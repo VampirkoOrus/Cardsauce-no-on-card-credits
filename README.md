@@ -11,8 +11,6 @@ https://docs.google.com/spreadsheets/d/1EhX1TviLLW4z4-KLvTPBau5FKBrjF7w6nNXOoNjI
 
 NEED HELP WITH:
 
--Make SPEEEN appear properly in collection
-
 -Make SPEEEN's pop-ups stack properly
 
 -Diaper Joker effect
