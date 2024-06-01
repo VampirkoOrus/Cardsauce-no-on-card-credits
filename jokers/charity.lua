@@ -9,22 +9,28 @@ local jokerInfo = {
 	},
 	rarity = 3,
 	cost = 7,
-	canBlueprint = true,
+	canBlueprint = false,
 	canEternal = true
 }
 
---[[
+
 function jokerInfo.locDef(self)
-	return { G.GAME.probabilities.normal }
+	return { self.ability.extra.mult }
 end
 
 function jokerInfo.init(self)
-
+	self.ability.extra = {
+		keepNoInterest = G.GAME.modifiers.no_interest,
+		mult = 0
+	}
+	G.GAME.modifiers.no_interest = true
 end
-]]--
 
 function jokerInfo.calculate(self, context)
 	--todo
+	if context.selling_self then
+		G.GAME.modifiers.no_interest = self.ability.extra.keepNoInterest --in case the joker is being used in a challenge
+	end
 end
 
 
