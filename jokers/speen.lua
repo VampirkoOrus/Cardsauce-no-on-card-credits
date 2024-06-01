@@ -24,7 +24,7 @@ end
 
 
 local jokerInfo = {
-	name = 'SPEEEEEEN [WIP]',
+	name = 'SPEEEEEEN',
 	config = {},
 	text = {
 		"Create a {C:purple}Wheel of Fortune{} card",
@@ -55,7 +55,22 @@ function jokerInfo.init(self)
 end
 
 function jokerInfo.calculate(self, context)
-	--todo
+	if context.reroll_shop and not self.getting_sliced and not self.debuff and not (context.blueprint_card or self).getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+		G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+		G.E_MANAGER:add_event(Event({
+			func = (function()
+				G.E_MANAGER:add_event(Event({
+					func = function() 
+						local card = create_card('Tarot',G.consumeables, nil, nil, nil, nil, 'c_wheel_of_fortune', 'car')
+						card:add_to_deck()
+						G.consumeables:emplace(card)
+						G.GAME.consumeable_buffer = 0
+						return true
+					end}))   
+					card_eval_status_text(context.blueprint_card or self, 'extra', nil, nil, nil, {message = "+1 Nope!", colour = G.C.PURPLE})                       
+				return true
+			end)}))
+	end
 end
 
 function jokerInfo.update(self, dt)
