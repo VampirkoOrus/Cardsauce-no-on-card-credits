@@ -28,7 +28,7 @@ function jokerInfo.init(self)
 end
 
 function jokerInfo.calculate(self, context)
-	if context.individual and context.cardarea == G.play then
+	if context.individual and context.cardarea == G.play and not self.debuff then
 		local chimera = true
                 for k, v in ipairs(context.scoring_hand) do
                     chimera = chimera and v.ability.name == 'Steel Card'
