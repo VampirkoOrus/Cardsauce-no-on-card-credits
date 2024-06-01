@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Bunch Of Jokers [WIP]',
+	name = 'Bunch Of Jokers',
 	config = {},
 	text = {
 		"Create a {C:purple}Judgement{} card",
@@ -28,7 +28,22 @@ end
 ]]--
 
 function jokerInfo.calculate(self, context)
-	--todo
+	if context.setting_blind and not self.getting_sliced and not self.debuff and not (context.blueprint_card or self).getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+		G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+		G.E_MANAGER:add_event(Event({
+			func = (function()
+				G.E_MANAGER:add_event(Event({
+					func = function() 
+						local card = create_card('Tarot',G.consumeables, nil, nil, nil, nil, 'c_judgement', 'car')
+						card:add_to_deck()
+						G.consumeables:emplace(card)
+						G.GAME.consumeable_buffer = 0
+						return true
+					end}))   
+					card_eval_status_text(context.blueprint_card or self, 'extra', nil, nil, nil, {message = "+1 Judgement", colour = G.C.PURPLE})                       
+				return true
+			end)}))
+	end
 end
 
 
