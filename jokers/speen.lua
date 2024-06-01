@@ -1,11 +1,13 @@
 local mod = SMODS.findModByID('Cardsauce')
 
+mod.speenTimer = 0
+
 mod.speenBase = love.graphics.newImage(mod.path..'assets/1x/speenBase.png')
 mod.speenFace = love.graphics.newImage(mod.path..'assets/1x/speenFace.png')
 
-local drawFace = function(timer)
-	local r = math.sin(timer/2) * 60
-	local sx = math.sin(timer*4)
+local drawFace = function()
+	local r = math.sin(mod.speenTimer/2) * 60
+	local sx = math.sin(mod.speenTimer*4)
 	love.graphics.draw(mod.speenFace,71/2,95/2,r,sx,1,71/2,95/2)
 end
 
@@ -14,9 +16,9 @@ local setupCanvas = function(self)
 	self.children.center.video:renderTo(function()
 		love.graphics.clear(1,1,1,0) 
 		love.graphics.setColor(1,1,1,1)
-		--Draw the base, then the face at timer = 0
+		--Draw the base, then the face
 		love.graphics.draw(mod.speenBase)
-		drawFace(0)
+		drawFace()
 	end)
 end
 
@@ -48,7 +50,6 @@ end
 
 function jokerInfo.init(self)
 	self.ability.extra = {
-		timer = 0
 	}
 	setupCanvas(self)
 end
@@ -58,7 +59,15 @@ function jokerInfo.calculate(self, context)
 end
 
 function jokerInfo.update(self, dt)
-	self.ability.extra.timer = self.ability.extra.timer + (dt / G.SETTINGS.GAMESPEED)
+end
+
+local loveUpdateReference = love.update
+
+function love.update(dt)
+	if mod.speenTimer and G.SETTINGS.GAMESPEED then
+		mod.speenTimer = (mod.speenTimer + (dt / G.SETTINGS.GAMESPEED)) % (math.pi * 4)
+	end
+	loveUpdateReference(dt)
 end
 
 function jokerInfo.draw(self,layer)
