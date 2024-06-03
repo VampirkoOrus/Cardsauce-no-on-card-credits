@@ -32,5 +32,3 @@ NEED HELP WITH:
 -Make Pepperoni Secret mod-friendly by calling the hand's starting visibility
 
 -Add the compatible button for Green Needle
-
--More suggestions for quips
