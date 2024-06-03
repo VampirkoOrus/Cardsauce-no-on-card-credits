@@ -113,16 +113,16 @@ function SMODS.INIT.Cardsauce()
 
 	--lose quip replace
 
-	G.localization.misc.quips['lq_'..1] = {'You wanna talk about', 'some dedication?'}
+	G.localization.misc.quips['lq_'..1] = {'HUGE waste of', 'brain cells!'}
 	G.localization.misc.quips['lq_'..2] = {'Melpert? Melpert!?', 'MELLLLLPERRRRRRRTTTT!!!'}
 	G.localization.misc.quips['lq_'..3] = {'"I am better at this', 'game now" -Vinny'}
 	G.localization.misc.quips['lq_'..4] = {'Your seed... it was', 'not strong enough...'}
 	G.localization.misc.quips['lq_'..5] = {'What do you mean, Chat.', 'WHAT DO YOU MEAN.'}
 	G.localization.misc.quips['lq_'..6] = {'AGGA'}
 	G.localization.misc.quips['lq_'..7] = {'I\'m watching', 'Northernlion now.'}
-	G.localization.misc.quips['lq_'..8] = {'Nope!'}
+	G.localization.misc.quips['lq_'..8] = {'Oh, fuck you, Luigi!'}
 	G.localization.misc.quips['lq_'..9] = {'"What a bimbo!"', '-Eiko'}
-	G.localization.misc.quips['lq_'..10] = {}
+	G.localization.misc.quips['lq_'..10] = {'Don\'t worry, Johnny', 'will cut this out.', 'Right?'}
 
 	--win quip replace
 
@@ -131,7 +131,7 @@ function SMODS.INIT.Cardsauce()
 	G.localization.misc.quips['wq_'..3] = {'Chat... I love', 'this game.'}
 	G.localization.misc.quips['wq_'..4] = {'Ah, is that another', 'Pluto? Don\'t mind', 'if I do.'}
 	G.localization.misc.quips['wq_'..5] = {'Beaauuuuutiful.', 'Give it up, baby!'}
-	G.localization.misc.quips['wq_'..6] = {}
+	G.localization.misc.quips['wq_'..6] = {'You wanna talk about', 'some dedication?'}
 	G.localization.misc.quips['wq_'..7] = {'IT\'S BECAUSE OF OSE, J--', 'wait, wrong streamer'}
 
 	
