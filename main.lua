@@ -95,6 +95,12 @@ function SMODS.INIT.Cardsauce()
 			  "{E:1}DPS2004{}"
 			},
 	}
+	G.localization.descriptions.Other["guestartist3"] = {
+		name = "Guest Coder",
+		text = {
+		  "{E:1}Nether{}"
+		},
+	}
 	G.localization.descriptions.Other["diapernote"] = {
 		name = "Author's Note",
 		text = {
@@ -110,7 +116,7 @@ function SMODS.INIT.Cardsauce()
 			  "1 {C:attention}hand{}"
 		},
 	}
-
+	
 	--lose quip replace
 
 	G.localization.misc.quips['lq_'..1] = {'HUGE waste of', 'brain cells!'}
@@ -134,7 +140,6 @@ function SMODS.INIT.Cardsauce()
 	G.localization.misc.quips['wq_'..6] = {'You wanna talk about', 'some dedication?'}
 	G.localization.misc.quips['wq_'..7] = {'IT\'S BECAUSE OF OSE, J--', 'wait, wrong streamer'}
 
-	
 	--functions that are used by many cards go here.
 	localizations = {}
 	function mod.addLocalization(key,str)
@@ -149,7 +154,6 @@ function SMODS.INIT.Cardsauce()
 		end
 		return nil
 	end
-	
 	
 	local jokerUpdates = {}
 	local jokerDraws = {}
@@ -213,7 +217,36 @@ function SMODS.INIT.Cardsauce()
 		
 	end
 	
-	
+	-- SMODS.Spectral:new(name, slug, config, pos, loc_txt, cost, consumeable, discovered, atlas)
+	local c_quixotic = SMODS.Spectral:new('Quixotic', 'quixotic', { }, { x = 0, y = 0 }, {
+    	name = 'Quixotic',
+    	text = { 'Gain an {C:attention}Ethereal Tag' }
+	}, 4, true, true, 'quixotic')
+	c_quixotic:register()
+	local sprite = SMODS.Sprite:new("quixotic", SMODS.findModByID("Cardsauce").path, "quixotic.png", 71, 95, "asset_atli")
+	sprite:register()
+
+	function SMODS.Spectrals.c_quixotic.loc_def(center, info_queue)
+		info_queue[#info_queue+1] = G.P_TAGS.tag_ethereal
+		return {}
+	end
+
+	function SMODS.Spectrals.c_quixotic.can_use(card)
+		-- stop_use and whatnot are handled by the loader, so you don't need to worry about it
+		return true
+	end
+
+	function SMODS.Spectrals.c_quixotic.use(card, area, copier)
+			G.E_MANAGER:add_event(Event({
+				func = (function()
+					add_tag(Tag('tag_ethereal'))
+					play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
+					play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
+					return true
+				end)
+			}))
+	end
+
 	--updates
 	local card_updateRef = Card.update
 	function Card.update(self, dt)
