@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Diaper Joker [WIP]',
+	name = 'Diaper Joker',
 	config = {},
 	text = {
 		"{C:mult}+2{} Mult for each {C:attention}2",
@@ -28,12 +28,6 @@ function jokerInfo.init(self)
 end
 
 function jokerInfo.calculate(self, context)
-	if G.STAGE == G.STAGES.RUN then
-		self.ability.extra.mult = 0
-            for k, v in pairs(G.playing_cards) do
-                if v:get_id() == 2 then self.ability.extra.mult = self.ability.extra.mult+self.ability.extra.mult_mod end
-            end
-		end
 	if context.joker_main and context.cardarea == G.jokers and not self.debuff then
 		return {
 			message = localize{type='variable',key='a_mult',vars={self.ability.extra.mult}},
