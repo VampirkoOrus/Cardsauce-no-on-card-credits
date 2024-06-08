@@ -116,15 +116,17 @@ function SMODS.INIT.Cardsauce()
 			  "1 {C:attention}hand{}"
 		},
 	}
+	--fix compatibility with G.GAME.probabilities.normal later
 	G.localization.descriptions.Other["wheel2"] = {
 		name = "The Wheel of Fortune",
         text = {
-            "{C:green}#1# in #2#{} chance to add",
+            "{C:green}1 in 4{} chance to add",
             "{C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
             "{C:dark_edition}Polychrome{} edition",
             "to a random {C:attention}Joker"
         },
 	}
+	
 	
 	--lose quip replace
 
