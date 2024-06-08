@@ -15,7 +15,7 @@ NEED HELP WITH:
 
 -Make SPEEEN's pop-ups stack properly
 
--Diaper Joker effect
+-Diaper Joker not updating as fast as Cloud Nine does
 
 -Speed Joker and Disturbed Joker
 
