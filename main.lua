@@ -116,6 +116,15 @@ function SMODS.INIT.Cardsauce()
 			  "1 {C:attention}hand{}"
 		},
 	}
+	G.localization.descriptions.Other["wheel2"] = {
+		name = "The Wheel of Fortune",
+        text = {
+            "{C:green}#1# in #2#{} chance to add",
+            "{C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
+            "{C:dark_edition}Polychrome{} edition",
+            "to a random {C:attention}Joker"
+        },
+	}
 	
 	--lose quip replace
 
@@ -141,6 +150,10 @@ function SMODS.INIT.Cardsauce()
 	G.localization.misc.quips['wq_'..7] = {'IT\'S BECAUSE OF OSE, J--', 'wait, wrong streamer'}
 
 	--functions that are used by many cards go here.
+
+	G.localization.descriptions.Blind.bl_wall.text = {"THAT'S THE WALL BROTHER"}
+	G.localization.descriptions.Blind.bl_final_vessel.text = {"HEY WALL"}
+
 	localizations = {}
 	function mod.addLocalization(key,str)
 		localizations[key] = str
@@ -217,6 +230,21 @@ function SMODS.INIT.Cardsauce()
 		
 	end
 	
+	--card updates
+
+	local card_updateref = Card.update
+	function Card.update(self, dt)
+		if G.STAGE == G.STAGES.RUN then
+			if self.config.center.key == "j_diaper" then
+				self.ability.extra.mult = 0
+            	for k, v in pairs(G.playing_cards) do
+                	if v:get_id() == 2 then self.ability.extra.mult = self.ability.extra.mult+self.ability.extra.mult_mod end
+				end
+            end
+		end
+		card_updateref(self, dt)
+	end
+
 	-- SMODS.Spectral:new(name, slug, config, pos, loc_txt, cost, consumeable, discovered, atlas)
 	local c_quixotic = SMODS.Spectral:new('Quixotic', 'quixotic', { }, { x = 0, y = 0 }, {
     	name = 'Quixotic',
