@@ -17,8 +17,6 @@ NEED HELP WITH:
 
 -Make SPEEEN's pop-ups stack properly
 
--Diaper Joker not updating as fast as Cloud Nine does
-
 -Speed Joker and Disturbed Joker
 
 -Grey Joker not activating discard until 5 cards are selected
@@ -40,13 +38,19 @@ NEED HELP WITH:
 SPECIAL THANKS:
 
 Art:
+
 -SagaciousCejai
 
 Coding:
+
 -DPS2004
+
 -Nether
+
 -Mysthaps
 
 Support:
+
 -Lyman (from JankJonklers)
+
 -Akai (from BalatroStuck)
