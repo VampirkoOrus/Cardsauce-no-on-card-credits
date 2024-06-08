@@ -38,15 +38,13 @@ local jokerInfo = {
 }
 
 function jokerInfo.tooltip(self, info_queue)
-	info_queue[#info_queue+1] = G.P_CENTERS.c_wheel_of_fortune
+	info_queue[#info_queue+1] = {key = "wheel2", set = "Other"}
 	info_queue[#info_queue+1] = {key = "guestartist2", set = "Other"}
 end
 
---[[
-function jokerInfo.locDef(self)
-	return {self.ability.extra.mult}
-end
-]]--
+
+
+
 
 function jokerInfo.init(self)
 	self.ability.extra = {
