@@ -1,6 +1,8 @@
 # Cardsauce
 A Balatro mod made for Vinesauce!
 
+Uses Steammodded 0.9.8. This project would not be possible without its framework!
+
 --
 
 Spreadsheet of planned Jokers:
@@ -32,3 +34,19 @@ NEED HELP WITH:
 -Make Pepperoni Secret mod-friendly by calling the hand's starting visibility
 
 -Add the compatible button for Green Needle
+
+--
+
+SPECIAL THANKS:
+
+Art:
+-SagaciousCejai
+
+Coding:
+-DPS2004
+-Nether
+-Mysthaps
+
+Support:
+-Lyman (from JankJonklers)
+-Akai (from BalatroStuck)
