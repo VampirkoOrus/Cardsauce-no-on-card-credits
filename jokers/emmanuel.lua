@@ -1,32 +1,45 @@
 local jokerInfo = {
-	name = 'Emmanuel Blast [WIP]',
+	name = 'Emmanuel Blast',
 	config = {},
 	text = {
-		"{C:dark_edition}Negative Jokers{} appear",
-		"{C:green}4X{} more often",
+		"{C:green}#1# in 8{} chance to create",
+		"a {C:dark_edition}Negative Tag{} at",
+		"end of round",
 	},
 	rarity = 1,
-	cost = 0,
-	canBlueprint = false,
+	cost = 4,
+	canBlueprint = true,
 	canEternal = true
 }
 
 function jokerInfo.tooltip(self, info_queue)
-	info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+	info_queue[#info_queue+1] = G.P_TAGS.tag_negative
 end
 
---[[
+
 function jokerInfo.locDef(self)
 	return { G.GAME.probabilities.normal }
 end
 
-function jokerInfo.init(self)
+--[[function jokerInfo.init(self)
 
-end
-]]--
+end]]--
+
 
 function jokerInfo.calculate(self, context)
-	--todo
+	if context.end_of_round and not self.debuff and not context.individual and not context.repetition then
+			if pseudorandom('blast') < G.GAME.probabilities.normal / 8 then
+				G.E_MANAGER:add_event(Event({
+                    func = (function()
+                        add_tag(Tag('tag_negative'))
+                        play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
+                        play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
+                        return true
+                    end)
+                }))
+			end
+		return
+	end
 end
 
 
