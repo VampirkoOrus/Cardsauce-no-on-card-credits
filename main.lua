@@ -101,6 +101,18 @@ function SMODS.INIT.Cardsauce()
 		  "{E:1}Nether{}"
 		},
 	}
+	G.localization.descriptions.Other["guestartist4"] = {
+		name = "Guest Coder",
+		text = {
+		  "{E:1}Mysthaps{}"
+		},
+	}
+	G.localization.descriptions.Other["guestartist5"] = {
+		name = "Voice Acting",
+		text = {
+		  "{E:1}AmtraxVA{}"
+		},
+	}
 	G.localization.descriptions.Other["diapernote"] = {
 		name = "Author's Note",
 		text = {
