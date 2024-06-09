@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'This Is Crack [WIP]',
+	name = 'This Is Crack',
 	config = {},
 	text = {
 		"This Joker gains {X:mult,C:white}X0.1{} Mult",
