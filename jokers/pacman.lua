@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'PAC-MAN Incident [WIP]',
+	name = 'PAC-MAN Incident',
 	config = {},
 	text = {
 		"This Joker gains {C:mult}+5{} Mult if",
