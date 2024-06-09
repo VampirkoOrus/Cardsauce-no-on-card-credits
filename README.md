@@ -25,8 +25,6 @@ NEED HELP WITH:
 
 -I'm so Happy/I'm so Sad and Odious Joker joker transformation
 
--Make This is Crack show previous hand played
-
 -Disable Interest for Vinesauce is Hope
 
 -Make Pepperoni Secret mod-friendly by calling the hand's starting visibility
