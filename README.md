@@ -19,9 +19,7 @@ NEED HELP WITH:
 
 -Speed Joker and Disturbed Joker
 
--Grey Joker not activating discard until 5 cards are selected
-
--Find out how to count unique cards for Cousins CLub
+-Find out how to count unique cards for Cousins Club
 
 -I'm so Happy/I'm so Sad and Odious Joker joker transformation
 
