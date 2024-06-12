@@ -19,7 +19,7 @@ NEED HELP WITH:
 
 -Transformation timing on Two-Faced Joker
 
--Make SPEEEN's pop-ups stack properly
+-Make SPEEEN's pop-up work with Oops! All 6s
 
 -Speed Joker and Disturbed Joker
 
@@ -29,7 +29,7 @@ NEED HELP WITH:
 
 -Disable Interest for Vinesauce is Hope
 
--Make Pepperoni Secret mod-friendly by calling the hand's starting visibility
+-Make Pepperoni Secret mod-friendly by calling the hand's starting visibility (is this possible?)
 
 -Add the compatible button for Green Needle
 
