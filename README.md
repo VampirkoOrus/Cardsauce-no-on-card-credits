@@ -15,8 +15,6 @@ NEED HELP WITH:
 
 -SOUNDS AND MUSIC NOT WORKING
 
--Motorcyclist Joker picking most-played hand at start of round not end
-
 -Transformation timing on Two-Faced Joker
 
 -Make SPEEEN's pop-up work with Oops! All 6s
