@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Motorcyclist Joker [WIP]',
+	name = 'Motorcyclist Joker',
 	config = {},
 	text = {
 		"If round ends with exactly {C:money}$#1#{},",
@@ -35,10 +35,19 @@ function jokerInfo.calculate(self, context)
 					trigger = 'before',
 					delay = 0.0,
 					func = (function()
-						if G.GAME.current_round.most_played_poker_hand then
+						
+						local _handname, _played, _order = 'High Card', -1, 100
+                    	for k, v in pairs(G.GAME.hands) do
+                        	if v.played > _played or (v.played == _played and _order > v.order) then 
+                            	_played = v.played
+								_order = v.order
+                            	_handname = k
+                        	end
+                    	end
+
 							local _planet = 0
 							for k, v in pairs(G.P_CENTER_POOLS.Planet) do
-								if v.config.hand_type == G.GAME.current_round.most_played_poker_hand then
+								if v.config.hand_type == _handname then
 									_planet = v.key
 								end
 							end
@@ -46,6 +55,10 @@ function jokerInfo.calculate(self, context)
 							card:add_to_deck()
 							G.consumeables:emplace(card)
 							G.GAME.consumeable_buffer = 0
+						
+						--modded_play_sound('roche',false,1,1)
+						if not context.blueprint then
+							Custom_Play_Sound("RochePlanetCard",false,1.3,1)
 						end
 						return true
 					end)}))

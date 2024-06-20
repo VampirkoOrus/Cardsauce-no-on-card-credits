@@ -21,6 +21,26 @@ function jokerInfo.init(self)
 end
 ]]--
 
+loc_vars = function(self, info_queue, card)
+	if not nether_util.is_in_your_collection(card) then 
+		local jokers = G.jokers.cards
+		local other_joker = jokers[#jokers]
+		if other_joker and other_joker ~= card and other_joker.config.center.blueprint_compat then
+			card.ability.blueprint_compat = 'compatible'
+		else
+			card.ability.blueprint_compat = 'incompatible'
+		end
+	end
+	card.ability.blueprint_compat_ui = card.ability.blueprint_compat_ui or ''; card.ability.blueprint_compat_check = nil
+	return { main_end = (card.area and card.area == G.jokers) and {
+		{n=G.UIT.C, config={align = "bm", minh = 0.4}, nodes={
+			{n=G.UIT.C, config={ref_table = card, align = "m", colour = G.C.JOKER_GREY, r = 0.05, padding = 0.06, func = 'blueprint_compat'}, nodes={
+				{n=G.UIT.T, config={ref_table = card.ability, ref_value = 'blueprint_compat_ui',colour = G.C.UI.TEXT_LIGHT, scale = 0.32*0.8}},
+			}}
+		}}
+	} or nil }
+end
+
 function jokerInfo.calculate(self, context)
 	local other_joker = G.jokers.cards[#G.jokers.cards]
 	if other_joker and other_joker ~= self then

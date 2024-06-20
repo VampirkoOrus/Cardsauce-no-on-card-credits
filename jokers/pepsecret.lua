@@ -23,7 +23,7 @@ end
 
 function jokerInfo.calculate(self, context)
 	if context.cardarea == G.jokers and context.before and not self.debuff then
-		if context.scoring_name == "High Card" then
+		if context.scoring_name == "Five of a Kind" or context.scoring_name == "Flush House" or context.scoring_name == "Flush Five" then
 			return {
 				card = self,
 				level_up = true,

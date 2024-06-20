@@ -5,7 +5,6 @@ local jokerInfo = {
 		"Create a {C:purple}Judgement{} card",
 		"when {C:attention}Blind{} is selected",
 		"{C:inactive}(Must have room){}",
-		--todo: add judgement side text
 	},
 	rarity = 1,
 	cost = 6,

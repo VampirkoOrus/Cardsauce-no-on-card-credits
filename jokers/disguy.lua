@@ -40,7 +40,7 @@ function jokerInfo.calculate(self, context)
 			[1] = "BLS BLAY GAME BINTY!!!",
 			[2] = "ONLY 20 MINOOT!!!",
 		}
-		for k, v in ipairs(context.scoring_hand) do --maybe swap this out with context.full_hand? -dps
+		for k, v in ipairs(context.scoring_hand) do 
 			if v:get_id() == 2 or v:get_id() == 5 then 
 				v:set_ability(enhancements[pseudorandom('OONDORTOOL', 1, 8)], nil, true)
 				G.E_MANAGER:add_event(Event({

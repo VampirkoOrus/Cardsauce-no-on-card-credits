@@ -17,7 +17,7 @@ local conf_cardsauce = {
 		'diaper',
 		'roche',
 		'pacman',
-		'cryberry',
+		'besomeone',
 		'disguy',
 		'speedjoker',
 		'disturbedjoker',
@@ -39,6 +39,11 @@ local conf_cardsauce = {
 		'pepsecret',
 		'odio0',
 		'greenneedle',
+		'fisheye',
+		'code',
+		'anotherlight',
+		'deathcard',
+		'hell',
 		'vincenzo',
 		'quarterdumb'
 	},
@@ -78,6 +83,11 @@ function SMODS.INIT.Cardsauce()
 	sendDebugMessage("AchievementsEnabler Activated!")
   	G.F_NO_ACHIEVEMENTS = false
 
+	Add_Custom_Sound_Global("Cardsauce")
+	--register_sound('roche', "", 'RochePlanetCard.wav')
+	
+
+
 	--misc localization stuff
 	G.localization.misc.dictionary.ph_armageddon = "Annihilated by Odio"
 
@@ -111,6 +121,12 @@ function SMODS.INIT.Cardsauce()
 		name = "Voice Acting",
 		text = {
 		  "{E:1}AmtraxVA{}"
+		},
+	}
+	G.localization.descriptions.Other["guestartist6"] = {
+		name = "Guest Artist",
+		text = {
+		  "{E:1}Cody Savoie{}"
 		},
 	}
 	G.localization.descriptions.Other["diapernote"] = {
@@ -202,6 +218,8 @@ function SMODS.INIT.Cardsauce()
 			end
 		end
 	end
+
+
 	
 	local jokerUpdates = {}
 	local jokerDraws = {}
