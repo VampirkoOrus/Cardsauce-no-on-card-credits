@@ -31,6 +31,15 @@ function jokerInfo.calculate(self, context)
 	if context.selling_self then
 		G.GAME.modifiers.no_interest = self.ability.extra.keepNoInterest --in case the joker is being used in a challenge
 	end
+	
+	if SMODS.end_calculate_context(context) then
+		if self.ability.extra.mult ~= 0 then
+			return {
+				message = localize { type = 'variable', key = 'a_mult', vars = {self.ability.extra.mult} },
+				mult_mod = self.ability.extra.mult,
+			}
+		end
+	end
 end
 
 
