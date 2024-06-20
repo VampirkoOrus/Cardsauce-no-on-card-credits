@@ -13,6 +13,8 @@ https://docs.google.com/spreadsheets/d/1EhX1TviLLW4z4-KLvTPBau5FKBrjF7w6nNXOoNjI
 
 NEED HELP WITH:
 
+-Shrimp Joker retriggering Blue Seal card enhancements
+
 -Transformation timing on Two-Faced Joker
 
 -Make SPEEEN's pop-up work with Oops! All 6s
