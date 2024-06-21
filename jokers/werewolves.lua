@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'That\'s Werewolves [WIP]',
+	name = 'That\'s Werewolves',
 	config = {},
 	text = {
 		"{X:mult,C:white}X#1#{} Mult, but",
@@ -22,25 +22,43 @@ function jokerInfo.init(self)
 	}
 end
 
+local debuff_hand_ref = Blind.debuff_hand
 
+function Blind:debuff_hand(cards, hand, handname, check)
+	debuff_hand_ref(self, cards, hand, handname, check)
+	if find_joker('That\'s Werewolves') then
+		if next(hand["Flush"]) then
+            return true
+		end
+	end
+end
 
 function jokerInfo.calculate(self, context)
-	mult = mod_mult(0)
-        hand_chips = mod_chips(0)
-        G.E_MANAGER:add_event(Event({
-            trigger = 'immediate',
-            func = (function()
-                G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff_1'):juice_up(0.3, 0)
-                G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff_2'):juice_up(0.3, 0)
-                G.GAME.blind:juice_up()
-                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06*G.SETTINGS.GAMESPEED, blockable = false, blocking = false, func = function()
+	--[[if context.cardarea == G.jokers and context.before and not self.debuff and not context.blueprint then
+		if next(get_flush(context.scoring_hand)) then
+			mult = 0
+    		hand_chips = 0
+        	G.E_MANAGER:add_event(Event({
+            	trigger = 'immediate',
+            	func = (function()
+                	self:juice_up()
+                	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06*G.SETTINGS.GAMESPEED, blockable = false, blocking = false, func = function()
                     play_sound('tarot2', 0.76, 0.4);return true end}))
-                play_sound('tarot2', 1, 0.4)
-                return true
-            end)
-        }))
+                	play_sound('tarot2', 1, 0.4)
+					play_area_status_text("Not Allowed!")--localize('k_not_allowed_ex'), true)
+                	return true
+         		end)
+        	}))
 
-        play_area_status_text("Not Allowed!")--localize('k_not_allowed_ex'), true)
+		end
+	end]]--
+
+	if context.joker_main and context.cardarea == G.jokers then
+		return {
+			message = localize{type='variable',key='a_xmult',vars={self.ability.extra.x_mult}},
+			Xmult_mod = self.ability.extra.x_mult, 
+		}
+	end
 end
 
 

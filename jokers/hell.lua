@@ -24,25 +24,25 @@ end
 local add_to_deck_ref2 = Card.add_to_deck
 
 function hand_level_reset(self)
-	update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=localize('k_all_hands'),chips = '...', mult = '...', level=''})
-	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2, func = function()
+	update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3*G.SETTINGS.GAMESPEED}, {handname=localize('k_all_hands'),chips = '...', mult = '...', level=''})
+	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2*G.SETTINGS.GAMESPEED, func = function()
 		play_sound('tarot1')
 		self:juice_up(0.8, 0.5)
 		G.TAROT_INTERRUPT_PULSE = true
 		return true end }))
 	update_hand_text({delay = 0}, {mult = '-', StatusText = true})
-	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9, func = function()
+	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9*G.SETTINGS.GAMESPEED, func = function()
 		play_sound('tarot1')
 		self:juice_up(0.8, 0.5)
 		return true end }))
 	update_hand_text({delay = 0}, {chips = '-', StatusText = true})
-	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9, func = function()
+	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9*G.SETTINGS.GAMESPEED, func = function()
 		play_sound('tarot1')
 		self:juice_up(0.8, 0.5)
 		G.TAROT_INTERRUPT_PULSE = nil
 		return true end }))
 	update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level='1'})
-	delay(1.3)
+	delay(1.3*G.SETTINGS.GAMESPEED)
 	for k, v in pairs(G.GAME.hands) do
 		level_up_hand(self, k, true, -G.GAME.hands[k].level + 1)
 	end

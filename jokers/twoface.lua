@@ -35,6 +35,7 @@ function jokerInfo.calculate(self, context)
 						card_eval_status_text(self, 'extra', nil, nil, nil, {message = "Twoed!", colour = G.C.MONEY, instant = true})
 				local suit_prefix = string.sub(v.base.suit, 1, 1)..'_'
 				v:set_base(G.P_CARDS[suit_prefix..2])
+				--delay(G.SETTINGS.GAMESPEED)
 						return true
 					end
 				})) 
@@ -47,6 +48,7 @@ function jokerInfo.calculate(self, context)
 						card_eval_status_text(self, 'extra', nil, nil, nil, {message = "Aced!", colour = G.C.MONEY, instant = true})
 				local suit_prefix = string.sub(v.base.suit, 1, 1)..'_'
 				v:set_base(G.P_CARDS[suit_prefix..'A'])
+				--delay(G.SETTINGS.GAMESPEED)
 						return true
 					end
 				})) 
