@@ -8,7 +8,7 @@ local jokerInfo = {
 	},
 	rarity = 2,
 	cost = 6,
-	canBlueprint = false,
+	canBlueprint = true,
 	canEternal = true
 }
 
@@ -22,33 +22,26 @@ end
 
 function jokerInfo.init(self)
 	self.ability.extra = {
-		x_mult = 1
+		x_mult = 1 + 0.5*(G.GAME.current_round.hands_played),
+		counter = 0
 	}
 end
 
 function jokerInfo.calculate(self, context)
-	if context.cardarea == G.jokers and context.before and not context.blueprint then
-		local hand = context.scoring_name
-		if hand == self.ability.extra.crack_hand or self.ability.extra.crack_hand == "None" then
-			self.ability.extra.x_mult = self.ability.extra.x_mult + 0.1
-		else
-			self.ability.extra.crack_hand = hand
-			if self.ability.extra.x_mult > 1 then
-                self.ability.extra.x_mult = 1
-                return {
-                    card = self,
-                    message = localize('k_reset')
-                }
-            end
-		end
-		self.ability.extra.crack_hand = hand
-	  end
 	if context.joker_main and context.cardarea == G.jokers then
-		return {
-			message = localize{type='variable',key='a_xmult',vars={self.ability.extra.x_mult}},
-			Xmult_mod = self.ability.extra.x_mult, 
-			--colour = G.C.MULT
-		}
+		self.ability.extra.x_mult = 1 + 0.5*(self.ability.extra.counter)
+		self.ability.extra.counter = self.ability.extra.counter + 1
+		if self.ability.extra.x_mult ~= 1 then
+			return {
+				message = localize{type='variable',key='a_xmult',vars={self.ability.extra.x_mult}},
+				Xmult_mod = self.ability.extra.x_mult, 
+				--colour = G.C.MULT
+			}
+		end
+	end
+	if context.end_of_round and not context.blueprint then
+		self.ability.extra.x_mult = 1
+		self.ability.extra.counter = 0
 	end
 end
 

@@ -19,10 +19,6 @@ NEED HELP WITH:
 
 -Make SPEEEN's pop-up work with Oops! All 6s
 
--Speed Joker and Disturbed Joker
-
--Find out how to count unique cards for Cousins Club
-
 -I'm so Happy/I'm so Sad and Odious Joker joker transformation
 
 -Make Pepperoni Secret mod-friendly by calling the hand's starting visibility (is this possible?)

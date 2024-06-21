@@ -26,7 +26,7 @@ local debuff_hand_ref = Blind.debuff_hand
 
 function Blind:debuff_hand(cards, hand, handname, check)
 	debuff_hand_ref(self, cards, hand, handname, check)
-	if find_joker('That\'s Werewolves') then
+	if next(find_joker('That\'s Werewolves')) then
 		if next(hand["Flush"]) then
             return true
 		end

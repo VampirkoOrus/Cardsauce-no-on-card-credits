@@ -2,8 +2,9 @@ local jokerInfo = {
 	name = 'Cousin\'s Club [WIP]',
 	config = {},
 	text = {
-		"This Joker gains {C:chips}+5{} Chips",
-		"for each {C:attention}unique{} {C:clubs}Club{} card scored",
+		"This Joker gains {C:chips}+1{} Chips",
+		"for each {C:clubs}Club{} card scored,",
+		"{C:attention}double{} if hand contains a {C:attention}Flush{}",
 		"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",
 	},
 	rarity = 2,
@@ -19,22 +20,25 @@ end
 function jokerInfo.init(self)
 	self.ability.extra = {
 		chips = 0,
-		chip_mod = 5
+		chip_mod = 1
 	}
 end
 
 function jokerInfo.calculate(self, context)
 	if context.individual and context.cardarea == G.play and not self.debuff and not (context.blueprint) then
 		for k, v in ipairs(context.scoring_hand) do
-			if v:is_suit('Clubs') and not (v.base.upgrade == 1) then 
-				v.base.upgrade = 1
+			if v:is_suit('Clubs') then 
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						v:juice_up()
 						return true
 					end
 				})) 
-				self.ability.extra.chips = self.ability.extra.chips + self.ability.extra.chip_mod
+				if get_flush(context.scoring_hand) then
+					self.ability.extra.chips = self.ability.extra.chips + 2*self.ability.extra.chip_mod
+				else
+					self.ability.extra.chips = self.ability.extra.chips + self.ability.extra.chip_mod
+				end
 				card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.CHIPS})
 			end
 		end

@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Rekoj Gnorts [WIP]',
+	name = 'Rekoj Gnorts',
 	config = {},
 	text = {
 		"Allows {C:attention}Straights{} to be made",
@@ -21,6 +21,10 @@ function jokerInfo.init(self)
 
 end
 ]]--
+
+function jokerInfo.tooltip(self, info_queue)
+	info_queue[#info_queue+1] = {key = "guestartist7", set = "Other"}
+end
 
 function jokerInfo.calculate(self, context)
 	--todo

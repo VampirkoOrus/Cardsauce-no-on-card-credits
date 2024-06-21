@@ -129,6 +129,12 @@ function SMODS.INIT.Cardsauce()
 		  "{E:1}Cody Savoie{}"
 		},
 	}
+	G.localization.descriptions.Other["guestartist7"] = {
+		name = "Guest Coder",
+		text = {
+		  "{E:1}Numbuh214{}"
+		},
+	}
 	G.localization.descriptions.Other["diapernote"] = {
 		name = "Author's Note",
 		text = {
@@ -216,6 +222,71 @@ function SMODS.INIT.Cardsauce()
 				e.config.colour = G.C.RED
 				e.config.button = 'discard_cards_from_highlighted'
 			end
+		end
+	end
+
+	local draw_from_deck_to_handref = G.FUNCS.draw_from_deck_to_hand
+	function G.FUNCS.draw_from_deck_to_hand(self, e)
+    	draw_from_deck_to_handref(self, e)
+
+    	for _, v in ipairs(G.jokers.cards) do
+        	if G.STATE == G.STATES.DRAW_TO_HAND and not v.debuff then
+            	if v.config.center.key == "j_speedjoker" and G.GAME.current_round.hands_played == v.ability.extra or
+            	v.config.center.key == "j_disturbedjoker" and G.GAME.current_round.discards_used == v.ability.extra then
+                	draw_card(G.deck, G.hand, 100, 'up', true)
+                	v.ability.extra = v.ability.extra + 1
+            	end
+        	end
+    	end
+	end
+
+	local get_straight_ref = get_straight
+	function get_straight(hand)
+		local base = get_straight_ref(hand)
+		local results = {}
+		local vals = {}
+		local verified = {}
+		local can_loop = next(find_joker('Rekoj Gnorts'))
+		local target = next(find_joker('Four Fingers')) and 4 or 5
+		local skip_var = next(find_joker('Shortcut'))
+		local skipped = false
+
+		if not(can_loop) or #hand < target then
+			return base
+		else
+			table.sort(hand, function(a,b) return a:get_id() < b:get_id() end)
+			local _next = nil
+			for val=0, #hand*2-1 do
+			local i = val%#hand + 1
+			sendDebugMessage("Card "..i.." is "..hand[i].base.value)
+			if #verified > 0 then
+				if SMODS.Ranks[verified[#verified].base.value].next[1] == hand[i].base.value then
+				sendDebugMessage(hand[i].base.value.." comes after "..hand[(val-1)%#hand + 1].base.value..".")
+				table.insert(verified,hand[i])
+				skipped = false
+				else
+				if skip_var and not skipped then
+					sendDebugMessage("Skipping because Shortcut.")
+					skipped = true
+				else
+					sendDebugMessage(hand[i].base.value.." does not come after "..hand[(val-1)%#hand + 1].base.value..".")
+					verified = {}
+					val = val - 1
+					skipped = false
+				end
+				end
+			end
+			if #verified == 0 then
+				sendDebugMessage("Starting new straight.")
+				table.insert(verified,hand[i])
+				skipped = false
+			end
+			if #verified == target then
+				break
+			end
+			end
+			if #verified < target then return {} end
+			return {verified}
 		end
 	end
 
