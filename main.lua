@@ -219,7 +219,80 @@ function SMODS.INIT.Cardsauce()
 		end
 	end
 
-
+	G.FUNCS.evaluate_round = function()
+		local pitch = 0.95
+		local dollars = 0
+	
+		if G.GAME.chips - G.GAME.blind.chips >= 0 then
+			add_round_eval_row({dollars = G.GAME.blind.dollars, name='blind1', pitch = pitch})
+			pitch = pitch + 0.06
+			dollars = dollars + G.GAME.blind.dollars
+		else
+			add_round_eval_row({dollars = 0, name='blind1', pitch = pitch, saved = true})
+			pitch = pitch + 0.06
+		end
+	
+		G.E_MANAGER:add_event(Event({
+			trigger = 'before',
+			delay = 1.3*math.min(G.GAME.blind.dollars+2, 7)/2*0.15 + 0.5,
+			func = function()
+			  G.GAME.blind:defeat()
+			  return true
+			end
+		  }))
+		delay(0.2)
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				ease_background_colour_blind(G.STATES.ROUND_EVAL, '')
+				return true
+			end
+		}))
+		G.GAME.selected_back:trigger_effect({context = 'eval'})
+	
+		if G.GAME.current_round.hands_left > 0 and not G.GAME.modifiers.no_extra_hand_money then
+			add_round_eval_row({dollars = G.GAME.current_round.hands_left*(G.GAME.modifiers.money_per_hand or 1), disp = G.GAME.current_round.hands_left, bonus = true, name='hands', pitch = pitch})
+			pitch = pitch + 0.06
+			dollars = dollars + G.GAME.current_round.hands_left*(G.GAME.modifiers.money_per_hand or 1)
+		end
+		if G.GAME.current_round.discards_left > 0 and G.GAME.modifiers.money_per_discard then
+			add_round_eval_row({dollars = G.GAME.current_round.discards_left*(G.GAME.modifiers.money_per_discard), disp = G.GAME.current_round.discards_left, bonus = true, name='discards', pitch = pitch})
+			pitch = pitch + 0.06
+			dollars = dollars +  G.GAME.current_round.discards_left*(G.GAME.modifiers.money_per_discard)
+		end
+		for i = 1, #G.jokers.cards do
+			local ret = G.jokers.cards[i]:calculate_dollar_bonus()
+			if ret then
+				add_round_eval_row({dollars = ret, bonus = true, name='joker'..i, pitch = pitch, card = G.jokers.cards[i]})
+				pitch = pitch + 0.06
+				dollars = dollars + ret
+			end
+		end
+		for i = 1, #G.GAME.tags do
+			local ret = G.GAME.tags[i]:apply_to_run({type = 'eval'})
+			if ret then
+				add_round_eval_row({dollars = ret.dollars, bonus = true, name='tag'..i, pitch = pitch, condition = ret.condition, pos = ret.pos, tag = ret.tag})
+				pitch = pitch + 0.06
+				dollars = dollars + ret.dollars
+			end
+		end
+		if G.GAME.dollars >= 5 and not G.GAME.modifiers.no_interest and not next(find_joker('Vinesauce is HOPE')) then
+			add_round_eval_row({bonus = true, name='interest', pitch = pitch, dollars = G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/5), G.GAME.interest_cap/5)})
+			pitch = pitch + 0.06
+			if not G.GAME.seeded and not G.GAME.challenge then
+				if G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/5), G.GAME.interest_cap/5) == G.GAME.interest_amount*G.GAME.interest_cap/5 then 
+					G.PROFILES[G.SETTINGS.profile].career_stats.c_round_interest_cap_streak = G.PROFILES[G.SETTINGS.profile].career_stats.c_round_interest_cap_streak + 1
+				else
+					G.PROFILES[G.SETTINGS.profile].career_stats.c_round_interest_cap_streak = 0
+				end
+			end
+			check_for_unlock({type = 'interest_streak'})
+			dollars = dollars + G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/5), G.GAME.interest_cap/5)
+		end
+	
+		pitch = pitch + 0.06
+	
+		add_round_eval_row({name = 'bottom', dollars = dollars})
+	end
 	
 	local jokerUpdates = {}
 	local jokerDraws = {}

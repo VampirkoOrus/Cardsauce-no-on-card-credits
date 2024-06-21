@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Vinesauce is HOPE [WIP]',
+	name = 'Vinesauce is HOPE',
 	config = {},
 	text = {
 		"Earn no {C:money}Interest{} at the end of",
@@ -21,18 +21,25 @@ end
 function jokerInfo.init(self)
 	self.ability.extra = {
 		keepNoInterest = G.GAME.modifiers.no_interest,
-		mult = 0
+		mult = 0,
+		mult_gain = 0
 	}
-	G.GAME.modifiers.no_interest = true
 end
 
 function jokerInfo.calculate(self, context)
-	--todo
-	if context.selling_self then
-		G.GAME.modifiers.no_interest = self.ability.extra.keepNoInterest --in case the joker is being used in a challenge
+	
+	if context.end_of_round and not self.debuff and not context.individual and not context.repetition and not context.blueprint then
+		self.ability.extra.mult_gain = 0
+		if not G.GAME.modifiers.no_interest then
+			self.ability.extra.mult_gain = G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/5), G.GAME.interest_cap/5)
+		end
+		self.ability.extra.mult = self.ability.extra.mult + self.ability.extra.mult_gain
+		if self.ability.extra.mult_gain ~= 0 then
+			card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{ type = 'variable', key = 'a_mult', vars = {self.ability.extra.mult_gain} }, colour = G.C.MULT})
+		end
 	end
 	
-	if SMODS.end_calculate_context(context) then
+	if context.joker_main and context.cardarea == G.jokers then
 		if self.ability.extra.mult ~= 0 then
 			return {
 				message = localize { type = 'variable', key = 'a_mult', vars = {self.ability.extra.mult} },
