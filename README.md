@@ -25,8 +25,6 @@ NEED HELP WITH:
 
 -I'm so Happy/I'm so Sad and Odious Joker joker transformation
 
--Disable Interest for Vinesauce is Hope
-
 -Make Pepperoni Secret mod-friendly by calling the hand's starting visibility (is this possible?)
 
 -Add the compatible button for Green Needle
