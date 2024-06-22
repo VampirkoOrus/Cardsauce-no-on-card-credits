@@ -5,6 +5,7 @@ local jokerInfo = {
 		"If round ends with exactly {C:money}$#1#{},",
 		"create a {C:planet}Planet{} card for",
 		"your most-used hand",
+		"{C:inactive}(Must have room){}",
 	},
 	rarity = 1,
 	cost = 5,

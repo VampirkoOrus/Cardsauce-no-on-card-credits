@@ -22,15 +22,13 @@ end
 
 function jokerInfo.init(self)
 	self.ability.extra = {
-		x_mult = 1 + 0.5*(G.GAME.current_round.hands_played),
-		counter = 0
+		x_mult = 1 + 0.5*(G.GAME.current_round.hands_played)
 	}
 end
 
 function jokerInfo.calculate(self, context)
 	if context.joker_main and context.cardarea == G.jokers then
-		self.ability.extra.x_mult = 1 + 0.5*(self.ability.extra.counter)
-		self.ability.extra.counter = self.ability.extra.counter + 1
+		self.ability.extra.x_mult = 1 + 0.5*(G.GAME.current_round.hands_played)
 		if self.ability.extra.x_mult ~= 1 then
 			return {
 				message = localize{type='variable',key='a_xmult',vars={self.ability.extra.x_mult}},
@@ -41,7 +39,6 @@ function jokerInfo.calculate(self, context)
 	end
 	if context.end_of_round and not context.blueprint then
 		self.ability.extra.x_mult = 1
-		self.ability.extra.counter = 0
 	end
 end
 
