@@ -240,54 +240,71 @@ function SMODS.INIT.Cardsauce()
     	end
 	end
 
+
+
 	local get_straight_ref = get_straight
 	function get_straight(hand)
-		local base = get_straight_ref(hand)
-		local results = {}
-		local vals = {}
-		local verified = {}
-		local can_loop = next(find_joker('Rekoj Gnorts'))
-		local target = next(find_joker('Four Fingers')) and 4 or 5
-		local skip_var = next(find_joker('Shortcut'))
-		local skipped = false
+	local base = get_straight_ref(hand)
+	local results = {}
+	local vals = {}
+	local verified = {}
+	local can_loop = next(find_joker('Rekoj Gnorts'))
+	local target = next(find_joker('Four Fingers')) and 4 or 5
+	local skip_var = next(find_joker('Shortcut'))
+	local skipped = false
+	if not(can_loop) or #hand < target then
+		return base
+	else
+		table.sort(hand, function(a,b) return a:get_id() < b:get_id() end)
+		local ranks = {}
+		local _next = nil
+		local val = 0
+		for k, v in pairs(G.P_CARDS) do
 
-		if not(can_loop) or #hand < target then
-			return base
-		else
-			table.sort(hand, function(a,b) return a:get_id() < b:get_id() end)
-			local _next = nil
-			for val=0, #hand*2-1 do
-			local i = val%#hand + 1
-			sendDebugMessage("Card "..i.." is "..hand[i].base.value)
-			if #verified > 0 then
-				if SMODS.Ranks[verified[#verified].base.value].next[1] == hand[i].base.value then
-				sendDebugMessage(hand[i].base.value.." comes after "..hand[(val-1)%#hand + 1].base.value..".")
-				table.insert(verified,hand[i])
-				skipped = false
-				else
-				if skip_var and not skipped then
-					sendDebugMessage("Skipping because Shortcut.")
-					skipped = true
-				else
-					sendDebugMessage(hand[i].base.value.." does not come after "..hand[(val-1)%#hand + 1].base.value..".")
-					verified = {}
-					val = val - 1
-					skipped = false
-				end
-				end
-			end
-			if #verified == 0 then
-				sendDebugMessage("Starting new straight.")
-				table.insert(verified,hand[i])
-				skipped = false
-			end
-			if #verified == target then
-				break
-			end
-			end
-			if #verified < target then return {} end
-			return {verified}
+		if (ranks[v.pos.x+1] == nil) then
+			ranks[v.pos.x+1] = v.value
 		end
+		end
+
+		while val < #hand*2 do
+		local i = val%#hand + 1
+		local id = hand[i]:get_id()-1
+		val = val + 1
+		if _next == nil then
+
+			table.insert(results,hand[i])
+			_next = ranks[id%#ranks+1]
+			skipped = false
+		else
+			if (ranks[id] == _next) then
+
+			table.insert(results,hand[i])
+			_next = ranks[id%#ranks+1]
+			skipped = false
+			elseif skip_var and not skipped then
+
+			_next = ranks[id%#ranks+1]
+			skipped = true
+			else
+
+			_next = nil
+			val = val-1
+			results = {}
+			skipped = false
+			end
+		end
+		if (#results == target) then
+			table.sort(hand, function(a,b) return a.T.x < b.T.x end)
+			table.sort(results, function(a,b) return a.T.x < b.T.x end)
+
+			return {results}
+		elseif _next ~= nil then
+
+		end
+		end
+	end
+
+	return {}
 	end
 
 	G.FUNCS.evaluate_round = function()
