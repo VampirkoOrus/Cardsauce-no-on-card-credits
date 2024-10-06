@@ -5,6 +5,9 @@
 --- MOD_DESCRIPTION: A set of Jokers based on Vinesauce!
 --- BADGE_COLOUR: 32A852
 --- DISPLAY_NAME: Cardsauce
+--- DUMP_LOCALIZATION
+
+local mod_path = SMODS.current_mod.path
 
 local conf_cardsauce = {
 	jokersToLoad = {
@@ -82,11 +85,6 @@ function SMODS.INIT.Cardsauce()
 	
 	sendDebugMessage("AchievementsEnabler Activated!")
   	G.F_NO_ACHIEVEMENTS = false
-
-	Add_Custom_Sound_Global("Cardsauce")
-	--register_sound('roche', "", 'RochePlanetCard.wav')
-	
-
 
 	--misc localization stuff
 	G.localization.misc.dictionary.ph_armageddon = "Annihilated by Odio"
@@ -386,7 +384,7 @@ function SMODS.INIT.Cardsauce()
 	local jokerDraws = {}
 	
 	for i,v in ipairs(conf_cardsauce.jokersToLoad) do
-		local jokerInfo = love.filesystem.load(mod.path .. 'jokers/'..v..'.lua')()
+		local jokerInfo = SMODS.load_file("jokers/" .. v .. ".lua")()
 		fillInDefaults(jokerInfo,jokerInfoDefault)
 		
 		local spritePos = {x=0,y=0}
@@ -440,7 +438,7 @@ function SMODS.INIT.Cardsauce()
 		
 		
 		--load sprite
-		SMODS.Sprite:new('j_'..v,mod.path,v..'.png',71,95,'asset_atli'):register()
+		SMODS.Sprite:new('j_'..v,mod_path,v..'.png',71,95,'asset_atli'):register()
 		
 	end
 	

@@ -1,9 +1,9 @@
-local mod = SMODS.findModByID('Cardsauce')
+--[[local mod = SMODS.findModByID('Cardsauce')
 
 mod.speenTimer = 0
 
-mod.speenBase = love.graphics.newImage(mod.path..'assets/1x/speenBase.png')
-mod.speenFace = love.graphics.newImage(mod.path..'assets/1x/speenFace.png')
+mod.speenBase = love.graphics.newImage(mod_path..'assets/1x/speenBase.png')
+mod.speenFace = love.graphics.newImage(mod_path..'assets/1x/speenFace.png')
 
 local drawFace = function()
 	local r = math.sin(mod.speenTimer/2) * 60
@@ -20,7 +20,7 @@ local setupCanvas = function(self)
 		love.graphics.draw(mod.speenBase)
 		drawFace()
 	end)
-end
+end]]--
 
 
 local jokerInfo = {
@@ -76,12 +76,12 @@ end
 
 local loveUpdateReference = love.update
 
-function love.update(dt)
+--[[function love.update(dt)
 	if mod.speenTimer and G.SETTINGS.GAMESPEED then
 		mod.speenTimer = (mod.speenTimer + (dt / G.SETTINGS.GAMESPEED)) % (math.pi * 4)
 	end
 	loveUpdateReference(dt)
-end
+end]]--
 
 function jokerInfo.draw(self,layer)
 	--Withouth love.graphics.push, .pop, and .reset, it will attempt to use values from the rest of 
