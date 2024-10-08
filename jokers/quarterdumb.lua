@@ -8,16 +8,16 @@ local jokerInfo = {
 	},
 	rarity = 4,
 	cost = 20,
-	canBlueprint = true,
-	canEternal = true,
+	blueprint_compat = true,
+	eternal_compat = true,
 	hasSoul = true,
 }
 
-function jokerInfo.locDef(self)
+function jokerInfo.loc_vars(self, info_queue, card)
 	return { G.GAME.probabilities.normal }
 end
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not self.debuff then
 		if next(context.poker_hands["Flush"]) then
 			if pseudorandom('mike') < G.GAME.probabilities.normal / 2 then

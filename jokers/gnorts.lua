@@ -8,16 +8,16 @@ local jokerInfo = {
 	},
 	rarity = 2,
 	cost = 7,
-	canBlueprint = false,
-	canEternal = true
+	blueprint_compat = false,
+	eternal_compat = true
 }
 
 --[[
-function jokerInfo.locDef(self)
+function jokerInfo.loc_vars(self, info_queue, card)
 	return { G.GAME.probabilities.normal }
 end
 
-function jokerInfo.init(self)
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
 
 end
 ]]--
@@ -26,7 +26,7 @@ function jokerInfo.tooltip(self, info_queue)
 	info_queue[#info_queue+1] = {key = "guestartist7", set = "Other"}
 end
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	--todo
 end
 

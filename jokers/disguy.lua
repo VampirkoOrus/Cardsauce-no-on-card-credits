@@ -8,23 +8,23 @@ local jokerInfo = {
 	},
 	rarity = 1,
 	cost = 6,
-	canBlueprint = false,
-	canEternal = true
+	blueprint_compat = false,
+	eternal_compat = true
 }
 
 --[[
-function jokerInfo.locDef(self)
+function jokerInfo.loc_vars(self, info_queue, card)
 	return { G.GAME.probabilities.normal }
 end
 ]]--
 
-function jokerInfo.init(self)
-	self.ability.extra = {
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	card.ability.extra = {
 		messageIndex = 0
 	}
 end
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not self.debuff and not context.blueprint then
 		local enhancements = {
 			[1] = G.P_CENTERS.m_bonus,
@@ -49,8 +49,8 @@ function jokerInfo.calculate(self, context)
 						return true
 					end
 				})) 
-				card_eval_status_text(self, 'extra', nil, nil, nil, {message = messages[(self.ability.extra.messageIndex % 2) + 1], colour = G.C.MONEY})
-				self.ability.extra.messageIndex = self.ability.extra.messageIndex + 1
+				card_eval_status_text(self, 'extra', nil, nil, nil, {message = messages[(card.ability.extra.messageIndex % 2) + 1], colour = G.C.MONEY})
+				card.ability.extra.messageIndex = card.ability.extra.messageIndex + 1
 			end
 		end
 	end

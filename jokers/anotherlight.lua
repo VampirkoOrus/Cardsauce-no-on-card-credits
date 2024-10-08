@@ -9,26 +9,24 @@ local jokerInfo = {
 	},
 	rarity = 2,
 	cost = 7,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true,
 }
 
 --[[
-function jokerInfo.locDef(self)
-	return { G.GAME.probabilities.normal }
-end
-
-function jokerInfo.init(self)
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
 
 end
 ]]--
 
-function jokerInfo.tooltip(self, info_queue)
+function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist6", set = "Other"}
+	--return { G.GAME.probabilities.normal }
 end
 
-function jokerInfo.calculate(self, context)
-	if context.cardarea == G.jokers and context.before and not self.debuff then
+function jokerInfo.calculate(self, card, context)
+	if context.cardarea == G.jokers and context.before and not card.debuff then
 		if context.scoring_name == "Flush" then
 			local flush_type = 'Spades'
 			for k, v in ipairs(context.scoring_hand) do

@@ -8,17 +8,17 @@ local jokerInfo = {
 	},
 	rarity = 3,
 	cost = 6,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true
 }
 
 --[[
-function jokerInfo.locDef(self)
+function jokerInfo.loc_vars(self, info_queue, card)
 	return { G.GAME.probabilities.normal }
 end]]--
 
-function jokerInfo.init(self)
-	self.ability.extra = 1
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	card.ability.extra = 1
 end
 
 local add_to_deck_ref2 = Card.add_to_deck
@@ -64,12 +64,12 @@ function Card:add_to_deck(from_debuff)
 	end
 end
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.repetition and not self.debuff then
 		if context.cardarea == G.play then
 			return {
 				message = localize('k_again_ex'),
-				repetitions = self.ability.extra,
+				repetitions = card.ability.extra,
 				card = self
 			}
 		end
@@ -77,7 +77,7 @@ function jokerInfo.calculate(self, context)
 			if (next(context.card_effects[1]) or #context.card_effects > 1) then
 				return {
 					message = localize('k_again_ex'),
-					repetitions = self.ability.extra,
+					repetitions = card.ability.extra,
 					card = self
 				}
 			end

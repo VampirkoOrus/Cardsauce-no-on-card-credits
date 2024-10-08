@@ -7,21 +7,21 @@ local jokerInfo = {
 	},
 	rarity = 3,
 	cost = 6,
-	canBlueprint = false,
-	canEternal = false
+	blueprint_compat = false,
+	eternal_compat = false
 }
 
 --[[
-function jokerInfo.locDef(self)
+function jokerInfo.loc_vars(self, info_queue, card)
 	return { G.GAME.probabilities.normal }
 end
 
-function jokerInfo.init(self)
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
 
 end
 ]]--
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	--todo
 end
 

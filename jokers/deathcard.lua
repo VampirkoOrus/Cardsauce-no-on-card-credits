@@ -8,16 +8,16 @@ local jokerInfo = {
 	},
 	rarity = 3,
 	cost = 5,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true
 }
 
-function jokerInfo.locDef(self)
-	return { self.ability.extra.money, self.ability.extra.money_mod, self.ability.extra.mult, self.ability.extra.mult_mod }
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { card.ability.extra.money, card.ability.extra.money_mod, card.ability.extra.mult, card.ability.extra.mult_mod }
 end
 
-function jokerInfo.init(self)
-	self.ability.extra = {
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	card.ability.extra = {
 		money = 5,
 		money_mod = 5,
 		mult = 0,
@@ -25,7 +25,7 @@ function jokerInfo.init(self)
 	}
 end
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	--todo
 end
 

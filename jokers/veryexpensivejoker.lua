@@ -9,15 +9,15 @@ local jokerInfo = {
 	},
 	rarity = 1,
 	cost = 0,
-	canBlueprint = false,
-	canEternal = true
+	blueprint_compat = false,
+	eternal_compat = true
 }
-function jokerInfo.locDef(self)
-	return { self.ability.extra.x_mult }
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { card.ability.extra.x_mult }
 end
 
-function jokerInfo.init(self)
-	self.ability.extra = {
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	card.ability.extra = {
 		x_mult = 1,
 		dollars = 0
 	}
@@ -29,23 +29,23 @@ function Card:add_to_deck(from_debuff)
 	add_to_deck_ref(self, from_debuff)
 	if self.config.center_key == 'j_veryexpensivejoker' then
 		if G.GAME.dollars > 0 then 
-			self.ability.extra.dollars = G.GAME.dollars
+			card.ability.extra.dollars = G.GAME.dollars
 		else
-			self.ability.extra.dollars = 0
+			card.ability.extra.dollars = 0
 		end
-		self.ability.extra.x_mult = (math.floor(self.ability.extra.dollars/10)/2) + 1
-		ease_dollars(-(self.ability.extra.dollars) +1)
-		card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_xmult',vars={self.ability.extra.x_mult}}})
+		card.ability.extra.x_mult = (math.floor(card.ability.extra.dollars/10)/2) + 1
+		ease_dollars(-(card.ability.extra.dollars) +1)
+		card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}}})
 	end
 end
 
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	
 	if context.joker_main and context.cardarea == G.jokers then
 		return {
-			message = localize{type='variable',key='a_xmult',vars={self.ability.extra.x_mult}},
-			Xmult_mod = self.ability.extra.x_mult, 
+			message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+			Xmult_mod = card.ability.extra.x_mult, 
 		}
 	end
 end

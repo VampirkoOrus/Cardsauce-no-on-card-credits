@@ -8,30 +8,30 @@ local jokerInfo = {
 	},
 	rarity = 1,
 	cost = 5,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true
 }
 
 function jokerInfo.tooltip(self, info_queue)
 	info_queue[#info_queue+1] = {key = "diapernote", set = "Other"}
 end
 
-function jokerInfo.locDef(self)
-	return { self.ability.extra.mult }
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { card.ability.extra.mult }
 end
 
-function jokerInfo.init(self)
-	self.ability.extra = {
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	card.ability.extra = {
 		mult = 0,
 		mult_mod = 2
 	}
 end
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.joker_main and context.cardarea == G.jokers and not self.debuff then
 		return {
-			message = localize{type='variable',key='a_mult',vars={self.ability.extra.mult}},
-			mult_mod = self.ability.extra.mult,
+			message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
+			mult_mod = card.ability.extra.mult,
 			colour = G.C.MULT
 		}
 	end

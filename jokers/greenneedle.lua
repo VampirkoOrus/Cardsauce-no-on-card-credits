@@ -7,16 +7,16 @@ local jokerInfo = {
 	},
 	rarity = 3,
 	cost = 10,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true
 }
 
 --[[
-function jokerInfo.locDef(self)
+function jokerInfo.loc_vars(self, info_queue, card)
 	return { G.GAME.probabilities.normal }
 end
 
-function jokerInfo.init(self)
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
 
 end
 ]]--
@@ -41,7 +41,7 @@ loc_vars = function(self, info_queue, card)
 	} or nil }
 end
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	local other_joker = G.jokers.cards[#G.jokers.cards]
 	if other_joker and other_joker ~= self then
 		context.blueprint = (context.blueprint and (context.blueprint + 1)) or 1

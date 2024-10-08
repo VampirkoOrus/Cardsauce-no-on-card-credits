@@ -1,6 +1,6 @@
 local jokerInfo = {
 	name = 'Industry Code',
-	config = {},
+	config = {extra = {money = 25}},
 	text = {
 		"If played hand is a",
 		"{C:attention}5{}, {C:attention}7{}, {C:attention}6{}, {C:attention}8{}, and {C:attention}7{},",
@@ -8,24 +8,22 @@ local jokerInfo = {
 	},
 	rarity = 2,
 	cost = 5,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true
 }
 
 
-function jokerInfo.locDef(self)
-	return { self.ability.extra.money }
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { vars = { card.ability.extra.money } }
 end
 
-function jokerInfo.init(self)
-	self.ability.extra = {
-		money = 25
-	}
-end
+--[[function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	
+end]]--
 
 
-function jokerInfo.calculate(self, context)
-	if context.joker_main and context.cardarea == G.jokers and not self.debuff then
+function jokerInfo.calculate(self, card, context)
+	if context.joker_main and context.cardarea == G.jokers and not card.debuff then
 		local code5 = 0
 		local code6 = 0
 		local code7 = 0
@@ -45,11 +43,11 @@ function jokerInfo.calculate(self, context)
 			end
 		end
 		if code5 == 1 and code6 == 1 and code7 == 2 and code8 == 1 then
-			ease_dollars(self.ability.extra.money)
+			ease_dollars(card.ability.extra.money)
 			return {
-				message = localize('$')..self.ability.extra.money,
+				message = localize('$')..card.ability.extra.money,
 				colour = G.C.MONEY,
-				card = self
+				card = card
 			}
 		end
 	end

@@ -33,8 +33,8 @@ local jokerInfo = {
 	},
 	rarity = 1,
 	cost = 6,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true
 }
 
 function jokerInfo.tooltip(self, info_queue)
@@ -46,13 +46,13 @@ end
 
 
 
-function jokerInfo.init(self)
-	self.ability.extra = {
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	card.ability.extra = {
 	}
 	setupCanvas(self)
 end
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.reroll_shop and not self.getting_sliced and not self.debuff and not (context.blueprint_card or self).getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
 		G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 		G.E_MANAGER:add_event(Event({
@@ -97,7 +97,7 @@ function jokerInfo.draw(self,layer)
 		self.children.center.video:renderTo(function()
 			--Same as before, but this time we pass in the timer.
 			love.graphics.draw(mod.speenBase)
-			drawFace(self.ability.extra.timer)
+			drawFace(card.ability.extra.timer)
 		end)
 	love.graphics.pop()
 end

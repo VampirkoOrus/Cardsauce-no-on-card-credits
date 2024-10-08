@@ -7,23 +7,23 @@ local jokerInfo = {
 	},
 	rarity = 1,
 	cost = 5,
-	canBlueprint = false,
-	canEternal = false
+	blueprint_compat = false,
+	eternal_compat = false
 }
 
 
-function jokerInfo.locDef(self)
-	return {self.ability.extra.cardsRemaining}
+function jokerInfo.loc_vars(self, info_queue, card)
+	return {card.ability.extra.cardsRemaining}
 end
 
 
-function jokerInfo.init(self)
-	self.ability.extra = {
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	card.ability.extra = {
 		cardsRemaining = 3
 	}
 end
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not self.debuff and not context.blueprint then
 		if context.scoring_name == "High Card" then
 			local seal = {
@@ -42,11 +42,11 @@ function jokerInfo.calculate(self, context)
 				})) 
 			end
 			card_eval_status_text(self, 'extra', nil, nil, nil, {message = "Yeow!", colour = G.C.MONEY})
-			self.ability.extra.cardsRemaining = self.ability.extra.cardsRemaining - 1
+			card.ability.extra.cardsRemaining = card.ability.extra.cardsRemaining - 1
 		end
 
 
-		if self.ability.extra.cardsRemaining <= 0 then 
+		if card.ability.extra.cardsRemaining <= 0 then 
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					play_sound('tarot1')

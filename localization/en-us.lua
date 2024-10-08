@@ -157,7 +157,7 @@ return {
 			},
 		},
 		Joker = {
-			j_diaper = {
+			j_csau_diaper = {
 				name = "Diaper Joker",
 				text = {
 					"{C:mult}+2{} Mult for each {C:attention}2",
@@ -165,7 +165,7 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}",
 				},
 			},
-			j_veryexpensivejoker = {
+			j_csau_veryexpensivejoker = {
 				name = "Very Expensive Joker",
 				text = {
 					"{X:mult,C:white}X0.5{} Mult for every {C:money}$10{}",
@@ -174,7 +174,7 @@ return {
 					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
 				},
 			},
-			j_quarterdumb = {
+			j_csau_quarterdumb = {
 				name = "Quarterdumb",
 				text = {
 					"{C:green}#1# in 2{} chance to gain {C:blue}+1{} Hand",
@@ -182,7 +182,7 @@ return {
 					"contains a {C:attention}Flush{}",
 				},
 			},
-			j_gnorts = {
+			j_csau_gnorts = {
 				name = "Rekoj Gnorts",
 				text = {
 					"Allows {C:attention}Straights{} to be made",
@@ -190,21 +190,21 @@ return {
 					"{C:inactive}(ex:{} {C:attention}3 2 A K Q{}{C:inactive}){}",
 				},
 			},
-			j_meat = {
+			j_csau_meat = {
 				name = "Meat",
 				text = {
 					"Add a random {C:attention}seal{} to the",
 					"next {C:attention}#1# High Cards{} scored",
 				},
 			},
-			j_greyjoker = {
+			j_csau_greyjoker = {
 				name = "Grey Joker",
 				text = {
 					"{C:mult}+#1#{} discards, but must",
 					"discard 5 cards {C:attention}at a time{}",
 				},
 			},
-			j_pacman = {
+			j_csau_pacman = {
 				name = "PAC-MAN Incident",
 				text = {
 					"This Joker gains {C:mult}+5{} Mult if",
@@ -213,7 +213,7 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}",
 				},
 			},
-			j_sohappy = {
+			j_csau_sohappy = {
 				name = "I'm So Happy [WIP]",
 				text = {
 					"{C:blue}+2{} hands, {C:red}-1{} discard",
@@ -221,7 +221,7 @@ return {
 					"{C:inactive}each round played)",
 				},
 			},
-			j_charity = {
+			j_csau_charity = {
 				name = "Vinesauce is HOPE",
 				text = {
 					"Earn no {C:money}Interest{} at the end of",
@@ -230,7 +230,7 @@ return {
 					"{C:inactive}(Currently{} {C:mult}+#1#{} {C:inactive}Mult){}",
 				},
 			},
-			j_chad = {
+			j_csau_chad = {
 				name = "No No No No No No No No No No No",
 				text = {
 					"Greetings, Cloud, it is me, Chudlot. As you can plainly see,",
@@ -244,7 +244,7 @@ return {
 					"humanity will become as Chadesque as myself.",
 				},
 			},
-			j_disguy = {
+			j_csau_disguy = {
 				name = "DIS JOAKERRR",
 				text = {
 					"eACH SKOARD DEE EMC {C:attention}2{}",
@@ -252,20 +252,20 @@ return {
 					"GAET RANDUM {C:attention}EHANCEMAENT{}",
 				},
 			},
-			j_fisheye = {
+			j_csau_fisheye = {
 				name = "Fisheye",
 				text = {
 					"{C:chips}+#1#{} Chips",
 				},
 			},
-			j_odio0 = {
+			j_csau_odio0 = {
 				name = "Odious Joker [WIP]",
 				text = {
 					"{C:dark_edition}It would be in your best interests to stop.{}",
 					"{C:dark_edition}These cards are my domain, and I their master.{}",
 				},
 			},
-			j_vincenzo = {
+			j_csau_vincenzo = {
 				name = "Vincenzo",
 				text = {
 					"When {C:attention}Boss Blind{} is",
@@ -273,14 +273,14 @@ return {
 					"{C:dark_edition}Negative{} {C:attention}Misprint Joker{}",
 				},
 			},
-			j_besomeone = {
+			j_csau_besomeone = {
 				name = "Be Someone Forever [WIP]",
 				text = {
 					"Played {C:attention}High Cards{}",
 					"are redrawn",
 				},
 			},
-			j_roger = {
+			j_csau_roger = {
 				name = "Mr. Roger [WIP]",
 				text = {
 					"This Joker gains {X:mult,C:white}X0.1{} Mult",
@@ -288,13 +288,13 @@ return {
 					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
 				},
 			},
-			j_disturbedjoker = {
+			j_csau_disturbedjoker = {
 				name = "Disturbed Joker",
 				text = {
 					"Draw {C:attention}+1{} card each {C:mult}discard{}",
 				},
 			},
-			j_maskedjoker = {
+			j_csau_maskedjoker = {
 				name = "Masked Joker",
 				text = {
 					"If played hand is all",
@@ -302,7 +302,7 @@ return {
 					"{C:chips}+#1#{} Chips and {C:mult}+#2#{} Mult",
 				},
 			},
-			j_deathcard = {
+			j_csau_deathcard = {
 				name = "Deathcard [WIP]",
 				text = {
 					"When {C:attention}sold{}, reappears in the next shop",
@@ -310,7 +310,7 @@ return {
 					"{C:inactive}(Currently {}{C:mult}#3#{}{C:inactive} Mult, {}{C:money}$#1#{} {C:inactive}Cost){}",
 				},
 			},
-			j_hell = {
+			j_csau_hell = {
 				name = "Running Hell [WIP]",
 				text = {
 					"All cards are {C:attention}retriggered{}",
@@ -318,7 +318,7 @@ return {
 					"and the start of each {C:attention}Ante{}",
 				},
 			},
-			j_roche = {
+			j_csau_roche = {
 				name = "Motorcyclist Joker",
 				text = {
 					"If round ends with exactly {C:money}$#1#{},",
@@ -327,7 +327,7 @@ return {
 					"{C:inactive}(Must have room){}",
 				},
 			},
-			j_speen = {
+			j_csau_speen = {
 				name = "SPEEEEEEN",
 				text = {
 					"Create a {C:purple}Wheel of Fortune{} card",
@@ -335,7 +335,7 @@ return {
 					"{C:inactive}(Must have room){}",
 				},
 			},
-			j_newjoker = {
+			j_csau_newjoker = {
 				name = "The NEW Joker!",
 				text = {
 					"Played cards with an",
@@ -343,14 +343,14 @@ return {
 					"when scored",
 				},
 			},
-			j_shrimp = {
+			j_csau_shrimp = {
 				name = "Shrimp Joker [WIP]",
 				text = {
 					"{C:attention}Seals{} trigger an",
 					"additional time",
 				},
 			},
-			j_reyn = {
+			j_csau_reyn = {
 				name = "Bunch Of Jokers",
 				text = {
 					"Create a {C:purple}Judgement{} card",
@@ -358,27 +358,27 @@ return {
 					"{C:inactive}(Must have room){}",
 				},
 			},
-			j_pepsecret = {
+			j_csau_pepsecret = {
 				name = "Pepperoni Secret [WIP]",
 				text = {
 					"{C:attention}Secret Hands{} are",
 					"upgraded when played",
 				},
 			},
-			j_pivot = {
+			j_csau_pivot = {
 				name = "Pivyot",
 				text = {
 					"{C:green}#1# in 2{} chance to upgrade",
 					"level of played {C:attention}High Card{}",
 				},
 			},
-			j_speedjoker = {
+			j_csau_speedjoker = {
 				name = "Speed Joker",
 				text = {
 					"Draw {C:attention}+1{} card each {C:chips}hand{}",
 				},
 			},
-			j_thisiscrack = {
+			j_csau_thisiscrack = {
 				name = "This Is Crack",
 				text = {
 					"This Joker gains {X:mult,C:white}X0.1{} Mult",
@@ -388,7 +388,7 @@ return {
 					"{C:inactive}(Current hand: {}{C:attention}#2#{}{C:inactive}){}",
 				},
 			},
-			j_twoface = {
+			j_csau_twoface = {
 				name = "Two-Faced Joker [WIP]",
 				text = {
 					"Each played {C:attention}Ace{} becomes",
@@ -396,7 +396,7 @@ return {
 					"becomes an {C:attention}Ace{}",
 				},
 			},
-			j_emmanuel = {
+			j_csau_emmanuel = {
 				name = "Emmanuel Blast",
 				text = {
 					"{C:green}#1# in 8{} chance to create",
@@ -404,7 +404,7 @@ return {
 					"end of round",
 				},
 			},
-			j_anotherlight = {
+			j_csau_anotherlight = {
 				name = "Another Light",
 				text = {
 					"If {C:attention}poker hand{} is a {C:attention}Flush{},",
@@ -413,14 +413,14 @@ return {
 					"{C:inactive}(Must have room){}",
 				},
 			},
-			j_greenneedle = {
+			j_csau_greenneedle = {
 				name = "Green Needle [WIP]",
 				text = {
 					"Copies the ability",
 					"of rightmost {C:attention}Joker{}",
 				},
 			},
-			j_werewolves = {
+			j_csau_werewolves = {
 				name = "That's Werewolves",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult, but",
@@ -428,7 +428,7 @@ return {
 					"containing a {C:attention}Flush{}",
 				},
 			},
-			j_depressedbrother = {
+			j_csau_depressedbrother = {
 				name = "Depressed Brother",
 				text = {
 					"This Joker gains {C:chips}+13{} Chips",
@@ -437,7 +437,7 @@ return {
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",
 				},
 			},
-			j_code = {
+			j_csau_code = {
 				name = "Industry Code",
 				text = {
 					"If played hand is a",
@@ -445,7 +445,7 @@ return {
 					"gain {C:money}$#1#{}",
 				},
 			},
-			j_cousinsclub = {
+			j_csau_cousinsclub = {
 				name = "Cousin's Club [WIP]",
 				text = {
 					"This Joker gains {C:chips}+1{} Chips",
