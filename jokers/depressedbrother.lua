@@ -1,31 +1,23 @@
 local jokerInfo = {
 	name = 'Depressed Brother',
-	config = {},
-	text = {
-		"This Joker gains {C:chips}+13{} Chips",
-		"if played hand triggers",
-		"the {C:attention}Boss Blind{} ability",
-		"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",
-	},
+	config = {extra = {
+		chips = 13,
+		chip_mod = 13
+	}},
 	rarity = 2,
 	cost = 5,
 	blueprint_compat = true,
-	eternal_compat = true
+	eternal_compat = true,
+	perishable_compat = false
 }
 
-function jokerInfo.tooltip(self, info_queue)
-	info_queue[#info_queue+1] = {key = "guestartist1", set = "Other"}
-end
-
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { card.ability.extra.chips }
+	info_queue[#info_queue+1] = {key = "guestartist1", set = "Other"}
+	return { vars = {card.ability.extra.chips, card.ability.extra.chips_mod} }
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.extra = {
-		chips = 13,
-		chip_mod = 13
-	}
+
 end
 
 function jokerInfo.calculate(self, card, context)

@@ -1,21 +1,11 @@
 local jokerInfo = {
 	name = 'No No No No No No No No No No No',
 	config = {extra = 2},
-	text = {
-		"Greetings, Cloud, it is me, Chudlot. As you can plainly see,",
-		"my lifelong dream of transmogrifying myself into a Joker",
-		"from the hit video game by LocalThunk \"Balatro\"",
-		"has finally been achieved! Now, while you are searching",
-		"for the Protojoker, please pick up any Showman you come across.",
-		"The Showman will allow me to obtain more copies of myself,",
-		"and facilitate the Chumpley reunion! When enough Chandlers are gathered,",
-		"we shall transform into CHADNOVA, and at last,",
-		"humanity will become as Chadesque as mycard.",
-	},
 	rarity = 1,
 	cost = 0,
 	blueprint_compat = false,
-	eternal_compat = true
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 --[[

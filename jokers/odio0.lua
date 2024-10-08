@@ -8,7 +8,8 @@ local jokerInfo = {
 	rarity = 3,
 	cost = 6,
 	blueprint_compat = false,
-	eternal_compat = false
+	eternal_compat = false,
+	perishable_compat = false
 }
 
 --[[

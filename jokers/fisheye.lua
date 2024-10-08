@@ -1,24 +1,20 @@
 local jokerInfo = {
 	name = 'Fisheye',
-	config = {},
-	text = {
-		"{C:chips}+#1#{} Chips",
-	},
+	config = {extra = {chips = 15}},
 	rarity = 1,
 	cost = 1,
 	blueprint_compat = true,
-	eternal_compat = true
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { card.ability.extra.chips }
+	return { vars = {card.ability.extra.chips} }
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.extra = {
-		chips = 15
-	}
+
 end
 
 function jokerInfo.calculate(self, card, context)

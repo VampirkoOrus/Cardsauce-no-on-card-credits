@@ -1,13 +1,11 @@
 local jokerInfo = {
 	name = 'Cryberries [WIP]',
 	config = {},
-	text = {
-		"idfk",
-	},
 	rarity = 1,
 	cost = 0,
 	blueprint_compat = false,
-	eternal_compat = true
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 --[[

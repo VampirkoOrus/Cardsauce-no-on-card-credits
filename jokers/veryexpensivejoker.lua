@@ -10,7 +10,8 @@ local jokerInfo = {
 	rarity = 1,
 	cost = 0,
 	blueprint_compat = false,
-	eternal_compat = true
+	eternal_compat = true,
+	perishable_compat = true
 }
 function jokerInfo.loc_vars(self, info_queue, card)
 	return { card.ability.extra.x_mult }

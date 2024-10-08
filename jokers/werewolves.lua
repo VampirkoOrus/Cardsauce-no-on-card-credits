@@ -9,7 +9,8 @@ local jokerInfo = {
 	rarity = 2,
 	cost = 7,
 	blueprint_compat = true,
-	eternal_compat = true
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

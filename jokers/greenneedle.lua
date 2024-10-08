@@ -1,14 +1,11 @@
 local jokerInfo = {
 	name = 'Green Needle [WIP]',
 	config = {},
-	text = {
-		"Copies the ability",
-		"of rightmost {C:attention}Joker{}",
-	},
 	rarity = 3,
 	cost = 10,
 	blueprint_compat = true,
-	eternal_compat = true
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 --[[
@@ -21,7 +18,8 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 end
 ]]--
 
-loc_vars = function(self, info_queue, card)
+-- need rework into generate_ui
+--[[loc_vars = function(self, info_queue, card)
 	if not nether_util.is_in_your_collection(card) then 
 		local jokers = G.jokers.cards
 		local other_joker = jokers[#jokers]
@@ -39,17 +37,17 @@ loc_vars = function(self, info_queue, card)
 			}}
 		}}
 	} or nil }
-end
+end]]
 
 function jokerInfo.calculate(self, card, context)
 	local other_joker = G.jokers.cards[#G.jokers.cards]
-	if other_joker and other_joker ~= self then
+	if other_joker and other_joker ~= card then
 		context.blueprint = (context.blueprint and (context.blueprint + 1)) or 1
-		context.blueprint_card = context.blueprint_card or self
+		context.blueprint_card = context.blueprint_card or card
 		if context.blueprint > #G.jokers.cards + 1 then return end
 		local other_joker_ret = other_joker:calculate_joker(context)
 		if other_joker_ret then 
-			other_joker_ret.card = context.blueprint_card or self
+			other_joker_ret.card = context.blueprint_card or card
 			other_joker_ret.colour = G.C.RED
 			return other_joker_ret
 		end

@@ -9,7 +9,8 @@ local jokerInfo = {
 	rarity = 2,
 	cost = 7,
 	blueprint_compat = true,
-	eternal_compat = true
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 function jokerInfo.tooltip(self, info_queue)

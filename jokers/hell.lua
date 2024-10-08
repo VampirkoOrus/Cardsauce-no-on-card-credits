@@ -1,15 +1,11 @@
 local jokerInfo = {
 	name = 'Running Hell [WIP]',
-	config = {},
-	text = {
-		"All cards are {C:attention}retriggered{}",
-		"All {C:attention}hands{} drop to {C:planet}Level 1{} upon pickup",
-		"and the start of each {C:attention}Ante{}",
-	},
+	config = {extra = 1},
 	rarity = 3,
 	cost = 6,
 	blueprint_compat = true,
-	eternal_compat = true
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 --[[
@@ -18,7 +14,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end]]--
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.extra = 1
+
 end
 
 local add_to_deck_ref2 = Card.add_to_deck
@@ -50,7 +46,7 @@ function hand_level_reset(self)
 		trigger = 'immediate',
 		func = (function()
 			play_area_status_text("A black wind flows through you...")
-			Custom_Play_Sound("cavestorytext",false,1.3,1)
+			-- Custom_Play_Sound("cavestorytext",false,1.3,1) need rework to SMODS.Sound API
 			return true
 		end)
 	}))
@@ -65,12 +61,12 @@ function Card:add_to_deck(from_debuff)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.repetition and not self.debuff then
+	if context.repetition and not card.debuff then
 		if context.cardarea == G.play then
 			return {
 				message = localize('k_again_ex'),
 				repetitions = card.ability.extra,
-				card = self
+				card = card
 			}
 		end
 		if context.cardarea == G.hand then
@@ -78,13 +74,13 @@ function jokerInfo.calculate(self, card, context)
 				return {
 					message = localize('k_again_ex'),
 					repetitions = card.ability.extra,
-					card = self
+					card = card
 				}
 			end
 		end
 	end
 	if context.end_of_round and G.GAME.blind.boss and not context.blueprint then
-		hand_level_reset(self)
+		hand_level_reset(card)
 	end
 end
 

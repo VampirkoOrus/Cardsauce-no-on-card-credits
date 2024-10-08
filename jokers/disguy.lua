@@ -1,6 +1,6 @@
 local jokerInfo = {
 	name = 'DIS JOAKERRR',
-	config = {},
+	config = {extra = {messageIndex = 0}},
 	text = {
 		"eACH SKOARD DEE EMC {C:attention}2{}",
 		"OR BERSONA {C:attention}5{}",
@@ -9,7 +9,8 @@ local jokerInfo = {
 	rarity = 1,
 	cost = 6,
 	blueprint_compat = false,
-	eternal_compat = true
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 --[[
@@ -19,13 +20,11 @@ end
 ]]--
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.extra = {
-		messageIndex = 0
-	}
+	
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.cardarea == G.jokers and context.before and not self.debuff and not context.blueprint then
+	if context.cardarea == G.jokers and context.before and not card.debuff and not context.blueprint then
 		local enhancements = {
 			[1] = G.P_CENTERS.m_bonus,
 			[2] = G.P_CENTERS.m_mult,

@@ -1,24 +1,21 @@
 local jokerInfo = {
 	name = 'Emmanuel Blast',
-	config = {},
+	config = {extra = 8},
 	text = {
-		"{C:green}#1# in 8{} chance to create",
+		"{C:green}#1# in #2#{} chance to create",
 		"a {C:dark_edition}Negative Tag{} at",
 		"end of round",
 	},
 	rarity = 1,
 	cost = 4,
 	blueprint_compat = true,
-	eternal_compat = true
+	eternal_compat = true,
+	perishable_compat = true
 }
 
-function jokerInfo.tooltip(self, info_queue)
-	info_queue[#info_queue+1] = G.P_TAGS.tag_negative
-end
-
-
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { G.GAME.probabilities.normal }
+	info_queue[#info_queue+1] = G.P_TAGS.tag_negative
+	return { vars = {G.GAME.probabilities.normal, card.ability.extra} }
 end
 
 --[[function jokerInfo.set_ability(self, card, initial, delay_sprites)
@@ -27,8 +24,8 @@ end]]--
 
 
 function jokerInfo.calculate(self, card, context)
-	if context.end_of_round and not self.debuff and not context.individual and not context.repetition then
-			if pseudorandom('blast') < G.GAME.probabilities.normal / 8 then
+	if context.end_of_round and not card.debuff and not context.individual and not context.repetition then
+			if pseudorandom('blast') < G.GAME.probabilities.normal / card.ability.extra then
 				G.E_MANAGER:add_event(Event({
                     func = (function()
                         add_tag(Tag('tag_negative'))

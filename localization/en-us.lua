@@ -160,7 +160,7 @@ return {
 			j_csau_diaper = {
 				name = "Diaper Joker",
 				text = {
-					"{C:mult}+2{} Mult for each {C:attention}2",
+					"{C:mult}+#2#{} Mult for each {C:attention}2",
 					"in your {C:attention}full deck",
 					"{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}",
 				},
@@ -399,7 +399,7 @@ return {
 			j_csau_emmanuel = {
 				name = "Emmanuel Blast",
 				text = {
-					"{C:green}#1# in 8{} chance to create",
+					"{C:green}#1# in #2#{} chance to create",
 					"a {C:dark_edition}Negative Tag{} at",
 					"end of round",
 				},
@@ -431,7 +431,7 @@ return {
 			j_csau_depressedbrother = {
 				name = "Depressed Brother",
 				text = {
-					"This Joker gains {C:chips}+13{} Chips",
+					"This Joker gains {C:chips}+#2#{} Chips",
 					"if played hand triggers",
 					"the {C:attention}Boss Blind{} ability",
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",
@@ -448,7 +448,7 @@ return {
 			j_csau_cousinsclub = {
 				name = "Cousin's Club [WIP]",
 				text = {
-					"This Joker gains {C:chips}+1{} Chips",
+					"This Joker gains {C:chips}+#2#{} Chips",
 					"for each {C:clubs}Club{} card scored,",
 					"{C:attention}double{} if hand contains a {C:attention}Flush{}",
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",

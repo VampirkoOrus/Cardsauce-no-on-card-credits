@@ -1,15 +1,11 @@
 local jokerInfo = {
 	name = 'Industry Code',
 	config = {extra = {money = 25}},
-	text = {
-		"If played hand is a",
-		"{C:attention}5{}, {C:attention}7{}, {C:attention}6{}, {C:attention}8{}, and {C:attention}7{},",
-		"gain {C:money}$#1#{}",
-	},
 	rarity = 2,
 	cost = 5,
 	blueprint_compat = true,
-	eternal_compat = true
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 
