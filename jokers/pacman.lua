@@ -1,12 +1,17 @@
 local jokerInfo = {
 	name = 'PAC-MAN Incident',
-	config = {},
-	text = {
+	config = {
+		extra = {
+			mult = 0,
+			mult_mod = 5
+		}
+	},
+	--[[text = {
 		"This Joker gains {C:mult}+5{} Mult if",
         "round ends with your chips",
         "within {C:attention}10%{} of the {C:attention}Blind{}",
         "{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}",
-	},
+	},]]--
 	rarity = 1,
 	cost = 5,
 	canBlueprint = true,
@@ -14,6 +19,7 @@ local jokerInfo = {
 }
 
 
+<<<<<<< Updated upstream
 function jokerInfo.locDef(self)
 	return { self.ability.extra.mult }
 end
@@ -23,6 +29,10 @@ function jokerInfo.init(self)
 		mult = 0,
 		mult_mod = 5
 	}
+=======
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { vars = {card.ability.extra.mult} }
+>>>>>>> Stashed changes
 end
 
 

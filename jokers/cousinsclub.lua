@@ -1,11 +1,19 @@
 local jokerInfo = {
 	name = 'Cousin\'s Club [WIP]',
+<<<<<<< Updated upstream
 	config = {},
 	text = {
 		"This Joker gains {C:chips}+1{} Chips",
 		"for each {C:clubs}Club{} card scored,",
 		"{C:attention}double{} if hand contains a {C:attention}Flush{}",
 		"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",
+=======
+	config = {
+		extra = {
+			chips = 0,
+			chip_mod = 1
+		}
+>>>>>>> Stashed changes
 	},
 	rarity = 2,
 	cost = 6,
@@ -13,8 +21,13 @@ local jokerInfo = {
 	canEternal = true
 }
 
+<<<<<<< Updated upstream
 function jokerInfo.locDef(self)
 	return { self.ability.extra.chips }
+=======
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { vars = {card.ability.extra.chips, card.ability.extra.chip_mod} }
+>>>>>>> Stashed changes
 end
 
 function jokerInfo.init(self)

@@ -13,8 +13,13 @@ local jokerInfo = {
 	hasSoul = true,
 }
 
+<<<<<<< Updated upstream
 function jokerInfo.locDef(self)
 	return { G.GAME.probabilities.normal }
+=======
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { vars = {G.GAME.probabilities.normal} }
+>>>>>>> Stashed changes
 end
 
 function jokerInfo.calculate(self, context)

@@ -1,11 +1,15 @@
 local jokerInfo = {
 	name = 'Mr. Roger [WIP]',
-	config = {},
-	text = {
+	config = {
+		extra = {
+			x_mult = 1
+		}
+	},
+	--[[text = {
 		"This Joker gains {X:mult,C:white}X0.1{} Mult",
 		"for each {C:attention}finger{} played this {C:attention}Blind{}",
 		"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
-	},
+	},]]--
 	rarity = 2,
 	cost = 6,
 	canBlueprint = true,
@@ -16,6 +20,7 @@ function jokerInfo.tooltip(self, info_queue)
 	info_queue[#info_queue+1] = {key = "rogernote", set = "Other"}
 end
 
+<<<<<<< Updated upstream
 function jokerInfo.locDef(self)
 	return { self.ability.extra.x_mult }
 end
@@ -24,6 +29,10 @@ function jokerInfo.init(self)
 	self.ability.extra = {
 		x_mult = 1 + 0.5*(G.GAME.current_round.hands_played)
 	}
+=======
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { vars = {card.ability.extra.x_mult} }
+>>>>>>> Stashed changes
 end
 
 function jokerInfo.calculate(self, context)

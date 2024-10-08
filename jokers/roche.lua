@@ -1,12 +1,14 @@
 local jokerInfo = {
 	name = 'Motorcyclist Joker',
-	config = {},
-	text = {
+	config = {
+		gil = 13
+	},
+	--[[text = {
 		"If round ends with exactly {C:money}$#1#{},",
 		"create a {C:planet}Planet{} card for",
 		"your most-used hand",
 		"{C:inactive}(Must have room){}",
-	},
+	},]]--
 	rarity = 1,
 	cost = 5,
 	canBlueprint = true,
@@ -17,12 +19,17 @@ function jokerInfo.tooltip(self, info_queue)
 	info_queue[#info_queue+1] = {key = "guestartist5", set = "Other"}
 end
 
+<<<<<<< Updated upstream
 function jokerInfo.locDef(self)
 	return { self.ability.gil }
 end
 
 function jokerInfo.init(self)
 	self.ability.gil = 13
+=======
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { vars = {card.ability.gil} }
+>>>>>>> Stashed changes
 end
 
 

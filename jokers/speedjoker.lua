@@ -1,9 +1,9 @@
 local jokerInfo = {
 	name = 'Speed Joker',
 	config = {},
-	text = {
+	--[[text = {
 		"Draw {C:attention}+1{} card each {C:chips}hand{}",
-	},
+	},]]--
 	rarity = 1,
 	cost = 4,
 	canBlueprint = false,

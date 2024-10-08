@@ -1,11 +1,11 @@
 local jokerInfo = {
 	name = 'Bunch Of Jokers',
 	config = {},
-	text = {
+	--[[text = {
 		"Create a {C:purple}Judgement{} card",
 		"when {C:attention}Blind{} is selected",
 		"{C:inactive}(Must have room){}",
-	},
+	},]]--
 	rarity = 1,
 	cost = 6,
 	canBlueprint = true,

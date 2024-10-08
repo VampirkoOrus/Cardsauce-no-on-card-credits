@@ -17,8 +17,13 @@ function jokerInfo.tooltip(self, info_queue)
 	info_queue[#info_queue+1] = {key = "guestartist1", set = "Other"}
 end
 
+<<<<<<< Updated upstream
 function jokerInfo.locDef(self)
 	return { self.ability.extra.chips }
+=======
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { vars = {card.ability.extra.chips, card.ability.extra.chip_mod} }
+>>>>>>> Stashed changes
 end
 
 function jokerInfo.init(self)

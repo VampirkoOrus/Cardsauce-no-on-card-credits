@@ -1,11 +1,16 @@
 local jokerInfo = {
 	name = 'Masked Joker',
-	config = {},
-	text = {
+	config = {
+		extra = {
+			chips = 29,
+			mult = 16
+		}
+	},
+	--[[text = {
 		"If played hand is all",
 		"{C:attention}Steel Cards{}, each gives",
 		"{C:chips}+#1#{} Chips and {C:mult}+#2#{} Mult",
-	},
+	},]]--
 	rarity = 2,
 	cost = 7,
 	canBlueprint = true,
@@ -16,8 +21,13 @@ function jokerInfo.tooltip(self, info_queue)
 	info_queue[#info_queue+1] = G.P_CENTERS.m_steel
 end
 
+<<<<<<< Updated upstream
 function jokerInfo.locDef(self)
 	return { self.ability.extra.chips, self.ability.extra.mult }
+=======
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { vars = {card.ability.extra.chips, card.ability.extra.mult}}
+>>>>>>> Stashed changes
 end
 
 function jokerInfo.init(self)

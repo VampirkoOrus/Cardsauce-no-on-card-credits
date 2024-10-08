@@ -1,17 +1,22 @@
 local jokerInfo = {
 	name = 'That\'s Werewolves',
-	config = {},
-	text = {
+	config = {
+		extra = {
+			x_mult = 3
+		}
+	},
+	--[[text = {
 		"{X:mult,C:white}X#1#{} Mult, but",
 		"cannot play hands",
 		"containing a {C:attention}Flush{}",
-	},
+	},]]--
 	rarity = 2,
 	cost = 7,
 	canBlueprint = true,
 	canEternal = true
 }
 
+<<<<<<< Updated upstream
 function jokerInfo.locDef(self)
 	return { self.ability.extra.x_mult }
 end
@@ -20,6 +25,10 @@ function jokerInfo.init(self)
 	self.ability.extra = {
 		x_mult = 3
 	}
+=======
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { vars = {card.ability.extra.x_mult} }
+>>>>>>> Stashed changes
 end
 
 local debuff_hand_ref = Blind.debuff_hand

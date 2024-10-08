@@ -1,12 +1,12 @@
 local jokerInfo = {
 	name = 'Another Light',
 	config = {},
-	text = {
+	--[[text = {
 		"If {C:attention}poker hand{} is a {C:attention}Flush{},",
 		"create a {C:purple}Tarot{} card",
 		"for that suit",
 		"{C:inactive}(Must have room){}",
-	},
+	},]]--
 	rarity = 2,
 	cost = 7,
 	canBlueprint = true,

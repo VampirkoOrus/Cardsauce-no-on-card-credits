@@ -1,11 +1,16 @@
 local jokerInfo = {
 	name = 'DIS JOAKERRR',
+<<<<<<< Updated upstream
 	config = {},
 	text = {
+=======
+	config = {extra = {messageIndex = 0}},
+	--[[text = {
+>>>>>>> Stashed changes
 		"eACH SKOARD DEE EMC {C:attention}2{}",
 		"OR BERSONA {C:attention}5{}",
 		"GAET RANDUM {C:attention}EHANCEMAENT{}",
-	},
+	},-]]
 	rarity = 1,
 	cost = 6,
 	canBlueprint = false,

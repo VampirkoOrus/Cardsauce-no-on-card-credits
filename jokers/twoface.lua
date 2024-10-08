@@ -1,11 +1,11 @@
 local jokerInfo = {
 	name = 'Two-Faced Joker [WIP]',
 	config = {},
-	text = {
+	--[[text = {
 		"Each played {C:attention}Ace{} becomes",
 		"a {C:attention}2{}, each played {C:attention}2{}",
 		"becomes an {C:attention}Ace{}",
-	},
+	},]]--
 	rarity = 1,
 	cost = 4,
 	canBlueprint = false,

@@ -1,10 +1,14 @@
 local jokerInfo = {
 	name = 'Meat',
-	config = {},
-	text = {
+	config = {
+		extra = {
+			cardsRemaining = 3
+		}
+	},
+	--[[text = {
 		"Add a random {C:attention}seal{} to the",
 		"next {C:attention}#1# High Cards{} scored"
-	},
+	},]]--
 	rarity = 1,
 	cost = 5,
 	canBlueprint = false,
@@ -12,6 +16,7 @@ local jokerInfo = {
 }
 
 
+<<<<<<< Updated upstream
 function jokerInfo.locDef(self)
 	return {self.ability.extra.cardsRemaining}
 end
@@ -21,6 +26,10 @@ function jokerInfo.init(self)
 	self.ability.extra = {
 		cardsRemaining = 3
 	}
+=======
+function jokerInfo.loc_vars(self, info_queue, card)
+	return {vars = {card.ability.extra.cardsRemaining}}
+>>>>>>> Stashed changes
 end
 
 function jokerInfo.calculate(self, context)

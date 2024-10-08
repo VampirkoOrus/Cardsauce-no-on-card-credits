@@ -1,10 +1,10 @@
 local jokerInfo = {
 	name = 'Pivyot',
 	config = {},
-	text = {
+	--[[text = {
 		"{C:green}#1# in 2{} chance to upgrade",
 		"level of played {C:attention}High Card{}",
-	},
+	},]]--
 	rarity = 1,
 	cost = 5,
 	canBlueprint = true,
@@ -12,8 +12,13 @@ local jokerInfo = {
 }
 
 
+<<<<<<< Updated upstream
 function jokerInfo.locDef(self)
 	return { G.GAME.probabilities.normal }
+=======
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { vars = {G.GAME.probabilities.normal} }
+>>>>>>> Stashed changes
 end
 
 

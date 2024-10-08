@@ -1,10 +1,10 @@
 local jokerInfo = {
 	name = 'Pepperoni Secret [WIP]',
 	config = {},
-	text = {
+	--[[text = {
 		"{C:attention}Secret Hands{} are",
 		"upgraded when played",
-	},
+	},]]--
 	rarity = 3,
 	cost = 8,
 	canBlueprint = true,

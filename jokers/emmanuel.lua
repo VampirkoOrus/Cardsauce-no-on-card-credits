@@ -1,11 +1,17 @@
 local jokerInfo = {
 	name = 'Emmanuel Blast',
+<<<<<<< Updated upstream
 	config = {},
 	text = {
 		"{C:green}#1# in 8{} chance to create",
+=======
+	config = {extra = 8},
+	--[[text = {
+		"{C:green}#1# in #2#{} chance to create",
+>>>>>>> Stashed changes
 		"a {C:dark_edition}Negative Tag{} at",
 		"end of round",
-	},
+	},]]--
 	rarity = 1,
 	cost = 4,
 	canBlueprint = true,
