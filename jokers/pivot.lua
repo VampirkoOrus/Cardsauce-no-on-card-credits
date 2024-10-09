@@ -7,28 +7,24 @@ local jokerInfo = {
 	},]]--
 	rarity = 1,
 	cost = 5,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 
-<<<<<<< Updated upstream
-function jokerInfo.locDef(self)
-	return { G.GAME.probabilities.normal }
-=======
 function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {G.GAME.probabilities.normal} }
->>>>>>> Stashed changes
 end
 
 
 --[[
-function jokerInfo.init(self)
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
 
 end
 ]]--
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not self.debuff then
 		if context.scoring_name == "High Card" then
 			if pseudorandom('pivot') < G.GAME.probabilities.normal / 2 then

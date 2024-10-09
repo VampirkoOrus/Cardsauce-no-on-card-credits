@@ -1,26 +1,24 @@
 local jokerInfo = {
 	name = 'Cryberries [WIP]',
 	config = {},
-	text = {
-		"idfk",
-	},
 	rarity = 1,
 	cost = 0,
-	canBlueprint = false,
-	canEternal = true
+	blueprint_compat = false,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 --[[
-function jokerInfo.locDef(self)
+function jokerInfo.loc_vars(self, info_queue, card)
 	return { G.GAME.probabilities.normal }
 end
 
-function jokerInfo.init(self)
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
 
 end
 ]]--
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	--todo
 end
 

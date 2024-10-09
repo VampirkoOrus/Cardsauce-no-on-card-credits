@@ -15,50 +15,38 @@ local jokerInfo = {
 	},]]--
 	rarity = 3,
 	cost = 8,
-	canBlueprint = true,
-	canEternal = true,
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = false,
 	hasSoul = true,
 }
 
-<<<<<<< Updated upstream
-function jokerInfo.locDef(self)
-	local hand_var = self.ability.extra.crack_hand and localize(self.ability.extra.crack_hand, 'poker_hands') or localize('k_none')
-	return { self.ability.extra.x_mult, self.ability.extra.crack_hand }
-end
-
-function jokerInfo.init(self)
-	self.ability.extra = {
-		x_mult = 1,
-		crack_hand = "None" --replace with previous hand?
-	}
-=======
 function jokerInfo.loc_vars(self, info_queue, card)
 	local hand_var = card.ability.extra.crack_hand and localize(card.ability.extra.crack_hand, 'poker_hands') or localize('k_none')
 	return { vars = {card.ability.extra.x_mult, card.ability.extra.crack_hand} }
->>>>>>> Stashed changes
 end
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not context.blueprint then
 		local hand = context.scoring_name
-		if hand == self.ability.extra.crack_hand or self.ability.extra.crack_hand == "None" then
-			self.ability.extra.x_mult = self.ability.extra.x_mult + 0.1
+		if hand == card.ability.extra.crack_hand or card.ability.extra.crack_hand == "None" then
+			card.ability.extra.x_mult = card.ability.extra.x_mult + 0.1
 		else
-			self.ability.extra.crack_hand = hand
-			if self.ability.extra.x_mult > 1 then
-                self.ability.extra.x_mult = 1
+			card.ability.extra.crack_hand = hand
+			if card.ability.extra.x_mult > 1 then
+                card.ability.extra.x_mult = 1
                 return {
                     card = self,
                     message = localize('k_reset')
                 }
             end
 		end
-		self.ability.extra.crack_hand = hand
+		card.ability.extra.crack_hand = hand
 	  end
 	if context.joker_main and context.cardarea == G.jokers then
 		return {
-			message = localize{type='variable',key='a_xmult',vars={self.ability.extra.x_mult}},
-			Xmult_mod = self.ability.extra.x_mult, 
+			message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+			Xmult_mod = card.ability.extra.x_mult, 
 			--colour = G.C.MULT
 		}
 	end
@@ -81,7 +69,7 @@ function jokerInfo.calculate(self, context)
         else
             self.ability.x_mult = self.ability.x_mult + 0.1
         end
-		self.ability.extra.crack_hand = context.scoring_name
+		card.ability.extra.crack_hand = context.scoring_name
 	end
 	]]--
 end

@@ -7,21 +7,22 @@ local jokerInfo = {
 	},]]--
 	rarity = 3,
 	cost = 8,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 --[[
-function jokerInfo.locDef(self)
+function jokerInfo.loc_vars(self, info_queue, card)
 	return { G.GAME.probabilities.normal }
 end
 
-function jokerInfo.init(self)
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
 
 end
 ]]--
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not self.debuff then
 		if context.scoring_name == "Five of a Kind" or context.scoring_name == "Flush House" or context.scoring_name == "Flush Five" then
 			return {

@@ -8,23 +8,24 @@ local jokerInfo = {
 	},]]--
 	rarity = 1,
 	cost = 4,
-	canBlueprint = false,
-	canEternal = true
+	blueprint_compat = false,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 --[[
-function jokerInfo.locDef(self)
+function jokerInfo.loc_vars(self, info_queue, card)
 	return { G.GAME.probabilities.normal }
 end
 
-function jokerInfo.init(self)
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
 
 end
 ]]--
 
 
 --card works, just need to fix timing on the card changing
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not self.debuff and not context.blueprint then
 		for k, v in ipairs(context.full_hand) do 
 			if v:get_id() == 14 then 

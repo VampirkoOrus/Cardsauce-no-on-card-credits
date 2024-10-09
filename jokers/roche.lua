@@ -11,29 +11,21 @@ local jokerInfo = {
 	},]]--
 	rarity = 1,
 	cost = 5,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 function jokerInfo.tooltip(self, info_queue)
 	info_queue[#info_queue+1] = {key = "guestartist5", set = "Other"}
 end
 
-<<<<<<< Updated upstream
-function jokerInfo.locDef(self)
-	return { self.ability.gil }
-end
-
-function jokerInfo.init(self)
-	self.ability.gil = 13
-=======
 function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {card.ability.gil} }
->>>>>>> Stashed changes
 end
 
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and not self.debuff and not context.individual and not context.repetition then
 		if G.GAME.dollars == self.ability.gil then
 			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then

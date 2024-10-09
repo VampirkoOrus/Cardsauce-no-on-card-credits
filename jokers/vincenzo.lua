@@ -8,8 +8,9 @@ local jokerInfo = {
 	},]]--
 	rarity = 4,
 	cost = 20,
-	canBlueprint = true,
-	canEternal = true,
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true,
 	hasSoul = true,
 }
 
@@ -18,7 +19,7 @@ function jokerInfo.tooltip(self, info_queue)
 end
 
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and G.GAME.blind.boss and (not context.individual) and (not context.repetition) then
 		G.GAME.joker_buffer = G.GAME.joker_buffer + 1
 		G.E_MANAGER:add_event(Event({

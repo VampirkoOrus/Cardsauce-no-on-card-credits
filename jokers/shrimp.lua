@@ -7,16 +7,17 @@ local jokerInfo = {
 	},]]--
 	rarity = 2,
 	cost = 6,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 --[[
-function jokerInfo.locDef(self)
+function jokerInfo.loc_vars(self, info_queue, card)
 	return { G.GAME.probabilities.normal }
 end
 
-function jokerInfo.init(self)
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
 
 end
 ]]--
@@ -53,7 +54,7 @@ function Card:get_end_of_round_effect(context)
 	return ret
 end]]--
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.repetition and not self.debuff then
 		if context.end_of_round and context.cardarea == G.hand then
 			if (next(context.card_effects[1]) or #context.card_effects > 1) then

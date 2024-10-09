@@ -1,35 +1,33 @@
 local jokerInfo = {
 	name = 'Grey Joker',
-	config = {},
-	text = {
-		"{C:mult}+#1#{} discards, but must",
-		"discard 5 cards {C:attention}at a time{}"
-	},
+	config = {extra = 3},
 	rarity = 2,
 	cost = 6,
-	canBlueprint = true,
-	canEternal = true,
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true,
 	hasSoul = true,
 }
 
 function jokerInfo.tooltip(self, info_queue)
+	
+end
+
+function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist1", set = "Other"}
+	return { vars = {card.ability.extra} }
 end
 
-function jokerInfo.locDef(self)
-	return { self.ability.extra }
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	
 end
 
-function jokerInfo.init(self)
-	self.ability.extra = 3
-end
-
-function jokerInfo.calculate(self, context)
-	if context.setting_blind and not self.getting_sliced and not self.debuff then
-		if not (context.blueprint_card or self).getting_sliced then
+function jokerInfo.calculate(self, card, context)
+	if context.setting_blind and not card.getting_sliced and not card.debuff then
+		if not (context.blueprint_card or card).getting_sliced then
 			G.E_MANAGER:add_event(Event({func = function()
-				ease_discard(self.ability.extra)
-				card_eval_status_text(context.blueprint_card or self, 'extra', nil, nil, nil, {message = "+3 Discards"})
+				ease_discard(card.ability.extra)
+				card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+3 Discards"})
 		return true end }))
 		end
 	end
