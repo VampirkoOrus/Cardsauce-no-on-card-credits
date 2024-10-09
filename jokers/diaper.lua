@@ -16,8 +16,8 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {card.ability.extra.mult} }
 end
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { vars = {card.ability.extra.mult, card.ability.extra.mult_mod} }
 end
 
 function jokerInfo.calculate(self, card, context)

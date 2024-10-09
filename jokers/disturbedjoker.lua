@@ -1,9 +1,9 @@
 local jokerInfo = {
 	name = 'Disturbed Joker',
 	config = {extra = 0},
-	text = {
+	--[[text = {
 		"Draw {C:attention}+1{} card each {C:mult}discard{}",
-	},
+	},]]--
 	rarity = 1,
 	cost = 4,
 	blueprint_compat = false,
@@ -19,6 +19,9 @@ end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
 	info_queue[#info_queue+1] = {key = "guestartist4", set = "Other"}
+end
+
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
 	card.ability.extra = G.GAME.current_round.discards_used + 1
 end
 

@@ -15,7 +15,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { G.GAME.probabilities.normal }
+	return { vars = {G.GAME.probabilities.normal} }
 end
 
 function jokerInfo.calculate(self, card, context)

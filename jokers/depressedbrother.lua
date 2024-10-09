@@ -16,8 +16,8 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {card.ability.extra.chips, card.ability.extra.chips_mod} }
 end
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-
+function jokerInfo.loc_vars(self, info_queue, card)
+	return { vars = {card.ability.extra.chips, card.ability.extra.chip_mod} }
 end
 
 function jokerInfo.calculate(self, card, context)

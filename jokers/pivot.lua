@@ -1,10 +1,10 @@
 local jokerInfo = {
 	name = 'Pivyot',
 	config = {},
-	text = {
+	--[[text = {
 		"{C:green}#1# in 2{} chance to upgrade",
 		"level of played {C:attention}High Card{}",
-	},
+	},]]--
 	rarity = 1,
 	cost = 5,
 	blueprint_compat = true,
@@ -14,7 +14,7 @@ local jokerInfo = {
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { G.GAME.probabilities.normal }
+	return { vars = {G.GAME.probabilities.normal} }
 end
 
 

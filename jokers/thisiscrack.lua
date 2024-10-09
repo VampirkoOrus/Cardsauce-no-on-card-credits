@@ -1,13 +1,18 @@
 local jokerInfo = {
 	name = 'This Is Crack',
-	config = {},
-	text = {
+	config = {
+		extra = {
+			x_mult = 1,
+			crack_hand = "None"
+		}
+	},
+	--[[text = {
 		"This Joker gains {X:mult,C:white}X0.1{} Mult",
 		"per {C:attention}consecutive{} hand played",
 		"of the {C:attention}same type{}",
 		"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
 		"{C:inactive}(Current hand: {}{C:attention}#2#{}{C:inactive}){}",
-	},
+	},]]--
 	rarity = 3,
 	cost = 8,
 	blueprint_compat = true,
@@ -18,14 +23,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	local hand_var = card.ability.extra.crack_hand and localize(card.ability.extra.crack_hand, 'poker_hands') or localize('k_none')
-	return { card.ability.extra.x_mult, card.ability.extra.crack_hand }
-end
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.extra = {
-		x_mult = 1,
-		crack_hand = "None" --replace with previous hand?
-	}
+	return { vars = {card.ability.extra.x_mult, card.ability.extra.crack_hand} }
 end
 
 function jokerInfo.calculate(self, card, context)

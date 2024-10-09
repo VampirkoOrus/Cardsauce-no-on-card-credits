@@ -1,12 +1,17 @@
 local jokerInfo = {
 	name = 'Very Expensive Joker',
-	config = {},
-	text = {
+	config = {
+		extra = {
+			x_mult = 1,
+			dollars = 0
+		}
+	},
+	--[[text = {
 		"{X:mult,C:white}X0.5{} Mult for every {C:money}$10{}",
 		"spent on this Joker, spend all",
 		"{C:attention}money{} obtaining this",
 		"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
-	},
+	},]]--
 	rarity = 1,
 	cost = 0,
 	blueprint_compat = false,
@@ -14,14 +19,7 @@ local jokerInfo = {
 	perishable_compat = true
 }
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { card.ability.extra.x_mult }
-end
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.extra = {
-		x_mult = 1,
-		dollars = 0
-	}
+	return { vars = {card.ability.extra.x_mult} }
 end
 
 local add_to_deck_ref = Card.add_to_deck

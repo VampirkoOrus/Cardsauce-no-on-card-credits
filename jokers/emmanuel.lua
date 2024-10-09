@@ -1,11 +1,11 @@
 local jokerInfo = {
 	name = 'Emmanuel Blast',
 	config = {extra = 8},
-	text = {
+	--[[text = {
 		"{C:green}#1# in #2#{} chance to create",
 		"a {C:dark_edition}Negative Tag{} at",
 		"end of round",
-	},
+	},]]--
 	rarity = 1,
 	cost = 4,
 	blueprint_compat = true,

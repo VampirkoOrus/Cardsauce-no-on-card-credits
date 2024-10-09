@@ -26,11 +26,11 @@ end]]--
 local jokerInfo = {
 	name = 'SPEEEEEEN',
 	config = {},
-	text = {
+	--[[text = {
 		"Create a {C:purple}Wheel of Fortune{} card",
 		"when {C:attention}rerolling{} in the shop",
 		"{C:inactive}(Must have room){}",
-	},
+	},]]--
 	rarity = 1,
 	cost = 6,
 	blueprint_compat = true,

@@ -1,11 +1,11 @@
 local jokerInfo = {
 	name = 'DIS JOAKERRR',
 	config = {extra = {messageIndex = 0}},
-	text = {
+	--[[text = {
 		"eACH SKOARD DEE EMC {C:attention}2{}",
 		"OR BERSONA {C:attention}5{}",
 		"GAET RANDUM {C:attention}EHANCEMAENT{}",
-	},
+	},-]]
 	rarity = 1,
 	cost = 6,
 	blueprint_compat = false,

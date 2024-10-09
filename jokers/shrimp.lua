@@ -1,10 +1,10 @@
 local jokerInfo = {
 	name = 'Shrimp Joker [WIP]',
 	config = {},
-	text = {
+	--[[text = {
 		"{C:attention}Seals{} trigger an",
 		"additional time",
-	},
+	},]]--
 	rarity = 2,
 	cost = 6,
 	blueprint_compat = true,

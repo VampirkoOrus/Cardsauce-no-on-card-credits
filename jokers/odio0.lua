@@ -1,10 +1,10 @@
 local jokerInfo = {
 	name = 'Odious Joker [WIP]',
 	config = {},
-	text = {
+	--[[text = {
 		"{C:dark_edition}It would be in your best interests to stop.{}",
 		"{C:dark_edition}These cards are my domain, and I their master.{}",
-	},
+	},]]--
 	rarity = 3,
 	cost = 6,
 	blueprint_compat = false,

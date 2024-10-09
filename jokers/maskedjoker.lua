@@ -1,11 +1,16 @@
 local jokerInfo = {
 	name = 'Masked Joker',
-	config = {},
-	text = {
+	config = {
+		extra = {
+			chips = 29,
+			mult = 16
+		}
+	},
+	--[[text = {
 		"If played hand is all",
 		"{C:attention}Steel Cards{}, each gives",
 		"{C:chips}+#1#{} Chips and {C:mult}+#2#{} Mult",
-	},
+	},]]--
 	rarity = 2,
 	cost = 7,
 	blueprint_compat = true,
@@ -18,7 +23,7 @@ function jokerInfo.tooltip(self, info_queue)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { card.ability.extra.chips, card.ability.extra.mult }
+	return { vars = {card.ability.extra.chips, card.ability.extra.mult}}
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)

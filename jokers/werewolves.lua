@@ -1,11 +1,15 @@
 local jokerInfo = {
 	name = 'That\'s Werewolves',
-	config = {},
-	text = {
+	config = {
+		extra = {
+			x_mult = 3
+		}
+	},
+	--[[text = {
 		"{X:mult,C:white}X#1#{} Mult, but",
 		"cannot play hands",
 		"containing a {C:attention}Flush{}",
-	},
+	},]]--
 	rarity = 2,
 	cost = 7,
 	blueprint_compat = true,
@@ -14,13 +18,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { card.ability.extra.x_mult }
-end
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.extra = {
-		x_mult = 3
-	}
+	return { vars = {card.ability.extra.x_mult} }
 end
 
 local debuff_hand_ref = Blind.debuff_hand

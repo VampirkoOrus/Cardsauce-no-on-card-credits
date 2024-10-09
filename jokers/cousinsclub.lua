@@ -1,9 +1,11 @@
 local jokerInfo = {
 	name = 'Cousin\'s Club [WIP]',
-	config = {extra = {
-		chips = 0,
-		chip_mod = 1
-	}},
+	config = {
+		extra = {
+			chips = 0,
+			chip_mod = 1
+		}
+	},
 	rarity = 2,
 	cost = 6,
 	blueprint_compat = true,
@@ -12,7 +14,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { vars = {card.ability.extra.chips, card.ability.extra.chips_mod} }
+	return { vars = {card.ability.extra.chips, card.ability.extra.chip_mod} }
 end
 
 --[[function jokerInfo.set_ability(self, card, initial, delay_sprites)

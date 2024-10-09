@@ -84,7 +84,6 @@ end
 local draw_from_deck_to_handref = G.FUNCS.draw_from_deck_to_hand
 function G.FUNCS.draw_from_deck_to_hand(self, e)
     draw_from_deck_to_handref(self, e)
-
     for _, v in ipairs(G.jokers.cards) do
     	if G.STATE == G.STATES.DRAW_TO_HAND and not v.debuff then
         	if v.config.center.key == "j_speedjoker" and G.GAME.current_round.hands_played == v.ability.extra or
@@ -260,7 +259,7 @@ for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 	end
 
 	--load sprite
-	SMODS.Atlas({ key = v, path = v .. ".png", px = 71, py = 95 })
+	SMODS.Atlas({ key = v, path ="jokers/" .. v .. ".png", px = 71, py = 95 })
 end
 
 --card updates
@@ -278,8 +277,7 @@ function Card.update(self, dt)
 end
 
 local quixotic = SMODS.Consumable({ key = "quixotic", cost = 4, set = "Spectral", discovered = true, alerted = true, atlas = "quixotic" })
-SMODS.Atlas({ key = "quixotic", path = "quixotic.png", px = 71, py = 95 })
-
+SMODS.Atlas({ key = "quixotic", path = "consumables/quixotic.png", px = 71, py = 95 })
 
 function quixotic.loc_vars(self, info_queue, card)
 	info_queue[#info_queue + 1] = G.P_TAGS.tag_ethereal
@@ -310,4 +308,193 @@ function Card.draw(self, layer)
 		obj:draw(self, layer)
 	end
 	card_drawRef(self, layer)
+end
+
+-- Base Deck Textures
+SMODS.Atlas {
+	key = "cards_1",
+	path = "BaseDeck.png",
+	px = 71,
+	py = 95,
+	prefix_config = { key = false }
+}
+
+-- Title Screen Logo Texture
+SMODS.Atlas {
+	key = "balatro",
+	path = "Logo.png",
+	px = 333,
+	py = 216,
+	prefix_config = { key = false }
+}
+
+-- Mod Icon in Mods tab
+SMODS.Atlas({
+	key = "modicon",
+	path = "icon.png",
+	px = 32,
+	py = 32
+}):register()
+
+-- Deck 2 - Extra Characters
+
+SMODS.Atlas{
+	key = "collab_AU_1",
+	path = "extra_h_1.png",
+	px = 71,
+	py = 95,
+	atlas_table = 'ASSET_ATLAS',
+	prefix_config = { key = false }
+}
+
+SMODS.Atlas{
+	key = "collab_AU_2",
+	path = "extra_h_2.png",
+	px = 71,
+	py = 95,
+	atlas_table = 'ASSET_ATLAS',
+	prefix_config = { key = false }
+}
+
+SMODS.Atlas{
+	key = "collab_TW_1",
+	path = "extra_s_1.png",
+	px = 71,
+	py = 95,
+	atlas_table = 'ASSET_ATLAS',
+	prefix_config = { key = false }
+}
+
+SMODS.Atlas{
+	key = "collab_TW_2",
+	path = "extra_s_2.png",
+	px = 71,
+	py = 95,
+	atlas_table = 'ASSET_ATLAS',
+	prefix_config = { key = false }
+}
+
+SMODS.Atlas{
+	key = "collab_VS_1",
+	path = "extra_c_1.png",
+	px = 71,
+	py = 95,
+	atlas_table = 'ASSET_ATLAS',
+	prefix_config = { key = false }
+}
+
+SMODS.Atlas{
+	key = "collab_VS_2",
+	path = "extra_c_2.png",
+	px = 71,
+	py = 95,
+	atlas_table = 'ASSET_ATLAS',
+	prefix_config = { key = false }
+}
+SMODS.Atlas{
+	key = "collab_DTD_1",
+	path = "extra_d_1.png",
+	px = 71,
+	py = 95,
+	atlas_table = 'ASSET_ATLAS',
+	prefix_config = { key = false }
+}
+
+SMODS.Atlas{
+	key = "collab_DTD_2",
+	path = "extra_d_2.png",
+	px = 71,
+	py = 95,
+	atlas_table = 'ASSET_ATLAS',
+	prefix_config = { key = false }
+}
+
+-- Credits Tab in Mods
+SMODS.current_mod.credits_tab = function()
+	local text_scale = 0.9
+	chosen = true
+	return {n=G.UIT.ROOT, config={align = "cm", padding = 0.2, colour = G.C.BLACK, r = 0.1, emboss = 0.05, minh = 6, minw = 10}, nodes={
+		{n=G.UIT.C, config={align = "cm", padding = 0.1}, nodes={
+			{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+					{n=G.UIT.T, config={text = localize('vs_credits1'), scale = text_scale*0.6, colour = G.C.GOLD, shadow = true}},
+				}},
+				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+					{n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							{n=G.UIT.T, config={text = 'BarrierTrio', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						}},
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							{n=G.UIT.T, config={text = 'Keku', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						}},
+					}},
+				}},
+			}},
+			{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+				{n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
+					{n=G.UIT.T, config={text = localize('vs_credits2'), scale = text_scale*0.6, colour = G.C.RED, shadow = true}},
+				}},
+				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+					{n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							{n=G.UIT.T, config={text = 'BarrierTrio', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						}},
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							{n=G.UIT.T, config={text = 'SagaciousCejai', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						}},
+					}},
+				}},
+			}},
+		}},
+		{n=G.UIT.C, config={align = "cm", padding = 0.1}, nodes={
+			{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+					{n=G.UIT.T, config={text = localize('vs_credits3'), scale = text_scale*0.6, colour = G.C.ORANGE, shadow = true}},
+				}},
+				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+					{n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							{n=G.UIT.T, config={text = 'DPS2004', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						}},
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							{n=G.UIT.T, config={text = 'Nether', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						}},
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							{n=G.UIT.T, config={text = 'Mysthaps', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						}},
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							{n=G.UIT.T, config={text = 'Aurelius7309', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						}},
+					}},
+				}},
+			}},
+			{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+				{n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
+					{n=G.UIT.T, config={text = localize('vs_credits4'), scale = text_scale*0.6, colour = G.C.PURPLE, shadow = true}},
+				}},
+				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+					{n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							{n=G.UIT.T, config={text = 'Infarctus', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						}},
+					}},
+				}},
+			}},
+			{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+				{n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
+					{n=G.UIT.T, config={text = localize('vs_credits5'), scale = text_scale*0.6, colour = G.C.GREEN, shadow = true}},
+				}},
+				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+					{n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							{n=G.UIT.T, config={text = 'Lyman (from JankJonklers)', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						}},
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							{n=G.UIT.T, config={text = 'Akai (from BalatroStuck)', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						}},
+					}},
+				}},
+			}},
+		}},
+	}}
 end

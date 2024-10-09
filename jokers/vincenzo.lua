@@ -1,11 +1,11 @@
 local jokerInfo = {
 	name = 'Vincenzo',
 	config = {},
-	text = {
+	--[[text = {
 		"When {C:attention}Boss Blind{} is",
 		"defeated, create a",
 		"{C:dark_edition}Negative{} {C:attention}Misprint Joker{}",
-	},
+	},]]--
 	rarity = 4,
 	cost = 20,
 	blueprint_compat = true,

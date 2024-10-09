@@ -1,10 +1,14 @@
 local jokerInfo = {
 	name = 'Meat',
-	config = {},
-	text = {
+	config = {
+		extra = {
+			cardsRemaining = 3
+		}
+	},
+	--[[text = {
 		"Add a random {C:attention}seal{} to the",
 		"next {C:attention}#1# High Cards{} scored"
-	},
+	},]]--
 	rarity = 1,
 	cost = 5,
 	blueprint_compat = false,
@@ -14,14 +18,7 @@ local jokerInfo = {
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return {card.ability.extra.cardsRemaining}
-end
-
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.extra = {
-		cardsRemaining = 3
-	}
+	return {vars = {card.ability.extra.cardsRemaining}}
 end
 
 function jokerInfo.calculate(self, card, context)

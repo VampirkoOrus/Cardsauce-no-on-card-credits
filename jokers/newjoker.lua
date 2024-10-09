@@ -1,11 +1,15 @@
 local jokerInfo = {
 	name = 'The NEW Joker!',
-	config = {},
-	text = {
+	config = {
+		extra = {
+			mult = 4
+		}
+	},
+	--[[text = {
 		"Played cards with an",
 		"{C:attention}Enhancement{} give {C:mult}+#1#{} Mult",
 		"when scored",
-	},
+	},]]--
 	rarity = 1,
 	cost = 4,
 	blueprint_compat = true,
@@ -15,14 +19,7 @@ local jokerInfo = {
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return {card.ability.extra.mult}
-end
-
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.extra = {
-		mult = 4
-	}
+	return {vars = {card.ability.extra.mult}}
 end
 
 --[[

@@ -1,12 +1,17 @@
 local jokerInfo = {
 	name = 'PAC-MAN Incident',
-	config = {},
-	text = {
+	config = {
+		extra = {
+			mult = 0,
+			mult_mod = 5
+		}
+	},
+	--[[text = {
 		"This Joker gains {C:mult}+5{} Mult if",
         "round ends with your chips",
         "within {C:attention}10%{} of the {C:attention}Blind{}",
         "{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}",
-	},
+	},]]--
 	rarity = 1,
 	cost = 5,
 	blueprint_compat = true,
@@ -16,14 +21,7 @@ local jokerInfo = {
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { card.ability.extra.mult }
-end
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.extra = {
-		mult = 0,
-		mult_mod = 5
-	}
+	return { vars = {card.ability.extra.mult} }
 end
 
 

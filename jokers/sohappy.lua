@@ -1,11 +1,11 @@
 local jokerInfo = {
 	name = 'I\'m So Happy [WIP]',
 	config = {},
-	text = {
+	--[[text = {
 		"{C:blue}+2{} hands, {C:red}-1{} discard",
 		"{C:inactive}(Turns upside-down after",
 		"{C:inactive}each round played)",
-	},
+	},]]--
 	rarity = 2,
 	cost = 6,
 	blueprint_compat = false,

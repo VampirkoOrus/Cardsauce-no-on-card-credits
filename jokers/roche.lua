@@ -1,12 +1,14 @@
 local jokerInfo = {
 	name = 'Motorcyclist Joker',
-	config = {},
-	text = {
+	config = {
+		gil = 13
+	},
+	--[[text = {
 		"If round ends with exactly {C:money}$#1#{},",
 		"create a {C:planet}Planet{} card for",
 		"your most-used hand",
 		"{C:inactive}(Must have room){}",
-	},
+	},]]--
 	rarity = 1,
 	cost = 5,
 	blueprint_compat = true,
@@ -19,11 +21,7 @@ function jokerInfo.tooltip(self, info_queue)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { card.ability.gil }
-end
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.gil = 13
+	return { vars = {card.ability.gil} }
 end
 
 

@@ -74,6 +74,31 @@ return {
 				"-Eiko",
 			},
 		},
+		collabs = {
+            Spades = {
+                ['1'] = 'Default', 
+                ['2'] = 'Extra Characters',
+            },
+            Hearts = {
+                ['1'] = 'Default', 
+                ['2'] = 'Extra Characters',
+            },
+            Clubs = {
+                ['1'] = 'Default', 
+                ['2'] = 'Extra Characters',
+            },
+            Diamonds = {
+                ['1'] = 'Default', 
+                ['2'] = 'Extra Characters',
+            },
+        },
+		dictionary = {
+			vs_credits1 = "Project Leads",
+			vs_credits2 = "Artists",
+			vs_credits3 = "Coding",
+			vs_credits4 = "Sound API",
+			vs_credits5 = "Support",
+		}
 	},
 	descriptions = {
 		Blind = {
