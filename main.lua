@@ -84,7 +84,6 @@ end
 local draw_from_deck_to_handref = G.FUNCS.draw_from_deck_to_hand
 function G.FUNCS.draw_from_deck_to_hand(self, e)
     draw_from_deck_to_handref(self, e)
-
     for _, v in ipairs(G.jokers.cards) do
     	if G.STATE == G.STATES.DRAW_TO_HAND and not v.debuff then
         	if v.config.center.key == "j_speedjoker" and G.GAME.current_round.hands_played == v.ability.extra or
@@ -279,7 +278,6 @@ end
 
 local quixotic = SMODS.Consumable({ key = "quixotic", cost = 4, set = "Spectral", discovered = true, alerted = true, atlas = "quixotic" })
 SMODS.Atlas({ key = "quixotic", path = "consumables/quixotic.png", px = 71, py = 95 })
-
 
 function quixotic.loc_vars(self, info_queue, card)
 	info_queue[#info_queue + 1] = G.P_TAGS.tag_ethereal

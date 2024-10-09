@@ -11,8 +11,9 @@ local jokerInfo = {
 	perishable_compat = false
 }
 
-function jokerInfo.tooltip(self, info_queue)
+function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist1", set = "Other"}
+	return { vars = {card.ability.extra.chips, card.ability.extra.chips_mod} }
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)

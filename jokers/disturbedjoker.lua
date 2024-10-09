@@ -17,7 +17,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 ]]--
 
-function jokerInfo.tooltip(self, info_queue)
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
 	info_queue[#info_queue+1] = {key = "guestartist4", set = "Other"}
 end
 
