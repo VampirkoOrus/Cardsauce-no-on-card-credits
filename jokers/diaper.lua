@@ -12,14 +12,6 @@ local jokerInfo = {
 	perishable_compat = true
 }
 
-<<<<<<< Updated upstream
-function jokerInfo.loc_vars(self, info_queue, card)
-	info_queue[#info_queue+1] = {key = "diapernote", set = "Other"}
-	return { vars = {card.ability.extra.mult} }
-end
-
-=======
->>>>>>> Stashed changes
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "diapernote", set = "Other"}
 	return { vars = {card.ability.extra.mult, card.ability.extra.mult_mod} }

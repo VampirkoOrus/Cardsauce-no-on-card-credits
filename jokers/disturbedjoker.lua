@@ -12,14 +12,6 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-<<<<<<< Updated upstream
-	return { G.GAME.probabilities.normal }
-end
-]]--
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-=======
->>>>>>> Stashed changes
 	info_queue[#info_queue+1] = {key = "guestartist4", set = "Other"}
 	return { vars = {card.ability.draw} }
 end
