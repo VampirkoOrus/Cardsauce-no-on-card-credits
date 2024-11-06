@@ -1,9 +1,10 @@
---[[local mod = SMODS.findModByID('Cardsauce')
+local mod = SMODS.current_mod
+local mod_path = 'Mods/Cardsauce/'
 
 mod.speenTimer = 0
 
-mod.speenBase = love.graphics.newImage(mod_path..'assets/1x/speenBase.png')
-mod.speenFace = love.graphics.newImage(mod_path..'assets/1x/speenFace.png')
+mod.speenBase = love.graphics.newImage(mod_path..'assets/1x/jokers/speenBase.png')
+mod.speenFace = love.graphics.newImage(mod_path..'assets/1x/jokers/speenFace.png')
 
 local drawFace = function()
 	local r = math.sin(mod.speenTimer/2) * 60
@@ -20,7 +21,7 @@ local setupCanvas = function(self)
 		love.graphics.draw(mod.speenBase)
 		drawFace()
 	end)
-end]]--
+end
 
 
 local jokerInfo = {
@@ -47,11 +48,6 @@ end
 
 
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.extra = {
-	}
-	setupCanvas(self)
-end
 
 function jokerInfo.calculate(self, card, context)
 	if context.reroll_shop and not self.getting_sliced and not self.debuff and not (context.blueprint_card or self).getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
@@ -77,28 +73,35 @@ end
 
 local loveUpdateReference = love.update
 
---[[function love.update(dt)
+function love.update(dt)
 	if mod.speenTimer and G.SETTINGS.GAMESPEED then
 		mod.speenTimer = (mod.speenTimer + (dt / G.SETTINGS.GAMESPEED)) % (math.pi * 4)
 	end
 	loveUpdateReference(dt)
-end]]--
+end
 
-function jokerInfo.draw(self,layer)
+function jokerInfo.draw(self,card,layer)
 	--Withouth love.graphics.push, .pop, and .reset, it will attempt to use values from the rest of 
 	--the rendering code. We need a clean slate for rendering to canvases.
+	
+	local undiscovered = false --TODO: find a way to check for if discovered
+	if undiscovered then
+		return
+	end
+	
+	
 	love.graphics.push('all')
 		love.graphics.reset()
-		if not self.children.center.video then
+		if not card.children.center.video then
 			--Sometimes, such as when a game is saved and loaded, the canvas gets de-initialized.
 			--We need to check for this, and re-initialize it.
-			setupCanvas(self)
+			setupCanvas(card)
 		end
 		
-		self.children.center.video:renderTo(function()
+		card.children.center.video:renderTo(function()
 			--Same as before, but this time we pass in the timer.
 			love.graphics.draw(mod.speenBase)
-			drawFace(card.ability.extra.timer)
+			drawFace(mod.speenTimer)
 		end)
 	love.graphics.pop()
 end

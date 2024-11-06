@@ -16,7 +16,7 @@ local conf_cardsauce = {
 		'twoface',
 		'newjoker',
 		'pivot',
-		--'speen',
+		'speen',
 		'diaper',
 		'roche',
 		'pacman',
