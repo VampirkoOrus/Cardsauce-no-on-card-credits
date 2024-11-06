@@ -244,7 +244,7 @@ local jokerUpdates = {}
 local jokerDraws = {}
 
 for i, v in ipairs(conf_cardsauce.jokersToLoad) do
-	local jokerInfo = SMODS.load_file("jokers/" .. v .. ".lua")()
+	local jokerInfo = assert(SMODS.load_file("jokers/" .. v .. ".lua"))()
 
 	jokerInfo.key = v
 	jokerInfo.atlas = v
