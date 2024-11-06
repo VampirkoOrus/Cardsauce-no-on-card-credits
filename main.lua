@@ -280,10 +280,7 @@ function Card.update(self, dt)
 end
 
 SMODS.Atlas({ key = "quixotic", path = "consumables/quixotic.png", px = 71, py = 95 })
-<<<<<<< Updated upstream
-=======
 local quixotic = SMODS.Consumable({ key = "quixotic", cost = 4, set = "Spectral", discovered = false, alerted = true, atlas = "quixotic" })
->>>>>>> Stashed changes
 
 function quixotic.loc_vars(self, info_queue, card)
 	info_queue[#info_queue + 1] = G.P_TAGS.tag_ethereal
