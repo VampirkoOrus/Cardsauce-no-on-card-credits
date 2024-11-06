@@ -19,10 +19,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 ]]--
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	
-end
-
 function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not card.debuff and not context.blueprint then
 		local enhancements = {
@@ -48,7 +44,7 @@ function jokerInfo.calculate(self, card, context)
 						return true
 					end
 				})) 
-				card_eval_status_text(self, 'extra', nil, nil, nil, {message = messages[(card.ability.extra.messageIndex % 2) + 1], colour = G.C.MONEY})
+				card_eval_status_text(card, 'extra', nil, nil, nil, {message = messages[(card.ability.extra.messageIndex % 2) + 1], colour = G.C.MONEY})
 				card.ability.extra.messageIndex = card.ability.extra.messageIndex + 1
 			end
 		end

@@ -9,17 +9,9 @@ local jokerInfo = {
 	hasSoul = true,
 }
 
-function jokerInfo.tooltip(self, info_queue)
-	
-end
-
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist1", set = "Other"}
 	return { vars = {card.ability.extra} }
-end
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -31,6 +23,8 @@ function jokerInfo.calculate(self, card, context)
 		return true end }))
 		end
 	end
+end
+
 
 	--[[G.FUNCS.can_discard = function(e)
 		if G.GAME.current_round.discards_left <= 0 or #G.hand.highlighted <= 4 then 
@@ -41,7 +35,6 @@ function jokerInfo.calculate(self, card, context)
 			e.config.button = 'discard_cards_from_highlighted'
 		end
 	  end]]--
-end
 
 --[[function Card:remove_from_deck()
 	G.FUNCS.can_discard = function(e)

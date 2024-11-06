@@ -44,13 +44,13 @@ function jokerInfo.calculate(self, card, context)
 					func = (function()
 						G.E_MANAGER:add_event(Event({
 							func = function() 
-								local card = create_card('Tarot',G.consumeables, nil, nil, nil, nil, flush_tarot, 'car')
-								card:add_to_deck()
-								G.consumeables:emplace(card)
+								local _card = create_card('Tarot',G.consumeables, nil, nil, nil, nil, flush_tarot, 'car')
+								_card:add_to_deck()
+								G.consumeables:emplace(_card)
 								G.GAME.consumeable_buffer = 0
 								return true
 							end}))   
-							card_eval_status_text(context.blueprint_card or self, 'extra', nil, nil, nil, {message = "+1 Tarot", colour = G.C.PURPLE})                       
+							card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+1 "..localize{type = 'name_text', key = flush_tarot, set = 'Tarot'}, colour = G.C.PURPLE})
 						return true
 					end)}))
 			end

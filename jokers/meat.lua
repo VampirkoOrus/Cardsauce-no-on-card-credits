@@ -22,7 +22,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.cardarea == G.jokers and context.before and not self.debuff and not context.blueprint then
+	if context.cardarea == G.jokers and context.before and not card.debuff and not context.blueprint then
 		if context.scoring_name == "High Card" then
 			local seal = {
 				[1] = "Gold",
@@ -39,7 +39,7 @@ function jokerInfo.calculate(self, card, context)
 				end
 				})) 
 			end
-			card_eval_status_text(self, 'extra', nil, nil, nil, {message = "Yeow!", colour = G.C.MONEY})
+			card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_meat_seal'), colour = G.C.MONEY})
 			card.ability.extra.cardsRemaining = card.ability.extra.cardsRemaining - 1
 		end
 
@@ -48,15 +48,15 @@ function jokerInfo.calculate(self, card, context)
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					play_sound('tarot1')
-					self.T.r = -0.2
-					self:juice_up(0.3, 0.4)
-					self.states.drag.is = true
-					self.children.center.pinch.x = true
+					card.T.r = -0.2
+					card:juice_up(0.3, 0.4)
+					card.states.drag.is = true
+					card.children.center.pinch.x = true
 					G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
 						func = function()
-							G.jokers:remove_card(self)
-							self:remove()
-							self = nil
+							G.jokers:remove_card(card)
+							card:remove()
+							card = nil
 							return true
 						end
 					})) 
@@ -64,7 +64,7 @@ function jokerInfo.calculate(self, card, context)
 				end
 			})) 
 			return {
-				message = "Nyomp!",
+				message = localize('k_meat_destroy'),
 				colour = G.C.MONEY
 			}
 		end

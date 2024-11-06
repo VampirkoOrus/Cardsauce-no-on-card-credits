@@ -25,18 +25,10 @@ function jokerInfo.calculate(self, card, context)
 		local code7 = 0
 		local code8 = 0
 		for k, v in ipairs(context.full_hand) do
-			if v:get_id() == 5 then
-				code5 = code5 + 1
-			end
-			if v:get_id() == 6 then
-				code6 = code6 + 1
-			end
-			if v:get_id() == 7 then
-				code7 = code7 + 1
-			end
-			if v:get_id() == 8 then
-				code8 = code8 + 1
-			end
+			if v:get_id() == 5 then code5 = code5 + 1 end
+			if v:get_id() == 6 then code6 = code6 + 1 end
+			if v:get_id() == 7 then code7 = code7 + 1 end
+			if v:get_id() == 8 then code8 = code8 + 1 end
 		end
 		if code5 == 1 and code6 == 1 and code7 == 2 and code8 == 1 then
 			ease_dollars(card.ability.extra.money)

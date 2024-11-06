@@ -1,7 +1,6 @@
 local jokerInfo = {
-	name = 'Vinesauce is HOPE',
+	name = 'Charity Stream',
 	config = {extra = {
-		keepNoInterest = G.GAME.modifiers.no_interest,
 		mult = 0,
 		mult_gain = 0
 	}},
@@ -17,15 +16,14 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = { card.ability.extra.mult } }
 end
 
---[[function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	
-end]]--
+function jokerInfo.add_to_deck(self, card)
+	G.GAME.modifiers.no_interest = true
+end
 
 function jokerInfo.calculate(self, card, context)
-	
 	if context.end_of_round and not card.debuff and not context.individual and not context.repetition and not context.blueprint then
 		card.ability.extra.mult_gain = 0
-		if not G.GAME.modifiers.no_interest then
+		if G.GAME.modifiers.no_interest then
 			card.ability.extra.mult_gain = G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/5), G.GAME.interest_cap/5)
 		end
 		card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
@@ -41,6 +39,10 @@ function jokerInfo.calculate(self, card, context)
 				mult_mod = card.ability.extra.mult,
 			}
 		end
+	end
+
+	if context.selling_self then
+		G.GAME.modifiers.no_interest = false
 	end
 end
 

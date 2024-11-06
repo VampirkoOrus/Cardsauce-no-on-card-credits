@@ -2,6 +2,7 @@ return {
 	misc = {
 		dictionary = {
 			ph_armageddon = "Annihilated by Odio",
+			ph_mr_bones = "Saved by Self-Destructing Joker",
 		},
 		quips = {
 			wq_1 = {
@@ -75,22 +76,26 @@ return {
 			},
 		},
 		collabs = {
-            Spades = {
-                ['1'] = 'Default', 
-                ['2'] = 'Extra Characters',
-            },
-            Hearts = {
-                ['1'] = 'Default', 
-                ['2'] = 'Extra Characters',
-            },
-            Clubs = {
-                ['1'] = 'Default', 
-                ['2'] = 'Extra Characters',
-            },
-            Diamonds = {
-                ['1'] = 'Default', 
-                ['2'] = 'Extra Characters',
-            },
+			Spades={
+				["1"]="Twitch Clips",
+				["2"]="Characters",
+				["3"]="The Confidants",
+			},
+			Hearts={
+				["1"]="Extrasauce",
+				["2"]="Characters",
+				["3"]="The Wildcards",
+			},
+			Clubs={
+				["1"]="Darkshroom",
+				["2"]="Characters",
+				["3"]="The Mascots",
+			},
+			Diamonds={
+				["1"]="Fullsauce",
+				["2"]="Characters",
+				["3"]="The Classics",
+			},
         },
 		dictionary = {
 			vs_credits1 = "Project Leads",
@@ -98,6 +103,14 @@ return {
 			vs_credits3 = "Coding",
 			vs_credits4 = "Sound API",
 			vs_credits5 = "Support",
+			k_aced = "Aced!",
+			k_twoed = "Twoed!",
+			k_plus_judge = "+1 Judgement",
+			k_meat_seal = "Yeow!",
+			k_meat_destroy = "Nyomp!",
+			k_plus_tarot = "+1 Tarot",
+			k_vincenzo = "Corrupted!",
+			k_flip = "Flipped!"
 		}
 	},
 	descriptions = {
@@ -163,6 +176,12 @@ return {
 				name = "Guest Coder",
 				text = {
 					"{E:1}Numbuh214{}",
+				},
+			},
+			guestartist8 = {
+				name = "Guest Artist",
+				text = {
+					"{E:1}Keku{}",
 				},
 			},
 			rogernote = {
@@ -238,16 +257,8 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}",
 				},
 			},
-			j_csau_sohappy = {
-				name = "I'm So Happy [WIP]",
-				text = {
-					"{C:blue}+2{} hands, {C:red}-1{} discard",
-					"{C:inactive}(Turns upside-down after",
-					"{C:inactive}each round played)",
-				},
-			},
 			j_csau_charity = {
-				name = "Vinesauce is HOPE",
+				name = "Charity Stream",
 				text = {
 					"Earn no {C:money}Interest{} at the end of",
 					"each round. This Joker gains {C:mult}+1{} Mult",
@@ -414,7 +425,7 @@ return {
 				},
 			},
 			j_csau_twoface = {
-				name = "Two-Faced Joker [WIP]",
+				name = "Two-Faced Joker",
 				text = {
 					"Each played {C:attention}Ace{} becomes",
 					"a {C:attention}2{}, each played {C:attention}2{}",
@@ -432,9 +443,9 @@ return {
 			j_csau_anotherlight = {
 				name = "Another Light",
 				text = {
-					"If {C:attention}poker hand{} is a {C:attention}Flush{},",
-					"create a {C:purple}Tarot{} card",
-					"for that suit",
+					"If played hand is a {C:attention}Flush{},",
+					"create a {C:purple}Tarot{}",
+					"card for that suit",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -479,9 +490,68 @@ return {
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",
 				},
 			},
+			j_csau_sohappy = {
+				name = "I'm So Happy",
+				text = {
+					"{C:blue}+2{} hands, {C:red}-1{} discard",
+					"{C:inactive}(Turns upside-down after",
+					"{C:inactive}each round played)",
+				},
+			},
+			j_csau_sohappy2 = {
+				name = "I'm So Happy",
+				text = {
+					"{C:blue}+2{} hands, {C:red}-1{} discard",
+					"{C:inactive}(Turns upside-down after",
+					"{C:inactive}each round played)",
+				},
+			},
+			j_csau_sosad = {
+				name = "I'm So Sad",
+				text = {
+					"{C:red}+2{} discards, {C:blue}-1{} hand",
+					"{C:inactive}(Turns upside-down after{}",
+					"{C:inactive}each round played){}",
+				},
+			},
+			j_csau_wingsoftime = {
+				name = "Wings of Time [WIP]",
+				text = {
+                    "Prevents Death if chips",
+                    "scored are at least {C:attention}23%",
+                    "of required chips and",
+					"reverts to Ante {E:1,C:attention}1",
+                    "{S:1.1,C:red,E:2}self destructs{}",
+                },
+			},
+			j_csau_miracle = {
+				name = "Miracle of Life [WIP]",
+				text = {
+                    "{C:green}#1# in 2{} chance to add",
+                    "a new {C:attention}playing card to",
+                    "your hand for every",
+                    "{C:attention}Pair{} in played hand",
+                },
+			},
+			j_csau_garbagehand = {
+				name = "Garbage Hand",
+				text = {
+					"Played cards without an",
+					"{C:attention}Enhancement{} and a chip value",
+					"of less than or equal to {C:chips}8{}",
+					"give {C:mult}+#1#{} Mult when scored",
+				},
+			},
+			j_csau_supper = {
+				name = "WAAUGGHGHHHHGHH",
+				text = {
+					"Each played {C:attention}2{}, {C:attention}4{}, or {C:attention}Ace{}",
+					"gives {X:mult,C:white}X#1#{} Mult when scored",
+				},
+			},
 		},
 		Spectral = {
-			c_quixotic = {
+			c_csau_quixotic = {
 				name = "Quixotic",
 				text = {
 					"Gain an {C:attention}Ethereal Tag",

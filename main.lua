@@ -21,9 +21,9 @@ local conf_cardsauce = {
 		'roche',
 		'pacman',
 		'besomeone',
-		'disguy',
 		'speedjoker',
 		'disturbedjoker',
+		'disguy',
 		'chad',
 		'emmanuel',
 		'reyn',
@@ -38,7 +38,7 @@ local conf_cardsauce = {
 		'sohappy',
 		'maskedjoker',
 		'thisiscrack',
-		--'charity',
+		'charity',
 		'pepsecret',
 		'odio0',
 		'greenneedle',
@@ -48,9 +48,12 @@ local conf_cardsauce = {
 		'deathcard',
 		'hell',
 		'vincenzo',
-		'quarterdumb'
+		'quarterdumb',
+		'wingsoftime',
+		'miracle',
+		'garbagehand',
+		'supper'
 	},
-
 }
 	
 -- sendDebugMessage("AchievementsEnabler Activated!")
@@ -86,8 +89,8 @@ function G.FUNCS.draw_from_deck_to_hand(self, e)
     draw_from_deck_to_handref(self, e)
     for _, v in ipairs(G.jokers.cards) do
     	if G.STATE == G.STATES.DRAW_TO_HAND and not v.debuff then
-        	if v.config.center.key == "j_speedjoker" and G.GAME.current_round.hands_played == v.ability.extra or
-        	v.config.center.key == "j_disturbedjoker" and G.GAME.current_round.discards_used == v.ability.extra then
+        	if v.config.center.key == "j_csau_speedjoker" and G.GAME.current_round.hands_played == v.ability.extra or
+        	v.config.center.key == "j_csau_disturbedjoker" and G.GAME.current_round.discards_used == v.ability.extra then
                	draw_card(G.deck, G.hand, 100, 'up', true)
             	v.ability.extra = v.ability.extra + 1
         	end
@@ -276,17 +279,15 @@ function Card.update(self, dt)
 	card_updateref(self, dt)
 end
 
-local quixotic = SMODS.Consumable({ key = "quixotic", cost = 4, set = "Spectral", discovered = true, alerted = true, atlas = "quixotic" })
 SMODS.Atlas({ key = "quixotic", path = "consumables/quixotic.png", px = 71, py = 95 })
+<<<<<<< Updated upstream
+=======
+local quixotic = SMODS.Consumable({ key = "quixotic", cost = 4, set = "Spectral", discovered = false, alerted = true, atlas = "quixotic" })
+>>>>>>> Stashed changes
 
 function quixotic.loc_vars(self, info_queue, card)
 	info_queue[#info_queue + 1] = G.P_TAGS.tag_ethereal
 	return {}
-end
-
-function quixotic.can_use(card)
-	-- stop_use and whatnot are handled by the loader, so you don't need to worry about it
-	return true
 end
 
 function quixotic.use(self, card, area, copier)
@@ -310,6 +311,24 @@ function Card.draw(self, layer)
 	card_drawRef(self, layer)
 end
 
+for suit, color in pairs(G.C.SUITS) do
+	local c
+	if suit == "Hearts" then c = HEX("e14e62")
+	elseif suit == "Diamonds" then c = HEX("3c56a4")
+	elseif suit == "Clubs" then c = HEX("4dac84")
+	elseif suit == "Spades" then c = HEX("8d619a")
+	end
+	SMODS.Suits[suit].keep_base_colours = false
+	SMODS.Suits[suit].lc_colour = c
+	SMODS.Suits[suit].hc_colour = c
+	if G.VANILLA_COLLABS then
+		G.VANILLA_COLLABS.lc_colours[suit] = c
+		G.VANILLA_COLLABS.hc_colours[suit] = c
+	end
+	G.C.SO_1[suit] = c
+	G.C.SO_2[suit] = c
+end
+
 -- Base Deck Textures
 SMODS.Atlas {
 	key = "cards_1",
@@ -318,6 +337,17 @@ SMODS.Atlas {
 	py = 95,
 	prefix_config = { key = false }
 }
+
+-- Base Deck UI Assets
+for i = 1, 2 do
+	SMODS.Atlas {
+		key = "ui_"..i,
+		path = "ui_assets.png",
+		px = 18,
+		py = 18,
+		prefix_config = { key = false }
+	}
+end
 
 -- Title Screen Logo Texture
 SMODS.Atlas {
@@ -335,79 +365,6 @@ SMODS.Atlas({
 	px = 32,
 	py = 32
 }):register()
-
--- Deck 2 - Extra Characters
-
-SMODS.Atlas{
-	key = "collab_AU_1",
-	path = "extra_h_1.png",
-	px = 71,
-	py = 95,
-	atlas_table = 'ASSET_ATLAS',
-	prefix_config = { key = false }
-}
-
-SMODS.Atlas{
-	key = "collab_AU_2",
-	path = "extra_h_2.png",
-	px = 71,
-	py = 95,
-	atlas_table = 'ASSET_ATLAS',
-	prefix_config = { key = false }
-}
-
-SMODS.Atlas{
-	key = "collab_TW_1",
-	path = "extra_s_1.png",
-	px = 71,
-	py = 95,
-	atlas_table = 'ASSET_ATLAS',
-	prefix_config = { key = false }
-}
-
-SMODS.Atlas{
-	key = "collab_TW_2",
-	path = "extra_s_2.png",
-	px = 71,
-	py = 95,
-	atlas_table = 'ASSET_ATLAS',
-	prefix_config = { key = false }
-}
-
-SMODS.Atlas{
-	key = "collab_VS_1",
-	path = "extra_c_1.png",
-	px = 71,
-	py = 95,
-	atlas_table = 'ASSET_ATLAS',
-	prefix_config = { key = false }
-}
-
-SMODS.Atlas{
-	key = "collab_VS_2",
-	path = "extra_c_2.png",
-	px = 71,
-	py = 95,
-	atlas_table = 'ASSET_ATLAS',
-	prefix_config = { key = false }
-}
-SMODS.Atlas{
-	key = "collab_DTD_1",
-	path = "extra_d_1.png",
-	px = 71,
-	py = 95,
-	atlas_table = 'ASSET_ATLAS',
-	prefix_config = { key = false }
-}
-
-SMODS.Atlas{
-	key = "collab_DTD_2",
-	path = "extra_d_2.png",
-	px = 71,
-	py = 95,
-	atlas_table = 'ASSET_ATLAS',
-	prefix_config = { key = false }
-}
 
 -- Credits Tab in Mods
 SMODS.current_mod.credits_tab = function()

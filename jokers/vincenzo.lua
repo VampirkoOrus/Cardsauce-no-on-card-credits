@@ -14,10 +14,9 @@ local jokerInfo = {
 	hasSoul = true,
 }
 
-function jokerInfo.tooltip(self, info_queue)
+function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = G.P_CENTERS.e_negative
 end
-
 
 function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and G.GAME.blind.boss and (not context.individual) and (not context.repetition) then
@@ -32,7 +31,7 @@ function jokerInfo.calculate(self, card, context)
 			G.GAME.joker_buffer = 0
 		return true
 		end}))   
-		card_eval_status_text(context.blueprint_card or self, 'extra', nil, nil, nil, {message = "Corrupted!", colour = G.C.BLUE})
+		card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_vincenzo'), colour = G.C.BLUE})
 	end
 end
 

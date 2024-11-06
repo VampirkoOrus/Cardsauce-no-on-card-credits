@@ -29,12 +29,11 @@ end
 ]]--
 
 function jokerInfo.calculate(self, card, context)
-	if context.individual and context.cardarea == G.play and not self.debuff then
-		if context.other_card.ability.effect ~= 'Base'
-		then
+	if context.individual and context.cardarea == G.play and not card.debuff then
+		if context.other_card.ability.effect ~= 'Base' and not context.other_card.debuff then
 			return {
 				mult = card.ability.extra.mult,
-				card = self
+				card = card
 			}
 		end
 	end
