@@ -8,10 +8,24 @@
 --- PREFIX: csau
 
 local mod_path = SMODS.current_mod.path
+csau_config = SMODS.current_mod.config
+csau_enabled = copy_table(csau_config)
+
+local hook_list = {
+	"card",
+	"UI_definitions",
+}
+
+for _, hook in ipairs(hook_list) do
+	local init, error = NFS.load(SMODS.current_mod.path .. "hooks/" .. hook ..".lua")
+	if error then sendErrorMessage("[Cardsauce] Failed to load "..hook.." with error "..error) else
+		local data = init()
+		sendDebugMessage("[Cardsauce] Loaded hook: " .. hook)
+	end
+end
 
 local conf_cardsauce = {
 	jokersToLoad = {
-
 		'meat',
 		'twoface',
 		'newjoker',
@@ -20,9 +34,9 @@ local conf_cardsauce = {
 		'diaper',
 		'roche',
 		'pacman',
-		'besomeone',
 		'speedjoker',
 		'disturbedjoker',
+		'besomeone',
 		'disguy',
 		'chad',
 		'emmanuel',
@@ -31,7 +45,7 @@ local conf_cardsauce = {
 		'werewolves',
 		'greyjoker',
 		'cousinsclub',
-		--'gnorts',
+		'gnorts',
 		'roger',
 		'shrimp',
 		'veryexpensivejoker',
@@ -40,19 +54,21 @@ local conf_cardsauce = {
 		'thisiscrack',
 		'charity',
 		'pepsecret',
-		'odio0',
+		'odio',
 		'greenneedle',
 		'fisheye',
 		'code',
 		'anotherlight',
 		'deathcard',
 		'hell',
-		'vincenzo',
-		'quarterdumb',
 		'wingsoftime',
+		'dontmind',
 		'miracle',
 		'garbagehand',
-		'supper'
+		'supper',
+		'chromedup',
+		'vincenzo',
+		'quarterdumb',
 	},
 }
 	
@@ -69,21 +85,6 @@ function getCardPosition(card)
 	return nil
 end
 
-local can_discardref = G.FUNCS.can_discard
-G.FUNCS.can_discard = function(e)
-	if next(SMODS.find_card('j_csau_greyjoker')) then
-		if G.GAME.current_round.discards_left <= 0 or #G.hand.highlighted <= 4 then
-			e.config.colour = G.C.UI.BACKGROUND_INACTIVE
-			e.config.button = nil
-		else
-			e.config.colour = G.C.RED
-			e.config.button = 'discard_cards_from_highlighted'
-		end
-	else
-		can_discardref(e)
-	end
-end
-
 local draw_from_deck_to_handref = G.FUNCS.draw_from_deck_to_hand
 function G.FUNCS.draw_from_deck_to_hand(self, e)
     draw_from_deck_to_handref(self, e)
@@ -98,150 +99,70 @@ function G.FUNCS.draw_from_deck_to_hand(self, e)
     end
 end
 
+local get_straight_ref = get_straight
+function get_straight(hand)
+local base = get_straight_ref(hand)
+local results = {}
+local vals = {}
+local verified = {}
+local can_loop = next(find_joker('Rekoj Gnorts'))
+local target = next(find_joker('Four Fingers')) and 4 or 5
+local skip_var = next(find_joker('Shortcut'))
+local skipped = false
+if not(can_loop) or #hand < target then
+	return base
+else
+	table.sort(hand, function(a,b) return a:get_id() < b:get_id() end)
+	local ranks = {}
+	local _next = nil
+	local val = 0
+	for k, v in pairs(G.P_CARDS) do
 
--- these two functions are *very* bad since they override base functions. need lovely patch
-	local get_straight_ref = get_straight
-	function get_straight(hand)
-	local base = get_straight_ref(hand)
-	local results = {}
-	local vals = {}
-	local verified = {}
-	local can_loop = next(find_joker('Rekoj Gnorts'))
-	local target = next(find_joker('Four Fingers')) and 4 or 5
-	local skip_var = next(find_joker('Shortcut'))
-	local skipped = false
-	if not(can_loop) or #hand < target then
-		return base
+	if (ranks[v.pos.x+1] == nil) then
+		ranks[v.pos.x+1] = v.value
+	end
+	end
+
+	while val < #hand*2 do
+	local i = val%#hand + 1
+	local id = hand[i]:get_id()-1
+	val = val + 1
+	if _next == nil then
+
+		table.insert(results,hand[i])
+		_next = ranks[id%#ranks+1]
+		skipped = false
 	else
-		table.sort(hand, function(a,b) return a:get_id() < b:get_id() end)
-		local ranks = {}
-		local _next = nil
-		local val = 0
-		for k, v in pairs(G.P_CARDS) do
+		if (ranks[id] == _next) then
 
-		if (ranks[v.pos.x+1] == nil) then
-			ranks[v.pos.x+1] = v.value
-		end
-		end
+		table.insert(results,hand[i])
+		_next = ranks[id%#ranks+1]
+		skipped = false
+		elseif skip_var and not skipped then
 
-		while val < #hand*2 do
-		local i = val%#hand + 1
-		local id = hand[i]:get_id()-1
-		val = val + 1
-		if _next == nil then
-
-			table.insert(results,hand[i])
-			_next = ranks[id%#ranks+1]
-			skipped = false
+		_next = ranks[id%#ranks+1]
+		skipped = true
 		else
-			if (ranks[id] == _next) then
 
-			table.insert(results,hand[i])
-			_next = ranks[id%#ranks+1]
-			skipped = false
-			elseif skip_var and not skipped then
-
-			_next = ranks[id%#ranks+1]
-			skipped = true
-			else
-
-			_next = nil
-			val = val-1
-			results = {}
-			skipped = false
-			end
-		end
-		if (#results == target) then
-			table.sort(hand, function(a,b) return a.T.x < b.T.x end)
-			table.sort(results, function(a,b) return a.T.x < b.T.x end)
-
-			return {results}
-		elseif _next ~= nil then
-
-		end
+		_next = nil
+		val = val-1
+		results = {}
+		skipped = false
 		end
 	end
+	if (#results == target) then
+		table.sort(hand, function(a,b) return a.T.x < b.T.x end)
+		table.sort(results, function(a,b) return a.T.x < b.T.x end)
 
-	return {}
-	end
+		return {results}
+	elseif _next ~= nil then
 
-	G.FUNCS.evaluate_round = function()
-		local pitch = 0.95
-		local dollars = 0
-	
-		if G.GAME.chips - G.GAME.blind.chips >= 0 then
-			add_round_eval_row({dollars = G.GAME.blind.dollars, name='blind1', pitch = pitch})
-			pitch = pitch + 0.06
-			dollars = dollars + G.GAME.blind.dollars
-		else
-			add_round_eval_row({dollars = 0, name='blind1', pitch = pitch, saved = true})
-			pitch = pitch + 0.06
-		end
-	
-		G.E_MANAGER:add_event(Event({
-			trigger = 'before',
-			delay = 1.3*math.min(G.GAME.blind.dollars+2, 7)/2*0.15 + 0.5,
-			func = function()
-			  G.GAME.blind:defeat()
-			  return true
-			end
-		  }))
-		delay(0.2)
-		G.E_MANAGER:add_event(Event({
-			func = function()
-				ease_background_colour_blind(G.STATES.ROUND_EVAL, '')
-				return true
-			end
-		}))
-		G.GAME.selected_back:trigger_effect({context = 'eval'})
-	
-		if G.GAME.current_round.hands_left > 0 and not G.GAME.modifiers.no_extra_hand_money then
-			add_round_eval_row({dollars = G.GAME.current_round.hands_left*(G.GAME.modifiers.money_per_hand or 1), disp = G.GAME.current_round.hands_left, bonus = true, name='hands', pitch = pitch})
-			pitch = pitch + 0.06
-			dollars = dollars + G.GAME.current_round.hands_left*(G.GAME.modifiers.money_per_hand or 1)
-		end
-		if G.GAME.current_round.discards_left > 0 and G.GAME.modifiers.money_per_discard then
-			add_round_eval_row({dollars = G.GAME.current_round.discards_left*(G.GAME.modifiers.money_per_discard), disp = G.GAME.current_round.discards_left, bonus = true, name='discards', pitch = pitch})
-			pitch = pitch + 0.06
-			dollars = dollars +  G.GAME.current_round.discards_left*(G.GAME.modifiers.money_per_discard)
-		end
-		for i = 1, #G.jokers.cards do
-			local ret = G.jokers.cards[i]:calculate_dollar_bonus()
-			if ret then
-				add_round_eval_row({dollars = ret, bonus = true, name='joker'..i, pitch = pitch, card = G.jokers.cards[i]})
-				pitch = pitch + 0.06
-				dollars = dollars + ret
-			end
-		end
-		for i = 1, #G.GAME.tags do
-			local ret = G.GAME.tags[i]:apply_to_run({type = 'eval'})
-			if ret then
-				add_round_eval_row({dollars = ret.dollars, bonus = true, name='tag'..i, pitch = pitch, condition = ret.condition, pos = ret.pos, tag = ret.tag})
-				pitch = pitch + 0.06
-				dollars = dollars + ret.dollars
-			end
-		end
-		if G.GAME.dollars >= 5 and not G.GAME.modifiers.no_interest and not next(find_joker('Vinesauce is HOPE')) then
-			add_round_eval_row({bonus = true, name='interest', pitch = pitch, dollars = G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/5), G.GAME.interest_cap/5)})
-			pitch = pitch + 0.06
-			if not G.GAME.seeded and not G.GAME.challenge then
-				if G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/5), G.GAME.interest_cap/5) == G.GAME.interest_amount*G.GAME.interest_cap/5 then 
-					G.PROFILES[G.SETTINGS.profile].career_stats.c_round_interest_cap_streak = G.PROFILES[G.SETTINGS.profile].career_stats.c_round_interest_cap_streak + 1
-				else
-					G.PROFILES[G.SETTINGS.profile].career_stats.c_round_interest_cap_streak = 0
-				end
-			end
-			check_for_unlock({type = 'interest_streak'})
-			dollars = dollars + G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/5), G.GAME.interest_cap/5)
-		end
-	
-		pitch = pitch + 0.06
-	
-		add_round_eval_row({name = 'bottom', dollars = dollars})
 	end
-	
-local jokerUpdates = {}
-local jokerDraws = {}
+	end
+end
+
+return {}
+end
 
 for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 	local jokerInfo = assert(SMODS.load_file("jokers/" .. v .. ".lua"))()
@@ -261,11 +182,9 @@ for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 		end
 	end
 
-	--load sprite
 	SMODS.Atlas({ key = v, path ="jokers/" .. v .. ".png", px = 71, py = 95 })
 end
 
---card updates
 local card_updateref = Card.update
 function Card.update(self, dt)
 	if G.STAGE == G.STAGES.RUN then
@@ -298,7 +217,6 @@ function quixotic.use(self, card, area, copier)
 	}))
 end
 
---draws
 local card_drawRef = Card.draw
 function Card.draw(self, layer)
 	local obj = self.config.center
@@ -306,6 +224,29 @@ function Card.draw(self, layer)
 		obj:draw(self, layer)
 	end
 	card_drawRef(self, layer)
+end
+
+function send(message, level)
+	level = level or 'debug'
+	if level == 'debug' then
+		if type(message) == 'table' then
+			sendDebugMessage(tprint(message))
+		else
+			sendDebugMessage(message)
+		end
+	elseif level == 'info' then
+		if type(message) == 'table' then
+			sendInfoMessage(tprint(message))
+		else
+			sendInfoMessage(message)
+		end
+	elseif level == 'error' then
+		if type(message) == 'table' then
+			sendErrorMessage(tprint(message))
+		else
+			sendErrorMessage(message)
+		end
+	end
 end
 
 for suit, color in pairs(G.C.SUITS) do
@@ -325,6 +266,47 @@ for suit, color in pairs(G.C.SUITS) do
 	G.C.SO_1[suit] = c
 	G.C.SO_2[suit] = c
 end
+
+if G.SETTINGS.chadNova then
+	G.TITLE_SCREEN_CARD = 'j_csau_chad'
+else
+	G.TITLE_SCREEN_CARD = G.P_CARDS.C_A
+end
+
+function G.FUNCS.title_screen_card(self, SC_scale)
+	if G.SETTINGS.chadNova then
+		if type(G.TITLE_SCREEN_CARD) == "table" then
+			return Card(self.title_top.T.x, self.title_top.T.y, 1.2*G.CARD_W*SC_scale, 1.2*G.CARD_H*SC_scale, G.TITLE_SCREEN_CARD, G.P_CENTERS.c_base)
+		elseif type(G.TITLE_SCREEN_CARD) == "string" then
+			return  Card(self.title_top.T.x, self.title_top.T.y, 1.2*G.CARD_W*SC_scale, 1.2*G.CARD_H*SC_scale, G.P_CARDS.empty, G.P_CENTERS[G.TITLE_SCREEN_CARD])
+		else
+			return Card(self.title_top.T.x, self.title_top.T.y, 1.2*G.CARD_W*SC_scale, 1.2*G.CARD_H*SC_scale, G.P_CARDS.C_A, G.P_CENTERS.c_base)
+		end
+	else
+		return Card(self.title_top.T.x, self.title_top.T.y, 1.2*G.CARD_W*SC_scale, 1.2*G.CARD_H*SC_scale, G.P_CARDS.C_A, G.P_CENTERS.c_base)
+	end
+end
+
+function G.FUNCS.center_splash_screen_card(SC_scale)
+	if G.SETTINGS.chadNova then
+		return Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, SC_scale*G.CARD_W, SC_scale*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS[G.TITLE_SCREEN_CARD])
+	else
+		return Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, SC_scale*G.CARD_W, SC_scale*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_joker'])
+	end
+end
+
+function G.FUNCS.splash_screen_card(card_pos, card_size)
+	if G.SETTINGS.chadNova then
+		return Card(  card_pos.x + G.ROOM.T.w/2 - G.CARD_W*card_size/2,
+				card_pos.y + G.ROOM.T.h/2 - G.CARD_H*card_size/2,
+				card_size*G.CARD_W, card_size*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS[G.TITLE_SCREEN_CARD])
+	else
+		return Card(  card_pos.x + G.ROOM.T.w/2 - G.CARD_W*card_size/2,
+				card_pos.y + G.ROOM.T.h/2 - G.CARD_H*card_size/2,
+				card_size*G.CARD_W, card_size*G.CARD_H, pseudorandom_element(G.P_CARDS), G.P_CENTERS.c_base)
+	end
+end
+
 
 -- Base Deck Textures
 SMODS.Atlas {
@@ -347,9 +329,13 @@ for i = 1, 2 do
 end
 
 -- Title Screen Logo Texture
+local logo = "Logo.png"
+if G.SETTINGS.chadNova then
+	logo = "Logo-C.png"
+end
 SMODS.Atlas {
 	key = "balatro",
-	path = "Logo.png",
+	path = logo,
 	px = 333,
 	py = 216,
 	prefix_config = { key = false }
@@ -363,9 +349,95 @@ SMODS.Atlas({
 	py = 32
 }):register()
 
+G.FUNCS.reset_chadnova = function(e)
+	local warning_text = e.UIBox:get_UIE_by_ID('warn')
+	if warning_text.config.colour ~= G.C.WHITE then
+		warning_text:juice_up()
+		warning_text.config.colour = G.C.WHITE
+		warning_text.config.shadow = true
+		e.config.disable_button = true
+		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06, blockable = false, blocking = false, func = function()
+			play_sound('tarot2', 0.76, 0.4);return true end}))
+		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.35, blockable = false, blocking = false, func = function()
+			e.config.disable_button = nil;return true end}))
+		play_sound('tarot2', 1, 0.4)
+	else
+		G.FUNCS.wipe_on()
+		G.SETTINGS.chadNova = false
+		G:save_settings()
+		G.E_MANAGER:add_event(Event({
+			delay = 6,
+			func = function()
+				G.FUNCS.quit()
+				G.FUNCS.wipe_off()
+				return true
+			end
+		}))
+	end
+end
+
+local text_scale = 0.9
+local csauConfigTabs = function() return {
+	{
+		label = localize("b_options"),
+		chosen = true,
+		tab_definition_function = function()
+			local csau_opts = { n = G.UIT.C, config = { align = "tm", padding = 0.05 }, nodes = {
+				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+					{n=G.UIT.T, config={text = localize("vs_options"), scale = text_scale*0.9, colour = G.C.GREEN, shadow = true}},
+				}},
+				{n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
+					{n=G.UIT.T, config={text = localize("vs_options_sub"), scale = text_scale*0.5, colour = G.C.GREEN, shadow = true}},
+				}},
+			} }
+			for k, _ in pairs(csau_config) do
+				if localize("vs_options_"..k) ~= "ERROR" then
+					csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.2}, nodes={
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							create_toggle({n=G.UIT.T, label = localize("vs_options_"..k), ref_table = csau_config, ref_value = k })
+						}},
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+							{n=G.UIT.T, config={text = localize("vs_options_"..k.."_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
+						}},
+					}}
+				end
+			end
+			if localize("vs_options_chadNova_r") and G.SETTINGS.chadNova then
+				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.2}, nodes={
+					{n=G.UIT.R, config={align = "cm", minw = 0.5, maxw = 2, minh = 0.6, padding = 0, r = 0.1, hover = true, colour = G.C.RED, button = "reset_chadnova", shadow = true, focus_args = {nav = 'wide'}}, nodes={
+						{n=G.UIT.T, config={text = localize("vs_options_chadNova_r"), scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT}}
+					}},
+					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+						{n=G.UIT.T, config={text = localize("vs_options_chadNova_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
+					}},
+				}}
+				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+					{n=G.UIT.T, config={id = 'warn', text = localize('ph_click_confirm').." "..localize('vs_options_reset_confirm'), scale = 0.4, colour = G.C.CLEAR}}
+				}}
+			end
+			return {
+				n = G.UIT.ROOT,
+				config = {
+					emboss = 0.05,
+					minh = 6,
+					r = 0.1,
+					minw = 10,
+					align = "cm",
+					padding = 0.05,
+					colour = G.C.BLACK,
+				},
+				nodes = {
+					csau_opts
+				}
+			}
+		end
+	}
+} end
+
+SMODS.current_mod.extra_tabs = csauConfigTabs
+
 -- Credits Tab in Mods
 SMODS.current_mod.credits_tab = function()
-	local text_scale = 0.9
 	chosen = true
 	return {n=G.UIT.ROOT, config={align = "cm", padding = 0.2, colour = G.C.BLACK, r = 0.1, emboss = 0.05, minh = 6, minw = 10}, nodes={
 		{n=G.UIT.C, config={align = "cm", padding = 0.1}, nodes={

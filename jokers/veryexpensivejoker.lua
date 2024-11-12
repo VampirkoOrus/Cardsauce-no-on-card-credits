@@ -2,7 +2,8 @@ local jokerInfo = {
 	name = 'Very Expensive Joker',
 	config = {
 		extra = {
-			x_mult = 1
+			x_mult = 1,
+			cost = 4
 		}
 	},
 	--[[text = {
@@ -12,7 +13,7 @@ local jokerInfo = {
 		"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
 	},]]--
 	rarity = 1,
-	cost = 4,
+	cost = 10,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true
@@ -30,7 +31,7 @@ function jokerInfo.add_to_deck(self, card)
 			func = function()
 				card:juice_up()
 				card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}}, colour = G.C.MONEY, instant = true})
-				card.cost = 4
+				card.cost = 10
 				return true
 			end
 		}))
@@ -50,7 +51,8 @@ function jokerInfo.update(self, card)
 	if card.cost ~= G.GAME.dollars then
 		if G.GAME.dollars ~= 0 then
 			sendInfoMessage("Setting Very Expensive Joker cost to $"..card.cost)
-			card.cost = G.GAME.dollars
+			card.ability.extra.cost = G.GAME.dollars
+			card.cost = card.ability.extra.cost
 		end
 	end
 end

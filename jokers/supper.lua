@@ -29,7 +29,7 @@ local wega = SMODS.Sound({
 })
 
 function jokerInfo.calculate(self, card, context)
-	if context.individual and context.cardarea == G.play and not self.debuff then
+	if context.individual and context.cardarea == G.play and not card.debuff then
 		if context.other_card:get_id() == 2 or context.other_card:get_id() == 4 or context.other_card:get_id() == 14 then
 			sendDebugMessage("Triggering WAAUGGHGHHHHGHH")
 			G.E_MANAGER:add_event(Event({

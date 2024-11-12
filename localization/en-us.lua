@@ -74,6 +74,88 @@ return {
 				"\"What a bimbo!\"",
 				"-Eiko",
 			},
+			roche_voiceline = {
+				"A {C:planet}Planet{} card for",
+				"you, my friend!"
+			},
+			chad_greeting1 = {
+				"Ah! Greetings, Cloud!"
+			},
+			chad_greeting2 = {
+				"It is me, Chudlot."
+			},
+			chad_greeting3shop1 = {
+				"If you don't mind, would you",
+				"please move me from this shop and",
+				"into your Joker slots?"
+			},
+			chad_greeting3shop2 = {
+				"When I have been moved, we",
+				"can proceed with discussion!"
+			},
+			chad_greeting3pack1 = {
+				"If you don't mind, would you",
+				"please acquire me from this",
+				"booster pack?"
+			},
+			chad_greeting3shop2 = {
+				"When I have been acquired, we",
+				"can proceed with a discussion!"
+			},
+			chad_greeting3randAquire1 = {
+				"It seems that by sheer luck,",
+				"I have been added to your",
+				"Joker slots. Superb!"
+			},
+			chad_thanks = {
+				"Splendid! Thank",
+				"you, Cloud!"
+			},
+			chad_explain1 = {
+				"As you can plainly see, my lifelong",
+				"dream of transmogrifying myself into",
+				"a Joker from the hit video game by",
+				"{E:1}LocalThunk{} {C:dark_edition}\"Balatro\"{} has",
+				"finally been achieved!",
+			},
+			chad_explain2 = {
+				"Now, while you are searching for the",
+				"Protojoker, please pick up any",
+				"{C:attention}Showman{} you come across."
+			},
+			chad_explain3 = {
+				"The {C:attention}Showman{} will allow me to obtain",
+				"more copies of myself, and facilitate",
+				"the Chumpley reunion!"
+			},
+			chad_explain4 = {
+				"When enough Chandlers are gathered,",
+				"we shall transform into {E:1}{C:attention}CHADNOVA{}{},"
+			},
+			chad_explain5 = {
+				"and at last, humanity will become",
+				"as Chadesque as myself."
+			},
+			chad_explain6 = {
+				"I look forward to your",
+				"continued support, Cloud!"
+			},
+			chad_showman1 = {
+				"Look, Cloud! It's",
+				"the {C:attention}Showman{}!"
+			},
+			chad_showman2_shop = {
+				"If it isn't too much trouble, would",
+				"you mind purchasing that {C:attention}Showman{}?"
+			},
+			chad_showman2_booster = {
+				"If it isn't too much trouble, would",
+				"you mind acquiring that {C:attention}Showman{}?"
+			},
+			chad_showman3 = {
+				"Its ability will be of",
+				"great use to us!"
+			},
 		},
 		collabs = {
 			Spades={
@@ -103,6 +185,13 @@ return {
 			vs_credits3 = "Coding",
 			vs_credits4 = "Sound API",
 			vs_credits5 = "Support",
+			vs_options = "Cardsauce Options",
+			vs_options_sub = "(Restart required to apply)",
+			vs_options_chadSay = "Chadley Dialogue",
+			vs_options_chadSay_desc = "Uncheck this to make Chadley shut the fuck up",
+			vs_options_chadNova_r = "Undo Chadnova",
+			vs_options_chadNova_desc = "Click this button to undo the consequences of your actions",
+			vs_options_reset_confirm = "(This will quit the game to apply)",
 			k_aced = "Aced!",
 			k_twoed = "Twoed!",
 			k_plus_judge = "+1 Judgement",
@@ -110,8 +199,19 @@ return {
 			k_meat_destroy = "Nyomp!",
 			k_plus_tarot = "+1 Tarot",
 			k_vincenzo = "Corrupted!",
-			k_flip = "Flipped!"
-		}
+			k_flip = "Flipped!",
+			k_speen = "+1 Nope!",
+			k_odio2 = "Odo",
+			k_odio3 = "Ou Di Wan Lee",
+			k_odio4 = "Ode Iou",
+			k_odio5 = "O. Dio",
+			k_odio6 = "Odie O'Bright",
+			k_odio7 = "Odeo",
+			k_odio8 = "Purity of Odio",
+			k_odio9 = "Armageddon",
+			k_glass = "Glass",
+			k_dontmind = "\"Ah, yes...\""
+		},
 	},
 	descriptions = {
 		Blind = {
@@ -184,6 +284,18 @@ return {
 					"{E:1}Keku{}",
 				},
 			},
+			guestartist9 = {
+				name = "Guest Coder",
+				text = {
+					"{E:1}Keku{}",
+				},
+			},
+			guestartist10 = {
+				name = "Guest Artist",
+				text = {
+					"{E:1}Gappie{}",
+				},
+			},
 			rogernote = {
 				name = "Conversion Table",
 				text = {
@@ -213,8 +325,8 @@ return {
 				name = "Very Expensive Joker",
 				text = {
 					"{X:mult,C:white}X0.5{} Mult for every {C:money}$10{}",
-					"spent on this Joker, spend all",
-					"{C:attention}money{} obtaining this",
+					"spent on this Joker, spend",
+					"all {C:attention}money{} obtaining this",
 					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
 				},
 			},
@@ -269,14 +381,26 @@ return {
 			j_csau_chad = {
 				name = "No No No No No No No No No No No",
 				text = {
+					"Why is he here...",
+				},
+			},
+			j_csau_chad_speaking = {
+				name = "No No No No No No No No No No No",
+				text = {
+					"Why is he here...",
+				},
+			},
+			j_csau_chad_muted = {
+				name = "No No No No No No No No No No No",
+				text = {
 					"Greetings, Cloud, it is me, Chudlot. As you can plainly see,",
 					"my lifelong dream of transmogrifying myself into a Joker",
-					"from the hit video game by LocalThunk \"Balatro\"",
+					"from the hit video game by {E:1}LocalThunk{} {C:dark_edition}\"Balatro\"{}",
 					"has finally been achieved! Now, while you are searching",
-					"for the Protojoker, please pick up any Showman you come across.",
-					"The Showman will allow me to obtain more copies of myself,",
+					"for the Protojoker, please pick up any {C:attention}Showman{} you come across.",
+					"The {C:attention}Showman{} will allow me to obtain more copies of myself,",
 					"and facilitate the Chumpley reunion! When enough Chandlers are gathered,",
-					"we shall transform into CHADNOVA, and at last,",
+					"we shall transform into {C:attention}CHADNOVA{}, and at last,",
 					"humanity will become as Chadesque as myself.",
 				},
 			},
@@ -294,11 +418,72 @@ return {
 					"{C:chips}+#1#{} Chips",
 				},
 			},
-			j_csau_odio0 = {
-				name = "Odious Joker [WIP]",
+			j_csau_odio = {
+				name = "Odious Joker",
 				text = {
 					"{C:dark_edition}It would be in your best interests to stop.{}",
 					"{C:dark_edition}These cards are my domain, and I their master.{}",
+				},
+			},
+			j_csau_odio1 = {
+				name = "Odious Joker",
+				text = {
+					"{C:dark_edition}It would be in your best interests to stop.{}",
+					"{C:dark_edition}These cards are my domain, and I their master.{}",
+				},
+			},
+			j_csau_odio2 = {
+				name = "Odious Joker",
+				text = {
+					"Big card give big {C:mult}Mult{}",
+					"{C:inactive}(Gain Mult equal to the highest{}",
+					"{C:inactive}valued card in scored hand){}",
+				},
+			},
+			j_csau_odio3 = {
+				name = "Odious Joker",
+				text = {
+					"Gain {C:attention}2{} {C:dark_edition}Negative{} copies",
+					"of {C:purple}The Emperor{}",
+				},
+			},
+			j_csau_odio4 = {
+				name = "Odious Joker",
+				text = {
+					"Each hand gains {C:mult}+5{} Mult for each",
+					"{C:attention}empty hand space{}",
+				},
+			},
+			j_csau_odio5 = {
+				name = "Odious Joker",
+				text = {
+					"All played {C:attention}face{} cards become",
+					"{C:attention}Glass{} cards when scored",
+				},
+			},
+			j_csau_odio6 = {
+				name = "Odious Joker",
+				text = {
+					"Gain {C:attention}3{} {C:dark_edition}Negative{} copies of {C:purple}Strength{}",
+				},
+			},
+			j_csau_odio7 = {
+				name = "Odious Joker",
+				text = {
+					"Other Jokers each give {X:mult,C:white}X1.5{} Mult",
+				},
+			},
+			j_csau_odio8 = {
+				name = "Odious Joker",
+				text = {
+					"Gain {C:attention}4{} {C:dark_edition}Negative{} copies of {C:purple}Death{}",
+				},
+			},
+			j_csau_odio9 = {
+				name = "Armageddon",
+				text = {
+					"Sell this card to defeat the",
+					"current {C:attention}Blind{}",
 				},
 			},
 			j_csau_vincenzo = {
@@ -310,14 +495,14 @@ return {
 				},
 			},
 			j_csau_besomeone = {
-				name = "Be Someone Forever [WIP]",
+				name = "Be Someone Forever",
 				text = {
 					"Played {C:attention}High Cards{}",
 					"are redrawn",
 				},
 			},
 			j_csau_roger = {
-				name = "Mr. Roger [WIP]",
+				name = "Mr. Roger",
 				text = {
 					"This Joker gains {X:mult,C:white}X0.1{} Mult",
 					"for each {C:attention}finger{} played this {C:attention}Blind{}",
@@ -339,11 +524,11 @@ return {
 				},
 			},
 			j_csau_deathcard = {
-				name = "Deathcard [WIP]",
+				name = "Deathcard",
 				text = {
 					"When {C:attention}sold{}, reappears in the next shop",
-					"with {C:mult}+#4#{} Mult and {C:money}+$#2#{} Cost",
-					"{C:inactive}(Currently {}{C:mult}#3#{}{C:inactive} Mult, {}{C:money}$#1#{} {C:inactive}Cost){}",
+					"with {C:mult}+#3#{} Mult and {C:money}+$#1#{} Cost",
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
 			j_csau_hell = {
@@ -380,7 +565,7 @@ return {
 				},
 			},
 			j_csau_shrimp = {
-				name = "Shrimp Joker [WIP]",
+				name = "Shrimp Joker",
 				text = {
 					"{C:attention}Seals{} trigger an",
 					"additional time",
@@ -395,7 +580,7 @@ return {
 				},
 			},
 			j_csau_pepsecret = {
-				name = "Pepperoni Secret [WIP]",
+				name = "Pepperoni Secret",
 				text = {
 					"{C:attention}Secret Hands{} are",
 					"upgraded when played",
@@ -450,7 +635,7 @@ return {
 				},
 			},
 			j_csau_greenneedle = {
-				name = "Green Needle [WIP]",
+				name = "Green Needle",
 				text = {
 					"Copies the ability",
 					"of rightmost {C:attention}Joker{}",
@@ -459,9 +644,8 @@ return {
 			j_csau_werewolves = {
 				name = "That's Werewolves",
 				text = {
-					"{X:mult,C:white}X#1#{} Mult, but",
-					"cannot play hands",
-					"containing a {C:attention}Flush{}",
+					"{X:mult,C:white}X#1#{} Mult, but cannot",
+					"play hands containing a {C:attention}Flush{}",
 				},
 			},
 			j_csau_depressedbrother = {
@@ -482,7 +666,7 @@ return {
 				},
 			},
 			j_csau_cousinsclub = {
-				name = "Cousin's Club [WIP]",
+				name = "Cousin's Club",
 				text = {
 					"This Joker gains {C:chips}+#2#{} Chips",
 					"for each {C:clubs}Club{} card scored,",
@@ -547,6 +731,20 @@ return {
 				text = {
 					"Each played {C:attention}2{}, {C:attention}4{}, or {C:attention}Ace{}",
 					"gives {X:mult,C:white}X#1#{} Mult when scored",
+				},
+			},
+			j_csau_dontmind = {
+				name = "Don't Mind If I Do",
+				text = {
+					"{C:planet}High Card{} levels up by {C:attention}double{}",
+					"the standard increment",
+				},
+			},
+			j_csau_chromedup = {
+				name = "Chromed Up",
+				text = {
+					"Played {C:attention}Steel Cards{} give {X:mult,C:white}X#1#{}",
+					"Mult when scored",
 				},
 			},
 		},

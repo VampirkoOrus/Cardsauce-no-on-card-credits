@@ -17,7 +17,15 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card)
-	G.GAME.modifiers.no_interest = true
+	if not G.GAME.selected_back.effect.config.no_interest then
+		G.GAME.modifiers.no_interest = true
+	end
+end
+
+function jokerInfo.remove_from_deck(self, card)
+	if not G.GAME.selected_back.effect.config.no_interest then
+		G.GAME.modifiers.no_interest = false
+	end
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -39,10 +47,6 @@ function jokerInfo.calculate(self, card, context)
 				mult_mod = card.ability.extra.mult,
 			}
 		end
-	end
-
-	if context.selling_self then
-		G.GAME.modifiers.no_interest = false
 	end
 end
 

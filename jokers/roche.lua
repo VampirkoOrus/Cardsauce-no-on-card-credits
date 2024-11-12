@@ -33,8 +33,29 @@ function jokerInfo.calculate(self, card, context)
 				local card_type = 'Planet'
 				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 				sendInfoMessage("Triggering function...")
+				card:vic_say_stuff(2, nil, true, roche)
 				G.E_MANAGER:add_event(Event({
 					trigger = 'before',
+					delay = 0.0,
+					blockable = false,
+					blocking = false,
+					func = function()
+						local speech_key = 'roche_voiceline'
+						card:vic_add_speech_bubble(speech_key, 'bm', nil, {text_alignment = "cm"})
+						G.E_MANAGER:add_event(Event({
+							trigger = 'after',
+							delay = 8,
+							blocking = false,
+							func = function()
+								card:vic_remove_speech_bubble()
+								return true
+							end
+						}))
+						return true
+					end
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
 					delay = 0.0,
 					func = (function()
 						sendInfoMessage("Getting most played hand...")
@@ -54,22 +75,16 @@ function jokerInfo.calculate(self, card, context)
 							end
 						end
 						sendInfoMessage("Creating " .. _planet .. " planet card...")
-						local card = create_card(card_type,G.consumeables, nil, nil, nil, nil, _planet, 'blusl')
+						local _card = create_card(card_type,G.consumeables, nil, nil, nil, nil, _planet, 'blusl')
 						sendInfoMessage("Adding " .. _planet .. " planet card to deck...")
-						card:add_to_deck()
+						_card:add_to_deck()
 						sendInfoMessage("Placing " .. _planet .. " in consumables...")
-						G.consumeables:emplace(card)
+						G.consumeables:emplace(_card)
 						G.GAME.consumeable_buffer = 0
-
-						--modded_play_sound('roche',false,1,1)
-						if not context.blueprint then
-							sendInfoMessage("Context is not blueprint, attempting to play Roche voice line...")
-							roche:play(1, (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/50.0),true);
-						end
 						return true
 					end)}))
-				sendInfoMessage("Sending +Planet message text...")
-				card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
+				--sendInfoMessage("Sending +Planet message text...")
+				--card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
 				--ret.effect = true
 			end
 		end

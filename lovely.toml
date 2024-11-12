@@ -8,6 +8,98 @@ priority = 0
 target = "game.lua"
 pattern = "local replace_card = Card(self.title_top.T.x, self.title_top.T.y, 1.2*G.CARD_W*SC_scale, 1.2*G.CARD_H*SC_scale, G.P_CARDS.S_A, G.P_CENTERS.c_base)"
 position = "at"
-payload = "local replace_card = Card(self.title_top.T.x, self.title_top.T.y, 1.2*G.CARD_W*SC_scale, 1.2*G.CARD_H*SC_scale, G.P_CARDS.C_A, G.P_CENTERS.c_base)"
+payload = '''
+local replace_card = G.FUNCS.title_screen_card(self, SC_scale)
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "SC = Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, SC_scale*G.CARD_W, SC_scale*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_joker'])"
+position = "at"
+payload = "SC = G.FUNCS.center_splash_screen_card(SC_scale)"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+                local card = Card(  card_pos.x + G.ROOM.T.w/2 - G.CARD_W*card_size/2,
+                                    card_pos.y + G.ROOM.T.h/2 - G.CARD_H*card_size/2,
+                                    card_size*G.CARD_W, card_size*G.CARD_H, pseudorandom_element(G.P_CARDS), G.P_CENTERS.c_base)
+'''
+position = "at"
+payload = '''
+local card = G.FUNCS.splash_screen_card(card_pos, card_size)
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "amount = amount or 1"
+position = "after"
+payload = '''
+    if next(find_joker("Don't Mind If I Do")) then
+		if hand == "High Card" then
+			amount = amount * 2
+		end
+	end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+    for k, v in ipairs(G.play.cards) do
+        if (not v.shattered) and (not v.destroyed) then
+            draw_card(G.play,G.discard, it*100/play_count,'down', false, v)
+'''
+position = "at"
+payload = '''
+    local highest = nil
+    if next(find_joker("Be Someone Forever")) then
+        sendDebugMessage("first if statement works lol")
+		local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(G.play.cards)
+		if text == "High Card" then
+			for i, v in ipairs(scoring_hand) do
+				if highest then
+					if v:get_id() > highest:get_id() then highest = v end
+				else highest = v end
+			end
+		end
+	end
+	for k, v in ipairs(G.play.cards) do
+		if (not v.shattered) and (not v.destroyed) then
+			if next(find_joker("Be Someone Forever")) and v == highest then
+			    sendDebugMessage("Drawing High Card back to hand...")
+				draw_card(G.play,G.hand, it*100/play_count,'up', true, v)
+			else
+				draw_card(G.play,G.discard, it*100/play_count,'down', false, v)
+			end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''
+        create_shop_card_ui(card)
+        return card
+'''
+position = "after"
+payload = '''
+    elseif G.GAME.spawnDeathcards and G.GAME.spawnDeathcards ~= 0 then
+		local card = Card(area.T.x + area.T.w/2, area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_csau_deathcard'])
+		create_shop_card_ui(card)
+		G.GAME.forcedeath = false
+		G.GAME.spawnDeathcards = G.GAME.spawnDeathcards - 1
+		return card
+'''
 match_indent = true
 overwrite = false

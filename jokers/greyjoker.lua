@@ -25,30 +25,20 @@ function jokerInfo.calculate(self, card, context)
 	end
 end
 
-
-	--[[G.FUNCS.can_discard = function(e)
-		if G.GAME.current_round.discards_left <= 0 or #G.hand.highlighted <= 4 then 
+local can_discardref = G.FUNCS.can_discard
+G.FUNCS.can_discard = function(e)
+	if next(SMODS.find_card('j_csau_greyjoker')) then
+		if G.GAME.current_round.discards_left <= 0 or #G.hand.highlighted <= 4 then
 			e.config.colour = G.C.UI.BACKGROUND_INACTIVE
 			e.config.button = nil
 		else
 			e.config.colour = G.C.RED
 			e.config.button = 'discard_cards_from_highlighted'
 		end
-	  end]]--
-
---[[function Card:remove_from_deck()
-	G.FUNCS.can_discard = function(e)
-		if G.GAME.current_round.discards_left <= 0 or #G.hand.highlighted <= 0 then 
-			e.config.colour = G.C.UI.BACKGROUND_INACTIVE
-			e.config.button = nil
-		else
-			e.config.colour = G.C.RED
-			e.config.button = 'discard_cards_from_highlighted'
-		end
-	  end
-end]]--
-
-
+	else
+		can_discardref(e)
+	end
+end
 
 return jokerInfo
 	

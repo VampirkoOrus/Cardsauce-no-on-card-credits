@@ -39,18 +39,13 @@ local jokerInfo = {
 	perishable_compat = true
 }
 
-function jokerInfo.tooltip(self, info_queue)
+function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "wheel2", set = "Other"}
 	info_queue[#info_queue+1] = {key = "guestartist2", set = "Other"}
 end
 
-
-
-
-
-
 function jokerInfo.calculate(self, card, context)
-	if context.reroll_shop and not self.getting_sliced and not self.debuff and not (context.blueprint_card or self).getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+	if context.reroll_shop and not card.getting_sliced and not card.debuff and not (context.blueprint_card or card).getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
 		G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 		G.E_MANAGER:add_event(Event({
 			func = (function()
@@ -62,7 +57,7 @@ function jokerInfo.calculate(self, card, context)
 						G.GAME.consumeable_buffer = 0
 						return true
 					end}))   
-					card_eval_status_text(context.blueprint_card or self, 'extra', nil, nil, nil, {message = "+1 Nope!", colour = G.C.PURPLE})                       
+					card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_speen'), colour = G.C.PURPLE})
 				return true
 			end)}))
 	end
@@ -83,12 +78,10 @@ end
 function jokerInfo.draw(self,card,layer)
 	--Withouth love.graphics.push, .pop, and .reset, it will attempt to use values from the rest of 
 	--the rendering code. We need a clean slate for rendering to canvases.
-	
-	local undiscovered = false --TODO: find a way to check for if discovered
-	if undiscovered then
+
+	if not self.discovered then
 		return
 	end
-	
 	
 	love.graphics.push('all')
 		love.graphics.reset()

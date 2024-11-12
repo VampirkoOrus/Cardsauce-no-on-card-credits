@@ -24,7 +24,7 @@ end
 ]]--
 
 function jokerInfo.calculate(self, card, context)
-	if context.individual and context.cardarea == G.play and not self.debuff and context.other_card.ability.effect == 'Base' and context.other_card:get_id() <= 8 then
+	if context.individual and context.cardarea == G.play and not card.debuff and context.other_card.ability.effect == 'Base' and context.other_card:get_id() <= 8 then
 		return {
 			mult = card.ability.extra.mult,
 			card = card

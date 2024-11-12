@@ -33,7 +33,7 @@ local function starts_with(str, start)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.cardarea == G.jokers and context.before and not self.debuff then
+	if context.cardarea == G.jokers and context.before and not card.debuff then
 		if next(context.poker_hands["Pair"]) then
 			local id_count = {}
 			local pair_count = 0

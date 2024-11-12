@@ -19,12 +19,12 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.cardarea == G.jokers and context.before and not self.debuff then
+	if context.cardarea == G.jokers and context.before and not card.debuff then
 		if next(context.poker_hands["Flush"]) then
 			if pseudorandom('mike') < G.GAME.probabilities.normal / 2 then
 				ease_hands_played(1)
 				return {
-					card = self,
+					card = card,
 					message = "+1 Hand!",
 					colour = G.C.BLUE
 				}
