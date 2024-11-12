@@ -2,7 +2,7 @@
 A Balatro mod made for Vinesauce!
 
 ~~Uses Steammodded 0.9.8. This project would not be possible without its framework!~~
-Now uses Steammodded 1.0.0 on this branch.
+**Now uses Steammodded 1.0.0 on this branch.**
 
 --
 
