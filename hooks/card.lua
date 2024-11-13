@@ -6,6 +6,8 @@ function Card:vic_add_speech_bubble(text_key, align, loc_vars, extra)
         definition = G.UIDEF.vic_speech_bubble(text_key, loc_vars, extra),
         config = self.config.speech_bubble_align
     }
+    self.children.speech_bubble.states.hover.can = false
+    self.children.speech_bubble.states.click.can = false
     self.children.speech_bubble:set_role{
         role_type = 'Minor',
         xy_bond = 'Weak',

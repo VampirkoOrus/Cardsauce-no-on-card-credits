@@ -192,6 +192,7 @@ return {
 			vs_options_chadNova_r = "Undo Chadnova",
 			vs_options_chadNova_desc = "Click this button to undo the consequences of your actions",
 			vs_options_reset_confirm = "(This will quit the game to apply)",
+			k_cavestorytext = "A black wind flows through you...",
 			k_aced = "Aced!",
 			k_twoed = "Twoed!",
 			k_plus_judge = "+1 Judgement",
@@ -635,7 +636,7 @@ return {
 				},
 			},
 			j_csau_greenneedle = {
-				name = "Green Needle",
+				name = "Green Needle [WIP]",
 				text = {
 					"Copies the ability",
 					"of rightmost {C:attention}Joker{}",

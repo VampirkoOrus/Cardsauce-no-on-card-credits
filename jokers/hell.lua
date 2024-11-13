@@ -13,51 +13,52 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { G.GAME.probabilities.normal }
 end]]--
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
+local cavestorytext = SMODS.Sound({
+	key = "cavestorytext",
+	path = "cavestorytext.wav"
+})
 
-end
-
-local add_to_deck_ref2 = Card.add_to_deck
-
-function hand_level_reset(self)
-	update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3*G.SETTINGS.GAMESPEED}, {handname=localize('k_all_hands'),chips = '...', mult = '...', level=''})
-	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2*G.SETTINGS.GAMESPEED, func = function()
+local function hand_level_reset(card, delayMod)
+	delayMod = delayMod or 1
+	update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3/delayMod}, {handname=localize('k_all_hands'),chips = '...', mult = '...', level=''})
+	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2/delayMod, func = function()
 		play_sound('tarot1')
-		self:juice_up(0.8, 0.5)
+		card:juice_up(0.8, 0.5)
 		G.TAROT_INTERRUPT_PULSE = true
 		return true end }))
 	update_hand_text({delay = 0}, {mult = '-', StatusText = true})
-	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9*G.SETTINGS.GAMESPEED, func = function()
+	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9/delayMod, func = function()
 		play_sound('tarot1')
-		self:juice_up(0.8, 0.5)
+		card:juice_up(0.8, 0.5)
 		return true end }))
 	update_hand_text({delay = 0}, {chips = '-', StatusText = true})
-	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9*G.SETTINGS.GAMESPEED, func = function()
+	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9/delayMod, func = function()
 		play_sound('tarot1')
-		self:juice_up(0.8, 0.5)
+		card:juice_up(0.8, 0.5)
 		G.TAROT_INTERRUPT_PULSE = nil
 		return true end }))
 	update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level='1'})
-	delay(1.3*G.SETTINGS.GAMESPEED)
+	delay(1.3/delayMod)
 	for k, v in pairs(G.GAME.hands) do
-		level_up_hand(self, k, true, -G.GAME.hands[k].level + 1)
+		if v.level > 1 then
+			level_up_hand(self, k, true, -G.GAME.hands[k].level + 1)
+		end
 	end
 	G.E_MANAGER:add_event(Event({
 		trigger = 'immediate',
+		blockable = false,
 		func = (function()
-			play_area_status_text("A black wind flows through you...")
-			-- Custom_Play_Sound("cavestorytext",false,1.3,1) need rework to SMODS.Sound API
+			play_area_status_text(localize('k_cavestorytext'))
+			cavestorytext:play(1, (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/50.0),true);
 			return true
 		end)
 	}))
-	return
+	update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
 end
 
-function Card:add_to_deck(from_debuff)
-	add_to_deck_ref2(self, from_debuff)
-	if self.config.center_key == 'j_hell' then
-		hand_level_reset(self)
-	end
+function jokerInfo.add_to_deck(self, card, context)
+	hand_level_reset(card, G.SETTINGS.GAMESPEED)
+	return
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -80,7 +81,13 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 	if context.end_of_round and G.GAME.blind.boss and not context.blueprint then
-		hand_level_reset(card)
+		local reset = false
+		for k, v in pairs(G.GAME.hands) do
+			if v.level > 1 then reset = true end
+		end
+		if reset then
+			hand_level_reset(card)
+		end
 	end
 end
 
