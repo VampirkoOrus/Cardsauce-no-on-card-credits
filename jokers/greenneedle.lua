@@ -11,15 +11,16 @@ local jokerInfo = {
 function jokerInfo.calculate(self, card, context)
 	local rightmost_joker = G.jokers.cards[#G.jokers.cards]
 	if rightmost_joker and rightmost_joker ~= card then
-		send("Triggering Green Needle")
 		context.blueprint = (context.blueprint and (context.blueprint + 1)) or 1
 		context.blueprint_card = context.blueprint_card or card
 		if context.blueprint > #G.jokers.cards + 1 then return end
+		context.no_callback = true
 		local other_joker_ret = rightmost_joker:calculate_joker(context)
 		if other_joker_ret then
 			other_joker_ret.card = context.blueprint_card or card
+			context.no_callback = false
 			other_joker_ret.colour = G.C.RED
-			SMODS.eval_this(card, other_joker_ret)
+			return other_joker_ret
 		end
 	end
 end
@@ -39,11 +40,13 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
 end
 
 function jokerInfo.update(self, card)
-	local other_joker = G.jokers.cards[#G.jokers.cards]
-	if other_joker and other_joker ~= self and other_joker.config.center.blueprint_compat then
-		card.ability.blueprint_compat = 'compatible'
-	else
-		card.ability.blueprint_compat = 'incompatible'
+	if G.STAGE == G.STAGES.RUN then
+		local other_joker = G.jokers.cards[#G.jokers.cards]
+		if other_joker and other_joker ~= card and other_joker.config.center.blueprint_compat then
+			card.ability.blueprint_compat = 'compatible'
+		else
+			card.ability.blueprint_compat = 'incompatible'
+		end
 	end
 end
 

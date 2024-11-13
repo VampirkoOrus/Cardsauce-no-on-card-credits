@@ -636,7 +636,7 @@ return {
 				},
 			},
 			j_csau_greenneedle = {
-				name = "Green Needle [WIP]",
+				name = "Green Needle",
 				text = {
 					"Copies the ability",
 					"of rightmost {C:attention}Joker{}",
