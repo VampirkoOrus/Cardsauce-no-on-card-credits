@@ -16,6 +16,7 @@ function G.UIDEF.vic_speech_bubble(text_key, loc_vars, extra)
     return t
 end
 
+
 function tableToString(tbl)
     local result = {}
     for _, line in ipairs(tbl) do

@@ -180,12 +180,12 @@ return {
 			},
         },
 		dictionary = {
-			vs_credits1 = "Project Leads",
+			vs_credits1 = "Concepting/Direction",
 			vs_credits2 = "Artists",
 			vs_credits3 = "Coding",
-			vs_credits4 = "Sound API",
+			vs_credits4 = "Voice Acting",
 			vs_credits5 = "Support",
-			vs_options = "Cardsauce Options",
+			vs_credits6 = "Special Thanks",
 			vs_options_sub = "(Restart required to apply)",
 			vs_options_chadSay = "Chadley Dialogue",
 			vs_options_chadSay_desc = "Uncheck this to make Chadley shut the fuck up",
@@ -746,6 +746,16 @@ return {
 				text = {
 					"Played {C:attention}Steel Cards{} give {X:mult,C:white}X#1#{}",
 					"Mult when scored",
+				},
+			},
+			j_csau_kings = {
+				name = "2 Kings 2:23-24 [WIP]",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult, but destroys {C:attention}42{} random",
+					"cards in your deck when acquired.",
+					"{C:inactive}(Cards destroyed this way are{}",
+					"{C:inactive}added back to your deck when this{}",
+					"{C:inactive}Joker is sold/destroyed){}",
 				},
 			},
 		},

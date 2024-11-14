@@ -67,6 +67,7 @@ local conf_cardsauce = {
 		'garbagehand',
 		'supper',
 		'chromedup',
+		'kings',
 		'vincenzo',
 		'quarterdumb',
 	},
@@ -307,7 +308,6 @@ function G.FUNCS.splash_screen_card(card_pos, card_size)
 	end
 end
 
-
 -- Base Deck Textures
 SMODS.Atlas {
 	key = "cards_1",
@@ -384,7 +384,7 @@ local csauConfigTabs = function() return {
 		tab_definition_function = function()
 			local csau_opts = { n = G.UIT.C, config = { align = "tm", padding = 0.05 }, nodes = {
 				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-					{n=G.UIT.T, config={text = localize("vs_options"), scale = text_scale*0.9, colour = G.C.GREEN, shadow = true}},
+					{n=G.UIT.T, config={text = localize("b_options"), scale = text_scale*0.9, colour = G.C.GREEN, shadow = true}},
 				}},
 				{n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
 					{n=G.UIT.T, config={text = localize("vs_options_sub"), scale = text_scale*0.5, colour = G.C.GREEN, shadow = true}},
@@ -436,91 +436,184 @@ local csauConfigTabs = function() return {
 
 SMODS.current_mod.extra_tabs = csauConfigTabs
 
--- Credits Tab in Mods
+local vs_credit_1 = "BarrierTrio/Gote"
+local vs_credit_2 = "DPS2004"
+local vs_credit_3 = "SagaciousCejai"
+local vs_credit_4 = "Nether"
+local vs_credit_5 = "Mysthaps"
+local vs_credit_6 = "Numbuh214"
+local vs_credit_7 = "Aurelius7309"
+local vs_credit_8 = "Austin L. Matthews"
+local vs_credit_8_tag = "(AmtraxVA)"
+local vs_credit_9 = "Lyman"
+local vs_credit_9_from = "(from JankJonklers)"
+local vs_credit_10 = "Akai"
+local vs_credit_10_from = "(from Balatrostuck)"
+local vs_credit_5_from = "(from LobotomyCorp)"
+local vs_credit_12 = "Victin"
+local vs_credit_12_from = "(from Victin's Collection)"
+local vs_credit_13 = "Keku"
+local vs_credit_14 = "Gappie"
+local vs_credit_st1 = "tortoise"
+local vs_credit_st2 = "Protokyuuu"
+local vs_credit_st3 = "ShrineFox"
+local vs_credit_st4 = "CheesyDraws"
+
+local header_scale = 1.1
+local bonus_padding = 1.15
+
 SMODS.current_mod.credits_tab = function()
 	chosen = true
 	return {n=G.UIT.ROOT, config={align = "cm", padding = 0.2, colour = G.C.BLACK, r = 0.1, emboss = 0.05, minh = 6, minw = 10}, nodes={
-		{n=G.UIT.C, config={align = "cm", padding = 0.1}, nodes={
-			{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
-				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-					{n=G.UIT.T, config={text = localize('vs_credits1'), scale = text_scale*0.6, colour = G.C.GOLD, shadow = true}},
-				}},
-				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-					{n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
-						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = 'BarrierTrio', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+		{n = G.UIT.C, config = { align = "tm", padding = 0.2 }, nodes = {
+			{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+				{n=G.UIT.T, config={text = localize("b_credits"), scale = text_scale*1.2, colour = G.C.GREEN, shadow = true}},
+			}},
+			{n=G.UIT.R, config={align = "cm", padding = 0.05,outline_colour = G.C.GREEN, r = 0.1, outline = 1}, nodes= {
+				{n=G.UIT.C, config={align = "tm", padding = 0.1, r = 0.1}, nodes={
+					{n=G.UIT.C, config={align = "tm", padding = 0}, nodes={
+						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = localize('vs_credits1'), scale = text_scale*0.6, colour = G.C.GOLD, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
+								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+									{n=G.UIT.T, config={text = vs_credit_1, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+									{n=G.UIT.T, config={text = vs_credit_13, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+							}},
 						}},
-						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = 'Keku', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						{n=G.UIT.R, config={align = "tm", padding = 0,outline_colour = G.C.CLEAR, r = 0.1, outline = 1}, nodes={
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.3, colour = G.C.CLEAR, shadow = true}},
+							}},
+						}},
+						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = localize('vs_credits4'), scale = text_scale*0.6, colour = G.C.BLUE, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
+								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+									{n=G.UIT.T, config={text = vs_credit_8, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+									{n=G.UIT.T, config={text = vs_credit_8_tag, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
+								}},
+								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+									{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.05, colour = G.C.CLEAR, shadow = true}},
+								}},
+							}},
 						}},
 					}},
 				}},
-			}},
-			{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
-				{n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
-					{n=G.UIT.T, config={text = localize('vs_credits2'), scale = text_scale*0.6, colour = G.C.RED, shadow = true}},
+				{n=G.UIT.C, config={align = "tm", padding = 0.1, r = 0.1}, nodes= {
+					{ n = G.UIT.C, config = { align = "tm", padding = 0.1 * bonus_padding, outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1 }, nodes = {
+						{ n = G.UIT.R, config = { align = "cm", padding = 0 }, nodes = {
+							{ n = G.UIT.T, config = { text = localize('vs_credits2'), scale = header_scale * 0.6, colour = G.C.RED, shadow = true } },
+						} },
+						{ n = G.UIT.R, config = { align = "cm", padding = 0 }, nodes = {
+							{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+								{ n = G.UIT.T, config = { text = vs_credit_1, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+							} },
+							{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+								{ n = G.UIT.T, config = { text = vs_credit_3, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+							} },
+							{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+								{ n = G.UIT.T, config = { text = vs_credit_13, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+							} },
+							{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+								{ n = G.UIT.T, config = { text = vs_credit_14, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+							} },
+						} },
+					} },
 				}},
-				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-					{n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
+				{n=G.UIT.C, config={align = "tm", padding = 0.1, r = 0.1}, nodes= {
+					{n=G.UIT.C, config={align = "tm", padding = 0.1*bonus_padding,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
 						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = 'BarrierTrio', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							{n=G.UIT.T, config={text = localize('vs_credits3'), scale = header_scale*0.6, colour = G.C.ORANGE, shadow = true}},
 						}},
-						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = 'SagaciousCejai', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_1, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_2, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_4, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_5, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_6, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_7, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_13, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
 						}},
 					}},
 				}},
-			}},
-		}},
-		{n=G.UIT.C, config={align = "cm", padding = 0.1}, nodes={
-			{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
-				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-					{n=G.UIT.T, config={text = localize('vs_credits3'), scale = text_scale*0.6, colour = G.C.ORANGE, shadow = true}},
-				}},
-				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-					{n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
+				{n=G.UIT.C, config={align = "tm", padding = 0.1, r = 0.1}, nodes= {
+					{n=G.UIT.C, config={align = "tm", padding = 0.1*bonus_padding,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
 						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = 'DPS2004', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							{n=G.UIT.T, config={text = localize('vs_credits5'), scale = header_scale*0.6, colour = G.C.PURPLE, shadow = true}},
 						}},
-						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = 'Nether', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-						}},
-						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = 'Mysthaps', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-						}},
-						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = 'Aurelius7309', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-						}},
-					}},
-				}},
-			}},
-			{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
-				{n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
-					{n=G.UIT.T, config={text = localize('vs_credits4'), scale = text_scale*0.6, colour = G.C.PURPLE, shadow = true}},
-				}},
-				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-					{n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
-						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = 'Infarctus', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_9, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_9_from, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_10, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_10_from, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_5, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_5_from, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_12, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_12_from, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
+							}},
 						}},
 					}},
 				}},
-			}},
-			{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
-				{n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
-					{n=G.UIT.T, config={text = localize('vs_credits5'), scale = text_scale*0.6, colour = G.C.GREEN, shadow = true}},
-				}},
-				{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-					{n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
+				{n=G.UIT.C, config={align = "tm", padding = 0.1, r = 0.1}, nodes= {
+					{n=G.UIT.C, config={align = "tm", padding = 0.1*bonus_padding,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
 						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = 'Lyman (from JankJonklers)', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							{n=G.UIT.T, config={text = localize('vs_credits6'), scale = header_scale*0.6, colour = G.C.GREEN, shadow = true}},
 						}},
-						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = 'Akai (from BalatroStuck)', scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_st1, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_st2, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_st3, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_st4, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
 						}},
-					}},
-				}},
-			}},
-		}},
+					}}
+				}}
+			}}
+		}}
 	}}
 end

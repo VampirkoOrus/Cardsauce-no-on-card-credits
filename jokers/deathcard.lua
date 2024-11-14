@@ -73,7 +73,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card)
-	if card.area.config.type == "shop" then
+	if card.area.config.type == "shop" and G.GAME.deathsold then
 		if #G.GAME.deathsold > 0 and not card.ability.id and not card.ability.timesSold then
 			local death = G.GAME.deathsold[1]
 			local id = death['id']

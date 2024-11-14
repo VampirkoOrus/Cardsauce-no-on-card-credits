@@ -36,95 +36,6 @@ function jokerInfo.init(card)
 	end
 end
 
-local speed = G.SETTINGS.GAMESPEED
-
-local function tableSlot(card, speech_key, bubble_side, end_delay)
-	return {card = card or chad, speech_key = speech_key or 'chad_greeting1', bubble_side=bubble_side or 'bm', end_delay=end_delay or nil}
-end
-
-local function readSpeed(inputText)
-	local wordsPerSecond = 3
-	local wordCount = 0
-	for _ in string.gmatch(inputText, "%S+") do wordCount = wordCount + 1 end
-	local time = math.ceil(wordCount / wordsPerSecond)
-	return time
-end
-
-local function chadTalk(messages, index, delay, end_flag)
-	index = index or 1
-	delay = delay or 0.1
-	end_flag = end_flag or nil
-	local card = messages[index].card or chad
-	local speech_key = 'chad_'..messages[index].speech_key or 'chad_greeting1'
-	local bubble_side = messages[index].bubble_side or 'bm'
-	local end_delay = messages[index].end_delay or nil
-	G.E_MANAGER:add_event(Event({
-		trigger = 'after',
-		delay = delay,
-		blocking = false,
-		func = function()
-			local speech_key = speech_key
-			local text = G.localization.misc.quips[speech_key]
-			local current_mod = #text*2+1 or 5
-			if current_mod < 5 then current_mod = 5 end
-			local dynDelay
-			if end_delay then
-				dynDelay = end_delay
-			else
-				dynDelay = readSpeed(tableToString(text)) + 2
-			end
-			sendDebugMessage(dynDelay)
-			if card.ability.talking then
-				sendDebugMessage("talking exists")
-				local cancelling = false
-				for k, v in pairs(card.ability.talking) do
-					if k ~= end_flag and v == true then
-						sendDebugMessage("Gotta cancel "..k)
-						cancelling = true
-						if not card.ability.cancel then card.ability.cancel = {} end
-						card.ability.cancel[k] = true
-					end
-				end
-				if cancelling then
-					card:vic_remove_speech_bubble()
-				end
-			else
-				card.ability.talking = {}
-			end
-			card:vic_say_stuff(current_mod, nil, true)
-			card:vic_add_speech_bubble(speech_key, bubble_side, nil, {text_alignment = "cm"})
-			card.ability.talking[end_flag] = true
-			send(card.ability.talking)
-			send(card.ability.cancel)
-			G.E_MANAGER:add_event(Event({
-				trigger = 'after',
-				delay = dynDelay*speed,
-				blocking = false,
-				func = function()
-					card.ability.talking[end_flag] = false
-					card:vic_remove_speech_bubble()
-					if not card.ability.cancel then card.ability.cancel = {} end
-					if messages[index+1] and not card.ability.cancel[end_flag] then
-						chadTalk(messages, index+1, 0, end_flag)
-					else
-						if end_flag and not card.ability.cancel[end_flag] then
-							card.ability.quips[end_flag] = true
-						end
-						if #card.ability.cancel > 0 then
-							for k, v in pairs(card.ability.talking) do
-								if v == true then
-									card.ability.cancel[k] = false
-								end
-							end
-						end
-					end
-					return true
-				end
-			}))
-			return true
-		end
-	}))
-end
 
 function jokerInfo.calculate(self, card, context)
 	if context.other_joker and not card.debuff and not context.blueprint then
@@ -151,13 +62,13 @@ function jokerInfo.add_to_deck(self, card)
 			if card.ability.quips.greeting and not card.ability.quips.explain then
 				sendDebugMessage("Triggering Chadley Explanation")
 				local dialogue = {}
-				dialogue[#dialogue + 1] = tableSlot(card, 'thanks', 'bm')
+				dialogue[#dialogue + 1] = tableSlot('chad_thanks', 'bm', chad)
 				for i = 1, 6 do
 					local delay = nil
 					if i == 1 then delay = 8 else delay = nil end
-					dialogue[#dialogue + 1] = tableSlot(card, 'explain'..i, 'bm', delay)
+					dialogue[#dialogue + 1] = tableSlot('chad_explain'..i, 'bm', delay, chad)
 				end
-				chadTalk(dialogue, nil, nil, 'explain_finished')
+				card:jokerTalk(dialogue, nil, nil, 'chad_explain_finished', chad)
 				card.ability.quips.explain = true
 			end
 		else
@@ -245,16 +156,16 @@ function jokerInfo.update(self, card, context)
 					if not next(find_joker('No No No No No No No No No No No')) and not card.ability.quips.greeting then
 						sendDebugMessage("Triggering Chadley Greeting")
 						local dialogue = {}
-						dialogue[#dialogue + 1] = tableSlot(card, 'greeting1', 'tm')
-						dialogue[#dialogue + 1] = tableSlot(card, 'greeting2', 'tm')
+						dialogue[#dialogue + 1] = tableSlot('chad_greeting1', 'tm', chad)
+						dialogue[#dialogue + 1] = tableSlot('chad_greeting2', 'tm', chad)
 						if card.area.config.type == "shop" then
-							dialogue[#dialogue + 1] = tableSlot(card, 'greeting3shop1', 'tm', 6)
-							dialogue[#dialogue + 1] = tableSlot(card, 'greeting3shop2', 'tm')
+							dialogue[#dialogue + 1] = tableSlot('chad_greeting3shop1', 'tm', 6, chad)
+							dialogue[#dialogue + 1] = tableSlot('chad_greeting3shop2', 'tm', chad)
 						elseif card.area.config.type1 == "pack" then
-							dialogue[#dialogue + 1] = tableSlot(card, 'chad_greeting3pack1', 'tm')
-							dialogue[#dialogue + 1] = tableSlot(card, 'chad_greeting3pack2', 'tm')
+							dialogue[#dialogue + 1] = tableSlot('chad_chad_greeting3pack1', 'tm', chad)
+							dialogue[#dialogue + 1] = tableSlot('chad_greeting3pack2', 'tm', chad)
 						end
-						chadTalk(dialogue, nil, nil, 'greeting_finished')
+						card:jokerTalk(dialogue, nil, nil, 'chad_greeting_finished', chad)
 						card.ability.quips.greeting = true
 					end
 					if not G.SETTINGS.chad.remember then
@@ -263,14 +174,14 @@ function jokerInfo.update(self, card, context)
 					end
 				elseif card.area.config.type == "joker" and card.ability.chadNum == 1 then
 					if G.GAME.chad_showman_detected and not card.ability.quips.showman then
-						sendDebugMessage("Triggering Chadley Showman Dialogue")
+						sendDebugMessage("Triggering Chadley Showman Dialogue", chad)
 						local dialogue = {}
-						dialogue[#dialogue + 1] = tableSlot(card, 'showman1', 'bm')
+						dialogue[#dialogue + 1] = tableSlot('chad_showman1', 'bm', chad)
 						if G.GAME.chad_showman_detected == "shop" then
-							dialogue[#dialogue + 1] = tableSlot(card, 'showman2_shop', 'bm')
+							dialogue[#dialogue + 1] = tableSlot('chad_showman2_shop', 'bm', chad)
 						end
-						dialogue[#dialogue + 1] = tableSlot(card, 'showman3', 'bm')
-						chadTalk(dialogue, nil, nil, 'showman_finished')
+						dialogue[#dialogue + 1] = tableSlot('chad_showman3', 'bm', chad)
+						card:jokerTalk(dialogue, nil, nil, 'chad_showman_finished', chad)
 						card.ability.quips.showman = true
 					end
 				end

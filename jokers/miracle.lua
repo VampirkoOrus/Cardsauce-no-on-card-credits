@@ -13,7 +13,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {G.GAME.probabilities.normal} }
 end
 
-function deepcopy(orig)
+local function deepcopy(orig)
     local orig_type = type(orig)
     local copy
     if orig_type == 'table' then

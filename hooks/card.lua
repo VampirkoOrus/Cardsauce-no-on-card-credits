@@ -69,3 +69,99 @@ function Card:vic_say_stuff(n, not_first, def_speed, voice, playVoice)
         }), 'tutorial')
     end
 end
+
+
+function tableSlot(speech_key, bubble_side, end_delay)
+    return {speech_key = speech_key or 'chad_greeting1', bubble_side=bubble_side or 'bm', end_delay=end_delay or nil}
+end
+
+local function readSpeed(inputText)
+    local wordsPerSecond = 3
+    local wordCount = 0
+    for _ in string.gmatch(inputText, "%S+") do wordCount = wordCount + 1 end
+    local time = math.ceil(wordCount / wordsPerSecond)
+    return time
+end
+
+function Card:jokerTalk(messages, index, delay, end_flag, fallback_card)
+    local speed = G.SETTINGS.GAMESPEED
+    index = index or 1
+    delay = delay or 0.1
+    end_flag = end_flag or nil
+    fallback_card = fallback_card or nil
+    local card = self or fallback_card
+    local speech_key = messages[index].speech_key or 'chad_greeting1'
+    local bubble_side = messages[index].bubble_side or 'bm'
+    local end_delay = messages[index].end_delay or nil
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = delay,
+        blocking = false,
+        func = function()
+            local speech_key = speech_key
+            local text = G.localization.misc.quips[speech_key]
+            local current_mod = #text*2+1 or 5
+            if current_mod < 5 then current_mod = 5 end
+            local dynDelay
+            if type(end_delay) == 'number' then
+                dynDelay = end_delay
+            elseif type(end_delay) == 'string' then
+                dynDelay = tonumber(end_delay) + (readSpeed(tableToString(text)) + 2)
+            else
+                dynDelay = readSpeed(tableToString(text)) + 2
+            end
+            sendDebugMessage(dynDelay)
+            if card.ability.talking then
+                sendDebugMessage("talking exists")
+                local cancelling = false
+                for k, v in pairs(card.ability.talking) do
+                    if k ~= end_flag and v == true then
+                        sendDebugMessage("Gotta cancel "..k)
+                        cancelling = true
+                        if not card.ability.cancel then card.ability.cancel = {} end
+                        card.ability.cancel[k] = true
+                    end
+                end
+                if cancelling then
+                    card:vic_remove_speech_bubble()
+                end
+            else
+                card.ability.talking = {}
+            end
+            card:vic_add_speech_bubble(speech_key, bubble_side, nil, {text_alignment = "cm"})
+            if card then
+                card:vic_say_stuff(current_mod, nil, true)
+            end
+            if end_flag then card.ability.talking[end_flag] = true end
+            send(card.ability.talking)
+            send(card.ability.cancel)
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = dynDelay*speed,
+                blocking = false,
+                blockable = true,
+                func = function()
+                    if end_flag then card.ability.talking[end_flag] = false end
+                    card:vic_remove_speech_bubble()
+                    if not card.ability.cancel then card.ability.cancel = {} end
+                    if card and messages[index+1] and ((end_flag and not card.ability.cancel[end_flag]) or (not end_flag)) then
+                        card:jokerTalk(messages, index+1, 0, end_flag)
+                    else
+                        if end_flag and not card.ability.cancel[end_flag] then
+                            card.ability.quips[end_flag] = true
+                        end
+                        if #card.ability.cancel > 0 then
+                            for k, v in pairs(card.ability.talking) do
+                                if v == true then
+                                    card.ability.cancel[k] = false
+                                end
+                            end
+                        end
+                    end
+                    return true
+                end
+            }))
+            return true
+        end
+    }))
+end
