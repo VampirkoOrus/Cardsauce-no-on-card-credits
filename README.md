@@ -24,7 +24,7 @@ NEED HELP WITH:
 
 -Make Pepperoni Secret mod-friendly by calling the hand's starting visibility (is this possible?)
 
--Add the compatible button for Green Needle
+-~~Add the compatible button for Green Needle~~✅
 
 --
 
