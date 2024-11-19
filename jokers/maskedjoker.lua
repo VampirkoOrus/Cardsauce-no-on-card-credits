@@ -24,7 +24,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.individual and context.cardarea == G.play and not self.debuff then
+	if context.individual and context.cardarea == G.play and not card.debuff then
 		local chimera = true
 		for k, v in ipairs(context.full_hand) do
 			chimera = chimera and v.ability.name == 'Steel Card'

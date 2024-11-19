@@ -15,6 +15,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = G.P_TAGS.tag_negative
+	info_queue[#info_queue+1] = {key = "guestartist9", set = "Other"}
 	return { vars = {G.GAME.probabilities.normal, card.ability.extra} }
 end
 
@@ -26,7 +27,10 @@ end]]--
 function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and not card.debuff and not context.individual and not context.repetition then
 			if pseudorandom('blast') < G.GAME.probabilities.normal / card.ability.extra then
+				card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_negative'), colour = HEX('39484e')})
 				G.E_MANAGER:add_event(Event({
+					trigger = 'before',
+					blocking = false,
                     func = (function()
                         add_tag(Tag('tag_negative'))
                         play_sound('generic1', 0.9 + math.random()*0.1, 0.8)

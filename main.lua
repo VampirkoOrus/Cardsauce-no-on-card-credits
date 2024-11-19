@@ -8,6 +8,7 @@
 --- PREFIX: csau
 
 local mod_path = SMODS.current_mod.path
+local usable_path = mod_path:match("Mods/[^/]+")
 csau_config = SMODS.current_mod.config
 csau_enabled = copy_table(csau_config)
 
@@ -67,7 +68,13 @@ local conf_cardsauce = {
 		'garbagehand',
 		'supper',
 		'chromedup',
+		'red',
 		'kings',
+		'kerosene',
+		'purple',
+		'fate',
+		'businesstrading',
+		'muppet',
 		'vincenzo',
 		'quarterdumb',
 	},
@@ -183,7 +190,7 @@ for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 		end
 	end
 
-	SMODS.Atlas({ key = v, path ="jokers/" .. v .. ".png", px = 71, py = 95 })
+	SMODS.Atlas({ key = v, path ="jokers/" .. v .. ".png", px = joker.width or 71, py = joker.height or  95 })
 end
 
 local card_updateref = Card.update
@@ -250,6 +257,21 @@ function send(message, level)
 	end
 end
 
+function deepcopy(orig)
+	local orig_type = type(orig)
+	local copy
+	if orig_type == 'table' then
+		copy = {}
+		for orig_key, orig_value in next, orig, nil do
+			copy[deepcopy(orig_key)] = deepcopy(orig_value)
+		end
+		setmetatable(copy, deepcopy(getmetatable(orig)))
+	else
+		copy = orig
+	end
+	return copy
+end
+
 for suit, color in pairs(G.C.SUITS) do
 	local c
 	if suit == "Hearts" then c = HEX("e14e62")
@@ -272,6 +294,244 @@ if G.SETTINGS.chadNova then
 	G.TITLE_SCREEN_CARD = 'j_csau_chad'
 else
 	G.TITLE_SCREEN_CARD = G.P_CARDS.C_A
+end
+
+G.C.PINK = HEX('fe55a5')
+G.C.CYAN = HEX('00eaff')
+
+
+G.C.COLOUR1 = G.SETTINGS.CS_COLOR1 or G.C.RED
+G.C.COLOUR2 = G.SETTINGS.CS_COLOR2 or G.C.BLUE
+
+local color_presets = {
+	{
+		"GREEN",
+		"PURPLE",
+		'default_csau'
+	},
+	{
+		"RED",
+		"BLUE",
+		'default_bal'
+	},
+	{
+		{'2c997f', "DS_GREENCYAN", },
+		{'09271d', "DS_DARKGREEN"},
+		'darkshroom',
+	},
+	{
+		{'38a789', "VS_GREEN"},
+		{'95c374', "VS_LIGHTGREEN"},
+		'vineshroom',
+	},
+	{
+		{"4862b0", "FS_BLUE"},
+		{"67b874", "FS_PALEGREEN"},
+		'fullsauce',
+	},
+	{
+		{'e26565', "ES_PALERED"},
+		{'a53b38', "ES_DARKRED"},
+		'extrasauce',
+	},
+	{
+		{'9967a7', "TWITCH_PALEPURPLE"},
+		{'483062', "TWITCH_DARKPURPLE"},
+		'twitch',
+	},
+	{
+		{"b5e61d", "FREN_NEONGREEN"},
+		{"04a1e5", "FREN_LIGHTBLUE"},
+		'fren',
+	},
+	{
+		"PURPLE",
+		"YELLOW",
+		'jabroni',
+	},
+	{
+		"BLACK",
+		"JOKER_GREY",
+		'uzumaki',
+	},
+}
+
+local function get_matching_color(name)
+	for i, v in ipairs(color_presets) do
+		if type(v[1]) == "string" then
+			if name == v[1] then
+				return G.C[name]
+			end
+		elseif type(v[1]) == "table" then
+			if name == v[1][2] then
+				return HEX(v[1][1])
+			end
+		end
+		if type(v[2]) == "string" then
+			if name == v[2] then
+				return G.C[name]
+			end
+		elseif type(v[2]) == "table" then
+			if name == v[2][2] then
+				return HEX(v[2][1])
+			end
+		end
+	end
+end
+
+function csau_save_color(colour, val)
+	local color = get_matching_color(val)
+	local set = 'CS_COLOR'..colour
+	G.SETTINGS[set] = color
+	G:save_settings()
+end
+
+local colors = {}
+for _, preset in ipairs(color_presets) do
+	for i = 1, 2 do
+		if type(preset[i]) == "string" then
+			colors[preset[i]] = true
+		elseif type(preset[i]) == "table" then
+			colors[preset[i][2]] = true
+		end
+	end
+end
+
+for color, _ in pairs(colors) do
+	G.FUNCS["change_color_1_" .. color] = function()
+		G.C.COLOUR1 = G.C[color]
+		csau_save_color(1, color)
+	end
+
+	G.FUNCS["change_color_2_" .. color] = function()
+		G.C.COLOUR2 = G.C[color]
+		csau_save_color(2, color)
+	end
+end
+
+local color_presets_nums = {}
+local color_presets_strings = {}
+for i, v in ipairs(color_presets) do
+	local k = v[3]
+	table.insert(color_presets_strings, k)
+	color_presets_nums[k] = i
+	for i = 1, 2 do
+		local func_name, color_name
+		if type(v[i]) == "string" then
+			func_name = "cs_"..v[i].."c"
+			color_name = v[i]
+		elseif type(v[i]) == "table" then
+			G.C[v[i][2]] = HEX(v[i][1])
+			func_name = "cs_"..v[i][2].."c"
+			color_name = v[i][2]
+		end
+	end
+end
+
+if not G.SETTINGS.csau_color_selection then
+	G.SETTINGS.csau_color_selection = "default_csau"
+end
+
+local main_menuRef = Game.main_menu
+function Game:main_menu(change_context)
+	main_menuRef(self, change_context)
+
+	local splash_args = {mid_flash = change_context == 'splash' and 1.6 or 0.}
+	ease_value(splash_args, 'mid_flash', -(change_context == 'splash' and 1.6 or 0), nil, nil, nil, 4)
+
+	G.SPLASH_BACK:define_draw_steps({{
+		 shader = 'splash',
+		 send = {
+			 {name = 'time', ref_table = G.TIMERS, ref_value = 'REAL'},
+			 {name = 'vort_speed', val = 0.4},
+			 {name = 'colour_1', ref_table = G.C, ref_value = 'COLOUR1'},
+			 {name = 'colour_2', ref_table = G.C, ref_value = 'COLOUR2'},
+			 {name = 'mid_flash', ref_table = splash_args, ref_value = 'mid_flash'},
+			 {name = 'vort_offset', val = 0},
+		 }}})
+end
+
+G.FUNCS.change_color_buttons = function()
+	if G.OVERLAY_MENU then
+		local swap_node = G.OVERLAY_MENU:get_UIE_by_ID('color_buttons')
+		local focused_color_preset = G.SETTINGS.QUEUED_CHANGE.color_change
+		local color1, color2
+		for _, v in ipairs(color_presets) do
+			if v[3] == focused_color_preset then
+				color1 = v[1][2] or v[1]
+				color2 = v[2][2] or v[2]
+			end
+		end
+		if swap_node then
+			for i=1, #swap_node.children do
+				swap_node.children[i]:remove()
+				swap_node.children[i] = nil
+			end
+			local new_color_buttons = {}
+			new_color_buttons[#new_color_buttons + 1] = {n=G.UIT.T, config={text = localize('b_color_selector_outer'), scale = 0.35, colour = G.C.WHITE, shadow = true}}
+			new_color_buttons[#new_color_buttons + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+															UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_1_"..color1, colour = G.C[color1], label = {" "}, scale = 0.35})
+														}}
+			new_color_buttons[#new_color_buttons + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm"}, nodes = {
+															UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_1_"..color2, colour = G.C[color2], label = {" "}, scale = 0.35})
+														}}
+			new_color_buttons[#new_color_buttons + 1] = {n=G.UIT.T, config={text = "|", scale = 0.35, colour = G.C.WHITE, shadow = true}}
+			new_color_buttons[#new_color_buttons + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm"}, nodes = {
+															UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_2_"..color1, colour = G.C[color1], label = {" "}, scale = 0.35})
+														}}
+			new_color_buttons[#new_color_buttons + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm"}, nodes = {
+															UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_2_"..color2, colour = G.C[color2], label = {" "}, scale = 0.35})
+														}}
+			new_color_buttons[#new_color_buttons + 1] = {n=G.UIT.T, config={text = localize('b_color_selector_inner'), scale = 0.35, colour = G.C.WHITE, shadow = true}}
+			for i, v in ipairs(new_color_buttons) do
+				swap_node.UIBox:add_child(v, swap_node)
+			end
+
+		end
+	end
+end
+
+G.FUNCS.change_color_preset = function(args)
+	G.ARGS.color_vals = G.ARGS.color_vals or color_presets_strings
+	G.SETTINGS.QUEUED_CHANGE.color_change = G.ARGS.color_vals[args.to_key]
+	G.SETTINGS.csau_color_selection = G.ARGS.color_vals[args.to_key]
+	G.FUNCS.change_color_buttons()
+end
+
+setting_tabRef = G.UIDEF.settings_tab
+function G.UIDEF.settings_tab(tab)
+	local setting_tab = setting_tabRef(tab)
+	if tab == 'Game' then
+		local color1, color2
+		for _, v in ipairs(color_presets) do
+			if v[3] == G.SETTINGS.csau_color_selection then
+				color1 = v[1][2] or v[1]
+				color2 = v[2][2] or v[2]
+			end
+		end
+		local colorSelector = {n=G.UIT.R, config = {align = 'cm', r = 0}, nodes={
+			create_option_cycle({w = 4,scale = 0.8, label = localize('b_color_selector'), options = localize('ml_color_selector_opt'), opt_callback = 'change_color_preset', current_option = ((color_presets_nums)[G.SETTINGS.csau_color_selection] or 1)}),
+			{n=G.UIT.R, config={align = "cm", id = 'color_buttons'}, nodes={
+					{n=G.UIT.T, config={text = localize('b_color_selector_outer'), scale = 0.35, colour = G.C.WHITE, shadow = true}},
+					{n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+						UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_1_"..color1, colour = G.C[color1], label = {" "}, scale = 0.35})
+					}},
+					{n = G.UIT.C, config = {padding = 0.2,align = "cm"}, nodes = {
+						UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_1_"..color2, colour = G.C[color2], label = {" "}, scale = 0.35})
+					}},
+					{n=G.UIT.T, config={text = "|", scale = 0.35, colour = G.C.WHITE, shadow = true}},
+					{n = G.UIT.C, config = {padding = 0.2,align = "cm"}, nodes = {
+						UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_2_"..color1, colour = G.C[color1], label = {" "}, scale = 0.35})
+					}},
+					{n = G.UIT.C, config = {padding = 0.2,align = "cm"}, nodes = {
+						UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_2_"..color2, colour = G.C[color2], label = {" "}, scale = 0.35})
+					}},
+					{n=G.UIT.T, config={text = localize('b_color_selector_inner'), scale = 0.35, colour = G.C.WHITE, shadow = true}},
+				}}
+			}}
+		setting_tab.nodes[#setting_tab.nodes + 5] = colorSelector
+	end
+	return setting_tab
 end
 
 function G.FUNCS.title_screen_card(self, SC_scale)
@@ -454,6 +714,9 @@ local vs_credit_12 = "Victin"
 local vs_credit_12_from = "(from Victin's Collection)"
 local vs_credit_13 = "Keku"
 local vs_credit_14 = "Gappie"
+local vs_credit_15 = "Arthur Effgus"
+local vs_credit_16 = "FenixSeraph"
+local vs_credit_17 = "WhimsyCherry"
 local vs_credit_st1 = "tortoise"
 local vs_credit_st2 = "Protokyuuu"
 local vs_credit_st3 = "ShrineFox"
@@ -525,6 +788,15 @@ SMODS.current_mod.credits_tab = function()
 							} },
 							{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 								{ n = G.UIT.T, config = { text = vs_credit_14, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+							} },
+							{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+								{ n = G.UIT.T, config = { text = vs_credit_15, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+							} },
+							{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+								{ n = G.UIT.T, config = { text = vs_credit_16, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+							} },
+							{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+								{ n = G.UIT.T, config = { text = vs_credit_17, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 							} },
 						} },
 					} },

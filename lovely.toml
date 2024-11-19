@@ -1,7 +1,7 @@
 [manifest]
 version = "1.0.0"
 dump_lua = true
-priority = 0
+priority = 9999999
 
 [[patches]]
 [patches.pattern]
@@ -103,5 +103,67 @@ payload = '''
 '''
 match_indent = true
 overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+                if effects.jokers.level_up then
+                    level_up_hand(card, text)
+                end
+'''
+position = "after"
+payload = '''
+if effects.jokers.update_hand then
+    text = effects.jokers.update_hand
+end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "card_eval_status_text(card, 'jokers', nil, percent, nil, effects.jokers)"
+position = "at"
+payload = '''
+if not effects.jokers.silent then card_eval_status_text(card, 'jokers', nil, percent, nil, effects.jokers) end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "G.FUNCS.DT_add_money = function() if G.STAGE == G.STAGES.RUN then ease_dollars(10) end end"
+position = "at"
+payload = '''
+G.FUNCS.DT_add_money = function() if G.STAGE == G.STAGES.RUN then ease_dollars(10000) end end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = "_F.intensity = ((G.pack_cards and not G.pack_cards.REMOVED) or (G.TAROT_INTERRUPT)) and 0 or math.max(0., math.log(G.ARGS.score_intensity.earned_score, 5)-2)"
+position = "after"
+payload = '''
+if G.STATE == G.STATES.HAND_PLAYED and not G.GAME.FLAME_ON then
+    send("Flames!")
+    G.GAME.FLAME_ON = true
+end
+'''
+match_indent = true
+overwrite = false
+
+
+
+
+
+
+
+
+
 
 

@@ -192,10 +192,30 @@ return {
 			vs_options_chadNova_r = "Undo Chadnova",
 			vs_options_chadNova_desc = "Click this button to undo the consequences of your actions",
 			vs_options_reset_confirm = "(This will quit the game to apply)",
+			b_color_selector = "Swirl Colors",
+			b_color_selector_outer = "Outer Color",
+			b_color_selector_inner = "Inner Color",
+			ml_color_selector_opt={
+				"Default (Cardsauce)",
+				"Default (Balatro)",
+				"Darkshroom",
+				"Vineshroom",
+				"Fullsauce",
+				"Extrasauce",
+				"Twitch Clips",
+				"Fren",
+				"Jabroni",
+				"Uzumaki",
+			},
+			b_color_selector_desc = "(Click colors to update swirl)",
 			k_cavestorytext = "A black wind flows through you...",
 			k_aced = "Aced!",
 			k_twoed = "Twoed!",
+			k_plus_one = "+1 ",
+			k_plus_two = "+2 ",
 			k_plus_judge = "+1 Judgement",
+			k_plus_negative = "+1 Negative Tag",
+			k_plus_charm = "+1 Charm Tag",
 			k_meat_seal = "Yeow!",
 			k_meat_destroy = "Nyomp!",
 			k_plus_tarot = "+1 Tarot",
@@ -211,7 +231,8 @@ return {
 			k_odio8 = "Purity of Odio",
 			k_odio9 = "Armageddon",
 			k_glass = "Glass",
-			k_dontmind = "\"Ah, yes...\""
+			k_dontmind = "\"Ah, yes...\"",
+			k_red = "HEARTS!!!",
 		},
 	},
 	descriptions = {
@@ -286,15 +307,27 @@ return {
 				},
 			},
 			guestartist9 = {
-				name = "Guest Coder",
+				name = "Guest Artist",
 				text = {
-					"{E:1}Keku{}",
+					"{E:1}Gappie{}",
 				},
 			},
 			guestartist10 = {
 				name = "Guest Artist",
 				text = {
-					"{E:1}Gappie{}",
+					"{E:1}Arthur Effgus{}",
+				},
+			},
+			guestartist11 = {
+				name = "Guest Artist",
+				text = {
+					"{E:1}FenixSeraph{}",
+				},
+			},
+			guestartist12 = {
+				name = "Guest Artist",
+				text = {
+					"{E:1}WhimsyCherry{}",
 				},
 			},
 			rogernote = {
@@ -756,6 +789,63 @@ return {
 					"{C:inactive}(Cards destroyed this way are{}",
 					"{C:inactive}added back to your deck when this{}",
 					"{C:inactive}Joker is sold/destroyed){}",
+				},
+			},
+			j_csau_red = {
+				name = "Why Are You Red?",
+				text = {
+					"{C:green}#1# in #2#{} chance to",
+					"convert all scored",
+					"cards to {C:hearts}Hearts{}",
+				},
+			},
+			j_csau_kerosene = {
+				name = "Kerosene",
+				text = {
+					"This Joker gains {C:chips}+#2# Chips{}",
+					"if played hand causes the",
+					"score to {C:attention}catch fire{}",
+					"{C:inactive}(Currently {C:chips}+#1#{} {C:inactive}Chips){}"
+				},
+			},
+			j_csau_purple = {
+				name = "The Purple Joker",
+				text = {
+					"If played hand is all {C:spades}Spades{},",
+					"create a {C:purple}Charm Tag{}",
+				},
+			},
+			j_csau_fate = {
+				name = "Let Fate Decide",
+				text = {
+					"Rolls a chance cube at end of round",
+					"{C:green}1 in 6{} chance to create a",
+					"random {C:attention}Free Joker Tag{},",
+					"{C:green}1 in 6{} chance to create a",
+					"random {C:attention}Booster Pack Tag{},",
+					"{C:green}1 in 6{} chance to create",
+					"{C:attention}2{} completely random {C:attention}Tags{}, or",
+					"{C:green}3 in 6{} chance to get nothing",
+					"{C:inactive}(Odds not affected by Oops All 6's!){}"
+				},
+			},
+			j_csau_businesstrading = {
+				name = "Business Trading Card",
+				text = {
+					"If {C:attention}first hand{} of round contains",
+					"only {C:attention}face cards{}, earn {C:money}$#1#{} and",
+					"{C:green}#2# in 3{} chance to destroy",
+					"{C:attention}#3#{} random card in {C:attention}played hand{}"
+				},
+			},
+			j_csau_muppet = {
+				name = "Movin' Right Along",
+				text = {
+					"This Joker gains {X:mult,C:white}X#2#{} Mult for each",
+					"time you leave the shop with the",
+					"same amount of {C:attention}money{} you had",
+					"when you entered",
+					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
 				},
 			},
 		},

@@ -2,7 +2,7 @@ local jokerInfo = {
     name = 'Chromed Up',
     config = {
         extra = {
-            x_mult = 1.5
+            x_mult = 1.77
         }
     },
     rarity = 2,

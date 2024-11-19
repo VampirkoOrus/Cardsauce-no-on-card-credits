@@ -10,22 +10,8 @@ local jokerInfo = {
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist11", set = "Other"}
 	return { vars = {G.GAME.probabilities.normal} }
-end
-
-local function deepcopy(orig)
-    local orig_type = type(orig)
-    local copy
-    if orig_type == 'table' then
-        copy = {}
-        for orig_key, orig_value in next, orig, nil do
-            copy[deepcopy(orig_key)] = deepcopy(orig_value)
-        end
-        setmetatable(copy, deepcopy(getmetatable(orig)))
-    else
-        copy = orig
-    end
-    return copy
 end
 
 local function starts_with(str, start)
@@ -41,30 +27,24 @@ function jokerInfo.calculate(self, card, context)
 			
 			for k, v in ipairs(context.scoring_hand) do
 				local id = v:get_id()
-				
-				-- Add the item to the id_count
+
 				if not id_count[id] then
-					id_count[id] = {count = 0, items = {}} -- Track both count and items
+					id_count[id] = {count = 0, items = {}}
 				end
 				id_count[id].count = id_count[id].count + 1
-				table.insert(id_count[id].items, v) -- Store the item (v) itself for later use
+				table.insert(id_count[id].items, v)
 			end
 			
 
-			-- Check how many pairs we can get from the occurrences
 			for id, data in pairs(id_count) do
-				-- Calculate number of pairs from this id
 				local num_pairs = math.floor(data.count / 2)
 				pair_count = pair_count + num_pairs
-				
-				-- Store pairs (each pair will have 2 items)
+
 				for i = 1, num_pairs do
-					-- Add the first two items as a pair, then move to the next pair
 					table.insert(pairs_list, {data.items[2 * i - 1], data.items[2 * i]})
 				end
 			end
 
-			-- Third loop to log the suits of items in the pairs
 			for i, pair in ipairs(pairs_list) do
 				local item1 = pair[1]
 				local item2 = pair[2]
@@ -166,9 +146,6 @@ function jokerInfo.calculate(self, card, context)
 				else
 					sendInfoMessage("Miscarried!")
 				end
-				
-				-- Log the suit values for the pair
-				
 			end
 		end
 	end
