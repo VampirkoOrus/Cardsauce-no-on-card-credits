@@ -24,12 +24,12 @@ end
 local debuff_hand_ref = Blind.debuff_hand
 
 function Blind:debuff_hand(cards, hand, handname, check)
-	debuff_hand_ref(self, cards, hand, handname, check)
-	if next(find_joker('That\'s Werewolves')) then
+	if next(SMODS.find_card('j_csau_werewolves')) then
 		if next(hand["Flush"]) then
             return true
 		end
 	end
+	return debuff_hand_ref(self, cards, hand, handname, check)
 end
 
 function jokerInfo.calculate(self, card, context)
