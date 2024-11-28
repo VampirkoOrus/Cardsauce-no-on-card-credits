@@ -18,11 +18,11 @@ NEED HELP WITH:
 
 -~~Transformation timing on Two-Faced Joker~~ ✅
 
--Make SPEEEN's pop-up work with Oops! All 6s [NOTE FROM KEKU: ❓]
+-Make SPEEEN's pop-up work with Oops! All 6s **[NOTE FROM KEKU: ❓]**
 
 -~~I'm so Happy/I'm so Sad and Odious Joker joker transformation~~ ✅
 
--~~Make Pepperoni Secret mod-friendly by calling the hand's starting visibility (is this possible?)~~ [NOTE FROM KEKU: yes, it's possible :) ] ✅
+-~~Make Pepperoni Secret mod-friendly by calling the hand's starting visibility (is this possible?)~~ **[NOTE FROM KEKU: yes, it's possible :) ]** ✅
 
 -~~Add the compatible button for Green Needle~~✅
 
