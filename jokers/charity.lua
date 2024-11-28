@@ -6,17 +6,24 @@ local jokerInfo = {
 	}},
 	rarity = 3,
 	cost = 7,
+	unlocked = false,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = false
 }
 
+function jokerInfo.check_for_unlock(self, args)
+	if args.type == "win_deck" and args.deck == "b_green" then
+		return true
+	end
+end
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = { card.ability.extra.mult } }
 end
 
 function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_charity" })
 	if not G.GAME.selected_back.effect.config.no_interest then
 		G.GAME.modifiers.no_interest = true
 	end

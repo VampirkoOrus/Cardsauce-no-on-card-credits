@@ -5,10 +5,6 @@ local jokerInfo = {
 			cardsRemaining = 3
 		}
 	},
-	--[[text = {
-		"Add a random {C:attention}seal{} to the",
-		"next {C:attention}#1# High Cards{} scored"
-	},]]--
 	rarity = 1,
 	cost = 5,
 	blueprint_compat = false,
@@ -19,6 +15,11 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	return {vars = {card.ability.extra.cardsRemaining}}
+end
+
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_meat" })
+	ach_jokercheck(self, ach_checklists.high)
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -59,10 +60,11 @@ function jokerInfo.calculate(self, card, context)
 							card = nil
 							return true
 						end
-					})) 
+					}))
+					check_for_unlock({ type = "meat_beaten" })
 					return true
 				end
-			})) 
+			}))
 			return {
 				message = localize('k_meat_destroy'),
 				colour = G.C.MONEY

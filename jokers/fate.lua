@@ -8,6 +8,14 @@ local jokerInfo = {
     perishable_compat = true
 }
 
+function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "guestartist11", set = "Other"}
+end
+
+function jokerInfo.add_to_deck(self, card)
+    check_for_unlock({ type = "discover_watto" })
+end
+
 local function starts_with(str, start)
     return string.sub(str, 1, #start) == start
 end

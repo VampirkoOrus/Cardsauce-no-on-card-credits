@@ -13,6 +13,11 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist9", set = "Other"}
 end
 
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_dontmind" })
+	ach_jokercheck(self, ach_checklists.high)
+end
+
 function jokerInfo.calculate(self, card, context)
 	if context.skip_blind then
 		for i, tag in ipairs(G.GAME.tags) do

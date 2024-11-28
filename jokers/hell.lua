@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Running Hell [WIP]',
+	name = 'Running Hell',
 	config = {extra = 1},
 	rarity = 3,
 	cost = 6,
@@ -57,6 +57,7 @@ local function hand_level_reset(card, delayMod)
 end
 
 function jokerInfo.add_to_deck(self, card, context)
+	check_for_unlock({ type = "discover_hell" })
 	hand_level_reset(card, G.SETTINGS.GAMESPEED)
 	return
 end

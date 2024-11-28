@@ -12,6 +12,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_TAGS.tag_charm
 end
 
+function jokerInfo.add_to_deck(self, card)
+    check_for_unlock({ type = "discover_purple" })
+end
+
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff then
         local purp = true

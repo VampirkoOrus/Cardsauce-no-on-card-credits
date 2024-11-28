@@ -17,6 +17,29 @@ local hook_list = {
 	"UI_definitions",
 }
 
+function recursiveEnumerate(folder)
+	local fileTree = ""
+	for _, file in ipairs(love.filesystem.getDirectoryItems(folder)) do
+		local path = folder .. "/" .. file
+		local info = love.filesystem.getInfo(path)
+		fileTree = fileTree .. "\n" .. path .. (info.type == "directory" and " (DIR)" or "")
+		if info.type == "directory" then
+			fileTree = fileTree .. recursiveEnumerate(path)
+		end
+	end
+	return fileTree
+end
+
+local skin_files = {}
+for s in recursiveEnumerate(usable_path .. "/assets/1x/skins/"):gmatch("[^\r\n]+") do
+	skin_files[#skin_files + 1] = s:gsub(usable_path .. "/assets/1x/skins/", "")
+end
+
+local deck_skins = {}
+for _, file in ipairs(skin_files) do
+	deck_skins[#deck_skins + 1] = file:sub(2, -5)
+end
+
 for _, hook in ipairs(hook_list) do
 	local init, error = NFS.load(SMODS.current_mod.path .. "hooks/" .. hook ..".lua")
 	if error then sendErrorMessage("[Cardsauce] Failed to load "..hook.." with error "..error) else
@@ -27,57 +50,155 @@ end
 
 local conf_cardsauce = {
 	jokersToLoad = {
+		-- Common
 		'meat',
 		'twoface',
 		'newjoker',
 		'pivot',
-		'speen',
+		'fisheye',
 		'diaper',
 		'roche',
 		'pacman',
-		'speedjoker',
-		'disturbedjoker',
 		'besomeone',
+		'speen',
 		'disguy',
-		'chad',
 		'emmanuel',
 		'reyn',
-		'depressedbrother',
+		'garbagehand',
+		'purple',
+		'chad',
+
+		-- Uncommon
 		'werewolves',
 		'greyjoker',
 		'cousinsclub',
 		'gnorts',
 		'roger',
-		'shrimp',
 		'veryexpensivejoker',
 		'sohappy',
 		'maskedjoker',
-		'thisiscrack',
-		'charity',
-		'pepsecret',
-		'odio',
-		'greenneedle',
-		'fisheye',
 		'code',
 		'anotherlight',
+		'miracle',
+		'dontmind',
+		'red',
+		'depressedbrother',
+		'chromedup',
+		'fate',
+		'kerosene',
+		'businesstrading',
+
+		-- Rare
+		'odio',
+		'thisiscrack',
 		'deathcard',
 		'hell',
-		'wingsoftime',
-		'dontmind',
-		'miracle',
-		'garbagehand',
+
+		-- Rare (Locked)
+		'greenneedle',
+		'charity',
 		'supper',
-		'chromedup',
-		'red',
-		'kings',
-		'kerosene',
-		'purple',
-		'fate',
-		'businesstrading',
 		'muppet',
+
+		-- Common (Locked, Hidden Unlock Condition)
+		'speedjoker',
+		'disturbedjoker',
+
+		-- Uncommon (Locked, Hidden Unlock Condition)
+		'shrimp',
+
+		-- Rare (Locked, Hidden Unlock Condition)
+		'wingsoftime',
+		'kings',
+		'pepsecret',
+
+		-- Legendary
 		'vincenzo',
 		'quarterdumb',
 	},
+	consumablesToLoad = {
+		'quixotic',
+	},
+	decksToLoad = {
+		'vine',
+	},
+	blindsToLoad = {
+		'hog',
+	},
+	trophiesToLoad = {
+		-- Bronze
+		'discover_fisheye',
+		'discover_cousinsclub',
+		'discover_disguy',
+		'discover_greenneedle',
+		'discover_twoface',
+		'discover_garbage',
+		'discover_sohappy',
+		'discover_kings',
+		'discover_chad',
+		'discover_code',
+		'discover_chrome',
+		'discover_shrimp',
+		'discover_kerosene',
+		'discover_werewolves',
+		'discover_supper',
+		'discover_red',
+		'discover_miracle',
+		'discover_pep',
+		'discover_grey',
+		'discover_meat',
+		'discover_sponge',
+		'discover_claus',
+		'discover_speed',
+		'discover_disturbed',
+		'discover_reyn',
+		'discover_bsf',
+		'discover_roger',
+		'discover_odio',
+		'discover_btc',
+		'discover_watto',
+		'discover_muppet',
+		'discover_dontmind',
+		'discover_crack',
+		'discover_charity',
+		'discover_roche',
+		'discover_new',
+		'discover_pivot',
+		'discover_speen',
+		'discover_diaper',
+		'discover_blast',
+		'discover_dink',
+		'discover_deathcard',
+		'discover_hell',
+		'discover_epoch',
+		'discover_gnorts',
+		'discover_al',
+		'discover_pacman',
+		'discover_purple',
+		-- Silver
+		'activate_roche',
+		'flip_sosad',
+		'activate_quixotic',
+		'fuckingkill_jimbo',
+		'high_one',
+		'defeat_hog',
+		'miracle_inherit',
+		'reno_colors',
+		'skin_vineshroom',
+		'skin_characters',
+		-- Gold
+		'discover_vincenzo',
+		'discover_quarterdumb',
+		'purchase_dink',
+		'final_odio',
+		'win_vine',
+		'the_band',
+		'chadley_power',
+		'red_convert',
+		-- Vine
+		'all_discovered',
+		'big_meat',
+	}
 }
 	
 -- sendDebugMessage("AchievementsEnabler Activated!")
@@ -98,8 +219,8 @@ function G.FUNCS.draw_from_deck_to_hand(self, e)
     draw_from_deck_to_handref(self, e)
     for _, v in ipairs(G.jokers.cards) do
     	if G.STATE == G.STATES.DRAW_TO_HAND and not v.debuff then
-        	if v.config.center.key == "j_csau_speedjoker" and G.GAME.current_round.hands_played == v.ability.extra or
-        	v.config.center.key == "j_csau_disturbedjoker" and G.GAME.current_round.discards_used == v.ability.extra then
+        	if v.config.center.key == "j_speedjoker" and G.GAME.current_round.hands_played == v.ability.extra or
+        	v.config.center.key == "j_disturbedjoker" and G.GAME.current_round.discards_used == v.ability.extra then
                	draw_card(G.deck, G.hand, 100, 'up', true)
             	v.ability.extra = v.ability.extra + 1
         	end
@@ -172,6 +293,7 @@ end
 return {}
 end
 
+-- Load Jokers
 for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 	local jokerInfo = assert(SMODS.load_file("jokers/" .. v .. ".lua"))()
 
@@ -192,6 +314,86 @@ for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 
 	SMODS.Atlas({ key = v, path ="jokers/" .. v .. ".png", px = joker.width or 71, py = joker.height or  95 })
 end
+-- Load Consumables
+for i, v in ipairs(conf_cardsauce.consumablesToLoad) do
+	local consumInfo = assert(SMODS.load_file("consumables/" .. v .. ".lua"))()
+
+	consumInfo.key = v
+	consumInfo.atlas = v
+	consumInfo.pos = { x = 0, y = 0 }
+	if consumInfo.hasSoul then
+		consumInfo.pos = { x = 1, y = 0 }
+		consumInfo.soul_pos = { x = 2, y = 0 }
+	end
+
+	local consum = SMODS.Consumable(consumInfo)
+	for k_, v_ in pairs(consum) do
+		if type(v_) == 'function' then
+			consum[k_] = consumInfo[k_]
+		end
+	end
+
+	SMODS.Atlas({ key = v, path ="consumables/" .. v .. ".png", px = consum.width or 71, py = consum.height or  95 })
+end
+for i, v in ipairs(conf_cardsauce.decksToLoad) do
+	local deckInfo = assert(SMODS.load_file("decks/" .. v .. ".lua"))()
+
+	deckInfo.key = v
+	deckInfo.atlas = v
+	deckInfo.pos = { x = 0, y = 0 }
+	if deckInfo.hasSoul then
+		deckInfo.pos = { x = 1, y = 0 }
+		deckInfo.soul_pos = { x = 2, y = 0 }
+	end
+
+	local deck = SMODS.Back(deckInfo)
+	for k_, v_ in pairs(deck) do
+		if type(v_) == 'function' then
+			deck[k_] = deckInfo[k_]
+		end
+	end
+
+	SMODS.Atlas({ key = v, path ="decks/" .. v .. ".png", px = deck.width or 71, py = deck.height or  95 })
+end
+for i, v in ipairs(conf_cardsauce.blindsToLoad) do
+	local blindInfo = assert(SMODS.load_file("blinds/" .. v .. ".lua"))()
+
+	blindInfo.key = v
+	blindInfo.atlas = v
+	if blindInfo.color then
+		blindInfo.boss_colour = blindInfo.color
+	end
+
+	local blind = SMODS.Blind(blindInfo)
+	for k_, v_ in pairs(blind) do
+		if type(v_) == 'function' then
+			blind[k_] = blindInfo[k_]
+		end
+	end
+
+	SMODS.Atlas({ key = v, atlas_table = "ANIMATION_ATLAS", path = "blinds/" .. v .. ".png", px = 34, py = 34, frames = 21, })
+end
+for i, v in ipairs(conf_cardsauce.trophiesToLoad) do
+	local trophyInfo = assert(SMODS.load_file("achievements/" .. v .. ".lua"))()
+
+	trophyInfo.key = v
+	trophyInfo.atlas = 'csau_achievements'
+	if trophyInfo.rarity then
+		if trophyInfo.rarity == 1 then
+			trophyInfo.pos = { x = 1, y = 0 }
+		elseif trophyInfo.rarity == 2 then
+			trophyInfo.pos = { x = 2, y = 0 }
+		elseif trophyInfo.rarity == 3 then
+			trophyInfo.pos = { x = 3, y = 0 }
+		elseif trophyInfo.rarity == 4 then
+			trophyInfo.pos = { x = 4, y = 0 }
+		end
+	end
+
+	SMODS.Achievement(trophyInfo)
+end
+
+SMODS.Atlas({ key = 'csau_achievements', path = "csau_achievements.png", px = 66, py = 66})
 
 local card_updateref = Card.update
 function Card.update(self, dt)
@@ -204,25 +406,6 @@ function Card.update(self, dt)
 		end
 	end
 	card_updateref(self, dt)
-end
-
-SMODS.Atlas({ key = "quixotic", path = "consumables/quixotic.png", px = 71, py = 95 })
-local quixotic = SMODS.Consumable({ key = "quixotic", cost = 4, set = "Spectral", discovered = false, alerted = true, atlas = "quixotic" })
-
-function quixotic.loc_vars(self, info_queue, card)
-	info_queue[#info_queue + 1] = G.P_TAGS.tag_ethereal
-	return {}
-end
-
-function quixotic.use(self, card, area, copier)
-	G.E_MANAGER:add_event(Event({
-		func = (function()
-			add_tag(Tag('tag_ethereal'))
-			play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
-			play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
-			return true
-		end)
-	}))
 end
 
 local card_drawRef = Card.draw
@@ -272,6 +455,83 @@ function deepcopy(orig)
 	return copy
 end
 
+ach_checklists = {
+	band = {
+		4,
+		'the_band',
+		{
+			'Be Someone Forever',
+			'Garbage Hand',
+			'Another Light',
+			'Kerosene',
+			'Vincenzo',
+			'Quarterdumb'
+		},
+	},
+	high = {
+		2,
+		'high_one',
+		{
+			'Be Someone Forever',
+			'Pivyot',
+			'Meat',
+			"Don't Mind If I Do",
+		},
+	},
+}
+
+function ach_jokercheck(card, table)
+	local counter = 0
+	for i, name in ipairs(table[3]) do
+		if next(find_joker(name)) or card.name == name then
+			counter = counter + 1
+		end
+	end
+	if counter >= table[1] then
+		check_for_unlock({ type = table[2] })
+	end
+end
+
+function G.FUNCS.ach_pepsecretunlock(text)
+	for k, v in pairs(SMODS.PokerHands) do
+		if k == text then
+			if v.visible == false then
+				check_for_unlock({ type = "unlock_pep" })
+			end
+		end
+	end
+end
+
+function G.FUNCS.ach_characters_check()
+	if G.SETTINGS.CUSTOM_DECK.Collabs.Spades == "collab_CYP" and
+	   G.SETTINGS.CUSTOM_DECK.Collabs.Hearts == "collab_TBoI" and
+	   G.SETTINGS.CUSTOM_DECK.Collabs.Diamonds == "collab_SV" and
+	   G.SETTINGS.CUSTOM_DECK.Collabs.Clubs == "collab_STS" then
+		check_for_unlock({ type = "skin_characters" })
+	end
+end
+
+function starts_with(str, start)
+	return string.sub(str, 1, #start) == start
+end
+
+function ends_with(str, ending)
+	send(string.sub(str, -#ending))
+	return string.sub(str, -#ending) == ending
+end
+
+function G.FUNCS.ach_vineshroom_check()
+	if ends_with(G.SETTINGS.CUSTOM_DECK.Collabs.Clubs, 'vineshroom') then
+		check_for_unlock({ type = "skin_vineshroom" })
+	end
+end
+
+function G.FUNCS.ach_bigmeat_check()
+	local all = true
+
+	return all
+end
+
 for suit, color in pairs(G.C.SUITS) do
 	local c
 	if suit == "Hearts" then c = HEX("e14e62")
@@ -291,247 +551,9 @@ for suit, color in pairs(G.C.SUITS) do
 end
 
 if G.SETTINGS.chadNova then
-	G.TITLE_SCREEN_CARD = 'j_csau_chad'
+	G.TITLE_SCREEN_CARD = 'j_chad'
 else
 	G.TITLE_SCREEN_CARD = G.P_CARDS.C_A
-end
-
-G.C.PINK = HEX('fe55a5')
-G.C.CYAN = HEX('00eaff')
-
-
-G.C.COLOUR1 = G.SETTINGS.CS_COLOR1 or G.C.RED
-G.C.COLOUR2 = G.SETTINGS.CS_COLOR2 or G.C.BLUE
-
-local color_presets = {
-	{
-		"GREEN",
-		"PURPLE",
-		'default_csau'
-	},
-	{
-		"RED",
-		"BLUE",
-		'default_bal'
-	},
-	{
-		{'2c997f', "DS_GREENCYAN", },
-		{'09271d', "DS_DARKGREEN"},
-		'darkshroom',
-	},
-	{
-		{'38a789', "VS_GREEN"},
-		{'95c374', "VS_LIGHTGREEN"},
-		'vineshroom',
-	},
-	{
-		{"4862b0", "FS_BLUE"},
-		{"67b874", "FS_PALEGREEN"},
-		'fullsauce',
-	},
-	{
-		{'e26565', "ES_PALERED"},
-		{'a53b38', "ES_DARKRED"},
-		'extrasauce',
-	},
-	{
-		{'9967a7', "TWITCH_PALEPURPLE"},
-		{'483062', "TWITCH_DARKPURPLE"},
-		'twitch',
-	},
-	{
-		{"b5e61d", "FREN_NEONGREEN"},
-		{"04a1e5", "FREN_LIGHTBLUE"},
-		'fren',
-	},
-	{
-		"PURPLE",
-		"YELLOW",
-		'jabroni',
-	},
-	{
-		"BLACK",
-		"JOKER_GREY",
-		'uzumaki',
-	},
-}
-
-local function get_matching_color(name)
-	for i, v in ipairs(color_presets) do
-		if type(v[1]) == "string" then
-			if name == v[1] then
-				return G.C[name]
-			end
-		elseif type(v[1]) == "table" then
-			if name == v[1][2] then
-				return HEX(v[1][1])
-			end
-		end
-		if type(v[2]) == "string" then
-			if name == v[2] then
-				return G.C[name]
-			end
-		elseif type(v[2]) == "table" then
-			if name == v[2][2] then
-				return HEX(v[2][1])
-			end
-		end
-	end
-end
-
-function csau_save_color(colour, val)
-	local color = get_matching_color(val)
-	local set = 'CS_COLOR'..colour
-	G.SETTINGS[set] = color
-	G:save_settings()
-end
-
-local colors = {}
-for _, preset in ipairs(color_presets) do
-	for i = 1, 2 do
-		if type(preset[i]) == "string" then
-			colors[preset[i]] = true
-		elseif type(preset[i]) == "table" then
-			colors[preset[i][2]] = true
-		end
-	end
-end
-
-for color, _ in pairs(colors) do
-	G.FUNCS["change_color_1_" .. color] = function()
-		G.C.COLOUR1 = G.C[color]
-		csau_save_color(1, color)
-	end
-
-	G.FUNCS["change_color_2_" .. color] = function()
-		G.C.COLOUR2 = G.C[color]
-		csau_save_color(2, color)
-	end
-end
-
-local color_presets_nums = {}
-local color_presets_strings = {}
-for i, v in ipairs(color_presets) do
-	local k = v[3]
-	table.insert(color_presets_strings, k)
-	color_presets_nums[k] = i
-	for i = 1, 2 do
-		local func_name, color_name
-		if type(v[i]) == "string" then
-			func_name = "cs_"..v[i].."c"
-			color_name = v[i]
-		elseif type(v[i]) == "table" then
-			G.C[v[i][2]] = HEX(v[i][1])
-			func_name = "cs_"..v[i][2].."c"
-			color_name = v[i][2]
-		end
-	end
-end
-
-if not G.SETTINGS.csau_color_selection then
-	G.SETTINGS.csau_color_selection = "default_csau"
-end
-
-local main_menuRef = Game.main_menu
-function Game:main_menu(change_context)
-	main_menuRef(self, change_context)
-
-	local splash_args = {mid_flash = change_context == 'splash' and 1.6 or 0.}
-	ease_value(splash_args, 'mid_flash', -(change_context == 'splash' and 1.6 or 0), nil, nil, nil, 4)
-
-	G.SPLASH_BACK:define_draw_steps({{
-		 shader = 'splash',
-		 send = {
-			 {name = 'time', ref_table = G.TIMERS, ref_value = 'REAL'},
-			 {name = 'vort_speed', val = 0.4},
-			 {name = 'colour_1', ref_table = G.C, ref_value = 'COLOUR1'},
-			 {name = 'colour_2', ref_table = G.C, ref_value = 'COLOUR2'},
-			 {name = 'mid_flash', ref_table = splash_args, ref_value = 'mid_flash'},
-			 {name = 'vort_offset', val = 0},
-		 }}})
-end
-
-G.FUNCS.change_color_buttons = function()
-	if G.OVERLAY_MENU then
-		local swap_node = G.OVERLAY_MENU:get_UIE_by_ID('color_buttons')
-		local focused_color_preset = G.SETTINGS.QUEUED_CHANGE.color_change
-		local color1, color2
-		for _, v in ipairs(color_presets) do
-			if v[3] == focused_color_preset then
-				color1 = v[1][2] or v[1]
-				color2 = v[2][2] or v[2]
-			end
-		end
-		if swap_node then
-			for i=1, #swap_node.children do
-				swap_node.children[i]:remove()
-				swap_node.children[i] = nil
-			end
-			local new_color_buttons = {}
-			new_color_buttons[#new_color_buttons + 1] = {n=G.UIT.T, config={text = localize('b_color_selector_outer'), scale = 0.35, colour = G.C.WHITE, shadow = true}}
-			new_color_buttons[#new_color_buttons + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
-															UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_1_"..color1, colour = G.C[color1], label = {" "}, scale = 0.35})
-														}}
-			new_color_buttons[#new_color_buttons + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm"}, nodes = {
-															UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_1_"..color2, colour = G.C[color2], label = {" "}, scale = 0.35})
-														}}
-			new_color_buttons[#new_color_buttons + 1] = {n=G.UIT.T, config={text = "|", scale = 0.35, colour = G.C.WHITE, shadow = true}}
-			new_color_buttons[#new_color_buttons + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm"}, nodes = {
-															UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_2_"..color1, colour = G.C[color1], label = {" "}, scale = 0.35})
-														}}
-			new_color_buttons[#new_color_buttons + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm"}, nodes = {
-															UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_2_"..color2, colour = G.C[color2], label = {" "}, scale = 0.35})
-														}}
-			new_color_buttons[#new_color_buttons + 1] = {n=G.UIT.T, config={text = localize('b_color_selector_inner'), scale = 0.35, colour = G.C.WHITE, shadow = true}}
-			for i, v in ipairs(new_color_buttons) do
-				swap_node.UIBox:add_child(v, swap_node)
-			end
-
-		end
-	end
-end
-
-G.FUNCS.change_color_preset = function(args)
-	G.ARGS.color_vals = G.ARGS.color_vals or color_presets_strings
-	G.SETTINGS.QUEUED_CHANGE.color_change = G.ARGS.color_vals[args.to_key]
-	G.SETTINGS.csau_color_selection = G.ARGS.color_vals[args.to_key]
-	G.FUNCS.change_color_buttons()
-end
-
-setting_tabRef = G.UIDEF.settings_tab
-function G.UIDEF.settings_tab(tab)
-	local setting_tab = setting_tabRef(tab)
-	if tab == 'Game' then
-		local color1, color2
-		for _, v in ipairs(color_presets) do
-			if v[3] == G.SETTINGS.csau_color_selection then
-				color1 = v[1][2] or v[1]
-				color2 = v[2][2] or v[2]
-			end
-		end
-		local colorSelector = {n=G.UIT.R, config = {align = 'cm', r = 0}, nodes={
-			create_option_cycle({w = 4,scale = 0.8, label = localize('b_color_selector'), options = localize('ml_color_selector_opt'), opt_callback = 'change_color_preset', current_option = ((color_presets_nums)[G.SETTINGS.csau_color_selection] or 1)}),
-			{n=G.UIT.R, config={align = "cm", id = 'color_buttons'}, nodes={
-					{n=G.UIT.T, config={text = localize('b_color_selector_outer'), scale = 0.35, colour = G.C.WHITE, shadow = true}},
-					{n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
-						UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_1_"..color1, colour = G.C[color1], label = {" "}, scale = 0.35})
-					}},
-					{n = G.UIT.C, config = {padding = 0.2,align = "cm"}, nodes = {
-						UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_1_"..color2, colour = G.C[color2], label = {" "}, scale = 0.35})
-					}},
-					{n=G.UIT.T, config={text = "|", scale = 0.35, colour = G.C.WHITE, shadow = true}},
-					{n = G.UIT.C, config = {padding = 0.2,align = "cm"}, nodes = {
-						UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_2_"..color1, colour = G.C[color1], label = {" "}, scale = 0.35})
-					}},
-					{n = G.UIT.C, config = {padding = 0.2,align = "cm"}, nodes = {
-						UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_2_"..color2, colour = G.C[color2], label = {" "}, scale = 0.35})
-					}},
-					{n=G.UIT.T, config={text = localize('b_color_selector_inner'), scale = 0.35, colour = G.C.WHITE, shadow = true}},
-				}}
-			}}
-		setting_tab.nodes[#setting_tab.nodes + 5] = colorSelector
-	end
-	return setting_tab
 end
 
 function G.FUNCS.title_screen_card(self, SC_scale)
@@ -568,17 +590,526 @@ function G.FUNCS.splash_screen_card(card_pos, card_size)
 	end
 end
 
--- Base Deck Textures
-SMODS.Atlas {
-	key = "cards_1",
-	path = "BaseDeck.png",
-	px = 71,
-	py = 95,
-	prefix_config = { key = false }
+G.C.PINK = HEX('fe55a5')
+G.C.CYAN = HEX('00eaff')
+
+G.C.COLOUR1 = G.SETTINGS.CS_COLOR1 or G.C.RED
+G.C.COLOUR2 = G.SETTINGS.CS_COLOR2 or G.C.BLUE
+G.C.BLIND.Small = G.SETTINGS.CS_COLOR3 or HEX('50846e')
+G.C.BLIND.Big = G.SETTINGS.CS_COLOR3 or HEX('50846e')
+G.CUSTOMHEX1 = ""
+G.CUSTOMHEX2 = ""
+G.CUSTOMHEX3 = ""
+
+local color_presets = {
+	{
+		"GREEN",
+		"PURPLE",
+		{'50846e', "BAL_DEF_SMALLBIGGREEN"},
+		'default_csau'
+	},
+	{
+		{'FE5F55', "BAL_DEF_RED"},
+		{'009dff', "BAL_DEF_BLUE"},
+		{'50846e', "BAL_DEF_SMALLBIGGREEN"},
+		'default_bal'
+	},
+	{
+		{'2c997f', "DS_GREENCYAN"},
+		{'09271d', "DS_DARKGREEN"},
+		{'3a6658', "DS)BGGREEN"},
+		'darkshroom',
+	},
+	{
+		{'60b283', "VS_GREEN"},
+		{'a3c86f', "VS_YELLOWGREEN"},
+		{'3a664c', "VS_BGGREEN"},
+		'vineshroom',
+	},
+	{
+		{"547bb8", "FS_BLUE"},
+		{"67b874", "FS_PALEGREEN"},
+		{"3a4b66", "FS_BGBLUE"},
+		'fullsauce',
+	},
+	{
+		{'e26565', "ES_PALERED"},
+		{'a53b38', "ES_DARKRED"},
+		{'704b4b', "ES_BGRED"},
+		'extrasauce',
+	},
+	{
+		{'9967a7', "TWITCH_PALEPURPLE"},
+		{'483062', "TWITCH_DARKPURPLE"},
+		{'655478', "TWITCH_BGPURPLE"},
+		'twitch',
+	},
+	{
+		{"b5e61d", "FREN_NEONGREEN"},
+		{"04a1e5", "FREN_LIGHTBLUE"},
+		{"446138", "FREN_BGGREEN"},
+		'fren',
+	},
+	{
+		"PURPLE",
+		"YELLOW",
+		{"655478", "JM_BGPURPLE"},
+		'jabroni',
+	},
+	{
+		"JOKER_GREY",
+		"BLACK",
+		{'404040', "UZU_BGGRAY"},
+		'uzumaki',
+	},
+	{
+		"customhex"
+	}
 }
 
--- Base Deck UI Assets
+local function get_matching_color(name)
+	for i, v in ipairs(color_presets) do
+		if type(v[1]) == "string" then
+			if name == v[1] then
+				return G.C[name]
+			end
+		elseif type(v[1]) == "table" then
+			if name == v[1][2] then
+				return HEX(v[1][1])
+			end
+		end
+		if type(v[2]) == "string" then
+			if name == v[2] then
+				return G.C[name]
+			end
+		elseif type(v[2]) == "table" then
+			if name == v[2][2] then
+				return HEX(v[2][1])
+			end
+		end
+	end
+end
+
+function csau_save_color(colour, val)
+	local color = get_matching_color(val)
+	local set = 'CS_COLOR'..colour
+	G.SETTINGS[set] = color
+	G:save_settings()
+end
+
+local colors = {}
+for _, preset in ipairs(color_presets) do
+	if preset[#preset] ~= "customhex" then
+		for i = 1, #preset - 1 do
+			if type(preset[i]) == "string" then
+				colors[preset[i]] = true
+			elseif type(preset[i]) == "table" then
+				colors[preset[i][2]] = true
+			end
+		end
+	end
+end
+
+local function isRed(color)
+	if type(color) ~= "table" or #color < 3 then
+		return false, "Invalid color table"
+	end
+	local r, g, b = color[1], color[2], color[3]
+	return r > g and r > b and r > 0.5
+end
+
+local function isBlack(color)
+	if type(color) ~= "table" or #color < 3 then
+		return false, "Invalid color table"
+	end
+	local r, g, b = color[1], color[2], color[3]
+	local tolerance = 0.2
+	local darkness_threshold = 0.3
+	local is_grayish = math.abs(r - g) <= tolerance and math.abs(g - b) <= tolerance and math.abs(r - b) <= tolerance
+	local is_dark = r <= darkness_threshold and g <= darkness_threshold and b <= darkness_threshold
+	return is_grayish and is_dark
+end
+
+local function renoColors(color1, color2)
+	local red = false
+	local black = false
+	if isRed(G.C.COLOUR1) and not isBlack(G.C.COLOUR1) then
+		red = true
+	elseif isBlack(G.C.COLOUR1) and not isRed(G.C.COLOUR1) then
+		black = true
+	end
+	if isRed(G.C.COLOUR2) and not isBlack(G.C.COLOUR2) then
+		if red == true then
+			return false
+		end
+		red = true
+	elseif isBlack(G.C.COLOUR2) and not isRed(G.C.COLOUR2) then
+		if black == true then
+			return false
+		end
+		black = true
+	end
+	return red and black
+end
+
+local function ach_reno_check()
+	if renoColors(G.C.COLOUR1, G.C.COLOUR2) then
+		check_for_unlock({ type = "reno_colors" })
+	end
+end
+
+
+for color, _ in pairs(colors) do
+	G.FUNCS["change_color_1_" .. color] = function()
+		G.C.COLOUR1 = G.C[color]
+		csau_save_color(1, color)
+		ach_reno_check()
+	end
+
+	G.FUNCS["change_color_2_" .. color] = function()
+		G.C.COLOUR2 = G.C[color]
+		csau_save_color(2, color)
+		ach_reno_check()
+	end
+
+	G.FUNCS["change_color_3_" .. color] = function()
+		G.C.BLIND.Small = G.C[color]
+		G.C.BLIND.Big = G.C[color]
+		ease_background_colour{new_colour = G.C[color], contrast = 1}
+		csau_save_color(3, color)
+	end
+end
+
+for i=1, 3 do
+	G.FUNCS["paste_hex_"..i] = function(e)
+		G.CONTROLLER.text_input_hook = e.UIBox:get_UIE_by_ID('hex_set_'..i).children[1].children[1]
+		G.CONTROLLER.text_input_id = 'hex_set_'..i
+		for i = 1, 6 do
+			G.FUNCS.text_input_key({key = 'right'})
+		end
+		for i = 1, 6 do
+			G.FUNCS.text_input_key({key = 'backspace'})
+		end
+		local clipboard = (G.F_LOCAL_CLIPBOARD and G.CLIPBOARD or love.system.getClipboardText()) or ''
+		for i = 1, #clipboard do
+			local c = clipboard:sub(i,i)
+			if c ~= "#" then
+				G.FUNCS.text_input_key({key = c})
+			end
+		end
+		G.FUNCS.text_input_key({key = 'return'})
+	end
+end
+
+local function validHEX(str)
+	local hex = str:match("^#?(%x%x%x%x%x%x)$") or str:match("^#?(%x%x%x)$")
+	return hex ~= nil
+end
+
+local function replaceReplacedChars(str)
+	return str:gsub("[Oo]", "0")
+end
+
+G.FUNCS.apply_colors = function()
+	for i=1, 3 do
+		if G["CUSTOMHEX"..i] then
+			local hex = replaceReplacedChars(G["CUSTOMHEX"..i])
+			if validHEX(hex) then
+				if i==3 then
+					G.C.BLIND.Small = HEX(hex)
+					G.C.BLIND.Big = HEX(hex)
+					ease_background_colour{new_colour = HEX(hex), contrast = 1}
+					G.SETTINGS["CS_COLOR"..i] = HEX(hex)
+				else
+					G.C["COLOUR"..i] = HEX(hex)
+					G.SETTINGS["CS_COLOR"..i] = HEX(hex)
+				end
+			end
+		end
+	end
+	ach_reno_check()
+end
+
+local color_presets_nums = {}
+local color_presets_strings = {}
+for i, v in ipairs(color_presets) do
+	local k = v[#v]
+	table.insert(color_presets_strings, k)
+	color_presets_nums[k] = i
+	if k ~= "customhex" then
+		for i = 1, #v - 1 do
+			local func_name, color_name
+			if type(v[i]) == "string" then
+				func_name = "cs_"..v[i].."c"
+				color_name = v[i]
+			elseif type(v[i]) == "table" then
+				G.C[v[i][2]] = HEX(v[i][1])
+				func_name = "cs_"..v[i][2].."c"
+				color_name = v[i][2]
+			end
+		end
+	end
+end
+
+if not G.SETTINGS.csau_color_selection then
+	G.SETTINGS.csau_color_selection = "default_csau"
+end
+
+if not G.SETTINGS.music_selection then
+	G.SETTINGS.music_selection = "cardsauce"
+end
+
+local main_menuRef = Game.main_menu
+function Game:main_menu(change_context)
+	main_menuRef(self, change_context)
+
+	local splash_args = {mid_flash = change_context == 'splash' and 1.6 or 0.}
+	ease_value(splash_args, 'mid_flash', -(change_context == 'splash' and 1.6 or 0), nil, nil, nil, 4)
+
+	G.SPLASH_BACK:define_draw_steps({{
+		 shader = 'splash',
+		 send = {
+			 {name = 'time', ref_table = G.TIMERS, ref_value = 'REAL'},
+			 {name = 'vort_speed', val = 0.4},
+			 {name = 'colour_1', ref_table = G.C, ref_value = 'COLOUR1'},
+			 {name = 'colour_2', ref_table = G.C, ref_value = 'COLOUR2'},
+			 {name = 'mid_flash', ref_table = splash_args, ref_value = 'mid_flash'},
+			 {name = 'vort_offset', val = 0},
+		 }}})
+end
+
+G.FUNCS.change_color_buttons = function()
+	if G.OVERLAY_MENU then
+		local swap_node = G.OVERLAY_MENU:get_UIE_by_ID('color_buttons')
+		local focused_color_preset = G.SETTINGS.QUEUED_CHANGE.color_change
+		local color = {}
+		local key
+		for _, v in ipairs(color_presets) do
+			if v[#v] == focused_color_preset then
+				key = v[#v]
+				if v[#v] ~= "customhex" then
+					for i=1, #v - 1 do
+						color[i] = v[i][2] or v[i]
+					end
+				end
+			end
+		end
+		if swap_node then
+			for i=1, #swap_node.children do
+				swap_node.children[i]:remove()
+				swap_node.children[i] = nil
+			end
+
+			local new_color_buttons = {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={}}
+			new_color_buttons.nodes[#new_color_buttons.nodes + 1] = {n=G.UIT.T, config={text = localize('b_color_selector_outer'), scale = 0.35, colour = G.C.WHITE, shadow = true}}
+			if key == "customhex" then
+				new_color_buttons.nodes[#new_color_buttons.nodes + 1] = create_text_input({id = 'hex_set_1', h = 0.05, w = 2, text_scale = 0.35, ref_table = G, ref_value = 'CUSTOMHEX1', max_length = 6, prompt_text = localize('b_color_selector_hex'), extended_corpus = true, config = { align = "cm" }})
+				new_color_buttons.nodes[#new_color_buttons.nodes + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+					UIBox_button({minw = 1.25, minh = 0.5, button = "paste_hex_1", colour = G.C.RED, label = localize('b_color_selector_paste_hex'), scale = 0.35})
+				}}
+			else
+				for i, color in ipairs(color) do
+					new_color_buttons.nodes[#new_color_buttons.nodes + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+						UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_1_"..color, colour = G.C[color], label = {" "}, scale = 0.35})
+					}}
+				end
+			end
+			new_color_buttons.nodes[#new_color_buttons.nodes + 1] = {n=G.UIT.T, config={text = "|", scale = 0.35, colour = G.C.WHITE, shadow = true}}
+			if key == "customhex" then
+				new_color_buttons.nodes[#new_color_buttons.nodes + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+					UIBox_button({minw = 1.25, minh = 0.5, button = "paste_hex_2", colour = G.C.RED, label = localize('b_color_selector_paste_hex'), scale = 0.35})
+				}}
+				new_color_buttons.nodes[#new_color_buttons.nodes + 1] = create_text_input({id = 'hex_set_2', h = 0.05, w = 2, text_scale = 0.35, ref_table = G, ref_value = 'CUSTOMHEX2', max_length = 6, prompt_text = localize('b_color_selector_hex'), config = { align = "cm" }})
+			else
+				for i, color in ipairs(color) do
+					new_color_buttons.nodes[#new_color_buttons.nodes + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+						UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_2_"..color, colour = G.C[color], label = {" "}, scale = 0.35})
+					}}
+				end
+			end
+			new_color_buttons.nodes[#new_color_buttons.nodes + 1] = {n=G.UIT.T, config={text = localize('b_color_selector_inner'), scale = 0.35, colour = G.C.WHITE, shadow = true}}
+			local new_sub_caption = { n=G.UIT.R, config={ align = "cm", padding = 0}, nodes={ { n=G.UIT.T, config={ text = localize('b_color_selector_game'), scale = 0.35, colour = G.C.WHITE, shadow = true}}}}
+			local new_sub_buttons = {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={}}
+			if key == "customhex" then
+				new_sub_buttons.nodes[#new_sub_buttons.nodes + 1] = create_text_input({id = 'hex_set_3', h = 0.05, w = 2, text_scale = 0.35, ref_table = G, ref_value = 'CUSTOMHEX3', max_length = 6, prompt_text = localize('b_color_selector_hex'), config = { align = "cm" }})
+				new_sub_buttons.nodes[#new_sub_buttons.nodes + 1] = {n = G.UIT.C, config = {padding = 0.2, align = "cm", }, nodes = {
+					UIBox_button({minw = 1.25, minh = 0.5, button = "paste_hex_3", colour = G.C.RED, label = localize('b_color_selector_paste_hex'), scale = 0.35})
+				}}
+			else
+				for i, color in ipairs(color) do
+					new_sub_buttons.nodes[#new_sub_buttons.nodes + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+						UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_3_"..color, colour = G.C[color], label = {" "}, scale = 0.35})
+					}}
+				end
+			end
+			local apply_button = {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={}}
+			if key == "customhex" then
+				apply_button.nodes[#apply_button.nodes + 1] = {n = G.UIT.C, config = {padding = 0.05,align = "cm", }, nodes = {
+					UIBox_button({minw = 2, minh = 0.5, button = "apply_colors", colour = G.C.RED, label = localize('b_color_selector_hex_set'), scale = 0.35})
+				}}
+			end
+			swap_node.UIBox:add_child(new_color_buttons, swap_node)
+			swap_node.UIBox:add_child(new_sub_caption, swap_node)
+			swap_node.UIBox:add_child(new_sub_buttons, swap_node)
+			swap_node.UIBox:add_child(apply_button, swap_node)
+		end
+	end
+end
+
+G.FUNCS.change_color_preset = function(args)
+	G.ARGS.color_vals = G.ARGS.color_vals or color_presets_strings
+	G.SETTINGS.QUEUED_CHANGE.color_change = G.ARGS.color_vals[args.to_key]
+	G.SETTINGS.csau_color_selection = G.ARGS.color_vals[args.to_key]
+	G.FUNCS.change_color_buttons()
+end
+
+local music_nums = {
+	cardsauce = 1,
+	balatro = 2
+}
+
+local music_strings = {
+	"cardsauce",
+	"balatro"
+}
+
+G.FUNCS.change_music = function(args)
+	G.ARGS.music_vals = G.ARGS.music_vals or music_strings
+	G.SETTINGS.QUEUED_CHANGE.music_change = G.ARGS.music_vals[args.to_key]
+	G.SETTINGS.music_selection = G.ARGS.music_vals[args.to_key]
+	send(G.SETTINGS.music_selection)
+end
+
+setting_tabRef = G.UIDEF.settings_tab
+function G.UIDEF.settings_tab(tab)
+	local setting_tab = setting_tabRef(tab)
+	if tab == 'Audio' then
+		local musicSelector = {n=G.UIT.R, config = {align = 'cm', r = 0}, nodes= {
+			create_option_cycle({ w = 6, scale = 0.8, label = localize('b_music_selector'), options = localize('ml_music_selector_opt'), opt_callback = 'change_music', current_option = ((music_nums)[G.SETTINGS.music_selection] or 1) })
+		}}
+		setting_tab.nodes[#setting_tab.nodes + 1] = musicSelector
+	end
+	if tab == 'Colors' then
+		local color = {}
+		local key
+		for _, v in ipairs(color_presets) do
+			if v[#v] == G.SETTINGS.csau_color_selection then
+				key = v[#v]
+				if v[#v] ~= "customhex" then
+					for i=1, #v - 1 do
+						color[i] = v[i][2] or v[i]
+					end
+				end
+			end
+		end
+		local nodes = {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={}}
+		nodes.nodes[#nodes.nodes + 1] = {n=G.UIT.T, config={text = localize('b_color_selector_outer'), scale = 0.35, colour = G.C.WHITE, shadow = true}}
+		if key == "customhex" then
+			nodes.nodes[#nodes.nodes + 1] = create_text_input({id = 'hex_set_1', h = 0.05, w = 2, text_scale = 0.35, ref_table = G, ref_value = 'CUSTOMHEX1', max_length = 6, prompt_text = localize('b_color_selector_hex'), extended_corpus = true, config = { align = "cm" }})
+			nodes.nodes[#nodes.nodes + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+				UIBox_button({minw = 1.25, minh = 0.5, button = "paste_hex_1", colour = G.C.RED, label = localize('b_color_selector_paste_hex'), scale = 0.35})
+			}}
+		else
+			for i, color in ipairs(color) do
+				nodes.nodes[#nodes.nodes + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+					UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_1_"..color, colour = G.C[color], label = {" "}, scale = 0.35})
+				}}
+			end
+		end
+		nodes.nodes[#nodes.nodes + 1] = {n=G.UIT.T, config={text = "|", scale = 0.35, colour = G.C.WHITE, shadow = true}}
+		if key == "customhex" then
+			nodes.nodes[#nodes.nodes + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+				UIBox_button({minw = 1.25, minh = 0.5, button = "paste_hex_2", colour = G.C.RED, label = localize('b_color_selector_paste_hex'), scale = 0.35})
+			}}
+			nodes.nodes[#nodes.nodes + 1] = create_text_input({id = 'hex_set_2', h = 0.05, w = 2, text_scale = 0.35, ref_table = G, ref_value = 'CUSTOMHEX2', max_length = 6, prompt_text = localize('b_color_selector_hex'), extended_corpus = true, config = { align = "cm" }})
+		else
+			for i, color in ipairs(color) do
+				nodes.nodes[#nodes.nodes + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+					UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_2_"..color, colour = G.C[color], label = {" "}, scale = 0.35})
+				}}
+			end
+		end
+		nodes.nodes[#nodes.nodes + 1] = {n=G.UIT.T, config={text = localize('b_color_selector_inner'), scale = 0.35, colour = G.C.WHITE, shadow = true}}
+		local sub_caption = { n=G.UIT.R, config={ align = "cm", padding = 0}, nodes={ { n=G.UIT.T, config={ text = localize('b_color_selector_game'), scale = 0.35, colour = G.C.WHITE, shadow = true}}}}
+		local sub_buttons = {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={}}
+		if key == "customhex" then
+			sub_buttons.nodes[#sub_buttons.nodes + 1] = create_text_input({id = 'hex_set_3', h = 0.05, w = 2, text_scale = 0.35, ref_table = G, ref_value = 'CUSTOMHEX3', max_length = 6, prompt_text = localize('b_color_selector_hex'), extended_corpus = true, config = { align = "cm" }})
+			sub_buttons.nodes[#sub_buttons.nodes + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+				UIBox_button({minw = 1.25, minh = 0.5, button = "paste_hex_3", colour = G.C.RED, label = localize('b_color_selector_paste_hex'), scale = 0.35})
+			}}
+		else
+			for i, color in ipairs(color) do
+				sub_buttons.nodes[#sub_buttons.nodes + 1] = {n = G.UIT.C, config = {padding = 0.2,align = "cm", }, nodes = {
+					UIBox_button({minw = 0.5, minh = 0.5, button = "change_color_3_"..color, colour = G.C[color], label = {" "}, scale = 0.35})
+				}}
+			end
+		end
+		local apply_button = {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={}}
+		if key == "customhex" then
+			apply_button.nodes[#apply_button.nodes + 1] = {n = G.UIT.C, config = {padding = 0.05,align = "cm", }, nodes = {
+				UIBox_button({minw = 2, minh = 0.5, button = "apply_colors", colour = G.C.RED, label = localize('b_color_selector_hex_set'), scale = 0.35})
+			}}
+		end
+		local colorSelector = {n=G.UIT.R, config = {align = 'cm', r = 0}, nodes={
+			create_option_cycle({w = 5,scale = 0.8, label = localize('b_color_selector'), options = localize('ml_color_selector_opt'), opt_callback = 'change_color_preset', current_option = ((color_presets_nums)[G.SETTINGS.csau_color_selection] or 1)}),
+			{n=G.UIT.R, config={align = "cm", id = 'color_buttons'}, nodes={nodes, sub_caption, sub_buttons, apply_button}},
+		}}
+		setting_tab.nodes[#setting_tab.nodes + 5] = colorSelector
+	end
+	return setting_tab
+end
+
+-- Base Deck Textures
 for i = 1, 2 do
+	SMODS.Atlas {
+		key = "collab_TBoI_"..i,
+		path = "collabs/h_wildcards.png",
+		px = 71,
+		py = 95,
+		prefix_config = { key = false }
+	}
+	SMODS.Atlas {
+		key = "collab_TW_"..i,
+		path = "collabs/s_characters.png",
+		px = 71,
+		py = 95,
+		prefix_config = { key = false }
+	}
+	SMODS.Atlas {
+		key = "collab_AU_"..i,
+		path = "collabs/h_characters.png",
+		px = 71,
+		py = 95,
+		prefix_config = { key = false }
+	}
+	SMODS.Atlas {
+		key = "collab_VS_"..i,
+		path = "collabs/c_characters.png",
+		px = 71,
+		py = 95,
+		prefix_config = { key = false }
+	}
+	SMODS.Atlas {
+		key = "collab_STS_"..i,
+		path = "collabs/c_mascots.png",
+		px = 71,
+		py = 95,
+		prefix_config = { key = false }
+	}
+	SMODS.Atlas {
+		key = "collab_DTD_"..i,
+		path = "collabs/d_characters.png",
+		px = 71,
+		py = 95,
+		prefix_config = { key = false }
+	}
+	SMODS.Atlas {
+		key = "cards_"..i,
+		path = "BaseDeck.png",
+		px = 71,
+		py = 95,
+		prefix_config = { key = false }
+	}
 	SMODS.Atlas {
 		key = "ui_"..i,
 		path = "ui_assets.png",
@@ -586,7 +1117,23 @@ for i = 1, 2 do
 		py = 18,
 		prefix_config = { key = false }
 	}
+	SMODS.Atlas {
+		key = "ui_",
+		path = "ui_assets.png",
+		px = 18,
+		py = 18,
+		prefix_config = { key = false }
+	}
 end
+
+SMODS.Atlas{
+	key = 'Joker',
+	path = "csau_vanilla_Jokers-.png",
+	px = 71,
+	py = 95,
+	atlas_table = "ASSET_ATLAS",
+	prefix_config = { key = false }
+}
 
 -- Title Screen Logo Texture
 local logo = "Logo.png"
@@ -604,10 +1151,367 @@ SMODS.Atlas {
 -- Mod Icon in Mods tab
 SMODS.Atlas({
 	key = "modicon",
-	path = "icon.png",
+	path = "csau_icon.png",
 	px = 32,
 	py = 32
 }):register()
+
+-- Skin Atlases
+for _, skin in ipairs(deck_skins) do
+	SMODS.Atlas{
+		key = skin,
+		path = "skins/"..skin..".png",
+		px = 71,
+		py = 95,
+		atlas_table = "ASSET_ATLAS"
+	}
+end
+
+-- Deck Skins: Clubs
+SMODS.DeckSkin{
+	key = "ds_c_vineshroom",
+	suit = "Clubs",
+	ranks =  {"Ace"},
+	lc_atlas = "c_vineshroom",
+	loc_txt = {
+		["en-us"] = "Vineshroom"
+	},
+	posStyle = "collab"
+}
+SMODS.DeckSkin{
+	key = "ds_c_collab_VS_DS",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "c_collab_VS_DS",
+	loc_txt = {
+		["en-us"] = "Vampire Survivors [DS]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_c_collab_STS_DS",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "c_collab_STS_DS",
+	loc_txt = {
+		["en-us"] = "Slay The Spire [DS]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_c_collab_VS_vineshroom",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "c_collab_VS_VS",
+	loc_txt = {
+		["en-us"] = "Vampire Survivors [VS]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_c_collab_STS_vineshroom",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "c_collab_STS_VS",
+	loc_txt = {
+		["en-us"] = "Slay The Spire [VS]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_c_collab_VS",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "c_collab_VS",
+	loc_txt = {
+		["en-us"] = "Vampire Survivors"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_c_collab_STS",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "c_collab_STS",
+	loc_txt = {
+		["en-us"] = "Slay The Spire"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_c_shroomless",
+	suit = "Clubs",
+	ranks =  {"Ace"},
+	lc_atlas = "c_shroomless",
+	loc_txt = {
+		["en-us"] = "Default"
+	},
+	posStyle = "collab"
+}
+
+-- Deck Skins: Hearts
+SMODS.DeckSkin{
+	key = "ds_h_collab_AU_ES",
+	suit = "Hearts",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "h_collab_AU_ES",
+	loc_txt = {
+		["en-us"] = "Among Us [ES]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_h_collab_TBoI_ES",
+	suit = "Hearts",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "h_collab_TBoI_ES",
+	loc_txt = {
+		["en-us"] = "Binding of Isaac [ES]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_h_collab_AU",
+	suit = "Hearts",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "h_collab_AU_ES",
+	loc_txt = {
+		["en-us"] = "Among Us [ES]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_h_collab_TBoI",
+	suit = "Hearts",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "h_collab_TBoI",
+	loc_txt = {
+		["en-us"] = "The Binding of Isaac"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_h_shroomless",
+	suit = "Hearts",
+	ranks =  {"Ace"},
+	lc_atlas = "h_shroomless",
+	loc_txt = {
+		["en-us"] = "Default"
+	},
+	posStyle = "collab"
+}
+
+-- Deck Skins: Diamonds
+SMODS.DeckSkin{
+	key = "ds_d_collab_DTD_FS",
+	suit = "Diamonds",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_DTD_FS",
+	loc_txt = {
+		["en-us"] = "Dave The Diver [FS]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_d_collab_SV_FS",
+	suit = "Diamonds",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_SV_FS",
+	loc_txt = {
+		["en-us"] = "Stardew Valley [FS]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_d_collab_DTD",
+	suit = "Diamonds",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_DTD",
+	loc_txt = {
+		["en-us"] = "Dave The Diver"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_d_collab_SV_FS",
+	suit = "Diamonds",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_SV_FS",
+	loc_txt = {
+		["en-us"] = "Stardew Valley"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_d_shroomless",
+	suit = "Diamonds",
+	ranks =  {"Ace"},
+	lc_atlas = "d_shroomless",
+	loc_txt = {
+		["en-us"] = "Default"
+	},
+	posStyle = "collab"
+}
+
+-- Deck Skins: Spades
+SMODS.DeckSkin{
+	key = "ds_d_collab_TW_TC",
+	suit = "Spades",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_TW_TC",
+	loc_txt = {
+		["en-us"] = "The Witcher [TC]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_d_collab_CYP_TC",
+	suit = "Spades",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_CYP_TC",
+	loc_txt = {
+		["en-us"] = "Cyberpunk 2077 [TC]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_d_collab_TW",
+	suit = "Spades",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_TW",
+	loc_txt = {
+		["en-us"] = "The Witcher"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_d_collab_CYP",
+	suit = "Spades",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_CYP",
+	loc_txt = {
+		["en-us"] = "Cyberpunk 2077"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_s_shroomless",
+	suit = "Spades",
+	ranks =  {"Ace"},
+	lc_atlas = "s_shroomless",
+	loc_txt = {
+		["en-us"] = "Default"
+	},
+	posStyle = "collab"
+}
+
+SMODS.Sound({
+	vol = 0.6,
+	pitch = 1,
+	key = "csau_music1",
+	path = "csau_music1.ogg",
+	select_music_track = function()
+		return (G.SETTINGS.music_selection == "cardsauce") and 10 or false
+	end,
+})
+
+SMODS.Sound({
+	vol = 0.6,
+	pitch = 1,
+	key = "csau_music2",
+	path = "csau_music2.ogg",
+	select_music_track = function()
+		return (G.SETTINGS.music_selection == "cardsauce" and G.booster_pack_sparkles and not G.booster_pack_sparkles.REMOVED) and 11 or false
+	end,
+})
+
+SMODS.Sound({
+	vol = 0.6,
+	pitch = 1,
+	key = "csau_music3",
+	path = "csau_music3.ogg",
+	select_music_track = function()
+		return (G.SETTINGS.music_selection == "cardsauce" and G.booster_pack_meteors and not G.booster_pack_meteors.REMOVED) and 11 or false
+	end,
+})
+
+SMODS.Sound({
+	vol = 0.6,
+	pitch = 1,
+	key = "csau_music4",
+	path = "csau_music4.ogg",
+	select_music_track = function()
+		return (G.SETTINGS.music_selection == "cardsauce" and G.shop and not G.shop.REMOVED) and 11 or false
+	end,
+})
+
+SMODS.Sound({
+	vol = 0.6,
+	pitch = 1,
+	key = "csau_music5",
+	path = "csau_music5.ogg",
+	select_music_track = function()
+		return (G.SETTINGS.music_selection == "cardsauce" and G.GAME.blind and G.GAME.blind.boss) and 11 or false
+	end,
+})
+
+SMODS.Atlas({
+	key = "jimbo_shot",
+	atlas_table = "ASSET_ATLAS",
+	path = "jimbo_shot.png",
+	px = 71,
+	py = 95
+})
+
+SMODS.Sound({
+	key = "gunshot",
+	path = "gunshot.ogg",
+	pitch = 1,
+	volume = 0.7
+})
+
+local initref = Card_Character.init
+function Card_Character:init(args)
+	initref(self, args)
+	self.children.card.click = Card.gunshot_func
+end
+
+function Card:gunshot_func()
+	if G.STATE == G.STATES.GAME_OVER then
+		play_sound("csau_gunshot", 1, 1)
+		self.children.center.atlas = G.ASSET_ATLAS["csau_jimbo_shot"]
+		self.children.center:set_sprite_pos({x = 0, y = 0})
+		self:juice_up()
+
+		if not G.GAME.shot_jimbo then
+			for k, v in pairs(G.I.CARD) do
+				if getmetatable(v) == Card_Character then
+					v.children.particles = Particles(0, 0, 0,0, {
+						timer = 0.01,
+						scale = 0.3,
+						speed = 2,
+						lifespan = 4,
+						attach = v,
+						colours = {G.C.RED, G.C.RED, G.C.RED},
+						fill = true
+					})
+					v:remove_speech_bubble()
+					v.talking = false
+				end
+			end
+		end
+
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 2,
+			func = (function()
+				check_for_unlock({ type = "fuckingkill_jimbo" })
+				return true
+			end)}))
+
+		G.GAME.shot_jimbo = true
+	end
+end
 
 G.FUNCS.reset_chadnova = function(e)
 	local warning_text = e.UIBox:get_UIE_by_ID('warn')
@@ -629,6 +1533,37 @@ G.FUNCS.reset_chadnova = function(e)
 			delay = 6,
 			func = function()
 				G.FUNCS.quit()
+				G.FUNCS.wipe_off()
+				return true
+			end
+		}))
+	end
+end
+
+G.FUNCS.reset_trophies = function(e)
+	local warning_text = e.UIBox:get_UIE_by_ID('warn')
+	if warning_text.config.colour ~= G.C.WHITE then
+		warning_text:juice_up()
+		warning_text.config.colour = G.C.WHITE
+		warning_text.config.shadow = true
+		e.config.disable_button = true
+		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06, blockable = false, blocking = false, func = function()
+			play_sound('tarot2', 0.76, 0.4);return true end}))
+		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.35, blockable = false, blocking = false, func = function()
+			e.config.disable_button = nil;return true end}))
+		play_sound('tarot2', 1, 0.4)
+	else
+		G.FUNCS.wipe_on()
+		for k, v in pairs(SMODS.Achievements) do
+			if starts_with(k, 'ach_csau_') then
+				G.SETTINGS.ACHIEVEMENTS_EARNED[k] = nil
+				G.ACHIEVEMENTS[k].earned = nil
+			end
+		end
+		G:save_settings()
+		G.E_MANAGER:add_event(Event({
+			delay = 1,
+			func = function()
 				G.FUNCS.wipe_off()
 				return true
 			end
@@ -662,6 +1597,16 @@ local csauConfigTabs = function() return {
 					}}
 				end
 			end
+			if localize("vs_options_trophies_r") then
+				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.2}, nodes={
+					{n=G.UIT.R, config={align = "cm", minw = 0.5, maxw = 2, minh = 0.6, padding = 0, r = 0.1, hover = true, colour = G.C.RED, button = "reset_trophies", shadow = true, focus_args = {nav = 'wide'}}, nodes={
+						{n=G.UIT.T, config={text = localize("vs_options_trophies_r"), scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT}}
+					}},
+					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+						{n=G.UIT.T, config={text = localize("vs_options_trophies_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
+					}},
+				}}
+			end
 			if localize("vs_options_chadNova_r") and G.SETTINGS.chadNova then
 				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.2}, nodes={
 					{n=G.UIT.R, config={align = "cm", minw = 0.5, maxw = 2, minh = 0.6, padding = 0, r = 0.1, hover = true, colour = G.C.RED, button = "reset_chadnova", shadow = true, focus_args = {nav = 'wide'}}, nodes={
@@ -671,10 +1616,10 @@ local csauConfigTabs = function() return {
 						{n=G.UIT.T, config={text = localize("vs_options_chadNova_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
 					}},
 				}}
-				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-					{n=G.UIT.T, config={id = 'warn', text = localize('ph_click_confirm').." "..localize('vs_options_reset_confirm'), scale = 0.4, colour = G.C.CLEAR}}
-				}}
 			end
+			csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+				{n=G.UIT.T, config={id = 'warn', text = localize('ph_click_confirm'), scale = 0.4, colour = G.C.CLEAR}}
+			}}
 			return {
 				n = G.UIT.ROOT,
 				config = {
@@ -706,17 +1651,21 @@ local vs_credit_7 = "Aurelius7309"
 local vs_credit_8 = "Austin L. Matthews"
 local vs_credit_8_tag = "(AmtraxVA)"
 local vs_credit_9 = "Lyman"
-local vs_credit_9_from = "(from JankJonklers)"
+local vs_credit_9_from = "(JankJonklers)"
 local vs_credit_10 = "Akai"
-local vs_credit_10_from = "(from Balatrostuck)"
-local vs_credit_5_from = "(from LobotomyCorp)"
+local vs_credit_10_from = "(Balatrostuck)"
+local vs_credit_5_from = "(LobotomyCorp)"
 local vs_credit_12 = "Victin"
-local vs_credit_12_from = "(from Victin's Collection)"
+local vs_credit_12_from = "(Victin's Collection)"
 local vs_credit_13 = "Keku"
 local vs_credit_14 = "Gappie"
 local vs_credit_15 = "Arthur Effgus"
 local vs_credit_16 = "FenixSeraph"
 local vs_credit_17 = "WhimsyCherry"
+local vs_credit_18 = "Global-Trance"
+local vs_credit_19 = "Lyzerus"
+local vs_credit_20 = "Basscleff"
+local vs_credit_20_tag = "(bassclefff.bandcamp.com)"
 local vs_credit_st1 = "tortoise"
 local vs_credit_st2 = "Protokyuuu"
 local vs_credit_st3 = "ShrineFox"
@@ -724,6 +1673,7 @@ local vs_credit_st4 = "CheesyDraws"
 
 local header_scale = 1.1
 local bonus_padding = 1.15
+local support_padding = 0.015
 
 SMODS.current_mod.credits_tab = function()
 	chosen = true
@@ -737,7 +1687,7 @@ SMODS.current_mod.credits_tab = function()
 					{n=G.UIT.C, config={align = "tm", padding = 0}, nodes={
 						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
 							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = localize('vs_credits1'), scale = text_scale*0.6, colour = G.C.GOLD, shadow = true}},
+								{n=G.UIT.T, config={text = localize('vs_credits1'), scale = header_scale * 0.5, colour = G.C.GOLD, shadow = true}},
 							}},
 							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
@@ -755,14 +1705,14 @@ SMODS.current_mod.credits_tab = function()
 						}},
 						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
 							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = localize('vs_credits4'), scale = text_scale*0.6, colour = G.C.BLUE, shadow = true}},
+								{n=G.UIT.T, config={text = localize('vs_credits7'), scale = header_scale * 0.6, colour = HEX('f75294'), shadow = true}},
 							}},
 							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = vs_credit_8, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.T, config={text = vs_credit_20, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = vs_credit_8_tag, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
+									{n=G.UIT.T, config={text = vs_credit_20_tag, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
 								}},
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
 									{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.05, colour = G.C.CLEAR, shadow = true}},
@@ -798,6 +1748,12 @@ SMODS.current_mod.credits_tab = function()
 							{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 								{ n = G.UIT.T, config = { text = vs_credit_17, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 							} },
+							{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+								{ n = G.UIT.T, config = { text = vs_credit_18, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+							} },
+							{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+								{ n = G.UIT.T, config = { text = vs_credit_19, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+							} },
 						} },
 					} },
 				}},
@@ -831,35 +1787,43 @@ SMODS.current_mod.credits_tab = function()
 						}},
 					}},
 				}},
-				{n=G.UIT.C, config={align = "tm", padding = 0.1, r = 0.1}, nodes= {
-					{n=G.UIT.C, config={align = "tm", padding = 0.1*bonus_padding,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
-						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = localize('vs_credits5'), scale = header_scale*0.6, colour = G.C.PURPLE, shadow = true}},
+				{n=G.UIT.C, config={align = "tm", padding = 0.1, r = 0.1}, nodes={
+					{n=G.UIT.C, config={align = "tm", padding = 0}, nodes={
+						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = G.SETTINGS.roche and localize('vs_credits4') or "?????", scale = header_scale*0.6, colour = G.C.BLUE, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
+								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+									{n=G.UIT.T, config={text = G.SETTINGS.roche and vs_credit_8 or "?????", scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+									{n=G.UIT.T, config={text = G.SETTINGS.roche and vs_credit_8_tag or "?????", scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
+								}},
+							}},
 						}},
-						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
+						{n=G.UIT.R, config={align = "tm", padding = 0,outline_colour = G.C.CLEAR, r = 0.1, outline = 1}, nodes={
 							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = vs_credit_9, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.3, colour = G.C.CLEAR, shadow = true}},
 							}},
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = vs_credit_9_from, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
+						}},
+						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+								{n=G.UIT.T, config={text = localize('vs_credits6'), scale = header_scale*0.55, colour = G.C.GREEN, shadow = true}},
 							}},
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = vs_credit_10, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-							}},
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = vs_credit_10_from, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
-							}},
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = vs_credit_5, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-							}},
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = vs_credit_5_from, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
-							}},
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = vs_credit_12, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-							}},
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = vs_credit_12_from, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
+							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
+								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+									{n=G.UIT.T, config={text = vs_credit_st1, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+									{n=G.UIT.T, config={text = vs_credit_st2, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+									{n=G.UIT.T, config={text = vs_credit_st3, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+									{n=G.UIT.T, config={text = vs_credit_st4, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
 							}},
 						}},
 					}},
@@ -867,24 +1831,36 @@ SMODS.current_mod.credits_tab = function()
 				{n=G.UIT.C, config={align = "tm", padding = 0.1, r = 0.1}, nodes= {
 					{n=G.UIT.C, config={align = "tm", padding = 0.1*bonus_padding,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
 						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = localize('vs_credits6'), scale = header_scale*0.6, colour = G.C.GREEN, shadow = true}},
+							{n=G.UIT.T, config={text = localize('vs_credits5'), scale = header_scale*0.6, colour = HEX('a166d4'), shadow = true}},
 						}},
 						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = vs_credit_st1, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_9, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 							}},
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = vs_credit_st2, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_9_from, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
 							}},
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = vs_credit_st3, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_10, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 							}},
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = vs_credit_st4, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_10_from, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_5, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_5_from, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_12, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							}},
+							{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
+								{n=G.UIT.T, config={text = vs_credit_12_from, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
 							}},
 						}},
-					}}
-				}}
+					}},
+				}},
 			}}
 		}}
 	}}

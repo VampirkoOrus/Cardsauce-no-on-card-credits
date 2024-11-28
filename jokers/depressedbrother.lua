@@ -1,9 +1,11 @@
 local jokerInfo = {
 	name = 'Depressed Brother',
-	config = {extra = {
-		chips = 13,
-		chip_mod = 13
-	}},
+	config = {
+		extra = {
+			chips = 13,
+			chip_mod = 13
+		}
+	},
 	rarity = 2,
 	cost = 5,
 	blueprint_compat = true,
@@ -16,8 +18,8 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {card.ability.extra.chips, card.ability.extra.chips_mod} }
 end
 
-function jokerInfo.loc_vars(self, info_queue, card)
-	return { vars = {card.ability.extra.chips, card.ability.extra.chip_mod} }
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_sponge" })
 end
 
 function jokerInfo.calculate(self, card, context)

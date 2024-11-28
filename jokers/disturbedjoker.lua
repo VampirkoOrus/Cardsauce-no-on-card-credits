@@ -6,14 +6,25 @@ local jokerInfo = {
 	},]]--
 	rarity = 1,
 	cost = 4,
+	unlocked = false,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true
 }
 
+function jokerInfo.check_for_unlock(self, args)
+	if args.type == "flip_sosad" then
+		return true
+	end
+end
+
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist4", set = "Other"}
 	return { vars = {card.ability.draw} }
+end
+
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_disturbed" })
 end
 
 function jokerInfo.init(card)

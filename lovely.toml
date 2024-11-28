@@ -157,6 +157,168 @@ end
 match_indent = true
 overwrite = false
 
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = '''
+                    elseif deckSkin.posStyle == 'deck' then
+                        return atlas, _front.pos
+'''
+position = "after"
+payload = '''
+                    elseif deckSkin.posStyle == 'ranks' then
+                        for i, rank in ipairs(deckSkin.ranks) do
+                            if rank == _front.value then
+                                return atlas, { x = i - 1, y = 0}
+                            end
+                        end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "_pool[#_pool + 1] = v.key"
+position = "before"
+payload = '''
+if G.GAME.selected_back.effect.center.key == "b_csau_vine" then
+    if string.sub(v.key, 1, 6) == 'j_csau' then
+        for i=1, 2 do
+            _pool[#_pool + 1] = v.key
+            _pool_size = _pool_size + 1
+        end
+    end
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''
+    tab_definition_function_args = 'Audio'
+  }
+'''
+position = "after"
+payload = '''
+  tabs[#tabs+1] = {
+      label = localize('b_set_colors'),
+      tab_definition_function = G.UIDEF.settings_tab,
+      tab_definition_function_args = 'Colors'
+  }
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+G.E_MANAGER:add_event(Event({
+    func = function()
+        G.hand_text_area.blind_chips:juice_up()
+        G.hand_text_area.game_chips:juice_up()
+        play_sound('tarot1')
+        self:start_dissolve()
+        return true
+    end
+}))
+'''
+position = "after"
+payload = "G.GAME.SAVEDBY = G.localization.descriptions.Joker.j_mr_bones.name"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "{n=G.UIT.O, config={object = DynaText({string = {' '..localize('ph_mr_bones')..' '}, colours = {G.C.FILTER}, shadow = true, pop_in = 0, scale = 0.5*scale, silent = true})}}"
+position = "at"
+payload = "{n=G.UIT.O, config={object = DynaText({string = {' '..localize('ph_mr_bones')..G.GAME.SAVEDBY..' '}, colours = {G.C.FILTER}, shadow = true, pop_in = 0, scale = 0.5*scale, silent = true})}}"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "G.STATE = G.STATES.GAME_OVER; G.STATE_COMPLETE = false"
+position = "before"
+payload = '''
+sendDebugMessage("test1")
+if next(find_joker('2 Kings 2:23-24')) then
+    sendDebugMessage("test2")
+    check_for_unlock({ type = "shebear_mauling" })
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "local temp_hand = {}"
+position = "before"
+payload = "check_for_unlock({type = 'unlock_kings'})"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+return {
+    message = localize('k_saved_ex'),
+    saved = true,
+    colour = G.C.RED
+}
+'''
+position = "before"
+payload = "check_for_unlock({ type = 'unlock_epoch' })"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = 'local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(G.play.cards)'
+position = "after"
+payload = "G.FUNCS.ach_pepsecretunlock(text)"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = '''
+G.SETTINGS.CUSTOM_DECK.Collabs[args.cycle_config.curr_suit] = G.COLLABS.options[args.cycle_config.curr_suit][args.to_key] or 'default'
+  for k, v in pairs(G.I.CARD) do
+    if v.config and v.config.card and v.children.front and v.ability.effect ~= 'Stone Card' then
+      v:set_sprites(nil, v.config.card)
+    end
+  end
+'''
+position = "after"
+payload = '''
+G.FUNCS.ach_characters_check()
+G.FUNCS.ach_vineshroom_check()
+'''
+match_indent = true
+
+# whoever tried to 'fix event queue leaking' in steammodded broke achievement unlocks so this undoes that.
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''if G.F_NO_ACHIEVEMENTS then return true end'''
+position = "at"
+payload = '''if G.F_NO_ACHIEVEMENTS then return end'''
+match_indent = true
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

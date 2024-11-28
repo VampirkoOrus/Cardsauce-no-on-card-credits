@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Deathcard [WIP]',
+	name = 'Deathcard',
 	config = {
 		id = nil,
 		timesSold = nil,
@@ -21,6 +21,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_deathcard" })
 	if not card.ability.id then
 		if not G.GAME.uniqueDeathcardsAcquired then
 			G.GAME.uniqueDeathcardsAcquired = 1
@@ -29,7 +30,6 @@ function jokerInfo.add_to_deck(self, card)
 		end
 		card.ability.id = G.GAME.uniqueDeathcardsAcquired
 	end
-	send("Deathcard ID: "..card.ability.id)
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -65,9 +65,6 @@ function jokerInfo.calculate(self, card, context)
 			else
 				G.GAME.spawnDeathcards = 1
 			end
-
-			send("New deathsold table: ")
-			send(G.GAME.deathsold)
 		end
 	end
 end
@@ -77,16 +74,12 @@ function jokerInfo.update(self, card)
 		if #G.GAME.deathsold > 0 and not card.ability.id and not card.ability.timesSold then
 			local death = G.GAME.deathsold[1]
 			local id = death['id']
-			sendInfoMessage("Deathcard id is "..id)
 			card.ability.id = id
 			local timesSold = death['timesSold']
-			sendInfoMessage("Deathcard was sold "..timesSold.." time(s)")
 			card.ability.timesSold = timesSold
 			local newcost = card.cost + (card.ability.extra.money_mod * card.ability.timesSold)
-			sendInfoMessage("Setting Deathcard cost to $"..newcost)
 			card.cost = newcost
 			local newmult = card.ability.extra.mult + (card.ability.extra.mult_mod * card.ability.timesSold)
-			sendInfoMessage("Setting Deathcard mult to "..newmult)
 			card.ability.extra.mult = newmult
 			table.remove(G.GAME.deathsold, 1)
 		end

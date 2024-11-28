@@ -18,6 +18,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.dollars, G.GAME.probabilities.normal, card.ability.extra.destroy} }
 end
 
+function jokerInfo.add_to_deck(self, card)
+    check_for_unlock({ type = "discover_btc" })
+end
+
 function jokerInfo.calculate(self, card, context)
     if context.before and context.cardarea == G.jokers and not context.blueprint and G.GAME.current_round.hands_played == 0 then
         local allfaces = false
@@ -36,13 +40,9 @@ function jokerInfo.calculate(self, card, context)
         end
     end
     if context.destroying_card and not context.blueprint and card.ability.destroyed_card then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'before',
-            func = function()
-                context.full_hand[card.ability.destroyed_card]:start_dissolve()
-                return true
-            end
-        }))
+        context.destroying_card = card.ability.destroyed_card
+        card.ability.destroyed_card = nil
+        return true
     end
 end
 

@@ -16,9 +16,22 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {G.GAME.probabilities.normal, card.ability.prob} }
 end
 
+function jokerInfo.add_to_deck(self, card)
+    check_for_unlock({ type = "discover_red" })
+end
+
+local function check_secret(name, visible)
+    for k, v in pairs(SMODS.PokerHands) do
+        if k == name then
+            if v.visible == visible then
+                return true
+            end
+        end
+    end
+end
+
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff then
-        send("Current hand: "..G.GAME.last_hand_played)
         local last_hand = G.GAME.last_hand_played
         if pseudorandom('red') < G.GAME.probabilities.normal / card.ability.prob then
             card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_red'), colour = G.C.RED})
@@ -40,14 +53,16 @@ function jokerInfo.calculate(self, card, context)
                 table.insert(scoring, _card)
             end
             local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(scoring)
-            send("Hand converted to all Hearts: "..text)
+            G.FUNCS.ach_pepsecretunlock(text)
             if G.GAME.current_round.current_hand.handname ~= disp_text then delay(0.3) end
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, blockable = false,
                  func = function()
-                     send("2")
                      if text ~= G.GAME.last_hand_played then
                          G.GAME.hands[G.GAME.last_hand_played].played = G.GAME.hands[G.GAME.last_hand_played].played - 1
                          G.GAME.hands[G.GAME.last_hand_played].played_this_round = G.GAME.hands[G.GAME.last_hand_played].played_this_round + 1
+                     end
+                     if check_secret(G.GAME.last_hand_played, true) and check_secret(text, false) then
+                         check_for_unlock({ type = "red_convert" })
                      end
                      G.GAME.hands[text].played = G.GAME.hands[text].played + 1
                      G.GAME.hands[text].played_this_round = G.GAME.hands[text].played_this_round + 1

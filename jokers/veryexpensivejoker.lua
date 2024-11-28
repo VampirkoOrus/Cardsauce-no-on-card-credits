@@ -12,9 +12,9 @@ local jokerInfo = {
 		"{C:attention}money{} obtaining this",
 		"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
 	},]]--
-	rarity = 1,
+	rarity = 2,
 	cost = 10,
-	blueprint_compat = false,
+	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true
 }
@@ -23,10 +23,12 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_dink" })
 	if G.GAME.dollars == card.cost then
-		sendInfoMessage("Adding Very Expensive Joker...") -- temp
+		if card.cost >= 60 then
+			check_for_unlock({ type = "purchase_dink" })
+		end
 		card.ability.extra.x_mult = (math.floor(card.cost/10)/2) + 1
-		sendInfoMessage("Very Expensive Joker now has x_mult value of "..card.ability.extra.x_mult) -- temp
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				card:juice_up()
@@ -50,7 +52,6 @@ end
 function jokerInfo.update(self, card)
 	if card.cost ~= G.GAME.dollars then
 		if G.GAME.dollars ~= 0 then
-			sendInfoMessage("Setting Very Expensive Joker cost to $"..card.cost)
 			card.ability.extra.cost = G.GAME.dollars
 			card.cost = card.ability.extra.cost
 		end

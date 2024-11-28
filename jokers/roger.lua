@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Mr. Roger [WIP]',
+	name = 'Mr. Roger',
 	config = {
 		extra = {
 			x_mult = 1
@@ -19,19 +19,21 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "rogernote", set = "Other"}
+	info_queue[#info_queue+1] = {key = "guestartist13", set = "Other"}
 	return { vars = {card.ability.extra.x_mult} }
+end
+
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_roger" })
 end
 
 function jokerInfo.calculate(self, card, context)
 	if context.joker_main and context.cardarea == G.jokers and not card.debuff then
-		sendInfoMessage("Hands played: "..G.GAME.current_round.hands_played)
-		sendInfoMessage("Roger Mult Before: X"..card.ability.extra.x_mult)
 		G.E_MANAGER:add_event(Event({
 			trigger = 'after',
 			delay = 0.0,
 			func = (function()
 				card.ability.extra.x_mult = 1 + 0.5*(G.GAME.current_round.hands_played)
-				sendInfoMessage("Roger Mult After: X"..card.ability.extra.x_mult)
 				return true
 			end)}))
 		if card.ability.extra.x_mult > 1 then
@@ -42,9 +44,7 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 	if context.end_of_round and not context.blueprint and card.ability.extra.x_mult > 1 then
-		sendInfoMessage("Resetting Roger Mult...")
 		card.ability.extra.x_mult = 1
-		sendInfoMessage("Roger Mult is now X"..card.ability.extra.x_mult..". Sending reset message...")
 		return {
 			message = localize('k_reset'),
 			colour = G.C.RED

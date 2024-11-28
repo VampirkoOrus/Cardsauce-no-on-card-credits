@@ -1,11 +1,8 @@
 local jokerInfo = {
 	name = 'Emmanuel Blast',
-	config = {extra = 8},
-	--[[text = {
-		"{C:green}#1# in #2#{} chance to create",
-		"a {C:dark_edition}Negative Tag{} at",
-		"end of round",
-	},]]--
+	config = {
+		extra = 8
+	},
 	rarity = 1,
 	cost = 4,
 	blueprint_compat = true,
@@ -19,10 +16,9 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {G.GAME.probabilities.normal, card.ability.extra} }
 end
 
---[[function jokerInfo.set_ability(self, card, initial, delay_sprites)
-
-end]]--
-
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_blast" })
+end
 
 function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and not card.debuff and not context.individual and not context.repetition then

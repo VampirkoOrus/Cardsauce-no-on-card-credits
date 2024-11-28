@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'I\'m So Happy [WIP]',
+	name = "I'm So Happy",
 	config = {
 		extra = {
 			side = 'happy',
@@ -9,27 +9,12 @@ local jokerInfo = {
 			calc = true
 		},
 	},
-	--[[text = {
-		"{C:blue}+2{} hands, {C:red}-1{} discard",
-		"{C:inactive}(Turns upside-down after",
-		"{C:inactive}each round played)",
-	},]]--
 	rarity = 2,
 	cost = 6,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true
 }
-
---[[
-function jokerInfo.loc_vars(self, info_queue, card)
-	return { G.GAME.probabilities.normal }
-end
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-
-end
-]]--
 
 SMODS.Atlas({ key = 'sosad', path ="jokers/sosad.png", px = 71, py = 95 })
 
@@ -42,7 +27,7 @@ end
 
 
 function jokerInfo.add_to_deck(self, card)
-	sendInfoMessage("I'm So Joker side: "..card.ability.extra.side)
+	check_for_unlock({ type = "discover_sohappy" })
 	card.ability.extra.deschappy = G.localization.descriptions["Joker"]["j_csau_sohappy"]
 	if card.ability.extra.side == 'happy' then
 		changeHandsAndDiscards(card.ability.extra.plus, -card.ability.extra.minus)
@@ -54,11 +39,10 @@ end
 function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and not context.blueprint and not context.repetition and not context.individual then
 		if card.ability.extra.side == 'sad' then
-			sendInfoMessage("Flipping to I'm So Happy")
 			G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
 										 func = function()
 											 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_flip'), colour = G.C.CHIPS, instant = true})
-											 G.localization.descriptions["Joker"]["j_csau_sohappy"] = card.ability.extra.deschappy
+											 G.localization.descriptions["Joker"]["j_sohappy"] = card.ability.extra.deschappy
 											 card:juice_up(1, 1)
 											 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
 																		  func = function()
@@ -67,7 +51,7 @@ function jokerInfo.calculate(self, card, context)
 											 return true; end}))
 			changeHandsAndDiscards(card.ability.extra.flip, -card.ability.extra.flip)
 		elseif card.ability.extra.side == 'happy' then
-			sendInfoMessage("Flipping to I'm So Sad")
+			check_for_unlock({ type = "flip_sosad" })
 			G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
 										 func = function()
 											 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_flip'), colour = G.C.CHIPS, instant = true})

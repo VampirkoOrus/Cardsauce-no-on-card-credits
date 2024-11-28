@@ -9,13 +9,24 @@ local jokerInfo = {
     },
     rarity = 3,
     cost = 6,
+    unlocked = false,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true
 }
 
+function jokerInfo.check_for_unlock(self, args)
+    if args.type == "continue_game" then
+        return true
+    end
+end
+
 function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.x_mult, card.ability.extra.x_mult_mod} }
+end
+
+function jokerInfo.add_to_deck(self, card)
+    check_for_unlock({ type = "discover_muppet" })
 end
 
 function jokerInfo.calculate(self, card, context)

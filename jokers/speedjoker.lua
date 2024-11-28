@@ -1,19 +1,28 @@
 local jokerInfo = {
 	name = 'Speed Joker',
 	config = {extra = 1},
-	--[[text = {
-		"Draw {C:attention}+1{} card each {C:chips}hand{}",
-	},]]--
 	rarity = 1,
 	cost = 4,
+	unlocked = false,
+	unlock_condition = {type = 'discover_sohappy'},
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true
 }
 
+function jokerInfo.check_for_unlock(self, args)
+	if args.type == "discover_sohappy" then
+		return true
+	end
+end
+
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist4", set = "Other"}
 	return { vars = {card.ability.draw} }
+end
+
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_speed" })
 end
 
 function jokerInfo.init(card)

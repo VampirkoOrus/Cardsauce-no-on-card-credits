@@ -8,25 +8,13 @@ local jokerInfo = {
 	perishable_compat = true
 }
 
---[[
-function jokerInfo.loc_vars(self, info_queue, card)
-	return { G.GAME.probabilities.normal }
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_gnorts" })
 end
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-
-end
-]]--
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist7", set = "Other"}
 end
-
-function jokerInfo.calculate(self, card, context)
-	--todo
-end
-
-
 
 return jokerInfo
 	

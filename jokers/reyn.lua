@@ -1,11 +1,6 @@
 local jokerInfo = {
 	name = 'Bunch Of Jokers',
 	config = {},
-	--[[text = {
-		"Create a {C:purple}Judgement{} card",
-		"when {C:attention}Blind{} is selected",
-		"{C:inactive}(Must have room){}",
-	},]]--
 	rarity = 1,
 	cost = 6,
 	blueprint_compat = true,
@@ -14,19 +9,13 @@ local jokerInfo = {
 	hasSoul = true,
 }
 
-function jokerInfo.tooltip(self, info_queue)
+function jokerInfo.loc_vars(self, info_queue)
 	info_queue[#info_queue+1] = G.P_CENTERS.c_judgement
 end
 
---[[
-function jokerInfo.loc_vars(self, info_queue, card)
-	return { G.GAME.probabilities.normal }
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_reyn" })
 end
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-
-end
-]]--
 
 function jokerInfo.calculate(self, card, context)
 	if context.setting_blind and not card.getting_sliced and not card.debuff and not (context.blueprint_card or card).getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then

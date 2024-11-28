@@ -1,6 +1,10 @@
 local jokerInfo = {
 	name = 'Fisheye',
-	config = {extra = {chips = 15}},
+	config = {
+		extra = {
+			chips = 15
+		}
+	},
 	rarity = 1,
 	cost = 1,
 	blueprint_compat = true,
@@ -13,8 +17,8 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {card.ability.extra.chips} }
 end
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_fisheye" })
 end
 
 function jokerInfo.calculate(self, card, context)

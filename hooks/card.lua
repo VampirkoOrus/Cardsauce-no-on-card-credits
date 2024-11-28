@@ -1,7 +1,7 @@
 function Card:vic_add_speech_bubble(text_key, align, loc_vars, extra)
     if self.children.speech_bubble then self.children.speech_bubble:remove() end
     self.config.speech_bubble_align = {align=align or 'bm', offset = {x=0,y=0},parent = self}
-    self.children.speech_bubble = 
+    self.children.speech_bubble =
     UIBox{
         definition = G.UIDEF.vic_speech_bubble(text_key, loc_vars, extra),
         config = self.config.speech_bubble_align
@@ -85,6 +85,7 @@ end
 
 function Card:jokerTalk(messages, index, delay, end_flag, fallback_card)
     local speed = G.SETTINGS.GAMESPEED
+    local removed = false
     index = index or 1
     delay = delay or 0.1
     end_flag = end_flag or nil
@@ -110,13 +111,10 @@ function Card:jokerTalk(messages, index, delay, end_flag, fallback_card)
             else
                 dynDelay = readSpeed(tableToString(text)) + 2
             end
-            sendDebugMessage(dynDelay)
             if card.ability.talking then
-                sendDebugMessage("talking exists")
                 local cancelling = false
                 for k, v in pairs(card.ability.talking) do
                     if k ~= end_flag and v == true then
-                        sendDebugMessage("Gotta cancel "..k)
                         cancelling = true
                         if not card.ability.cancel then card.ability.cancel = {} end
                         card.ability.cancel[k] = true
@@ -133,8 +131,6 @@ function Card:jokerTalk(messages, index, delay, end_flag, fallback_card)
                 card:vic_say_stuff(current_mod, nil, true)
             end
             if end_flag then card.ability.talking[end_flag] = true end
-            send(card.ability.talking)
-            send(card.ability.cancel)
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = dynDelay*speed,
@@ -144,11 +140,20 @@ function Card:jokerTalk(messages, index, delay, end_flag, fallback_card)
                     if end_flag then card.ability.talking[end_flag] = false end
                     card:vic_remove_speech_bubble()
                     if not card.ability.cancel then card.ability.cancel = {} end
-                    if card and messages[index+1] and ((end_flag and not card.ability.cancel[end_flag]) or (not end_flag)) then
+                    if card.role.draw_major.removed == true or card.ARGS.get_major.removed == true then removed = true end
+                    if card and not removed and messages[index+1] and ((end_flag and not card.ability.cancel[end_flag]) or (not end_flag)) then
                         card:jokerTalk(messages, index+1, 0, end_flag)
                     else
                         if end_flag and not card.ability.cancel[end_flag] then
-                            card.ability.quips[end_flag] = true
+                            if end_flag == 'chad_greeting_finished' or
+                            end_flag == 'chad_explain_finished' or
+                            end_flag == 'chad_showman_finished' then
+                                card.ability.quips[end_flag] = true
+                                G.SETTINGS.chad[end_flag] = true
+                                G:save_settings()
+                            else
+                                card.ability.quips[end_flag] = true
+                            end
                         end
                         if #card.ability.cancel > 0 then
                             for k, v in pairs(card.ability.talking) do

@@ -19,6 +19,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 ]]--
 
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_disguy" })
+end
+
 function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not card.debuff and not context.blueprint then
 		local enhancements = {

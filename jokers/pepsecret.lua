@@ -1,26 +1,23 @@
 local jokerInfo = {
-	name = 'Pepperoni Secret [WIP]',
+	name = 'Pepperoni Secret',
 	config = {},
-	--[[text = {
-		"{C:attention}Secret Hands{} are",
-		"upgraded when played",
-	},]]--
 	rarity = 3,
 	cost = 8,
+	unlocked = false,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true
 }
 
---[[
-function jokerInfo.loc_vars(self, info_queue, card)
-	return { G.GAME.probabilities.normal }
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_pep" })
 end
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-
+function jokerInfo.check_for_unlock(self, args)
+	if args.type == "unlock_pep" then
+		return true
+	end
 end
-]]--
 
 function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not card.debuff then

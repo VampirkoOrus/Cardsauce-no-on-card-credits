@@ -27,11 +27,6 @@ end
 local jokerInfo = {
 	name = 'SPEEEEEEN',
 	config = {},
-	--[[text = {
-		"Create a {C:purple}Wheel of Fortune{} card",
-		"when {C:attention}rerolling{} in the shop",
-		"{C:inactive}(Must have room){}",
-	},]]--
 	rarity = 1,
 	cost = 6,
 	blueprint_compat = true,
@@ -42,6 +37,10 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "wheel2", set = "Other"}
 	info_queue[#info_queue+1] = {key = "guestartist2", set = "Other"}
+end
+
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_speen" })
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -70,7 +69,7 @@ local loveUpdateReference = love.update
 
 function love.update(dt)
 	if mod.speenTimer and G.SETTINGS.GAMESPEED then
-		mod.speenTimer = (mod.speenTimer + (dt / G.SETTINGS.GAMESPEED)) % (math.pi * 4)
+		mod.speenTimer = (mod.speenTimer + (dt * (G.SETTINGS.GAMESPEED / 4))) % (math.pi * 4)
 	end
 	loveUpdateReference(dt)
 end

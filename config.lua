@@ -1,4 +1,4 @@
 return {
-	["chadSay"] = true,
 	["chadNova"] = nil,
+	["trophies"] = nil,
 }

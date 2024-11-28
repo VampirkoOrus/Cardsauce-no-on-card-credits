@@ -5,11 +5,6 @@ local jokerInfo = {
 			mult = 4
 		}
 	},
-	--[[text = {
-		"Played cards with an",
-		"{C:attention}Enhancement{} give {C:mult}+#1#{} Mult",
-		"when scored",
-	},]]--
 	rarity = 1,
 	cost = 4,
 	blueprint_compat = true,
@@ -22,11 +17,9 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return {vars = {card.ability.extra.mult}}
 end
 
---[[
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_new" })
 end
-]]--
 
 function jokerInfo.calculate(self, card, context)
 	if context.individual and context.cardarea == G.play and not card.debuff then

@@ -6,10 +6,6 @@ local jokerInfo = {
 			formNum = 1
 		}
 	},
-	--[[text = {
-		"{C:dark_edition}It would be in your best interests to stop.{}",
-		"{C:dark_edition}These cards are my domain, and I their master.{}",
-	},]]--
 	rarity = 3,
 	cost = 6,
 	blueprint_compat = false,
@@ -17,15 +13,9 @@ local jokerInfo = {
 	perishable_compat = false
 }
 
---[[
-function jokerInfo.loc_vars(self, info_queue, card)
-	return { G.GAME.probabilities.normal }
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_odio" })
 end
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-
-end
-]]--
 
 local forms = {
 	[1] = nil,
@@ -47,16 +37,15 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and G.GAME.blind.boss and not context.other_card then
-		sendDebugMessage("Boss beaten")
 		if not card.getting_sliced and card.ability.extra.form ~= "odio9" then
-			sendDebugMessage("not getting sliced and not armageddon")
 			if card.ability.extra.form then
 				sendDebugMessage("Current Odious Form: "..card.ability.extra.form)
 			end
 			card.ability.extra.formNum = card.ability.extra.formNum + 1
-			sendDebugMessage("Form Num: "..card.ability.extra.formNum)
+			if card.ability.extra.formNum == 9 then
+				check_for_unlock({ type = "final_odio" })
+			end
 			local form = forms[card.ability.extra.formNum]
-			sendDebugMessage("New Odious Form: "..form)
 			local trigger = true
 			if trigger then
 				trigger = false
@@ -162,7 +151,7 @@ end
 
 function jokerInfo.update(self, card)
 	if card.ability.extra.form then
-		if card.config.center.atlas ~= "csau_"..card.ability.extra.form then
+		if card.config.center.atlas ~= card.ability.extra.form then
 			card.config.center.atlas = "csau_"..card.ability.extra.form
 			card:set_sprites(card.config.center)
 		end

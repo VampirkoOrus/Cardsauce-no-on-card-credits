@@ -1,12 +1,6 @@
 local jokerInfo = {
 	name = 'Another Light',
 	config = {},
-	--[[text = {
-		"If {C:attention}poker hand{} is a {C:attention}Flush{},",
-		"create a {C:purple}Tarot{} card",
-		"for that suit",
-		"{C:inactive}(Must have room){}",
-	},]]--
 	rarity = 2,
 	cost = 7,
 	blueprint_compat = true,
@@ -14,15 +8,9 @@ local jokerInfo = {
 	perishable_compat = true,
 }
 
---[[
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-
-end
-]]--
-
-function jokerInfo.loc_vars(self, info_queue, card)
-	info_queue[#info_queue+1] = {key = "guestartist6", set = "Other"}
-	--return { G.GAME.probabilities.normal }
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_al" })
+	ach_jokercheck(self, ach_checklists.band)
 end
 
 function jokerInfo.calculate(self, card, context)

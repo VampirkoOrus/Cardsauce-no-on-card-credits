@@ -18,6 +18,11 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.chips, card.ability.extra.chip_mod} }
 end
 
+function jokerInfo.add_to_deck(self, card)
+    check_for_unlock({ type = "discover_kerosene" })
+    ach_jokercheck(self, ach_checklists.band)
+end
+
 function jokerInfo.calculate(self, card, context)
     if context.end_of_round and not card.debuff and not context.individual and not context.repetition and not context.blueprint then
         if G.GAME.FLAME_ON then

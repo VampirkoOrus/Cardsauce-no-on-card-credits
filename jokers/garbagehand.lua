@@ -14,14 +14,14 @@ local jokerInfo = {
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist14", set = "Other"}
 	return {vars = {card.ability.extra.mult}}
 end
 
---[[
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_garbage" })
+	ach_jokercheck(self, ach_checklists.band)
 end
-]]--
 
 function jokerInfo.calculate(self, card, context)
 	if context.individual and context.cardarea == G.play and not card.debuff and context.other_card.ability.effect == 'Base' then

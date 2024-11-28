@@ -3,10 +3,21 @@ local jokerInfo = {
 	config = {},
 	rarity = 3,
 	cost = 10,
+	unlocked = false,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true
 }
+
+function jokerInfo.check_for_unlock(self, args)
+	if args.type == "win_deck" and args.deck == "b_green" then
+		return true
+	end
+end
+
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_greenneedle" })
+end
 
 function jokerInfo.calculate(self, card, context)
 	local rightmost_joker = G.jokers.cards[#G.jokers.cards]
@@ -26,7 +37,10 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
-	full_UI_table.name = localize{type = 'name', key = self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
+	if card.config.center.discovered then
+		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
+		full_UI_table.name = localize{type = 'name', key = self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
+	end
 	localize{type = 'descriptions', key = self.key, set = self.set, nodes = desc_nodes, vars = vars}
 	if card.area and card.area == G.jokers then
 		desc_nodes[#desc_nodes+1] = {

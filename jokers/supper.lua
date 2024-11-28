@@ -7,21 +7,26 @@ local jokerInfo = {
 	},
 	rarity = 3,
 	cost = 6,
+	unlocked = false,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true
 }
 
+function jokerInfo.check_for_unlock(self, args)
+	if args.type == "ante_up" and args.ante == 7 then
+		return true
+	end
+end
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist8", set = "Other"}
 	return { vars = {card.ability.extra.x_mult} }
 end
 
-
---[[function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	
-end]]--
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_supper" })
+end
 
 local wega = SMODS.Sound({
 	key = "wega",
