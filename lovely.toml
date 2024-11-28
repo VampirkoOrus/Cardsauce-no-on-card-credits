@@ -298,15 +298,6 @@ G.FUNCS.ach_vineshroom_check()
 '''
 match_indent = true
 
-# whoever tried to 'fix event queue leaking' in steammodded broke achievement unlocks so this undoes that.
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''if G.F_NO_ACHIEVEMENTS then return true end'''
-position = "at"
-payload = '''if G.F_NO_ACHIEVEMENTS then return end'''
-match_indent = true
-
 
 
 
