@@ -28,8 +28,7 @@ return {
 				"some dedication?",
 			},
 			wq_7 = {
-				"IT'S BECAUSE OF OSE, J--",
-				"wait, wrong streamer",
+				"YES! IT IS DONE!"
 			},
 			lq_10 = {
 				"Don't worry, Johnny",
