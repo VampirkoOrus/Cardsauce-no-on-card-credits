@@ -22,7 +22,7 @@ function jokerInfo.calculate(self, card, context)
 	if context.skip_blind then
 		for i, tag in ipairs(G.GAME.tags) do
 			if tag.name == "tag_orbital" and tag.ability.orbital_hand == "High Card" then
-				G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, blockable = false,
+				G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, blockable = false, blocking = true,
 					func = function()
 						card:juice_up()
 						card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("k_dontmind"), colour = G.C.BLUE, instant = true})
@@ -33,7 +33,7 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 	if context.using_consumeable and not context.blueprint and context.consumeable.ability.set == 'Planet' and context.consumeable.ability.name == 'Pluto' then
-		G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, blockable = false,
+		G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, blockable = false, blocking = true,
 			func = function()
 				card:juice_up()
 				card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("k_dontmind"), colour = G.C.BLUE, instant = true})

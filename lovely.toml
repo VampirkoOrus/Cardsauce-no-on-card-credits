@@ -17,6 +17,20 @@ overwrite = false
 [[patches]]
 [patches.pattern]
 target = "game.lua"
+pattern = '''
+{name = 'colour_1', ref_table = G.C, ref_value = 'BLUE'},
+{name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},
+'''
+position = "at"
+payload = '''
+{name = 'colour_1', ref_table = G.C, ref_value = 'COLOUR1'},
+{name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
 pattern = "SC = Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, SC_scale*G.CARD_W, SC_scale*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_joker'])"
 position = "at"
 payload = "SC = G.FUNCS.center_splash_screen_card(SC_scale)"
@@ -63,7 +77,6 @@ position = "at"
 payload = '''
     local highest = nil
     if next(find_joker("Be Someone Forever")) then
-        sendDebugMessage("first if statement works lol")
 		local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(G.play.cards)
 		if text == "High Card" then
 			for i, v in ipairs(scoring_hand) do
@@ -76,7 +89,6 @@ payload = '''
 	for k, v in ipairs(G.play.cards) do
 		if (not v.shattered) and (not v.destroyed) then
 			if next(find_joker("Be Someone Forever")) and v == highest then
-			    sendDebugMessage("Drawing High Card back to hand...")
 				draw_card(G.play,G.hand, it*100/play_count,'up', true, v)
 			else
 				draw_card(G.play,G.discard, it*100/play_count,'down', false, v)
@@ -280,6 +292,47 @@ position = "after"
 payload = "G.FUNCS.ach_pepsecretunlock(text)"
 match_indent = true
 
+# whoever tried to 'fix event queue leaking' in steammodded broke achievement unlocks so this undoes that.
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''if G.F_NO_ACHIEVEMENTS then return true end'''
+position = "at"
+payload = '''if G.F_NO_ACHIEVEMENTS then return end'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "if add and not G.GAME.banned_keys[v.key] then"
+position = "before"
+payload = '''
+if _append == "jud" and v.key == 'j_csau_hell' then
+    add = false
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "table.insert(t, create_toggle({label = localize('b_high_contrast_cards'), ref_table = G.SETTINGS, ref_value = 'colourblind_option', callback = G.FUNCS.refresh_contrast_mode}))"
+position = "at"
+payload = '''
+local current_skin
+local string
+for k, v in pairs(G.COLLABS.options[_suit]) do
+    if G.SETTINGS.CUSTOM_DECK.Collabs[_suit] == v then
+        current_skin = v
+        string = G.localization.misc.dictionary.vs_collab_credits[_suit][current_skin] or " "
+    end
+end
+local caption = {n=G.UIT.T, config={text = string, scale = 0.35, colour = G.C.WHITE, shadow = true}}
+local credit = {n=G.UIT.R, config={align = "cm", maxw = 4*G.CARD_W, id = 'collab_credit'}, nodes={caption}}
+table.insert(t, credit)
+'''
+match_indent = true
+
 [[patches]]
 [patches.pattern]
 target = "functions/button_callbacks.lua"
@@ -293,23 +346,25 @@ G.SETTINGS.CUSTOM_DECK.Collabs[args.cycle_config.curr_suit] = G.COLLABS.options[
 '''
 position = "after"
 payload = '''
+local swap_node = G.OVERLAY_MENU:get_UIE_by_ID('collab_credit')
+if swap_node then
+    for i=1, #swap_node.children do
+        swap_node.children[i]:remove()
+        swap_node.children[i] = nil
+    end
+    for k, v in pairs(G.COLLABS.options[args.cycle_config.curr_suit]) do
+        if G.COLLABS.options[args.cycle_config.curr_suit][args.to_key] == v then
+            current_skin = v
+            string = G.localization.misc.dictionary.vs_collab_credits[args.cycle_config.curr_suit][current_skin] or " "
+        end
+    end
+    local caption = {n=G.UIT.T, config={text = string, scale = 0.35, colour = G.C.WHITE, shadow = true}}
+    swap_node.UIBox:add_child(caption, swap_node)
+end
 G.FUNCS.ach_characters_check()
 G.FUNCS.ach_vineshroom_check()
 '''
 match_indent = true
-
-# whoever tried to 'fix event queue leaking' in steammodded broke achievement unlocks so this undoes that.
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''if G.F_NO_ACHIEVEMENTS then return true end'''
-position = "at"
-payload = '''if G.F_NO_ACHIEVEMENTS then return end'''
-match_indent = true
-
-
-
-
 
 
 

@@ -6,12 +6,6 @@ local jokerInfo = {
 			cost = 4
 		}
 	},
-	--[[text = {
-		"{X:mult,C:white}X0.5{} Mult for every {C:money}$10{}",
-		"spent on this Joker, spend all",
-		"{C:attention}money{} obtaining this",
-		"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
-	},]]--
 	rarity = 2,
 	cost = 10,
 	blueprint_compat = true,
@@ -29,11 +23,11 @@ function jokerInfo.add_to_deck(self, card)
 			check_for_unlock({ type = "purchase_dink" })
 		end
 		card.ability.extra.x_mult = (math.floor(card.cost/10)/2) + 1
+		card.sell_cost = math.max(1, math.floor(card.cost/2))
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				card:juice_up()
 				card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}}, colour = G.C.MONEY, instant = true})
-				card.cost = 10
 				return true
 			end
 		}))
@@ -50,8 +44,8 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card)
-	if card.cost ~= G.GAME.dollars then
-		if G.GAME.dollars ~= 0 then
+	if card.area.config.type ~= "joker" then
+		if card.cost ~= G.GAME.dollars and G.GAME.dollars ~= 0 then
 			card.ability.extra.cost = G.GAME.dollars
 			card.cost = card.ability.extra.cost
 		end

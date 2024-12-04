@@ -6,12 +6,6 @@ local jokerInfo = {
 			mult_mod = 5
 		}
 	},
-	--[[text = {
-		"This Joker gains {C:mult}+5{} Mult if",
-        "round ends with your chips",
-        "within {C:attention}10%{} of the {C:attention}Blind{}",
-        "{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}",
-	},]]--
 	rarity = 1,
 	cost = 5,
 	blueprint_compat = true,

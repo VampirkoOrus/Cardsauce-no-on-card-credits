@@ -1,3 +1,5 @@
+local mod = SMODS.current_mod
+
 local jokerInfo = {
 	name = 'WAAUGGHGHHHHGHH',
 	config = {
@@ -39,7 +41,9 @@ function jokerInfo.calculate(self, card, context)
 			sendDebugMessage("Triggering WAAUGGHGHHHHGHH")
 			G.E_MANAGER:add_event(Event({
 				func = function()
-					wega:play(1, (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/100.0),true);
+					if not mod.config['muteWega'] then
+						wega:play(1, (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/100.0),true);
+					end
 					card:juice_up()
 					return true
 				end

@@ -1,9 +1,6 @@
 local jokerInfo = {
 	name = 'Disturbed Joker',
 	config = {extra = 1},
-	--[[text = {
-		"Draw {C:attention}+1{} card each {C:mult}discard{}",
-	},]]--
 	rarity = 1,
 	cost = 4,
 	unlocked = false,

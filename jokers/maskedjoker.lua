@@ -6,11 +6,6 @@ local jokerInfo = {
 			mult = 16
 		}
 	},
-	--[[text = {
-		"If played hand is all",
-		"{C:attention}Steel Cards{}, each gives",
-		"{C:chips}+#1#{} Chips and {C:mult}+#2#{} Mult",
-	},]]--
 	rarity = 2,
 	cost = 7,
 	blueprint_compat = true,

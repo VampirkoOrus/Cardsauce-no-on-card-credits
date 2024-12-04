@@ -1,10 +1,6 @@
 local jokerInfo = {
 	name = 'Pivyot',
 	config = {},
-	--[[text = {
-		"{C:green}#1# in 2{} chance to upgrade",
-		"level of played {C:attention}High Card{}",
-	},]]--
 	rarity = 1,
 	cost = 5,
 	blueprint_compat = true,

@@ -5,11 +5,6 @@ local jokerInfo = {
 			x_mult = 3
 		}
 	},
-	--[[text = {
-		"{X:mult,C:white}X#1#{} Mult, but",
-		"cannot play hands",
-		"containing a {C:attention}Flush{}",
-	},]]--
 	rarity = 2,
 	cost = 7,
 	blueprint_compat = true,

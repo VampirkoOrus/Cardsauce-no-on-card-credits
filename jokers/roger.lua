@@ -5,11 +5,6 @@ local jokerInfo = {
 			x_mult = 1
 		}
 	},
-	--[[text = {
-		"This Joker gains {X:mult,C:white}X0.1{} Mult",
-		"for each {C:attention}finger{} played this {C:attention}Blind{}",
-		"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
-	},]]--
 	rarity = 2,
 	cost = 6,
 	blueprint_compat = true,

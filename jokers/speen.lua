@@ -15,7 +15,7 @@ end
 local setupCanvas = function(self)
 	self.children.center.video = love.graphics.newCanvas(71,95)
 	self.children.center.video:renderTo(function()
-		love.graphics.clear(1,1,1,0) 
+		love.graphics.clear(1,1,1,0)
 		love.graphics.setColor(1,1,1,1)
 		--Draw the base, then the face
 		love.graphics.draw(mod.speenBase)
@@ -77,7 +77,6 @@ end
 function jokerInfo.draw(self,card,layer)
 	--Withouth love.graphics.push, .pop, and .reset, it will attempt to use values from the rest of 
 	--the rendering code. We need a clean slate for rendering to canvases.
-
 	if not self.discovered then
 		return
 	end

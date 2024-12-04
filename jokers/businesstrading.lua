@@ -11,10 +11,13 @@ local jokerInfo = {
     cost = 6,
     blueprint_compat = false,
     eternal_compat = true,
-    perishable_compat = true
+    perishable_compat = true,
+    width = 178,
+    height = 238,
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "guestartist15", set = "Other"}
     return { vars = {card.ability.extra.dollars, G.GAME.probabilities.normal, card.ability.extra.destroy} }
 end
 

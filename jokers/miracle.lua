@@ -17,10 +17,6 @@ function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_miracle" })
 end
 
-local function starts_with(str, start)
-    return str:sub(1, 1) == start
-end
-
 function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not card.debuff then
 		if next(context.poker_hands["Pair"]) then
@@ -133,8 +129,6 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 end
-
-
 
 return jokerInfo
 	

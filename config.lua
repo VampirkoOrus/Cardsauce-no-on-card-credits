@@ -1,4 +1,5 @@
 return {
-	["chadNova"] = nil,
+	['muteWega'] = false,
 	["trophies"] = nil,
+	["chadNova"] = nil,
 }

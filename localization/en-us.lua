@@ -28,13 +28,10 @@ return {
 				"some dedication?",
 			},
 			wq_7 = {
-				"IT'S BECAUSE OF OSE, J--",
-				"wait, wrong streamer",
+				"Never settle for less!",
 			},
-			lq_10 = {
-				"Don't worry, Johnny",
-				"will cut this out.",
-				"Right?",
+			wq_8 = {
+				"YES! IT IS DONE!",
 			},
 			lq_1 = {
 				"HUGE waste of",
@@ -68,6 +65,11 @@ return {
 			},
 			lq_9 = {
 				"What a bimbo!",
+			},
+			lq_10 = {
+				"Don't worry, Johnny",
+				"will cut this out.",
+				"Right?",
 			},
 			roche_voiceline = {
 				"A {C:planet}Planet{} card for",
@@ -223,16 +225,37 @@ return {
 		dictionary = {
 			vs_credits1 = "Concepting/Direction",
 			vs_credits2 = "Artists",
+			vs_credits2_2 = "Playing Cards",
 			vs_credits3 = "Coding",
 			vs_credits4 = "Voice Acting",
 			vs_credits5 = "Support",
 			vs_credits6 = "Special Thanks",
 			vs_credits7 = "Music",
 			vs_options_sub = "(Restart required to apply)",
+			vs_options_muteWega = "Mute WAAUGGHGHHHHGHH",
+			vs_options_muteWega_desc = "Check this box to mute WAAUGGHGHHHHGHH's screams",
 			vs_options_trophies_r = "Reset Achievements",
 			vs_options_trophies_desc = "Click this button to reset all Cardsauce achievements",
 			vs_options_chadNova_r = "Undo Chadnova",
 			vs_options_chadNova_desc = "Click this button to undo the consequences of your actions",
+			vs_collab_credits = {
+				Hearts = {
+					collab_AU = "King by "..vs_credit_23.." | Queen by "..vs_credit_22.." | Jack by "..vs_credit_17,
+					collab_TBoI = "King by "..vs_credit_21.." | Queen and Jack by "..vs_credit_23,
+				},
+				Clubs = {
+					collab_VS = "King by "..vs_credit_23.." | Queen by "..vs_credit_22.." | Jack by "..vs_credit_17,
+					collab_STS = "King by "..vs_credit_23.." | Queen by "..vs_credit_22.." | Jack by "..vs_credit_17,
+				},
+				Diamonds = {
+					collab_DTD = "King by "..vs_credit_23.." | Queen by "..vs_credit_22.." | Jack by "..vs_credit_17,
+					collab_SV = "King, Queen and Jack by "..vs_credit_15,
+				},
+				Spades = {
+					collab_TW = "King by "..vs_credit_23.." | Queen by "..vs_credit_22.." | Jack by "..vs_credit_17,
+					collab_CYP = "King, Queen and Jack by "..vs_credit_24,
+				}
+			},
 			b_set_colors = "Colors",
 			b_color_selector = "Background Colors",
 			b_color_selector_outer = "Main Menu Outer Swirl",
@@ -289,6 +312,12 @@ return {
 			k_glass = "Glass",
 			k_dontmind = "\"Ah, yes...\"",
 			k_red = "HEARTS!!!",
+		},
+		challenge_names = {
+			c_csau_tucker = "Tucker's Challenge",
+		},
+		v_text = {
+			ch_c_csau_tucker = {"All Non-{C:clubs}Cardsauce{} Jokers are banned"}
 		},
 		achievement_names = {
 			ach_csau_discover_fisheye = "As You Know...",
@@ -543,6 +572,12 @@ return {
 				name = "Guest Artist",
 				text = {
 					"{E:1}Global-Trance{}",
+				},
+			},
+			guestartist15 = {
+				name = "Guest Artist",
+				text = {
+					"{E:1}BardVergil{}",
 				},
 			},
 			rogernote = {

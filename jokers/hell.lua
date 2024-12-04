@@ -1,17 +1,14 @@
 local jokerInfo = {
 	name = 'Running Hell',
-	config = {extra = 1},
+	config = {
+		extra = 1
+	},
 	rarity = 3,
 	cost = 6,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true
 }
-
---[[
-function jokerInfo.loc_vars(self, info_queue, card)
-	return { G.GAME.probabilities.normal }
-end]]--
 
 local cavestorytext = SMODS.Sound({
 	key = "cavestorytext",
@@ -45,15 +42,16 @@ local function hand_level_reset(card, delayMod)
 		end
 	end
 	G.E_MANAGER:add_event(Event({
-		trigger = 'immediate',
+		trigger = 'after',
+		delay = 1.8,
 		blockable = false,
 		func = (function()
 			play_area_status_text(localize('k_cavestorytext'))
 			cavestorytext:play(1, (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/50.0),true);
+			update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
 			return true
 		end)
 	}))
-	update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
 end
 
 function jokerInfo.add_to_deck(self, card, context)
