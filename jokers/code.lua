@@ -1,6 +1,10 @@
 local jokerInfo = {
 	name = 'Industry Code',
-	config = {extra = {money = 25}},
+	config = {
+		extra = {
+			money = 25
+		}
+	},
 	rarity = 2,
 	cost = 5,
 	blueprint_compat = true,

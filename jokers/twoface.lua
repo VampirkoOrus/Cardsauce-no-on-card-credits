@@ -14,32 +14,45 @@ end
 
 
 function jokerInfo.calculate(self, card, context)
-	if context.individual and context.cardarea == G.play and not card.debuff then
-		if not self.debuff then
-			if context.other_card:get_id() == 14 then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						context.other_card:juice_up()
-						card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_twoed'), colour = G.C.MONEY, instant = true})
-						local suit_prefix = string.sub(context.other_card.base.suit, 1, 1)..'_'
-						context.other_card:set_base(G.P_CARDS[suit_prefix..2])
-						--delay(G.SETTINGS.GAMESPEED)
-						return true
+	if context.remove_playing_cards then
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				local two, ace = false, false
+				local convert = {}
+				for i, v in ipairs(G.play.cards) do
+					if v:get_id() == 14 then
+						convert[i] = true
+						ace = true
+					elseif v:get_id() == 2 then
+						convert[i] = true
+						two = true
+					else
+						convert[i] = false
 					end
-				}))
-			elseif context.other_card:get_id() == 2 then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						context.other_card:juice_up()
+				end
+				if (two or ace) and #convert > 0 then
+					for i, v in ipairs(G.play.cards) do
+						if convert[i] then
+							v:juice_up()
+							local suit_prefix = string.sub(v.base.suit, 1, 1)..'_'
+							if v:get_id() == 14 then
+								v:set_base(G.P_CARDS[suit_prefix..2])
+							elseif v:get_id() == 2 then
+								v:set_base(G.P_CARDS[suit_prefix..'A'])
+							end
+						end
+					end
+					if two and ace then
+						card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_twoed_aced'), colour = G.C.MONEY, instant = true})
+					elseif two and not ace then
 						card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_aced'), colour = G.C.MONEY, instant = true})
-						local suit_prefix = string.sub(context.other_card.base.suit, 1, 1)..'_'
-						context.other_card:set_base(G.P_CARDS[suit_prefix..'A'])
-						--delay(G.SETTINGS.GAMESPEED)
-						return true
+					elseif ace and not two then
+						card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_twoed'), colour = G.C.MONEY, instant = true})
 					end
-				}))
+				end
+				return true
 			end
-		end
+		}))
 	end
 end
 

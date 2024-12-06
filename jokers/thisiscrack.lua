@@ -16,7 +16,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	local hand_var = card.ability.extra.crack_hand and localize(card.ability.extra.crack_hand, 'poker_hands') or localize('k_none')
-	return { vars = {card.ability.extra.x_mult, card.ability.extra.crack_hand} }
+	return { vars = {card.ability.extra.x_mult, hand_var} }
 end
 
 function jokerInfo.add_to_deck(self, card)
@@ -40,35 +40,12 @@ function jokerInfo.calculate(self, card, context)
 		end
 		card.ability.extra.crack_hand = hand
 	  end
-	if context.joker_main and context.cardarea == G.jokers then
+	if context.joker_main and context.cardarea == G.jokers and card.ability.extra.x_mult > 1 then
 		return {
 			message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
-			Xmult_mod = card.ability.extra.x_mult, 
-			--colour = G.C.MULT
+			Xmult_mod = card.ability.extra.x_mult,
 		}
 	end
-	--[[	if not context.blueprint then
-		local reset = true
-        --local play_more_than = (G.GAME.hands[context.scoring_name].played or 0)
-        for k, v in pairs(G.GAME.hands) do
-            if k == context.scoring_name and v.visible then
-                reset = false
-            end
-        end
-        if reset then
-            if self.ability.x_mult > 1 then
-                self.ability.x_mult = 1
-                return {
-                    card = self,
-                    message = localize('k_reset')
-                }
-            end
-        else
-            self.ability.x_mult = self.ability.x_mult + 0.1
-        end
-		card.ability.extra.crack_hand = context.scoring_name
-	end
-	]]--
 end
 
 

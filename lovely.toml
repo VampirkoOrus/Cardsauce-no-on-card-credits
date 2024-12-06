@@ -158,10 +158,10 @@ overwrite = false
 [[patches]]
 [patches.pattern]
 target = "functions/button_callbacks.lua"
-pattern = "_F.intensity = ((G.pack_cards and not G.pack_cards.REMOVED) or (G.TAROT_INTERRUPT)) and 0 or math.max(0., math.log(G.ARGS.score_intensity.earned_score, 5)-2)"
+pattern = "if G.ARGS.score_intensity.earned_score >= G.ARGS.score_intensity.required_score and G.ARGS.score_intensity.required_score > 0 then"
 position = "after"
 payload = '''
-if G.STATE == G.STATES.HAND_PLAYED and not G.GAME.FLAME_ON then
+if G.STATE == G.STATES.HAND_PLAYED and not G.GAME.FLAME_ON and next(find_joker('Kerosene')) then
     send("Flames!")
     G.GAME.FLAME_ON = true
 end

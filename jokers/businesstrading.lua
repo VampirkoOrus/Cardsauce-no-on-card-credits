@@ -27,10 +27,10 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.before and context.cardarea == G.jokers and not context.blueprint and G.GAME.current_round.hands_played == 0 then
-        local allfaces = false
+        local allfaces = true
         for k, v in ipairs(context.full_hand) do
-            if v:is_face() then
-                allfaces = true
+            if not v:is_face() then
+                allfaces = false
             end
         end
         if allfaces then

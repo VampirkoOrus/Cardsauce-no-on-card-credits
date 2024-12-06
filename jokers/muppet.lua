@@ -7,8 +7,8 @@ local jokerInfo = {
             x_mult_mod = 0.5,
         }
     },
-    rarity = 3,
-    cost = 6,
+    rarity = 2,
+    cost = 5,
     unlocked = false,
     blueprint_compat = true,
     eternal_compat = true,

@@ -4,7 +4,7 @@ local jokerInfo = {
 	name = 'WAAUGGHGHHHHGHH',
 	config = {
 		extra = {
-			x_mult = 1.75
+			x_mult = 1.5
 		}
 	},
 	rarity = 3,
