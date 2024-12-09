@@ -1,44 +1,49 @@
 local jokerInfo = {
-	name = 'Mr. Roger [WIP]',
-	config = {},
-	text = {
-		"This Joker gains {X:mult,C:white}X0.1{} Mult",
-		"for each {C:attention}finger{} played this {C:attention}Blind{}",
-		"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
+	name = 'Mr. Roger',
+	config = {
+		extra = {
+			x_mult = 1
+		}
 	},
 	rarity = 2,
 	cost = 6,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
-function jokerInfo.tooltip(self, info_queue)
+function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "rogernote", set = "Other"}
+	info_queue[#info_queue+1] = {key = "guestartist13", set = "Other"}
+	return { vars = {card.ability.extra.x_mult} }
 end
 
-function jokerInfo.locDef(self)
-	return { self.ability.extra.x_mult }
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_roger" })
 end
 
-function jokerInfo.init(self)
-	self.ability.extra = {
-		x_mult = 1 + 0.5*(G.GAME.current_round.hands_played)
-	}
-end
-
-function jokerInfo.calculate(self, context)
-	if context.joker_main and context.cardarea == G.jokers then
-		self.ability.extra.x_mult = 1 + 0.5*(G.GAME.current_round.hands_played)
-		if self.ability.extra.x_mult ~= 1 then
+function jokerInfo.calculate(self, card, context)
+	if context.joker_main and context.cardarea == G.jokers and not card.debuff then
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 0.0,
+			func = (function()
+				card.ability.extra.x_mult = 1 + 0.5*(G.GAME.current_round.hands_played)
+				return true
+			end)}))
+		if card.ability.extra.x_mult > 1 then
 			return {
-				message = localize{type='variable',key='a_xmult',vars={self.ability.extra.x_mult}},
-				Xmult_mod = self.ability.extra.x_mult, 
-				--colour = G.C.MULT
+				message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+				Xmult_mod = card.ability.extra.x_mult,
 			}
 		end
 	end
-	if context.end_of_round and not context.blueprint then
-		self.ability.extra.x_mult = 1
+	if context.end_of_round and not context.blueprint and card.ability.extra.x_mult > 1 then
+		card.ability.extra.x_mult = 1
+		return {
+			message = localize('k_reset'),
+			colour = G.C.RED
+		}
 	end
 end
 

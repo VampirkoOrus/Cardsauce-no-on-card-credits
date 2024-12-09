@@ -1,29 +1,25 @@
 local jokerInfo = {
 	name = 'Pivyot',
 	config = {},
-	text = {
-		"{C:green}#1# in 2{} chance to upgrade",
-		"level of played {C:attention}High Card{}",
-	},
 	rarity = 1,
 	cost = 5,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
 
-function jokerInfo.locDef(self)
-	return { G.GAME.probabilities.normal }
+function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+	return { vars = {G.GAME.probabilities.normal} }
 end
 
-
---[[
-function jokerInfo.init(self)
-
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_pivot" })
+	ach_jokercheck(self, ach_checklists.high)
 end
-]]--
 
-function jokerInfo.calculate(self, context)
+function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not self.debuff then
 		if context.scoring_name == "High Card" then
 			if pseudorandom('pivot') < G.GAME.probabilities.normal / 2 then

@@ -1,45 +1,41 @@
 local jokerInfo = {
 	name = 'Masked Joker',
-	config = {},
-	text = {
-		"If played hand is all",
-		"{C:attention}Steel Cards{}, each gives",
-		"{C:chips}+#1#{} Chips and {C:mult}+#2#{} Mult",
+	config = {
+		extra = {
+			chips = 29,
+			mult = 16
+		}
 	},
 	rarity = 2,
 	cost = 7,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
-function jokerInfo.tooltip(self, info_queue)
+function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = G.P_CENTERS.m_steel
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+	return { vars = {card.ability.extra.chips, card.ability.extra.mult}}
 end
 
-function jokerInfo.locDef(self)
-	return { self.ability.extra.chips, self.ability.extra.mult }
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_claus" })
 end
 
-function jokerInfo.init(self)
-	self.ability.extra = {
-		chips = 29,
-		mult = 16
-	}
-end
-
-function jokerInfo.calculate(self, context)
-	if context.individual and context.cardarea == G.play and not self.debuff then
+function jokerInfo.calculate(self, card, context)
+	if context.individual and context.cardarea == G.play and not card.debuff then
 		local chimera = true
-                for k, v in ipairs(context.full_hand) do
-                    chimera = chimera and v.ability.name == 'Steel Card'
-                end
-                if not chimera then
-                    return nil
-                end
+		for k, v in ipairs(context.full_hand) do
+			chimera = chimera and v.ability.name == 'Steel Card'
+		end
+		if not chimera then
+			return nil
+		end
 		return {
-			chips = self.ability.extra.chips,
-			mult = self.ability.extra.mult,
-			card = self
+			chips = card.ability.extra.chips,
+			mult = card.ability.extra.mult,
+			card = card
 		}
 	end
 end

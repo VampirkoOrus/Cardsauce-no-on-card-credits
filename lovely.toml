@@ -1,0 +1,386 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 9999999
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "local replace_card = Card(self.title_top.T.x, self.title_top.T.y, 1.2*G.CARD_W*SC_scale, 1.2*G.CARD_H*SC_scale, G.P_CARDS.S_A, G.P_CENTERS.c_base)"
+position = "at"
+payload = '''
+local replace_card = G.FUNCS.title_screen_card(self, SC_scale)
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+{name = 'colour_1', ref_table = G.C, ref_value = 'BLUE'},
+{name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},
+'''
+position = "at"
+payload = '''
+{name = 'colour_1', ref_table = G.C, ref_value = 'COLOUR1'},
+{name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "SC = Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, SC_scale*G.CARD_W, SC_scale*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_joker'])"
+position = "at"
+payload = "SC = G.FUNCS.center_splash_screen_card(SC_scale)"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+                local card = Card(  card_pos.x + G.ROOM.T.w/2 - G.CARD_W*card_size/2,
+                                    card_pos.y + G.ROOM.T.h/2 - G.CARD_H*card_size/2,
+                                    card_size*G.CARD_W, card_size*G.CARD_H, pseudorandom_element(G.P_CARDS), G.P_CENTERS.c_base)
+'''
+position = "at"
+payload = '''
+local card = G.FUNCS.splash_screen_card(card_pos, card_size)
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "amount = amount or 1"
+position = "after"
+payload = '''
+    if next(find_joker("Don't Mind If I Do")) then
+		if hand == "High Card" then
+			amount = amount * 2
+		end
+	end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+    for k, v in ipairs(G.play.cards) do
+        if (not v.shattered) and (not v.destroyed) then
+            draw_card(G.play,G.discard, it*100/play_count,'down', false, v)
+'''
+position = "at"
+payload = '''
+    local highest = nil
+    if next(find_joker("Be Someone Forever")) then
+		local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(G.play.cards)
+		if text == "High Card" then
+			for i, v in ipairs(scoring_hand) do
+				if highest then
+					if v:get_id() > highest:get_id() then highest = v end
+				else highest = v end
+			end
+		end
+	end
+	for k, v in ipairs(G.play.cards) do
+		if (not v.shattered) and (not v.destroyed) then
+			if next(find_joker("Be Someone Forever")) and v == highest then
+				draw_card(G.play,G.hand, it*100/play_count,'up', true, v)
+			else
+				draw_card(G.play,G.discard, it*100/play_count,'down', false, v)
+			end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''
+        create_shop_card_ui(card)
+        return card
+'''
+position = "after"
+payload = '''
+    elseif G.GAME.spawnDeathcards and G.GAME.spawnDeathcards ~= 0 then
+		local card = Card(area.T.x + area.T.w/2, area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_csau_deathcard'])
+		create_shop_card_ui(card)
+		G.GAME.forcedeath = false
+		G.GAME.spawnDeathcards = G.GAME.spawnDeathcards - 1
+		return card
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+                if effects.jokers.level_up then
+                    level_up_hand(card, text)
+                end
+'''
+position = "after"
+payload = '''
+if effects.jokers.update_hand then
+    text = effects.jokers.update_hand
+end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "card_eval_status_text(card, 'jokers', nil, percent, nil, effects.jokers)"
+position = "at"
+payload = '''
+if not effects.jokers.silent then card_eval_status_text(card, 'jokers', nil, percent, nil, effects.jokers) end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "G.FUNCS.DT_add_money = function() if G.STAGE == G.STAGES.RUN then ease_dollars(10) end end"
+position = "at"
+payload = '''
+G.FUNCS.DT_add_money = function() if G.STAGE == G.STAGES.RUN then ease_dollars(10000) end end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = "if G.ARGS.score_intensity.earned_score >= G.ARGS.score_intensity.required_score and G.ARGS.score_intensity.required_score > 0 then"
+position = "after"
+payload = '''
+if G.STATE == G.STATES.HAND_PLAYED and not G.GAME.FLAME_ON and next(find_joker('Kerosene')) then
+    send("Flames!")
+    G.GAME.FLAME_ON = true
+end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = '''
+                    elseif deckSkin.posStyle == 'deck' then
+                        return atlas, _front.pos
+'''
+position = "after"
+payload = '''
+                    elseif deckSkin.posStyle == 'ranks' then
+                        for i, rank in ipairs(deckSkin.ranks) do
+                            if rank == _front.value then
+                                return atlas, { x = i - 1, y = 0}
+                            end
+                        end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "_pool[#_pool + 1] = v.key"
+position = "before"
+payload = '''
+if G.GAME.selected_back.effect.center.key == "b_csau_vine" then
+    if string.sub(v.key, 1, 6) == 'j_csau' then
+        for i=1, 2 do
+            _pool[#_pool + 1] = v.key
+            _pool_size = _pool_size + 1
+        end
+    end
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''
+    tab_definition_function_args = 'Audio'
+  }
+'''
+position = "after"
+payload = '''
+  tabs[#tabs+1] = {
+      label = localize('b_set_colors'),
+      tab_definition_function = G.UIDEF.settings_tab,
+      tab_definition_function_args = 'Colors'
+  }
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+G.E_MANAGER:add_event(Event({
+    func = function()
+        G.hand_text_area.blind_chips:juice_up()
+        G.hand_text_area.game_chips:juice_up()
+        play_sound('tarot1')
+        self:start_dissolve()
+        return true
+    end
+}))
+'''
+position = "after"
+payload = "G.GAME.SAVEDBY = G.localization.descriptions.Joker.j_mr_bones.name"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "{n=G.UIT.O, config={object = DynaText({string = {' '..localize('ph_mr_bones')..' '}, colours = {G.C.FILTER}, shadow = true, pop_in = 0, scale = 0.5*scale, silent = true})}}"
+position = "at"
+payload = "{n=G.UIT.O, config={object = DynaText({string = {' '..localize('ph_mr_bones')..G.GAME.SAVEDBY..' '}, colours = {G.C.FILTER}, shadow = true, pop_in = 0, scale = 0.5*scale, silent = true})}}"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "G.STATE = G.STATES.GAME_OVER; G.STATE_COMPLETE = false"
+position = "before"
+payload = '''
+sendDebugMessage("test1")
+if next(find_joker('2 Kings 2:23-24')) then
+    sendDebugMessage("test2")
+    check_for_unlock({ type = "shebear_mauling" })
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "local temp_hand = {}"
+position = "before"
+payload = "check_for_unlock({type = 'unlock_kings'})"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+return {
+    message = localize('k_saved_ex'),
+    saved = true,
+    colour = G.C.RED
+}
+'''
+position = "before"
+payload = "check_for_unlock({ type = 'unlock_epoch' })"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = 'local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(G.play.cards)'
+position = "after"
+payload = "G.FUNCS.ach_pepsecretunlock(text)"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "if add and not G.GAME.banned_keys[v.key] then"
+position = "before"
+payload = '''
+if _append == "jud" and v.key == 'j_csau_hell' then
+    add = false
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "table.insert(t, create_toggle({label = localize('b_high_contrast_cards'), ref_table = G.SETTINGS, ref_value = 'colourblind_option', callback = G.FUNCS.refresh_contrast_mode}))"
+position = "at"
+payload = '''
+local current_skin
+local string
+for k, v in pairs(G.COLLABS.options[_suit]) do
+    if G.SETTINGS.CUSTOM_DECK.Collabs[_suit] == v then
+        current_skin = v
+        string = G.localization.misc.dictionary.vs_collab_credits[_suit][current_skin] or " "
+    end
+end
+local caption = {n=G.UIT.T, config={text = string, scale = 0.35, colour = G.C.WHITE, shadow = true}}
+local credit = {n=G.UIT.R, config={align = "cm", maxw = 4*G.CARD_W, id = 'collab_credit'}, nodes={caption}}
+table.insert(t, credit)
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = '''
+G.SETTINGS.CUSTOM_DECK.Collabs[args.cycle_config.curr_suit] = G.COLLABS.options[args.cycle_config.curr_suit][args.to_key] or 'default'
+  for k, v in pairs(G.I.CARD) do
+    if v.config and v.config.card and v.children.front and v.ability.effect ~= 'Stone Card' then
+      v:set_sprites(nil, v.config.card)
+    end
+  end
+'''
+position = "after"
+payload = '''
+local swap_node = G.OVERLAY_MENU:get_UIE_by_ID('collab_credit')
+if swap_node then
+    for i=1, #swap_node.children do
+        swap_node.children[i]:remove()
+        swap_node.children[i] = nil
+    end
+    for k, v in pairs(G.COLLABS.options[args.cycle_config.curr_suit]) do
+        if G.COLLABS.options[args.cycle_config.curr_suit][args.to_key] == v then
+            current_skin = v
+            string = G.localization.misc.dictionary.vs_collab_credits[args.cycle_config.curr_suit][current_skin] or " "
+        end
+    end
+    local caption = {n=G.UIT.T, config={text = string, scale = 0.35, colour = G.C.WHITE, shadow = true}}
+    swap_node.UIBox:add_child(caption, swap_node)
+end
+G.FUNCS.ach_characters_check()
+G.FUNCS.ach_vineshroom_check()
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.name == 'Hologram' then"
+position = "at"
+payload = "if self.ability.name == 'Hologram' or self.ability.name == 'Shrimp Joker' then"
+match_indent = true
+
+# TEMPORARY
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''if G.F_NO_ACHIEVEMENTS then return true end'''
+position = "at"
+payload = '''if G.F_NO_ACHIEVEMENTS and not G.ACHIEVEMENTS[achievement_name].mod then return true end'''
+match_indent = true
+
+
+
+
+
+
+
+
+
+
+

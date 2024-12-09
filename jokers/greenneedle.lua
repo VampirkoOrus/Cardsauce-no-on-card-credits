@@ -1,74 +1,72 @@
 local jokerInfo = {
-	name = 'Green Needle [WIP]',
+	name = 'Green Needle',
 	config = {},
-	text = {
-		"Copies the ability",
-		"of rightmost {C:attention}Joker{}",
-	},
 	rarity = 3,
 	cost = 10,
-	canBlueprint = true,
-	canEternal = true
+	unlocked = false,
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
---[[
-function jokerInfo.locDef(self)
-	return { G.GAME.probabilities.normal }
+function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
 end
 
-function jokerInfo.init(self)
-
+function jokerInfo.check_for_unlock(self, args)
+	if args.type == "win_deck" and args.deck == "b_green" then
+		return true
+	end
 end
-]]--
 
-loc_vars = function(self, info_queue, card)
-	if not nether_util.is_in_your_collection(card) then 
-		local jokers = G.jokers.cards
-		local other_joker = jokers[#jokers]
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_greenneedle" })
+end
+
+function jokerInfo.calculate(self, card, context)
+	local rightmost_joker = G.jokers.cards[#G.jokers.cards]
+	if rightmost_joker and rightmost_joker ~= card then
+		context.blueprint = (context.blueprint and (context.blueprint + 1)) or 1
+		context.blueprint_card = context.blueprint_card or card
+		if context.blueprint > #G.jokers.cards + 1 then return end
+		context.no_callback = true
+		local other_joker_ret = rightmost_joker:calculate_joker(context)
+		if other_joker_ret then
+			other_joker_ret.card = context.blueprint_card or card
+			context.no_callback = false
+			other_joker_ret.colour = G.C.RED
+			return other_joker_ret
+		end
+	end
+end
+
+function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+	if card.config.center.discovered then
+		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
+		full_UI_table.name = localize{type = 'name', key = self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
+	end
+	localize{type = 'descriptions', key = self.key, set = self.set, nodes = desc_nodes, vars = vars}
+	if card.area and card.area == G.jokers then
+		desc_nodes[#desc_nodes+1] = {
+			{n=G.UIT.C, config={align = "bm", minh = 0.4}, nodes={
+				{n=G.UIT.C, config={ref_table = self, align = "m", colour = card.ability.blueprint_compat == 'compatible' and mix_colours(G.C.GREEN, G.C.JOKER_GREY, 0.8) or mix_colours(G.C.RED, G.C.JOKER_GREY, 0.8), r = 0.05, padding = 0.06}, nodes={
+					{n=G.UIT.T, config={text = ' '..localize('k_'..card.ability.blueprint_compat)..' ',colour = G.C.UI.TEXT_LIGHT, scale = 0.32*0.8}},
+				}}
+			}}
+		}
+	end
+end
+
+function jokerInfo.update(self, card)
+	if G.STAGE == G.STAGES.RUN then
+		local other_joker = G.jokers.cards[#G.jokers.cards]
 		if other_joker and other_joker ~= card and other_joker.config.center.blueprint_compat then
 			card.ability.blueprint_compat = 'compatible'
 		else
 			card.ability.blueprint_compat = 'incompatible'
 		end
 	end
-	card.ability.blueprint_compat_ui = card.ability.blueprint_compat_ui or ''; card.ability.blueprint_compat_check = nil
-	return { main_end = (card.area and card.area == G.jokers) and {
-		{n=G.UIT.C, config={align = "bm", minh = 0.4}, nodes={
-			{n=G.UIT.C, config={ref_table = card, align = "m", colour = G.C.JOKER_GREY, r = 0.05, padding = 0.06, func = 'blueprint_compat'}, nodes={
-				{n=G.UIT.T, config={ref_table = card.ability, ref_value = 'blueprint_compat_ui',colour = G.C.UI.TEXT_LIGHT, scale = 0.32*0.8}},
-			}}
-		}}
-	} or nil }
 end
-
-function jokerInfo.calculate(self, context)
-	local other_joker = G.jokers.cards[#G.jokers.cards]
-	if other_joker and other_joker ~= self then
-		context.blueprint = (context.blueprint and (context.blueprint + 1)) or 1
-		context.blueprint_card = context.blueprint_card or self
-		if context.blueprint > #G.jokers.cards + 1 then return end
-		local other_joker_ret = other_joker:calculate_joker(context)
-		if other_joker_ret then 
-			other_joker_ret.card = context.blueprint_card or self
-			other_joker_ret.colour = G.C.RED
-			return other_joker_ret
-		end
-	end
-
-	--[[G.FUNCS.blueprint_compat = function(e)
-	if e.config.ref_table.ability.blueprint_compat ~= e.config.ref_table.ability.blueprint_compat_check then 
-		if e.config.ref_table.ability.blueprint_compat == 'compatible' then 
-			e.config.colour = mix_colours(G.C.GREEN, G.C.JOKER_GREY, 0.8)
-		elseif e.config.ref_table.ability.blueprint_compat == 'incompatible' then
-			e.config.colour = mix_colours(G.C.RED, G.C.JOKER_GREY, 0.8)
-		end
-		e.config.ref_table.ability.blueprint_compat_ui = ' '..localize('k_'..e.config.ref_table.ability.blueprint_compat)..' '
-		e.config.ref_table.ability.blueprint_compat_check = e.config.ref_table.ability.blueprint_compat
-		end
-	end]]--
-end
-
-
 
 return jokerInfo
 	

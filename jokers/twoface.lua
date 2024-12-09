@@ -1,59 +1,61 @@
 local jokerInfo = {
-	name = 'Two-Faced Joker [WIP]',
+	name = 'Two-Faced Joker',
 	config = {},
-	text = {
-		"Each played {C:attention}Ace{} becomes",
-		"a {C:attention}2{}, each played {C:attention}2{}",
-		"becomes an {C:attention}Ace{}",
-	},
 	rarity = 1,
 	cost = 4,
-	canBlueprint = false,
-	canEternal = true
+	blueprint_compat = false,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
---[[
-function jokerInfo.locDef(self)
-	return { G.GAME.probabilities.normal }
+function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
 end
 
-function jokerInfo.init(self)
-
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_twoface" })
 end
-]]--
 
-
---card works, just need to fix timing on the card changing
-function jokerInfo.calculate(self, context)
-	if context.cardarea == G.jokers and context.before and not self.debuff and not context.blueprint then
-		for k, v in ipairs(context.full_hand) do 
-			if v:get_id() == 14 then 
-				
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						v:juice_up()
-						card_eval_status_text(self, 'extra', nil, nil, nil, {message = "Twoed!", colour = G.C.MONEY, instant = true})
-				local suit_prefix = string.sub(v.base.suit, 1, 1)..'_'
-				v:set_base(G.P_CARDS[suit_prefix..2])
-				--delay(G.SETTINGS.GAMESPEED)
-						return true
+function jokerInfo.calculate(self, card, context)
+	if context.remove_playing_cards then
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				local two, ace = false, false
+				local convert = {}
+				for i, v in ipairs(G.play.cards) do
+					if v:get_id() == 14 then
+						convert[i] = true
+						ace = true
+					elseif v:get_id() == 2 then
+						convert[i] = true
+						two = true
+					else
+						convert[i] = false
 					end
-				})) 
-
-			elseif v:get_id() == 2 then 
-				
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						v:juice_up()
-						card_eval_status_text(self, 'extra', nil, nil, nil, {message = "Aced!", colour = G.C.MONEY, instant = true})
-				local suit_prefix = string.sub(v.base.suit, 1, 1)..'_'
-				v:set_base(G.P_CARDS[suit_prefix..'A'])
-				--delay(G.SETTINGS.GAMESPEED)
-						return true
+				end
+				if (two or ace) and #convert > 0 then
+					for i, v in ipairs(G.play.cards) do
+						if convert[i] then
+							v:juice_up()
+							local suit_prefix = string.sub(v.base.suit, 1, 1)..'_'
+							if v:get_id() == 14 then
+								v:set_base(G.P_CARDS[suit_prefix..2])
+							elseif v:get_id() == 2 then
+								v:set_base(G.P_CARDS[suit_prefix..'A'])
+							end
+						end
 					end
-				})) 
+					if two and ace then
+						card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_twoed_aced'), colour = G.C.MONEY, instant = true})
+					elseif two and not ace then
+						card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_aced'), colour = G.C.MONEY, instant = true})
+					elseif ace and not two then
+						card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_twoed'), colour = G.C.MONEY, instant = true})
+					end
+				end
+				return true
 			end
-		end
+		}))
 	end
 end
 

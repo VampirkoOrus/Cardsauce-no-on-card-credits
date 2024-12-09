@@ -1,52 +1,40 @@
 local jokerInfo = {
-	name = 'Cousin\'s Club [WIP]',
-	config = {},
-	text = {
-		"This Joker gains {C:chips}+1{} Chips",
-		"for each {C:clubs}Club{} card scored,",
-		"{C:attention}double{} if hand contains a {C:attention}Flush{}",
-		"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",
+	name = "Cousin's Club",
+	config = {
+		extra = {
+			chips = 0,
+			chip_mod = 1
+		}
 	},
 	rarity = 2,
 	cost = 6,
-	canBlueprint = true,
-	canEternal = true
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = false
 }
 
-function jokerInfo.locDef(self)
-	return { self.ability.extra.chips }
+function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+	return { vars = {card.ability.extra.chips, card.ability.extra.chip_mod} }
 end
 
-function jokerInfo.init(self)
-	self.ability.extra = {
-		chips = 0,
-		chip_mod = 1
-	}
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_cousinsclub" })
 end
 
-function jokerInfo.calculate(self, context)
-	if context.individual and context.cardarea == G.play and not self.debuff and not (context.blueprint) then
-		for k, v in ipairs(context.scoring_hand) do
-			if v:is_suit('Clubs') then 
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						v:juice_up()
-						return true
-					end
-				})) 
-				if get_flush(context.scoring_hand) then
-					self.ability.extra.chips = self.ability.extra.chips + 2*self.ability.extra.chip_mod
-				else
-					self.ability.extra.chips = self.ability.extra.chips + self.ability.extra.chip_mod
-				end
-				card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.CHIPS})
-			end
+function jokerInfo.calculate(self, card, context)
+	if context.individual and context.cardarea == G.play and not card.debuff and context.other_card:is_suit('Clubs') then
+		local chip = card.ability.extra.chip_mod
+		if context.scoring_name == "Flush" then
+			chip = chip * 2
 		end
+		card.ability.extra.chips = card.ability.extra.chips + chip
+		card_eval_status_text(card, 'extra', nil, nil, nil, {message = context.scoring_name == "Flush" and localize('k_upgrade_double_ex') or localize('k_upgrade_ex'), colour = G.C.CHIPS})
 	end
 	if context.joker_main and context.cardarea == G.jokers then
 		return {
-			message = localize{type='variable',key='a_chips',vars={self.ability.extra.chips}},
-			chip_mod = self.ability.extra.chips, 
+			message = localize{type='variable',key='a_chips',vars={card.ability.extra.chips}},
+			chip_mod = card.ability.extra.chips, 
 			colour = G.C.CHIPS
 		}
 	end

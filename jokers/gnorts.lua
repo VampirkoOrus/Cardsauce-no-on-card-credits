@@ -1,36 +1,21 @@
 local jokerInfo = {
 	name = 'Rekoj Gnorts',
 	config = {},
-	text = {
-		"Allows {C:attention}Straights{} to be made",
-		"with {C:attention}Aces{} in the middle",
-		"{C:inactive}(ex:{} {C:attention}3 2 A K Q{}{C:inactive}){}",
-	},
-	rarity = 2,
-	cost = 7,
-	canBlueprint = false,
-	canEternal = true
+	rarity = 1,
+	cost = 4,
+	blueprint_compat = false,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
---[[
-function jokerInfo.locDef(self)
-	return { G.GAME.probabilities.normal }
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_gnorts" })
 end
 
-function jokerInfo.init(self)
-
-end
-]]--
-
-function jokerInfo.tooltip(self, info_queue)
+function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
 	info_queue[#info_queue+1] = {key = "guestartist7", set = "Other"}
 end
-
-function jokerInfo.calculate(self, context)
-	--todo
-end
-
-
 
 return jokerInfo
 	

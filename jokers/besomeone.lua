@@ -1,31 +1,23 @@
 local jokerInfo = {
-	name = 'Be Someone Forever [WIP]',
+	name = 'Be Someone Forever',
 	config = {},
-	text = {
-		"Played {C:attention}High Cards{}",
-		"are redrawn",
-	},
 	rarity = 1,
 	cost = 4,
-	canBlueprint = false,
-	canEternal = true
+	blueprint_compat = false,
+	eternal_compat = true,
+	perishable_compat = true
 }
 
---[[
-function jokerInfo.locDef(self)
-	return { G.GAME.probabilities.normal }
+function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
 end
 
-function jokerInfo.init(self)
-
+function jokerInfo.add_to_deck(self, card)
+	check_for_unlock({ type = "discover_bsf" })
+	ach_jokercheck(self, ach_checklists.band)
+	ach_jokercheck(self, ach_checklists.high)
 end
-]]--
-
-function jokerInfo.calculate(self, context)
-	--todo
-end
-
-
 
 return jokerInfo
-	
+
+
