@@ -33,6 +33,9 @@ return {
 			wq_8 = {
 				"YES! IT IS DONE!",
 			},
+			wq_9 = {
+				"That's my streamer!",
+			},
 			lq_1 = {
 				"HUGE waste of",
 				"brain cells!",
@@ -234,26 +237,28 @@ return {
 			vs_options_sub = "(Restart required to apply)",
 			vs_options_muteWega = "Mute WAAUGGHGHHHHGHH",
 			vs_options_muteWega_desc = "Check this box to mute WAAUGGHGHHHHGHH's screams",
-			vs_options_trophies_r = "Reset Achievements",
-			vs_options_trophies_desc = "Click this button to reset all Cardsauce achievements",
+			vs_options_enableTrophies = "Enable Achievements",
+			vs_options_enableTrophies_desc = "Uncheck this box to disable Cardsauce achievements (WILL RESTART GAME TO APPLY)",
+			vs_options_resetTrophies_r = "Reset Achievements",
+			vs_options_resetTrophies_desc = "Click this button to reset all Cardsauce achievements",
 			vs_options_chadNova_r = "Undo Chadnova",
 			vs_options_chadNova_desc = "Click this button to undo the consequences of your actions",
 			vs_collab_credits = {
 				Hearts = {
-					collab_AU = "King by "..vs_credit_23.." | Queen by "..vs_credit_22.." | Jack by "..vs_credit_17,
-					collab_TBoI = "King by "..vs_credit_21.." | Queen and Jack by "..vs_credit_23,
+					collab_AU = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
+					collab_TBoI = "King by fradavovan | Queen and Jack by CheesyDraws",
 				},
 				Clubs = {
-					collab_VS = "King by "..vs_credit_23.." | Queen by "..vs_credit_22.." | Jack by "..vs_credit_17,
-					collab_STS = "King by "..vs_credit_23.." | Queen by "..vs_credit_22.." | Jack by "..vs_credit_17,
+					collab_VS = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
+					collab_STS = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
 				},
 				Diamonds = {
-					collab_DTD = "King by "..vs_credit_23.." | Queen by "..vs_credit_22.." | Jack by "..vs_credit_17,
-					collab_SV = "King, Queen and Jack by "..vs_credit_15,
+					collab_DTD = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
+					collab_SV = "King, Queen and Jack by Arthur Effgus",
 				},
 				Spades = {
-					collab_TW = "King by "..vs_credit_23.." | Queen by "..vs_credit_22.." | Jack by "..vs_credit_17,
-					collab_CYP = "King, Queen and Jack by "..vs_credit_24,
+					collab_TW = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
+					collab_CYP = "King, Queen and Jack by Jazz_Jen",
 				}
 			},
 			b_set_colors = "Colors",
@@ -498,86 +503,92 @@ return {
 					"to a random {C:attention}Joker",
 				},
 			},
+			guestartist0 = {
+				name = "Artist",
+				text = {
+					"{E:1}BarrierTrio/Gote{}",
+				},
+			},
 			guestartist1 = {
-				name = "Guest Artist",
+				name = "Artist",
 				text = {
 					"{E:1}SagaciousCejai{}",
 				},
 			},
 			guestartist2 = {
-				name = "Guest Coder",
+				name = "Coding",
 				text = {
 					"{E:1}DPS2004{}",
 				},
 			},
 			guestartist3 = {
-				name = "Guest Coder",
+				name = "Coding",
 				text = {
 					"{E:1}Nether{}",
 				},
 			},
 			guestartist4 = {
-				name = "Guest Coder",
+				name = "Coding",
 				text = {
 					"{E:1}Mysthaps{}",
 				},
 			},
 			guestartist5 = {
-				name = "Voice Acting",
+				name = "Artist",
 				text = {
 					"{E:1}AmtraxVA{}",
 				},
 			},
 			guestartist7 = {
-				name = "Guest Coder",
+				name = "Coding",
 				text = {
 					"{E:1}Numbuh214{}",
 				},
 			},
 			guestartist8 = {
-				name = "Guest Artist",
+				name = "Artist",
 				text = {
 					"{E:1}Keku{}",
 				},
 			},
 			guestartist9 = {
-				name = "Guest Artist",
+				name = "Artist",
 				text = {
 					"{E:1}Gappie{}",
 				},
 			},
 			guestartist10 = {
-				name = "Guest Artist",
+				name = "Artist",
 				text = {
 					"{E:1}Arthur Effgus{}",
 				},
 			},
 			guestartist11 = {
-				name = "Guest Artist",
+				name = "Artist",
 				text = {
 					"{E:1}FenixSeraph{}",
 				},
 			},
 			guestartist12 = {
-				name = "Guest Artist",
+				name = "Artist",
 				text = {
 					"{E:1}WhimsyCherry{}",
 				},
 			},
 			guestartist13 = {
-				name = "Guest Artist",
+				name = "Artist",
 				text = {
 					"{E:1}Lyzerus{}",
 				},
 			},
 			guestartist14 = {
-				name = "Guest Artist",
+				name = "Artist",
 				text = {
 					"{E:1}Global-Trance{}",
 				},
 			},
 			guestartist15 = {
-				name = "Guest Artist",
+				name = "Artist",
 				text = {
 					"{E:1}BardVergil{}",
 				},

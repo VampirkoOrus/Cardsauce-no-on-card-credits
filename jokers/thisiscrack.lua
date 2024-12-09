@@ -15,6 +15,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
 	local hand_var = card.ability.extra.crack_hand and localize(card.ability.extra.crack_hand, 'poker_hands') or localize('k_none')
 	return { vars = {card.ability.extra.x_mult, hand_var} }
 end

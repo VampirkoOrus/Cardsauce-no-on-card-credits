@@ -12,6 +12,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
 	return { vars = {G.GAME.probabilities.normal} }
 end
 
@@ -28,6 +29,7 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
 	if specific_vars and not specific_vars.not_hidden then
 		localize{type = 'unlocks', key = 'joker_locked_legendary', set = 'Other', nodes = desc_nodes, vars = {}}
 	else
+		info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
 		localize{type = 'descriptions', key = self.key, set = self.set, nodes = desc_nodes, vars = {G.GAME.probabilities.normal}}
 	end
 end

@@ -13,6 +13,7 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
 	info_queue[#info_queue+1] = {key = "guestartist7", set = "Other"}
 end
 

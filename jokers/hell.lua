@@ -54,6 +54,10 @@ local function hand_level_reset(card, delayMod)
 	}))
 end
 
+function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+end
+
 function jokerInfo.add_to_deck(self, card, context)
 	check_for_unlock({ type = "discover_hell" })
 	hand_level_reset(card, G.SETTINGS.GAMESPEED)
@@ -89,8 +93,6 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 end
-
-
 
 return jokerInfo
 	

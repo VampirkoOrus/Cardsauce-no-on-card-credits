@@ -15,6 +15,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = G.P_CENTERS.m_steel
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
 	return { vars = {card.ability.extra.chips, card.ability.extra.mult}}
 end
 

@@ -1,5 +1,6 @@
 return {
 	['muteWega'] = false,
-	["trophies"] = nil,
+	['enableTrophies'] = true,
+	["resetTrophies"] = nil,
 	["chadNova"] = nil,
 }

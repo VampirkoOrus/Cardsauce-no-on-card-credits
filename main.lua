@@ -125,6 +125,12 @@ local conf_cardsauce = {
 		'hog',
 	},
 	trophiesToLoad = {
+	}
+}
+
+G.loadTrophies = true
+if csau_enabled['enableTrophies'] then
+	conf_cardsauce.trophiesToLoad = {
 		-- Bronze
 		'discover_fisheye',
 		'discover_cousinsclub',
@@ -198,8 +204,10 @@ local conf_cardsauce = {
 		'all_discovered',
 		'big_meat',
 	}
-}
-	
+else
+	G.loadTrophies = false
+end
+
 -- sendDebugMessage("AchievementsEnabler Activated!")
 -- G.F_NO_ACHIEVEMENTS = false
 
@@ -349,6 +357,11 @@ for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 
 	jokerInfo.key = v
 	jokerInfo.atlas = v
+	local atlasKey = v
+	if jokerInfo.texture then
+		atlasKey = jokerInfo.texture
+		jokerInfo.atlas = jokerInfo.texture
+	end
 	jokerInfo.pos = { x = 0, y = 0 }
 	if jokerInfo.hasSoul then
 		jokerInfo.pos = { x = 1, y = 0 }
@@ -362,7 +375,7 @@ for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 		end
 	end
 
-	SMODS.Atlas({ key = v, path ="jokers/" .. v .. ".png", px = jokerInfo.width or 71, py = jokerInfo.height or  95 })
+	SMODS.Atlas({ key = atlasKey, path ="jokers/" .. atlasKey .. ".png", px = jokerInfo.width or 71, py = jokerInfo.height or  95 })
 end
 -- Load Consumables
 for i, v in ipairs(conf_cardsauce.consumablesToLoad) do
@@ -1628,30 +1641,46 @@ local csauConfigTabs = function() return {
 					{n=G.UIT.T, config={text = localize("vs_options_sub"), scale = text_scale*0.5, colour = G.C.GREEN, shadow = true}},
 				}},]]--
 			}}
-			for k, _ in pairs(csau_config) do
-				if localize("vs_options_"..k) ~= "ERROR" then
-					csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.2}, nodes={
-						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							create_toggle({n=G.UIT.T, label = localize("vs_options_"..k), ref_table = csau_config, ref_value = k })
-						}},
-						{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-							{n=G.UIT.T, config={text = localize("vs_options_"..k.."_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
-						}},
-					}}
-				end
-			end
-			if localize("vs_options_trophies_r") then
-				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.2}, nodes={
-					{n=G.UIT.R, config={align = "cm", minw = 0.5, maxw = 2, minh = 0.6, padding = 0, r = 0.1, hover = true, colour = G.C.RED, button = "reset_trophies", shadow = true, focus_args = {nav = 'wide'}}, nodes={
-						{n=G.UIT.T, config={text = localize("vs_options_trophies_r"), scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT}}
+			if localize("vs_options_muteWega") then
+				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
+					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+						create_toggle({n=G.UIT.T, label = localize("vs_options_muteWega"), ref_table = csau_config, ref_value = 'muteWega' })
 					}},
 					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-						{n=G.UIT.T, config={text = localize("vs_options_trophies_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
+						{n=G.UIT.T, config={text = localize("vs_options_muteWega_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
+					}},
+				}}
+			end
+			if localize("vs_options_enableTrophies") then
+				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
+					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+						create_toggle({n=G.UIT.T, label = localize("vs_options_enableTrophies"), ref_table = csau_config, ref_value = 'enableTrophies', callback = (
+								function()
+									if csau_config['enableTrophies'] ~= G.loadTrophies then
+										SMODS.full_restart = 1
+									else
+										SMODS.full_restart = 0
+									end
+								end
+						) })
+					}},
+					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+						{n=G.UIT.T, config={text = localize("vs_options_enableTrophies_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
+					}},
+				}}
+			end
+			if localize("vs_options_resetTrophies_r") then
+				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
+					{n=G.UIT.R, config={align = "cm", minw = 0.5, maxw = 2, minh = 0.6, padding = 0, r = 0.1, hover = true, colour = G.C.RED, button = "reset_trophies", shadow = true, focus_args = {nav = 'wide'}}, nodes={
+						{n=G.UIT.T, config={text = localize("vs_options_resetTrophies_r"), scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT}}
+					}},
+					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+						{n=G.UIT.T, config={text = localize("vs_options_resetTrophies_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
 					}},
 				}}
 			end
 			if localize("vs_options_chadNova_r") and G.SETTINGS.chadNova then
-				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.2}, nodes={
+				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
 					{n=G.UIT.R, config={align = "cm", minw = 0.5, maxw = 2, minh = 0.6, padding = 0, r = 0.1, hover = true, colour = G.C.RED, button = "reset_chadnova", shadow = true, focus_args = {nav = 'wide'}}, nodes={
 						{n=G.UIT.T, config={text = localize("vs_options_chadNova_r"), scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT}}
 					}},
@@ -1721,30 +1750,6 @@ vs_credit_st3 = "ShrineFox"
 local header_scale = 1.1
 local bonus_padding = 1.15
 local support_padding = 0.015
-
-G.csau_collab_credits = {
-	Hearts = {
-		collab_AU = {vs_credit_13, vs_credit_23, vs_credit_22, vs_credit_17},
-		collab_CYP = {vs_credit_13, vs_credit_21, {vs_credit_23, 2}},
-		default = {vs_credit_13},
-	},
-	Clubs = {
-		default = {vs_credit_13},
-		collab_VS = {vs_credit_13, vs_credit_23, vs_credit_22, vs_credit_17},
-		collab_STS = {vs_credit_13, vs_credit_23, vs_credit_22, vs_credit_17},
-	},
-	Diamonds = {
-		default = {vs_credit_13},
-		collab_DTD = {vs_credit_13, vs_credit_23, vs_credit_22, vs_credit_17},
-		collab_SV = {vs_credit_13, {vs_credit_15, 3}},
-	},
-	Spades = {
-		default = {vs_credit_13},
-		collab_DTD = {vs_credit_13, vs_credit_23, vs_credit_22, vs_credit_17},
-		collab_SV = {vs_credit_13, {vs_credit_24, 3}},
-	}
-}
-
 
 SMODS.current_mod.credits_tab = function()
 	chosen = true

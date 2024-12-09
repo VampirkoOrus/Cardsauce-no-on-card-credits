@@ -9,6 +9,10 @@ local jokerInfo = {
 	perishable_compat = true
 }
 
+function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+end
+
 function jokerInfo.check_for_unlock(self, args)
 	if args.type == "win_deck" and args.deck == "b_green" then
 		return true

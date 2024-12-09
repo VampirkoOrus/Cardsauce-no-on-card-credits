@@ -134,17 +134,19 @@ function jokerInfo.calculate(self, card, context)
 				end
 			}))
 			return {
-				message = localize{type='variable',key='a_xmult',vars={self.ability.extra}},
-				Xmult_mod = self.ability.extra
+				message = localize{type='variable',key='a_xmult',vars={1.5}},
+				Xmult_mod = 1.5
 			}
 		end
 	end
 	if context.selling_self then
 		if card.ability.extra.form == "odio9" then
-			G.GAME.chips = G.GAME.blind.chips
-			G.STATE = G.STATES.HAND_PLAYED
-			G.STATE_COMPLETE = true
-			end_round()
+			if G.STATE == G.STATES.SELECTING_HAND then
+				G.GAME.chips = G.GAME.blind.chips
+				G.STATE = G.STATES.HAND_PLAYED
+				G.STATE_COMPLETE = true
+				end_round()
+			end
 		end
 	end
 end

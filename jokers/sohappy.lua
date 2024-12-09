@@ -25,6 +25,9 @@ local function changeHandsAndDiscards(handcrement, discardcrement)
 	ease_discard(discardcrement)
 end
 
+function jokerInfo.loc_vars(self, info_queue)
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+end
 
 function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_sohappy" })

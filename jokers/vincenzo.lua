@@ -13,6 +13,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
 end
 
 function jokerInfo.add_to_deck(self, card)
