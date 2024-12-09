@@ -1,55 +1,16 @@
 # Cardsauce
 A Balatro mod made for Vinesauce!
 
-~~Uses Steammodded 0.9.8. This project would not be possible without its framework!~~
-**Now uses Steammodded 1.0.0 on this branch.**
+![Cardsauce Logo](https://i.imgur.com/aKvF0sg.png)
 
---
+**Cardsauce** is a Vinesauce-themed expansion for Balatro, made in collaboration with the Balatro Discord and Vinesauce communities! Featuring art from several talented artists, Cardsauce adds 50 new Jokers, as well as a handful of other new additions to the game.
 
-Spreadsheet of planned Jokers:
+## Installation
 
-https://docs.google.com/spreadsheets/d/1EhX1TviLLW4z4-KLvTPBau5FKBrjF7w6nNXOoNjIYjc/edit#gid=0
+This mod requires [Lovely](https://github.com/ethangreen-dev/lovely-injector) and the latest version of [Steammodded](https://github.com/Steamopollys/Steamodded) **(Version 1.0.0~ALPHA-1203a or later)**. Without these dependencies, this mod will not function.
 
---
+## Credits
+Created by **BarrierTrio/Gote** in collaboration with **Keku**
 
-NEED HELP WITH:
-
--~~Shrimp Joker retriggering Blue Seal card enhancements~~ ✅
-
--~~Transformation timing on Two-Faced Joker~~ ✅
-
--Make SPEEEN's pop-up work with Oops! All 6s **[NOTE FROM KEKU: ❓]**
-
--~~I'm so Happy/I'm so Sad and Odious Joker joker transformation~~ ✅
-
--~~Make Pepperoni Secret mod-friendly by calling the hand's starting visibility (is this possible?)~~ **[NOTE FROM KEKU: yes, it's possible :) ]** ✅
-
--~~Add the compatible button for Green Needle~~✅
-
---
-
-SPECIAL THANKS:
-
-Art:
-
--SagaciousCejai
-
-Coding:
-
--DPS2004
-
--Nether
-
--Mysthaps
-
--Aurelius7309
-
-Sound API:
-
--Infarcactus
-
-Support:
-
--Lyman (from JankJonklers)
-
--Akai (from BalatroStuck)
+Detailed credits for everyone else who contributed to the mod can be found in-game in Cardsauce's credits tab in the Mods menu. There are too many names to list here and some credits spoil a bit of the stuff you'll discover in the mod, so just download it and see it all for yourself!
+ A huge thank you to all the artists from Artcord Collaberative and the Vinesauce discord who joined the project, your help means the world! 💚
