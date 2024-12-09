@@ -2,14 +2,14 @@ local jokerInfo = {
     name = '2 Kings 2:23-24',
     config = {
         extra = {
-            x_mult = 5,
+            x_mult = 2.5,
             cards = {}
         },
     },
     rarity = 3,
-    cost = 6,
+    cost = 8,
     unlocked = false,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true
 }

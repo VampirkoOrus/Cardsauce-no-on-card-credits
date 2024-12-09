@@ -497,7 +497,7 @@ return {
 			wheel2 = {
 				name = "The Wheel of Fortune",
 				text = {
-					"{C:green}1 in 4{} chance to add",
+					"{C:green}#1# in 4{} chance to add",
 					"{C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
 					"{C:dark_edition}Polychrome{} edition",
 					"to a random {C:attention}Joker",
@@ -534,7 +534,7 @@ return {
 				},
 			},
 			guestartist5 = {
-				name = "Artist",
+				name = "Voice Acting",
 				text = {
 					"{E:1}AmtraxVA{}",
 				},
@@ -623,7 +623,8 @@ return {
 				text = {
 					"{X:mult,C:white}X0.5{} Mult for every {C:money}$10{}",
 					"spent on this Joker, spend",
-					"all {C:attention}money{} obtaining this",
+					"all {C:money}money{} obtaining this",
+					"{C:inactive}({}{C:attention}Sell value{} {C:inactive}capped at{} {C:money}$10{}{C:inactive}){}",
 					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
 				},
 			},
@@ -1160,7 +1161,7 @@ return {
 			j_csau_kerosene = {
 				name = "Kerosene",
 				text = {
-					"This Joker gains {C:chips}+#2# Chips{}",
+					"This Joker gains {C:chips}+#2#{} Chips",
 					"if played hand causes the",
 					"score to {C:attention}catch fire{}",
 					"{C:inactive}(Currently {C:chips}+#1#{} {C:inactive}Chips){}"
@@ -1201,7 +1202,7 @@ return {
 				text = {
 					"This Joker gains {X:mult,C:white}X#2#{} Mult for each",
 					"time you leave the shop with the",
-					"same amount of {C:attention}money{} you had",
+					"same amount of {C:money}money{} you had",
 					"when you entered",
 					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
 				},

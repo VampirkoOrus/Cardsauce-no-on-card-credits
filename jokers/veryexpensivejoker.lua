@@ -7,7 +7,7 @@ local jokerInfo = {
 		}
 	},
 	rarity = 2,
-	cost = 10,
+	cost = 1,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true
@@ -19,12 +19,15 @@ end
 
 function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_dink" })
-	if G.GAME.dollars == card.cost then
+	if G.GAME.dollars == card.cost and card.area == G.shop_jokers then
 		if card.cost >= 60 then
 			check_for_unlock({ type = "purchase_dink" })
 		end
 		card.ability.extra.x_mult = (math.floor(card.cost/10)/2) + 1
 		card.sell_cost = math.max(1, math.floor(card.cost/2))
+		if card.sell_cost > 10 then
+			card.sell_cost = 10
+		end
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				card:juice_up()

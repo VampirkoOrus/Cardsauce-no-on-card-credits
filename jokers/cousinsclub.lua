@@ -25,11 +25,11 @@ end
 function jokerInfo.calculate(self, card, context)
 	if context.individual and context.cardarea == G.play and not card.debuff and context.other_card:is_suit('Clubs') then
 		local chip = card.ability.extra.chip_mod
-		if context.scoring_name == "Flush" then
+		if next(context.poker_hands['Flush']) then
 			chip = chip * 2
 		end
 		card.ability.extra.chips = card.ability.extra.chips + chip
-		card_eval_status_text(card, 'extra', nil, nil, nil, {message = context.scoring_name == "Flush" and localize('k_upgrade_double_ex') or localize('k_upgrade_ex'), colour = G.C.CHIPS})
+		card_eval_status_text(card, 'extra', nil, nil, nil, {message = next(context.poker_hands['Flush']) and localize('k_upgrade_double_ex') or localize('k_upgrade_ex'), colour = G.C.CHIPS})
 	end
 	if context.joker_main and context.cardarea == G.jokers then
 		return {

@@ -1,8 +1,8 @@
 --- STEAMODDED HEADER
 --- MOD_NAME: Cardsauce
 --- MOD_ID: Cardsauce
---- MOD_AUTHOR: [BarrierTrio/Gote]
---- MOD_DESCRIPTION: A Vinesauce-themed expansion for Balatro, made in collaboration with the Balatro Discord and the Vinesauce community!
+--- MOD_AUTHOR: [BarrierTrio/Gote & Keku]
+--- MOD_DESCRIPTION: A Vinesauce-themed expansion for Balatro, made in collaboration with the Balatro Discord and Vinesauce communities!
 --- BADGE_COLOUR: 32A852
 --- DISPLAY_NAME: Cardsauce
 --- PREFIX: csau
@@ -637,6 +637,7 @@ G.C.COLOUR1 = G.SETTINGS.CS_COLOR1 or G.C.RED
 G.C.COLOUR2 = G.SETTINGS.CS_COLOR2 or G.C.BLUE
 G.C.BLIND.Small = G.SETTINGS.CS_COLOR3 or HEX('50846e')
 G.C.BLIND.Big = G.SETTINGS.CS_COLOR3 or HEX('50846e')
+G.C.BLIND.won = G.SETTINGS.CS_COLOR3 or HEX('50846e')
 G.CUSTOMHEX1 = ""
 G.CUSTOMHEX2 = ""
 G.CUSTOMHEX3 = ""
@@ -814,6 +815,7 @@ for color, _ in pairs(colors) do
 	G.FUNCS["change_color_3_" .. color] = function()
 		G.C.BLIND.Small = G.C[color]
 		G.C.BLIND.Big = G.C[color]
+		G.C.BLIND.won = G.C[color]
 		ease_background_colour{new_colour = G.C[color], contrast = 1}
 		csau_save_color(3, color)
 	end
@@ -857,6 +859,7 @@ G.FUNCS.apply_colors = function()
 				if i==3 then
 					G.C.BLIND.Small = HEX(hex)
 					G.C.BLIND.Big = HEX(hex)
+					G.C.BLIND.won = HEX(hex)
 					ease_background_colour{new_colour = HEX(hex), contrast = 1}
 					G.SETTINGS["CS_COLOR"..i] = HEX(hex)
 					G:save_settings()
