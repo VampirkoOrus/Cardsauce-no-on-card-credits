@@ -289,8 +289,7 @@ return {
 			},
 			b_color_selector_desc = "(Click colors to update swirl)",
 			ph_armageddon = "Annihilated by Odio",
-			ph_mr_bones = "Saved by ",
-			ph_saved_epoch = "The Epoch",
+			ph_saved_vague = "Saved by Joker",
 			k_upgrade_double_ex = "Double Upgrade!",
 			k_cavestorytext = "A black wind flows through you...",
 			k_aced = "Aced!",
@@ -395,6 +394,7 @@ return {
 			ach_csau_the_band = "The Band",
 			ach_csau_chadley_power = "The Power of Chadnova",
 			ach_csau_red_convert = "Pro-lapsed Gamer",
+			ach_csau_five_deathcard = "Ouroboros",
 
 			ach_csau_all_discovered = "Card Addict",
 			ach_csau_big_meat = "The Big Meat",
@@ -468,6 +468,7 @@ return {
 			ach_csau_the_band = "Have 4 Red Vox Jokers in your Joker slots",
 			ach_csau_chadley_power = "Harness but a fraction of Chadley's secret power",
 			ach_csau_red_convert = "Use Why Are You Red? to turn a Poker Hand into a Secret Hand",
+			ach_csau_five_deathcard = "Purchase the same Deathcard from the shop 5 times in a single run",
 
 			ach_csau_all_discovered = "Discover All Cardsauce Jokers",
 			ach_csau_big_meat = "Unlock every Cardsauce Achievement",
@@ -591,6 +592,12 @@ return {
 				name = "Artist",
 				text = {
 					"{E:1}BardVergil{}",
+				},
+			},
+			guestartist16 = {
+				name = "Artist",
+				text = {
+					"{E:1}GuffNFluff{}",
 				},
 			},
 			rogernote = {
@@ -1120,8 +1127,8 @@ return {
 			j_csau_chromedup = {
 				name = "Chromed Up",
 				text = {
-					"Played {C:attention}Steel Cards{} give {X:mult,C:white}X#1#{}",
-					"Mult when scored",
+					"Played {C:attention}Steel Cards{} give",
+					"{X:mult,C:white}X#1#{} Mult when scored",
 				},
 			},
 			j_csau_kings = {

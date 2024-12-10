@@ -23,13 +23,16 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.individual and context.cardarea == G.play and not card.debuff and context.other_card:is_suit('Clubs') then
+	if context.individual and context.cardarea == G.play and not card.debuff and not context.blueprint and context.other_card:is_suit('Clubs') then
 		local chip = card.ability.extra.chip_mod
 		if next(context.poker_hands['Flush']) then
 			chip = chip * 2
 		end
 		card.ability.extra.chips = card.ability.extra.chips + chip
-		card_eval_status_text(card, 'extra', nil, nil, nil, {message = next(context.poker_hands['Flush']) and localize('k_upgrade_double_ex') or localize('k_upgrade_ex'), colour = G.C.CHIPS})
+		return {
+			extra = {focus = card, message = next(context.poker_hands['Flush']) and localize('k_upgrade_double_ex') or localize('k_upgrade_ex'), colour = G.C.CHIPS},
+			card = card
+		}
 	end
 	if context.joker_main and context.cardarea == G.jokers then
 		return {

@@ -6,6 +6,7 @@
 --- BADGE_COLOUR: 32A852
 --- DISPLAY_NAME: Cardsauce
 --- PREFIX: csau
+--- VERSION: 1.0
 
 local mod_path = SMODS.current_mod.path
 local usable_path = mod_path:match("Mods/[^/]+")
@@ -200,6 +201,7 @@ if csau_enabled['enableTrophies'] then
 		'the_band',
 		'chadley_power',
 		'red_convert',
+		'five_deathcard',
 		-- Vine
 		'all_discovered',
 		'big_meat',
@@ -1746,6 +1748,7 @@ vs_credit_22 = "Greeeg"
 vs_credit_23 = "CheesyDraws"
 vs_credit_24 = "Jazz_Jen"
 vs_credit_25 = "BardVergil"
+vs_credit_26 = "GuffNFluff"
 vs_credit_st1 = "tortoise"
 vs_credit_st2 = "Protokyuuu"
 vs_credit_st3 = "ShrineFox"
@@ -1857,6 +1860,9 @@ SMODS.current_mod.credits_tab = function()
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_25, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_26, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}},
 							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={

@@ -9,7 +9,13 @@ local jokerInfo = {
 	eternal_compat = false,
 	perishable_compat = true,
 	hasSoul = true,
+	width = 284,
+	height = 380,
 }
+
+function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = {key = "guestartist16", set = "Other"}
+end
 
 function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_epoch" })
@@ -24,21 +30,15 @@ function jokerInfo.calculate(self, card, context)
 				play_sound('tarot1')
 				card:start_dissolve()
 				ante_dec = G.GAME.round_resets.ante - 1
-				sendDebugMessage("round_sesets.blind_ante Before: " .. G.GAME.round_resets.blind_ante)
-				sendDebugMessage("round_sesets.ante Before: " .. G.GAME.round_resets.ante)
 				ease_ante(-ante_dec)
 				G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
 				G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante-ante_dec
-				sendDebugMessage("round_sesets.blind_ante After: " .. G.GAME.round_resets.blind_ante)
-				sendDebugMessage("round_sesets.ante After: " .. G.GAME.round_resets.ante)
 				return true
 			end
 		}))
-		G.GAME.SAVEDBY = G.localization.descriptions.Joker.j_mr_bones.name
 	return {
 		message = localize('k_saved_ex'),
 		saved = true,
-		saved_by_message = localize('ph_saved_epoch'),
 		colour = G.C.RED
 	}
 	end

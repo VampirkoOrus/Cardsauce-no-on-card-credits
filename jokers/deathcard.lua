@@ -23,6 +23,9 @@ end
 
 function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_deathcard" })
+	if card.ability.timesSold and card.ability.timesSold >= 5 then
+		check_for_unlock({ type = "five_deathcard" })
+	end
 	if not card.ability.id then
 		if not G.GAME.uniqueDeathcardsAcquired then
 			G.GAME.uniqueDeathcardsAcquired = 1
