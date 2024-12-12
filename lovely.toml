@@ -347,6 +347,26 @@ position = "at"
 payload = "{n=G.UIT.O, config={object = DynaText({string = {' '..localize('ph_saved_vague')..' '}, colours = {G.C.FILTER}, shadow = true, pop_in = 0, scale = 0.5*scale, silent = true})}}"
 match_indent = true
 
+[[patches]]
+[patches.pattern]
+target = "engine/controller.lua"
+pattern = "if self.text_input_hook then"
+position = "before"
+payload = '''
+    if key == mgt[mgt_num] then
+		if key == "o" then
+			send("METAL GEAR TACO MODE ACTIVATED!")
+			G.debug_background_toggle = not G.debug_background_toggle
+			mgt_num = 1
+		else
+			mgt_num = mgt_num + 1
+		end
+	else
+		mgt_num = 1
+	end
+'''
+match_indent = true
+
 # TEMPORARY
 [[patches]]
 [patches.pattern]

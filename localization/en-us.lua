@@ -600,6 +600,12 @@ return {
 					"{E:1}GuffNFluff{}",
 				},
 			},
+			guestartist17 = {
+				name = "Artist",
+				text = {
+					"{E:1}Jazz_Jen{}",
+				},
+			},
 			rogernote = {
 				name = "Conversion Table",
 				text = {
@@ -1067,7 +1073,9 @@ return {
                     "Prevents Death if chips",
                     "scored are at least {C:attention}23%",
                     "of required chips and",
-					"reverts to Ante {E:1,C:attention}1",
+					"reverts to Ante {C:attention}1",
+					"lose all {C:money}money{} and all",
+					"hands drop to {C:planet}Level 1{}",
                     "{S:1.1,C:red,E:2}self destructs{}",
                 },
 				unlock = {
@@ -1081,7 +1089,9 @@ return {
 					"Prevents Death if chips",
 					"scored are at least {C:attention}23%",
 					"of required chips and",
-					"reverts to Ante {E:1,C:attention}1",
+					"reverts to Ante {C:attention}1{} and",
+					"Lose all {C:money}money{} and all",
+					"hands drop to {C:planet}Level 1{}",
 					"{S:1.1,C:red,E:2}self destructs{}",
 				},
 				unlock = {
