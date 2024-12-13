@@ -2,7 +2,6 @@ local jokerInfo = {
     name = '2 Kings 2:23-24',
     config = {
         extra = {
-            x_mult = 2.5,
             cards = {}
         },
     },
@@ -192,15 +191,6 @@ function jokerInfo.remove_from_deck(self, card)
                 return true
             end
         }))
-    end
-end
-
-function jokerInfo.calculate(self, card, context)
-    if context.joker_main and context.cardarea == G.jokers then
-        return {
-            message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
-            Xmult_mod = card.ability.extra.x_mult,
-        }
     end
 end
 

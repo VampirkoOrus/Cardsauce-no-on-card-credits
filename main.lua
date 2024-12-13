@@ -41,6 +41,18 @@ for _, file in ipairs(skin_files) do
 	deck_skins[#deck_skins + 1] = file:sub(2, -5)
 end
 
+local collab_files = {}
+for s in recursiveEnumerate(usable_path .. "/assets/1x/collabs/"):gmatch("[^\r\n]+") do
+	if s:match("%.png$") then
+		collab_files[#collab_files + 1] = s:gsub(usable_path .. "/assets/1x/collabs/", "")
+	end
+end
+
+local collab_skins = {}
+for _, file in ipairs(collab_files) do
+	collab_skins[#collab_skins + 1] = file:sub(2, -5)
+end
+
 local tarot_files = {}
 for s in recursiveEnumerate(usable_path .. "/assets/1x/tarot/"):gmatch("[^\r\n]+") do
 	tarot_files[#tarot_files + 1] = s:gsub(usable_path .. "/assets/1x/tarot/", "")
@@ -1121,6 +1133,7 @@ end
 
 -- Base Deck Textures
 for i = 1, 2 do
+	--[[
 	SMODS.Atlas {
 		key = "collab_TBoI_"..i,
 		path = "collabs/h_wildcards.png",
@@ -1177,6 +1190,7 @@ for i = 1, 2 do
 		py = 95,
 		prefix_config = { key = false }
 	}
+	]]--
 	SMODS.Atlas {
 		key = "cards_"..i,
 		path = "BaseDeck.png",
@@ -1262,27 +1276,97 @@ for _, skin in ipairs(deck_skins) do
 	}
 end
 
--- Deck Skins: Clubs
-SMODS.DeckSkin{
-	key = "ds_c_vineshroom",
-	suit = "Clubs",
+-- Collab Atlases
+for _, skin in ipairs(collab_skins) do
+	SMODS.Atlas{
+		key = skin,
+		path = "collabs/"..skin..".png",
+		px = 71,
+		py = 95,
+		atlas_table = "ASSET_ATLAS",
+	}
+end
+
+-- Characters Replacements
+SMODS.DeckSkin:take_ownership('collab_AU',{
+	loc_txt = {
+		["en-us"] = "Characters"
+	},
+	lc_atlas = "csau_h_characters",
+	hc_atlas = "csau_h_characters"
+})
+SMODS.DeckSkin:take_ownership('collab_TW',{
+	loc_txt = {
+		["en-us"] = "Characters"
+	},
+	lc_atlas = "csau_s_characters",
+	hc_atlas = "csau_s_characters"
+})
+SMODS.DeckSkin:take_ownership('collab_VS',{
+	loc_txt = {
+		["en-us"] = "Characters"
+	},
+	lc_atlas = "csau_c_characters",
+	hc_atlas = "csau_c_characters"
+})
+SMODS.DeckSkin:take_ownership('collab_DTD',{
+	loc_txt = {
+		["en-us"] = "Characters"
+	},
+	lc_atlas = "csau_d_characters",
+	hc_atlas = "csau_d_characters"
+})
+
+-- The Mascots, Classics, Wildcards, and Confidants
+SMODS.DeckSkin:take_ownership('collab_TBoI',{
+	loc_txt = {
+		["en-us"] = "The Wildcards"
+	},
+	lc_atlas = "csau_h_wildcards",
+	hc_atlas = "csau_h_wildcards"
+})
+SMODS.DeckSkin:take_ownership('collab_CYP',{
+	loc_txt = {
+		["en-us"] = "The Confidants"
+	},
+	lc_atlas = "csau_s_confidants",
+	hc_atlas = "csau_s_confidants"
+})
+SMODS.DeckSkin:take_ownership('collab_STS',{
+	loc_txt = {
+		["en-us"] = "The Mascots"
+	},
+	lc_atlas = "csau_c_mascots",
+	hc_atlas = "csau_c_mascots"
+})
+SMODS.DeckSkin:take_ownership('collab_SV',{
+	loc_txt = {
+		["en-us"] = "The Classics"
+	},
+	lc_atlas = "csau_d_classics",
+	hc_atlas = "csau_d_classics"
+})
+
+-- Vineshroom
+SMODS.DeckSkin:take_ownership('collab_PC',{
 	ranks =  {"Ace"},
-	lc_atlas = "c_vineshroom",
 	loc_txt = {
 		["en-us"] = "Vineshroom"
 	},
-	posStyle = "collab"
-}
-SMODS.DeckSkin{
-	key = "ds_c_collab_VS_DS",
-	suit = "Clubs",
+	lc_atlas = "c_vineshroom",
+	hc_atlas = "c_vineshroom"
+})
+
+-- Deck Skins: Clubs
+SMODS.DeckSkin:take_ownership('collab_WF',{
 	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
 	lc_atlas = "c_collab_VS_DS",
+	hc_atlas = "c_collab_VS_DS",
 	loc_txt = {
 		["en-us"] = "Vampire Survivors [DS]"
 	},
 	posStyle = "ranks"
-}
+})
 SMODS.DeckSkin{
 	key = "ds_c_collab_STS_DS",
 	suit = "Clubs",
@@ -1293,6 +1377,27 @@ SMODS.DeckSkin{
 	},
 	posStyle = "ranks"
 }
+SMODS.DeckSkin{
+	key = "ds_c_collab_PC_DS",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King'},
+	lc_atlas = "c_collab_PC_DS",
+	loc_txt = {
+		["en-us"] = "Potion Craft [DS]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_c_collab_WF_DS",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King'},
+	lc_atlas = "c_collab_WF_DS",
+	loc_txt = {
+		["en-us"] = "Warframe [DS]"
+	},
+	posStyle = "ranks"
+}
+
 SMODS.DeckSkin{
 	key = "ds_c_collab_VS_vineshroom",
 	suit = "Clubs",
@@ -1314,6 +1419,27 @@ SMODS.DeckSkin{
 	posStyle = "ranks"
 }
 SMODS.DeckSkin{
+	key = "ds_c_collab_PC_vineshroom",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "c_collab_PC_VS",
+	loc_txt = {
+		["en-us"] = "Potion Craft [VS]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_c_collab_WF_vineshroom",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "c_collab_WF_VS",
+	loc_txt = {
+		["en-us"] = "Warframe [VS]"
+	},
+	posStyle = "ranks"
+}
+
+SMODS.DeckSkin{
 	key = "ds_c_collab_VS",
 	suit = "Clubs",
 	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
@@ -1334,6 +1460,26 @@ SMODS.DeckSkin{
 	posStyle = "ranks"
 }
 SMODS.DeckSkin{
+	key = "ds_c_collab_PC",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "c_collab_PC",
+	loc_txt = {
+		["en-us"] = "Potion Craft"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_c_collab_WF",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "c_collab_WF",
+	loc_txt = {
+		["en-us"] = "Warframe"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
 	key = "ds_c_shroomless",
 	suit = "Clubs",
 	ranks =  {"Ace"},
@@ -1345,26 +1491,45 @@ SMODS.DeckSkin{
 }
 
 -- Deck Skins: Hearts
-SMODS.DeckSkin{
-	key = "ds_h_collab_AU_ES",
-	suit = "Hearts",
+SMODS.DeckSkin:take_ownership('collab_CL',{
 	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
 	lc_atlas = "h_collab_AU_ES",
+	hc_atlas = "h_collab_AU_ES",
 	loc_txt = {
 		["en-us"] = "Among Us [ES]"
 	},
 	posStyle = "ranks"
-}
-SMODS.DeckSkin{
-	key = "ds_h_collab_TBoI_ES",
-	suit = "Hearts",
+})
+SMODS.DeckSkin:take_ownership('collab_D2',{
 	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
 	lc_atlas = "h_collab_TBoI_ES",
+	hc_atlas = "h_collab_TBoI_ES",
 	loc_txt = {
-		["en-us"] = "Binding of Isaac [ES]"
+		["en-us"] = "The Binding of Isaac [ES]"
+	},
+	posStyle = "ranks"
+})
+SMODS.DeckSkin{
+	key = "ds_h_collab_CL_ES",
+	suit = "Hearts",
+	ranks =  {'Jack', 'Queen', 'King'},
+	lc_atlas = "h_collab_CL_ES",
+	loc_txt = {
+		["en-us"] = "Cult of the Lamb [ES]"
 	},
 	posStyle = "ranks"
 }
+SMODS.DeckSkin{
+	key = "ds_h_collab_D2_ES",
+	suit = "Hearts",
+	ranks =  {'Jack', 'Queen', 'King'},
+	lc_atlas = "h_collab_D2_ES",
+	loc_txt = {
+		["en-us"] = "Divinity Original Sin 2 [ES]"
+	},
+	posStyle = "ranks"
+}
+
 SMODS.DeckSkin{
 	key = "ds_h_collab_AU",
 	suit = "Hearts",
@@ -1386,6 +1551,27 @@ SMODS.DeckSkin{
 	posStyle = "ranks"
 }
 SMODS.DeckSkin{
+	key = "ds_h_collab_CL",
+	suit = "Hearts",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "h_collab_CL",
+	loc_txt = {
+		["en-us"] = "Cult of the Lamb"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_h_collab_D2",
+	suit = "Hearts",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "h_collab_D2",
+	loc_txt = {
+		["en-us"] = "Divinity Original Sin 2"
+	},
+	posStyle = "ranks"
+}
+
+SMODS.DeckSkin{
 	key = "ds_h_shroomless",
 	suit = "Hearts",
 	ranks =  {"Ace"},
@@ -1396,79 +1582,46 @@ SMODS.DeckSkin{
 	posStyle = "collab"
 }
 
--- Deck Skins: Diamonds
-SMODS.DeckSkin{
-	key = "ds_d_collab_DTD_FS",
-	suit = "Diamonds",
-	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
-	lc_atlas = "d_collab_DTD_FS",
-	loc_txt = {
-		["en-us"] = "Dave The Diver [FS]"
-	},
-	posStyle = "ranks"
-}
-SMODS.DeckSkin{
-	key = "ds_d_collab_SV_FS",
-	suit = "Diamonds",
-	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
-	lc_atlas = "d_collab_SV_FS",
-	loc_txt = {
-		["en-us"] = "Stardew Valley [FS]"
-	},
-	posStyle = "ranks"
-}
-SMODS.DeckSkin{
-	key = "ds_d_collab_DTD",
-	suit = "Diamonds",
-	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
-	lc_atlas = "d_collab_DTD",
-	loc_txt = {
-		["en-us"] = "Dave The Diver"
-	},
-	posStyle = "ranks"
-}
-SMODS.DeckSkin{
-	key = "ds_d_collab_SV_FS",
-	suit = "Diamonds",
-	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
-	lc_atlas = "d_collab_SV_FS",
-	loc_txt = {
-		["en-us"] = "Stardew Valley"
-	},
-	posStyle = "ranks"
-}
-SMODS.DeckSkin{
-	key = "ds_d_shroomless",
-	suit = "Diamonds",
-	ranks =  {"Ace"},
-	lc_atlas = "d_shroomless",
-	loc_txt = {
-		["en-us"] = "Default"
-	},
-	posStyle = "collab"
-}
-
 -- Deck Skins: Spades
-SMODS.DeckSkin{
-	key = "ds_s_collab_TW_TC",
-	suit = "Spades",
+SMODS.DeckSkin:take_ownership('collab_SK',{
 	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
 	lc_atlas = "s_collab_TW_TC",
+	hc_atlas = "s_collab_TW_TC",
 	loc_txt = {
 		["en-us"] = "The Witcher [TC]"
 	},
 	posStyle = "ranks"
-}
-SMODS.DeckSkin{
-	key = "ds_s_collab_CYP_TC",
-	suit = "Spades",
+})
+SMODS.DeckSkin:take_ownership('collab_DS',{
 	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
 	lc_atlas = "s_collab_CYP_TC",
+	hc_atlas = "s_collab_CYP_TC",
 	loc_txt = {
 		["en-us"] = "Cyberpunk 2077 [TC]"
 	},
 	posStyle = "ranks"
+})
+SMODS.DeckSkin{
+	key = "ds_s_collab_SK_TC",
+	suit = "Spades",
+	ranks =  {'Jack', 'Queen', 'King'},
+	lc_atlas = "s_collab_SK_TC",
+	loc_txt = {
+		["en-us"] = "Shovel Knight [TC]"
+	},
+	posStyle = "ranks"
 }
+SMODS.DeckSkin{
+	key = "ds_s_collab_DS_TC",
+	suit = "Spades",
+	ranks =  {'Jack', 'Queen', 'King'},
+	lc_atlas = "s_collab_DS_TC",
+	loc_txt = {
+		["en-us"] = "Don't Starve [TC]"
+	},
+	posStyle = "ranks"
+}
+
 SMODS.DeckSkin{
 	key = "ds_s_collab_TW",
 	suit = "Spades",
@@ -1490,10 +1643,123 @@ SMODS.DeckSkin{
 	posStyle = "ranks"
 }
 SMODS.DeckSkin{
+	key = "ds_s_collab_SK",
+	suit = "Spades",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "s_collab_SK",
+	loc_txt = {
+		["en-us"] = "Shovel Knight"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_s_collab_DS",
+	suit = "Spades",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "s_collab_DS",
+	loc_txt = {
+		["en-us"] = "Don't Starve"
+	},
+	posStyle = "ranks"
+}
+
+SMODS.DeckSkin{
 	key = "ds_s_shroomless",
 	suit = "Spades",
 	ranks =  {"Ace"},
 	lc_atlas = "s_shroomless",
+	loc_txt = {
+		["en-us"] = "Default"
+	},
+	posStyle = "collab"
+}
+
+-- Deck Skins: Diamonds
+SMODS.DeckSkin:take_ownership('collab_EG',{
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_DTD_FS",
+	hc_atlas = "d_collab_DTD_FS",
+	loc_txt = {
+		["en-us"] = "Dave The Diver [FS]"
+	},
+	posStyle = "ranks"
+})
+SMODS.DeckSkin:take_ownership('collab_XR',{
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_SV_FS",
+	hc_atlas = "d_collab_SV_FS",
+	loc_txt = {
+		["en-us"] = "Stardew Valley [FS]"
+	},
+	posStyle = "ranks"
+})
+SMODS.DeckSkin{
+	key = "ds_d_collab_EG_FS",
+	suit = "Diamonds",
+	ranks =  {'Jack', 'Queen', 'King'},
+	lc_atlas = "d_collab_EG_FS",
+	loc_txt = {
+		["en-us"] = "Enter the Gungeon [FS]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_d_collab_XR_FS",
+	suit = "Diamonds",
+	ranks =  {'Jack', 'Queen', 'King'},
+	lc_atlas = "d_collab_XR_FS",
+	loc_txt = {
+		["en-us"] = "1000xRESIST [FS]"
+	},
+	posStyle = "ranks"
+}
+
+SMODS.DeckSkin{
+	key = "ds_d_collab_DTD",
+	suit = "Diamonds",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_DTD",
+	loc_txt = {
+		["en-us"] = "Dave The Diver"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_d_collab_SV",
+	suit = "Diamonds",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_SV",
+	loc_txt = {
+		["en-us"] = "Stardew Valley"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_d_collab_EG",
+	suit = "Diamonds",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_EG",
+	loc_txt = {
+		["en-us"] = "Enter the Gungeon"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_d_collab_XR",
+	suit = "Diamonds",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "d_collab_XR",
+	loc_txt = {
+		["en-us"] = "1000xRESIST"
+	},
+	posStyle = "ranks"
+}
+
+SMODS.DeckSkin{
+	key = "ds_d_shroomless",
+	suit = "Diamonds",
+	ranks =  {"Ace"},
+	lc_atlas = "d_shroomless",
 	loc_txt = {
 		["en-us"] = "Default"
 	},

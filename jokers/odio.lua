@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Odious Joker [WIP]',
+	name = 'Odious Joker',
 	config = {
 		extra = {
 			form = nil,
@@ -18,7 +18,7 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 local forms = {
-	[1] = nil,
+	[1] = "odio",
 	[2] = "odio2",
 	[3] = "odio3",
 	[4] = "odio4",
@@ -35,17 +35,18 @@ for i = 1, #forms do
 	end
 end
 
+function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+	if card.config.center.discovered then
+		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
+		full_UI_table.name = localize{type = 'name', key = self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
+	end
+	localize{type = 'descriptions', key = "j_csau_"..card.ability.extra.form or self.key, set = self.set, nodes = desc_nodes, vars = {}}
+end
+
 function jokerInfo.calculate(self, card, context)
-	if context.end_of_round and G.GAME.blind.boss and not context.other_card then
-		if not card.getting_sliced and card.ability.extra.form ~= "odio9" then
-			if card.ability.extra.form then
-				sendDebugMessage("Current Odious Form: "..card.ability.extra.form)
-			end
-			card.ability.extra.formNum = card.ability.extra.formNum + 1
-			if card.ability.extra.formNum == 9 then
-				check_for_unlock({ type = "final_odio" })
-			end
-			local form = forms[card.ability.extra.formNum]
+	if context.setting_blind and not card.debuff and not (context.blueprint_card or card).getting_sliced and not context.blueprint_card then
+		if not card.ability.extra.form ~= "odio9" and G.GAME.round_resets.ante ~= 1 then
+			local form = forms[G.GAME.round_resets.ante]
 			local trigger = true
 			if trigger then
 				trigger = false
@@ -75,6 +76,29 @@ function jokerInfo.calculate(self, card, context)
 			end
 		end
 	end
+	if context.end_of_round and G.GAME.blind.boss and not context.other_card then
+		if not card.getting_sliced and card.ability.extra.form ~= "odio9" then
+			if G.GAME.round_resets.ante == 8 then
+				local form = forms[9]
+				local trigger = true
+				if trigger then
+					trigger = false
+					card.ability.extra.form = form
+					card:juice_up(1, 1)
+					card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_'..card.ability.extra.form), colour = G.C.PURPLE, no_juice = true})
+				end
+				check_for_unlock({ type = "final_odio" })
+			else
+				local form = forms[1]
+				local trigger = true
+				if trigger then
+					trigger = false
+					card.ability.extra.form = form
+					card:juice_up(1, 1)
+				end
+			end
+		end
+	end
 	if context.individual and context.cardarea == G.play and not card.debuff then
 		if card.ability.extra.form == "odio2" then
 			local big_card = nil
@@ -92,13 +116,15 @@ function jokerInfo.calculate(self, card, context)
 	end
 	if context.joker_main and context.cardarea == G.jokers then
 		if card.ability.extra.form == "odio4" then
-			local card_limit = G.hand.config.real_card_limit or G.hand.config.card_limit
-			local empty_hand_slots = card_limit - #G.hand.cards
+			local empty_hand_slots = 5 - #context.full_hand
+			send(empty_hand_slots)
 			local slot_mult = empty_hand_slots * 5
-			return {
-				message = localize { type = 'variable', key = 'a_mult', vars = {slot_mult} },
-				mult_mod = slot_mult,
-			}
+			if slot_mult > 0 then
+				return {
+					message = localize { type = 'variable', key = 'a_mult', vars = {slot_mult} },
+					mult_mod = slot_mult,
+				}
+			end
 		end
 	end
 	if context.cardarea == G.jokers and context.before and not card.debuff then
@@ -156,9 +182,6 @@ function jokerInfo.update(self, card)
 		if card.config.center.atlas ~= card.ability.extra.form then
 			card.config.center.atlas = "csau_"..card.ability.extra.form
 			card:set_sprites(card.config.center)
-		end
-		if G.localization.descriptions["Joker"]["j_csau_odio"] ~= G.localization.descriptions["Joker"]["j_csau_"..card.ability.extra.form] then
-			G.localization.descriptions["Joker"]["j_csau_odio"] = G.localization.descriptions["Joker"]["j_csau_"..card.ability.extra.form]
 		end
 	end
 end

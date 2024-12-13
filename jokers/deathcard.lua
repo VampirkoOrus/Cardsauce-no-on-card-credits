@@ -5,12 +5,12 @@ local jokerInfo = {
 		timesSold = nil,
 		extra = {
 			money_mod = 5,
-			mult = 0,
+			mult = 4,
 			mult_mod = 10
 		},
 	},
 	rarity = 3,
-	cost = 5,
+	cost = 2,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true
@@ -22,6 +22,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card)
+	card.sell_cost = math.max(1, math.floor(card.cost/2))
 	check_for_unlock({ type = "discover_deathcard" })
 	if card.ability.timesSold and card.ability.timesSold >= 5 then
 		check_for_unlock({ type = "five_deathcard" })

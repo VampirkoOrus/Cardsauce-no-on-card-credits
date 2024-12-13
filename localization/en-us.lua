@@ -206,23 +206,15 @@ return {
 		collabs = {
 			Spades={
 				["1"]="Twitch Clips",
-				["2"]="Characters",
-				["3"]="The Confidants",
 			},
 			Hearts={
 				["1"]="Extrasauce",
-				["2"]="Characters",
-				["3"]="The Wildcards",
 			},
 			Clubs={
 				["1"]="Darkshroom",
-				["2"]="Characters",
-				["3"]="The Mascots",
 			},
 			Diamonds={
 				["1"]="Fullsauce",
-				["2"]="Characters",
-				["3"]="The Classics",
 			},
         },
 		dictionary = {
@@ -489,7 +481,7 @@ return {
 			bl_csau_hog = {
 				name="The Hog",
 				text={
-					"1 in 4 face cards",
+					"#1# in 4 face cards",
 					"become The Hog's prey"
 				},
 			},
@@ -644,9 +636,8 @@ return {
 			j_csau_quarterdumb = {
 				name = "Quarterdumb",
 				text = {
-					"{C:green}#1# in 2{} chance to gain {C:blue}+1{} Hand",
-					"this {C:attention}Blind{} if played hand",
-					"contains a {C:attention}Flush{}",
+					"Gain {C:blue}+1{} Hand this {C:attention}Blind{} if",
+					"played hand contains a {C:attention}Flush{}",
 				},
 				unlock = {
 					"{E:1,s:1.3}?????"
@@ -795,7 +786,7 @@ return {
 			j_csau_odio8 = {
 				name = "Odious Joker",
 				text = {
-					"Gain {C:attention}4{} {C:dark_edition}Negative{} copies of {C:purple}Death{}",
+					"Gain {C:attention}4{} {C:dark_edition}Negative{} copies of {C:purple}Death's card{}",
 				},
 			},
 			j_csau_odio9 = {
@@ -992,8 +983,8 @@ return {
 			j_csau_anotherlight = {
 				name = "Another Light",
 				text = {
-					"If played hand is a {C:attention}Flush{},",
-					"create a {C:purple}Tarot{}",
+					"If first hand of round is",
+					"a {C:attention}Flush{}, create a {C:purple}Tarot{}",
 					"card for that suit",
 					"{C:inactive}(Must have room){}",
 				},
@@ -1144,11 +1135,11 @@ return {
 			j_csau_kings = {
 				name = "2 Kings 2:23-24",
 				text = {
-					"{X:mult,C:white}X#1#{} Mult, but destroys {C:attention}42{} random",
-					"cards in your deck when acquired.",
+					"Destroys {C:attention}42{} random cards",
+					"in your deck when acquired.",
 					"{C:inactive}(Cards destroyed this way are{}",
-					"{C:inactive}added back to your deck when this{}",
-					"{C:inactive}Joker is sold/destroyed){}",
+					"{C:inactive}added back to your deck when{}",
+					"{C:inactive}this Joker is sold/destroyed){}",
 				},
 				unlock = {
 					"Use an {C:spectral}Immolate{} card"
@@ -1187,8 +1178,8 @@ return {
 			j_csau_purple = {
 				name = "The Purple Joker",
 				text = {
-					"If played hand is all {C:spades}Spades{},",
-					"create a {C:purple}Charm Tag{}",
+					"If first hand of round is all",
+					"{C:spades}Spades{}, create a {C:purple}Charm Tag{}",
 				},
 			},
 			j_csau_fate = {

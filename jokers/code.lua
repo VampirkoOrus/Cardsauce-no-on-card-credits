@@ -2,7 +2,7 @@ local jokerInfo = {
 	name = 'Industry Code',
 	config = {
 		extra = {
-			money = 25
+			money = 20
 		}
 	},
 	rarity = 2,

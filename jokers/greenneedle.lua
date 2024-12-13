@@ -45,7 +45,7 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
 		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
 		full_UI_table.name = localize{type = 'name', key = self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
 	end
-	localize{type = 'descriptions', key = self.key, set = self.set, nodes = desc_nodes, vars = vars}
+	localize{type = 'descriptions', key = self.key, set = self.set, nodes = desc_nodes, vars = self.loc_vars(self, info_queue, card)}
 	if card.area and card.area == G.jokers then
 		desc_nodes[#desc_nodes+1] = {
 			{n=G.UIT.C, config={align = "bm", minh = 0.4}, nodes={

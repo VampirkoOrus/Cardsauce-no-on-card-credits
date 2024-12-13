@@ -19,6 +19,13 @@ function blindInfo.recalc_debuff(self, card, from_blind)
     end
 end
 
+function blindInfo.loc_vars(self)
+    return {vars = {G.GAME.probabilities.normal} }
+end
+function blindInfo.collection_loc_vars(self)
+    return {vars = {G.GAME.probabilities.normal} }
+end
+
 function blindInfo.defeat(self)
     check_for_unlock({ type = "defeat_hog" })
 end
@@ -28,7 +35,7 @@ function blindInfo.press_play(self)
     G.E_MANAGER:add_event(Event({
         func = function()
             for i, v in ipairs(G.play.cards) do
-                if v.debuff and pseudorandom(pseudoseed('hogstrike')) < G.GAME.probabilities.normal/3 then
+                if v.debuff and pseudorandom(pseudoseed('hogstrike')) < G.GAME.probabilities.normal/2 then
                     destroy = true
                     if v.ability.name == 'Glass Card' then
                         v:shatter()

@@ -18,7 +18,7 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.cardarea == G.jokers and context.before and not card.debuff then
+	if context.cardarea == G.jokers and context.before and not card.debuff and G.GAME.current_round.hands_played == 0 then
 		if context.scoring_name == "Flush" then
 			local flush_type = 'Spades'
 			for k, v in ipairs(context.scoring_hand) do
