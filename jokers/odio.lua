@@ -2,7 +2,7 @@ local jokerInfo = {
 	name = 'Odious Joker',
 	config = {
 		extra = {
-			form = nil,
+			form = "odio",
 			formNum = 1
 		}
 	},
@@ -44,7 +44,7 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.setting_blind and not card.debuff and not (context.blueprint_card or card).getting_sliced and not context.blueprint_card then
+	if context.setting_blind and G.GAME.blind.boss and not card.debuff and not (context.blueprint_card or card).getting_sliced and not context.blueprint_card then
 		if not card.ability.extra.form ~= "odio9" and G.GAME.round_resets.ante ~= 1 then
 			local form = forms[G.GAME.round_resets.ante]
 			local trigger = true

@@ -983,7 +983,7 @@ return {
 			j_csau_anotherlight = {
 				name = "Another Light",
 				text = {
-					"If first hand of round is",
+					"If {C:attention}first hand{} of round is",
 					"a {C:attention}Flush{}, create a {C:purple}Tarot{}",
 					"card for that suit",
 					"{C:inactive}(Must have room){}",
@@ -1178,7 +1178,7 @@ return {
 			j_csau_purple = {
 				name = "The Purple Joker",
 				text = {
-					"If first hand of round is all",
+					"If {C:attention}first hand{} of round is all",
 					"{C:spades}Spades{}, create a {C:purple}Charm Tag{}",
 				},
 			},
