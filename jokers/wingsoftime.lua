@@ -21,6 +21,16 @@ function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_epoch" })
 end
 
+function jokerInfo.set_sprites(self, card, _front)
+	card.children.center.scale = {x=284,y=380}
+	card.children.center.scale_mag = math.min(284/card.children.center.T.w,380/card.children.center.T.h)
+	card.children.center:reset()
+
+	card.children.floating_sprite.scale = {x=284,y=380}
+	card.children.floating_sprite.scale_mag = math.min(284/card.children.floating_sprite.T.w,380/card.children.floating_sprite.T.h)
+	card.children.floating_sprite:reset()
+end
+
 function jokerInfo.calculate(self, card, context)
 	if context.game_over and G.GAME.chips/G.GAME.blind.chips >= 0.23 then
 		G.E_MANAGER:add_event(Event({
