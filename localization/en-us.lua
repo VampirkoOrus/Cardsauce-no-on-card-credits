@@ -598,6 +598,12 @@ return {
 					"{E:1}Jazz_Jen{}",
 				},
 			},
+			guestartist18 = {
+				name = "Artist",
+				text = {
+					"{E:1}effigyofjuno{}",
+				},
+			},
 			rogernote = {
 				name = "Conversion Table",
 				text = {

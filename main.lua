@@ -2049,6 +2049,7 @@ vs_credit_23 = "CheesyDraws"
 vs_credit_24 = "Jazz_Jen"
 vs_credit_25 = "BardVergil"
 vs_credit_26 = "GuffNFluff"
+vs_credit_27 = "effigyofjuno"
 vs_credit_st1 = "tortoise"
 vs_credit_st2 = "Protokyuuu"
 vs_credit_st3 = "ShrineFox"
@@ -2058,6 +2059,7 @@ vs_credit_st5 = "ReconBox"
 local header_scale = 1.1
 local bonus_padding = 1.15
 local support_padding = 0.015
+local artist_size = 0.4175
 
 SMODS.current_mod.credits_tab = function()
 	chosen = true
@@ -2134,40 +2136,43 @@ SMODS.current_mod.credits_tab = function()
 									{ n = G.UIT.T, config = { text = localize('b_jokers'), scale = text_scale * 0.5, colour = HEX('ea5d98'), shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_1, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_1, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_3, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_3, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_13, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_13, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_14, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_14, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_15, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_15, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_16, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_16, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_17, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_17, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_18, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_18, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_19, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_19, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_25, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_25, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_26, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_26, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_24, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_24, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_27, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}},
 							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
@@ -2178,19 +2183,19 @@ SMODS.current_mod.credits_tab = function()
 									{n=G.UIT.T, config={text = vs_credit_13, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_21, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_21, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_17, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_17, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_22, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_22, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_15, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_15, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_23, scale = text_scale * 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_23, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},
