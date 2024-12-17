@@ -601,7 +601,7 @@ return {
 			guestartist18 = {
 				name = "Artist",
 				text = {
-					"{E:1}effigyofjuno{}",
+					"{E:1}sinewuui{}",
 				},
 			},
 			rogernote = {
