@@ -243,6 +243,8 @@ return {
 				Clubs = {
 					collab_VS = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
 					collab_STS = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
+					collab_WF = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
+					csau_ds_mascots_VS = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
 				},
 				Diamonds = {
 					collab_DTD = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",

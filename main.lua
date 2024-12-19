@@ -1360,13 +1360,35 @@ SMODS.DeckSkin:take_ownership('collab_PC',{
 -- Deck Skins: Clubs
 SMODS.DeckSkin:take_ownership('collab_WF',{
 	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "c_characters_VS",
+	hc_atlas = "c_characters_VS",
+	loc_txt = {
+		["en-us"] = "Characters [VS]"
+	},
+	posStyle = "ranks"
+})
+SMODS.DeckSkin{
+	key = "ds_mascots_VS",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	lc_atlas = "c_mascots_VS",
+	hc_atlas = "c_mascots_VS",
+	loc_txt = {
+		["en-us"] = "The Mascots [VS]"
+	},
+	posStyle = "ranks"
+}
+SMODS.DeckSkin{
+	key = "ds_c_collab_VS_DS",
+	suit = "Clubs",
+	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
 	lc_atlas = "c_collab_VS_DS",
 	hc_atlas = "c_collab_VS_DS",
 	loc_txt = {
 		["en-us"] = "Vampire Survivors [DS]"
 	},
 	posStyle = "ranks"
-})
+}
 SMODS.DeckSkin{
 	key = "ds_c_collab_STS_DS",
 	suit = "Clubs",
@@ -2196,6 +2218,9 @@ SMODS.current_mod.credits_tab = function()
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_23, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_24, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},
