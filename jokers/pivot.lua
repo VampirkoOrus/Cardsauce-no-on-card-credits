@@ -22,7 +22,7 @@ end
 function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not self.debuff then
 		if context.scoring_name == "High Card" then
-			if pseudorandom('pivot') < G.GAME.probabilities.normal / 2 then
+			if pseudorandom('pivot') < G.GAME.probabilities.normal / 3 then
 				return {
 					card = self,
 					level_up = true,
