@@ -1201,7 +1201,7 @@ return {
 					"{C:green}1 in 6{} chance to create",
 					"{C:attention}2{} completely random {C:attention}Tags{},",
 					"or {C:green}3 in 6{} chance to get nothing",
-					"{C:inactive}(Odds not affected by Oops! All 6's){}"
+					"{C:inactive}(Odds not affected by probability manipulation){}"
 				},
 			},
 			j_csau_businesstrading = {
