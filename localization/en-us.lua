@@ -349,7 +349,7 @@ return {
 			ach_csau_discover_roger = "Like He Would Have Wanted",
 			ach_csau_discover_odio = "Lord of All Demons",
 			ach_csau_discover_btc = "Fake Rarity",
-			ach_csau_discover_watto = "I’m A Watto",
+			ach_csau_discover_watto = "I'm A Watto",
 			ach_csau_discover_muppet = "Could Become a Habit",
 			ach_csau_discover_dontmind = "Hmmm, What To Play...",
 			ach_csau_discover_crack = "It's Not Cool",
@@ -383,7 +383,7 @@ return {
 			ach_csau_discover_vincenzo = "Step Right In",
 			ach_csau_discover_quarterdumb = "Drown In It",
 			ach_csau_purchase_dink = "VERY Expensive.",
-			ach_csau_final_odio = "Megalomania",
+			ach_csau_final_odio = "MEGALOMANIA",
 			ach_csau_win_vine = "Growing Free",
 			ach_csau_the_band = "The Band",
 			ach_csau_chadley_power = "The Power of Chadnova",
@@ -769,7 +769,7 @@ return {
 				name = "Odious Joker",
 				text = {
 					"Each hand gains {C:mult}+5{} Mult for each",
-					"{C:attention}empty hand space{}",
+					"{C:attention}empty played hand space{}",
 				},
 			},
 			j_csau_odio5 = {
@@ -940,7 +940,7 @@ return {
 			j_csau_pivot = {
 				name = "Pivyot",
 				text = {
-					"{C:green}#1# in 2{} chance to upgrade",
+					"{C:green}#1# in 3{} chance to upgrade",
 					"level of played {C:attention}High Card{}",
 				},
 			},
