@@ -9,7 +9,7 @@ A Balatro mod made for Vinesauce!
 
 This mod requires [Lovely](https://github.com/ethangreen-dev/lovely-injector) and the latest version of [Steammodded](https://github.com/Steamopollys/Steamodded) **(Version 1.0.0~ALPHA-1203a or later)**. Without these dependencies, this mod will not function.
 
-Download the latest release zip file and put the folder inside it in your Balatro Mods folder (located at %APPDATA%/Balatro/Mods). And that's it!
+Once you've installed both lovely and Steammodded, download the latest release zip file and put the folder inside it in your Balatro Mods folder (`%APPDATA%/Balatro/Mods`). That's it!
 
 ## Credits
 Created by **BarrierTrio/Gote** in collaboration with **Keku**
