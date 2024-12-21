@@ -21,7 +21,9 @@ function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff and G.GAME.current_round.hands_played == 0 then
         local purp = true
         for k, v in ipairs(context.full_hand) do
-            purp = purp and v.base.suit == 'Spades'
+            if not v:is_suit('Spades', nil, true) then
+                purp = false
+            end
         end
         if purp then
             card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_charm'), colour = G.C.SECONDARY_SET.Tarot})
