@@ -48,7 +48,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card)
-	if card.area.config.type ~= "joker" then
+	if card.area and card.area.config.type ~= "joker" then
 		if card.cost ~= G.GAME.dollars and G.GAME.dollars ~= 0 then
 			card.ability.extra.cost = G.GAME.dollars
 			card.cost = card.ability.extra.cost
