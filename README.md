@@ -11,7 +11,7 @@ This mod requires [Lovely](https://github.com/ethangreen-dev/lovely-injector) an
 
 Once you've installed both lovely and Steammodded, download the latest release zip file and put the folder inside it in your Balatro Mods folder (`%APPDATA%/Balatro/Mods`). That's it!
 
-**NOTE:** If you are downloading the mod using the source code and not the release download, **remember to remove '-main' from the folder name for Cardsauce!** You may run into issues if it's not removed.
+**NOTE:** If you are downloading the mod using the source code and not the release download, **always remember to remove '-main' from the folder name for Cardsauce!** You may run into issues if it's not removed.
 
 ## Credits
 Created by **BarrierTrio/Gote** in collaboration with **Keku**
