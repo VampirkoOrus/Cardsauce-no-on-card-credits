@@ -23,12 +23,12 @@ end
 
 function jokerInfo.set_sprites(self, card, _front)
 	if card.config.center.discovered or card.bypass_discovery_center then
-		card.children.center.scale = {x=284,y=380}
-		card.children.center.scale_mag = math.min(284/card.children.center.T.w,380/card.children.center.T.h)
+		card.children.center.scale = {x=self.width,y=self.height}
+		card.children.center.scale_mag = math.min(self.width/card.children.center.T.w,self.height/card.children.center.T.h)
 		card.children.center:reset()
 
-		card.children.floating_sprite.scale = {x=284,y=380}
-		card.children.floating_sprite.scale_mag = math.min(284/card.children.floating_sprite.T.w,380/card.children.floating_sprite.T.h)
+		card.children.floating_sprite.scale = {x=self.width,y=self.height}
+		card.children.floating_sprite.scale_mag = math.min(self.width/card.children.floating_sprite.T.w,self.height/card.children.floating_sprite.T.h)
 		card.children.floating_sprite:reset()
 	end
 end

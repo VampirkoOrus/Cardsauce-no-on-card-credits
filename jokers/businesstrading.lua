@@ -25,6 +25,14 @@ function jokerInfo.add_to_deck(self, card)
     check_for_unlock({ type = "discover_btc" })
 end
 
+function jokerInfo.set_sprites(self, card, _front)
+    if card.config.center.discovered or card.bypass_discovery_center then
+        card.children.center.scale = {x=self.width,y=self.height}
+        card.children.center.scale_mag = math.min(self.width/card.children.center.T.w,self.height/card.children.center.T.h)
+        card.children.center:reset()
+    end
+end
+
 function jokerInfo.calculate(self, card, context)
     if context.before and context.cardarea == G.jokers and not context.blueprint and G.GAME.current_round.hands_played == 0 then
         local allfaces = true
