@@ -282,16 +282,15 @@ end
 
 local draw_from_deck_to_handref = G.FUNCS.draw_from_deck_to_hand
 function G.FUNCS.draw_from_deck_to_hand(self, e)
-    draw_from_deck_to_handref(self, e)
-    for _, v in ipairs(G.jokers.cards) do
-    	if G.STATE == G.STATES.DRAW_TO_HAND and not v.debuff then
-        	if v.config.center.key == "j_speedjoker" and G.GAME.current_round.hands_played == v.ability.extra or
-        	v.config.center.key == "j_disturbedjoker" and G.GAME.current_round.discards_used == v.ability.extra then
-               	draw_card(G.deck, G.hand, 100, 'up', true)
-            	v.ability.extra = v.ability.extra + 1
-        	end
-    	end
-    end
+	draw_from_deck_to_handref(self, e)
+	if G.GAME.csau_dj_drawextra then
+		draw_card(G.deck, G.hand, 100, 'up', true)
+		G.GAME.csau_dj_drawextra = false
+	end
+	if G.GAME.csau_sj_drawextra then
+		draw_card(G.deck, G.hand, 100, 'up', true)
+		G.GAME.csau_sj_drawextra = false
+	end
 end
 
 local get_straight_ref = get_straight
