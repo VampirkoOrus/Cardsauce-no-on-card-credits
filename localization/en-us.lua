@@ -1110,9 +1110,9 @@ return {
 				name = "Garbage Hand",
 				text = {
 					"Played cards without an",
-					"{C:attention}Enhancement{} and a chip value",
-					"of less than or equal to {C:chips}8{}",
-					"give {C:mult}+#1#{} Mult when scored",
+					"{C:attention}Enhancement{} and a chip",
+					"value of {C:chips}8{} or less give",
+					"{C:mult}+#1#{} Mult when scored",
 				},
 			},
 			j_csau_supper = {

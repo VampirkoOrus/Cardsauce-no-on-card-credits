@@ -931,13 +931,10 @@ if not G.SETTINGS.music_selection then
 end
 
 local function greenneedlebugcheck()
-	G.SETTINGS.greenneedlebugrecheck = false
 	if not G.SETTINGS.greenneedlebugrecheck then
 		for k, v in pairs(G.P_CENTERS) do
 			if k == "b_csau_vine" then
-				send(v)
 				if v.unlocked then
-					send("UNLOCKING GREEN NEEDLE")
 					check_for_unlock({type = 'win_deck', deck = 'b_green'})
 				end
 			end
