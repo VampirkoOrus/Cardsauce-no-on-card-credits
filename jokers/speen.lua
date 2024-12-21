@@ -1,5 +1,5 @@
 local mod = SMODS.current_mod
-local mod_path = 'Mods/Cardsauce/'
+local mod_path = SMODS.current_mod.path:match("Mods/[^/]+")..'/'
 
 mod.speenTimer = 0
 
