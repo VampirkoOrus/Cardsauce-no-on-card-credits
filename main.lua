@@ -588,7 +588,7 @@ function G.FUNCS.ach_characters_check()
 end
 
 function G.FUNCS.ach_vineshroom_check()
-	if ends_with(G.SETTINGS.CUSTOM_DECK.Collabs.Clubs, 'vineshroom') then
+	if ends_with(G.SETTINGS.CUSTOM_DECK.Collabs.Clubs, 'vineshroom') or G.SETTINGS.CUSTOM_DECK.Collabs.Clubs == "collab_PC" or G.SETTINGS.CUSTOM_DECK.Collabs.Clubs == "collab_WF" then
 		check_for_unlock({ type = "skin_vineshroom" })
 	end
 end
@@ -1384,7 +1384,7 @@ SMODS.DeckSkin:take_ownership('collab_WF',{
 	posStyle = "ranks"
 })
 SMODS.DeckSkin{
-	key = "ds_mascots_VS",
+	key = "ds_mascots_vineshroom",
 	suit = "Clubs",
 	ranks =  {'Jack', 'Queen', 'King', 'Ace'},
 	lc_atlas = "c_mascots_VS",
