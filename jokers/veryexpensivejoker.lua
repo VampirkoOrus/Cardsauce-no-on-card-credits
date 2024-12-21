@@ -4,7 +4,8 @@ local jokerInfo = {
 		extra = {
 			x_mult = 1,
 			cost = 4
-		}
+		},
+		wasShop = false
 	},
 	rarity = 2,
 	cost = 1,
@@ -19,7 +20,7 @@ end
 
 function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_dink" })
-	if G.GAME.dollars == card.cost and card.area == G.shop_jokers then
+	if G.GAME.dollars == card.cost and card.ability.wasShop then
 		if card.cost >= 60 then
 			check_for_unlock({ type = "purchase_dink" })
 		end
@@ -49,6 +50,9 @@ end
 
 function jokerInfo.update(self, card)
 	if card.area and card.area.config.type ~= "joker" then
+		if card.area == G.shop_jokers and card.ability.wasShop == false then
+			card.ability.wasShop = true
+		end
 		if card.cost ~= G.GAME.dollars and G.GAME.dollars ~= 0 then
 			card.ability.extra.cost = G.GAME.dollars
 			card.cost = card.ability.extra.cost

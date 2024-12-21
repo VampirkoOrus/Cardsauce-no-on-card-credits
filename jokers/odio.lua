@@ -35,10 +35,19 @@ for i = 1, #forms do
 	end
 end
 
+local function updateSprite(card)
+	if card.ability.extra.form then
+		if card.config.center.atlas ~= card.ability.extra.form then
+			card.config.center.atlas = "csau_"..card.ability.extra.form
+			card:set_sprites(card.config.center)
+		end
+	end
+end
+
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 	if card.config.center.discovered then
 		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
-		full_UI_table.name = localize{type = 'name', key = self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
+		full_UI_table.name = localize{type = 'name', key = "j_csau_"..card.ability.extra.form or self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
 	end
 	localize{type = 'descriptions', key = "j_csau_"..card.ability.extra.form or self.key, set = self.set, nodes = desc_nodes, vars = {}}
 end
@@ -53,6 +62,7 @@ function jokerInfo.calculate(self, card, context)
 				card.ability.extra.form = form
 				card:juice_up(1, 1)
 				card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_'..card.ability.extra.form), colour = G.C.PURPLE, no_juice = true})
+				updateSprite(card)
 				if card.ability.extra.form == "odio3" or card.ability.extra.form == "odio6" or card.ability.extra.form == "odio8" then
 					local tarot, loops
 					if card.ability.extra.form == "odio3" then
@@ -84,17 +94,22 @@ function jokerInfo.calculate(self, card, context)
 				if trigger then
 					trigger = false
 					card.ability.extra.form = form
+					updateSprite(card)
 					card:juice_up(1, 1)
 					card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_'..card.ability.extra.form), colour = G.C.PURPLE, no_juice = true})
 				end
 				check_for_unlock({ type = "final_odio" })
 			else
+				local beforeForm = card.ability.extra.form
 				local form = forms[1]
 				local trigger = true
 				if trigger then
 					trigger = false
 					card.ability.extra.form = form
-					card:juice_up(1, 1)
+					updateSprite(card)
+					if beforeForm ~= forms[1] then
+						card:juice_up(1, 1)
+					end
 				end
 			end
 		end
@@ -178,11 +193,8 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card)
-	if card.ability.extra.form then
-		if card.config.center.atlas ~= card.ability.extra.form then
-			card.config.center.atlas = "csau_"..card.ability.extra.form
-			card:set_sprites(card.config.center)
-		end
+	if G.screenwipe then
+		updateSprite(card)
 	end
 end
 

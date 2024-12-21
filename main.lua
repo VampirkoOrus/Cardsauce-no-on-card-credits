@@ -930,11 +930,30 @@ if not G.SETTINGS.music_selection then
 	G.SETTINGS.music_selection = "cardsauce"
 end
 
+local function greenneedlebugcheck()
+	G.SETTINGS.greenneedlebugrecheck = false
+	if not G.SETTINGS.greenneedlebugrecheck then
+		for k, v in pairs(G.P_CENTERS) do
+			if k == "b_csau_vine" then
+				send(v)
+				if v.unlocked then
+					send("UNLOCKING GREEN NEEDLE")
+					check_for_unlock({type = 'win_deck', deck = 'b_green'})
+				end
+			end
+		end
+		G.SETTINGS.greenneedlebugrecheck = true
+		G.save_settings()
+	end
+end
+
 local main_menuRef = Game.main_menu
 function Game:main_menu(change_context)
 	main_menuRef(self, change_context)
 
 	csau_tucker_addBanned()
+
+	greenneedlebugcheck()
 
 	local splash_args = {mid_flash = change_context == 'splash' and 1.6 or 0.}
 	ease_value(splash_args, 'mid_flash', -(change_context == 'splash' and 1.6 or 0), nil, nil, nil, 4)
