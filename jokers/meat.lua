@@ -32,13 +32,15 @@ function jokerInfo.calculate(self, card, context)
 				[3] = "Blue",
 				[4] = "Purple",
 			}
-			context.scoring_hand[1]:set_seal(seal[pseudorandom('meat', 1, 4)], nil, true)
-			G.E_MANAGER:add_event(Event({
+			for k, v in ipairs(context.scoring_hand) do
+				G.E_MANAGER:add_event(Event({
 				func = function()
-					context.scoring_hand[1]:juice_up()
+					v:set_seal(seal[pseudorandom('meat', 1, 4)], nil, true)
+					v:juice_up()
 					return true
 				end
-			}))
+				}))
+			end
 			card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_meat_seal'), colour = G.C.MONEY})
 			card.ability.extra.cardsRemaining = card.ability.extra.cardsRemaining - 1
 		end
