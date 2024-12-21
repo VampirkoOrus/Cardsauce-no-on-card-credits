@@ -35,8 +35,8 @@ function jokerInfo.calculate(self, card, context)
 			for k, v in ipairs(context.scoring_hand) do
 				G.E_MANAGER:add_event(Event({
 				func = function()
-					v:set_seal(seal[pseudorandom('meat', 1, 4)], nil, true)
 					v:juice_up()
+					v:set_seal(seal[pseudorandom('meat', 1, 4)], nil, true)
 					return true
 				end
 				}))
