@@ -22,13 +22,15 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.set_sprites(self, card, _front)
-	card.children.center.scale = {x=284,y=380}
-	card.children.center.scale_mag = math.min(284/card.children.center.T.w,380/card.children.center.T.h)
-	card.children.center:reset()
+	if card.config.center.discovered or card.bypass_discovery_center then
+		card.children.center.scale = {x=284,y=380}
+		card.children.center.scale_mag = math.min(284/card.children.center.T.w,380/card.children.center.T.h)
+		card.children.center:reset()
 
-	card.children.floating_sprite.scale = {x=284,y=380}
-	card.children.floating_sprite.scale_mag = math.min(284/card.children.floating_sprite.T.w,380/card.children.floating_sprite.T.h)
-	card.children.floating_sprite:reset()
+		card.children.floating_sprite.scale = {x=284,y=380}
+		card.children.floating_sprite.scale_mag = math.min(284/card.children.floating_sprite.T.w,380/card.children.floating_sprite.T.h)
+		card.children.floating_sprite:reset()
+	end
 end
 
 function jokerInfo.calculate(self, card, context)
