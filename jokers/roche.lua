@@ -27,6 +27,15 @@ local roche = SMODS.Sound({
 	path = "roche.wav"
 })
 
+local rochedies = SMODS.Sound({
+	key = "rochedies",
+	path = "roche_dies.wav"
+})
+
+function jokerInfo.remove_from_deck(self, card)
+	rochedies:play(1, (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/70.0),true)
+end
+
 function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and not self.debuff and not context.individual and not context.repetition then
 		if G.GAME.dollars == card.ability.gil then

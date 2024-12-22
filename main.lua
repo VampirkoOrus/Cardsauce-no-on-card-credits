@@ -6,7 +6,7 @@
 --- BADGE_COLOUR: 32A852
 --- DISPLAY_NAME: Cardsauce
 --- PREFIX: csau
---- VERSION: 1.0
+--- VERSION: 1.1
 
 local mod_path = SMODS.current_mod.path
 local usable_path = mod_path:match("Mods/[^/]+")
@@ -311,16 +311,6 @@ function get_straight(hand)
 		for k, v in pairs(hand) do
 			table.insert(hand_ref, v)
 		end
-		if G.GAME.gnortstraight then
-			G.E_MANAGER:add_event(Event({
-				trigger = 'before',
-				func = function()
-					table.sort(hand, function(a,b) return a:get_id() < b:get_id() end)
-					return true
-				end
-			}))
-			G.GAME.gnortstraight = false
-		end
 		table.sort(hand_ref, function(a,b) return a:get_id() < b:get_id() end)
 		local ranks = {}
 		local _next = nil
@@ -355,15 +345,8 @@ function get_straight(hand)
 				end
 			end
 			if (#results == target) then
-				G.GAME.gnortstraight = true
-				G.E_MANAGER:add_event(Event({
-					trigger = 'before',
-					func = function()
-						table.sort(hand, function(a,b) return a.T.x < b.T.x end)
-						table.sort(results, function(a,b) return a.T.x < b.T.x end)
-						return true
-					end
-				}))
+				table.sort(hand, function(a,b) return a.T.x < b.T.x end)
+				table.sort(results, function(a,b) return a.T.x < b.T.x end)
 				return {results}
 			elseif _next ~= nil then
 
@@ -1148,64 +1131,6 @@ end
 
 -- Base Deck Textures
 for i = 1, 2 do
-	--[[
-	SMODS.Atlas {
-		key = "collab_TBoI_"..i,
-		path = "collabs/h_wildcards.png",
-		px = 71,
-		py = 95,
-		prefix_config = { key = false }
-	}
-	SMODS.Atlas {
-		key = "collab_SV_"..i,
-		path = "collabs/d_classics.png",
-		px = 71,
-		py = 95,
-		prefix_config = { key = false }
-	}
-	SMODS.Atlas {
-		key = "collab_TW_"..i,
-		path = "collabs/s_characters.png",
-		px = 71,
-		py = 95,
-		prefix_config = { key = false }
-	}
-	SMODS.Atlas {
-		key = "collab_CYP_"..i,
-		path = "collabs/s_confidants.png",
-		px = 71,
-		py = 95,
-		prefix_config = { key = false }
-	}
-	SMODS.Atlas {
-		key = "collab_AU_"..i,
-		path = "collabs/h_characters.png",
-		px = 71,
-		py = 95,
-		prefix_config = { key = false }
-	}
-	SMODS.Atlas {
-		key = "collab_VS_"..i,
-		path = "collabs/c_characters.png",
-		px = 71,
-		py = 95,
-		prefix_config = { key = false }
-	}
-	SMODS.Atlas {
-		key = "collab_STS_"..i,
-		path = "collabs/c_mascots.png",
-		px = 71,
-		py = 95,
-		prefix_config = { key = false }
-	}
-	SMODS.Atlas {
-		key = "collab_DTD_"..i,
-		path = "collabs/d_characters.png",
-		px = 71,
-		py = 95,
-		prefix_config = { key = false }
-	}
-	]]--
 	SMODS.Atlas {
 		key = "cards_"..i,
 		path = "BaseDeck.png",
