@@ -23,12 +23,12 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.joker_main and context.cardarea == G.jokers then
-		if G.GAME.blind.triggered and not (context.blueprint or context.repetition or context.individual) then
+	if context.cardarea == G.jokers then
+		if G.GAME.blind.triggered and not (context.blueprint or context.repetition or context.individual or context.after or context.before) then
 			card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
 			card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.CHIPS})
 		end
-		if card.ability.extra.chips > 0 then
+		if context.joker_main and card.ability.extra.chips > 0 then
 			return {
 				message = localize{type='variable',key='a_chips',vars={card.ability.extra.chips}},
 				chip_mod = card.ability.extra.chips,

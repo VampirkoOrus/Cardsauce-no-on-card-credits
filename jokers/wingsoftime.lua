@@ -4,7 +4,6 @@ local jokerInfo = {
 	rarity = 3,
 	cost = 10,
 	unlocked = false,
-	unlock_condition = {type = 'unlock_epoch'},
 	blueprint_compat = false,
 	eternal_compat = false,
 	perishable_compat = true,
@@ -12,6 +11,12 @@ local jokerInfo = {
 	width = 284,
 	height = 380,
 }
+
+function jokerInfo.check_for_unlock(self, args)
+	if args.type == "unlock_epoch" then
+		return true
+	end
+end
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist16", set = "Other"}
