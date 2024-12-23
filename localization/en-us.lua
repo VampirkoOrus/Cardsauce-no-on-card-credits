@@ -313,7 +313,7 @@ return {
 			k_dontmind = "\"Ah, yes...\"",
 			k_red = "HEARTS!!!",
 			k_werewolves = "No hands containing a Flush [That's Werewolves]",
-			k_val_down="Value Down...",
+			k_val_down = "Value Down...",
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
