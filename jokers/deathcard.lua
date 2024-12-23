@@ -34,7 +34,16 @@ function jokerInfo.add_to_deck(self, card)
 			G.GAME.uniqueDeathcardsAcquired = G.GAME.uniqueDeathcardsAcquired + 1
 		end
 		card.ability.id = G.GAME.uniqueDeathcardsAcquired
+	else
+		local other_dc = find_joker('Deathcard')
+		if other_dc[1] then
+			if other_dc[1].Mid.ability.id == card.ability.id then
+				G.GAME.uniqueDeathcardsAcquired = G.GAME.uniqueDeathcardsAcquired + 1
+				card.ability.id = G.GAME.uniqueDeathcardsAcquired
+			end
+		end
 	end
+	send(card.ability.id)
 end
 
 function jokerInfo.calculate(self, card, context)
