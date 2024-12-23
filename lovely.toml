@@ -194,7 +194,7 @@ target = "functions/common_events.lua"
 pattern = "_pool[#_pool + 1] = v.key"
 position = "before"
 payload = '''
-if G.GAME.selected_back.effect.center.key == "b_csau_vine" then
+if G.GAME.selected_back and G.GAME.selected_back.effect.center.key == "b_csau_vine" the
     if string.sub(v.key, 1, 6) == 'j_csau' then
         for i=1, 2 do
             _pool[#_pool + 1] = v.key
