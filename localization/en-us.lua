@@ -313,6 +313,7 @@ return {
 			k_dontmind = "\"Ah, yes...\"",
 			k_red = "HEARTS!!!",
 			k_werewolves = "No hands containing a Flush [That's Werewolves]",
+			k_val_down="Value Down...",
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
@@ -1226,6 +1227,14 @@ return {
 				unlock = {
 					"Continue a saved run",
 					"from the main menu",
+				},
+			},
+			j_csau_fantabulous = {
+				name = "Fantabulous Joker",
+				text = {
+					"{C:money}$#1#{} {C:attention}sell value{},",
+					"loses {C:money}$#2#{} of {C:attention}sell value{}",
+					"at end of round",
 				},
 			},
 		},

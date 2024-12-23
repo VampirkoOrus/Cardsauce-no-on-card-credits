@@ -134,6 +134,12 @@ local conf_cardsauce = {
 		-- Legendary
 		'vincenzo',
 		'quarterdumb',
+		-- Update 1.2
+		'fantabulous',
+		--'meteor',
+		--'qotsa',
+		--'beginners',
+		--'joeycastle',
 	},
 	consumablesToLoad = {
 		'quixotic',
