@@ -21,15 +21,26 @@ function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_werewolves" })
 end
 
+local triggered = false
 local debuff_hand_ref = Blind.debuff_hand
 
 function Blind:debuff_hand(cards, hand, handname, check)
 	if next(SMODS.find_card('j_csau_werewolves')) then
 		if next(hand["Flush"]) then
+			triggered = true
             return true
 		end
+		triggered = false
 	end
 	return debuff_hand_ref(self, cards, hand, handname, check)
+end
+
+local get_loc_debuff_textref = Blind.get_loc_debuff_text
+function Blind:get_loc_debuff_text()
+	if triggered then
+		return localize("k_werewolves")
+	end
+	return get_loc_debuff_textref(self)
 end
 
 function jokerInfo.calculate(self, card, context)

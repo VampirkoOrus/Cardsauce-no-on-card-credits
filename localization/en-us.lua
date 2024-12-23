@@ -312,6 +312,7 @@ return {
 			k_glass = "Glass",
 			k_dontmind = "\"Ah, yes...\"",
 			k_red = "HEARTS!!!",
+			k_werewolves = "No hands containing a Flush [That's Werewolves]",
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
