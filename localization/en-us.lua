@@ -370,6 +370,7 @@ return {
 			ach_csau_discover_al = "See It All",
 			ach_csau_discover_pacman = "Drugs Are Bad",
 			ach_csau_discover_purple = "I Do What I Want",
+			ach_csau_discover_fantabulous = "I Feel Fantastic",
 
 			ach_csau_activate_quixotic = "From Some Place Even Higher",
 			ach_csau_flip_sosad = "I'm Unhappy When You're Happy",
@@ -444,6 +445,7 @@ return {
 			ach_csau_discover_al = "Discover Another Light",
 			ach_csau_discover_pacman = "Discover PAC-MAN Incident",
 			ach_csau_discover_purple = "Discover The Purple Joker",
+			ach_csau_discover_fantabulous = "Discover Fantabulous Joker",
 
 			ach_csau_activate_quixotic = "Use a Quixotic Card",
 			ach_csau_flip_sosad = "Win a round with I'm So Happy, causing it to flip to I'm So Sad",

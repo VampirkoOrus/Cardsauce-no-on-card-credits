@@ -159,81 +159,9 @@ local conf_cardsauce = {
 
 G.loadTrophies = true
 if csau_enabled['enableTrophies'] then
-	conf_cardsauce.trophiesToLoad = {
-		-- Bronze
-		'discover_fisheye',
-		'discover_cousinsclub',
-		'discover_disguy',
-		'discover_greenneedle',
-		'discover_twoface',
-		'discover_garbage',
-		'discover_sohappy',
-		'discover_kings',
-		'discover_chad',
-		'discover_code',
-		'discover_chrome',
-		'discover_shrimp',
-		'discover_kerosene',
-		'discover_werewolves',
-		'discover_supper',
-		'discover_red',
-		'discover_miracle',
-		'discover_pep',
-		'discover_grey',
-		'discover_meat',
-		'discover_sponge',
-		'discover_claus',
-		'discover_speed',
-		'discover_disturbed',
-		'discover_reyn',
-		'discover_bsf',
-		'discover_roger',
-		'discover_odio',
-		'discover_btc',
-		'discover_watto',
-		'discover_muppet',
-		'discover_dontmind',
-		'discover_crack',
-		'discover_charity',
-		'discover_roche',
-		'discover_new',
-		'discover_pivot',
-		'discover_speen',
-		'discover_diaper',
-		'discover_blast',
-		'discover_dink',
-		'discover_deathcard',
-		'discover_hell',
-		'discover_epoch',
-		'discover_gnorts',
-		'discover_al',
-		'discover_pacman',
-		'discover_purple',
-		-- Silver
-		'activate_roche',
-		'flip_sosad',
-		'activate_quixotic',
-		'fuckingkill_jimbo',
-		'high_one',
-		'defeat_hog',
-		'miracle_inherit',
-		'reno_colors',
-		'skin_vineshroom',
-		'skin_characters',
-		-- Gold
-		'discover_vincenzo',
-		'discover_quarterdumb',
-		'purchase_dink',
-		'final_odio',
-		'win_vine',
-		'the_band',
-		'chadley_power',
-		'red_convert',
-		'five_deathcard',
-		-- Vine
-		'all_discovered',
-		'big_meat',
-	}
+	for s in recursiveEnumerate(usable_path .. "/achievements/"):gmatch("[^\r\n]+") do
+		conf_cardsauce.trophiesToLoad[#conf_cardsauce.trophiesToLoad + 1] = s:gsub(usable_path .. "/achievements/", "")
+	end
 else
 	G.loadTrophies = false
 end
@@ -461,9 +389,9 @@ for i, v in ipairs(conf_cardsauce.blindsToLoad) do
 	SMODS.Atlas({ key = v, atlas_table = "ANIMATION_ATLAS", path = "blinds/" .. v .. ".png", px = 34, py = 34, frames = 21, })
 end
 for i, v in ipairs(conf_cardsauce.trophiesToLoad) do
-	local trophyInfo = assert(SMODS.load_file("achievements/" .. v .. ".lua"))()
+	local trophyInfo = assert(SMODS.load_file("achievements/" .. v))()
 
-	trophyInfo.key = v
+	trophyInfo.key = v:sub(2, -5)
 	trophyInfo.atlas = 'csau_achievements'
 	if trophyInfo.rarity then
 		if trophyInfo.rarity == 1 then
