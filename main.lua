@@ -851,7 +851,7 @@ local function greenneedlebugcheck()
 		for k, v in pairs(G.P_CENTERS) do
 			if k == "b_csau_vine" then
 				if v.unlocked then
-					check_for_unlock({type = 'win_deck', deck = 'b_green'})
+					check_for_unlock({type = 'actuallyunlocksorry'})
 				end
 			end
 		end

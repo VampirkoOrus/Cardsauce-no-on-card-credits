@@ -9,11 +9,12 @@ local jokerInfo = {
 	unlocked = false,
 	blueprint_compat = false,
 	eternal_compat = true,
-	perishable_compat = false
+	perishable_compat = false,
+	unlock_condition = {type = 'win_deck', deck = 'b_green'}
 }
 
 function jokerInfo.check_for_unlock(self, args)
-	if args.type == "win_deck" and args.deck == "b_green" then
+	if (args.type == "win_deck" and get_deck_win_stake(self.unlock_condition.deck)) or args.type == "actuallyunlocksorry" then
 		return true
 	end
 end

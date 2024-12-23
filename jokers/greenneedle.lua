@@ -6,7 +6,8 @@ local jokerInfo = {
 	unlocked = false,
 	blueprint_compat = true,
 	eternal_compat = true,
-	perishable_compat = true
+	perishable_compat = true,
+	unlock_condition = {type = 'win_deck', deck = 'b_green'}
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -14,7 +15,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.check_for_unlock(self, args)
-	if args.type == "win_deck" and args.deck == "b_green" then
+	if (args.type == "win_deck" and get_deck_win_stake(self.unlock_condition.deck)) or args.type == "actuallyunlocksorry" then
 		return true
 	end
 end
