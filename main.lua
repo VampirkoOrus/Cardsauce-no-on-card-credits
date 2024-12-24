@@ -136,10 +136,10 @@ local conf_cardsauce = {
 		'quarterdumb',
 		-- Update 1.2
 		'fantabulous',
+		'joeycastle',
 		--'meteor',
 		--'qotsa',
 		--'beginners',
-		--'joeycastle',
 	},
 	consumablesToLoad = {
 		'quixotic',

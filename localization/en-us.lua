@@ -1239,6 +1239,13 @@ return {
 					"at end of round",
 				},
 			},
+			j_csau_joeycastle = {
+				name = "Joey's Castle",
+				text = {
+					"Earn {C:money}$#1#{} per discarded {V:1}#2#{} card",
+					"{s:0.8}suit changes at end of round"
+				},
+			},
 		},
 		Spectral = {
 			c_csau_quixotic = {
