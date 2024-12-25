@@ -314,6 +314,7 @@ return {
 			k_red = "HEARTS!!!",
 			k_werewolves = "No hands containing a Flush [That's Werewolves]",
 			k_val_down = "Value Down...",
+			k_worthless_ex = "Worthless!"
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
@@ -371,6 +372,7 @@ return {
 			ach_csau_discover_pacman = "Drugs Are Bad",
 			ach_csau_discover_purple = "I Do What I Want",
 			ach_csau_discover_fantabulous = "I Feel Fantastic",
+			ach_csau_discover_joeycastle = "Murder & Jenkem",
 
 			ach_csau_activate_quixotic = "From Some Place Even Higher",
 			ach_csau_flip_sosad = "I'm Unhappy When You're Happy",
@@ -446,6 +448,7 @@ return {
 			ach_csau_discover_pacman = "Discover PAC-MAN Incident",
 			ach_csau_discover_purple = "Discover The Purple Joker",
 			ach_csau_discover_fantabulous = "Discover Fantabulous Joker",
+			ach_csau_discover_joeycastle = "Discover Joey's Castle",
 
 			ach_csau_activate_quixotic = "Use a Quixotic Card",
 			ach_csau_flip_sosad = "Win a round with I'm So Happy, causing it to flip to I'm So Sad",
@@ -1242,8 +1245,8 @@ return {
 			j_csau_joeycastle = {
 				name = "Joey's Castle",
 				text = {
-					"Earn {C:money}$#1#{} per discarded {V:1}#2#{} card",
-					"{s:0.8}suit changes at end of round"
+					"Earn {C:money}$#1#{} per discarded {V:1}#2#{} card,",
+					"suit changes every round"
 				},
 			},
 		},

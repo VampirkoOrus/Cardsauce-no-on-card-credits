@@ -7,6 +7,7 @@
 --- DISPLAY_NAME: Cardsauce
 --- PREFIX: csau
 --- VERSION: 1.1
+--- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1225a]
 
 local mod_path = SMODS.current_mod.path
 local usable_path = mod_path:match("Mods/[^/]+")
