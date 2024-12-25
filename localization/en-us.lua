@@ -387,6 +387,7 @@ return {
 			ach_csau_reno_colors = "Headin' On Back",
 			ach_csau_skin_vineshroom = "thwomp.mp3",
 			ach_csau_skin_characters = "The Gang's All Here",
+			ach_csau_defeat_tray = "One Third Tray of: Chips!",
 
 			ach_csau_discover_vincenzo = "Step Right In",
 			ach_csau_discover_quarterdumb = "Drown In It",
@@ -466,6 +467,7 @@ return {
 			ach_csau_reno_colors = "Set the title screen colors to black and red",
 			ach_csau_skin_vineshroom = "Customize your deck to use the Classic Vineshroom for the Ace of Clubs",
 			ach_csau_skin_characters = "Customize your deck to include all of the Vinesauce characters",
+			ach_csau_defeat_tray = "Defeat The Tray",
 
 			ach_csau_discover_vincenzo = "Discover Vincenzo",
 			ach_csau_discover_quarterdumb = "Discover Quarterdumb",
@@ -498,6 +500,13 @@ return {
 				text={
 					"#1# in 4 face cards",
 					"become The Hog's prey"
+				},
+			},
+			bl_csau_tray = {
+				name="The Tray",
+				text={
+					"#1# in #2# chance to divide",
+					"base Chips and Mult by 3"
 				},
 			},
 		},

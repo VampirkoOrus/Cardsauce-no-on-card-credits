@@ -159,6 +159,7 @@ local conf_cardsauce = {
 	},
 	blindsToLoad = {
 		'hog',
+		'tray',
 	},
 	trophiesToLoad = {
 	}
