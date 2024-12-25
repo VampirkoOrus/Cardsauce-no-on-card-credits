@@ -372,9 +372,10 @@ return {
 			ach_csau_discover_pacman = "Drugs Are Bad",
 			ach_csau_discover_purple = "I Do What I Want",
 			ach_csau_discover_fantabulous = "I Feel Fantastic",
-			ach_csau_discover_joeycastle = "Murder & Jenkem",
+			ach_csau_discover_joeycastle = "SHIT CANNON",
 			ach_csau_discover_grand = "Nourish the Blood",
 			ach_csau_discover_voice = "maarrrio̸̊oò̶o̿̀o͚͂ooo",
+			ach_csau_discover_beginners = "Join Me At The Table",
 
 			ach_csau_activate_quixotic = "From Some Place Even Higher",
 			ach_csau_flip_sosad = "I'm Unhappy When You're Happy",
@@ -453,6 +454,7 @@ return {
 			ach_csau_discover_joeycastle = "Discover Joey's Castle",
 			ach_csau_discover_grand = "Discover 7 Funny Story",
 			ach_csau_discover_voice = "Discover Choicest Voice",
+			ach_csau_discover_beginners = "Discover Beginner's Luck",
 
 			ach_csau_activate_quixotic = "Use a Quixotic Card",
 			ach_csau_flip_sosad = "Win a round with I'm So Happy, causing it to flip to I'm So Sad",
@@ -1274,6 +1276,14 @@ return {
 					"{C:attention}#1#{} and a {C:attention}#2#{} of {V:1}#3#{},",
 					"retrigger the whole hand",
 					"{C:inactive}hand and card changes every round"
+				},
+			},
+			j_csau_beginners = {
+				name = "Beginner's Luck",
+				text = {
+					"Triples all {C:attention}listed{} {C:green,E:1,S:1.1}probabilities",
+                    "for the first {C:attention}4 Antes",
+                    "{C:inactive}(ex: {C:green}1 in 4{C:inactive} -> {C:green}3 in 4{C:inactive})",
 				},
 			},
 		},
