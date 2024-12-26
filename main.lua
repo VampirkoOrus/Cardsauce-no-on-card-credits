@@ -7,6 +7,7 @@
 --- DISPLAY_NAME: Cardsauce
 --- PREFIX: csau
 --- VERSION: 1.1
+--- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1225a]
 
 local mod_path = SMODS.current_mod.path
 local usable_path = mod_path:match("Mods/[^/]+")
@@ -134,12 +135,18 @@ local conf_cardsauce = {
 		-- Legendary
 		'vincenzo',
 		'quarterdumb',
+
 		-- Update 1.2
 		'fantabulous',
 		--'meteor',
 		--'qotsa',
-		--'beginners',
-		--'joeycastle',
+		'grand',
+		'beginners',
+		--'frich',
+		--'bunji',
+		'joeycastle',
+		'voice',
+		--'killjester',
 	},
 	consumablesToLoad = {
 		'quixotic',
@@ -212,6 +219,15 @@ function send(message, level)
 			sendErrorMessage(message)
 		end
 	end
+end
+
+function table.contains(table, element)
+	for _, value in pairs(table) do
+		if value == element then
+			return true
+		end
+	end
+	return false
 end
 
 local draw_from_deck_to_handref = G.FUNCS.draw_from_deck_to_hand
@@ -1955,7 +1971,7 @@ vs_credit_st5 = "ReconBox"
 local header_scale = 1.1
 local bonus_padding = 1.15
 local support_padding = 0.015
-local artist_size = 0.4175
+local artist_size = 0.43
 
 SMODS.current_mod.credits_tab = function()
 	chosen = true
@@ -2028,9 +2044,6 @@ SMODS.current_mod.credits_tab = function()
 						} },
 						{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
 							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
-								{ n = G.UIT.R, config = { align = "tm", padding = 0.05 }, nodes = {
-									{ n = G.UIT.T, config = { text = localize('b_jokers'), scale = text_scale * 0.5, colour = HEX('ea5d98'), shadow = true } },
-								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_1, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
@@ -2070,31 +2083,19 @@ SMODS.current_mod.credits_tab = function()
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_27, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
-							}},
-							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
-								{ n = G.UIT.R, config = { align = "tm", padding = 0.05 }, nodes = {
-									{ n = G.UIT.T, config = { text = localize('vs_credits2_2'), scale = text_scale * 0.5, colour = HEX('ea5d98'), shadow = true } },
-								} },
-								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = vs_credit_13, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_21, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_17, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
+							}},
+							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_22, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_15, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_23, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = vs_credit_24, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = vs_credit_10, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},
