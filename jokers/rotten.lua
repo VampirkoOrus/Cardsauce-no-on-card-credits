@@ -3,7 +3,7 @@ local jokerInfo = {
     config = {
     },
     rarity = 2,
-    cost = 5,
+    cost = 6,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true
