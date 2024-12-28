@@ -1751,7 +1751,7 @@ function Card_Character:init(args)
 end
 
 function Card:gunshot_func()
-	if G.STATE == G.STATES.GAME_OVER then
+	if G.OVERLAY_MENU and G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot') then 
 		play_sound("csau_gunshot", 1, 1)
 		self.children.center.atlas = G.ASSET_ATLAS["csau_jimbo_shot"]
 		self.children.center:set_sprite_pos({x = 0, y = 0})
