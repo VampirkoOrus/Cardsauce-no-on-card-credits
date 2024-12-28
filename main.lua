@@ -138,15 +138,11 @@ local conf_cardsauce = {
 
 		-- Update 1.2
 		'fantabulous',
-		--'meteor',
-		--'qotsa',
 		'grand',
 		'beginners',
-		--'frich',
-		--'bunji',
 		'joeycastle',
 		'voice',
-		--'killjester',
+		'rotten',
 	},
 	consumablesToLoad = {
 		'quixotic',

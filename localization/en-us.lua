@@ -634,6 +634,12 @@ return {
 					"{E:1}Akai{}",
 				},
 			},
+			guestartist20 = {
+				name = "Artist",
+				text = {
+					"{E:1}Swizik{}",
+				},
+			},
 			rogernote = {
 				name = "Conversion Table",
 				text = {
@@ -1293,6 +1299,13 @@ return {
 					"Triples all {C:attention}listed{} {C:green,E:1,S:1.1}probabilities",
                     "for the first {C:attention}4 Antes",
                     "{C:inactive}(ex: {C:green}1 in 4{C:inactive} -> {C:green}3 in 4{C:inactive})",
+				},
+			},
+			j_csau_rotten = {
+				name = "Rotten Joker",
+				text = {
+					"When {C:attention}Blind{} is selected, upgrade",
+					"a random {C:attention}least played hand"
 				},
 			},
 		},
