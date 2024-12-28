@@ -139,10 +139,13 @@ local conf_cardsauce = {
 		-- Update 1.2
 		'fantabulous',
 		'grand',
+		'ten',
+		'rapture',
 		'beginners',
 		'joeycastle',
 		'voice',
 		'rotten',
+		'killjester',
 	},
 	consumablesToLoad = {
 		'quixotic',
@@ -1959,6 +1962,8 @@ vs_credit_24 = "Jazz_Jen"
 vs_credit_25 = "BardVergil"
 vs_credit_26 = "GuffNFluff"
 vs_credit_27 = "sinewuui"
+vs_credit_28 = "Swizik"
+vs_credit_29 = "Burdrehnar"
 vs_credit_st1 = "tortoise"
 vs_credit_st2 = "Protokyuuu"
 vs_credit_st3 = "ShrineFox"
@@ -2093,6 +2098,12 @@ SMODS.current_mod.credits_tab = function()
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_10, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_28, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_29, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},

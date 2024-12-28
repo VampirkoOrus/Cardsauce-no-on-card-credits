@@ -376,6 +376,10 @@ return {
 			ach_csau_discover_grand = "Nourish the Blood",
 			ach_csau_discover_voice = "maarrrio̸̊oò̶o̿̀o͚͂ooo",
 			ach_csau_discover_beginners = "Join Me At The Table",
+			ach_csau_discover_rotten = "It Degrades, Douglath",
+			ach_csau_discover_ten = "I Did All That For YOU!?!?",
+			ach_csau_discover_rapture = "I've Been A Good Christian!",
+			ach_csau_discover_killjester = "Well Worth It",
 
 			ach_csau_activate_quixotic = "From Some Place Even Higher",
 			ach_csau_flip_sosad = "I'm Unhappy When You're Happy",
@@ -456,6 +460,10 @@ return {
 			ach_csau_discover_grand = "Discover 7 Funny Story",
 			ach_csau_discover_voice = "Discover Choicest Voice",
 			ach_csau_discover_beginners = "Discover Beginner's Luck",
+			ach_csau_discover_rotten = "Discover Rotten Joker",
+			ach_csau_discover_ten = "Discover 10 ARROWS!?!?",
+			ach_csau_discover_rapture = "Discover Rapture",
+			ach_csau_discover_killjester = "Discover Kill Jester",
 
 			ach_csau_activate_quixotic = "Use a Quixotic Card",
 			ach_csau_flip_sosad = "Win a round with I'm So Happy, causing it to flip to I'm So Sad",
@@ -638,6 +646,12 @@ return {
 				name = "Artist",
 				text = {
 					"{E:1}Swizik{}",
+				},
+			},
+			guestartist21 = {
+				name = "Artist",
+				text = {
+					"{E:1}Burdrehnar{}",
 				},
 			},
 			rogernote = {
@@ -1306,6 +1320,35 @@ return {
 				text = {
 					"When {C:attention}Blind{} is selected, upgrade",
 					"a random {C:attention}least played hand"
+				},
+			},
+			j_csau_ten = {
+				name = "10 ARROWS!?!?",
+				text = {
+					"This Joker gives {C:mult}+#1#{} Mult",
+					"for each {C:attention}consumable",
+					"card used this {C:attention}Blind",
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+			},
+			j_csau_rapture = {
+				name = "Rapture",
+				text = {
+					"This Joker gives {C:mult}+#1#{} Mult",
+					"for {C:attention}consecutive{} hand",
+					"without playing {C:attention}High Card{}",
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+			},
+			j_csau_killjester = {
+				name = "Kill Jester",
+				text = {
+					"When {C:attention}Blind{} is selected,",
+                    "destroy every Joker with ",
+                    "\"Joker\" in the name and",
+					"gain {X:mult,C:white}X#1#{} Mult for every",
+					"Joker destroyed this way",
+                    "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
 				},
 			},
 		},

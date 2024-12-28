@@ -13,6 +13,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "guestartist20", set = "Other"}
 end
 
+function jokerInfo.add_to_deck(self, card)
+    check_for_unlock({ type = "discover_rotten" })
+end
+
 function jokerInfo.calculate(self, card, context)
     if context.setting_blind and not card.getting_sliced and not card.debuff then
         local least_played_num = (G.GAME.hands["High Card"].played or 10000)
