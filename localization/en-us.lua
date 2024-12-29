@@ -278,7 +278,7 @@ return {
 			},
 			b_music_selector = "Soundtrack",
 			ml_music_selector_opt={
-				"Cardsauce OST by Basscleff",
+				"Cardsauce OST by Bassclefff",
 				"Balatro OST by LouisF"
 			},
 			b_color_selector_desc = "(Click colors to update swirl)",
