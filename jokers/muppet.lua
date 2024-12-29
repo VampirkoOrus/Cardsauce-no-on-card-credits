@@ -31,9 +31,6 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if G.shop and not card.ability.dollars_before then
-        card.ability.dollars_before = G.GAME.dollars
-    end
     if context.ending_shop and not context.blueprint then
         if card.ability.dollars_before and G.GAME.dollars == card.ability.dollars_before then
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
@@ -48,6 +45,18 @@ function jokerInfo.calculate(self, card, context)
             --colour = G.C.MULT
         }
     end
+end
+
+local shopref = G.UIDEF.shop
+function G.UIDEF.shop()
+    local t = shopref()
+    -- Wrap this in an event for it to get dollars after ease_dollars
+    G.E_MANAGER:add_event(Event({trigger = 'after', blocking = false, func = function()
+        for _, v in ipairs(SMODS.find_card("j_csau_muppet")) do
+            v.ability.dollars_before = G.GAME.dollars
+        end
+    return true end }))
+    return t
 end
 
 return jokerInfo
