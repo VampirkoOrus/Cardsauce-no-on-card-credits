@@ -1361,6 +1361,11 @@ return {
 					"without playing {C:attention}High Card{}",
 					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
+				unlock={
+					"Win a run",
+					"without playing",
+					"a {E:1,C:attention}High Card",
+				},
 			},
 			j_csau_killjester = {
 				name = "Kill Jester",
@@ -1371,12 +1376,19 @@ return {
 					"gain {X:mult,C:white}X#1#{} Mult for each",
                     "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
 				},
+				unlock={
+					"{C:attention}Sacrifice{} a Joker",
+				},
 			},
 			j_csau_villains = {
 				name = "Jokers of Circumstance",
 				text = {
 					"{C:chips}+#1#{} Chips and {C:mult}+#2#{} Mult if played",
 					"hand is your {C:attention}most played",
+				},
+				unlock={
+					"Turn a {C:attention}Queen",
+					"into a {C:attention}Stone Card"
 				},
 			},
 		},

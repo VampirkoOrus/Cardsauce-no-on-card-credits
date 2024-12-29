@@ -8,10 +8,17 @@ local jokerInfo = {
     },
     rarity = 1,
     cost = 4,
+    unlocked = false,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true
 }
+
+function jokerInfo.check_for_unlock(self, args)
+    if args.type == "unlock_villains" then
+        return true
+    end
+end
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}

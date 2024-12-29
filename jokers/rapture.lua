@@ -8,9 +8,11 @@ local jokerInfo = {
     },
     rarity = 1,
     cost = 6,
+    unlocked = false,
     blueprint_compat = true,
     eternal_compat = false,
-    perishable_compat = false
+    perishable_compat = false,
+    unlock_condition = {type = 'win_no_hand', extra = 'High Card'},
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

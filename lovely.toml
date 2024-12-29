@@ -379,6 +379,64 @@ payload = '''
 '''
 match_indent = true
 
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function() G.hand.highlighted[i]:set_ability(G.P_CENTERS[self.ability.consumeable.mod_conv]);return true end }))"
+position = "before"
+payload = '''
+    if self.ability.name == "The Tower" and G.hand.highlighted[i]:get_id() == 12 then
+        check_for_unlock({ type = "unlock_villains" })
+    end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.name == 'Ankh' then "
+position = "after"
+payload = '''
+check_for_unlock({ type = "unlock_killjester" })
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability.name == 'Hex' then
+    local _first_dissolve = nil
+'''
+position = "after"
+payload = '''
+check_for_unlock({ type = "unlock_killjester" })
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+local sliced_card = G.jokers.cards[my_pos+1]
+'''
+position = "before"
+payload = '''
+check_for_unlock({ type = "unlock_killjester" })
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if joker_to_destroy and not (context.blueprint_card or self).getting_sliced then
+'''
+position = "after"
+payload = '''
+check_for_unlock({ type = "unlock_killjester" })
+'''
+match_indent = true
 
 
 
