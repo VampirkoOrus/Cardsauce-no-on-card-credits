@@ -493,6 +493,13 @@ function deepcopy(orig)
 	return copy
 end
 
+math.randomseed(os.time())
+function externalPsuedorandom(chance, total)
+	if total <= 0 then return false end
+	local randomNumber = math.random(1, total)
+	return randomNumber <= chance
+end
+
 ach_checklists = {
 	band = {
 		4,
@@ -573,14 +580,16 @@ for suit, color in pairs(G.C.SUITS) do
 	G.C.SO_2[suit] = c
 end
 
-if G.SETTINGS.chadNova then
-	G.TITLE_SCREEN_CARD = 'j_chad'
+G.chadnova = externalPsuedorandom(1, 1000)
+
+if G.chadnova then
+	G.TITLE_SCREEN_CARD = 'j_csau_chad'
 else
 	G.TITLE_SCREEN_CARD = G.P_CARDS.C_A
 end
 
 function G.FUNCS.title_screen_card(self, SC_scale)
-	if G.SETTINGS.chadNova then
+	if G.chadnova then
 		if type(G.TITLE_SCREEN_CARD) == "table" then
 			return Card(self.title_top.T.x, self.title_top.T.y, 1.2*G.CARD_W*SC_scale, 1.2*G.CARD_H*SC_scale, G.TITLE_SCREEN_CARD, G.P_CENTERS.c_base)
 		elseif type(G.TITLE_SCREEN_CARD) == "string" then
@@ -594,7 +603,7 @@ function G.FUNCS.title_screen_card(self, SC_scale)
 end
 
 function G.FUNCS.center_splash_screen_card(SC_scale)
-	if G.SETTINGS.chadNova then
+	if G.chadnova then
 		return Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, SC_scale*G.CARD_W, SC_scale*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS[G.TITLE_SCREEN_CARD])
 	else
 		return Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, SC_scale*G.CARD_W, SC_scale*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_joker'])
@@ -602,7 +611,7 @@ function G.FUNCS.center_splash_screen_card(SC_scale)
 end
 
 function G.FUNCS.splash_screen_card(card_pos, card_size)
-	if G.SETTINGS.chadNova then
+	if G.chadnova then
 		return Card(  card_pos.x + G.ROOM.T.w/2 - G.CARD_W*card_size/2,
 				card_pos.y + G.ROOM.T.h/2 - G.CARD_H*card_size/2,
 				card_size*G.CARD_W, card_size*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS[G.TITLE_SCREEN_CARD])
@@ -1166,7 +1175,7 @@ SMODS.Consumable:take_ownership('hermit', {
 
 -- Title Screen Logo Texture
 local logo = "Logo.png"
-if G.SETTINGS.chadNova then
+if G.chadnova then
 	logo = "Logo-C.png"
 end
 SMODS.Atlas {
@@ -1816,33 +1825,6 @@ function Card:gunshot_func()
 	end
 end
 
-G.FUNCS.reset_chadnova = function(e)
-	local warning_text = e.UIBox:get_UIE_by_ID('warn')
-	if warning_text.config.colour ~= G.C.WHITE then
-		warning_text:juice_up()
-		warning_text.config.colour = G.C.WHITE
-		warning_text.config.shadow = true
-		e.config.disable_button = true
-		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06, blockable = false, blocking = false, func = function()
-			play_sound('tarot2', 0.76, 0.4);return true end}))
-		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.35, blockable = false, blocking = false, func = function()
-			e.config.disable_button = nil;return true end}))
-		play_sound('tarot2', 1, 0.4)
-	else
-		G.FUNCS.wipe_on()
-		G.SETTINGS.chadNova = false
-		G:save_settings()
-		G.E_MANAGER:add_event(Event({
-			delay = 6,
-			func = function()
-				G.FUNCS.quit()
-				G.FUNCS.wipe_off()
-				return true
-			end
-		}))
-	end
-end
-
 G.FUNCS.reset_trophies = function(e)
 	local warning_text = e.UIBox:get_UIE_by_ID('warn')
 	if warning_text.config.colour ~= G.C.WHITE then
@@ -1923,16 +1905,6 @@ local csauConfigTabs = function() return {
 					}},
 					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
 						{n=G.UIT.T, config={text = localize("vs_options_resetTrophies_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
-					}},
-				}}
-			end
-			if localize("vs_options_chadNova_r") and G.SETTINGS.chadNova then
-				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
-					{n=G.UIT.R, config={align = "cm", minw = 0.5, maxw = 2, minh = 0.6, padding = 0, r = 0.1, hover = true, colour = G.C.RED, button = "reset_chadnova", shadow = true, focus_args = {nav = 'wide'}}, nodes={
-						{n=G.UIT.T, config={text = localize("vs_options_chadNova_r"), scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT}}
-					}},
-					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-						{n=G.UIT.T, config={text = localize("vs_options_chadNova_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
 					}},
 				}}
 			end
