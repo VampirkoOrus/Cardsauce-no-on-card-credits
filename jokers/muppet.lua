@@ -12,7 +12,7 @@ local jokerInfo = {
     unlocked = false,
     blueprint_compat = true,
     eternal_compat = true,
-    perishable_compat = true
+    perishable_compat = false
 }
 
 function jokerInfo.check_for_unlock(self, args)
