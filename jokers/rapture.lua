@@ -23,7 +23,8 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.before and not card.debuff then
+    local bad_context = context.repetition or context.individual
+    if context.cardarea == G.jokers and context.before and not card.debuff and not bad_context then
         if context.scoring_name == "High Card" then
             if card.ability.extra.mult > 0 then
                 card.ability.extra.mult = 0
@@ -43,7 +44,7 @@ function jokerInfo.calculate(self, card, context)
             }
         end
     end
-    if context.joker_main and context.cardarea == G.jokers and not card.debuff then
+    if context.joker_main and context.cardarea == G.jokers and not card.debuff and not bad_context then
         if card.ability.extra.mult > 0 then
             return {
                 message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
