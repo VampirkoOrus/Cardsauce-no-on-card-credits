@@ -314,7 +314,8 @@ return {
 			k_red = "HEARTS!!!",
 			k_werewolves = "No hands containing a Flush [That's Werewolves]",
 			k_val_down = "Value Down...",
-			k_worthless_ex = "Worthless!"
+			k_worthless_ex = "Worthless!",
+			k_noluck_ex = "No Luck!",
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",

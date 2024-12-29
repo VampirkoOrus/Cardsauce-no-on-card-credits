@@ -24,7 +24,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff then
-        if context.scoring_hand == "High Card" then
+        if context.scoring_name == "High Card" then
             if card.ability.extra.mult > 0 then
                 card.ability.extra.mult = 0
                 return {

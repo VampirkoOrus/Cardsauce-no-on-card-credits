@@ -246,6 +246,33 @@ function G.FUNCS.draw_from_deck_to_hand(self, e)
 	end
 end
 
+function SMODS.current_mod.reset_game_globals(run_start)
+	G.GAME.current_round.choicevoice = { suit = 'Clubs' }
+	local valid_choicevoice_cards = {}
+	for _, v in ipairs(G.playing_cards) do
+		if not SMODS.has_no_suit(v) then
+			valid_choicevoice_cards[#valid_choicevoice_cards+1] = v
+		end
+	end
+	if valid_choicevoice_cards[1] then
+		local randCard = pseudorandom_element(valid_choicevoice_cards, pseudoseed('marrriooOOO'..G.GAME.round_resets.ante))
+		G.GAME.current_round.choicevoice.suit = randCard.base.suit
+		G.GAME.current_round.choicevoice.rank = randCard.base.value
+		G.GAME.current_round.choicevoice.id = randCard.base.id
+	end
+	G.GAME.current_round.joeycastle = { suit = 'Clubs' }
+	local valid_joeycastle_cards = {}
+	for _, v in ipairs(G.playing_cards) do
+		if not SMODS.has_no_suit(v) then
+			valid_joeycastle_cards[#valid_joeycastle_cards+1] = v
+		end
+	end
+	if valid_joeycastle_cards[1] then
+		local randCard = pseudorandom_element(valid_joeycastle_cards, pseudoseed('fent'..G.GAME.round_resets.ante))
+		G.GAME.current_round.joeycastle.suit = randCard.base.suit
+	end
+end
+
 local get_straight_ref = get_straight
 function get_straight(hand)
 	local base = get_straight_ref(hand)
