@@ -380,6 +380,7 @@ return {
 			ach_csau_discover_ten = "I Did All That For YOU!?!?",
 			ach_csau_discover_rapture = "I've Been A Good Christian!",
 			ach_csau_discover_killjester = "Well Worth It",
+			ach_csau_discover_villains = "Magic Bullet",
 
 			ach_csau_activate_quixotic = "From Some Place Even Higher",
 			ach_csau_flip_sosad = "I'm Unhappy When You're Happy",
@@ -392,6 +393,8 @@ return {
 			ach_csau_skin_vineshroom = "thwomp.mp3",
 			ach_csau_skin_characters = "The Gang's All Here",
 			ach_csau_defeat_tray = "One Third Tray of: Chips!",
+			ach_csau_defeat_vod = "The Final Cut",
+			ach_csau_supreme_ascend = "Supreme Ascendancy",
 
 			ach_csau_discover_vincenzo = "Step Right In",
 			ach_csau_discover_quarterdumb = "Drown In It",
@@ -402,6 +405,7 @@ return {
 			ach_csau_chadley_power = "The Power of Chadnova",
 			ach_csau_red_convert = "Pro-lapsed Gamer",
 			ach_csau_five_deathcard = "Ouroboros",
+			ach_csau_ult_choomera = "Ultimate Choomera",
 
 			ach_csau_all_discovered = "Card Addict",
 			ach_csau_big_meat = "The Big Meat",
@@ -464,6 +468,7 @@ return {
 			ach_csau_discover_ten = "Discover 10 ARROWS!?!?",
 			ach_csau_discover_rapture = "Discover Rapture",
 			ach_csau_discover_killjester = "Discover Kill Jester",
+			ach_csau_discover_villains = "Discover Jokers of Circumstance",
 
 			ach_csau_activate_quixotic = "Use a Quixotic Card",
 			ach_csau_flip_sosad = "Win a round with I'm So Happy, causing it to flip to I'm So Sad",
@@ -476,6 +481,8 @@ return {
 			ach_csau_skin_vineshroom = "Customize your deck to use the Classic Vineshroom for the Ace of Clubs",
 			ach_csau_skin_characters = "Customize your deck to include all of the Vinesauce characters",
 			ach_csau_defeat_tray = "Defeat The Tray",
+			ach_csau_defeat_vod = "Defeat The Vod",
+			ach_csau_supreme_ascend = "Have Rapture at or above +30 Mult and 2 Kings 2:23-24 in your Joker slots",
 
 			ach_csau_discover_vincenzo = "Discover Vincenzo",
 			ach_csau_discover_quarterdumb = "Discover Quarterdumb",
@@ -486,6 +493,7 @@ return {
 			ach_csau_chadley_power = "Harness but a fraction of Chadley's secret power",
 			ach_csau_red_convert = "Use Why Are You Red? to turn a Poker Hand into a Secret Hand",
 			ach_csau_five_deathcard = "Purchase the same Deathcard from the shop 5 times in a single run",
+			ach_csau_ult_choomera = "Play a hand of 5 scoring Steel Cards with Chromed Up and Masked Joker",
 
 			ach_csau_all_discovered = "Discover All Cardsauce Jokers",
 			ach_csau_big_meat = "Unlock every Cardsauce Achievement",
@@ -515,6 +523,19 @@ return {
 				text={
 					"#1# in #2# chance to divide",
 					"base Chips and Mult by 3"
+				},
+			},
+			bl_csau_vod = {
+				name="The Vod",
+				text={
+					"Played cards are redrawn"
+				},
+			},
+			bl_csau_outlaw = {
+				name="The Outlaw",
+				text={
+					"Debuffs all cards of the",
+					"ranks played last hand"
 				},
 			},
 		},
@@ -1344,11 +1365,17 @@ return {
 				name = "Kill Jester",
 				text = {
 					"When {C:attention}Blind{} is selected,",
-                    "destroy every Joker with ",
-                    "\"Joker\" in the name and",
-					"gain {X:mult,C:white}X#1#{} Mult for every",
-					"Joker destroyed this way",
+                    "destroy all Jokers with",
+                    "\"Joker\" in their name and",
+					"gain {X:mult,C:white}X#1#{} Mult for each",
                     "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
+				},
+			},
+			j_csau_villains = {
+				name = "Jokers of Circumstance",
+				text = {
+					"{C:chips}+#1#{} Chips and {C:mult}+#2#{} Mult if played",
+					"hand is your {C:attention}most played",
 				},
 			},
 		},

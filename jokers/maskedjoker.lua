@@ -31,6 +31,18 @@ function jokerInfo.in_pool(self, args)
 	end
 end
 
+local function choomeraCheck(context)
+	local all_steel = true
+	for k, v in ipairs(context.scoring_hand) do
+		if v.ability.name ~= 'Steel Card' then
+			all_steel = false
+		end
+	end
+	if all_steel and #context.scoring_hand == 5 and next(find_joker('Chromed Up')) then
+		check_for_unlock({ type = "ult_choomera" })
+	end
+end
+
 function jokerInfo.calculate(self, card, context)
 	if context.individual and context.cardarea == G.play and not card.debuff then
 		local chimera = true
@@ -40,6 +52,7 @@ function jokerInfo.calculate(self, card, context)
 		if not chimera then
 			return nil
 		end
+		choomeraCheck(context)
 		return {
 			chips = card.ability.extra.chips,
 			mult = card.ability.extra.mult,

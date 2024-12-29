@@ -24,19 +24,24 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff then
-        if context.scoring_hand == "High Card" and card.ability.extra.mult > 0 then
-            card.ability.extra.mult = 0
+        if context.scoring_hand == "High Card" then
+            if card.ability.extra.mult > 0 then
+                card.ability.extra.mult = 0
+                return {
+                    message = localize('k_reset'),
+                    colour = G.C.RED
+                }
+            end
+        else
+            card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
+            if card.ability.extra.mult >= 30 and next(find_joker('2 Kings 2:23-24')) then
+                check_for_unlock({ type = "supreme_ascend" })
+            end
             return {
-                message = localize('k_reset'),
-                colour = G.C.RED
+                card = card,
+                message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}}
             }
         end
-    else
-        card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
-        return {
-            card = card,
-            message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}}
-        }
     end
     if context.joker_main and context.cardarea == G.jokers and not card.debuff then
         if card.ability.extra.mult > 0 then

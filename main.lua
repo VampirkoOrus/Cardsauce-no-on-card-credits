@@ -141,6 +141,7 @@ local conf_cardsauce = {
 		'grand',
 		'ten',
 		'rapture',
+		'villains',
 		'beginners',
 		'joeycastle',
 		'voice',
@@ -159,6 +160,8 @@ local conf_cardsauce = {
 	blindsToLoad = {
 		'hog',
 		'tray',
+		'vod',
+		--'outlaw',
 	},
 	trophiesToLoad = {
 	}

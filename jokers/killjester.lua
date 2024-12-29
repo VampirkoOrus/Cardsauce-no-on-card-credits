@@ -47,8 +47,8 @@ function jokerInfo.calculate(self, card, context)
     end
     if context.joker_main and context.cardarea == G.jokers then
         return {
-            message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
-            Xmult_mod = card.ability.extra.x_mult,
+            message = localize{type='variable',key='a_xmult',vars={card.ability.x_mult}},
+            Xmult_mod = card.ability.x_mult,
         }
     end
 end
