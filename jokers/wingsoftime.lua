@@ -18,6 +18,12 @@ function jokerInfo.check_for_unlock(self, args)
 	end
 end
 
+function jokerInfo.in_pool(self, args)
+	if G.GAME.round_resets.ante < 1 then
+		return true
+	end
+end
+
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist16", set = "Other"}
 end
