@@ -1144,12 +1144,11 @@ for i = 1, 2 do
 end
 
 SMODS.Atlas{
-	key = 'Joker',
-	path = "csau_vanilla_Jokers-.png",
+	key = 'alt_color_jokers',
+	path = "colorjokers.png",
 	px = 71,
 	py = 95,
 	atlas_table = "ASSET_ATLAS",
-	prefix_config = { key = false }
 }
 
 -- Tarot Atlases
@@ -1163,11 +1162,36 @@ for _, tarot in ipairs(tarot_textures) do
 	}
 end
 
+SMODS.Joker:take_ownership('greedy_joker', {
+	pos = {x = 0, y = 0},
+	atlas = 'csau_alt_color_jokers'
+}, true)
+SMODS.Joker:take_ownership('lusty_joker', {
+	pos = {x = 1, y = 0},
+	atlas = 'csau_alt_color_jokers'
+}, true)
+SMODS.Joker:take_ownership('wrathful_joker', {
+	pos = {x = 2, y = 0},
+	atlas = 'csau_alt_color_jokers'
+}, true)
+SMODS.Joker:take_ownership('gluttenous_joker', {
+	pos = {x = 3, y = 0},
+	atlas = 'csau_alt_color_jokers'
+}, true)
+
+SMODS.Joker:take_ownership('onyx_agate', {
+	pos = {x = 5, y = 0},
+	atlas = 'csau_alt_color_jokers'
+}, true)
+SMODS.Joker:take_ownership('rough_gem', {
+	pos = {x = 4, y = 0},
+	atlas = 'csau_alt_color_jokers'
+}, true)
+
 SMODS.Consumable:take_ownership('moon', {
 	pos = {x = 0, y = 0},
 	atlas = 'csau_moon'
 }, true)
-
 SMODS.Consumable:take_ownership('hermit', {
 	pos = {x = 0, y = 0},
 	atlas = 'csau_kermit'
