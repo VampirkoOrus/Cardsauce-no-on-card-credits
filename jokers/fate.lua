@@ -105,7 +105,15 @@ function jokerInfo.calculate(self, card, context)
                     trigger = 'before',
                     blocking = false,
                     func = (function()
-                        add_tag(Tag(rand_tags[free_tag]))
+                        local tag_to_add = Tag(rand_tags[free_tag])
+                        if rand_tags[free_tag] == 'tag_orbital' then
+                            local _poker_hands = {}
+                            for k, v in pairs(G.GAME.hands) do
+                                if v.visible then _poker_hands[#_poker_hands+1] = k end
+                            end
+                            tag_to_add.ability.orbital_hand = pseudorandom_element(_poker_hands, pseudoseed('orbital'))
+                        end
+                        add_tag(tag_to_add)
                         play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
                         play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
                         return true
