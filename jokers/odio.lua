@@ -10,7 +10,8 @@ local jokerInfo = {
 	cost = 6,
 	blueprint_compat = false,
 	eternal_compat = false,
-	perishable_compat = false
+	perishable_compat = false,
+	streamer = "other",
 }
 
 function jokerInfo.add_to_deck(self, card)

@@ -7,7 +7,8 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	unlock_condition = {type = 'win_deck', deck = 'b_green'}
+	unlock_condition = {type = 'win_deck', deck = 'b_green'},
+	streamer = "other",
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

@@ -13,7 +13,8 @@ local jokerInfo = {
 	cost = 6,
 	blueprint_compat = false,
 	eternal_compat = true,
-	perishable_compat = true
+	perishable_compat = true,
+	streamer = "vinny",
 }
 
 SMODS.Atlas({ key = 'sosad', path ="jokers/sosad.png", px = 71, py = 95 })

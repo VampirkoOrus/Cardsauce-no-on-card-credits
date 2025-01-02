@@ -10,6 +10,7 @@ local jokerInfo = {
 	hasSoul = true,
 	width = 284,
 	height = 380,
+	streamer = "vinny",
 }
 
 function jokerInfo.check_for_unlock(self, args)

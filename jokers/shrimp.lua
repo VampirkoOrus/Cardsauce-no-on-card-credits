@@ -9,6 +9,7 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable_compat = true,
 	hasSoul = true,
+	streamer = "vinny",
 }
 
 function jokerInfo.add_to_deck(self, card)

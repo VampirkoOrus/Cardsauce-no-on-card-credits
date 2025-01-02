@@ -5,7 +5,8 @@ local jokerInfo = {
 	cost = 6,
 	blueprint_compat = false,
 	eternal_compat = true,
-	perishable_compat = true
+	perishable_compat = true,
+	streamer = "vinny",
 }
 
 local function detect2or5(scoring_hand)

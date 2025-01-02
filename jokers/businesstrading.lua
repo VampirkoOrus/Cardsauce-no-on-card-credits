@@ -14,6 +14,7 @@ local jokerInfo = {
     perishable_compat = true,
     width = 178,
     height = 238,
+    streamer = "vinny",
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

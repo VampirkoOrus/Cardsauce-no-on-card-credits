@@ -10,7 +10,8 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = false,
-	unlock_condition = {type = 'win_deck', deck = 'b_green'}
+	unlock_condition = {type = 'win_deck', deck = 'b_green'},
+	streamer = "other",
 }
 
 function jokerInfo.check_for_unlock(self, args)

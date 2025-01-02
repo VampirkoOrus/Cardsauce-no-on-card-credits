@@ -6,7 +6,8 @@ local jokerInfo = {
 	unlocked = false,
 	blueprint_compat = false,
 	eternal_compat = true,
-	perishable_compat = true
+	perishable_compat = true,
+	streamer = "vinny",
 }
 
 function jokerInfo.check_for_unlock(self, args)

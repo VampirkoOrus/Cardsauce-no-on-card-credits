@@ -5,7 +5,8 @@ local jokerInfo = {
 	cost = 0,
 	blueprint_compat = false,
 	eternal_compat = true,
-	perishable_compat = true
+	perishable_compat = true,
+	streamer = "vinny",
 }
 
 function jokerInfo.calculate(self, card, context)

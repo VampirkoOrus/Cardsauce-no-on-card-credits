@@ -18,13 +18,42 @@ overwrite = false
 [patches.pattern]
 target = "game.lua"
 pattern = '''
-{name = 'colour_1', ref_table = G.C, ref_value = 'BLUE'},
-{name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},
+G.SPLASH_BACK:define_draw_steps({{
+    shader = 'splash',
+    send = {
+        {name = 'time', ref_table = G.TIMERS, ref_value = 'REAL'},
+        {name = 'vort_speed', val = 1},
+        {name = 'colour_1', ref_table = G.C, ref_value = 'COLOUR1'},
+        {name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},
+        {name = 'mid_flash', val = 0},
+        {name = 'vort_offset', val = (2*90.15315131*os.time())%100000},
+    }}})
 '''
 position = "at"
 payload = '''
-{name = 'colour_1', ref_table = G.C, ref_value = 'COLOUR1'},
-{name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},
+if csau_enabled['enableColors'] then
+    G.SPLASH_BACK:define_draw_steps({{
+        shader = 'splash',
+        send = {
+            {name = 'time', ref_table = G.TIMERS, ref_value = 'REAL'},
+            {name = 'vort_speed', val = 1},
+            {name = 'colour_1', ref_table = G.C, ref_value = 'COLOUR1'},
+            {name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},
+            {name = 'mid_flash', val = 0},
+            {name = 'vort_offset', val = (2*90.15315131*os.time())%100000},
+        }}})
+else
+    G.SPLASH_BACK:define_draw_steps({{
+        shader = 'splash',
+        send = {
+            {name = 'time', ref_table = G.TIMERS, ref_value = 'REAL'},
+            {name = 'vort_speed', val = 1},
+            {name = 'colour_1', ref_table = G.C, ref_value = 'COLOUR1'},
+            {name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},
+            {name = 'mid_flash', val = 0},
+            {name = 'vort_offset', val = (2*90.15315131*os.time())%100000},
+        }}})
+end
 '''
 match_indent = true
 
@@ -175,7 +204,6 @@ pattern = "if G.ARGS.score_intensity.earned_score >= G.ARGS.score_intensity.requ
 position = "after"
 payload = '''
 if G.STATE == G.STATES.HAND_PLAYED and not G.GAME.FLAME_ON and next(find_joker('Kerosene')) then
-    send("Flames!")
     G.GAME.FLAME_ON = true
 end
 '''
@@ -227,11 +255,13 @@ pattern = '''
 '''
 position = "after"
 payload = '''
-  tabs[#tabs+1] = {
-      label = localize('b_set_colors'),
-      tab_definition_function = G.UIDEF.settings_tab,
-      tab_definition_function_args = 'Colors'
-  }
+  if csau_enabled['enableColors'] then
+      tabs[#tabs+1] = {
+          label = localize('b_set_colors'),
+          tab_definition_function = G.UIDEF.settings_tab,
+          tab_definition_function_args = 'Colors'
+      }
+  end
 '''
 match_indent = true
 
@@ -241,9 +271,7 @@ target = "functions/state_events.lua"
 pattern = "G.STATE = G.STATES.GAME_OVER; G.STATE_COMPLETE = false"
 position = "before"
 payload = '''
-sendDebugMessage("test1")
 if next(find_joker('2 Kings 2:23-24')) then
-    sendDebugMessage("test2")
     check_for_unlock({ type = "shebear_mauling" })
 end
 '''
@@ -297,17 +325,21 @@ target = "functions/UI_definitions.lua"
 pattern = "table.insert(t, create_toggle({label = localize('b_high_contrast_cards'), ref_table = G.SETTINGS, ref_value = 'colourblind_option', callback = G.FUNCS.refresh_contrast_mode}))"
 position = "at"
 payload = '''
-local current_skin
-local string
-for k, v in pairs(G.COLLABS.options[_suit]) do
-    if G.SETTINGS.CUSTOM_DECK.Collabs[_suit] == v then
-        current_skin = v
-        string = G.localization.misc.dictionary.vs_collab_credits[_suit][current_skin] or " "
+if csau_enabled['enableSkins'] then
+    local current_skin
+    local string
+    for k, v in pairs(G.COLLABS.options[_suit]) do
+        if G.SETTINGS.CUSTOM_DECK.Collabs[_suit] == v then
+            current_skin = v
+            string = G.localization.misc.dictionary.vs_collab_credits[_suit][current_skin] or " "
+        end
     end
+    local caption = {n=G.UIT.T, config={text = string, scale = 0.35, colour = G.C.WHITE, shadow = true}}
+    local credit = {n=G.UIT.R, config={align = "cm", maxw = 4*G.CARD_W, id = 'collab_credit'}, nodes={caption}}
+    table.insert(t, credit)
+else
+    table.insert(t, create_toggle({label = localize('b_high_contrast_cards'), ref_table = G.SETTINGS, ref_value = 'colourblind_option', callback = G.FUNCS.refresh_contrast_mode}))
 end
-local caption = {n=G.UIT.T, config={text = string, scale = 0.35, colour = G.C.WHITE, shadow = true}}
-local credit = {n=G.UIT.R, config={align = "cm", maxw = 4*G.CARD_W, id = 'collab_credit'}, nodes={caption}}
-table.insert(t, credit)
 '''
 match_indent = true
 
@@ -324,23 +356,25 @@ G.SETTINGS.CUSTOM_DECK.Collabs[args.cycle_config.curr_suit] = G.COLLABS.options[
 '''
 position = "after"
 payload = '''
-local swap_node = G.OVERLAY_MENU:get_UIE_by_ID('collab_credit')
-if swap_node then
-    for i=1, #swap_node.children do
-        swap_node.children[i]:remove()
-        swap_node.children[i] = nil
-    end
-    for k, v in pairs(G.COLLABS.options[args.cycle_config.curr_suit]) do
-        if G.COLLABS.options[args.cycle_config.curr_suit][args.to_key] == v then
-            current_skin = v
-            string = G.localization.misc.dictionary.vs_collab_credits[args.cycle_config.curr_suit][current_skin] or " "
+if csau_enabled['enableSkins'] then
+    local swap_node = G.OVERLAY_MENU:get_UIE_by_ID('collab_credit')
+    if swap_node then
+        for i=1, #swap_node.children do
+            swap_node.children[i]:remove()
+            swap_node.children[i] = nil
         end
+        for k, v in pairs(G.COLLABS.options[args.cycle_config.curr_suit]) do
+            if G.COLLABS.options[args.cycle_config.curr_suit][args.to_key] == v then
+                current_skin = v
+                string = G.localization.misc.dictionary.vs_collab_credits[args.cycle_config.curr_suit][current_skin] or " "
+            end
+        end
+        local caption = {n=G.UIT.T, config={text = string, scale = 0.35, colour = G.C.WHITE, shadow = true}}
+        swap_node.UIBox:add_child(caption, swap_node)
     end
-    local caption = {n=G.UIT.T, config={text = string, scale = 0.35, colour = G.C.WHITE, shadow = true}}
-    swap_node.UIBox:add_child(caption, swap_node)
+    G.FUNCS.ach_characters_check()
+    G.FUNCS.ach_vineshroom_check()
 end
-G.FUNCS.ach_characters_check()
-G.FUNCS.ach_vineshroom_check()
 '''
 match_indent = true
 
@@ -366,15 +400,17 @@ target = "engine/controller.lua"
 pattern = "if self.text_input_hook then"
 position = "before"
 payload = '''
-    if key == mgt[mgt_num] then
-		if key == "o" then
-			G.debug_background_toggle = not G.debug_background_toggle
-			mgt_num = 1
-		else
-			mgt_num = mgt_num + 1
-		end
-	else
-		mgt_num = 1
+    if csau_enabled['enableEasterEggs'] then
+        if key == mgt[mgt_num] then
+            if key == "o" then
+                G.debug_background_toggle = not G.debug_background_toggle
+                mgt_num = 1
+            else
+                mgt_num = mgt_num + 1
+            end
+        else
+            mgt_num = 1
+        end
 	end
 '''
 match_indent = true
