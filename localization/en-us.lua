@@ -312,7 +312,7 @@ return {
 			k_glass = "Glass",
 			k_dontmind = "\"Ah, yes...\"",
 			k_red = "HEARTS!!!",
-			k_werewolves = "No hands containing a Flush [That's Werewolves]",
+			k_werewolves = "Not allowed [That's Werewolves]",
 			k_val_down = "Value Down...",
 			k_worthless_ex = "Worthless!",
 			k_noluck_ex = "No Luck!",
@@ -1083,7 +1083,8 @@ return {
 				name = "That's Werewolves",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult, but cannot",
-					"play hands containing a {C:attention}Flush{}",
+					"play a {C:attention}#2#{}",
+					"{C:inactive}hand changes every ante"
 				},
 			},
 			j_csau_depressedbrother = {
@@ -1309,7 +1310,7 @@ return {
 				name = "Joey's Castle",
 				text = {
 					"Earn {C:money}$#1#{} per discarded {V:1}#2#{} card,",
-					"suit changes every round"
+					"{C:inactive}suit changes every round"
 				},
 			},
 			j_csau_grand = {
@@ -1406,6 +1407,7 @@ return {
 				text = {
 					"{C:clubs}Cardsauce{} Jokers appear",
 					"{C:attention}3x{} more often",
+					"Start run with {C:attention}#1#{}",
 				},
 			},
 		},

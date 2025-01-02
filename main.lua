@@ -75,12 +75,11 @@ end
 local conf_cardsauce = {
 	jokersToLoad = {
 		-- Common
-		'meat',
 		'twoface',
 		'newjoker',
 		'depressedbrother',
-		'gnorts',
 		'pivot',
+		'fisheye',
 		'diaper',
 		'speen',
 		'pacman',
@@ -89,12 +88,14 @@ local conf_cardsauce = {
 		'roche',
 		'reyn',
 		'emmanuel',
-		'fisheye',
+		'gnorts',
+		'chad',
+
 
 		'purple',
 		'garbagehand',
-		'chad',
 		-- Uncommon
+		'meat',
 		'greyjoker',
 		'veryexpensivejoker',
 		'roger',

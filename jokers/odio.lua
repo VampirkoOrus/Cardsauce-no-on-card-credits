@@ -17,6 +17,12 @@ function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_odio" })
 end
 
+function jokerInfo.in_pool(self, args)
+	if G.GAME.round_resets.ante < 9 then
+		return true
+	end
+end
+
 local forms = {
 	[1] = "odio",
 	[2] = "odio2",

@@ -394,7 +394,7 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = "if self.ability.name == 'Ankh' then "
+pattern = "if v ~= chosen_joker then"
 position = "after"
 payload = '''
 check_for_unlock({ type = "unlock_killjester" })
@@ -404,13 +404,14 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = '''
-if self.ability.name == 'Hex' then
-    local _first_dissolve = nil
-'''
-position = "after"
+pattern = "if v ~= eligible_card and (not v.ability.eternal) then v:start_dissolve(nil, _first_dissolve);_first_dissolve = true end"
+position = "at"
 payload = '''
-check_for_unlock({ type = "unlock_killjester" })
+if v ~= eligible_card and (not v.ability.eternal) then
+ v:start_dissolve(nil, _first_dissolve)
+ _first_dissolve = true
+ check_for_unlock({ type = "unlock_killjester" })
+end
 '''
 match_indent = true
 

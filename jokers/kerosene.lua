@@ -3,7 +3,7 @@ local jokerInfo = {
     config = {
         extra = {
             chips = 0,
-            chip_mod = 25
+            chip_mod = 20
         }
     },
     rarity = 2,

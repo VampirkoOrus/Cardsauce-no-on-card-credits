@@ -73,7 +73,7 @@ function jokerInfo.calculate(self, card, context)
 			if not G.GAME.deathsold then
 				G.GAME.deathsold = {}
 			end
-			G.GAME.deathsold[#G.GAME.deathsold+1] = {id=card.ability.id, timesSold=card.ability.timesSold}
+			G.GAME.deathsold[#G.GAME.deathsold+1] = {id=card.ability.id, timesSold=card.ability.timesSold, edition=card.edition and card.edition.type or nil}
 			if G.GAME.spawnDeathcards then
 				G.GAME.spawnDeathcards = G.GAME.spawnDeathcards + 1
 			else
@@ -88,6 +88,17 @@ function jokerInfo.update(self, card)
 		if #G.GAME.deathsold > 0 and not card.ability.id and not card.ability.timesSold then
 			local death = G.GAME.deathsold[1]
 			local id = death['id']
+			if death['edition'] then
+				if death['edition'] == "foil" then
+					card:set_edition({foil = true}, true, true)
+				elseif death['edition'] == "holo" then
+					card:set_edition({holo = true}, true, true)
+				elseif death['edition'] == "polychrome" then
+					card:set_edition({polychrome = true}, true, true)
+				elseif death['edition'] == "negative" then
+					card:set_edition({negative = true}, true, true)
+				end
+			end
 			card.ability.id = id
 			local timesSold = death['timesSold']
 			card.ability.timesSold = timesSold
