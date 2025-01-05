@@ -148,6 +148,9 @@ local conf_cardsauce = {
 		'rapture',
 		'villains',
 		'killjester',
+
+		-- Update 1.3
+		'meteor',
 	},
 	consumablesToLoad = {
 		'quixotic',
