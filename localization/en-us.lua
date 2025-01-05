@@ -1363,8 +1363,7 @@ return {
 			j_csau_ten = {
 				name = "10 ARROWS!?!?",
 				text = {
-					"This Joker gives {C:mult}+#1#{} Mult",
-					"for each {C:attention}consumable",
+					"{C:mult}+#1#{} Mult for each {C:attention}consumable",
 					"card used this {C:attention}Blind",
 					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
