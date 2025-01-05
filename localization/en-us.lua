@@ -465,7 +465,7 @@ return {
 			ach_csau_discover_pivot = "Discover Pivyot",
 			ach_csau_discover_speen = "Discover SPEEEEEEN",
 			ach_csau_discover_diaper = "Discover Diaper Joker",
-			ach_csau_discover_blast = "Discover Emmanual Blast",
+			ach_csau_discover_blast = "Discover Emmanuel Blast",
 			ach_csau_discover_dink = "Discover Very Expensive Joker",
 			ach_csau_discover_deathcard = "Discover Deathcard",
 			ach_csau_discover_hell = "Discover Running Hell",
