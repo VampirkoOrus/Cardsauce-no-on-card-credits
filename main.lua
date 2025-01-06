@@ -185,6 +185,7 @@ G.foodjokers = {
 	'j_popcorn',
 	'j_ramen',
 	'j_selzer',
+	'j_diet_cola',
 	'j_csau_meat',
 	'j_csau_fantabulous'
 }
