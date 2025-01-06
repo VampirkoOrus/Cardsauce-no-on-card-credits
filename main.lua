@@ -170,6 +170,8 @@ local conf_cardsauce = {
 		'tray',
 		'vod',
 		--'outlaw',
+		'finger',
+		--'mochamike',
 	},
 	trophiesToLoad = {
 	}

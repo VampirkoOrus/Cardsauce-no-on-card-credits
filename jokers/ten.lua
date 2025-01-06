@@ -24,7 +24,7 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.using_consumeable then
+    if context.using_consumeable and not G.shop then
         card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.MULT})
     end

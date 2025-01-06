@@ -414,6 +414,8 @@ return {
 			ach_csau_defeat_tray = "One Third Tray of: Chips!",
 			ach_csau_defeat_vod = "The Final Cut",
 			ach_csau_supreme_ascend = "Supreme Ascendancy",
+			ach_csau_defeat_finger = "Handy",
+			ach_csau_defeat_mochamike = "Put Your Deck Away",
 
 			ach_csau_discover_vincenzo = "Step Right In",
 			ach_csau_discover_quarterdumb = "Drown In It",
@@ -507,6 +509,8 @@ return {
 			ach_csau_defeat_tray = "Defeat The Tray",
 			ach_csau_defeat_vod = "Defeat The Vod",
 			ach_csau_supreme_ascend = "Have Rapture at or above +30 Mult and 2 Kings 2:23-24 in your Joker slots",
+			ach_csau_defeat_finger = "Defeat The Finger",
+			ach_csau_defeat_mochamike = "Defeat Mocha Mike",
 
 			ach_csau_discover_vincenzo = "Discover Vincenzo",
 			ach_csau_discover_quarterdumb = "Discover Quarterdumb",
@@ -560,6 +564,18 @@ return {
 				text={
 					"Debuffs all cards of the",
 					"ranks played last hand"
+				},
+			},
+			bl_csau_finger = {
+				name="The Finger",
+				text={
+					"High Card will not score"
+				},
+			},
+			bl_csau_mochamike = {
+				name="Mocha Mike",
+				text={
+					"#1# will not score"
 				},
 			},
 		},
@@ -1223,7 +1239,7 @@ return {
 			j_csau_dontmind = {
 				name = "Don't Mind If I Do",
 				text = {
-					"{C:planet}High Card{} levels up by {C:attention}double{}",
+					"{C:planet}High Card{} levels by {C:attention}double{}",
 					"the standard increment",
 				},
 			},
@@ -1444,7 +1460,7 @@ return {
 				},
 			},
 			j_csau_koffing = {
-				name = "That Fucking Koffing Again [WIP]",
+				name = "That Fucking Koffing Again",
 				text = {
 					"Your first {C:attention}Shop Reroll{} each",
 					"shop rerolls {C:attention}Booster Packs"

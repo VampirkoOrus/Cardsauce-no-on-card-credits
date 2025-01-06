@@ -48,7 +48,8 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not card.debuff then
-		if check_secret(context.scoring_name) then
+		local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(context.scoring_hand)
+		if check_secret(text) then
 			return {
 				card = self,
 				level_up = true,

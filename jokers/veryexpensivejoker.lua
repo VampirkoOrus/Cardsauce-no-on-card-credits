@@ -2,7 +2,7 @@ local jokerInfo = {
 	name = 'Very Expensive Joker',
 	config = {
 		extra = {
-			x_mult = 1,
+			x_mult = nil,
 			cost = 4
 		},
 		wasShop = false
@@ -16,7 +16,7 @@ local jokerInfo = {
 }
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
-	return { vars = {card.ability.extra.x_mult} }
+	return { vars = {card.ability.extra.x_mult or ((math.floor(card.cost/10)/2) + 1) or 1} }
 end
 
 function jokerInfo.add_to_deck(self, card)
