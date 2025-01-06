@@ -151,8 +151,8 @@ local conf_cardsauce = {
 
 		-- Update 1.3
 		'meteor',
-		--'dud',
-		--'koffing',
+		'dud',
+		'koffing',
 		'frich',
 		'bunji',
 	},

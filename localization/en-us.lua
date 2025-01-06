@@ -396,6 +396,8 @@ return {
 			ach_csau_discover_killjester = "Well Worth It",
 			ach_csau_discover_villains = "Magic Bullet",
 			ach_csau_discover_meteor = "Did Sephiroth... Do This?",
+			ach_csau_discover_dud = "A DUHD!?",
+			ach_csau_discover_koffing = "NOT CLICKBAIT",
 			ach_csau_discover_frich = "FINE DINING",
 			ach_csau_discover_bunji = "Lemme Just Say This... Yum",
 
@@ -487,6 +489,8 @@ return {
 			ach_csau_discover_killjester = "Discover Kill Jester",
 			ach_csau_discover_villains = "Discover Jokers of Circumstance",
 			ach_csau_discover_meteor = "Discover Meteor",
+			ach_csau_discover_dud = "Discover The Dud",
+			ach_csau_discover_koffing = "Discover That Fucking Koffing Again",
 			ach_csau_discover_frich = "Discover Gourmand of Faramore",
 			ach_csau_discover_bunji = "Discover Scourge Of Pantsylvania",
 
@@ -1437,6 +1441,25 @@ return {
 				},
 				unlock={
 					"Discover {C:attention}Gourmand of Faramore",
+				},
+			},
+			j_csau_koffing = {
+				name = "That Fucking Koffing Again [WIP]",
+				text = {
+					"Your first {C:attention}Shop Reroll{} each",
+					"shop rerolls {C:attention}Booster Packs"
+				},
+			},
+			j_csau_dud = {
+				name = "The Dud",
+				text = {
+					"When sold, removes all {C:attention}stickers",
+					"from a random {C:attention}Joker{} with stickers"
+				},
+				unlock = {
+					"Win a run with any",
+					"deck on at least",
+					"{V:1}Black Stake{} difficulty",
 				},
 			},
 		},
