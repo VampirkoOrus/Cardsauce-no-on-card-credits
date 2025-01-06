@@ -61,7 +61,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if context.setting_blind and G.GAME.blind.boss and not card.debuff and not (context.blueprint_card or card).getting_sliced and not context.blueprint_card then
-		if not card.ability.extra.form ~= "odio9" and G.GAME.round_resets.ante ~= 1 then
+		if not card.ability.extra.form ~= "odio9" and G.GAME.round_resets.ante ~= 1 and G.GAME.round_resets.ante < 10  then
 			local form = forms[G.GAME.round_resets.ante]
 			local trigger = true
 			if trigger then
