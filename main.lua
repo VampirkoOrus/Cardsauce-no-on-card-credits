@@ -469,6 +469,7 @@ if csau_enabled['enableBosses'] then
 		blindInfo.atlas = v
 		if blindInfo.color then
 			blindInfo.boss_colour = blindInfo.color
+			blindInfo.color = nil
 		end
 
 		local blind = SMODS.Blind(blindInfo)
