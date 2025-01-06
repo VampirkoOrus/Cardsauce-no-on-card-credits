@@ -243,6 +243,12 @@ if G.GAME.selected_back and G.GAME.selected_back.effect.center.key == "b_csau_vi
         end
     end
 end
+if next(SMODS.find_card('j_csau_frich')) then
+    if G.FUNCS.is_food(v.key) then
+        _pool[#_pool + 1] = v.key
+        _pool_size = _pool_size + 1
+    end
+end
 '''
 match_indent = true
 
@@ -474,6 +480,56 @@ payload = '''
 check_for_unlock({ type = "unlock_killjester" })
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.name == 'Ramen' and not context.blueprint then"
+position = "at"
+payload = "if self.ability.name == 'Ramen' and not context.blueprint and not next(SMODS.find_card('j_csau_bunji')) then"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.name == 'Popcorn' and not context.blueprint then"
+position = "at"
+payload = "if self.ability.name == 'Popcorn' and not context.blueprint and not next(SMODS.find_card('j_csau_bunji')) then"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.name == 'Ice Cream' and not context.blueprint then"
+position = "at"
+payload = "if self.ability.name == 'Ice Cream' and not context.blueprint and not next(SMODS.find_card('j_csau_bunji')) then"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.name == 'Seltzer' and not context.blueprint then"
+position = "at"
+payload = "if self.ability.name == 'Seltzer' and not context.blueprint and not next(SMODS.find_card('j_csau_bunji')) then"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.name == 'Turtle Bean' and not context.blueprint then"
+position = "at"
+payload = "if self.ability.name == 'Turtle Bean' and not context.blueprint and not next(SMODS.find_card('j_csau_bunji')) then"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.name == 'Gros Michel' or self.ability.name == 'Cavendish' then"
+position = "at"
+payload = "if (self.ability.name == 'Gros Michel' or self.ability.name == 'Cavendish') and not next(SMODS.find_card('j_csau_bunji')) then"
+match_indent = true
+
+
 
 
 

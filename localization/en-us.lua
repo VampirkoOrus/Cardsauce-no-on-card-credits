@@ -396,6 +396,8 @@ return {
 			ach_csau_discover_killjester = "Well Worth It",
 			ach_csau_discover_villains = "Magic Bullet",
 			ach_csau_discover_meteor = "Did Sephiroth... Do This?",
+			ach_csau_discover_frich = "FINE DINING",
+			ach_csau_discover_bunji = "Lemme Just Say This... Yum",
 
 			ach_csau_activate_quixotic = "From Some Place Even Higher",
 			ach_csau_flip_sosad = "I'm Unhappy When You're Happy",
@@ -485,6 +487,8 @@ return {
 			ach_csau_discover_killjester = "Discover Kill Jester",
 			ach_csau_discover_villains = "Discover Jokers of Circumstance",
 			ach_csau_discover_meteor = "Discover Meteor",
+			ach_csau_discover_frich = "Discover Gourmand of Faramore",
+			ach_csau_discover_bunji = "Discover Scourge Of Pantsylvania",
 
 			ach_csau_activate_quixotic = "Use a Quixotic Card",
 			ach_csau_flip_sosad = "Win a round with I'm So Happy, causing it to flip to I'm So Sad",
@@ -1416,6 +1420,24 @@ return {
 				},
 				unlock={
 					"Destroy a {C:attention}Glass 7",
+				},
+			},
+			j_csau_frich = {
+				name = "Gourmand of Faramore",
+				text = {
+					"{C:attention}Food Jokers{} appear twice as often"
+				},
+				unlock={
+					"Discover {C:attention}5 Food Jokers",
+				},
+			},
+			j_csau_bunji = {
+				name = "Scourge Of Pantsylvania",
+				text = {
+					"{C:attention}Food Jokers{} never expire"
+				},
+				unlock={
+					"Discover {C:attention}Gourmand of Faramore",
 				},
 			},
 		},

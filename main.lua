@@ -151,6 +151,10 @@ local conf_cardsauce = {
 
 		-- Update 1.3
 		'meteor',
+		--'dud',
+		--'koffing',
+		'frich',
+		'bunji',
 	},
 	consumablesToLoad = {
 		'quixotic',
@@ -170,6 +174,28 @@ local conf_cardsauce = {
 	trophiesToLoad = {
 	}
 }
+
+G.foodjokers = {
+	'j_gros_michel',
+	'j_ice_cream',
+	'j_cavendish',
+	'j_turtle_bean',
+	'j_popcorn',
+	'j_ramen',
+	'j_selzer',
+	'j_csau_meat',
+	'j_csau_fantabulous'
+}
+
+function G.FUNCS.is_food(key)
+	for i, k in ipairs(G.foodjokers) do
+		if k == key then
+			return true
+		end
+	end
+	return false
+end
+
 
 G.loadTrophies = true
 if csau_enabled['enableTrophies'] then
