@@ -150,11 +150,11 @@ local conf_cardsauce = {
 		'killjester',
 
 		-- Update 1.3
-		--'meteor',
-		--'dud',
-		--'koffing',
-		--'frich',
-		--'bunji',
+		'meteor',
+		'dud',
+		'koffing',
+		'frich',
+		'bunji',
 	},
 	consumablesToLoad = {
 		'quixotic',
@@ -170,7 +170,7 @@ local conf_cardsauce = {
 		'tray',
 		'vod',
 		--'outlaw',
-		--'finger',
+		'finger',
 		--'mochamike',
 	},
 	trophiesToLoad = {
@@ -1832,6 +1832,19 @@ if csau_enabled['enableSkins'] then
 		posStyle = "collab"
 	}
 end
+
+local palette = {
+	key = 'testpalette',
+	ranks = {"Ace"},
+	display_ranks = {'Jack', 'Queen', "King", "Ace"},
+	atlas = 'csau_s_shroomless',
+	posStyle = 'ranks',
+	loc_txt = {
+		["en-us"] = "New Test Palette!"
+	}
+}
+
+SMODS.add_deckskin_palette('default_Spades', palette)
 
 if csau_enabled['enableMusic'] then
 	SMODS.Sound({
