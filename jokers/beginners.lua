@@ -52,4 +52,10 @@ function jokerInfo.calculate(self, card, context)
     end
 end
 
+function jokerInfo.update(self, card)
+    if card.ability.disabled and not card.debuff then
+        card.debuff = true
+    end
+end
+
 return jokerInfo

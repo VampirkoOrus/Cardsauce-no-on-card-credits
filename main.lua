@@ -150,11 +150,11 @@ local conf_cardsauce = {
 		'killjester',
 
 		-- Update 1.3
-		'meteor',
-		'dud',
-		'koffing',
-		'frich',
-		'bunji',
+		--'meteor',
+		--'dud',
+		--'koffing',
+		--'frich',
+		--'bunji',
 	},
 	consumablesToLoad = {
 		'quixotic',
@@ -170,7 +170,7 @@ local conf_cardsauce = {
 		'tray',
 		'vod',
 		--'outlaw',
-		'finger',
+		--'finger',
 		--'mochamike',
 	},
 	trophiesToLoad = {
