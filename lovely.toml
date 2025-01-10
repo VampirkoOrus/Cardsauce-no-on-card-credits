@@ -110,7 +110,9 @@ payload = '''
     local highest = nil
     if G.GAME.blind.boss and G.GAME.blind.name == "The Vod" and not G.GAME.blind.disabled then
         for k, v in ipairs(G.play.cards) do
-            draw_card(G.play,G.hand, it*100/play_count,'up', true, v)
+            if (not v.shattered) and (not v.destroyed) then
+                draw_card(G.play,G.hand, it*100/play_count,'up', true, v)
+            end
         end
     else
         if next(find_joker("Be Someone Forever")) then

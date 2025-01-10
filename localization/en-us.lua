@@ -730,6 +730,17 @@ return {
 					"Fuck you.",
 				},
 			},
+			disabled_note = {
+				name = "BROKEN JOKER!",
+				text = {
+					"This joker has been",
+					"disabled for the time being.",
+					"The modding tools are not",
+					"being nice with its ability.",
+					"It's broken as hell.",
+					"Sorry! -Cardsauce Team",
+				},
+			}
 		},
 		Joker = {
 			j_csau_diaper = {
@@ -1132,6 +1143,7 @@ return {
 					"This Joker gains {C:chips}+#2#{} Chips",
 					"if played hand triggers",
 					"the {C:attention}Boss Blind{} ability",
+					"{C:attention}(Once per round)",
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",
 				},
 			},

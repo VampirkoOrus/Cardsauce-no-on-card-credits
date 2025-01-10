@@ -34,7 +34,7 @@ function jokerInfo.calculate(self, card, context)
 			if card.ability.extra.x_mult > 1 then
                 card.ability.extra.x_mult = 1
                 return {
-                    card = self,
+                    card = card,
                     message = localize('k_reset')
                 }
             end

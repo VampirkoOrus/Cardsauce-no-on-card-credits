@@ -25,7 +25,7 @@ function jokerInfo.calculate(self, card, context)
 		if context.scoring_name == "High Card" then
 			if pseudorandom('pivot') < G.GAME.probabilities.normal / 3 then
 				return {
-					card = self,
+					card = card,
 					level_up = true,
 					message = localize('k_level_up_ex')
 				}
