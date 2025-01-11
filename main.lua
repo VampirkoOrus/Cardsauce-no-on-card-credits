@@ -1833,19 +1833,6 @@ if csau_enabled['enableSkins'] then
 	}
 end
 
-local palette = {
-	key = 'testpalette',
-	ranks = {"Ace"},
-	display_ranks = {'Jack', 'Queen', "King", "Ace"},
-	atlas = 'csau_s_shroomless',
-	posStyle = 'ranks',
-	loc_txt = {
-		["en-us"] = "New Test Palette!"
-	}
-}
-
-SMODS.add_deckskin_palette('default_Spades', palette)
-
 if csau_enabled['enableMusic'] then
 	SMODS.Sound({
 		vol = 0.6,
