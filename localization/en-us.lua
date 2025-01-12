@@ -217,7 +217,14 @@ return {
 				["1"]="Fullsauce",
 			},
         },
+		labels = {
+			vhs = "VHS Tape"
+		},
 		dictionary = {
+			k_vhs = "VHS Tape",
+			b_vhs_cards = "VHS Tapes",
+			b_and_activate = "& Activate",
+			b_activate = "Activate",
 			vs_credits1 = "Concepting/Direction",
 			vs_credits2 = "Artists",
 			vs_credits2_2 = "Playing Cards",
@@ -329,6 +336,7 @@ return {
 			k_val_down = "Value Down...",
 			k_worthless_ex = "Worthless!",
 			k_noluck_ex = "No Luck!",
+			k_sipped_ex = "Sipped!"
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
@@ -580,6 +588,14 @@ return {
 			},
 		},
 		Other = {
+			undiscovered_vhs={
+				name="Not Discovered",
+				text={
+					"Purchase this card in",
+					"an unseeded run to",
+					"learn what it does",
+				},
+			},
 			wheel2 = {
 				name = "The Wheel of Fortune",
 				text = {
@@ -587,6 +603,19 @@ return {
 					"{C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
 					"{C:dark_edition}Polychrome{} edition",
 					"to a random {C:attention}Joker",
+				},
+			},
+			vhs_activation = {
+				name = "VHS Activation",
+				text = {
+					"When clicking the use button,",
+					"this {C:vhs}VHS Tape's{} Joker-like ability",
+					"will become {C:attention}activated{}, and it",
+					"won't immediately disappear.",
+					"This activation state can be {C:attention}toggled{},",
+					"and when its ability is used up, the",
+					"tape is then {C:attention}destroyed.",
+
 				},
 			},
 			guestartist0 = {
@@ -713,6 +742,12 @@ return {
 				name = "Artist",
 				text = {
 					"{E:1}Burdrehnar{}",
+				},
+			},
+			guestartist22 = {
+				name = "Artist",
+				text = {
+					"{E:1}Crisppyboat{}",
 				},
 			},
 			rogernote = {
@@ -1490,12 +1525,59 @@ return {
 					"{V:1}Black Stake{} difficulty",
 				},
 			},
+			j_csau_crudeoil = {
+				name = "Crude Oil",
+				text = {
+					"Earn {C:money}$#1#{} at end of round",
+					"Payout reduces by {C:money}$#2#{}",
+					"after each cash out"
+				},
+			},
+			j_csau_bjbros = {
+				name = "Blowzo Brothers",
+				text = {
+					"{C:green}#1# in #2#{} chance to upgrade",
+					"level of played {C:attention}Two Pair{}",
+					"{C:green}#1# in #3#{} chance to {C:attention}enhance{} two",
+					"cards in played {C:attention}Two Pair{}",
+				},
+			},
+			j_csau_grannycream = {
+				name = "Granny Cream",
+				text = {
+					"If scored hand has under {C:chips}#1#{} Chips,",
+					"spend Chips from this Joker to make it {C:chips}#1#{}",
+					"{C:inactive}({}{C:chips}#2#{}{C:inactive} Chips remaining){}",
+				},
+			},
 		},
 		Spectral = {
 			c_csau_quixotic = {
 				name = "Quixotic",
 				text = {
 					"Gain an {C:attention}Ethereal Tag",
+				},
+			},
+		},
+		VHS = {
+			c_csau_blackspine = {
+				name = "Black Spine",
+				text = {
+					"Creates a random {C:vhs}VHS Tape{}",
+				},
+			},
+			c_csau_doubledown = {
+				name = "Double Down",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult when {C:attention}activated",
+				},
+			},
+			c_csau_topslots = {
+				name = "Top Slots - Spotting The Best",
+				text = {
+					"{C:green}#1# in #2#{} chance to win {C:money}$#3#{}",
+					"{C:green}#1# in #4#{} chance to {C:attention}double{} winnings",
+					"{C:green}#1# in #5#{} chance to {C:attention}triple{} winnings",
 				},
 			},
 		},

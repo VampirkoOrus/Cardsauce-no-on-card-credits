@@ -531,6 +531,24 @@ position = "at"
 payload = "if (self.ability.name == 'Gros Michel' or self.ability.name == 'Cavendish') and not next(SMODS.find_card('j_csau_bunji')) then"
 match_indent = true
 
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = '''
+e.config.button = nil
+local card = e.config.ref_table
+'''
+position = "at"
+payload = '''
+local card = e.config.ref_table
+if card.config.center.activation then
+    G.FUNCS.tape_activate(card)
+    return
+end
+e.config.button = nil
+'''
+match_indent = true
+
 
 
 

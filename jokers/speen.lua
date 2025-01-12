@@ -23,7 +23,6 @@ local setupCanvas = function(self)
 	end)
 end
 
-
 local jokerInfo = {
 	name = 'SPEEEEEEN',
 	config = {},
@@ -79,7 +78,7 @@ end
 function jokerInfo.draw(self,card,layer)
 	--Withouth love.graphics.push, .pop, and .reset, it will attempt to use values from the rest of 
 	--the rendering code. We need a clean slate for rendering to canvases.
-	if not self.discovered then
+	if card.area.config.collection and not self.discovered then
 		return
 	end
 	

@@ -150,6 +150,9 @@ local conf_cardsauce = {
 		'killjester',
 
 		-- Update 1.3
+		'crudeoil',
+		'grannycream',
+		'bjbros',
 		'meteor',
 		'dud',
 		'koffing',
@@ -157,7 +160,13 @@ local conf_cardsauce = {
 		'bunji',
 	},
 	consumablesToLoad = {
+		--Spectral
 		'quixotic',
+
+		--VHS
+		'blackspine',
+		'doubledown',
+		'topslots'
 	},
 	decksToLoad = {
 		'vine',
@@ -187,7 +196,9 @@ G.foodjokers = {
 	'j_selzer',
 	'j_diet_cola',
 	'j_csau_meat',
-	'j_csau_fantabulous'
+	'j_csau_fantabulous',
+	'j_csau_crudeoil',
+	'j_csau_grannycream',
 }
 
 function G.FUNCS.is_food(key)
@@ -370,6 +381,69 @@ function get_straight(hand)
 	return {}
 end
 
+if #conf_cardsauce.consumablesToLoad > 1 then
+	G.C.VHS = HEX('a2615e')
+
+	SMODS.ConsumableType{
+		key = "VHS",
+		primary_colour = G.C.VHS,
+		secondary_colour = G.C.VHS,
+		collection_rows = { 8, 8 },
+		shop_rate = 1,
+		loc_txt = {},
+		default = "c_csau_blackspine",
+		can_stack = false,
+		can_divide = false,
+	}
+
+	SMODS.Atlas({ key = 'csau_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
+
+	SMODS.UndiscoveredSprite{
+		key = "VHS",
+		atlas = "csau_undiscovered",
+		pos = { x = 0, y = 0 }
+	}
+
+	G.FUNCS.tape_activate = function(card)
+		if not card.config.center.activation then return end
+		if card.ability.activated then
+			card.ability.activated = false
+		else
+			card.ability.tape_move = 9
+			card.ability.sleeve_move = -9
+			card.ability.activated = true
+		end
+	end
+
+	G.FUNCS.destroy_tape = function(card, delay, ach, silent)
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = delay,
+			func = function()
+				if not silent then
+					play_sound('tarot1')
+				end
+				card.T.r = -0.2
+				card:juice_up(0.3, 0.4)
+				card.states.drag.is = true
+				card.children.center.pinch.x = true
+				G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
+											 func = function()
+												 G.consumeables:remove_card(card)
+												 card:remove()
+												 card = nil
+												 return true
+											 end
+				}))
+				if ach then
+					check_for_unlock({ type = ach })
+				end
+				return true
+			end
+		}))
+	end
+end
+
 -- Load Jokers
 for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 	local jokerInfo = assert(SMODS.load_file("jokers/" .. v .. ".lua"))()
@@ -409,9 +483,10 @@ end
 for i, v in ipairs(conf_cardsauce.consumablesToLoad) do
 	local consumInfo = assert(SMODS.load_file("consumables/" .. v .. ".lua"))()
 
-	if consumInfo.set == "Spectral" and csau_enabled['enableSpectrals'] then
+	if (consumInfo.set == "Spectral" and csau_enabled['enableSpectrals']) or (consumInfo.set == "VHS") then
 		consumInfo.key = v
 		consumInfo.atlas = v
+
 		consumInfo.pos = { x = 0, y = 0 }
 		if consumInfo.hasSoul then
 			consumInfo.pos = { x = 1, y = 0 }
@@ -1833,19 +1908,6 @@ if csau_enabled['enableSkins'] then
 	}
 end
 
-local palette = {
-	key = 'testpalette',
-	ranks = {"Ace"},
-	display_ranks = {'Jack', 'Queen', "King", "Ace"},
-	atlas = 'csau_s_shroomless',
-	posStyle = 'ranks',
-	loc_txt = {
-		["en-us"] = "New Test Palette!"
-	}
-}
-
-SMODS.add_deckskin_palette('default_Spades', palette)
-
 if csau_enabled['enableMusic'] then
 	SMODS.Sound({
 		vol = 0.6,
@@ -2140,6 +2202,7 @@ vs_credit_26 = "GuffNFluff"
 vs_credit_27 = "sinewuui"
 vs_credit_28 = "Swizik"
 vs_credit_29 = "Burdrehnar"
+vs_credit_30 = "Crisppyboat"
 vs_credit_st1 = "tortoise"
 vs_credit_st2 = "Protokyuuu"
 vs_credit_st3 = "ShrineFox"
@@ -2280,6 +2343,9 @@ SMODS.current_mod.credits_tab = function()
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_29, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_30, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},
