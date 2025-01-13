@@ -1671,6 +1671,14 @@ return {
 					"Start run with {C:attention}#1#{}",
 				},
 			},
+			b_csau_wheel = {
+				name = "Wheel Deck",
+				text = {
+					"Start run with {C:purple}Crystal Ball{}",
+					"After each {C:attention}Boss Blind,{} ",
+					"gain a {C:vhs}Black Spine{}",
+				},
+			},
 		},
 	},
 }

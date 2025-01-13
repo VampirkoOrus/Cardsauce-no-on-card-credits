@@ -172,6 +172,7 @@ local conf_cardsauce = {
 	},
 	decksToLoad = {
 		'vine',
+		'wheel',
 	},
 	challengesToLoad = {
 		'tucker',
