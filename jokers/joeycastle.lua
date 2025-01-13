@@ -22,11 +22,10 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.discard and not context.other_card.debuff and context.other_card:is_suit(G.GAME.current_round.joeycastle.suit) and not context.blueprint then
-        ease_dollars(card.ability.money)
         return {
-            message = localize('$')..card.ability.money,
             dollars = card.ability.money,
-            colour = G.C.MONEY
+            colour = G.C.MONEY,
+            card = card
         }
     end
 end

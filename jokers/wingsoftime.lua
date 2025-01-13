@@ -20,7 +20,7 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.in_pool(self, args)
-	if G.GAME.round_resets.ante < 1 then
+	if G.GAME.round_resets.ante > 1 then
 		return true
 	end
 end

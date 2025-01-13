@@ -21,6 +21,7 @@ end
 
 function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_roche" })
+	ach_jokercheck(self, ach_checklists.ff7)
 end
 
 local roche = SMODS.Sound({
@@ -35,6 +36,7 @@ local rochedies = SMODS.Sound({
 
 function jokerInfo.remove_from_deck(self, card)
 	rochedies:play(1, (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/70.0),true)
+	check_for_unlock({ type = "roche_destroyed" })
 end
 
 function jokerInfo.calculate(self, card, context)

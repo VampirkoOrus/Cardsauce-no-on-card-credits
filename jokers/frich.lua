@@ -24,7 +24,6 @@ function jokerInfo.check_for_unlock(self, args)
                 end
             end
         end
-        send('Food Discovered: '..foodDiscovered)
         if foodDiscovered >= 5 then
             return true
         end

@@ -153,9 +153,11 @@ local conf_cardsauce = {
 		'crudeoil',
 		'grannycream',
 		'bjbros',
+		'koffing',
+		'drippy',
+		'sts',
 		'meteor',
 		'dud',
-		'koffing',
 		'frich',
 		'bunji',
 	},
@@ -178,9 +180,8 @@ local conf_cardsauce = {
 		'hog',
 		'tray',
 		'vod',
-		--'outlaw',
 		'finger',
-		--'mochamike',
+		'mochamike',
 	},
 	trophiesToLoad = {
 	}
@@ -287,6 +288,12 @@ function G.FUNCS.draw_from_deck_to_hand(self, e)
 	if G.GAME.csau_sj_drawextra then
 		draw_card(G.deck, G.hand, 100, 'up', true)
 		G.GAME.csau_sj_drawextra = false
+	end
+	if G.GAME.csau_stss_drawthreeextra then
+		for i = 1, 3 do
+			draw_card(G.deck, G.hand, 100, 'up', true)
+		end
+		G.GAME.csau_stss_drawthreeextra = false
 	end
 end
 
@@ -636,6 +643,15 @@ ach_checklists = {
 			"Don't Mind If I Do",
 		},
 	},
+	ff7 = {
+		3,
+		'triple_seven',
+		{
+			'Motorcyclist Joker',
+			'No No No No No No No No No No No',
+			'Meteor',
+		}
+	}
 }
 
 function ach_jokercheck(card, table)

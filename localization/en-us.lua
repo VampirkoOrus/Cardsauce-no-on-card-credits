@@ -310,6 +310,7 @@ return {
 			k_twoed = "Twoed!",
 			k_twoed_aced = "Two-Aced!",
 			k_plus_one = "+1 ",
+			k_plus_one_card = "+1 Card",
 			k_plus_two = "+2 ",
 			k_child = "Child",
 			k_plus_judge = "+1 Judgement",
@@ -336,7 +337,14 @@ return {
 			k_val_down = "Value Down...",
 			k_worthless_ex = "Worthless!",
 			k_noluck_ex = "No Luck!",
-			k_sipped_ex = "Sipped!"
+			k_sipped_ex = "Sipped!",
+			k_sts_hearts = "Twice-Fired",
+			k_sts_clubs = "Infinite Stones",
+			k_sts_diamonds = "Galvanism",
+			k_sts_spades = "Execration",
+			k_sts_wild = "Deification",
+			k_disguy_1 = "BLS BLAY GAME BINTY!!!",
+			k_disguy_2 = "ONLY 20 MINOOT!!!",
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
@@ -408,6 +416,11 @@ return {
 			ach_csau_discover_koffing = "NOT CLICKBAIT",
 			ach_csau_discover_frich = "FINE DINING",
 			ach_csau_discover_bunji = "Lemme Just Say This... Yum",
+			ach_csau_discover_crudeoil = "I CAN'T STOP",
+			ach_csau_discover_grannycream = "Heat n' Sip",
+			ach_csau_discover_sts = "ResidentSleeper",
+			ach_csau_discover_bjbros = "*Chain Attack OST Plays*",
+			ach_csau_discover_drippy = "The Dripping Tap",
 
 			ach_csau_activate_quixotic = "From Some Place Even Higher",
 			ach_csau_flip_sosad = "I'm Unhappy When You're Happy",
@@ -424,6 +437,7 @@ return {
 			ach_csau_supreme_ascend = "Supreme Ascendancy",
 			ach_csau_defeat_finger = "Handy",
 			ach_csau_defeat_mochamike = "Put Your Deck Away",
+			ach_csau_triple_seven = "Triple Seven",
 
 			ach_csau_discover_vincenzo = "Step Right In",
 			ach_csau_discover_quarterdumb = "Drown In It",
@@ -435,6 +449,7 @@ return {
 			ach_csau_red_convert = "Pro-lapsed Gamer",
 			ach_csau_five_deathcard = "Ouroboros",
 			ach_csau_ult_choomera = "Ultimate Choomera",
+			ach_csau_sts_allforms = "Art of Heartbreak",
 
 			ach_csau_all_discovered = "Card Addict",
 			ach_csau_big_meat = "The Big Meat",
@@ -503,6 +518,11 @@ return {
 			ach_csau_discover_koffing = "Discover That Fucking Koffing Again",
 			ach_csau_discover_frich = "Discover Gourmand of Faramore",
 			ach_csau_discover_bunji = "Discover Scourge Of Pantsylvania",
+			ach_csau_discover_crudeoil = "Discover Crude Oil",
+			ach_csau_discover_grannycream = "Discover Granny Cream",
+			ach_csau_discover_sts = "Discover Murder the Monolith",
+			ach_csau_discover_bjbros = "Discover Blowzo Brothers",
+			ach_csau_discover_drippy = "Discover Dripping Joker",
 
 			ach_csau_activate_quixotic = "Use a Quixotic Card",
 			ach_csau_flip_sosad = "Win a round with I'm So Happy, causing it to flip to I'm So Sad",
@@ -519,6 +539,7 @@ return {
 			ach_csau_supreme_ascend = "Have Rapture at or above +30 Mult and 2 Kings 2:23-24 in your Joker slots",
 			ach_csau_defeat_finger = "Defeat The Finger",
 			ach_csau_defeat_mochamike = "Defeat Mocha Mike",
+			ach_csau_triple_seven = "Have all 3 Final Fantasy Jokers in your Joker Slots",
 
 			ach_csau_discover_vincenzo = "Discover Vincenzo",
 			ach_csau_discover_quarterdumb = "Discover Quarterdumb",
@@ -530,6 +551,7 @@ return {
 			ach_csau_red_convert = "Use Why Are You Red? to turn a Poker Hand into a Secret Hand",
 			ach_csau_five_deathcard = "Purchase the same Deathcard from the shop 5 times in a single run",
 			ach_csau_ult_choomera = "Play a hand of 5 scoring Steel Cards with Chromed Up and Masked Joker",
+			ach_csau_sts_allforms = "Use all Murder the Monolith forms in a single run",
 
 			ach_csau_all_discovered = "Discover All Cardsauce Jokers",
 			ach_csau_big_meat = "Unlock every Cardsauce Achievement",
@@ -1343,8 +1365,10 @@ return {
 			j_csau_purple = {
 				name = "The Purple Joker",
 				text = {
-					"If {C:attention}first hand{} of round is all",
-					"{C:spades}Spades{}, create a {C:purple}Charm Tag{}",
+					"If {C:attention}first hand{} of round",
+					"contains a {C:attention}Flush{} of {C:spades}Spades{},",
+					"create up to #1# {C:purple}Tarot{} cards",
+					"{C:inactive}(Must have room)",
 				},
 			},
 			j_csau_fate = {
@@ -1485,7 +1509,8 @@ return {
 					"current {C:attention}Enhancement"
 				},
 				unlock={
-					"Destroy a {C:attention}Glass 7",
+					"Sell or destroy",
+					"{C:attention}Motorcyclist Joker",
 				},
 			},
 			j_csau_frich = {
@@ -1494,7 +1519,8 @@ return {
 					"{C:attention}Food Jokers{} appear twice as often"
 				},
 				unlock={
-					"Discover {C:attention}5 Food Jokers",
+					"Discover",
+					"{C:attention}5 Food Jokers",
 				},
 			},
 			j_csau_bunji = {
@@ -1503,7 +1529,8 @@ return {
 					"{C:attention}Food Jokers{} never expire"
 				},
 				unlock={
-					"Discover {C:attention}Gourmand of Faramore",
+					"Discover",
+					"{C:attention}Gourmand of Faramore",
 				},
 			},
 			j_csau_koffing = {
@@ -1548,6 +1575,60 @@ return {
 					"If scored hand has under {C:chips}#1#{} Chips,",
 					"spend Chips from this Joker to make it {C:chips}#1#{}",
 					"{C:inactive}({}{C:chips}#2#{}{C:inactive} Chips remaining){}",
+				},
+			},
+			j_csau_drippy = {
+				name = "Dripping Joker",
+				text = {
+					"Adds a random {C:attention}playing card{} to hand",
+					"when playing a {C:attention}Poker Hand{}",
+					"If card has any enhancements, add",
+					"its {C:attention}effect to scoring",
+				},
+			},
+			j_csau_sts_base = {
+				name = "Murder the Monolith",
+				text = {
+					"{C:attention}Transforms{} into a different Joker",
+					"depending on the {C:attention}suit{} of the",
+					"first card scored!",
+				},
+			},
+			j_csau_sts_hearts = {
+				name = "Twice-Fired",
+				text = {
+					"Played cards are {C:attention}Retriggered{}",
+				},
+			},
+			j_csau_sts_clubs = {
+				name = "Infinite Stones",
+				text = {
+					"After each hand played, add a",
+					"{C:attention}Stone{} card to your hand"
+				},
+			},
+			j_csau_sts_diamonds = {
+				name = "Galvanism",
+				text = {
+					"Every {C:attention}played card{} counts in scoring",
+					"Gain {C:mult}+#1#{} Mult for each card played",
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+			},
+			j_csau_sts_spades = {
+				name = "Execration",
+				text = {
+					"{X:mult,C:white}X#3#{} Mult",
+					"All cards retrigger {C:attention}twice",
+					"Draw #4# more cards after hand is played",
+					"Reduce Hands to {C:blue}#5#{} and Discards to {C:red}#6#",
+				},
+			},
+			j_csau_sts_wild = {
+				name = "Deification",
+				text = {
+					"Each card played without an",
+					"{C:attention}Enhancement{} gains a random {C:attention}Enhancement{}",
 				},
 			},
 		},

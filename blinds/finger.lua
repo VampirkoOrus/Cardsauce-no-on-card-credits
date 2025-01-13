@@ -5,16 +5,18 @@ local blindInfo = {
     dollars = 5,
     mult = 2,
     vars = {},
-    debuff = {
-        hand = {
-            ['High Card'] = true
-        }
-    },
+    debuff = { },
     boss = {min = 1, max = 10}
 }
 
 function blindInfo.defeat(self)
     check_for_unlock({ type = "defeat_finger" })
+end
+
+function blindInfo.debuff_hand(self, cards, hand, handname, check)
+    if handname == "High Card" then
+        return true
+    end
 end
 
 return blindInfo

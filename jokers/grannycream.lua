@@ -19,6 +19,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.chip_goal, card.ability.extra.chip_pool } }
 end
 
+function jokerInfo.add_to_deck(self, card)
+    check_for_unlock({ type = "discover_grannycream" })
+end
+
 function jokerInfo.calculate(self, card, context)
     if context.final_scoring_step then
         if hand_chips < card.ability.extra.chip_goal then
@@ -26,7 +30,9 @@ function jokerInfo.calculate(self, card, context)
             if spent_chips > card.ability.extra.chip_pool then
                 spent_chips = card.ability.extra.chip_pool
             end
-            card.ability.extra.chip_pool = card.ability.extra.chip_pool - spent_chips
+            if not next(SMODS.find_card('j_csau_bunji')) then
+                card.ability.extra.chip_pool = card.ability.extra.chip_pool - spent_chips
+            end
             return {
                 message = localize{type='variable',key='a_chips',vars={spent_chips}},
                 chip_mod = spent_chips

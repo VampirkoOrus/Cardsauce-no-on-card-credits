@@ -18,8 +18,23 @@ function jokerInfo.locked_loc_vars(self, info_queue, card)
     return { vars = { colours = {get_stake_col(4)} }}
 end
 
+function jokerInfo.in_pool(self, args)
+    if G.GAME.modifiers.enable_eternals_in_shop then
+        return true
+    end
+end
+
 function jokerInfo.add_to_deck(self, card)
     check_for_unlock({ type = "discover_dud" })
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if args.type == "win_stake" then
+        local highest_win, lowest_win = get_deck_win_stake(nil)
+        if highest_win >= 4 then
+            return true
+        end
+    end
 end
 
 function jokerInfo.calculate(self, card, context)

@@ -549,6 +549,15 @@ e.config.button = nil
 '''
 match_indent = true
 
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "if next(find_joker('Splash')) then"
+position = "at"
+payload = "if next(find_joker('Splash')) or G.FUNCS.find_sts_form('spades') then"
+match_indent = true
+
+
 
 
 

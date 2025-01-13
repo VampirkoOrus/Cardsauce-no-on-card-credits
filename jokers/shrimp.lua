@@ -47,7 +47,7 @@ function jokerInfo.calculate(self, card, context)
 					card = card
 				}
 			end
-			if context.other_card.seal == 'Gold' then 
+			if context.other_card.seal == 'Gold' then
 				ease_dollars(3)
 				return {
 					message = localize('k_again_ex'),

@@ -17,6 +17,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {G.GAME.probabilities.normal, card.ability.prob_1, card.ability.prob_2 } }
 end
 
+function jokerInfo.add_to_deck(self, card)
+    check_for_unlock({ type = "discover_bjbros" })
+end
+
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff then
         if context.scoring_name == "Two Pair" then
