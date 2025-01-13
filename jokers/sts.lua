@@ -117,30 +117,25 @@ function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff then
         if G.GAME.current_round.hands_played == 0 and card.ability.form == "base" and not context.blueprint then
             local first = context.scoring_hand[1]
-            if first.ability.effect == 'Wild Card' then
-                local form = change_form(card, "Wild Card")
-                card:juice_up(1, 1)
-                card:set_sprites(card.config.center)
-                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_sts_'..card.ability.form), colour = form_color(form), no_juice = true})
-            else
-                local form = change_form(card, first.base.suit)
-                card:juice_up(1, 1)
-                card:set_sprites(card.config.center)
-                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_sts_'..card.ability.form), colour = form_color(form), no_juice = true})
-            end
-            if card.ability.form == "diamonds" then
-                for i=1, #G.play.cards do
-                    context.scoring_hand[i] = G.play.cards[i]
+            if not first.debuff then
+                if first.ability.effect == 'Wild Card' then
+                    local form = change_form(card, "Wild Card")
+                    card:juice_up(1, 1)
+                    card:set_sprites(card.config.center)
+                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_sts_'..card.ability.form), colour = form_color(form), no_juice = true})
+                else
+                    local form = change_form(card, first.base.suit)
+                    card:juice_up(1, 1)
+                    card:set_sprites(card.config.center)
+                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_sts_'..card.ability.form), colour = form_color(form), no_juice = true})
                 end
-                for i=1, #context.scoring_hand do
-                    highlight_card(context.scoring_hand[i],(i-0.999)/5,'up')
+                if card.ability.form == "spades" then
+                    ease_discard(-G.GAME.current_round.discards_left, nil, true)
+                    ease_hands_played(-G.GAME.current_round.hands_left + 1, nil, true)
                 end
-            elseif card.ability.form == "spades" then
-                ease_discard(-G.GAME.current_round.discards_left, nil, true)
-                ease_hands_played(-G.GAME.current_round.hands_left + 1, nil, true)
+                card.ability.changed_forms[card.ability.form] = true
+                sts_allforms(card)
             end
-            card.ability.changed_forms[card.ability.form] = true
-            sts_allforms(card)
         end
         if card.ability.form == "clubs" then
             G.playing_card = (G.playing_card and G.playing_card + 1) or 1
@@ -157,36 +152,43 @@ function jokerInfo.calculate(self, card, context)
                     return true
                 end
             }))
-        elseif card.ability.form == "diamonds" and not context.blueprint then
-            card.ability.diamonds.mult = card.ability.diamonds.mult + (card.ability.diamonds.mult_mod * #context.scoring_hand)
-            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_mult', vars = {card.ability.diamonds.mult}}, colour = G.C.MULT})
-        elseif card.ability.form == "spades" and not context.blueprint then
-            G.GAME.csau_stss_drawthreeextra = true
-        elseif card.ability.form == "wild" then
-            local enhancements = {
-                [1] = G.P_CENTERS.m_bonus,
-                [2] = G.P_CENTERS.m_mult,
-                [3] = G.P_CENTERS.m_wild,
-                [4] = G.P_CENTERS.m_glass,
-                [5] = G.P_CENTERS.m_steel,
-                [6] = G.P_CENTERS.m_stone,
-                [7] = G.P_CENTERS.m_gold,
-                [8] = G.P_CENTERS.m_lucky,
-            }
-            for i, v in ipairs(context.scoring_hand) do
-                if v.ability.effect == "Base" then
-                    v:set_ability(enhancements[pseudorandom('deification', 1, 8)], nil, true)
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            v:juice_up()
-                            return true
-                        end
-                    }))
+        elseif card.ability.form == "spades" then
+            if G.GAME.csau_stss_drawthreeextra == nil then
+                G.GAME.csau_stss_drawthreeextra = 1
+            else
+                G.GAME.csau_stss_drawthreeextra = G.GAME.csau_stss_drawthreeextra + 1
+            end
+        end
+        if G.GAME.current_round.hands_played > 0 then
+            if card.ability.form == "diamonds" and not context.blueprint then
+                card.ability.diamonds.mult = card.ability.diamonds.mult + (card.ability.diamonds.mult_mod * #context.scoring_hand)
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_mult', vars = {card.ability.diamonds.mult}}, colour = G.C.MULT})
+            elseif card.ability.form == "wild" then
+                local enhancements = {
+                    [1] = G.P_CENTERS.m_bonus,
+                    [2] = G.P_CENTERS.m_mult,
+                    [3] = G.P_CENTERS.m_wild,
+                    [4] = G.P_CENTERS.m_glass,
+                    [5] = G.P_CENTERS.m_steel,
+                    [6] = G.P_CENTERS.m_stone,
+                    [7] = G.P_CENTERS.m_gold,
+                    [8] = G.P_CENTERS.m_lucky,
+                }
+                for i, v in ipairs(context.scoring_hand) do
+                    if v.ability.effect == "Base" then
+                        v:set_ability(enhancements[pseudorandom('deification', 1, 8)], nil, true)
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                v:juice_up()
+                                return true
+                            end
+                        }))
+                    end
                 end
             end
         end
     end
-    if context.cardarea == G.play and context.repetition and not context.repetition_only and not card.debuff then
+    if context.cardarea == G.play and context.repetition and not context.repetition_only and not card.debuff and G.GAME.current_round.hands_played > 0 then
         if card.ability.form == "hearts" then
             return {
                 message = 'Again!',
@@ -201,7 +203,7 @@ function jokerInfo.calculate(self, card, context)
             }
         end
     end
-    if context.final_scoring_step then
+    if context.final_scoring_step and G.GAME.current_round.hands_played > 0 then
         if card.ability.form == "diamonds" and card.ability.diamonds.mult > 0 then
             return {
                 message = localize{type='variable',key='a_mult',vars={card.ability.diamonds.mult}},
@@ -214,13 +216,18 @@ function jokerInfo.calculate(self, card, context)
             }
         end
     end
-    if context.end_of_round and not context.other_card and card.ability.form ~= "base" then
+    if context.end_of_round and not context.other_card then
+        if card.ability.form ~= "base" then
+            change_form(card, "Base")
+            card:juice_up(1, 1)
+            card:set_sprites(card.config.center)
+        end
         if card.ability.diamonds.mult > 0 then
             card.ability.diamonds.mult = 0
         end
-        change_form(card, "Base")
-        card:juice_up(1, 1)
-        card:set_sprites(card.config.center)
+        if G.GAME.csau_stss_drawthreeextra and G.GAME.csau_stss_drawthreeextra > 0 then
+            G.GAME.csau_stss_drawthreeextra = 0
+        end
     end
 end
 

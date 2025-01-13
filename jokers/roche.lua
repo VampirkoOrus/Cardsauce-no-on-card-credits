@@ -35,8 +35,10 @@ local rochedies = SMODS.Sound({
 })
 
 function jokerInfo.remove_from_deck(self, card)
-	rochedies:play(1, (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/70.0),true)
-	check_for_unlock({ type = "roche_destroyed" })
+	if not G.screenwipe then
+		rochedies:play(1, (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/70.0),true)
+		check_for_unlock({ type = "roche_destroyed" })
+	end
 end
 
 function jokerInfo.calculate(self, card, context)

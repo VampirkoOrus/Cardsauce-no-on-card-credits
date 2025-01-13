@@ -554,7 +554,7 @@ match_indent = true
 target = "functions/state_events.lua"
 pattern = "if next(find_joker('Splash')) then"
 position = "at"
-payload = "if next(find_joker('Splash')) or G.FUNCS.find_sts_form('spades') then"
+payload = "if next(find_joker('Splash')) or G.FUNCS.find_sts_form('diamonds') then"
 match_indent = true
 
 
