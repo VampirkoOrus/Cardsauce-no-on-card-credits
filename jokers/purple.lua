@@ -12,7 +12,6 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = G.P_TAGS.tag_charm
     info_queue[#info_queue+1] = {key = "guestartist18", set = "Other"}
     return {vars = { card.ability.tarot } }
 end
