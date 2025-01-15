@@ -31,8 +31,7 @@ function blindInfo.loc_vars(self)
 end
 
 function blindInfo.collection_loc_vars(self)
-    local most_played = get_most_played()
-    return {vars = { localize(most_played, 'poker_hands') or localize('ph_most_played') } }
+    return {vars = { localize('ph_most_played') } }
 end
 
 function blindInfo.debuff_hand(self, cards, hand, handname, check)

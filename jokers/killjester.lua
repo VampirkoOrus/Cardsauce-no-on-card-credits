@@ -28,12 +28,6 @@ function jokerInfo.add_to_deck(self, card)
     check_for_unlock({ type = "discover_killjester" })
 end
 
-local function containsString(str, substring)
-    local lowerStr = string.lower(str)
-    local lowerSubstring = string.lower(substring)
-    return string.find(lowerStr, lowerSubstring, 1, true) ~= nil
-end
-
 function jokerInfo.calculate(self, card, context)
     if context.setting_blind and not context.blueprint and not card.getting_sliced and not card.debuff then
         local trigger = false

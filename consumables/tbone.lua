@@ -1,14 +1,13 @@
 local consumInfo = {
     name = 'Double Down',
-    key = 'doubledown',
+    key = 'tbone',
     set = "VHS",
     cost = 3,
     alerted = true,
     activation = true,
     config = {
         extra = {
-            x_mult = 2,
-            runtime = 2,
+            mult = 10
         },
         activated = false,
         slide_move = 0,
@@ -23,18 +22,21 @@ local slide_out_delay = 1
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
-    return { vars = { card.ability.extra.x_mult, card.ability.extra.runtime } }
+    return { vars = { card.ability.extra.mult } }
 end
 
 function consumInfo.calculate(self, card, context)
-    if card.ability.activated and context.final_scoring_step then
-        card.ability.extra.runtime = card.ability.extra.runtime - 1
-        if card.ability.extra.runtime <= 0 then
-            card.ability.destroy = true
-        end
+    if card.ability.activated and context.other_joker then
+        card.ability.destroy = true
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                context.other_joker:juice_up(0.5, 0.5)
+                return true
+            end
+        }))
         return {
-            x_mult = card.ability.extra.x_mult,
-            card = card
+            message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
+            mult_mod = card.ability.extra.mult
         }
     end
     if context.remove_playing_cards and card.ability.destroy then

@@ -31,25 +31,20 @@ function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_supper" })
 end
 
-local wega = SMODS.Sound({
+SMODS.Sound({
 	key = "wega",
-	path = "wega.ogg"
+	path = "wega.ogg",
 })
 
 function jokerInfo.calculate(self, card, context)
 	if context.individual and context.cardarea == G.play and not card.debuff then
 		if context.other_card:get_id() == 2 or context.other_card:get_id() == 4 or context.other_card:get_id() == 14 then
-			sendDebugMessage("Triggering WAAUGGHGHHHHGHH")
-			G.E_MANAGER:add_event(Event({
-				func = function()
-					if not mod.config['muteWega'] then
-						wega:play(1, (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/100.0),true);
-					end
-					card:juice_up()
-					return true
-				end
-			}))
+			local silent = false
+			if mod.config['muteWega'] then silent = true end
+			local pitch = 1
+			local volume = (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/100.0)
 			return {
+				xmult_message = {message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}}, colour = G.C.MULT, sound = "csau_wega", volume = volume, pitch = pitch},
 				x_mult = card.ability.extra.x_mult,
 				card = card
 			}

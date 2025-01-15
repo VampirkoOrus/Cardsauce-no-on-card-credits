@@ -6,8 +6,8 @@
 --- BADGE_COLOUR: 32A852
 --- DISPLAY_NAME: Cardsauce
 --- PREFIX: csau
---- VERSION: 1.2.2
---- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1225a]
+--- VERSION: 1.3
+--- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1313f]
 
 local mod_path = SMODS.current_mod.path
 local usable_path = mod_path:match("Mods/[^/]+")
@@ -91,7 +91,6 @@ local conf_cardsauce = {
 		'gnorts',
 		'chad',
 
-
 		'purple',
 		'garbagehand',
 		-- Uncommon
@@ -164,15 +163,16 @@ local conf_cardsauce = {
 	consumablesToLoad = {
 		--Spectral
 		'quixotic',
-
-		--VHS
-		'blackspine',
-		'doubledown',
-		'topslots'
+		'protojoker'
+	},
+	vhsToLoad = {
+	},
+	standsToLoad = {
+	},
+	packsToLoad = {
 	},
 	decksToLoad = {
 		'vine',
-		'wheel',
 	},
 	challengesToLoad = {
 		'tucker',
@@ -184,9 +184,29 @@ local conf_cardsauce = {
 		'finger',
 		'mochamike',
 	},
-	trophiesToLoad = {
-	}
+	trophiesToLoad = {}
 }
+
+local twoPointO = false
+
+if twoPointO then
+	conf_cardsauce.vhsToLoad = {
+		'blackspine',
+		'doubledown',
+		'topslots',
+		'donbeveridge',
+		'tbone',
+	}
+	conf_cardsauce.standsToLoad = {
+	}
+	conf_cardsauce.decksToLoad[#conf_cardsauce.decksToLoad+1] = 'wheel'
+	conf_cardsauce.packsToLoad = {
+		'analog1',
+		'analog2',
+		'analog3',
+		'analog4',
+	}
+end
 
 G.foodjokers = {
 	'j_gros_michel',
@@ -268,6 +288,12 @@ function send(message, level)
 			sendErrorMessage(message)
 		end
 	end
+end
+
+function containsString(str, substring)
+	local lowerStr = string.lower(str)
+	local lowerSubstring = string.lower(substring)
+	return string.find(lowerStr, lowerSubstring, 1, true) ~= nil
 end
 
 function table.contains(table, element)
@@ -391,7 +417,104 @@ function get_straight(hand)
 	return {}
 end
 
-if #conf_cardsauce.consumablesToLoad > 1 then
+local G_FUNCS_can_buy_and_use_ref=G.FUNCS.can_buy_and_use
+G.FUNCS.can_buy_and_use = function(e)
+	G_FUNCS_can_buy_and_use_ref(e)
+	if e.config.ref_table.ability.set=='VHS' then
+		e.UIBox.states.visible = false
+		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+		e.config.button = nil
+	end
+end
+
+-- Modified Code from Malverk
+local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
+function G.UIDEF.use_and_sell_buttons(card)
+	if card.ability.set == "VHS" then
+		if (card.area == G.pack_cards and G.pack_cards) and card.ability.consumeable then --Add a use button
+			local use
+			local spacer = {n=G.UIT.R, config={minh = 0.8}}
+			local pull = {n=G.UIT.R, config={minh = 0.55}}
+			use = {n=G.UIT.R, config={align = 'cm'}, nodes={
+				{n=G.UIT.C, config={align = "cm"}, nodes={
+					{n=G.UIT.C, config={align = "bm", maxw = G.CARD_W * 0.65, shadow = true, padding = 0.1, r=0.08, minw = 0.5 * G.CARD_W, minh = 0.8, hover = true, colour = G.C.RED, button = "use_card", func = "can_reserve_card", ref_table = card, activate = true}, nodes={
+						{n=G.UIT.T, config={text = localize('b_activate'), colour = G.C.UI.TEXT_LIGHT, scale = 0.45, shadow = true}}
+					}}
+				}}
+			}}
+			if not card.config.center.unpausable then
+				pull = {n=G.UIT.R, config={align = 'cr', minw = 1.7*G.CARD_W}, nodes={
+					{n=G.UIT.R, config={minh = 0.65}},
+					{n=G.UIT.R, nodes = {
+						{n=G.UIT.C, config={minw = G.CARD_W, minh = 0.8, colour = G.C.IMPORTANT, r = 0.1, align = 'cr', shadow = true, padding = 0.1, hover = true, button = "use_card", func = "can_reserve_card", ref_table = card, pull = true}, nodes = {
+							{n=G.UIT.T, config={text = localize('b_pull'), colour = G.C.UI.TEXT_LIGHT, scale = 0.45, shadow = true}}
+						}}
+					}}
+				}}
+			end
+			spacer = {n=G.UIT.R, config={minh = 0.7}}
+			local t = {n=G.UIT.ROOT, config = {align = 'cm', padding = 0, colour = G.C.CLEAR}, nodes={
+				{n=G.UIT.C, config={align = 'cm'}, nodes={
+					pull,
+					spacer,
+					use
+				}},
+			}}
+			return t
+		end
+	end
+	return G_UIDEF_use_and_sell_buttons_ref(card)
+end
+
+--Modified Code from Betmma's Vouchers
+G.FUNCS.can_reserve_card = function(e)
+	if #G.consumeables.cards < G.consumeables.config.card_limit then
+		if not e.config.colour == G.C.IMPORTANT then
+			e.config.colour = G.C.RED
+		end
+		if (e.config.ref_table.config.center.activation and e.config.activate) or e.config.pull then
+			e.config.button = "reserve_card"
+		else
+			e.config.button = "use_card"
+		end
+	else
+		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+		e.config.button = nil
+	end
+end
+G.FUNCS.reserve_card = function(e)
+	local c1 = e.config.ref_table
+	if e.config.activate then
+		G.FUNCS.tape_activate(c1)
+	end
+	G.E_MANAGER:add_event(Event({
+		trigger = "after",
+		delay = 0.1,
+		func = function()
+			c1.area:remove_card(c1)
+			c1:add_to_deck()
+			if c1.children.price then
+				c1.children.price:remove()
+			end
+			c1.children.price = nil
+			if c1.children.buy_button then
+				c1.children.buy_button:remove()
+			end
+			c1.children.buy_button = nil
+			remove_nils(c1.children)
+			G.consumeables:emplace(c1)
+			G.GAME.pack_choices = G.GAME.pack_choices - 1
+			if G.GAME.pack_choices <= 0 then
+				G.FUNCS.end_consumeable(nil, delay_fac)
+			end
+			return true
+		end,
+	}))
+end
+
+SMODS.Atlas({ key = 'csau_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
+
+if twoPointO and #conf_cardsauce.vhsToLoad > 0 then
 	G.C.VHS = HEX('a2615e')
 
 	SMODS.ConsumableType{
@@ -406,8 +529,6 @@ if #conf_cardsauce.consumablesToLoad > 1 then
 		can_divide = false,
 	}
 
-	SMODS.Atlas({ key = 'csau_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
-
 	SMODS.UndiscoveredSprite{
 		key = "VHS",
 		atlas = "csau_undiscovered",
@@ -418,10 +539,12 @@ if #conf_cardsauce.consumablesToLoad > 1 then
 		if not card.config.center.activation then return end
 		if card.ability.activated then
 			card.ability.activated = false
+			play_sound('csau_vhsclose', 0.9 + math.random()*0.1, 0.4)
 		else
 			card.ability.tape_move = 9
 			card.ability.sleeve_move = -9
 			card.ability.activated = true
+			play_sound('csau_vhsopen', 0.9 + math.random()*0.1, 0.4)
 		end
 	end
 
@@ -452,6 +575,27 @@ if #conf_cardsauce.consumablesToLoad > 1 then
 			end
 		}))
 	end
+end
+
+if twoPointO and #conf_cardsauce.standsToLoad > 0 then
+	G.C.Stand = HEX('eb62ab')
+	SMODS.ConsumableType{
+		key = "Stand",
+		primary_colour = G.C.Stand,
+		secondary_colour = G.C.Stand,
+		collection_rows = { 4, 4 },
+		shop_rate = 0,
+		loc_txt = {},
+		default = "c_csau_blackspine",
+		can_stack = false,
+		can_divide = false,
+	}
+
+	SMODS.UndiscoveredSprite{
+		key = "Stand",
+		atlas = "csau_undiscovered",
+		pos = { x = 0, y = 0 }
+	}
 end
 
 -- Load Jokers
@@ -489,12 +633,12 @@ for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 		SMODS.Atlas({ key = atlasKey, path ="jokers/" .. atlasKey .. ".png", px = jokerInfo.width or 71, py = jokerInfo.height or  95 })
 	end
 end
--- Load Consumables
-for i, v in ipairs(conf_cardsauce.consumablesToLoad) do
+
+local loadConsumable = function(v)
 	local consumInfo = assert(SMODS.load_file("consumables/" .. v .. ".lua"))()
 
-	if (consumInfo.set == "Spectral" and csau_enabled['enableSpectrals']) or (consumInfo.set == "VHS") then
-		consumInfo.key = v
+	if (consumInfo.set == "Spectral" and csau_enabled['enableSpectrals']) or (consumInfo.set == "VHS") or (consumInfo.set == "Stand") then
+		consumInfo.key = consumInfo.key or v
 		consumInfo.atlas = v
 
 		consumInfo.pos = { x = 0, y = 0 }
@@ -513,6 +657,36 @@ for i, v in ipairs(conf_cardsauce.consumablesToLoad) do
 		SMODS.Atlas({ key = v, path ="consumables/" .. v .. ".png", px = consum.width or 71, py = consum.height or  95 })
 	end
 end
+-- Load Consumables
+for i, v in ipairs(conf_cardsauce.consumablesToLoad) do
+	loadConsumable(v)
+end
+for i, v in ipairs(conf_cardsauce.vhsToLoad) do
+	loadConsumable(v)
+end
+for i, v in ipairs(conf_cardsauce.standsToLoad) do
+	loadConsumable(v)
+end
+
+for i, v in ipairs(conf_cardsauce.packsToLoad) do
+	local packInfo = assert(SMODS.load_file("packs/" .. v .. ".lua"))()
+
+	packInfo.key = v
+	packInfo.atlas = v
+
+	packInfo.pos = { x = 0, y = 0 }
+
+	local pack = SMODS.Booster(packInfo)
+	for k_, v_ in pairs(pack) do
+		if type(v_) == 'function' then
+			pack[k_] = packInfo[k_]
+		end
+	end
+
+	SMODS.Atlas({ key = v, path ="packs/" .. v .. ".png", px = pack.width or 71, py = pack.height or  95 })
+end
+
+
 if csau_enabled['enableDecks'] then
 	for i, v in ipairs(conf_cardsauce.decksToLoad) do
 		local deckInfo = assert(SMODS.load_file("decks/" .. v .. ".lua"))()
@@ -1652,6 +1826,15 @@ if csau_enabled['enableSkins'] then
 
 	-- Deck Skins: Hearts
 	SMODS.DeckSkin:take_ownership('collab_CL',{
+		ranks =  {'Jack', 'Queen', 'King'},
+		lc_atlas = "h_poops",
+		hc_atlas = "h_poops",
+		loc_txt = {
+			["en-us"] = "The Poops"
+		},
+		posStyle = "ranks"
+	})
+	SMODS.DeckSkin:take_ownership('collab_D2',{
 		ranks =  {'Jack', 'Queen', 'King', 'Ace'},
 		lc_atlas = "h_collab_AU_ES",
 		hc_atlas = "h_collab_AU_ES",
@@ -1660,15 +1843,17 @@ if csau_enabled['enableSkins'] then
 		},
 		posStyle = "ranks"
 	})
-	SMODS.DeckSkin:take_ownership('collab_D2',{
-		ranks =  {'Jack', 'Queen', 'King', 'Ace'},
+	SMODS.DeckSkin{
+		key = "ds_h_collab_TBoI_ES",
+		suit = "Hearts",
+		ranks =  {'Jack', 'Queen', 'King'},
 		lc_atlas = "h_collab_TBoI_ES",
 		hc_atlas = "h_collab_TBoI_ES",
 		loc_txt = {
 			["en-us"] = "The Binding of Isaac [ES]"
 		},
 		posStyle = "ranks"
-	})
+	}
 	SMODS.DeckSkin{
 		key = "ds_h_collab_CL_ES",
 		suit = "Hearts",
@@ -1975,6 +2160,16 @@ if csau_enabled['enableMusic'] then
 	})
 end
 
+SMODS.Sound({
+	key = "vhsopen",
+	path = "vhsopen.ogg",
+})
+
+SMODS.Sound({
+	key = "vhsclose",
+	path = "vhsclose.ogg",
+})
+
 if csau_enabled['enableEasterEggs'] then
 	SMODS.Atlas({
 		key = "jimbo_shot",
@@ -2222,11 +2417,13 @@ vs_credit_27 = "sinewuui"
 vs_credit_28 = "Swizik"
 vs_credit_29 = "Burdrehnar"
 vs_credit_30 = "Crisppyboat"
+vs_credit_31 = "Alli"
 vs_credit_st1 = "tortoise"
 vs_credit_st2 = "Protokyuuu"
 vs_credit_st3 = "ShrineFox"
 vs_credit_st4 = "cyrobolic"
 vs_credit_st5 = "ReconBox"
+vs_credit_st6 = "SinCityAssassin"
 
 local header_scale = 1.1
 local bonus_padding = 1.15
@@ -2366,6 +2563,9 @@ SMODS.current_mod.credits_tab = function()
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_30, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_31, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
 							}}
 						}},
 					} },
@@ -2470,6 +2670,9 @@ SMODS.current_mod.credits_tab = function()
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
 										{n=G.UIT.T, config={text = vs_credit_st4, scale = text_scale*0.36, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									}},
+									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+										{n=G.UIT.T, config={text = vs_credit_st6, scale = text_scale*0.36, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 								}}
 							}},

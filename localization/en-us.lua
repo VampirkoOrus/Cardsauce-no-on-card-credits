@@ -258,6 +258,7 @@ return {
 				Hearts = {
 					collab_AU = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
 					collab_TBoI = "King by fradavovan | Queen and Jack by CheesyDraws",
+					collab_CL = "King and Queen by BarrierTrio/Gote | King and Jack by SagaciousCejai",
 				},
 				Clubs = {
 					collab_VS = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
@@ -345,6 +346,11 @@ return {
 			k_sts_wild = "Deification",
 			k_disguy_1 = "BLS BLAY GAME BINTY!!!",
 			k_disguy_2 = "ONLY 20 MINOOT!!!",
+			k_analog_pack = "Analog Pack",
+			k_jumbo_analog_pack = "Jumbo Analog Pack",
+			k_mega_analog_pack = "Mega Analog Pack",
+			b_activate = "ACTIVATE",
+			b_pull = "PULL",
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
@@ -618,6 +624,34 @@ return {
 					"learn what it does",
 				},
 			},
+			p_csau_analog1={
+				name = 'Analog Pack',
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:vhs} VHS Tapes{}",
+				},
+			},
+			p_csau_analog2={
+				name = 'Analog Pack',
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:vhs} VHS Tapes{}",
+				},
+			},
+			p_csau_analog3={
+				name = 'Jumbo Analog Pack',
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:vhs} VHS Tapes{}",
+				},
+			},
+			p_csau_analog4={
+				name = 'Mega Analog Pack',
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:vhs} VHS Tapes{}",
+				},
+			},
 			wheel2 = {
 				name = "The Wheel of Fortune",
 				text = {
@@ -770,6 +804,24 @@ return {
 				name = "Artist",
 				text = {
 					"{E:1}Crisppyboat{}",
+				},
+			},
+			guestartist23 = {
+				name = "Artist",
+				text = {
+					"{E:1}Crisppyboat{}",
+				},
+			},
+			guestartist24 = {
+				name = "Artist",
+				text = {
+					"{E:1}Alli{}",
+				},
+			},
+			drippyforce = {
+				name = "Forced in the mod by",
+				text = {
+					"{E:1}SinCityAssassin{}",
 				},
 			},
 			rogernote = {
@@ -1639,26 +1691,52 @@ return {
 					"Gain an {C:attention}Ethereal Tag",
 				},
 			},
+			c_csau_protojoker = {
+				name = "Protojoker",
+				text = {
+					"Transform every {C:attention}Joker{} with \"Joker\"",
+					"in its name into {C:attention}Chadley{}"
+				},
+			},
 		},
 		VHS = {
 			c_csau_blackspine = {
 				name = "Black Spine",
 				text = {
-					"Creates a random {C:vhs}VHS Tape{}",
+					"When {C:attention}Blind{} is selected, create a",
+					"random {C:vhs}VHS Tape{}. {C:attention}Unpausable",
+					"{C:inactive}(Must have room){}",
 				},
 			},
 			c_csau_doubledown = {
 				name = "Double Down",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult when {C:attention}activated",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} hands"
 				},
 			},
 			c_csau_topslots = {
 				name = "Top Slots - Spotting The Best",
 				text = {
+					"When {C:attention}Blind{} is selected,",
 					"{C:green}#1# in #2#{} chance to win {C:money}$#3#{}",
 					"{C:green}#1# in #4#{} chance to {C:attention}double{} winnings",
 					"{C:green}#1# in #5#{} chance to {C:attention}triple{} winnings",
+				},
+			},
+			c_csau_donbeveridge = {
+				name = "Don Beveridge Customerization Seminar",
+				text = {
+					"When {C:attention}Blind{} is selected, create a",
+					"random {C:attention}Food Joker{}. {C:attention}Unpausable",
+					"{C:inactive}(Must have room){}",
+				},
+			},
+			c_csau_tbone = {
+				name = "T-Bone's World of Clowning",
+				text = {
+					"Each Joker gives {C:mult}+#1#{} Mult",
+					"when this tape is {C:attention}activated{}",
 				},
 			},
 		},

@@ -116,8 +116,13 @@ end
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff then
         if G.GAME.current_round.hands_played == 0 and card.ability.form == "base" and not context.blueprint then
-            local first = context.scoring_hand[1]
-            if not first.debuff then
+            local first = nil
+            for i=1, #context.scoring_hand do
+                if first == nil and not context.scoring_hand[i].debuff then
+                    local first = context.scoring_hand[i]
+                end
+            end
+            if first then
                 if first.ability.effect == 'Wild Card' then
                     local form = change_form(card, "Wild Card")
                     card:juice_up(1, 1)

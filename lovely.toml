@@ -107,36 +107,27 @@ pattern = '''
 '''
 position = "at"
 payload = '''
-    local highest = nil
-    if G.GAME.blind.boss and G.GAME.blind.name == "The Vod" and not G.GAME.blind.disabled then
-        for k, v in ipairs(G.play.cards) do
-            if (not v.shattered) and (not v.destroyed) then
-                draw_card(G.play,G.hand, it*100/play_count,'up', true, v)
-            end
-        end
-    else
-        if next(find_joker("Be Someone Forever")) then
-            local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(G.play.cards)
-            if text == "High Card" then
-                for i, v in ipairs(scoring_hand) do
-                    if highest then
-                        if v:get_id() > highest:get_id() then highest = v end
-                    else highest = v end
-                end
-            end
-        end
-        for k, v in ipairs(G.play.cards) do
-            if (not v.shattered) and (not v.destroyed) then
-                if next(find_joker("Be Someone Forever")) and v == highest then
-                    draw_card(G.play,G.hand, it*100/play_count,'up', true, v)
-                else
-                    draw_card(G.play,G.discard, it*100/play_count,'down', false, v)
-                end
-            end
-            it = it + 1
-        end
-    end
-
+    local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(G.play.cards)
+	if (G.GAME.blind.boss and G.GAME.blind.name == "The Vod" and not G.GAME.blind.disabled)
+	or (text == "High Card" and next(SMODS.find_card("j_csau_besomeone")) and next(find_joker("Splash"))) then
+		for k, v in ipairs(G.play.cards) do
+			if (not v.shattered) and (not v.destroyed) then
+				draw_card(G.play,G.hand, it*100/play_count,'up', true, v)
+				it = it + 1
+			end
+		end
+	else
+		for k, v in ipairs(G.play.cards) do
+			if (not v.shattered) and (not v.destroyed) then
+				if text == "High Card" and next(SMODS.find_card("j_csau_besomeone")) and table.contains(scoring_hand, v) then
+					draw_card(G.play,G.hand, it*100/play_count,'up', true, v)
+				else
+					draw_card(G.play,G.discard, it*100/play_count,'down', false, v)
+				end
+				it = it + 1
+			end
+		end
+	end
 '''
 match_indent = true
 overwrite = false
@@ -542,7 +533,28 @@ position = "at"
 payload = '''
 local card = e.config.ref_table
 if card.config.center.activation then
-    G.FUNCS.tape_activate(card)
+    if card.area and card.area == G.consumeables then
+        G.FUNCS.tape_activate(card)
+    end
+    discover_card(card.config.center)
+    if card.area and card.area ~= G.consumeables then
+        if card.area and card.area == G.pack_cards then
+            if G.GAME.pack_choices and G.GAME.pack_choices > 1 then
+                if G.booster_pack.alignment.offset.py then
+                  G.booster_pack.alignment.offset.y = G.booster_pack.alignment.offset.py
+                  G.booster_pack.alignment.offset.py = nil
+                end
+                G.GAME.pack_choices = G.GAME.pack_choices - 1
+            end
+            card.area:remove_card(card)
+        end
+        card:add_to_deck()
+        G.consumeables:emplace(card)
+        play_sound('card1', 0.8, 0.6)
+        play_sound('generic1')
+        dont_dissolve = true
+        delay_fac = 0.2
+    end
     return
 end
 e.config.button = nil
@@ -556,6 +568,23 @@ pattern = "if next(find_joker('Splash')) then"
 position = "at"
 payload = "if next(find_joker('Splash')) or G.FUNCS.find_sts_form('diamonds') then"
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''
+{n=G.UIT.B, config = {w=0.1,h=0.6}},
+{n=G.UIT.T, config={text = localize('b_use'),colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true}}
+'''
+position = "at"
+payload = '''
+{n=G.UIT.B, config = {w=card.ability.set == "VHS" and 0.2 or 0.1,h=0.6 }},
+{n=G.UIT.T, config={text = card.ability.set == "VHS" and localize('b_activate') or localize('b_use'),colour = G.C.UI.TEXT_LIGHT, scale = card.ability.set == "VHS" and 0.75 or 0.55, shadow = true}}
+'''
+match_indent = true
+
+
+
 
 
 
