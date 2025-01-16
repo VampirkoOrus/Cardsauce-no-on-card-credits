@@ -48,8 +48,8 @@ function jokerInfo.calculate(self, card, context)
             context.other_card.drippy = false
             if context.other_card.ability.effect == 'Bonus Card' then
                 return {
-                    message = localize{type='variable',key='a_chips',vars={30}},
-                    chips = 30,
+                    message = localize{type='variable',key='a_chips',vars={50}},
+                    chip_mod = 50,
                     card = context.other_card
                 }
             elseif context.other_card.ability.effect == 'Mult Card' then
