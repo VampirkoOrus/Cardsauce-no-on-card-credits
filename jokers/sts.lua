@@ -119,7 +119,7 @@ function jokerInfo.calculate(self, card, context)
             local first = nil
             for i=1, #context.scoring_hand do
                 if first == nil and not context.scoring_hand[i].debuff then
-                    local first = context.scoring_hand[i]
+                    first = context.scoring_hand[i]
                 end
             end
             if first then

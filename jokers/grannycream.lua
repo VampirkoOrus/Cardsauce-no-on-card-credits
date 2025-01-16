@@ -24,7 +24,7 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.final_scoring_step then
+    if context.joker_main then
         if hand_chips < card.ability.extra.chip_goal then
             local spent_chips = card.ability.extra.chip_goal - hand_chips
             if spent_chips > card.ability.extra.chip_pool then
