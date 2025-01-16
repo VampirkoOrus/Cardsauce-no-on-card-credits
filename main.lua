@@ -54,16 +54,6 @@ for _, file in ipairs(collab_files) do
 	collab_skins[#collab_skins + 1] = file:sub(2, -5)
 end
 
-local tarot_files = {}
-for s in recursiveEnumerate(usable_path .. "/assets/1x/tarot/"):gmatch("[^\r\n]+") do
-	tarot_files[#tarot_files + 1] = s:gsub(usable_path .. "/assets/1x/tarot/", "")
-end
-
-local tarot_textures = {}
-for _, file in ipairs(tarot_files) do
-	tarot_textures[#tarot_textures + 1] = file:sub(2, -5)
-end
-
 for _, hook in ipairs(hook_list) do
 	local init, error = NFS.load(SMODS.current_mod.path .. "hooks/" .. hook ..".lua")
 	if error then sendErrorMessage("[Cardsauce] Failed to load "..hook.." with error "..error) else
@@ -232,7 +222,6 @@ function G.FUNCS.is_food(key)
 	return false
 end
 
-
 G.loadTrophies = true
 if csau_enabled['enableTrophies'] then
 	for s in recursiveEnumerate(usable_path .. "/achievements/"):gmatch("[^\r\n]+") do
@@ -242,8 +231,10 @@ else
 	G.loadTrophies = false
 end
 
--- sendDebugMessage("AchievementsEnabler Activated!")
--- G.F_NO_ACHIEVEMENTS = false
+-- Talisman compat
+to_big = to_big or function(num)
+	return num
+end
 
 -- unused
 function getCardPosition(card)
@@ -1496,25 +1487,77 @@ if csau_enabled['enableLogo'] then
 	}
 end
 
-if csau_enabled['enableTarotSkins'] then
-	-- Tarot Atlases
-	for _, tarot in ipairs(tarot_textures) do
-		SMODS.Atlas{
-			key = tarot,
-			path = "tarot/"..tarot..".png",
-			px = 71,
-			py = 95,
-			atlas_table = "ASSET_ATLAS"
-		}
-	end
+-- Tarot Atlas
+SMODS.Atlas{
+	key = "tarotreskins",
+	path = "tarotreskins.png",
+	px = 71,
+	py = 95,
+	atlas_table = "ASSET_ATLAS"
+}
+SMODS.Atlas{
+	key = 'alt_color_jokers',
+	path = "colorjokers.png",
+	px = 71,
+	py = 95,
+	atlas_table = "ASSET_ATLAS",
+}
 
+if AltTexture and TexturePack then
+	AltTexture({
+		key = 'jokers',
+		set = 'Joker',
+		path = 'colorjokers.png',
+		loc_txt = {
+			name = 'Jokers'
+		},
+		keys = {
+			'j_gluttenous_joker',
+			'j_greedy_joker',
+			'j_lusty_joker',
+			'j_wrathful_joker',
+			'j_onyx_agate',
+			'j_rough_gem'
+		},
+		original_sheet = true
+	})
+
+	AltTexture({
+		key = 'tarot',
+		set = 'Tarot',
+		path = 'tarotreskins.png',
+		loc_txt = {
+			name = 'Tarot'
+		},
+		keys = {
+			'c_hermit',
+			'c_moon',
+		},
+		original_sheet = true
+	})
+
+	TexturePack{
+		key = 'csau',
+		textures = {
+			'csau_jokers',
+			'csau_tarot',
+		},
+		loc_txt = {
+			name = 'Cardsauce Malverk Compatibility',
+			text = {
+				"Enables the Cardsauce reskins of the Suit Color",
+				"Jokers + 2 Tarot cards to work with Malverk!",
+			}
+		}
+	}
+end
+
+if csau_enabled['enableTarotSkins'] then
 	SMODS.Consumable:take_ownership('moon', {
-		pos = {x = 0, y = 0},
-		atlas = 'csau_moon'
+		atlas = 'csau_tarotreskins'
 	}, true)
 	SMODS.Consumable:take_ownership('hermit', {
-		pos = {x = 0, y = 0},
-		atlas = 'csau_kermit'
+		atlas = 'csau_tarotreskins'
 	}, true)
 end
 
@@ -1543,37 +1586,24 @@ if csau_enabled['enableSkins'] then
 			prefix_config = { key = false }
 		}
 	end
-	SMODS.Atlas{
-		key = 'alt_color_jokers',
-		path = "colorjokers.png",
-		px = 71,
-		py = 95,
-		atlas_table = "ASSET_ATLAS",
-	}
 
 	SMODS.Joker:take_ownership('greedy_joker', {
-		pos = {x = 0, y = 0},
 		atlas = 'csau_alt_color_jokers'
 	}, true)
 	SMODS.Joker:take_ownership('lusty_joker', {
-		pos = {x = 1, y = 0},
 		atlas = 'csau_alt_color_jokers'
 	}, true)
 	SMODS.Joker:take_ownership('wrathful_joker', {
-		pos = {x = 2, y = 0},
 		atlas = 'csau_alt_color_jokers'
 	}, true)
 	SMODS.Joker:take_ownership('gluttenous_joker', {
-		pos = {x = 3, y = 0},
 		atlas = 'csau_alt_color_jokers'
 	}, true)
 
 	SMODS.Joker:take_ownership('onyx_agate', {
-		pos = {x = 5, y = 0},
 		atlas = 'csau_alt_color_jokers'
 	}, true)
 	SMODS.Joker:take_ownership('rough_gem', {
-		pos = {x = 4, y = 0},
 		atlas = 'csau_alt_color_jokers'
 	}, true)
 
