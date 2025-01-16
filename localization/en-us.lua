@@ -818,6 +818,12 @@ return {
 					"{E:1}Alli{}",
 				},
 			},
+			guestartist25 = {
+				name = "Artist",
+				text = {
+					"{E:1}Lyman{}",
+				},
+			},
 			drippyforce = {
 				name = "Forced in the mod by",
 				text = {

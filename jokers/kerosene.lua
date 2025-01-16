@@ -26,10 +26,19 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.end_of_round and not card.debuff and not context.individual and not context.repetition and not context.blueprint then
-        if G.GAME.FLAME_ON then
+        if G.GAME.FLAME_ON and G.GAME.FLAME_ON > 0 then
             card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
             card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.CHIPS})
-            G.GAME.FLAME_ON = false
+            G.GAME.FLAME_ON = G.GAME.FLAME_ON - 1
+            if G.GAME.FLAME_ON == 0 then
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    func = function()
+                        G.GAME.FLAME_ON = nil
+                        return true
+                    end
+                }))
+            end
         end
     end
     if context.joker_main and context.cardarea == G.jokers and card.ability.extra.chips > 0 then

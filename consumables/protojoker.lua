@@ -9,6 +9,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "guestartist25", set = "Other"}
     return {}
 end
 

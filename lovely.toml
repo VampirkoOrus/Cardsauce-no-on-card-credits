@@ -196,8 +196,10 @@ target = "functions/button_callbacks.lua"
 pattern = "if G.ARGS.score_intensity.earned_score >= G.ARGS.score_intensity.required_score and G.ARGS.score_intensity.required_score > 0 then"
 position = "after"
 payload = '''
-if G.STATE == G.STATES.HAND_PLAYED and not G.GAME.FLAME_ON and next(find_joker('Kerosene')) then
-    G.GAME.FLAME_ON = true
+if G.STATE == G.STATES.HAND_PLAYED and next(SMODS.find_card('j_csau_kerosene')) then
+    if not G.GAME.FLAME_ON then
+        G.GAME.FLAME_ON = #SMODS.find_card('j_csau_kerosene')
+    end
 end
 '''
 match_indent = true
