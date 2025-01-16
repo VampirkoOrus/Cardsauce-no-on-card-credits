@@ -8,7 +8,7 @@ local jokerInfo = {
     },
     rarity = 1,
     cost = 8,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = true,
     streamer = "vinny",
@@ -44,12 +44,20 @@ function G.UIDEF.shop()
                             v.children.center.pinch.x = true
                             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
                                  func = function()
+                                     card_eval_status_text(v, 'extra', nil, nil, nil, {message = localize('k_drank_ex'), colour = G.C.MONEY})
                                      G.jokers:remove_card(v)
                                      v:remove()
                                      v = nil
                                      return true
                                  end
                             }))
+                            return true
+                        end
+                    }))
+                else
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            card_eval_status_text(v, 'extra', nil, nil, nil, {message = "-"..localize('$') .. v.ability.extra.dollars_mod, colour = G.C.MONEY})
                             return true
                         end
                     }))
