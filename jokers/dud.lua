@@ -37,6 +37,11 @@ function jokerInfo.check_for_unlock(self, args)
     end
 end
 
+local peeloff = SMODS.Sound({
+    key = "peeloff",
+    path = "peeloff.ogg"
+})
+
 function jokerInfo.calculate(self, card, context)
     if context.selling_self then
         local pool = {}
@@ -58,8 +63,9 @@ function jokerInfo.calculate(self, card, context)
                     if v.ability.rental then
                         v.ability.rental = false
                     end
+                    peeloff:play(1, (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/70.0),true)
+                    v:juice_up()
                 end
-                v:juice_up()
             end
         end
     end

@@ -115,24 +115,20 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff then
-        if G.GAME.current_round.hands_played == 0 and card.ability.form == "base" and not context.blueprint then
+        if card.ability.form == "base" and not context.blueprint then
             local first = nil
             for i=1, #context.scoring_hand do
-                if first == nil and not context.scoring_hand[i].debuff then
+                if first == nil and not (context.scoring_hand[i].debuff or SMODS.has_enhancement(context.scoring_hand[i], 'm_stone')) then
                     first = context.scoring_hand[i]
                 end
             end
             if first then
                 if first.ability.effect == 'Wild Card' then
                     local form = change_form(card, "Wild Card")
-                    card:juice_up(1, 1)
-                    card:set_sprites(card.config.center)
-                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_sts_'..card.ability.form), colour = form_color(form), no_juice = true})
+                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_sts_'..card.ability.form), colour = form_color(form), update_sprites = true, juice_num1 = 0.7, juice_num2 = 0.7})
                 else
                     local form = change_form(card, first.base.suit)
-                    card:juice_up(1, 1)
-                    card:set_sprites(card.config.center)
-                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_sts_'..card.ability.form), colour = form_color(form), no_juice = true})
+                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_sts_'..card.ability.form), colour = form_color(form), update_sprites = true, juice_num1 = 0.7, juice_num2 = 0.7})
                 end
                 if card.ability.form == "spades" then
                     ease_discard(-G.GAME.current_round.discards_left, nil, true)

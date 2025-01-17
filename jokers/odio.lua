@@ -125,13 +125,12 @@ function jokerInfo.calculate(self, card, context)
 		if card.ability.extra.form == "odio2" then
 			local big_card = nil
 			for k, v in ipairs(context.full_hand) do
-				if not big_card or v.base.nominal > big_card.base.nominal then big_card = v end
+				if (not big_card or v.base.nominal > big_card.base.nominal) and not SMODS.has_enhancement(v, 'm_stone') then big_card = v end
 			end
-			sendDebugMessage("Biggest scoring card value: "..big_card.base.nominal)
 			if not big_card.debuff and context.other_card == big_card then
 				return {
 					mult = big_card.base.nominal,
-					card = big_card,
+					card = card,
 				}
 			end
 		end
@@ -139,7 +138,6 @@ function jokerInfo.calculate(self, card, context)
 	if context.joker_main and context.cardarea == G.jokers then
 		if card.ability.extra.form == "odio4" then
 			local empty_hand_slots = 5 - #context.full_hand
-			send(empty_hand_slots)
 			local slot_mult = empty_hand_slots * 5
 			if slot_mult > 0 then
 				return {
