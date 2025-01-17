@@ -11,6 +11,7 @@
 
 local mod_path = SMODS.current_mod.path
 local usable_path = mod_path:match("Mods/[^/]+")
+local path_pattern_replace = usable_path:gsub("(%W)","%%%1")  -- shoot me in the foot, why doesn't lua just have a str.replace
 csau_config = SMODS.current_mod.config
 csau_enabled = copy_table(csau_config)
 
@@ -34,7 +35,7 @@ end
 
 local skin_files = {}
 for s in recursiveEnumerate(usable_path .. "/assets/1x/skins/"):gmatch("[^\r\n]+") do
-	skin_files[#skin_files + 1] = s:gsub(usable_path .. "/assets/1x/skins/", "")
+	skin_files[#skin_files + 1] = s:gsub(path_pattern_replace .. "/assets/1x/skins/", "")
 end
 
 local deck_skins = {}
@@ -45,7 +46,7 @@ end
 local collab_files = {}
 for s in recursiveEnumerate(usable_path .. "/assets/1x/collabs/"):gmatch("[^\r\n]+") do
 	if s:match("%.png$") then
-		collab_files[#collab_files + 1] = s:gsub(usable_path .. "/assets/1x/collabs/", "")
+		collab_files[#collab_files + 1] = s:gsub(path_pattern_replace .. "/assets/1x/collabs/", "")
 	end
 end
 
@@ -225,7 +226,7 @@ end
 G.loadTrophies = true
 if csau_enabled['enableTrophies'] then
 	for s in recursiveEnumerate(usable_path .. "/achievements/"):gmatch("[^\r\n]+") do
-		conf_cardsauce.trophiesToLoad[#conf_cardsauce.trophiesToLoad + 1] = s:gsub(usable_path .. "/achievements/", "")
+		conf_cardsauce.trophiesToLoad[#conf_cardsauce.trophiesToLoad + 1] = s:gsub(path_pattern_replace .. "/achievements/", "")
 	end
 else
 	G.loadTrophies = false
