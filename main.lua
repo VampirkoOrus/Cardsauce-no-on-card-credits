@@ -226,9 +226,7 @@ end
 G.loadTrophies = true
 if csau_enabled['enableTrophies'] then
 	for s in recursiveEnumerate(usable_path .. "/achievements/"):gmatch("[^\r\n]+") do
-        s = s:gsub(path_pattern_replace .. "/achievements/", "")
-        print_debug("s = " .. s)
-		conf_cardsauce.trophiesToLoad[#conf_cardsauce.trophiesToLoad + 1] = s
+		conf_cardsauce.trophiesToLoad[#conf_cardsauce.trophiesToLoad + 1] = s:gsub(path_pattern_replace .. "/achievements/", "")
 	end
 else
 	G.loadTrophies = false
