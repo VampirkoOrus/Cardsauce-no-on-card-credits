@@ -25,13 +25,16 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if context.joker_main and context.cardarea == G.jokers and not card.debuff then
-		G.E_MANAGER:add_event(Event({
-			trigger = 'after',
-			delay = 0.0,
-			func = (function()
-				card.ability.extra.x_mult = 1 + 0.5*(G.GAME.current_round.hands_played)
-				return true
-			end)}))
+		if not context.blueprint then
+			G.E_MANAGER:add_event(Event({
+				trigger = 'after',
+				delay = 0.0,
+				func = (function()
+					card.ability.extra.x_mult = 1 + 0.5*(G.GAME.current_round.hands_played)
+					return true
+				end)}
+			))
+		end
 		if card.ability.extra.x_mult > 1 then
 			return {
 				message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
