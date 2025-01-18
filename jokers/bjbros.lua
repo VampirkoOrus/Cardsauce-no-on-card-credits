@@ -25,9 +25,7 @@ function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff then
         if context.scoring_name == "Two Pair" then
             if pseudorandom('bjbros2') < G.GAME.probabilities.normal / card.ability.prob_2 then
-                send("what")
                 if not context.blueprint_card then
-                    send("huh")
                     card:juice_up()
                     local enhancements = {
                         [1] = G.P_CENTERS.m_bonus,

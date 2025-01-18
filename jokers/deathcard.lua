@@ -44,7 +44,6 @@ function jokerInfo.add_to_deck(self, card)
 			end
 		end
 	end
-	send(card.ability.id)
 end
 
 function jokerInfo.calculate(self, card, context)

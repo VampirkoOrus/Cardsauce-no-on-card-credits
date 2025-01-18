@@ -6,7 +6,7 @@
 --- BADGE_COLOUR: 32A852
 --- DISPLAY_NAME: Cardsauce
 --- PREFIX: csau
---- VERSION: 1.3
+--- VERSION: 1.3.1
 --- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1317a]
 
 local mod_path = SMODS.current_mod.path
@@ -649,6 +649,7 @@ local loadConsumable = function(v)
 		SMODS.Atlas({ key = v, path ="consumables/" .. v .. ".png", px = consum.width or 71, py = consum.height or  95 })
 	end
 end
+
 -- Load Consumables
 for i, v in ipairs(conf_cardsauce.consumablesToLoad) do
 	loadConsumable(v)

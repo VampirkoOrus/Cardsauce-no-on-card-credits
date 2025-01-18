@@ -47,7 +47,6 @@ function jokerInfo.calculate(self, card, context)
             card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('$') .. card.ability.extra.dollars, colour = G.C.MONEY})
             if pseudorandom('businesstrading') < G.GAME.probabilities.normal / 3 then
                 card.ability.destroyed_card = pseudorandom('businesstrading_1', 1, #context.full_hand)
-                send("Destroying card: "..context.full_hand[card.ability.destroyed_card]:get_id())
             end
         end
     end

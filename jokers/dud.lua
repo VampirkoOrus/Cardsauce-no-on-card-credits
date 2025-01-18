@@ -6,7 +6,7 @@ local jokerInfo = {
     unlocked = false,
     blueprint_compat = false,
     eternal_compat = false,
-    perishable_compat = true,
+    perishable_compat = false,
     streamer = "vinny",
 }
 
@@ -46,7 +46,7 @@ function jokerInfo.calculate(self, card, context)
     if context.selling_self then
         local pool = {}
         for k, v in pairs(G.jokers.cards) do
-            if v.ability.eternal or v.ability.perishable or v.ability.rental then
+            if (v.ability.eternal or v.ability.perishable or v.ability.rental) and not v == card then
                 pool[#pool+1] = v
             end
         end

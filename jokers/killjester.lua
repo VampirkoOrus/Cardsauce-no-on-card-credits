@@ -32,7 +32,7 @@ function jokerInfo.calculate(self, card, context)
     if context.setting_blind and not context.blueprint and not card.getting_sliced and not card.debuff then
         local trigger = false
         for i = 1, #G.jokers.cards do
-            if G.jokers.cards[i] ~= card and not G.jokers.cards[i].getting_sliced then
+            if G.jokers.cards[i] ~= card and not (G.jokers.cards[i].getting_sliced or G.jokers.cards[i].ability.eternal) then
                 if containsString(G.jokers.cards[i].ability.name, "Joker") then
                     card.ability.x_mult = card.ability.x_mult + card.ability.x_mult_mod
                     G.jokers.cards[i].getting_sliced = true

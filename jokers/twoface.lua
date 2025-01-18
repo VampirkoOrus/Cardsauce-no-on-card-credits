@@ -18,7 +18,7 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.remove_playing_cards then
+	if context.final_scoring_step then
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				local two, ace = false, false
