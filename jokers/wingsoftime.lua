@@ -20,7 +20,7 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.in_pool(self, args)
-	if G.GAME.round_resets.ante > 1 then
+	if not G.GAME.pool_flags.wingsoftimeused then
 		return true
 	end
 end
@@ -46,7 +46,7 @@ function jokerInfo.set_sprites(self, card, _front)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.game_over and G.GAME.chips/G.GAME.blind.chips >= 0.23 then
+	if not context.blueprint_card and context.game_over and G.GAME.chips/G.GAME.blind.chips >= 0.23 then
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				G.hand_text_area.blind_chips:juice_up()
@@ -84,6 +84,7 @@ function jokerInfo.calculate(self, card, context)
 					end
 				end
 				update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 1.8}, {mult = 0, chips = 0, handname = '', level = ''})
+				G.GAME.pool_flags.wingsoftimeused = true
 				return true
 			end
 		}))

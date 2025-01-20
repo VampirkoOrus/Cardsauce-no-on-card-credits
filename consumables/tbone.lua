@@ -7,7 +7,9 @@ local consumInfo = {
     activation = true,
     config = {
         extra = {
-            mult = 10
+            mult = 10,
+            runtime = 3,
+            uses = 0,
         },
         activated = false,
         slide_move = 0,
@@ -22,12 +24,21 @@ local slide_out_delay = 1
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
-    return { vars = { card.ability.extra.mult } }
+    return { vars = { card.ability.extra.mult, card.ability.extra.runtime } }
+end
+
+function consumInfo.set_ability(self, card, initial, delay_sprites)
+    if next(SMODS.find_card("c_csau_moodyblues")) then
+        card.ability.extra.runtime = card.ability.extra.runtime*2
+    end
 end
 
 function consumInfo.calculate(self, card, context)
     if card.ability.activated and context.other_joker then
-        card.ability.destroy = true
+        card.ability.extra.uses = card.ability.extra.uses+1
+        if card.ability.extra.uses >= card.ability.extra.runtime then
+            card.ability.destroy = true
+        end
         G.E_MANAGER:add_event(Event({
             func = function()
                 context.other_joker:juice_up(0.5, 0.5)

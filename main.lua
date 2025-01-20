@@ -6,7 +6,7 @@
 --- BADGE_COLOUR: 32A852
 --- DISPLAY_NAME: Cardsauce
 --- PREFIX: csau
---- VERSION: 1.3.1
+--- VERSION: 1.3.2
 --- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1317a]
 
 local mod_path = SMODS.current_mod.path
@@ -154,7 +154,7 @@ local conf_cardsauce = {
 	consumablesToLoad = {
 		--Spectral
 		'quixotic',
-		'protojoker'
+		'protojoker',
 	},
 	vhsToLoad = {
 	},
@@ -189,7 +189,11 @@ if twoPointO then
 		'tbone',
 	}
 	conf_cardsauce.standsToLoad = {
+		'moodyblues',
+		'tohth',
 	}
+	conf_cardsauce.consumablesToLoad[#conf_cardsauce.consumablesToLoad+1] = 'arrow'
+	conf_cardsauce.jokersToLoad[#conf_cardsauce.jokersToLoad+1] = 'tetris'
 	conf_cardsauce.decksToLoad[#conf_cardsauce.decksToLoad+1] = 'wheel'
 	conf_cardsauce.packsToLoad = {
 		'analog1',
@@ -197,6 +201,15 @@ if twoPointO then
 		'analog3',
 		'analog4',
 	}
+end
+
+local start = Game.start_run
+function Game:start_run(args)
+	start(self, args)
+	if G.GAME.selected_back.effect.center.key == "b_csau_disc" then
+		G.GAME.unlimited_stands = true
+	end
+	G.GAME.max_stands = G.GAME.modifiers.max_stands or 1
 end
 
 G.foodjokers = {
@@ -570,12 +583,12 @@ if twoPointO and #conf_cardsauce.vhsToLoad > 0 then
 end
 
 if twoPointO and #conf_cardsauce.standsToLoad > 0 then
-	G.C.Stand = HEX('eb62ab')
+	G.C.Stand = HEX('b85f8e')
 	SMODS.ConsumableType{
 		key = "Stand",
 		primary_colour = G.C.Stand,
 		secondary_colour = G.C.Stand,
-		collection_rows = { 4, 4 },
+		collection_rows = { 8, 8 },
 		shop_rate = 0,
 		loc_txt = {},
 		default = "c_csau_blackspine",
@@ -629,7 +642,7 @@ end
 local loadConsumable = function(v)
 	local consumInfo = assert(SMODS.load_file("consumables/" .. v .. ".lua"))()
 
-	if (consumInfo.set == "Spectral" and csau_enabled['enableSpectrals']) or (consumInfo.set == "VHS") or (consumInfo.set == "Stand") then
+	if (consumInfo.set == "Spectral" and csau_enabled['enableSpectrals']) or (consumInfo.set == "VHS") or (consumInfo.set == "Stand") or (consumInfo.set == "Tarot") then
 		consumInfo.key = consumInfo.key or v
 		consumInfo.atlas = v
 

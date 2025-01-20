@@ -9,6 +9,7 @@ local consumInfo = {
         extra = {
             x_mult = 2,
             runtime = 2,
+            uses = 0,
         },
         activated = false,
         slide_move = 0,
@@ -26,10 +27,16 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.x_mult, card.ability.extra.runtime } }
 end
 
+function consumInfo.set_ability(self, card, initial, delay_sprites)
+    if next(SMODS.find_card("c_csau_moodyblues")) then
+        card.ability.extra.runtime = card.ability.extra.runtime*2
+    end
+end
+
 function consumInfo.calculate(self, card, context)
     if card.ability.activated and context.final_scoring_step then
-        card.ability.extra.runtime = card.ability.extra.runtime - 1
-        if card.ability.extra.runtime <= 0 then
+        card.ability.extra.uses = card.ability.extra.uses+1
+        if card.ability.extra.uses >= card.ability.extra.runtime then
             card.ability.destroy = true
         end
         return {

@@ -72,6 +72,8 @@ function jokerInfo.calculate(self, card, context)
                      G.GAME.hands[text].visible = true
                      update_hand_text({sound = G.GAME.current_round.current_hand.handname ~= disp_text and 'button' or nil, volume = 0.4, immediate = true, nopulse = true,
                                        delay = G.GAME.current_round.current_hand.handname ~= disp_text and 0.4 or 0}, {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult, chips = G.GAME.hands[text].chips})
+                     hand_chips = G.GAME.hands[text].chips
+                     mult = G.GAME.hands[text].mult
                      return true
                  end
             }))

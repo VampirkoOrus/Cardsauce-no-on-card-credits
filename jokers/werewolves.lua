@@ -39,8 +39,10 @@ function Blind:debuff_hand(cards, hand, handname, check)
 		local werewolves = SMODS.find_card('j_csau_werewolves')
 		if handname == werewolves[1].ability.extra.hand then
 			triggered = true
-            return true
+			return true
 		end
+		triggered = false
+	else
 		triggered = false
 	end
 	return debuff_hand_ref(self, cards, hand, handname, check)

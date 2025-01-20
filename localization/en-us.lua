@@ -218,11 +218,14 @@ return {
 			},
         },
 		labels = {
-			vhs = "VHS Tape"
+			vhs = "VHS Tape",
+			stand = "Stands"
 		},
 		dictionary = {
 			k_vhs = "VHS Tape",
+			k_stand = "Stand",
 			b_vhs_cards = "VHS Tapes",
+			b_stand_cards = "Stands",
 			b_and_activate = "& Activate",
 			b_activate = "Activate",
 			vs_credits1 = "Concepting/Direction",
@@ -624,6 +627,14 @@ return {
 					"learn what it does",
 				},
 			},
+			undiscovered_stand={
+				name="Not Discovered",
+				text={
+					"Purchase this card in",
+					"an unseeded run to",
+					"learn what it does",
+				},
+			},
 			p_csau_analog1={
 				name = 'Analog Pack',
 				text = {
@@ -672,6 +683,24 @@ return {
 					"and when its ability is used up, the",
 					"tape is then {C:attention}destroyed.",
 
+				},
+			},
+			stand_info = {
+				name = "Acquiring Stands",
+				text = {
+					"You can only have {C:attention}#1#{} {C:stand}#2#{} at a time",
+					"{C:inactive}(Also limited by consumable slots){}",
+					"If you have no more room for {C:stand}Stands{} and",
+					"get a new one, it will replace the leftmost",
+					"{C:stand}Stand{} in your consumables."
+				},
+			},
+			stand_info_unlimited = {
+				name = "Acquiring Stands",
+				text = {
+					"If you have no more room for {C:stand}Stands{}",
+					"and get a new one, it will replace the leftmost",
+					"{C:stand}Stand{} in your consumables."
 				},
 			},
 			guestartist0 = {
@@ -1689,19 +1718,15 @@ return {
 					"{C:attention}Enhancement{} gains a random {C:attention}Enhancement{}",
 				},
 			},
-		},
-		Spectral = {
-			c_csau_quixotic = {
-				name = "Quixotic",
+			j_csau_tetris = {
+				name = "YOU GOT THE TETRIS!",
 				text = {
-					"Gain an {C:attention}Ethereal Tag",
-				},
-			},
-			c_csau_protojoker = {
-				name = "Protojoker",
-				text = {
-					"Transform every {C:attention}Joker{} with \"Joker\"",
-					"in its name into {C:attention}Chadley{}"
+					"Tetris. Use {C:attention}Arrow Keys{},",
+					"{C:attention}Z{}, and {C:attention}X{} to play",
+					"{C:inactive}(Pausing is not allowed)",
+					"Gain {C:mult}Mult{} equal to",
+					"amount of lines cleared.",
+					"{C:inactive}(Currently {}{C:mult}+#1#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
 		},
@@ -1710,7 +1735,7 @@ return {
 				name = "Black Spine",
 				text = {
 					"When {C:attention}Blind{} is selected, create a",
-					"random {C:vhs}VHS Tape{}. {C:attention}Unpausable",
+					"random {C:vhs}VHS Tape{}. {C:attention}Unpauseable",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -1728,13 +1753,14 @@ return {
 					"{C:green}#1# in #2#{} chance to win {C:money}$#3#{}",
 					"{C:green}#1# in #4#{} chance to {C:attention}double{} winnings",
 					"{C:green}#1# in #5#{} chance to {C:attention}triple{} winnings",
+					"{C:attention}Unpauseable",
 				},
 			},
 			c_csau_donbeveridge = {
 				name = "Don Beveridge Customerization Seminar",
 				text = {
 					"When {C:attention}Blind{} is selected, create a",
-					"random {C:attention}Food Joker{}. {C:attention}Unpausable",
+					"random {C:attention}Food Joker{}. {C:attention}Unpauseable",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -1743,6 +1769,47 @@ return {
 				text = {
 					"Each Joker gives {C:mult}+#1#{} Mult",
 					"when this tape is {C:attention}activated{}",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} hands"
+				},
+			},
+		},
+		Stand = {
+			c_csau_moodyblues = {
+				name = "Moody Blues",
+				text = {
+					"Pauseable {C:vhs}VHS Tapes{} have",
+					"{C:attention}double{} the Running Time",
+				},
+			},
+			c_csau_tohth = {
+				name = "Tohth",
+				text = {
+					"The top 5 cards of your deck are shown here!",
+				},
+			},
+		},
+		Tarot = {
+			c_csau_arrow = {
+				name = "The Arrow",
+				text = {
+					"Create a random {C:stand}Stand",
+					"{C:inactive}(Must have room or",
+					"{C:inactive}a {C:stand}Stand{}{C:inactive} to {}{C:attention}replace{}{C:inactive}){}",
+				},
+			},
+		},
+		Spectral = {
+			c_csau_quixotic = {
+				name = "Quixotic",
+				text = {
+					"Gain an {C:attention}Ethereal Tag",
+				},
+			},
+			c_csau_protojoker = {
+				name = "Protojoker",
+				text = {
+					"Transform every {C:attention}Joker{} with \"Joker\"",
+					"in its name into {C:attention}Chadley{}"
 				},
 			},
 		},
