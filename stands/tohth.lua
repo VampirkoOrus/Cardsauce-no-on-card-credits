@@ -3,7 +3,7 @@ local consumInfo = {
     set = "Stand",
     cost = 4,
     config = {
-        preview = 5
+        preview = 3
     },
     alerted = true,
     hasSoul = true,
@@ -15,7 +15,7 @@ local create_tohth_cardarea = function(card, cards)
         tohth_cards = CardArea(
                 0,
                 0,
-                (math.min(card.ability.preview,#cards) * G.CARD_W)*0.5,
+                (math.min(card.ability.preview,#cards) * G.CARD_W)*0.8,
                 (G.CARD_H*1.5)*0.5,
                 {card_limit = #cards, type = 'title', highlight_limit = 0, card_w = G.CARD_W*0.7})
     end

@@ -51,7 +51,7 @@ function jokerInfo.calculate(self, card, context)
 			ease_hands_played(1)
 			return {
 				card = card,
-				message = "+1 Hand!",
+				message = localize('k_plus_hand'),
 				colour = G.C.BLUE
 			}
 		end

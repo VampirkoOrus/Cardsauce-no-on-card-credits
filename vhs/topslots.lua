@@ -2,9 +2,10 @@ local consumInfo = {
     name = 'Top Slots - Spotting The Best',
     key = 'topslots',
     set = "VHS",
-    cost = 4,
+    cost = 3,
     alerted = true,
     activation = false,
+    unpauseable = true,
     config = {
         extra = {
             prob_base = 3,
@@ -91,8 +92,8 @@ end
 local mod = SMODS.current_mod
 local mod_path = SMODS.current_mod.path:match("Mods/[^/]+")..'/'
 
-mod['c_csau_'..consumInfo.key..'_tape'] = love.graphics.newImage(mod_path..'assets/1x/consumables/'..(consumInfo.tapeKey or 'blackspine')..'.png')
-mod['c_csau_'..consumInfo.key..'_sleeve'] = love.graphics.newImage(mod_path..'assets/1x/consumables/'..consumInfo.key..'.png')
+mod['c_csau_'..consumInfo.key..'_tape'] = love.graphics.newImage(mod_path..'assets/1x/vhs/'..(consumInfo.tapeKey or 'blackspine')..'.png')
+mod['c_csau_'..consumInfo.key..'_sleeve'] = love.graphics.newImage(mod_path..'assets/1x/vhs/'..consumInfo.key..'.png')
 
 local setupTapeCanvas = function(self, card, tape, sleeve)
     card.children.center.video = love.graphics.newCanvas(self.width or 71, self.height or 95)

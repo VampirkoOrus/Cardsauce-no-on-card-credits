@@ -230,9 +230,10 @@ target = "functions/common_events.lua"
 pattern = "_pool[#_pool + 1] = v.key"
 position = "before"
 payload = '''
-if G.GAME.selected_back and G.GAME.selected_back.effect.center.key == "b_csau_vine" then
+if G.GAME.selected_back and G.GAME.selected_back.effect.center.key == "b_csau_vine" or G.GAME.selected_back.effect.center.key == "b_csau_varg" then
+    local csau_rate = (G.GAME.selected_back.effect.center.key == "b_csau_vine" and 2) or (G.GAME.selected_back.effect.center.key == "b_csau_varg" and 1) or 0
     if string.sub(v.key, 1, 6) == 'j_csau' then
-        for i=1, 2 do
+        for i=1, csau_rate do
             _pool[#_pool + 1] = v.key
             _pool_size = _pool_size + 1
         end
@@ -648,6 +649,47 @@ payload = '''
 local text,dt,ph,sh,nldt = G.FUNCS.get_poker_hand_info(G.play.cards)
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "local last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set} or localize('k_none')"
+position = "at"
+payload = '''
+local last_tarot_planet = localize('k_none')
+if fool_c == 'c_csau_arrow' then
+    last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set, vars = { G.GAME.max_stands or 1, (card.area.config.collection and localize('k_stand')) or (G.GAME.max_stands > 1 and localize('b_stand_cards') or localize('k_stand')) }} or localize('k_none')
+else
+    last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set} or localize('k_none')
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "local shared_sprite = (self.ability.set == 'Edition' or self.ability.set == 'Joker') and G.shared_undiscovered_joker or G.shared_undiscovered_tarot"
+position = "at"
+payload = '''
+G.shared_undiscovered_stand = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_undiscovered"], {x=2,y=0})
+local shared_sprite = ((self.ability.set == 'Joker' or self.ability.set == 'Edition') and G.shared_undiscovered_joker) or (self.ability.set == 'Stand' and G.shared_undiscovered_stand) or G.shared_undiscovered_tarot
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = "if self.ability.name == 'Invisible Joker' and (self.config.center.discovered or self.bypass_discovery_center) then"
+match_indent = true
+position = 'before'
+payload = '''
+if self.cured_debuff then
+    self.children.center:draw_shader('debuff', nil, self.ARGS.send_to_shader)
+    if self.children.front and self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card then
+        self.children.front:draw_shader('debuff', nil, self.ARGS.send_to_shader)
+    end
+end
+'''
 
 
 

@@ -310,6 +310,7 @@ return {
 			ph_saved_vague = "Saved by Joker",
 			k_upgrade_double_ex = "Double Upgrade!",
 			k_cavestorytext = "A black wind flows through you...",
+			k_plus_hand = "+1 Hand",
 			k_aced = "Aced!",
 			k_twoed = "Twoed!",
 			k_twoed_aced = "Two-Aced!",
@@ -323,6 +324,7 @@ return {
 			k_meat_seal = "Yeow!",
 			k_meat_destroy = "Nyomp!",
 			k_plus_tarot = "+1 Tarot",
+			k_cd_healed = "Healed!",
 			k_vincenzo = "Corrupted!",
 			k_flip = "Flipped!",
 			k_speen = "+1 Nope!",
@@ -1777,14 +1779,34 @@ return {
 			c_csau_moodyblues = {
 				name = "Moody Blues",
 				text = {
-					"Pauseable {C:vhs}VHS Tapes{} have",
-					"{C:attention}double{} the Running Time",
+					"{C:vhs}VHS Tapes{} have {C:attention}double{}",
+					"the Running Time",
 				},
 			},
 			c_csau_tohth = {
 				name = "Tohth",
 				text = {
-					"The top 5 cards of your deck are shown here!",
+					"The top {C:attention}3{} cards of your deck are shown here!",
+				},
+			},
+			c_csau_starplatinum = {
+				name = "Star Platinum",
+				text = {
+					"{C:blue}+1{} Hand if {C:attention}first hand{}",
+					"of round is all {C:diamonds}Diamonds",
+				},
+			},
+			c_csau_diosworld = {
+				name = "DIO's World",
+				text = {
+					"{C:blue}+1{} Hand if {C:attention}first hand{}",
+					"of round is all {C:spades}Spades",
+				},
+			},
+			c_csau_crazydiamond = {
+				name = "Crazy Diamond",
+				text = {
+					"Played {C:attention}debuffed{} cards are {C:attention}healed{}",
 				},
 			},
 		},
@@ -1813,21 +1835,48 @@ return {
 				},
 			},
 		},
+		Tag = {
+			tag_csau_spirit = {
+				name = "Spirit Tag",
+				text = {
+					"Create a random {C:stand}Stand",
+					"{C:inactive}(Must have room or",
+					"{C:inactive}a {C:stand}Stand{}{C:inactive} to {}{C:attention}replace{}{C:inactive}){}",
+				},
+			},
+		},
 		Back = {
 			b_csau_vine = {
 				name = "Vine Deck",
 				text = {
+					"Start run with {C:attention}#1#{}",
 					"{C:clubs}Cardsauce{} Jokers appear",
 					"{C:attention}3x{} more often",
-					"Start run with {C:attention}#1#{}",
+				},
+			},
+			b_csau_varg = {
+				name = "Varg Deck",
+				text = {
+					"{C:attention}#1#{} Hand Size",
+					"{C:green}Probabilities{} are {C:attention}doubled{}",
+					"{C:clubs}Cardsauce{} Jokers appear",
+					"{C:attention}2x{} more often",
 				},
 			},
 			b_csau_wheel = {
 				name = "Wheel Deck",
 				text = {
-					"Start run with {C:purple}Crystal Ball{}",
+					"Start run with {C:purple}#1#{}",
 					"After each {C:attention}Boss Blind,{} ",
 					"gain a {C:vhs}Black Spine{}",
+				},
+			},
+			b_csau_disc = {
+				name = "DISC Deck",
+				text = {
+					"Start run with {C:purple}#1#{}",
+					"You can have as many",
+					"{C:stand}Stands{} as you wish",
 				},
 			},
 		},

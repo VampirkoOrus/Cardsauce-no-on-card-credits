@@ -22,12 +22,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff and G.GAME.current_round.hands_played == 0 and next(context.poker_hands['Flush']) then
-        local purp = true
-        for k, v in ipairs(context.full_hand) do
-            if not v:is_suit('Spades', nil, true) then
-                purp = false
-            end
-        end
+        local purp = G.FUNCS.csau_all_suit(context, "Spades")
         if purp then
             for i = 1, math.min(card.ability.tarot, G.consumeables.config.card_limit - #G.consumeables.cards) do
                 G.E_MANAGER:add_event(Event({func = function()

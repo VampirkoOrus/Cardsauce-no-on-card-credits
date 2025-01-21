@@ -165,6 +165,8 @@ local conf_cardsauce = {
 	decksToLoad = {
 		'vine',
 	},
+	tagsToLoad = {
+	},
 	challengesToLoad = {
 		'tucker',
 	},
@@ -178,7 +180,7 @@ local conf_cardsauce = {
 	trophiesToLoad = {}
 }
 
-local twoPointO = false
+local twoPointO = true
 
 if twoPointO then
 	conf_cardsauce.vhsToLoad = {
@@ -189,12 +191,20 @@ if twoPointO then
 		'tbone',
 	}
 	conf_cardsauce.standsToLoad = {
+		'starplatinum',
+		'diosworld',
+		'crazydiamond',
 		'moodyblues',
 		'tohth',
 	}
+	conf_cardsauce.tagsToLoad = {
+		'spirit',
+	}
 	conf_cardsauce.consumablesToLoad[#conf_cardsauce.consumablesToLoad+1] = 'arrow'
 	conf_cardsauce.jokersToLoad[#conf_cardsauce.jokersToLoad+1] = 'tetris'
+	conf_cardsauce.decksToLoad[#conf_cardsauce.decksToLoad+1] = 'varg'
 	conf_cardsauce.decksToLoad[#conf_cardsauce.decksToLoad+1] = 'wheel'
+	conf_cardsauce.decksToLoad[#conf_cardsauce.decksToLoad+1] = 'disc'
 	conf_cardsauce.packsToLoad = {
 		'analog1',
 		'analog2',
@@ -435,9 +445,9 @@ end
 -- Modified Code from Malverk
 local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
 function G.UIDEF.use_and_sell_buttons(card)
+	local use = nil
 	if card.ability.set == "VHS" then
 		if (card.area == G.pack_cards and G.pack_cards) and card.ability.consumeable then --Add a use button
-			local use
 			local spacer = {n=G.UIT.R, config={minh = 0.8}}
 			local pull = {n=G.UIT.R, config={minh = 0.55}}
 			use = {n=G.UIT.R, config={align = 'cm'}, nodes={
@@ -447,7 +457,7 @@ function G.UIDEF.use_and_sell_buttons(card)
 					}}
 				}}
 			}}
-			if not card.config.center.unpausable then
+			if not card.config.center.unpauseable then
 				pull = {n=G.UIT.R, config={align = 'cr', minw = 1.7*G.CARD_W}, nodes={
 					{n=G.UIT.R, config={minh = 0.65}},
 					{n=G.UIT.R, nodes = {
@@ -467,6 +477,31 @@ function G.UIDEF.use_and_sell_buttons(card)
 			}}
 			return t
 		end
+	end
+	if card.ability.set == "Stand" then
+		local sell = {n=G.UIT.C, config={align = "cr"}, nodes={
+			{n=G.UIT.C, config={ref_table = card, align = "cr",padding = 0.1, r=0.08, minw = 1.25, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'sell_card', func = 'can_sell_card'}, nodes={
+				{n=G.UIT.B, config = {w=0.1,h=0.6}},
+				{n=G.UIT.C, config={align = "tm"}, nodes={
+					{n=G.UIT.R, config={align = "cm", maxw = 1.25}, nodes={
+						{n=G.UIT.T, config={text = localize('b_sell'),colour = G.C.UI.TEXT_LIGHT, scale = 0.4, shadow = true}}
+					}},
+					{n=G.UIT.R, config={align = "cm"}, nodes={
+						{n=G.UIT.T, config={text = localize('$'),colour = G.C.WHITE, scale = 0.4, shadow = true}},
+						{n=G.UIT.T, config={ref_table = card, ref_value = 'sell_cost_label',colour = G.C.WHITE, scale = 0.55, shadow = true}}
+					}}
+				}}
+			}},
+		}}
+		local t = {
+			n=G.UIT.ROOT, config = {padding = 0, colour = G.C.CLEAR}, nodes={
+				{n=G.UIT.C, config={padding = 0.15, align = 'cl'}, nodes={
+					{n=G.UIT.R, config={align = 'cl'}, nodes={
+						sell
+					}},
+				}},
+			}}
+		return t
 	end
 	return G_UIDEF_use_and_sell_buttons_ref(card)
 end
@@ -517,6 +552,17 @@ G.FUNCS.reserve_card = function(e)
 	}))
 end
 
+G.FUNCS.csau_all_suit = function(context, suit)
+	local all = true
+	for k, v in ipairs(context.full_hand) do
+		if not v:is_suit(suit, nil, true) then
+			all = false
+		end
+	end
+	return all
+end
+
+
 SMODS.Atlas({ key = 'csau_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
 
 if twoPointO and #conf_cardsauce.vhsToLoad > 0 then
@@ -538,6 +584,12 @@ if twoPointO and #conf_cardsauce.vhsToLoad > 0 then
 		key = "VHS",
 		atlas = "csau_undiscovered",
 		pos = { x = 0, y = 0 }
+	}
+
+	SMODS.UndiscoveredSprite{
+		key = "Stand",
+		atlas = "csau_undiscovered",
+		pos = { x = 1, y = 0 }
 	}
 
 	G.FUNCS.tape_activate = function(card)
@@ -566,12 +618,12 @@ if twoPointO and #conf_cardsauce.vhsToLoad > 0 then
 				card.states.drag.is = true
 				card.children.center.pinch.x = true
 				G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-											 func = function()
-												 G.consumeables:remove_card(card)
-												 card:remove()
-												 card = nil
-												 return true
-											 end
+					 func = function()
+						 G.consumeables:remove_card(card)
+						 card:remove()
+						 card = nil
+						 return true
+					 end
 				}))
 				if ach then
 					check_for_unlock({ type = ach })
@@ -639,39 +691,37 @@ for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 	end
 end
 
-local loadConsumable = function(v)
-	local consumInfo = assert(SMODS.load_file("consumables/" .. v .. ".lua"))()
+local loadConsumable = function(folder, v)
+	local consumInfo = assert(SMODS.load_file(folder.."/" .. v .. ".lua"))()
 
-	if (consumInfo.set == "Spectral" and csau_enabled['enableSpectrals']) or (consumInfo.set == "VHS") or (consumInfo.set == "Stand") or (consumInfo.set == "Tarot") then
-		consumInfo.key = consumInfo.key or v
-		consumInfo.atlas = v
+	consumInfo.key = consumInfo.key or v
+	consumInfo.atlas = v
 
-		consumInfo.pos = { x = 0, y = 0 }
-		if consumInfo.hasSoul then
-			consumInfo.pos = { x = 1, y = 0 }
-			consumInfo.soul_pos = { x = 2, y = 0 }
-		end
-
-		local consum = SMODS.Consumable(consumInfo)
-		for k_, v_ in pairs(consum) do
-			if type(v_) == 'function' then
-				consum[k_] = consumInfo[k_]
-			end
-		end
-
-		SMODS.Atlas({ key = v, path ="consumables/" .. v .. ".png", px = consum.width or 71, py = consum.height or  95 })
+	consumInfo.pos = { x = 0, y = 0 }
+	if consumInfo.hasSoul then
+		consumInfo.pos = { x = 1, y = 0 }
+		consumInfo.soul_pos = { x = 2, y = 0 }
 	end
+
+	local consum = SMODS.Consumable(consumInfo)
+	for k_, v_ in pairs(consum) do
+		if type(v_) == 'function' then
+			consum[k_] = consumInfo[k_]
+		end
+	end
+
+	SMODS.Atlas({ key = v, path =folder.."/" .. v .. ".png", px = consum.width or 71, py = consum.height or  95 })
 end
 
 -- Load Consumables
 for i, v in ipairs(conf_cardsauce.consumablesToLoad) do
-	loadConsumable(v)
+	loadConsumable('consumables', v)
 end
 for i, v in ipairs(conf_cardsauce.vhsToLoad) do
-	loadConsumable(v)
+	loadConsumable('vhs', v)
 end
 for i, v in ipairs(conf_cardsauce.standsToLoad) do
-	loadConsumable(v)
+	loadConsumable('stands', v)
 end
 
 for i, v in ipairs(conf_cardsauce.packsToLoad) do
@@ -692,6 +742,22 @@ for i, v in ipairs(conf_cardsauce.packsToLoad) do
 	SMODS.Atlas({ key = v, path ="packs/" .. v .. ".png", px = pack.width or 71, py = pack.height or  95 })
 end
 
+for i, v in ipairs(conf_cardsauce.tagsToLoad) do
+	local tagInfo = assert(SMODS.load_file("tags/" .. v .. ".lua"))()
+
+	tagInfo.key = v
+	tagInfo.atlas = v
+	tagInfo.pos = { x = 0, y = 0 }
+
+	local tag = SMODS.Tag(tagInfo)
+	for k_, v_ in pairs(tag) do
+		if type(v_) == 'function' then
+			tag[k_] = tagInfo[k_]
+		end
+	end
+
+	SMODS.Atlas({ key = v, path ="tags/" .. v .. ".png", px = tag.width or 34, py = tag.height or 34 })
+end
 
 if csau_enabled['enableDecks'] then
 	for i, v in ipairs(conf_cardsauce.decksToLoad) do
@@ -1043,7 +1109,7 @@ if csau_enabled['enableColors'] then
 	G.C.COLOUR2 = G.SETTINGS.CS_COLOR2 or G.C.BLUE
 	G.C.BLIND.Small = G.SETTINGS.CS_COLOR3 or HEX('50846e')
 	G.C.BLIND.Big = G.SETTINGS.CS_COLOR3 or HEX('50846e')
-	G.C.BLIND.won = G.SETTINGS.CS_COLOR3 or HEX('50846e')
+	G.C.BLIND.won = G.SETTINGS.CS_COLOR4 or HEX('50846e')
 	G.CUSTOMHEX1 = ""
 	G.CUSTOMHEX2 = ""
 	G.CUSTOMHEX3 = ""

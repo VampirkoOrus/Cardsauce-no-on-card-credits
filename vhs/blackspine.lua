@@ -4,7 +4,7 @@ local consumInfo = {
     cost = 3,
     alerted = true,
     nosleeve = true,
-    unpausable = true,
+    unpauseable = true,
 }
 
 function consumInfo.calculate(self, card, context)

@@ -2,9 +2,9 @@ local consumInfo = {
     name = 'Don Beveridge Customerization Seminar',
     key = 'donbeveridge',
     set = "VHS",
-    cost = 4,
+    cost = 3,
     alerted = true,
-    unpausable = true,
+    unpauseable = true,
     config = {
     },
 }

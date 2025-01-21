@@ -1,5 +1,5 @@
 local deckInfo = {
-    name = 'Wheel Deck',
+    name = 'DISC Deck',
     config = {},
     unlocked = false,
     discovered = false,
@@ -26,7 +26,8 @@ deckInfo.calculate = function(self, card, context)
                     G.GAME.consumeable_buffer = 0
                 end
                 return true
-            end }))
+            end
+        }))
     end
 end
 
