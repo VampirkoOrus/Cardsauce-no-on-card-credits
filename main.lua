@@ -194,9 +194,10 @@ if twoPointO then
 	conf_cardsauce.standsToLoad = {
 		'starplatinum',
 		'diosworld',
+		'tohth',
 		'crazydiamond',
 		'moodyblues',
-		'tohth',
+		'metallica',
 		'd4c',
 	}
 	conf_cardsauce.tagsToLoad = {

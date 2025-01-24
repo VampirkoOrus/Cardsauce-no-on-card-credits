@@ -1723,9 +1723,9 @@ return {
 			j_csau_tetris = {
 				name = "YOU GOT THE TETRIS!",
 				text = {
-					"Tetris. Use {C:attention}Arrow Keys{},",
-					"{C:attention}Z{}, and {C:attention}X{} to play",
-					"{C:inactive}(Pausing is not allowed)",
+					"Tetris. Use {C:attention}Arrow Keys{}/{C:attention}D-Pad{},",
+					"{C:attention}Z{}/{C:attention}L3{}, and {C:attention}X{}/{C:attention}R3{} to play",
+					"{C:inactive}(Pausing not allowed)",
 					"Gain {C:mult}Mult{} equal to",
 					"amount of lines cleared.",
 					"{C:inactive}(Currently {}{C:mult}+#1#{}{C:inactive} Mult{}{C:inactive}){}",
@@ -1816,6 +1816,13 @@ return {
 					"each round is {C:attention}destroyed{}",
 					"{C:stand}Evolves{} after your Deck",
 					"contains 9 {C:attention}Lucky Cards"
+				},
+			},
+			c_csau_metallica = {
+				name = "Metallica",
+				text = {
+					"Played {C:attention}Jacks{} become {C:attention}Steel{} cards",
+					"{C:attention}Steel Jacks{} act as {C:attention}Glass{} cards when played",
 				},
 			},
 		},

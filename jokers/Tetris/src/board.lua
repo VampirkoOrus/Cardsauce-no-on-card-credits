@@ -61,6 +61,27 @@ function Board:lockTetromino(tetromino)
     end
 end
 
+function Board:getClearedRows()
+    local rowsCleared = 0
+    local fullRows = {}
+
+    for y = self.height, 1, -1 do
+        local fullRow = true
+        for x = 1, self.width do
+            if self.grid[y][x] == 0 then
+                fullRow = false
+                break
+            end
+        end
+        if fullRow then
+            fullRows[#fullRows+1] = y
+            rowsCleared = rowsCleared + 1
+        end
+    end
+
+    return rowsCleared, fullRows
+end
+
 function Board:clearRows()
     local totalRowsCleared = 0
     local rowsCleared
@@ -100,15 +121,17 @@ function Board:draw(x_offset, y_offset)
         love.graphics.setColor(Board.colors.background)
         love.graphics.rectangle("fill", Tetris.gridOffsetX + x_offset, Tetris.gridOffsetY + y_offset, self.width * Tetris.blockSize, self.height * Tetris.blockSize)
 
-        for y = 1, self.height do
-            for x = 1, self.width do
-                local screenX = (x - 1) * Tetris.blockSize + Tetris.gridOffsetX + x_offset
-                local screenY = (y - 1) * Tetris.blockSize + Tetris.gridOffsetY + y_offset
+        if not Tetris.gameOverAnimationState or Tetris.gameOverAnimationState ~= 'decreasing' then
+            for y = 1, self.height do
+                for x = 1, self.width do
+                    local screenX = (x - 1) * Tetris.blockSize + Tetris.gridOffsetX + x_offset
+                    local screenY = (y - 1) * Tetris.blockSize + Tetris.gridOffsetY + y_offset
 
-                if self.grid[y][x] ~= 0 then
-                    local color = self.grid[y][x]
-                    love.graphics.setColor(color[1], color[2], color[3])
-                    love.graphics.rectangle("fill", screenX, screenY, Tetris.blockSize, Tetris.blockSize)
+                    if self.grid[y][x] ~= 0 then
+                        local color = self.grid[y][x]
+                        love.graphics.setColor(color[1], color[2], color[3])
+                        love.graphics.rectangle("fill", screenX, screenY, Tetris.blockSize, Tetris.blockSize)
+                    end
                 end
             end
         end

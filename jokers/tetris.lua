@@ -31,6 +31,14 @@ local loveKeyPressedRef = love.keypressed
 local loveKeyReleasedRef = love.keyreleased
 local loveUpdateRef = love.update
 local loveDrawRef = love.draw
+local controllerPressUpdateRef = Controller.button_press_update
+
+function Controller:button_press_update(button, dt)
+    if mod.tetris.isActive then
+        mod.tetris.controller_press_update(self, button, dt)
+    end
+    controllerPressUpdateRef(self, button, dt)
+end
 
 function love.keypressed(key)
     mod.tetris.keypressed(key)
@@ -66,7 +74,6 @@ local jokerInfo = {
 }
 
 mod.tetrisCardBase = love.graphics.newImage(mod_path..'assets/1x/jokers/tetris.png')
-mod.tetrisCardOverlay = love.graphics.newImage(mod_path..'assets/1x/jokers/tetrisoverlay.png')
 
 local setupCanvas = function(self)
     self.children.center.video = love.graphics.newCanvas(71,95) --why does this work lmaooooooo
@@ -87,6 +94,7 @@ jokerInfo.calculate = function(self, card, context)
             return {
                 message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
                 mult_mod = card.ability.extra.mult,
+                card = card,
             }
         end
     end
@@ -107,10 +115,24 @@ function jokerInfo.update(self, card, dt)
         --swing your arms from side to side
         if mod.tetris.isActive then
             card.ability.extra.mult = mod.tetris.linesCleared
+            if mod.tetris.queue and #mod.tetris.queue > 0 then
+                local msg = mod.tetris.queue[1]
+                if msg.type == 'line' then
+                    card_eval_status_text(card, 'extra', nil, nil, nil, {blockable = false, message = localize{type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult}}})
+                elseif msg.type == 'reset' then
+                    card_eval_status_text(card, 'extra', nil, nil, nil, {blockable = false, message = localize('k_reset'), colour = G.C.RED})
+                end
+                table.remove(mod.tetris.queue, 1)
+            end
         else
             card.ability.extra.mult = 0
         end
     end
+end
+
+function jokerInfo.load(self, card, card_table, other_card)
+    mod.tetris.load()
+    mod.tetris.isActive = true
 end
 
 function jokerInfo.draw(self,card,layer)
@@ -127,9 +149,8 @@ function jokerInfo.draw(self,card,layer)
     end
     card.children.center.video:renderTo(function()
         if mod.tetris.isActive then
-            mod.tetris.draw(6, 6)
+            mod.tetris.draw(6, 6.5)
         end
-        love.graphics.draw(mod.tetrisCardOverlay)
     end)
     love.graphics.pop()
 end

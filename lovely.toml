@@ -615,6 +615,8 @@ payload = '''
 G.E_MANAGER:add_event(Event({ --Add bonus chips from this card
                     trigger = extra ~= nil and extra.trigger or 'before',
                     delay = delay,
+                    blocking = extra ~= nil and extra.blocking or nil,
+                    blockable = extra ~= nil and extra.blockable or nil,
                     func = function()
                     if extrafunc then extrafunc() end
                     attention_text({
@@ -702,7 +704,7 @@ if self.debuff then
 '''
 position = "before"
 payload = '''
-if self.config.center.stand_overlay and not (self.area.config.collection and not self.discovered) then
+if self.ability.stand_overlay then
     if not G[self.config.center.key..'_overlay'] then
         G[self.config.center.key..'_overlay'] = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS[string.sub(self.config.center.key, 3)], {x = 3,y = 0})
     end

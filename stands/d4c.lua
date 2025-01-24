@@ -3,11 +3,11 @@ local consumInfo = {
     set = "Stand",
     cost = 4,
     config = {
+        stand_overlay = true,
         activated = false,
     },
     alerted = true,
     hasSoul = true,
-    stand_overlay = true,
 }
 
 function consumInfo.calculate(self, card, context)
