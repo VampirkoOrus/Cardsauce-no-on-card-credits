@@ -51,7 +51,7 @@ function jokerInfo.calculate(self, card, context)
 		local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(context.scoring_hand)
 		if check_secret(text) then
 			return {
-				card = self,
+				card = card,
 				level_up = true,
 				message = localize('k_level_up_ex')
 			}

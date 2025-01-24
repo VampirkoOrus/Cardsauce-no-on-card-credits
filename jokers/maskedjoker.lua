@@ -39,7 +39,7 @@ local function choomeraCheck(context)
 			all_steel = false
 		end
 	end
-	if all_steel and #context.scoring_hand == 5 and next(find_joker('Chromed Up')) then
+	if all_steel and #context.scoring_hand >= 5 and next(find_joker('Chromed Up')) then
 		check_for_unlock({ type = "ult_choomera" })
 	end
 end

@@ -1780,7 +1780,7 @@ return {
 				name = "Moody Blues",
 				text = {
 					"{C:vhs}VHS Tapes{} have {C:attention}double{}",
-					"the Running Time",
+					"the {C:vhs}Running Time",
 				},
 			},
 			c_csau_tohth = {
@@ -1792,21 +1792,30 @@ return {
 			c_csau_starplatinum = {
 				name = "Star Platinum",
 				text = {
-					"{C:blue}+1{} Hand if {C:attention}first hand{}",
-					"of round is all {C:diamonds}Diamonds",
+					"If {C:attention}first hand{} of round is",
+					"all {C:diamonds}Diamonds{}, gain {C:blue}+1{} Hand",
 				},
 			},
 			c_csau_diosworld = {
 				name = "DIO's World",
 				text = {
-					"{C:blue}+1{} Hand if {C:attention}first hand{}",
-					"of round is all {C:spades}Spades",
+					"If {C:attention}first hand{} of round is",
+					"all {C:spades}Spades{}, gain {C:blue}+1{} Hand",
 				},
 			},
 			c_csau_crazydiamond = {
 				name = "Crazy Diamond",
 				text = {
 					"Played {C:attention}debuffed{} cards are {C:attention}healed{}",
+				},
+			},
+			c_csau_d4c = {
+				name = "Dirty Deeds Done Dirt Cheap",
+				text = {
+					"Your first scored {C:attention}Pair{}",
+					"each round is {C:attention}destroyed{}",
+					"{C:stand}Evolves{} after your Deck",
+					"contains 9 {C:attention}Lucky Cards"
 				},
 			},
 		},

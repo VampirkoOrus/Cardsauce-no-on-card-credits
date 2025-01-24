@@ -43,7 +43,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and not self.debuff and not context.individual and not context.repetition then
-		if G.GAME.dollars == card.ability.gil then
+		if to_big(G.GAME.dollars) == to_big(card.ability.gil) then
 			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
 				local card_type = 'Planet'
 				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1

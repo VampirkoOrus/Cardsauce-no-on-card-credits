@@ -48,19 +48,19 @@ function jokerInfo.calculate(self, card, context)
             context.other_card.drippy = false
             if context.other_card.ability.effect == 'Bonus Card' then
                 return {
-                    message = localize{type='variable',key='a_chips',vars={50}},
+                    message = localize{type='variable',key='a_chips',vars={to_big(50)}},
                     chip_mod = 50,
                     card = context.other_card
                 }
             elseif context.other_card.ability.effect == 'Mult Card' then
                 return {
-                    message = localize{type='variable',key='a_mult',vars={4}},
+                    message = localize{type='variable',key='a_mult',vars={to_big(4)}},
                     mult = 4,
                     card = context.other_card
                 }
             elseif context.other_card.ability.effect == 'Stone Card' then
                 return {
-                    message = localize{type='variable',key='a_chips',vars={50}},
+                    message = localize{type='variable',key='a_chips',vars={to_big(50)}},
                     chip_mod = 50,
                     card = context.other_card
                 }
@@ -76,11 +76,11 @@ function jokerInfo.calculate(self, card, context)
                     mult = 20
                 end
                 if pseudorandom('drippylucky2') < G.GAME.probabilities.normal / 15 then
-                    dollars = 20
+                    dollars = to_big(20)
                 end
                 return {
                     mult =mult,
-                    dollars = dollars,
+                    dollars = to_big(dollars),
                     card = context.other_card
                 }
             end

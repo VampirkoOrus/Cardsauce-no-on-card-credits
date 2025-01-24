@@ -26,13 +26,13 @@ end
 function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and not card.debuff and not context.individual and not context.repetition and not context.blueprint then
 		if G.GAME.chips <= (G.GAME.blind.chips * 1.1) then
-			card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
+			card.ability.extra.mult = to_big(card.ability.extra.mult) + to_big(card.ability.extra.mult_mod)
 			card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.MULT})
 		end
 	end
-	if context.joker_main and context.cardarea == G.jokers and card.ability.extra.mult > 0 then
+	if context.joker_main and context.cardarea == G.jokers and to_big(card.ability.extra.mult) > to_big(0) then
 		return {
-			message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
+			message = localize{type='variable',key='a_mult',vars={to_big(card.ability.extra.mult)}},
 			mult_mod = card.ability.extra.mult, 
 		}
 	end

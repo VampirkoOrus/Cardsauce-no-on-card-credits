@@ -35,14 +35,14 @@ function jokerInfo.calculate(self, card, context)
 				end)}
 			))
 		end
-		if card.ability.extra.x_mult > 1 then
+		if to_big(card.ability.extra.x_mult) > to_big(1) then
 			return {
-				message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+				message = localize{type='variable',key='a_xmult',vars={to_big(card.ability.extra.x_mult)}},
 				Xmult_mod = card.ability.extra.x_mult,
 			}
 		end
 	end
-	if context.end_of_round and not context.blueprint and card.ability.extra.x_mult > 1 then
+	if context.end_of_round and not context.blueprint and to_big(card.ability.extra.x_mult) > to_big(1) then
 		card.ability.extra.x_mult = 1
 		return {
 			message = localize('k_reset'),

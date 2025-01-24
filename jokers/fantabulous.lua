@@ -42,12 +42,12 @@ function jokerInfo.calculate(self, card, context)
 						card.states.drag.is = true
 						card.children.center.pinch.x = true
 						G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-													 func = function()
-														 G.jokers:remove_card(card)
-														 card:remove()
-														 card = nil
-														 return true
-													 end
+							 func = function()
+								 G.jokers:remove_card(card)
+								 card:remove()
+								 card = nil
+								 return true
+							 end
 						}))
 						return true
 					end

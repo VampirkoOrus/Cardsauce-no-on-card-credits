@@ -37,7 +37,7 @@ function jokerInfo.calculate(self, card, context)
         if trigger then
             if pseudorandom('fleentstones') < G.GAME.probabilities.normal / card.ability.rate then
                 return {
-                    message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+                    message = localize{type='variable',key='a_xmult',vars={to_big(card.ability.extra.x_mult)}},
                     Xmult_mod = card.ability.extra.x_mult,
                 }
             end

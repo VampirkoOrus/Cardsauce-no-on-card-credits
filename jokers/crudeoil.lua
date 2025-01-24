@@ -33,7 +33,7 @@ function G.UIDEF.shop()
     if not next(SMODS.find_card('j_csau_bunji')) then
         G.E_MANAGER:add_event(Event({trigger = 'after', blocking = false, func = function()
             for _, v in ipairs(SMODS.find_card("j_csau_crudeoil")) do
-                v.ability.extra.dollars = v.ability.extra.dollars - v.ability.extra.dollars_mod
+                v.ability.extra.dollars = to_big(v.ability.extra.dollars) - to_big(v.ability.extra.dollars_mod)
                 if v.ability.extra.dollars <= 0 then
                     G.E_MANAGER:add_event(Event({
                         func = function()
@@ -57,7 +57,7 @@ function G.UIDEF.shop()
                 else
                     G.E_MANAGER:add_event(Event({
                         func = function()
-                            card_eval_status_text(v, 'extra', nil, nil, nil, {message = "-"..localize('$') .. v.ability.extra.dollars_mod, colour = G.C.MONEY})
+                            card_eval_status_text(v, 'extra', nil, nil, nil, {message = "-"..localize('$') .. to_big(v.ability.extra.dollars_mod), colour = G.C.MONEY})
                             return true
                         end
                     }))

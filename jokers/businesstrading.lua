@@ -43,8 +43,8 @@ function jokerInfo.calculate(self, card, context)
             end
         end
         if allfaces then
-            ease_dollars(card.ability.extra.dollars)
-            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('$') .. card.ability.extra.dollars, colour = G.C.MONEY})
+            ease_dollars(to_big(card.ability.extra.dollars))
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('$') .. to_big(card.ability.extra.dollars), colour = G.C.MONEY})
             if pseudorandom('businesstrading') < G.GAME.probabilities.normal / 3 then
                 card.ability.destroyed_card = pseudorandom('businesstrading_1', 1, #context.full_hand)
             end

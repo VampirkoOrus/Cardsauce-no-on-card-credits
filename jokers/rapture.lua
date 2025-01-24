@@ -29,28 +29,28 @@ function jokerInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.individual
     if context.cardarea == G.jokers and context.before and not card.debuff and not bad_context then
         if context.scoring_name == "High Card" then
-            if card.ability.extra.mult > 0 then
-                card.ability.extra.mult = 0
+            if to_big(card.ability.extra.mult) > to_big(0) then
+                card.ability.extra.mult = to_big(0)
                 return {
                     message = localize('k_reset'),
                     colour = G.C.RED
                 }
             end
         else
-            card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
-            if card.ability.extra.mult >= 30 and next(find_joker('2 Kings 2:23-24')) then
+            card.ability.extra.mult = to_big(card.ability.extra.mult) + to_big(card.ability.extra.mult_mod)
+            if to_big(card.ability.extra.mult) >= to_big(30) and next(find_joker('2 Kings 2:23-24')) then
                 check_for_unlock({ type = "supreme_ascend" })
             end
             return {
                 card = card,
-                message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}}
+                message = localize{type='variable',key='a_mult',vars={to_big(card.ability.extra.mult)}}
             }
         end
     end
     if context.joker_main and context.cardarea == G.jokers and not card.debuff and not bad_context then
-        if card.ability.extra.mult > 0 then
+        if to_big(card.ability.extra.mult) > to_big(0) then
             return {
-                message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
+                message = localize{type='variable',key='a_mult',vars={to_big(card.ability.extra.mult)}},
                 mult_mod = card.ability.extra.mult,
             }
         end

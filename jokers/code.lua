@@ -36,7 +36,7 @@ function jokerInfo.calculate(self, card, context)
 			if v:get_id() == 8 then code8 = code8 + 1 end
 		end
 		if code5 == 1 and code6 == 1 and code7 == 2 and code8 == 1 then
-			ease_dollars(card.ability.extra.money)
+			ease_dollars(to_big(card.ability.extra.money))
 			return {
 				message = localize('$')..card.ability.extra.money,
 				colour = G.C.MONEY,

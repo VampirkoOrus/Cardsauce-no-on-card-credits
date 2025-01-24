@@ -33,7 +33,7 @@ end
 local can_discardref = G.FUNCS.can_discard
 G.FUNCS.can_discard = function(e)
 	if next(SMODS.find_card('j_csau_greyjoker')) then
-		if G.GAME.current_round.discards_left <= 0 or #G.hand.highlighted <= 4 then
+		if to_big(G.GAME.current_round.discards_left) <= to_big(0) or to_big(#G.hand.highlighted) <= to_big(4) then
 			e.config.colour = G.C.UI.BACKGROUND_INACTIVE
 			e.config.button = nil
 		else

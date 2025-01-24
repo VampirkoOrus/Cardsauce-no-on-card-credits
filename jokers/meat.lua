@@ -16,7 +16,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
-	return {vars = {card.ability.extra.cardsRemaining}}
+	return {vars = { card.ability.extra.cardsRemaining } }
 end
 
 function jokerInfo.add_to_deck(self, card)

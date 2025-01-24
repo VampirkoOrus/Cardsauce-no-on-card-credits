@@ -9,6 +9,7 @@
 --- VERSION: 1.3.2
 --- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1317a]
 
+local mod = SMODS.current_mod
 local mod_path = SMODS.current_mod.path
 local usable_path = mod_path:match("Mods/[^/]+")
 local path_pattern_replace = usable_path:gsub("(%W)","%%%1")  -- shoot me in the foot, why doesn't lua just have a str.replace
@@ -196,6 +197,7 @@ if twoPointO then
 		'crazydiamond',
 		'moodyblues',
 		'tohth',
+		'd4c',
 	}
 	conf_cardsauce.tagsToLoad = {
 		'spirit',
@@ -302,6 +304,14 @@ function send(message, level)
 		else
 			sendErrorMessage(message)
 		end
+	end
+end
+
+if Cryptid and Cryptid.food then
+	local food_keys = {
+	}
+	for i, v in ipairs(food_keys) do
+		table.insert(Cryptid.food)
 	end
 end
 
@@ -430,6 +440,39 @@ function get_straight(hand)
 	end
 
 	return {}
+end
+
+-- Based on code from Ortalab
+G.FUNCS.transform_card = function(card, to_key)
+	local new_card = G.P_CENTERS[to_key]
+	card.children.center = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.pos)
+	card.children.center.states.hover = card.states.hover
+	card.children.center.states.click = card.states.click
+	card.children.center.states.drag = card.states.drag
+	card.children.center.states.collide.can = false
+	card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})
+	card:set_ability(new_card)
+	card:set_cost()
+	if new_card.soul_pos then
+		card.children.floating_sprite = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.soul_pos)
+		card.children.floating_sprite.role.draw_major = card
+		card.children.floating_sprite.states.hover.can = false
+		card.children.floating_sprite.states.click.can = false
+	end
+	if not card.edition then
+		card:juice_up()
+		play_sound('generic1')
+	else
+		card:juice_up(1, 0.5)
+		if card.edition.foil then play_sound('foil1', 1.2, 0.4) end
+		if card.edition.holo then play_sound('holo1', 1.2*1.58, 0.4) end
+		if card.edition.polychrome then play_sound('polychrome1', 1.2, 0.7) end
+		if card.edition.negative then play_sound('negative', 1.5, 0.4) end
+	end
+end
+
+function get_stand_overlay(card)
+	return mod[card.config.center.key..'_overlay']
 end
 
 local G_FUNCS_can_buy_and_use_ref=G.FUNCS.can_buy_and_use
@@ -586,12 +629,6 @@ if twoPointO and #conf_cardsauce.vhsToLoad > 0 then
 		pos = { x = 0, y = 0 }
 	}
 
-	SMODS.UndiscoveredSprite{
-		key = "Stand",
-		atlas = "csau_undiscovered",
-		pos = { x = 1, y = 0 }
-	}
-
 	G.FUNCS.tape_activate = function(card)
 		if not card.config.center.activation then return end
 		if card.ability.activated then
@@ -651,7 +688,7 @@ if twoPointO and #conf_cardsauce.standsToLoad > 0 then
 	SMODS.UndiscoveredSprite{
 		key = "Stand",
 		atlas = "csau_undiscovered",
-		pos = { x = 0, y = 0 }
+		pos = { x = 1, y = 0 }
 	}
 end
 

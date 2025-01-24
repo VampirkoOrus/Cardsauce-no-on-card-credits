@@ -18,7 +18,7 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "disabled_note", set = "Other"}
 	info_queue[#info_queue+1] = {key = "guestartist1", set = "Other"}
-	return { vars = {card.ability.extra.chips, card.ability.extra.chip_mod} }
+	return { vars = { card.ability.extra.chips, card.ability.extra.chip_mod } }
 end
 
 function jokerInfo.add_to_deck(self, card)
@@ -34,12 +34,12 @@ function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and not card.debuff then
 		if G.GAME.blind.triggered and not (context.blueprint or context.repetition or context.individual or context.after or context.before) then
 			card.ability.trigger_allowed = false
-			card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
+			card.ability.extra.chips = to_big(card.ability.extra.chips) + to_big(card.ability.extra.chip_mod)
 			card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.CHIPS})
 		end
-		if context.joker_main and card.ability.extra.chips > 0 then
+		if context.joker_main and to_big(card.ability.extra.chips) > to_big(0) then
 			return {
-				message = localize{type='variable',key='a_chips',vars={card.ability.extra.chips}},
+				message = localize{type='variable',key='a_chips',vars={to_big(card.ability.extra.chips)}},
 				chip_mod = card.ability.extra.chips,
 				colour = G.C.CHIPS
 			}

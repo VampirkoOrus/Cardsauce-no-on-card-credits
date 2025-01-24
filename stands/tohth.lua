@@ -13,11 +13,11 @@ local consumInfo = {
 local create_tohth_cardarea = function(card, cards)
     if not tohth_cards then
         tohth_cards = CardArea(
-                0,
-                0,
-                (math.min(card.ability.preview,#cards) * G.CARD_W)*0.8,
-                (G.CARD_H*1.5)*0.5,
-                {card_limit = #cards, type = 'title', highlight_limit = 0, card_w = G.CARD_W*0.7})
+            0, 0,
+            (math.min(card.ability.preview,#cards) * G.CARD_W)*0.75,
+            (G.CARD_H*1.5)*0.5,
+            {card_limit = #cards, type = 'title', highlight_limit = 0, card_w = G.CARD_W*0.7}
+        )
     end
     for i = 1, #cards do
         local card = copy_card(cards[i], nil, nil, G.playing_card)

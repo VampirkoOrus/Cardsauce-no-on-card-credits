@@ -44,7 +44,7 @@ function jokerInfo.calculate(self, card, context)
 			local pitch = 1
 			local volume = (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/100.0)
 			return {
-				xmult_message = {message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}}, colour = G.C.MULT, sound = "csau_wega", volume = volume, pitch = pitch},
+				xmult_message = {message = localize{type='variable',key='a_xmult',vars={to_big(card.ability.extra.x_mult)}}, colour = G.C.MULT, sound = "csau_wega", volume = volume, pitch = pitch},
 				x_mult = card.ability.extra.x_mult,
 				card = card
 			}

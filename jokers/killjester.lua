@@ -34,7 +34,7 @@ function jokerInfo.calculate(self, card, context)
         for i = 1, #G.jokers.cards do
             if G.jokers.cards[i] ~= card and not (G.jokers.cards[i].getting_sliced or G.jokers.cards[i].ability.eternal) then
                 if containsString(G.jokers.cards[i].ability.name, "Joker") then
-                    card.ability.x_mult = card.ability.x_mult + card.ability.x_mult_mod
+                    card.ability.x_mult = to_big(card.ability.x_mult) + to_big(card.ability.x_mult_mod)
                     G.jokers.cards[i].getting_sliced = true
                     trigger = true
                     G.E_MANAGER:add_event(Event({func = function()
@@ -49,7 +49,7 @@ function jokerInfo.calculate(self, card, context)
     end
     if context.joker_main and context.cardarea == G.jokers then
         return {
-            message = localize{type='variable',key='a_xmult',vars={card.ability.x_mult}},
+            message = localize{type='variable',key='a_xmult',vars={to_big(card.ability.x_mult)}},
             Xmult_mod = card.ability.x_mult,
         }
     end

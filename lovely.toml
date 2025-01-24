@@ -671,7 +671,9 @@ target = "card.lua"
 pattern = "local shared_sprite = (self.ability.set == 'Edition' or self.ability.set == 'Joker') and G.shared_undiscovered_joker or G.shared_undiscovered_tarot"
 position = "at"
 payload = '''
-G.shared_undiscovered_stand = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_undiscovered"], {x=2,y=0})
+if not G.shared_undiscovered_stand then
+    G.shared_undiscovered_stand = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_undiscovered"], {x=2,y=0})
+end
 local shared_sprite = ((self.ability.set == 'Joker' or self.ability.set == 'Edition') and G.shared_undiscovered_joker) or (self.ability.set == 'Stand' and G.shared_undiscovered_stand) or G.shared_undiscovered_tarot
 '''
 match_indent = true
@@ -691,11 +693,57 @@ if self.cured_debuff then
 end
 '''
 
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.debuff then
+    self.children.center:draw_shader('debuff', nil, self.ARGS.send_to_shader)
+'''
+position = "before"
+payload = '''
+if self.config.center.stand_overlay and not (self.area.config.collection and not self.discovered) then
+    if not G[self.config.center.key..'_overlay'] then
+        G[self.config.center.key..'_overlay'] = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS[string.sub(self.config.center.key, 3)], {x = 3,y = 0})
+    end
+    G[self.config.center.key..'_overlay'].role.draw_major = self
+    G[self.config.center.key..'_overlay']:draw_shader('dissolve', nil, nil, nil, self.children.center)
+end
+'''
+match_indent = true
 
+# Make Perkeo only copy consumables (and not Stands)
+# (Slightly modified code from Cryptid, this should conflict with Cryptid's lovely patch of this,
+# but it should maintain Cryptid compatibility, cause it does the same thing)
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if G.consumeables.cards[1] then'''
+position = "at"
+payload = '''local eligibleJokers = {}
+for i = 1, #G.consumeables.cards do
+    if G.consumeables.cards[i].ability.consumeable and not G.consumeables.cards[i].ability.set == "Stand" then
+        eligibleJokers[#eligibleJokers + 1] = G.consumeables.cards[i]
+    end
+end
+if #eligibleJokers > 0 then'''
+match_indent = true
 
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''local card = copy_card(pseudorandom_element(G.consumeables.cards, pseudoseed('perkeo')), nil)'''
+position = "at"
+payload = '''local card = copy_card(pseudorandom_element(eligibleJokers, pseudoseed('perkeo')), nil)'''
+match_indent = true
 
-
-
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if G.consumeables.cards[i].ability.consumeable then'''
+position = "at"
+payload = '''if G.consumeables.cards[i].ability.consumeable and not G.consumeables.cards[i].ability.set == "Stand" then'''
+match_indent = true
 
 
 

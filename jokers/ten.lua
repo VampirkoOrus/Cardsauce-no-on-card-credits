@@ -25,18 +25,18 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.using_consumeable and not G.shop then
-        card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
+        card.ability.extra.mult = to_big(card.ability.extra.mult) + to_big(card.ability.extra.mult_mod)
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.MULT})
     end
     if context.joker_main and context.cardarea == G.jokers and not card.debuff then
-        if card.ability.extra.mult > 0 then
+        if to_big(card.ability.extra.mult) > to_big(0) then
             return {
-                message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
+                message = localize{type='variable',key='a_mult',vars={to_big(card.ability.extra.mult)}},
                 mult_mod = card.ability.extra.mult,
             }
         end
     end
-    if context.end_of_round and not context.blueprint and card.ability.extra.mult > 0 then
+    if context.end_of_round and not context.blueprint and to_big(card.ability.extra.mult) > to_big(0) then
         card.ability.extra.mult = 0
         return {
             message = localize('k_reset'),

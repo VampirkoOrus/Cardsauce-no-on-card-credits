@@ -46,7 +46,7 @@ function jokerInfo.set_sprites(self, card, _front)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if not context.blueprint_card and context.game_over and G.GAME.chips/G.GAME.blind.chips >= 0.23 then
+	if not context.blueprint_card and context.game_over and to_big(G.GAME.chips)/to_big(G.GAME.blind.chips) >= to_big(0.23) then
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				G.hand_text_area.blind_chips:juice_up()
@@ -57,7 +57,7 @@ function jokerInfo.calculate(self, card, context)
 				ease_ante(-ante_dec)
 				G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
 				G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante-ante_dec
-				ease_dollars(-G.GAME.dollars, true)
+				ease_dollars(-to_big(G.GAME.dollars), true)
 				delayMod = delayMod or 1
 				update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3/delayMod}, {handname=localize('k_all_hands'),chips = '...', mult = '...', level=''})
 				G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2/delayMod, func = function()
@@ -79,8 +79,8 @@ function jokerInfo.calculate(self, card, context)
 				update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level='1'})
 				delay(1.3/delayMod)
 				for k, v in pairs(G.GAME.hands) do
-					if v.level > 1 then
-						level_up_hand(self, k, true, -G.GAME.hands[k].level + 1)
+					if to_big(v.level) > to_big(1) then
+						level_up_hand(self, k, true, to_big(-G.GAME.hands[k].level) + to_big(1))
 					end
 				end
 				update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 1.8}, {mult = 0, chips = 0, handname = '', level = ''})

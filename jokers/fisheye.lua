@@ -26,7 +26,7 @@ end
 function jokerInfo.calculate(self, card, context)
 	if context.joker_main and context.cardarea == G.jokers then
 		return {
-			message = localize{type='variable',key='a_chips',vars={card.ability.extra.chips}},
+			message = localize{type='variable',key='a_chips',vars={to_big(card.ability.extra.chips)}},
 			chip_mod = card.ability.extra.chips, 
 			colour = G.C.CHIPS
 		}

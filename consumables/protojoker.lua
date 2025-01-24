@@ -21,26 +21,7 @@ function consumInfo.use(self, card, area, copier)
                 trigger = 'after',
                 delay = 0.4,
                 func = function()
-                -- Based on code from Ortalab
-                local _center = G.P_CENTERS['j_csau_chad']
-                G.jokers.cards[i].children.center = Sprite(G.jokers.cards[i].T.x, G.jokers.cards[i].T.y, G.jokers.cards[i].T.w, G.jokers.cards[i].T.h, G.ASSET_ATLAS[_center.atlas or 'j_csau_chad'], _center.pos)
-                G.jokers.cards[i].children.center.states.hover = G.jokers.cards[i].states.hover
-                G.jokers.cards[i].children.center.states.click = G.jokers.cards[i].states.click
-                G.jokers.cards[i].children.center.states.drag = G.jokers.cards[i].states.drag
-                G.jokers.cards[i].children.center.states.collide.can = false
-                G.jokers.cards[i].children.center:set_role({major = G.jokers.cards[i], role_type = 'Glued', draw_major = G.jokers.cards[i]})
-                G.jokers.cards[i]:set_ability(_center)
-                G.jokers.cards[i]:set_cost()
-                if not G.jokers.cards[i].edition then
-                    G.jokers.cards[i]:juice_up()
-                    play_sound('generic1')
-                else
-                    G.jokers.cards[i]:juice_up(1, 0.5)
-                    if G.jokers.cards[i].edition.foil then play_sound('foil1', 1.2, 0.4) end
-                    if G.jokers.cards[i].edition.holo then play_sound('holo1', 1.2*1.58, 0.4) end
-                    if G.jokers.cards[i].edition.polychrome then play_sound('polychrome1', 1.2, 0.7) end
-                    if G.jokers.cards[i].edition.negative then play_sound('negative', 1.5, 0.4) end
-                end
+                G.FUNCS.transform_card(G.jokers.cards[i], 'j_csau_chad')
                 return true end
             }))
         end
@@ -48,6 +29,10 @@ function consumInfo.use(self, card, area, copier)
 end
 
 function consumInfo.draw(self,card,layer)
+    if card.area.config.collection and not self.discovered then
+        return
+    end
+
     if not G.chadley_scarf then
         G.chadley_scarf = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_protojoker"], { x = 1, y = 0 })
     end

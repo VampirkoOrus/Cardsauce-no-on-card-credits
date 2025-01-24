@@ -25,11 +25,11 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if context.individual and context.cardarea == G.play and not card.debuff and not context.blueprint and context.other_card:is_suit('Clubs') then
-		local chip = card.ability.extra.chip_mod
+		local chip = to_big(card.ability.extra.chip_mod)
 		if next(context.poker_hands['Flush']) then
-			chip = chip * 2
+			chip = to_big(chip) * to_big(2)
 		end
-		card.ability.extra.chips = card.ability.extra.chips + chip
+		card.ability.extra.chips = to_big(card.ability.extra.chips) + to_big(chip)
 		return {
 			extra = {focus = card, message = next(context.poker_hands['Flush']) and localize('k_upgrade_double_ex') or localize('k_upgrade_ex'), colour = G.C.CHIPS},
 			card = card
@@ -37,7 +37,7 @@ function jokerInfo.calculate(self, card, context)
 	end
 	if context.joker_main and context.cardarea == G.jokers then
 		return {
-			message = localize{type='variable',key='a_chips',vars={card.ability.extra.chips}},
+			message = localize{type='variable',key='a_chips',vars={to_big(card.ability.extra.chips)}},
 			chip_mod = card.ability.extra.chips, 
 			colour = G.C.CHIPS
 		}

@@ -44,28 +44,28 @@ function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and not context.blueprint and not context.repetition and not context.individual then
 		if card.ability.extra.side == 'sad' then
 			G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-										 func = function()
-											 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_flip'), colour = G.C.CHIPS, instant = true})
-											 G.localization.descriptions["Joker"]["j_sohappy"] = card.ability.extra.deschappy
-											 card:juice_up(1, 1)
-											 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-																		  func = function()
-																			  card.ability.extra.side = 'happy'
-																			  return true; end}))
-											 return true; end}))
+				 func = function()
+					 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_flip'), colour = G.C.CHIPS, instant = true})
+					 G.localization.descriptions["Joker"]["j_sohappy"] = card.ability.extra.deschappy
+					 card:juice_up(1, 1)
+					 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
+												  func = function()
+													  card.ability.extra.side = 'happy'
+													  return true; end}))
+					 return true; end}))
 			changeHandsAndDiscards(card.ability.extra.flip, -card.ability.extra.flip)
 		elseif card.ability.extra.side == 'happy' then
 			check_for_unlock({ type = "flip_sosad" })
 			G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-										 func = function()
-											 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_flip'), colour = G.C.CHIPS, instant = true})
-											 G.localization.descriptions["Joker"]["j_csau_sohappy"] = G.localization.descriptions["Joker"]["j_csau_sosad"]
-											 card:juice_up(1, 1)
-											 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-																		  func = function()
-																			  card.ability.extra.side = 'sad'
-																			  return true; end}))
-											 return true; end}))
+				 func = function()
+					 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_flip'), colour = G.C.CHIPS, instant = true})
+					 G.localization.descriptions["Joker"]["j_csau_sohappy"] = G.localization.descriptions["Joker"]["j_csau_sosad"]
+					 card:juice_up(1, 1)
+					 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
+												  func = function()
+													  card.ability.extra.side = 'sad'
+													  return true; end}))
+					 return true; end}))
 			changeHandsAndDiscards(-card.ability.extra.flip, card.ability.extra.flip)
 		end
 	end

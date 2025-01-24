@@ -9,7 +9,7 @@ function consumInfo.loc_vars(self, info_queue, card)
     if G.GAME.unlimited_stands then
         info_queue[#info_queue+1] = {key = "stand_info_unlimited", set = "Other"}
     else
-        if card then
+        if card and card.area then
             info_queue[#info_queue+1] = {key = "stand_info", set = "Other", vars = { G.GAME.max_stands or 1, (card.area.config.collection and localize('k_stand')) or (G.GAME.max_stands > 1 and localize('b_stand_cards') or localize('k_stand')) }}
         end
     end
@@ -38,31 +38,7 @@ end
 replace_stand = function()
     local card = get_replaceable_stand()
     local new_stand_key = pseudorandom_element(get_current_pool('Stand', nil, nil, 'arrow'), pseudoseed('arrowreplace'))
-    local new_stand = G.P_CENTERS[new_stand_key]
-    card.children.center = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_stand.atlas], new_stand.pos)
-    card.children.center.states.hover = card.states.hover
-    card.children.center.states.click = card.states.click
-    card.children.center.states.drag = card.states.drag
-    card.children.center.states.collide.can = false
-    card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})
-    card:set_ability(new_stand)
-    card:set_cost()
-    if new_stand.soul_pos then
-        card.children.floating_sprite = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_stand.atlas], new_stand.soul_pos)
-        card.children.floating_sprite.role.draw_major = card
-        card.children.floating_sprite.states.hover.can = false
-        card.children.floating_sprite.states.click.can = false
-    end
-    if not card.edition then
-        card:juice_up()
-        play_sound('generic1')
-    else
-        card:juice_up(1, 0.5)
-        if card.edition.foil then play_sound('foil1', 1.2, 0.4) end
-        if card.edition.holo then play_sound('holo1', 1.2*1.58, 0.4) end
-        if card.edition.polychrome then play_sound('polychrome1', 1.2, 0.7) end
-        if card.edition.negative then play_sound('negative', 1.5, 0.4) end
-    end
+    G.FUNCS.transform_card(card, new_stand_key)
 end
 
 new_stand = function()

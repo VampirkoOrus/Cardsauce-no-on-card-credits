@@ -98,7 +98,5 @@ function jokerInfo.draw(self,card,layer)
 	love.graphics.pop()
 end
 
-
-
 return jokerInfo
 	

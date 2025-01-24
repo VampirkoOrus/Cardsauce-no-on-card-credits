@@ -78,7 +78,6 @@ local sts_allforms = function(card)
     end
 end
 
-
 function G.FUNCS.find_sts_form(form)
     if next(SMODS.find_card("j_csau_sts")) then
         for i, v in ipairs(SMODS.find_card("j_csau_sts")) do
@@ -162,8 +161,8 @@ function jokerInfo.calculate(self, card, context)
         end
         if G.GAME.current_round.hands_played > 0 then
             if card.ability.form == "diamonds" and not context.blueprint then
-                card.ability.diamonds.mult = card.ability.diamonds.mult + (card.ability.diamonds.mult_mod * #context.scoring_hand)
-                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_mult', vars = {card.ability.diamonds.mult}}, colour = G.C.MULT})
+                card.ability.diamonds.mult = to_big(card.ability.diamonds.mult) + (to_big(card.ability.diamonds.mult_mod) * to_big(#context.scoring_hand))
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_mult', vars = {to_big(card.ability.diamonds.mult)}}, colour = G.C.MULT})
             elseif card.ability.form == "wild" then
                 local enhancements = {
                     [1] = G.P_CENTERS.m_bonus,
@@ -205,14 +204,14 @@ function jokerInfo.calculate(self, card, context)
         end
     end
     if context.final_scoring_step and G.GAME.current_round.hands_played > 0 then
-        if card.ability.form == "diamonds" and card.ability.diamonds.mult > 0 then
+        if card.ability.form == "diamonds" and to_big(card.ability.diamonds.mult) > to_big(0) then
             return {
-                message = localize{type='variable',key='a_mult',vars={card.ability.diamonds.mult}},
+                message = localize{type='variable',key='a_mult',vars={to_big(card.ability.diamonds.mult)}},
                 mult_mod = card.ability.diamonds.mult
             }
         elseif card.ability.form == "spades" then
             return {
-                message = localize{type='variable',key='a_xmult',vars={card.ability.spades.x_mult}},
+                message = localize{type='variable',key='a_xmult',vars={to_big(card.ability.spades.x_mult)}},
                 Xmult_mod = card.ability.spades.x_mult,
             }
         end
