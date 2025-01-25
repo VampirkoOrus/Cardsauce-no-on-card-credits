@@ -41,12 +41,16 @@ function Controller:button_press_update(button, dt)
 end
 
 function love.keypressed(key)
-    mod.tetris.keypressed(key)
+    if mod.tetris.isActive then
+        mod.tetris.keypressed(key)
+    end
     loveKeyPressedRef(key)
 end
 
 function love.keyreleased(key)
-    mod.tetris.keyreleased(key)
+    if mod.tetris.isActive then
+        mod.tetris.keypressed(key)
+    end
     loveKeyReleasedRef(key)
 end
 
