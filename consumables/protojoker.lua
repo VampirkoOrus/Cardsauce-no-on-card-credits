@@ -29,7 +29,7 @@ function consumInfo.use(self, card, area, copier)
 end
 
 function consumInfo.draw(self,card,layer)
-    if card.area.config.collection and not self.discovered then
+    if card.area and card.area.config.collection and not self.discovered then
         return
     end
 

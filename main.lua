@@ -190,6 +190,10 @@ if twoPointO then
 		'topslots',
 		'donbeveridge',
 		'tbone',
+		'remlezar',
+		'calibighunks',
+		'twistedpair',
+		'suburbansasquatch',
 	}
 	conf_cardsauce.standsToLoad = {
 		'starplatinum',
