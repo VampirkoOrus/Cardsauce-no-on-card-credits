@@ -6,8 +6,8 @@
 --- BADGE_COLOUR: 32A852
 --- DISPLAY_NAME: Cardsauce
 --- PREFIX: csau
---- VERSION: 1.3.2
---- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1317a]
+--- VERSION: 1.3.3
+--- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1406b]
 
 local mod = SMODS.current_mod
 local mod_path = SMODS.current_mod.path
