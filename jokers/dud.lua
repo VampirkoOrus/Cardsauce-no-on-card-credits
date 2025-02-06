@@ -46,12 +46,12 @@ function jokerInfo.calculate(self, card, context)
     if context.selling_self then
         local pool = {}
         for k, v in pairs(G.jokers.cards) do
-            if (v.ability.eternal or v.ability.perishable or v.ability.rental) and not v == card then
+            if (v.ability.eternal or v.ability.perishable or v.ability.rental) and card ~= v then
                 pool[#pool+1] = v
             end
         end
         if #pool > 0 then
-            local chosen_joker = pseudorandom_element(G.jokers.cards, pseudoseed('dud_choice'))
+            local chosen_joker = pseudorandom_element(pool, pseudoseed('dud_choice'))
             for k, v in pairs(G.jokers.cards) do
                 if v == chosen_joker then
                     if v.ability.eternal then
