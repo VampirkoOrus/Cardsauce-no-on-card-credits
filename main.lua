@@ -2907,6 +2907,9 @@ if csau_enabled['enableSkins'] then
 		G.SETTINGS.CUSTOM_DECK.Collabs.Hearts = "csau_default_hearts"
 		G.SETTINGS.CUSTOM_DECK.Collabs.Diamonds = "csau_default_diamonds"
 		G.SETTINGS.CUSTOM_DECK.Collabs.Clubs = "csau_default_clubs"
+		if not G.SETTINGS.colourpalettes then
+			G.SETTINGS.colourpalettes = {}
+		end
 		G.SETTINGS.colourpalettes.Spades = "csau_def_spades"
 		G.SETTINGS.colourpalettes.Hearts = "csau_def_hearts"
 		G.SETTINGS.colourpalettes.Diamonds = "csau_def_diamonds"

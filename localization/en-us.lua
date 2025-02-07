@@ -203,20 +203,6 @@ return {
 				"CHUDLOT"
 			},
 		},
-		collabs = {
-			Spades={
-				["1"]="Twitch Clips",
-			},
-			Hearts={
-				["1"]="Extrasauce",
-			},
-			Clubs={
-				["1"]="Darkshroom",
-			},
-			Diamonds={
-				["1"]="Fullsauce",
-			},
-        },
 		labels = {
 			vhs = "VHS Tape",
 			stand = "Stands"
