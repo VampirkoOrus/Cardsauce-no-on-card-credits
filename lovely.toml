@@ -724,7 +724,7 @@ pattern = '''if G.consumeables.cards[1] then'''
 position = "at"
 payload = '''local eligibleJokers = {}
 for i = 1, #G.consumeables.cards do
-    if G.consumeables.cards[i].ability.consumeable and not G.consumeables.cards[i].ability.set == "Stand" then
+    if G.consumeables.cards[i].ability.consumeable and G.consumeables.cards[i].ability.set ~= "Stand" then
         eligibleJokers[#eligibleJokers + 1] = G.consumeables.cards[i]
     end
 end
