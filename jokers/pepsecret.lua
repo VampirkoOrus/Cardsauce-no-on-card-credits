@@ -23,9 +23,11 @@ local function check_secret(name)
 end
 
 local function hasPlayedSecret()
-	for k, v in ipairs(G.handlist) do
-		if G.GAME.hands[v].visible and check_secret(k) then
-			return true
+	for k, v in pairs(G.handlist) do
+		if G.GAME.hands[v].visible then
+			if check_secret(v) then
+				return true
+			end
 		end
 	end
 end
@@ -65,7 +67,7 @@ function Game:init_game_object()
 	G.csau_secret_hands = {}
 	for k, v in pairs(SMODS.PokerHands) do
 		if not v.visible then
-			G.csau_secret_hands[#G.csau_secret_hands + 1] = k
+			G.csau_secret_hands[#G.csau_secret_hands + 1] = v.original_key
 		end
 	end
 	return ret
