@@ -10,6 +10,10 @@ local consumInfo = {
     hasSoul = true,
 }
 
+function consumInfo.add_to_deck(self, card)
+    set_consumeable_usage(card)
+end
+
 function consumInfo.calculate(self, card, context)
     if context.destroy_card and context.cardarea == G.play then
         if context.scoring_name == "Pair" and not card.ability.activated then

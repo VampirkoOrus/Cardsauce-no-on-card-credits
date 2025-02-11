@@ -9,16 +9,18 @@ local consumInfo = {
     hasSoul = true,
 }
 
+function consumInfo.add_to_deck(self, card)
+    set_consumeable_usage(card)
+end
+
 -- Modified Code from Jimbo's Pack
 local create_tohth_cardarea = function(card, cards)
-    if not tohth_cards then
-        tohth_cards = CardArea(
-            0, 0,
-            (math.min(card.ability.preview,#cards) * G.CARD_W)*0.75,
-            (G.CARD_H*1.5)*0.5,
-            {card_limit = #cards, type = 'title', highlight_limit = 0, card_w = G.CARD_W*0.7}
-        )
-    end
+    tohth_cards = CardArea(
+        0, 0,
+        (math.min(card.ability.preview,#cards) * G.CARD_W)*0.75,
+        (G.CARD_H*1.5)*0.5,
+        {card_limit = #cards, type = 'title', highlight_limit = 0, card_w = G.CARD_W*0.7}
+    )
     for i = 1, #cards do
         local card = copy_card(cards[i], nil, nil, G.playing_card)
         tohth_cards:emplace(card)
@@ -52,22 +54,24 @@ function consumInfo.generate_ui(self, info_queue, card, desc_nodes, specific_var
                 cards[#cards+1]=G.deck.cards[#G.deck.cards-(i-1)]
             end
         end
-        local cardarea = create_tohth_cardarea(card, cards)
-        desc_nodes[#desc_nodes+1] = {{
-            n=G.UIT.R, config = {
-                align = "cm", colour = G.C.CLEAR, r = 0.0
-            },
-            nodes={
-                {
-                    n=G.UIT.C,
-                    config = {align = "cm", padding = 0.1},
-                    nodes={
-                        {n=G.UIT.T, config={text = '/', scale = 0.15, colour = G.C.CLEAR}},
-                    }
-                }
-            },
-        }}
-        desc_nodes[#desc_nodes+1] = {cardarea}
+        if cards[1] then
+            local cardarea = create_tohth_cardarea(card, cards)
+            desc_nodes[#desc_nodes+1] = {{
+                                             n=G.UIT.R, config = {
+                    align = "cm", colour = G.C.CLEAR, r = 0.0
+                },
+                                             nodes={
+                                                 {
+                                                     n=G.UIT.C,
+                                                     config = {align = "cm", padding = 0.1},
+                                                     nodes={
+                                                         {n=G.UIT.T, config={text = '/', scale = 0.15, colour = G.C.CLEAR}},
+                                                     }
+                                                 }
+                                             },
+                                         }}
+            desc_nodes[#desc_nodes+1] = {cardarea}
+        end
     end
 end
 

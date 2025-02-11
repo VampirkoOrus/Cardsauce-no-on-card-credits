@@ -1717,6 +1717,56 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#1#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
+			j_csau_agga = {
+				name = "AGGA",
+				text = {
+					"This Joker gains {X:mult,C:white}X#2#{} Mult for",
+					"every time a card is {C:attention}retriggered",
+					"{C:green}1 in #3#{} chance this Joker",
+					"{C:attention}resets{} when {C:attention}triggered{}",
+					"{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
+				},
+			},
+			j_csau_bsi = {
+				name = "Blue Shell Incident",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult if you have no",
+					"{C:attention}Aces{} in your full deck",
+					"{C:inactive}(Currently {C:attention}#2#{C:inactive})",
+				},
+			},
+			j_csau_sotw = {
+				name = "Stand of the Week",
+				text = {
+					"Gains {X:mult,C:white}X#1#{} Mult for every",
+					"{C:attention}unique{} {C:stand}Stand{} obtained this run",
+					"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
+				},
+			},
+			j_csau_flusher = {
+				name = "THE FLUSHER™",
+				text = {
+					"{C:green}#1# in #2#{} chance to upgrade",
+					"level of played {C:attention}Flush",
+					"Gains {C:green}+#3#{} chance for each sold",
+					"{C:attention}consumable{} until the end of round",
+				},
+			},
+			j_csau_frens = {
+				name = "Frens",
+				text = {
+					"{C:chips}+#1#{} Chips for every {C:attention}face{}",
+					"card in your full deck",
+					"{C:inactive}(Currently {C:chips}+#2#{} {C:inactive}Chips){}"
+				},
+			},
+			j_csau_nutbuster = {
+				name = "Nutbuster",
+				text = {
+					"All {C:tarot}Wheel of Fortune{} cards have",
+					"{C:green}3 in 4{} chance to succeed",
+				},
+			},
 		},
 		VHS = {
 			c_csau_blackspine = {

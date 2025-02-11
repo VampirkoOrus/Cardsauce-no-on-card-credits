@@ -181,7 +181,7 @@ local conf_cardsauce = {
 	trophiesToLoad = {}
 }
 
-local twoPointO = false
+local twoPointO = true
 
 if twoPointO then
 	conf_cardsauce.vhsToLoad = {
@@ -208,7 +208,23 @@ if twoPointO then
 		'spirit',
 	}
 	conf_cardsauce.consumablesToLoad[#conf_cardsauce.consumablesToLoad+1] = 'arrow'
-	conf_cardsauce.jokersToLoad[#conf_cardsauce.jokersToLoad+1] = 'tetris'
+	local jokers = {
+		--Common
+		'frens',
+		'nutbuster',
+		--Uncommon
+		'bsi',
+		'agga',
+		'flusher',
+		--Rare
+		'tetris',
+
+		-- Jojo Jokers
+		'sotw',
+	}
+	for i, k in ipairs(jokers) do
+		conf_cardsauce.jokersToLoad[#conf_cardsauce.jokersToLoad+1] = k
+	end
 	conf_cardsauce.decksToLoad[#conf_cardsauce.decksToLoad+1] = 'varg'
 	conf_cardsauce.decksToLoad[#conf_cardsauce.decksToLoad+1] = 'wheel'
 	conf_cardsauce.decksToLoad[#conf_cardsauce.decksToLoad+1] = 'disc'

@@ -8,8 +8,11 @@ local consumInfo = {
     },
     alerted = true,
     hasSoul = true,
-
 }
+
+function consumInfo.add_to_deck(self, card)
+    set_consumeable_usage(card)
+end
 
 function consumInfo.calculate(self, card, context)
 

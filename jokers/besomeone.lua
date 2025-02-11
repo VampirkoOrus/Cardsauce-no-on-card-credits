@@ -20,5 +20,3 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 return jokerInfo
-
-

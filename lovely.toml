@@ -207,25 +207,6 @@ overwrite = false
 
 [[patches]]
 [patches.pattern]
-target = "functions/misc_functions.lua"
-pattern = '''
-                    elseif deckSkin.posStyle == 'deck' then
-                        return atlas, _front.pos
-'''
-position = "after"
-payload = '''
-                    elseif deckSkin.posStyle == 'ranks' then
-                        for i, rank in ipairs(deckSkin.ranks) do
-                            if rank == _front.value then
-                                return atlas, { x = i - 1, y = 0}
-                            end
-                        end
-'''
-match_indent = true
-overwrite = false
-
-[[patches]]
-[patches.pattern]
 target = "functions/common_events.lua"
 pattern = "_pool[#_pool + 1] = v.key"
 position = "before"
@@ -746,6 +727,25 @@ pattern = '''if G.consumeables.cards[i].ability.consumeable then'''
 position = "at"
 payload = '''if G.consumeables.cards[i].ability.consumeable and not G.consumeables.cards[i].ability.set == "Stand" then'''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or pseudorandom('wheel_of_fortune') < G.GAME.probabilities.normal/self.ability.extra then'''
+position = "at"
+payload = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or pseudorandom('wheel_of_fortune') < (G.FUNCS.nutbuster_active() and 3) or G.GAME.probabilities.normal/self.ability.extra then'''
+match_indent = true
+
+[[patches]]
+[patches.regex]
+target = 'functions/common_events.lua'
+pattern = "G.GAME.probabilities.normal, cfg.extra"
+position = 'at'
+payload = '''G.FUNCS.nutbuster_active() and 3 or G.GAME.probabilities.normal, cfg.extra'''
+
+
+
+
 
 
 
