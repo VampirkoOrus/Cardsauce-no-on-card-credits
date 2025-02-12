@@ -245,6 +245,81 @@ function Game:start_run(args)
 	G.GAME.max_stands = G.GAME.modifiers.max_stands or 1
 end
 
+G.collab_credits = {
+	-- Vine
+	csau_wildcards = {
+		King = {key = "guestartist23", set = "Other"}, --fradavovan
+		Queen = {key = "guestartist26", set = "Other"}, --CheesyDraws
+		Jack = {key = "guestartist26", set = "Other"}, --CheesyDraws
+	},
+	csau_mascots = {
+		King = {key = "guestartist26", set = "Other"}, --CheesyDraws
+		Queen = {key = "guestartist27", set = "Other"}, --Greeeg
+		Jack = {key = "guestartist12", set = "Other"}, --WhimsyCherry
+	},
+	csau_classics = {
+		King = {key = "guestartist10", set = "Other"}, --Arthur Effgus
+		Queen = {key = "guestartist10", set = "Other"}, --Arthur Effgus
+		Jack = {key = "guestartist10", set = "Other"}, --Arthur Effgus
+	},
+	csau_confidants = {
+		King = {key = "guestartist17", set = "Other"}, --Jazz_Jen
+		Queen = {key = "guestartist17", set = "Other"}, --Jazz_Jen
+		Jack = {key = "guestartist17", set = "Other"}, --Jazz_Jen
+	},
+	-- Varg
+	csau_americans = {
+		King = {key = "guestartist21", set = "Other"}, --Burdrehnar
+		Queen = {key = "guestartist16", set = "Other"}, --GuffNFluff
+		Jack = nil,
+	},
+	csau_voices = {
+		King = {key = "guestartist13", set = "Other"}, --Lyzerus
+		Queen = {key = "guestartist22", set = "Other"}, --Crisppyboat
+		Jack = {key = "guestartist13", set = "Other"}, --Lyzerus
+	},
+	csau_duendes = {
+		King = nil,
+		Queen = {key = "guestartist1", set = "Other"}, --SagaciousCejai
+		Jack = nil,
+	},
+	csau_powerful = {
+		King = nil,
+		Queen =nil,
+		Jack = {key = "guestartist1", set = "Other"}, --SagaciousCejai
+	},
+	-- Mike
+	csau_poops = {
+		King = {key = "guestartists0plus1", set = "Other", plural = true}, --Gote + SagaciousCejai
+		Queen = {key = "guestartist0", set = "Other"}, --Gote
+		Jack = {key = "guestartist1", set = "Other"}, --SagaciousCejai
+	},
+	csau_ocs = {
+		King = nil,
+		Queen = {key = "guestartist16", set = "Other"}, --GuffNFluff
+		Jack = nil,
+	},
+}
+
+upc_ref = G.FUNCS.update_collab_cards
+G.FUNCS.update_collab_cards = function(key, suit, silent)
+	upc_ref(key, suit, silent)
+	if type(key) == "number" then
+		key = G.COLLABS.options[suit][key]
+	end
+	if G.collab_credits[key] then
+		for i, card in ipairs(G.cdds_cards.cards) do
+			if G.collab_credits[key][card.config.card.value] then
+				card.no_ui = false
+				card.csau_collab_credit = G.collab_credits[key][card.config.card.value]
+			else
+				card.no_ui = true
+				card.csau_collab_credit = nil
+			end
+		end
+	end
+end
+
 G.foodjokers = {
 	'j_gros_michel',
 	'j_ice_cream',
@@ -1826,6 +1901,7 @@ if csau_enabled['enableSkins'] then
 
 	-- Mike Characters
 	SMODS.Atlas{ key = 'h_poops', px = 71, py = 95, path = 'cards/csau/h_poops.png',}
+	SMODS.Atlas{ key = 's_ocs', px = 71, py = 95, path = 'cards/csau/s_ocs.png',}
 
 	SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_VS'], { key = 'csau_collab_VS', ranks = full_ranks,
 	   display_ranks = face, atlas = 'csau_default',
@@ -3084,7 +3160,7 @@ if csau_enabled['enableSkins'] then
 				}
 			},
 			{
-				key = 'csau_wildcards_ace', ranks = full_ranks,
+				key = 'csau_poops_ace', ranks = full_ranks,
 				display_ranks = face_ace, atlas = 'csau_default',
 				pos_style = {
 					fallback_style = 'deck',
@@ -3104,6 +3180,50 @@ if csau_enabled['enableSkins'] then
 		},
 		loc_txt = {
 			['en-us'] = "The Poops"
+		}
+	}
+	SMODS.DeckSkin{
+		key = "csau_ocs",
+		suit = "Spades",
+		palettes = {
+			{
+				key = 'csau_ocs', ranks = full_ranks,
+				display_ranks = face_ace, atlas = 'csau_default',
+				pos_style = {
+					fallback_style = 'deck',
+					Jack = { atlas = 'csau_s_ocs', pos = {x = 0, y = 0} },
+					Queen = { atlas = 'csau_s_ocs', pos = {x = 1, y = 0} },
+					King = { atlas = 'csau_s_ocs', pos = {x = 2, y = 0} },
+				},
+				loc_txt = {
+					['en-us'] = "Cardsauce Colors"
+				},
+				colour = color.Spades,
+				suit_icon = {
+					atlas = 'csau_suits'
+				}
+			},
+			{
+				key = 'csau_ocs_ace', ranks = full_ranks,
+				display_ranks = face_ace, atlas = 'csau_default',
+				pos_style = {
+					fallback_style = 'deck',
+					Jack = { atlas = 'csau_s_ocs', pos = {x = 0, y = 0} },
+					Queen = { atlas = 'csau_s_ocs', pos = {x = 1, y = 0} },
+					King = { atlas = 'csau_s_ocs', pos = {x = 2, y = 0} },
+					Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
+				},
+				loc_txt = {
+					['en-us'] = "Vanilla Ace"
+				},
+				colour = color.Hearts,
+				suit_icon = {
+					atlas = 'csau_suits'
+				}
+			},
+		},
+		loc_txt = {
+			['en-us'] = "The OCs"
 		}
 	}
 

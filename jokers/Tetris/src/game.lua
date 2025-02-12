@@ -366,12 +366,12 @@ function Tetris.keypressed(key)
 
     Tetris.keysPressed[key] = true
     Tetris.keyDelayTimers[key] = 0
-
     Tetris.keysPressed[key] = true
     if key == "left" then
         Tetris.moveTetromino(-1, 0)
     end
     if key == "right" then
+
         Tetris.moveTetromino(1, 0)
     end
     if key == "down" then

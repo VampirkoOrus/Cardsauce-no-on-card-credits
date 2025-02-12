@@ -49,7 +49,7 @@ end
 
 function love.keyreleased(key)
     if mod.tetris.isActive then
-        mod.tetris.keypressed(key)
+        mod.tetris.keyreleased(key)
     end
     loveKeyReleasedRef(key)
 end

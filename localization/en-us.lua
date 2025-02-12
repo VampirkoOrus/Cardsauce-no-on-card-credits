@@ -691,6 +691,16 @@ return {
 					"{C:stand}Stand{} in your consumables."
 				},
 			},
+			artist = {
+				text = {
+					"{C:inactive}Artist",
+				},
+			},
+			artists = {
+				text = {
+					"{C:inactive}Artists",
+				},
+			},
 			guestartist0 = {
 				name = "Artist",
 				text = {
@@ -826,7 +836,7 @@ return {
 			guestartist23 = {
 				name = "Artist",
 				text = {
-					"{E:1}Crisppyboat{}",
+					"{E:1}fradavovan{}",
 				},
 			},
 			guestartist24 = {
@@ -839,6 +849,25 @@ return {
 				name = "Artist",
 				text = {
 					"{E:1}Lyman{}",
+				},
+			},
+			guestartist26 = {
+				name = "Artist",
+				text = {
+					"{E:1}CheesyDraws{}",
+				},
+			},
+			guestartist27 = {
+				name = "Artist",
+				text = {
+					"{E:1}Greeeg{}",
+				},
+			},
+			guestartists0plus1 = {
+				name = "Artists",
+				text = {
+					"{E:1}BarrierTrio/Gote{}",
+					"{E:1}SagaciousCejai{}",
 				},
 			},
 			drippyforce = {

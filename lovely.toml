@@ -743,12 +743,33 @@ pattern = "G.GAME.probabilities.normal, cfg.extra"
 position = 'at'
 payload = '''G.FUNCS.nutbuster_active() and 3 or G.GAME.probabilities.normal, cfg.extra'''
 
-
-
-
-
-
-
-
-
-
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''
+if specific_vars.nominal_chips then
+    localize{type = 'other', key = 'card_chips', nodes = desc_nodes, vars = {specific_vars.nominal_chips}}
+end
+if specific_vars.bonus_chips then
+    localize{type = 'other', key = 'card_extra_chips', nodes = desc_nodes, vars = {specific_vars.bonus_chips}}
+end
+'''
+position = "at"
+payload = '''
+if card.csau_collab_credit then
+    if card.csau_collab_credit.plural then
+        localize{type = 'other', key = 'artists', nodes = desc_nodes, vars = {specific_vars.nominal_chips}}
+    else
+        localize{type = 'other', key = 'artist', nodes = desc_nodes, vars = {specific_vars.nominal_chips}}
+    end
+    localize{type = 'other', key = card.csau_collab_credit.key, nodes = desc_nodes}
+else
+    if specific_vars.nominal_chips then
+        localize{type = 'other', key = 'card_chips', nodes = desc_nodes, vars = {specific_vars.nominal_chips}}
+    end
+    if specific_vars.bonus_chips then
+        localize{type = 'other', key = 'card_extra_chips', nodes = desc_nodes, vars = {specific_vars.bonus_chips}}
+    end
+end
+'''
+match_indent = true
