@@ -342,6 +342,7 @@ return {
 			k_mega_analog_pack = "Mega Analog Pack",
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
+			k_negative_mult = "Negative Mult!",
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
@@ -1794,6 +1795,39 @@ return {
 				text = {
 					"All {C:tarot}Wheel of Fortune{} cards have",
 					"{C:green}3 in 4{} chance to succeed",
+				},
+			},
+			j_csau_chips = {
+				name = "Chips for Dinner",
+				text = {
+					"{C:chips}+#1#{} Chips and {X:mult,C:white}X#2#{} for",
+					"each active {C:attention}Food Joker{}",
+					"{C:inactive}(Currently {C:chips}+#3#{}{C:inactive} Chips and {X:mult,C:white} X#4# {C:inactive} Mult)",
+				},
+			},
+			j_csau_bonzi = {
+				name = "Bonzi Buddy",
+				text = {
+					"When {C:attention}Blind{} is selected, this Joker",
+					"gains {C:mult}+#1#{} Mult if it can take {C:money}$#2#{}",
+					"If it can't take {C:money}$#2#{}, the Mult",
+					"becomes negative for that round.",
+					"{C:inactive}(Currently {}{C:mult}#3#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+			},
+			j_csau_bbq = {
+				name = "Barbeque Shoes",
+				text = {
+					"Earn {C:money}$#1#{} for every {C:attention}#2#{} {C:hearts}Hearts{} in your",
+					"{C:attention}full deck{} at end of round",
+					"{C:inactive}(Currently {}{C:money}$#3#{}{C:inactive})"
+				},
+			},
+			j_csau_lidl = {
+				name = "Lidl",
+				text = {
+					"All Vouchers in",
+					"shop are {C:attention}#1#%{} off"
 				},
 			},
 		},

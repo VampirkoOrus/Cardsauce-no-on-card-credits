@@ -28,6 +28,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
+    if not G.playing_cards then return end
     card.ability.ace_tally = 0
     for k, v in pairs(G.playing_cards) do
         if v:get_id() == 14 then card.ability.ace_tally = card.ability.ace_tally+1 end

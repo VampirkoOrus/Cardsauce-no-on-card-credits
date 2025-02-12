@@ -26,7 +26,7 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    local bad_context = context.repetition or context.individual
+    local bad_context = context.repetition or context.individual or context.blueprint
     if context.cardarea == G.jokers and context.before and not card.debuff and not bad_context then
         if context.scoring_name == "High Card" then
             if to_big(card.ability.extra.mult) > to_big(0) then

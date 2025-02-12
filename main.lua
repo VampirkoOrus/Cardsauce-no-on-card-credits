@@ -212,6 +212,10 @@ if twoPointO then
 		--Common
 		'frens',
 		'nutbuster',
+		'chips',
+		'bonzi',
+		'bbq',
+		'lidl',
 		--Uncommon
 		'bsi',
 		'agga',

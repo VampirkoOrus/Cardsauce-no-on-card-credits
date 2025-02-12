@@ -29,6 +29,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
+    if not G.playing_cards then return end
     local faces = 0
     for k, v in pairs(G.playing_cards) do
         if v:is_face() then faces = faces+1 end

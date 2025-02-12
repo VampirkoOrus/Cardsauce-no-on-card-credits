@@ -773,3 +773,17 @@ else
 end
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''self.cost = math.max(1, math.floor((self.base_cost + self.extra_cost + 0.5)*(100-G.GAME.discount_percent)/100))'''
+position = "at"
+payload = '''
+local voucher_discount = 0
+if self.ability.set == "Voucher" then
+    voucher_discount = G.GAME.voucher_discount
+end
+self.cost = math.max(1, math.floor((self.base_cost + self.extra_cost + 0.5)*(100-(G.GAME.discount_percent+voucher_discount))/100))'''
+match_indent = true
+

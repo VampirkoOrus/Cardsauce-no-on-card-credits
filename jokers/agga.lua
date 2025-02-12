@@ -21,7 +21,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.repetition and not (context.end_of_round) then
+    if context.repetition and not (context.end_of_round or context.blueprint) then
         if card.ability.extra.x_mult > 1 and pseudorandom('agga') < G.GAME.probabilities.normal / card.ability.extra.prob then
             card.ability.extra.x_mult = to_big(1)
             card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_reset'), colour = G.C.IMPORTANT})

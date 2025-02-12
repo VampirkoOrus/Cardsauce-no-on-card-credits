@@ -24,7 +24,9 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calc_dollar_bonus(self, card)
-    return card.ability.extra.dollars
+    if not card.debuff then
+        return card.ability.extra.dollars
+    end
 end
 
 local shopref = G.UIDEF.shop

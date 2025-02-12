@@ -32,7 +32,7 @@ function jokerInfo.calculate(self, card, context)
             end
         end
     end
-    if context.selling_card then
+    if context.selling_card and not context.blueprint then
         if context.card.config.center.consumeable then
             card.ability.extra.prob_extra = card.ability.extra.prob_extra + 1
             G.E_MANAGER:add_event(Event({
