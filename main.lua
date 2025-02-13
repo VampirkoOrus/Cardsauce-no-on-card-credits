@@ -6,7 +6,7 @@
 --- BADGE_COLOUR: 32A852
 --- DISPLAY_NAME: Cardsauce
 --- PREFIX: csau
---- VERSION: 1.3.3
+--- VERSION: 1.3.4
 --- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1406b]
 
 local mod = SMODS.current_mod
@@ -3186,50 +3186,52 @@ if csau_enabled['enableSkins'] then
 			['en-us'] = "The Poops"
 		}
 	}
-	SMODS.DeckSkin{
-		key = "csau_ocs",
-		suit = "Spades",
-		palettes = {
-			{
-				key = 'csau_ocs', ranks = full_ranks,
-				display_ranks = face_ace, atlas = 'csau_default',
-				pos_style = {
-					fallback_style = 'deck',
-					Jack = { atlas = 'csau_s_ocs', pos = {x = 0, y = 0} },
-					Queen = { atlas = 'csau_s_ocs', pos = {x = 1, y = 0} },
-					King = { atlas = 'csau_s_ocs', pos = {x = 2, y = 0} },
+	if twoPointO then
+		SMODS.DeckSkin{
+			key = "csau_ocs",
+			suit = "Spades",
+			palettes = {
+				{
+					key = 'csau_ocs', ranks = full_ranks,
+					display_ranks = face_ace, atlas = 'csau_default',
+					pos_style = {
+						fallback_style = 'deck',
+						Jack = { atlas = 'csau_s_ocs', pos = {x = 0, y = 0} },
+						Queen = { atlas = 'csau_s_ocs', pos = {x = 1, y = 0} },
+						King = { atlas = 'csau_s_ocs', pos = {x = 2, y = 0} },
+					},
+					loc_txt = {
+						['en-us'] = "Cardsauce Colors"
+					},
+					colour = color.Spades,
+					suit_icon = {
+						atlas = 'csau_suits'
+					}
 				},
-				loc_txt = {
-					['en-us'] = "Cardsauce Colors"
+				{
+					key = 'csau_ocs_ace', ranks = full_ranks,
+					display_ranks = face_ace, atlas = 'csau_default',
+					pos_style = {
+						fallback_style = 'deck',
+						Jack = { atlas = 'csau_s_ocs', pos = {x = 0, y = 0} },
+						Queen = { atlas = 'csau_s_ocs', pos = {x = 1, y = 0} },
+						King = { atlas = 'csau_s_ocs', pos = {x = 2, y = 0} },
+						Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
+					},
+					loc_txt = {
+						['en-us'] = "Vanilla Ace"
+					},
+					colour = color.Hearts,
+					suit_icon = {
+						atlas = 'csau_suits'
+					}
 				},
-				colour = color.Spades,
-				suit_icon = {
-					atlas = 'csau_suits'
-				}
 			},
-			{
-				key = 'csau_ocs_ace', ranks = full_ranks,
-				display_ranks = face_ace, atlas = 'csau_default',
-				pos_style = {
-					fallback_style = 'deck',
-					Jack = { atlas = 'csau_s_ocs', pos = {x = 0, y = 0} },
-					Queen = { atlas = 'csau_s_ocs', pos = {x = 1, y = 0} },
-					King = { atlas = 'csau_s_ocs', pos = {x = 2, y = 0} },
-					Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
-				},
-				loc_txt = {
-					['en-us'] = "Vanilla Ace"
-				},
-				colour = color.Hearts,
-				suit_icon = {
-					atlas = 'csau_suits'
-				}
-			},
-		},
-		loc_txt = {
-			['en-us'] = "The OCs"
+			loc_txt = {
+				['en-us'] = "The OCs"
+			}
 		}
-	}
+	end
 
 	if not G.SETTINGS.initCSAUColors then
 		G.SETTINGS.CUSTOM_DECK.Collabs.Spades = "csau_default_spades"
