@@ -14,9 +14,21 @@ local jokerInfo = {
 	perishable_compat = true,
 	streamer = "vinny",
 }
+
+local function get_xmult(card)
+	if card.area == G.jokers and card.ability.wasShop and card.ability.extra.x_mult then
+		return card.ability.extra.x_mult
+	elseif card.area == G.shop_jokers and card.ability.wasShop then
+		return ((math.floor(to_big(card.cost)/to_big(10))/to_big(2)) + to_big(1)) or to_big(1)
+	else
+		return 1
+	end
+end
+
+
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
-	return { vars = {to_big(card.ability.extra.x_mult) or ((math.floor(to_big(card.cost)/to_big(10))/to_big(2)) + to_big(1)) or to_big(1)} }
+	return { vars = { get_xmult(card) } }
 end
 
 function jokerInfo.add_to_deck(self, card)

@@ -24,7 +24,7 @@ function jokerInfo.calculate(self, card, context)
 		if not (context.blueprint_card or card).getting_sliced then
 			G.E_MANAGER:add_event(Event({func = function()
 				ease_discard(card.ability.extra)
-				card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+3 Discards"})
+				card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..localize('k_hud_discards').." Discards"})
 		return true end }))
 		end
 	end

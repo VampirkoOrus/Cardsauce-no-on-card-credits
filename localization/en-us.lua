@@ -343,6 +343,7 @@ return {
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
 			k_negative_mult = "Negative Mult!",
+			a_discards="+#1# Discards",
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
@@ -557,6 +558,12 @@ return {
 	},
 	descriptions = {
 		Blind = {
+			bl_mystery={
+				name="???",
+				text={
+					"?????",
+				},
+			},
 			bl_final_vessel = {
 				text = {
 					"HEY WALL",
@@ -1828,6 +1835,43 @@ return {
 				text = {
 					"All Vouchers in",
 					"shop are {C:attention}#1#%{} off"
+				},
+			},
+			j_csau_toeofsatan = {
+				name = "Toe of Satan",
+				text = {
+					"{C:red}+#1#{} discards each round",
+					"{C:red}-#2#{} discards per round played"
+				},
+			},
+			j_csau_superghostbusters = {
+				name = "Super Jokebusters",
+				text = {
+					"{C:mult}+#1#{} Mult per {C:spectral}Spectral{}",
+					"card used this run",
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+			},
+			j_csau_facade = {
+				name = "Couple's Joker",
+				text = {
+					"{C:mult}+#1#{} Mult for every {C:attention}Pair{} played this run",
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+			},
+			j_csau_vomitblast = {
+				name = "VOMIT BLAST",
+				text = {
+					"{C:mult}+#1#{} Mult for each discard of",
+					"{C:attention}5 cards{} used this {C:attention}Blind{}",
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+			},
+			j_csau_itsmeaustin = {
+				name = "IT'S ME AUSTIN",
+				text = {
+					"{C:mult}+#1#{} Mult, {C:attention}Boss Blinds{} are hidden",
+					"until they are selected",
 				},
 			},
 		},

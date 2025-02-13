@@ -216,6 +216,11 @@ if twoPointO then
 		'bonzi',
 		'bbq',
 		'lidl',
+		'toeofsatan',
+		'superghostbusters',
+		'facade',
+		'vomitblast',
+		'itsmeaustin',
 		--Uncommon
 		'bsi',
 		'agga',
