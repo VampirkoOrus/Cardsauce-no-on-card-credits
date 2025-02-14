@@ -1874,6 +1874,26 @@ return {
 					"until they are selected",
 				},
 			},
+			j_csau_bald = {
+				name = "Bald Joker",
+				text = {
+					"Earn {C:money}$#1#{} if {C:attention}5 numbered cards{] are",
+					"discarded at the same time",
+				},
+			},
+			j_csau_monkey = {
+				name = "Monkey Mondays",
+				text = {
+					"All played cards have {C:mult}+#1#{} Mult and",
+					"{C:green}#2# in #3#{} chance to be destroyed when scored",
+				},
+			},
+			j_csau_no2joker = {
+				name = "No. 2 Joker",
+				text = {
+					"All {C:stand}Stands{} retrigger once",
+				},
+			},
 		},
 		VHS = {
 			c_csau_blackspine = {

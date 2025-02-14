@@ -52,6 +52,11 @@ function jokerInfo.calculate(self, card, context)
     end
     if context.destroying_card and not context.blueprint and card.ability.destroyed_card then
         context.destroying_card = card.ability.destroyed_card
+        G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
+            play_sound('tarot1')
+            play_sound('whoosh2', math.random()*0.2 + 0.9,0.5)
+            play_sound('crumple'..math.random(1, 5), math.random()*0.2 + 0.9,0.5)
+            return true end }))
         card.ability.destroyed_card = nil
         return true
     end

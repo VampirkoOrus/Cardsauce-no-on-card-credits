@@ -10,7 +10,7 @@ local jokerInfo = {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
-    streamer = "other",
+    streamer = "otherjoel",
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

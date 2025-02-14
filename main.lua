@@ -9,6 +9,11 @@
 --- VERSION: 1.3.4
 --- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1406b]
 
+SMODS.current_mod.optional_features = {
+	retrigger_joker = true,
+	post_trigger = true,
+}
+
 local mod = SMODS.current_mod
 local mod_path = SMODS.current_mod.path
 local usable_path = mod_path:match("Mods/[^/]+")
@@ -221,6 +226,8 @@ if twoPointO then
 		'facade',
 		'vomitblast',
 		'itsmeaustin',
+		'bald',
+		'monkey',
 		--Uncommon
 		'bsi',
 		'agga',
@@ -229,6 +236,7 @@ if twoPointO then
 		'tetris',
 
 		-- Jojo Jokers
+		'no2joker',
 		'sotw',
 	}
 	for i, k in ipairs(jokers) do
@@ -325,6 +333,11 @@ G.FUNCS.update_collab_cards = function(key, suit, silent)
 				card.no_ui = true
 				card.csau_collab_credit = nil
 			end
+		end
+	else
+		for i, card in ipairs(G.cdds_cards.cards) do
+			card.no_ui = true
+			card.csau_collab_credit = nil
 		end
 	end
 end
@@ -802,9 +815,9 @@ for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 	local jokerInfo = assert(SMODS.load_file("jokers/" .. v .. ".lua"))()
 	local enabled = false
 	if jokerInfo.streamer then
-		if ((jokerInfo.streamer == 'vinny' or 'othervinny') and csau_enabled['enableVinkers'])
-				or (jokerInfo.streamer == 'joel' and csau_enabled['enableJoelkers'])
-				or ((jokerInfo.streamer == 'other' or 'othervinny') and csau_enabled['enableOtherJokers']) then
+		if ((jokerInfo.streamer == 'vinny' or jokerInfo.streamer == 'othervinny') and csau_enabled['enableVinkers'])
+				or ((jokerInfo.streamer == 'joel' or jokerInfo.streamer == 'otherjoel') and csau_enabled['enableJoelkers'])
+				or ((jokerInfo.streamer == 'other' or jokerInfo.streamer == 'othervinny') and csau_enabled['enableOtherJokers']) then
 			enabled = true
 		end
 	end
