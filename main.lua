@@ -784,9 +784,10 @@ if twoPointO and #conf_cardsauce.vhsToLoad > 0 then
 				card.children.center.pinch.x = true
 				G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
 					 func = function()
-						 G.consumeables:remove_card(card)
-						 card:remove()
-						 card = nil
+						 card:start_dissolve({ G.C.VHS, G.C.RED })
+						 --G.consumeables:remove_card(card)
+						 --card:remove()
+						 --card = nil
 						 return true
 					 end
 				}))

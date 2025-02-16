@@ -14,7 +14,7 @@ local consumInfo = {
         activated = false,
         slide_move = 0,
         slide_out_delay = 0,
-        destroy = false,
+        destroyed = false,
     },
 }
 
@@ -34,18 +34,20 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-    if card.ability.activated and context.main_scoring then
+    if context.cardarea == G.jokers and context.before and card.ability.activated then
         card.ability.extra.uses = card.ability.extra.uses+1
-        if card.ability.extra.uses >= card.ability.extra.runtime then
-            card.ability.destroy = true
-        end
+    end
+    if card.ability.activated and context.main_scoring then
         return {
             x_mult = card.ability.extra.x_mult,
             card = card
         }
     end
-    if context.remove_playing_cards and card.ability.destroy then
-        G.FUNCS.destroy_tape(card)
+    if context.destroy_card and not card.ability.destroyed then
+        if card.ability.extra.uses >= card.ability.extra.runtime then
+            G.FUNCS.destroy_tape(card)
+            card.ability.destroyed = true
+        end
     end
 end
 

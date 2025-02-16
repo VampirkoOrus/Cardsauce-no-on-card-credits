@@ -24,7 +24,34 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-
+    if context.setting_blind and not card.getting_sliced then
+        G.E_MANAGER:add_event(Event({
+            func = (function()
+                add_tag(Tag('tag_ethereal'))
+                play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+                play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+                return true
+            end)
+        }))
+        if context.blind.boss then
+            G.E_MANAGER:add_event(Event({func = function()
+                G.E_MANAGER:add_event(Event({func = function()
+                    G.GAME.blind:disable()
+                    play_sound('timpani')
+                    delay(0.4)
+                    return true end }))
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('ph_boss_disabled')})
+                return true
+            end }))
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            func = (function()
+                G.FUNCS.destroy_tape(card)
+                return true
+            end)
+        }))
+    end
 end
 
 function consumInfo.can_use(self, card)

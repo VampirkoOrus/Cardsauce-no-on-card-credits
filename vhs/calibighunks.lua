@@ -7,11 +7,13 @@ local consumInfo = {
     activation = true,
     config = {
         extra = {
+            runtime = 3,
+            uses = 0,
         },
         activated = false,
         slide_move = 0,
         slide_out_delay = 0,
-        destroy = false,
+        destroyed = false,
     },
 }
 
@@ -20,11 +22,35 @@ local slide_mod = 0.25
 local slide_out_delay = 1
 
 function consumInfo.loc_vars(self, info_queue, card)
-    return { vars = { } }
+    return { vars = { card.ability.extra.runtime, card.ability.extra.uses } }
+end
+
+function consumInfo.set_ability(self, card, initial, delay_sprites)
+    if next(SMODS.find_card("c_csau_moodyblues")) then
+        card.ability.extra.runtime = card.ability.extra.runtime*2
+    end
 end
 
 function consumInfo.calculate(self, card, context)
-
+    if context.cardarea == G.jokers and context.before and not card.debuff and not context.blueprint then
+        for i, v in ipairs(context.scoring_hand) do
+            if v:get_id() == 13 and card.ability.extra.uses < card.ability.extra.runtime then
+                v:set_ability(G.P_CENTERS.m_mult)
+                card.ability.extra.uses = card.ability.extra.uses+1
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        v:juice_up()
+                        card:juice_up()
+                        return true
+                    end
+                }))
+                if card.ability.extra.uses >= card.ability.extra.runtime then
+                    G.FUNCS.destroy_tape(card)
+                    card.ability.destroyed = true
+                end
+            end
+        end
+    end
 end
 
 function consumInfo.can_use(self, card)

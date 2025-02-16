@@ -14,7 +14,7 @@ local consumInfo = {
         activated = false,
         slide_move = 0,
         slide_out_delay = 0,
-        destroy = false,
+        destroyed = false,
     },
 }
 
@@ -24,7 +24,7 @@ local slide_out_delay = 1
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
-    return { vars = { card.ability.extra.mult, card.ability.extra.runtime } }
+    return { vars = { card.ability.extra.mult, card.ability.extra.runtime, card.ability.extra.uses } }
 end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)
@@ -34,11 +34,10 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-    if card.ability.activated and context.other_joker then
+    if context.cardarea == G.jokers and context.before and card.ability.activated then
         card.ability.extra.uses = card.ability.extra.uses+1
-        if card.ability.extra.uses >= card.ability.extra.runtime then
-            card.ability.destroy = true
-        end
+    end
+    if card.ability.activated and context.other_joker then
         G.E_MANAGER:add_event(Event({
             func = function()
                 context.other_joker:juice_up(0.5, 0.5)
@@ -50,8 +49,11 @@ function consumInfo.calculate(self, card, context)
             mult_mod = card.ability.extra.mult
         }
     end
-    if context.remove_playing_cards and card.ability.destroy then
-        G.FUNCS.destroy_tape(card)
+    if context.destroy_card and not card.ability.destroyed then
+        if card.ability.extra.uses >= card.ability.extra.runtime then
+            G.FUNCS.destroy_tape(card)
+            card.ability.destroyed = true
+        end
     end
 end
 

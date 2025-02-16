@@ -1979,7 +1979,38 @@ return {
 				text = {
 					"Each Joker gives {C:mult}+#1#{} Mult",
 					"when this tape is {C:attention}activated{}",
-					"{C:vhs}Running Time{}: {C:attention}#2#{} hands"
+					"{C:vhs}Running Time{}: {C:attention}#2#{} hands {C:inactive}({}{C:attention}#3#{}{C:inactive}/#2#)"
+				},
+			},
+			c_csau_twistedpair = {
+				name = "Twisted Pair",
+				text = {
+					"When {C:attention}activated{}, first card in next",
+					"played pair gets a random {C:attention}Edition{}",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} hands {C:inactive}({}{C:attention}#2#{}{C:inactive}/#1#)"
+				},
+			},
+			c_csau_calibighunks = {
+				name = "California Big Hunks",
+				text = {
+					"When {C:attention}activated{}, next {C:attention}#1#{} played Kings",
+					"are enhanced to {C:attention}Mult Cards{}",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} hands {C:inactive}({}{C:attention}#2#{}{C:inactive}/#1#)"
+				},
+			},
+			c_csau_remlezar = {
+				name = "Creating Rem Lezar",
+				text = {
+					"When {C:attention}Blind{} is selected, gain an {C:attention}Ethereal Tag",
+					"If selected Blind is a {C:attention}Boss Blind{},",
+					"disable its effect. {C:attention}Unpauseable"
+				},
+			},
+			c_csau_suburbansasquatch = {
+				name = "Suburban Sasquatch",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
 				},
 			},
 		},
