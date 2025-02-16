@@ -89,6 +89,7 @@ local setupCanvas = function(self)
 end
 
 jokerInfo.loc_vars = function (self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "twoartists1", set = "Other"}
     return { vars = { card.ability.extra.mult } }
 end
 

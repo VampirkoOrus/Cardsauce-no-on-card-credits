@@ -2,10 +2,8 @@ local jokerInfo = {
     name = "Chips for Dinner",
     config = {
         extra = {
-            chips = 0,
-            chips_mod = 50,
-            x_mult = 1,
-            x_mult_mod = 0.25,
+            chips = 100,
+            chips_mod = 20,
         },
     },
     rarity = 1,
@@ -17,28 +15,45 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    return { vars = {card.ability.extra.chips_mod, card.ability.extra.x_mult_mod, card.ability.extra.chips, card.ability.extra.x_mult} }
+    return { vars = {card.ability.extra.chips, card.ability.extra.chips_mod } }
 end
 
 function jokerInfo.calculate(self, card, context)
-    if (card.ability.extra.chips > 0 or card.ability.extra.x_mult > 1) and context.joker_main and context.cardarea == G.jokers then
-        return {
-            chips = card.ability.extra.chips,
-            Xmult = card.ability.extra.x_mult,
-        }
-    end
-end
-
-function jokerInfo.update(self, card, dt)
-    if not G.jokers then return end
-    local food = 0
-    for k, v in pairs(G.jokers.cards) do
-        if G.FUNCS.is_food(v.config.center.key) and not v.debuff then
-            food = food + 1
+    if context.cardarea == G.jokers and context.after and not (context.blueprint or card.debuff) and G.GAME.current_round.hands_left == 0 then
+        if card.ability.extra.chips - card.ability.extra.chip_mod <= 0 then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    play_sound('tarot1')
+                    card.T.r = -0.2
+                    card:juice_up(0.3, 0.4)
+                    card.states.drag.is = true
+                    card.children.center.pinch.x = true
+                    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
+                         func = function()
+                             G.jokers:remove_card(card)
+                             card:remove()
+                             card = nil
+                             return true; end}))
+                    return true
+                end
+            }))
+            return {
+                message = localize('k_eaten_ex'),
+                colour = G.C.CHIPS
+            }
+        else
+            card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.chip_mod
+            return {
+                message = localize{type='variable',key='a_chips_minus',vars={card.ability.extra.chip_mod}},
+                colour = G.C.CHIPS
+            }
         end
     end
-    card.ability.extra.chips = card.ability.extra.chips_mod * food
-    card.ability.extra.x_mult = 1 + (card.ability.extra.x_mult_mod * food)
+    if card.ability.extra.chips > 0 and context.joker_main and context.cardarea == G.jokers and not card.debuff then
+        return {
+            chips = card.ability.extra.chips,
+        }
+    end
 end
 
 return jokerInfo

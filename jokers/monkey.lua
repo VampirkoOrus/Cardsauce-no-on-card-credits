@@ -6,7 +6,7 @@ local jokerInfo = {
             prob = 6,
         },
     },
-    rarity = 1,
+    rarity = 2,
     cost = 4,
     blueprint_compat = true,
     eternal_compat = true,

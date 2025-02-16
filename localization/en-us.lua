@@ -343,7 +343,8 @@ return {
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
 			k_negative_mult = "Negative Mult!",
-			a_discards="+#1# Discards",
+			a_discards = "+#1# Discards",
+			k_allgone = "All Gone!",
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
@@ -871,11 +872,18 @@ return {
 					"{E:1}Greeeg{}",
 				},
 			},
-			guestartists0plus1 = {
+			twoartists0 = {
 				name = "Artists",
 				text = {
 					"{E:1}BarrierTrio/Gote{}",
 					"{E:1}SagaciousCejai{}",
+				},
+			},
+			twoartists1 = {
+				name = "Artists",
+				text = {
+					"{E:1}Keku{}",
+					"{E:1}GuffNFluff{}",
 				},
 			},
 			drippyforce = {
@@ -1807,9 +1815,8 @@ return {
 			j_csau_chips = {
 				name = "Chips for Dinner",
 				text = {
-					"{C:chips}+#1#{} Chips and {X:mult,C:white}X#2#{} for",
-					"each active {C:attention}Food Joker{}",
-					"{C:inactive}(Currently {C:chips}+#3#{}{C:inactive} Chips and {X:mult,C:white} X#4# {C:inactive} Mult)",
+					"{C:chips}+#1#{} Chips",
+					"{C:chips}-#1#{} Chips for each {C:attention}final hand{} played",
 				},
 			},
 			j_csau_bonzi = {
@@ -1892,6 +1899,44 @@ return {
 				name = "No. 2 Joker",
 				text = {
 					"All {C:stand}Stands{} retrigger once",
+				},
+			},
+			j_csau_triptoamerica = {
+				name = "Trip To America",
+				text = {
+					"This Joker gains {C:mult}+#1#{} Mult per",
+					"{C:attention}consecutive{} hand played without",
+					"a scoring {C:attention}numbered{} card",
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+			},
+			j_csau_passport = {
+				name = "Passport",
+				text = {
+					"This Joker gains {X:mult,C:white} X#1# {} Mult for",
+					"each {C:attention}Voucher{} redeemed this run",
+					"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
+				},
+			},
+			j_csau_fireworks = {
+				name = "Stolen Christmas",
+				text = {
+					"Blows off the next {C:attention}#1# fingers{} played",
+				},
+			},
+			j_csau_plaguewalker = {
+				name = "Plaguewalker",
+				text = {
+					"{C:attention}Glass Cards{} have {X:mult,C:white} X3 {} Mult",
+					"and {C:green}#1# in 2{} chance to break"
+				},
+			},
+			j_csau_skeletor = {
+				name = "EAT IT",
+				text = {
+					"{C:chips}+#1#{} Chips and {X:mult,C:white} X#2# {} for",
+					"each active {C:attention}Food Joker{}",
+					"{C:inactive}(Currently {C:chips}+#3#{}{C:inactive} Chips and {X:mult,C:white} X#4# {C:inactive} Mult)",
 				},
 			},
 		},

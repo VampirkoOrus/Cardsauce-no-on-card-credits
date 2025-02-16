@@ -304,30 +304,6 @@ match_indent = true
 
 [[patches]]
 [patches.pattern]
-target = "functions/UI_definitions.lua"
-pattern = "table.insert(t, create_toggle({label = localize('b_high_contrast_cards'), ref_table = G.SETTINGS, ref_value = 'colourblind_option', callback = G.FUNCS.refresh_contrast_mode}))"
-position = "at"
-payload = '''
-if csau_enabled['enableSkins'] then
-    local current_skin
-    local string
-    for k, v in pairs(G.COLLABS.options[_suit]) do
-        if G.SETTINGS.CUSTOM_DECK.Collabs[_suit] == v then
-            current_skin = v
-            string = G.localization.misc.dictionary.vs_collab_credits[_suit][current_skin] or " "
-        end
-    end
-    local caption = {n=G.UIT.T, config={text = string, scale = 0.35, colour = G.C.WHITE, shadow = true}}
-    local credit = {n=G.UIT.R, config={align = "cm", maxw = 4*G.CARD_W, id = 'collab_credit'}, nodes={caption}}
-    table.insert(t, credit)
-else
-    table.insert(t, create_toggle({label = localize('b_high_contrast_cards'), ref_table = G.SETTINGS, ref_value = 'colourblind_option', callback = G.FUNCS.refresh_contrast_mode}))
-end
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
 target = "functions/button_callbacks.lua"
 pattern = '''
 G.SETTINGS.CUSTOM_DECK.Collabs[args.cycle_config.curr_suit] = G.COLLABS.options[args.cycle_config.curr_suit][args.to_key] or 'default'
@@ -737,11 +713,12 @@ payload = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' o
 match_indent = true
 
 [[patches]]
-[patches.regex]
+[patches.pattern]
 target = 'functions/common_events.lua'
-pattern = "G.GAME.probabilities.normal, cfg.extra"
+pattern = "elseif _c.name == \"The Wheel of Fortune\" then loc_vars = {G.GAME.probabilities.normal, cfg.extra};  info_queue[#info_queue+1] = G.P_CENTERS.e_foil; info_queue[#info_queue+1] = G.P_CENTERS.e_holo; info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome; "
 position = 'at'
-payload = '''G.FUNCS.nutbuster_active() and 3 or G.GAME.probabilities.normal, cfg.extra'''
+payload = "elseif _c.name == \"The Wheel of Fortune\" then loc_vars = {G.FUNCS.nutbuster_active() and 3 or G.GAME.probabilities.normal, _c.config.extra};  info_queue[#info_queue+1] = G.P_CENTERS.e_foil; info_queue[#info_queue+1] = G.P_CENTERS.e_holo; info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome;"
+match_indent = true
 
 [[patches]]
 [patches.pattern]
@@ -786,7 +763,3 @@ if self.ability.set == "Voucher" then
 end
 self.cost = math.max(1, math.floor((self.base_cost + self.extra_cost + 0.5)*(100-(G.GAME.discount_percent+voucher_discount))/100))'''
 match_indent = true
-
-
-
-

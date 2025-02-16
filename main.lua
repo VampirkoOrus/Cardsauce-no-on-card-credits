@@ -12,6 +12,10 @@
 SMODS.current_mod.optional_features = {
 	retrigger_joker = true,
 	post_trigger = true,
+	cardareas = {
+		deck = true,
+		discard = true,
+	},
 }
 
 local mod = SMODS.current_mod
@@ -227,10 +231,15 @@ if twoPointO then
 		'vomitblast',
 		'itsmeaustin',
 		'bald',
-		'monkey',
 		--Uncommon
-		'bsi',
+		'monkey',
+		'skeletor',
 		'agga',
+		'triptoamerica',
+		'passport',
+		'fireworks',
+		'plaguewalker',
+		'bsi',
 		'flusher',
 		--Rare
 		'tetris',
@@ -307,7 +316,7 @@ G.collab_credits = {
 	},
 	-- Mike
 	csau_poops = {
-		King = {key = "guestartists0plus1", set = "Other", plural = true}, --Gote + SagaciousCejai
+		King = {key = "twoartists0", set = "Other", plural = true}, --Gote + SagaciousCejai
 		Queen = {key = "guestartist0", set = "Other"}, --Gote
 		Jack = {key = "guestartist1", set = "Other"}, --SagaciousCejai
 	},
@@ -355,6 +364,7 @@ G.foodjokers = {
 	'j_csau_fantabulous',
 	'j_csau_crudeoil',
 	'j_csau_grannycream',
+	'j_csau_toeofsatan',
 }
 
 function G.FUNCS.is_food(key)
