@@ -52,6 +52,20 @@ local function findCard(suit, id)
     return nil
 end
 
+local function getEnhancement(name)
+    if name == "Base" then
+        return G.P_CENTERS.c_base
+    else
+        for k, v in pairs(G.P_CENTERS) do
+            if v.set == "Enhanced" then
+                if v.effect == name or v.label == name then
+                    return v
+                end
+            end
+        end
+    end
+end
+
 function jokerInfo.add_to_deck(self, card)
     check_for_unlock({ type = "discover_kings" })
     if G.GAME.buttons then G.GAME.buttons:remove(); G.GAME.buttons = nil end
@@ -140,12 +154,12 @@ function jokerInfo.remove_from_deck(self, card)
         for i, v in ipairs(card.ability.extra.cards) do
             local key = v[1]
             local effect = v[2]
-            local center = effect
+            local center = getEnhancement(effect)
             local seal = v[3]
             local edition = v[4]
 
-            local _card = create_playing_card({front = G.P_CARDS[key], center = G.P_CENTERS[center]}, G.csau_destroy, nil, nil, {G.C.SECONDARY_SET.Enhanced})
-            _card:set_ability(G.P_CENTERS[center], true, nil)
+            local _card = create_playing_card({front = G.P_CARDS[key], center = center}, G.csau_destroy, nil, nil, {G.C.SECONDARY_SET.Enhanced})
+            _card:set_ability(center, true, nil)
             if seal then _card:set_seal(seal, true) end
             if edition == "foil" then
                 _card:set_edition({foil = true}, true, true)

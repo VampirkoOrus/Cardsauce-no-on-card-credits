@@ -45,7 +45,7 @@ local card_set_ability_ref = Card.set_ability
 function Card:set_ability(center, initial, delay_sprites)
     local old_center = self.config.center
     card_set_ability_ref(self, center, initial, delay_sprites)
-    if old_center ~= center then
+    if old_center ~= center and self.ability.set == "Default" then
         local bulks = SMODS.find_card("j_csau_bulk")
         for i, v in ipairs(bulks) do
             upgrade(v)

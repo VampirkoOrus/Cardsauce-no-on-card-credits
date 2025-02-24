@@ -36,7 +36,7 @@ function G.UIDEF.shop()
         G.E_MANAGER:add_event(Event({trigger = 'after', blocking = false, func = function()
             for _, v in ipairs(SMODS.find_card("j_csau_crudeoil")) do
                 v.ability.extra.dollars = to_big(v.ability.extra.dollars) - to_big(v.ability.extra.dollars_mod)
-                if v.ability.extra.dollars <= 0 then
+                if v.ability.extra.dollars <= to_big(0) then
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             play_sound('tarot1')
