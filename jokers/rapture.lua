@@ -50,8 +50,7 @@ function jokerInfo.calculate(self, card, context)
     if context.joker_main and context.cardarea == G.jokers and not card.debuff and not bad_context then
         if to_big(card.ability.extra.mult) > to_big(0) then
             return {
-                message = localize{type='variable',key='a_mult',vars={to_big(card.ability.extra.mult)}},
-                mult_mod = card.ability.extra.mult,
+                mult = card.ability.extra.mult,
             }
         end
     end

@@ -9,6 +9,10 @@ local consumInfo = {
     },
 }
 
+function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+end
+
 function consumInfo.calculate(self, card, context)
     if context.setting_blind and G.jokers.config.card_limit > #G.jokers.cards then
         local e = {config = {ref_table = card}}

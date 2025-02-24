@@ -524,9 +524,9 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "functions/state_events.lua"
-pattern = "if next(find_joker('Splash')) then"
+pattern = "local splashed = SMODS.always_scores(G.play.cards[i]) or next(find_joker('Splash'))"
 position = "at"
-payload = "if next(find_joker('Splash')) or G.FUNCS.find_sts_form('diamonds') then"
+payload = "local splashed = SMODS.always_scores(G.play.cards[i]) or next(find_joker('Splash')) or G.FUNCS.find_sts_form('diamonds') or G.FUNCS.find_blackjack(G.play.cards)"
 match_indent = true
 
 [[patches]]
@@ -621,19 +621,6 @@ if fool_c == 'c_csau_arrow' then
 else
     last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set} or localize('k_none')
 end
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = "local shared_sprite = (self.ability.set == 'Edition' or self.ability.set == 'Joker') and G.shared_undiscovered_joker or G.shared_undiscovered_tarot"
-position = "at"
-payload = '''
-if not G.shared_undiscovered_stand then
-    G.shared_undiscovered_stand = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_undiscovered"], {x=2,y=0})
-end
-local shared_sprite = ((self.ability.set == 'Joker' or self.ability.set == 'Edition') and G.shared_undiscovered_joker) or (self.ability.set == 'Stand' and G.shared_undiscovered_stand) or G.shared_undiscovered_tarot
 '''
 match_indent = true
 
@@ -763,3 +750,14 @@ if self.ability.set == "Voucher" then
 end
 self.cost = math.max(1, math.floor((self.base_cost + self.extra_cost + 0.5)*(100-(G.GAME.discount_percent+voucher_discount))/100))'''
 match_indent = true
+
+# loc_colour()
+[[patches]]
+[patches.pattern]
+target = 'functions/misc_functions.lua'
+pattern = 'return G.ARGS.LOC_COLOURS[_c] or _default or G.C.UI.TEXT_DARK'
+position = 'before'
+match_indent = true
+payload = '''
+    csau_loc_colors()
+'''

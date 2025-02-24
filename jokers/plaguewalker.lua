@@ -1,6 +1,8 @@
 local jokerInfo = {
     name = 'Plaguewalker',
-    config = {},
+    config = {
+        debuff = false,
+    },
     rarity = 2,
     cost = 6,
     blueprint_compat = false,
@@ -9,11 +11,14 @@ local jokerInfo = {
     streamer = "joel",
 }
 
-G.FUNCS.plaguewalker_active = function()
+G.FUNCS.plaguewalker_active = function(card)
+    card = card or nil
     local plaguewalkers = SMODS.find_card("j_csau_plaguewalker")
     for i, v in ipairs(plaguewalkers) do
-        if not v.debuff then
-            return true
+        if (card and v ~= card) or not card then
+            if not v.debuff then
+                return true
+            end
         end
     end
     return false
@@ -68,7 +73,21 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.remove_from_deck(self, card)
-    activate(false)
+    if not G.FUNCS.plaguewalker_active(card) then
+        activate(false)
+    end
+end
+
+function jokerInfo.update(self, card)
+    if card.debuff and not card.ability.debuff then
+        card.ability.debuff = true
+        if not G.FUNCS.plaguewalker_active(card) then
+            activate(false)
+        end
+    elseif not card.debuff and card.ability.debuff then
+        card.ability.debuff = false
+        activate(true)
+    end
 end
 
 return jokerInfo

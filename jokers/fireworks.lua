@@ -1,3 +1,5 @@
+local mod = SMODS.current_mod
+
 local jokerInfo = {
     name = "Stolen Christmas",
     config = {
@@ -14,9 +16,23 @@ local jokerInfo = {
     streamer = "joel",
 }
 
+local function get_fingers(card)
+    if mod.config['detailedDescs'] then
+        return math.ceil(card.ability.extra.fingers / (next(SMODS.find_card("j_four_fingers")) and 4 or 5))
+    else
+        return card.ability.extra.fingers
+    end
+end
+
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "rogernote", set = "Other"}
-    return { vars = { card.ability.extra.fingers } }
+    if not mod.config['detailedDescs'] then
+        info_queue[#info_queue+1] = {key = "rogernote", set = "Other", vars = {next(SMODS.find_card("j_four_fingers")) and 4 or 5}}
+    end
+    return { vars = { get_fingers(card) } }
+end
+
+function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+    G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -31,7 +47,7 @@ function jokerInfo.calculate(self, card, context)
         end
     end
     if context.remove_playing_cards and card.ability.activated then
-        card.ability.extra.fingers = card.ability.extra.fingers - 5
+        card.ability.extra.fingers = card.ability.extra.fingers - (next(SMODS.find_card("j_four_fingers")) and 4 or 5)
         if card.ability.extra.fingers > 0 then
             card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_remaining',vars={card.ability.extra.fingers}},colour = G.C.IMPORTANT})
         else

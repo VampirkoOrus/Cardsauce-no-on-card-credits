@@ -25,7 +25,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.using_consumable and not context.blueprint then
+    if context.using_consumeable and not context.blueprint then
         if context.consumeable.ability.set == "Spectral" then
             G.E_MANAGER:add_event(Event({ func = function()
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_mult',vars={get_mult(card)}}})

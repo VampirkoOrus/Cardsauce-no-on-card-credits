@@ -17,13 +17,14 @@ local jokerInfo = {
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    return { vars = {G.GAME.probabilities.normal+card.ability.extra.prob_extra, card.ability.extra.prob, card.ability.extra.prob_mod} }
+    info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+    return { vars = {G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true, true), card.ability.extra.prob, card.ability.extra.prob_mod} }
 end
 
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not self.debuff then
         if context.scoring_name == "Flush" then
-            if pseudorandom('flusher') < G.GAME.probabilities.normal+card.ability.extra.prob_extra / card.ability.extra.prob then
+            if pseudorandom('flusher') < G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true) / card.ability.extra.prob then
                 return {
                     card = card,
                     level_up = true,

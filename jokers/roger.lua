@@ -1,8 +1,10 @@
+local mod = SMODS.current_mod
+
 local jokerInfo = {
 	name = 'Mr. Roger',
 	config = {
 		extra = {
-			x_mult = 1
+			x_mult = 1,
 		}
 	},
 	rarity = 2,
@@ -14,9 +16,15 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	info_queue[#info_queue+1] = {key = "rogernote", set = "Other"}
+	if not mod.config['detailedDescs'] then
+		info_queue[#info_queue+1] = {key = "rogernote", set = "Other", vars = {next(SMODS.find_card("j_four_fingers")) and 4 or 5}}
+	end
 	info_queue[#info_queue+1] = {key = "guestartist13", set = "Other"}
-	return { vars = {card.ability.extra.x_mult} }
+	return { vars = {card.ability.extra.x_mult, next(SMODS.find_card("j_four_fingers")) and 0.4 or 0.5} }
+end
+
+function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+	G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 end
 
 function jokerInfo.add_to_deck(self, card)
@@ -30,7 +38,7 @@ function jokerInfo.calculate(self, card, context)
 				trigger = 'after',
 				delay = 0.0,
 				func = (function()
-					card.ability.extra.x_mult = 1 + 0.5*(G.GAME.current_round.hands_played)
+					card.ability.extra.x_mult = 1 + (next(SMODS.find_card("j_four_fingers")) and 0.4 or 0.5)*(G.GAME.current_round.hands_played)
 					return true
 				end)}
 			))

@@ -177,6 +177,8 @@ local conf_cardsauce = {
 	},
 	tagsToLoad = {
 	},
+	vouchersToLoad = {
+	},
 	challengesToLoad = {
 		'tucker',
 	},
@@ -216,10 +218,16 @@ if twoPointO then
 	conf_cardsauce.tagsToLoad = {
 		'spirit',
 	}
+	conf_cardsauce.vouchersToLoad = {
+		'scavenger',
+		'raffle',
+		'ff',
+	}
 	conf_cardsauce.consumablesToLoad[#conf_cardsauce.consumablesToLoad+1] = 'arrow'
 	local jokers = {
 		--Common
 		'frens',
+		'powers',
 		'nutbuster',
 		'chips',
 		'bonzi',
@@ -231,16 +239,23 @@ if twoPointO then
 		'vomitblast',
 		'itsmeaustin',
 		'bald',
+		'protogent',
 		--Uncommon
+		'scam',
 		'monkey',
 		'skeletor',
 		'agga',
 		'triptoamerica',
 		'passport',
 		'fireworks',
-		'plaguewalker',
-		'bsi',
+		'sprunk',
 		'flusher',
+		'plaguewalker',
+		'itsafeature',
+		'bulk',
+		'mug',
+		'blackjack',
+		'bsi',
 		--Rare
 		'tetris',
 
@@ -271,7 +286,7 @@ function Game:start_run(args)
 	G.GAME.max_stands = G.GAME.modifiers.max_stands or 1
 end
 
-G.collab_credits = {
+G.csau_collab_credits = {
 	-- Vine
 	csau_wildcards = {
 		King = {key = "guestartist23", set = "Other"}, --fradavovan
@@ -333,11 +348,11 @@ G.FUNCS.update_collab_cards = function(key, suit, silent)
 	if type(key) == "number" then
 		key = G.COLLABS.options[suit][key]
 	end
-	if G.collab_credits[key] then
+	if G.csau_collab_credits[key] then
 		for i, card in ipairs(G.cdds_cards.cards) do
-			if G.collab_credits[key][card.config.card.value] then
+			if G.csau_collab_credits[key][card.config.card.value] then
 				card.no_ui = false
-				card.csau_collab_credit = G.collab_credits[key][card.config.card.value]
+				card.csau_collab_credit = G.csau_collab_credits[key][card.config.card.value]
 			else
 				card.no_ui = true
 				card.csau_collab_credit = nil
@@ -348,6 +363,33 @@ G.FUNCS.update_collab_cards = function(key, suit, silent)
 			card.no_ui = true
 			card.csau_collab_credit = nil
 		end
+	end
+end
+
+G.FUNCS.csau_set_big_sprites = function(self, card)
+	if card.config.center.discovered or card.bypass_discovery_center then
+		card.children.center.scale = {x=self.width,y=self.height}
+		card.children.center.scale_mag = math.min(self.width/card.children.center.T.w,self.height/card.children.center.T.h)
+		card.children.center:reset()
+
+		if self.hasSoul then
+			card.children.floating_sprite.scale = {x=self.width,y=self.height}
+			card.children.floating_sprite.scale_mag = math.min(self.width/card.children.floating_sprite.T.w,self.height/card.children.floating_sprite.T.h)
+			card.children.floating_sprite:reset()
+		end
+	end
+end
+
+G.FUNCS.csau_generate_detail_desc = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table, key)
+	key = key or card.config.center.key
+	if card.config.center.discovered then
+		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
+		full_UI_table.name = localize{type = 'name', key = key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
+	end
+	if mod.config['detailedDescs'] and G.localization.descriptions.Joker[key.."_detailed"] then
+		localize{type = 'descriptions', key = key.."_detailed", set = self.set, nodes = desc_nodes, vars = self.loc_vars and self.loc_vars(self, info_queue, card).vars or {}}
+	else
+		localize{type = 'descriptions', key = key, set = self.set, nodes = desc_nodes, vars = self.loc_vars and self.loc_vars(self, info_queue, card).vars or {}}
 	end
 end
 
@@ -613,6 +655,11 @@ G.FUNCS.can_buy_and_use = function(e)
 	end
 end
 
+G.C.MUG = HEX('db9a4d')
+function csau_loc_colors()
+	G.ARGS.LOC_COLOURS['mug'] = G.C.MUG
+end
+
 -- Modified Code from Malverk
 local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
 function G.UIDEF.use_and_sell_buttons(card)
@@ -733,6 +780,36 @@ G.FUNCS.csau_all_suit = function(context, suit)
 	return all
 end
 
+G.FUNCS.csau_add_chance = function(num, multiply, startAtOne)
+	multiply = multiply or false
+	startAtOne = startAtOne or false
+	if G.FUNCS.powers_active and G.FUNCS.powers_active() then
+		return 0
+	else
+		if multiply then
+			if G.GAME.probabilities and G.GAME.probabilities.normal then
+				if startAtOne then
+					return (1 + num) * G.GAME.probabilities.normal
+				else
+					return (num <= 0 and 0 or (1 + num)) * G.GAME.probabilities.normal
+				end
+			else
+				if startAtOne then
+					return 1 + num
+				else
+					return num
+				end
+			end
+		else
+			if startAtOne then
+				return 1 + num
+			else
+				return num
+			end
+		end
+	end
+end
+
 
 SMODS.Atlas({ key = 'csau_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
 
@@ -744,7 +821,7 @@ if twoPointO and #conf_cardsauce.vhsToLoad > 0 then
 		primary_colour = G.C.VHS,
 		secondary_colour = G.C.VHS,
 		collection_rows = { 8, 8 },
-		shop_rate = 1,
+		shop_rate = 0,
 		loc_txt = {},
 		default = "c_csau_blackspine",
 		can_stack = false,
@@ -817,7 +894,8 @@ if twoPointO and #conf_cardsauce.standsToLoad > 0 then
 	SMODS.UndiscoveredSprite{
 		key = "Stand",
 		atlas = "csau_undiscovered",
-		pos = { x = 1, y = 0 }
+		pos = { x = 1, y = 0 },
+        overlay_pos = {x = 2, y = 0}
 	}
 end
 
@@ -923,6 +1001,22 @@ for i, v in ipairs(conf_cardsauce.tagsToLoad) do
 	end
 
 	SMODS.Atlas({ key = v, path ="tags/" .. v .. ".png", px = tag.width or 34, py = tag.height or 34 })
+end
+for i, v in ipairs(conf_cardsauce.vouchersToLoad) do
+	local voucherInfo = assert(SMODS.load_file("vouchers/" .. v .. ".lua"))()
+
+	voucherInfo.key = v
+	voucherInfo.atlas = v
+	voucherInfo.pos = { x = 0, y = 0 }
+
+	local voucher = SMODS.Voucher(voucherInfo)
+	for k_, v_ in pairs(voucher) do
+		if type(v_) == 'function' then
+			voucher[k_] = voucherInfo[k_]
+		end
+	end
+
+	SMODS.Atlas({ key = v, path ="vouchers/" .. v .. ".png", px = voucher.width or 71, py = voucher.height or 95 })
 end
 
 if csau_enabled['enableDecks'] then
@@ -1473,13 +1567,17 @@ if csau_enabled['enableColors'] then
 	end
 end
 
+local function initPostMainMenu()
+	if csau_enabled['enableChallenges'] then
+		csau_tucker_addBanned()
+	end
+end
+
 local main_menuRef = Game.main_menu
 function Game:main_menu(change_context)
 	main_menuRef(self, change_context)
 
-	if csau_enabled['enableChallenges'] then
-		csau_tucker_addBanned()
-	end
+	initPostMainMenu()
 
 	if csau_enabled['enableColors'] then
 		local splash_args = {mid_flash = change_context == 'splash' and 1.6 or 0.}
@@ -3470,6 +3568,16 @@ local csauConfigTabs = function() return {
 					}},
 				}}
 			end
+			if localize("vs_options_detailedDescs") then
+				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
+					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+						create_toggle({n=G.UIT.T, label = localize("vs_options_detailedDescs"), ref_table = csau_config, ref_value = 'detailedDescs' })
+					}},
+					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+						{n=G.UIT.T, config={text = localize("vs_options_detailedDescs_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
+					}},
+				}}
+			end
 			if localize("vs_options_resetTrophies_r") then
 				csau_opts.nodes[#csau_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
 					{n=G.UIT.R, config={align = "cm", minw = 0.5, maxw = 2, minh = 0.6, padding = 0, r = 0.1, hover = true, colour = G.C.RED, button = "reset_trophies", shadow = true, focus_args = {nav = 'wide'}}, nodes={
@@ -3586,6 +3694,7 @@ vs_credit_29 = "Burdrehnar"
 vs_credit_30 = "Crisppyboat"
 vs_credit_31 = "Alli"
 vs_credit_32 = "Lyman"
+vs_credit_33 = "AlizarinRed"
 vs_credit_st1 = "tortoise"
 vs_credit_st2 = "Protokyuuu"
 vs_credit_st3 = "ShrineFox"
@@ -3736,6 +3845,9 @@ SMODS.current_mod.credits_tab = function()
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_32, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_33, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},

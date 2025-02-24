@@ -225,6 +225,8 @@ return {
 			vs_options_sub = "(Restart required to apply)",
 			vs_options_muteWega = "Mute WAAUGGHGHHHHGHH",
 			vs_options_muteWega_desc = "Check this box to mute WAAUGGHGHHHHGHH's screams",
+			vs_options_detailedDescs = "Detailed Descriptions",
+			vs_options_detailedDescs_desc = "Replaces the jokey descriptions on certain Jokers with standard ones",
 			vs_options_enableVinkers = "Vinny-centric Jokers",
 			vs_options_enableJoelkers = "Joel-centric Jokers",
 			vs_options_enableOtherJokers = "Other Jokers",
@@ -345,6 +347,9 @@ return {
 			k_negative_mult = "Negative Mult!",
 			a_discards = "+#1# Discards",
 			k_allgone = "All Gone!",
+			k_mug_moment = "Mug Moment!",
+			k_mug_gone = "I Love My Mug!",
+			k_blackjack = "Blackjack!"
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
@@ -872,6 +877,12 @@ return {
 					"{E:1}Greeeg{}",
 				},
 			},
+			guestartist28 = {
+				name = "Artist",
+				text = {
+					"{E:1}AlizarinRed{}",
+				},
+			},
 			twoartists0 = {
 				name = "Artists",
 				text = {
@@ -895,7 +906,7 @@ return {
 			rogernote = {
 				name = "Conversion Table",
 				text = {
-					"5 {C:attention}fingers{} =",
+					"#1# {C:attention}fingers{} =",
 					"1 {C:attention}hand{}",
 				},
 			},
@@ -1007,16 +1018,11 @@ return {
 					"humanity will become as Chadesque as myself.",
 				},
 			},
-			j_csau_chad_speaking = {
+			j_csau_chad_detailed = {
 				name = "No No No No No No No No No No No",
 				text = {
-					"Why is he here...",
-				},
-			},
-			j_csau_chad_muted = {
-				name = "No No No No No No No No No No No",
-				text = {
-					"Why is he here...",
+					"{X:mult,C:white}X2{} Mult for every other {C:attention}copy{} of",
+					"this Joker, {C:attention}Showman{}, or {C:attention}Hanging Chad{}"
 				},
 			},
 			j_csau_disguy = {
@@ -1025,6 +1031,13 @@ return {
 					"eACH SKOARD DEE EMC {C:attention}2{}",
 					"OR BERSONA {C:attention}5{}",
 					"GAET RANDUM {C:attention}EHANCEMAENT{}",
+				},
+			},
+			j_csau_disguy_detailed = {
+				name = "DIS JOAKERRR",
+				text = {
+					"Each scored {C:attention}2{} or {C:attention}5{} gets",
+					"a random {C:attention}Enhancement{}",
 				},
 			},
 			j_csau_fisheye = {
@@ -1040,11 +1053,27 @@ return {
 					"{C:dark_edition}These cards are my domain, and I their master.{}",
 				},
 			},
+			j_csau_odio_detailed = {
+				name = "Odious Joker",
+				text = {
+					"{C:attention}Transforms{} into a new form during each {C:attention}Boss Blind{}",
+					"Form determined by the current {C:attention}Ante{} level",
+					"{C:inactive}(Final transformation in {C:attention}Endless Mode{C:inactive})"
+				},
+			},
 			j_csau_odio1 = {
 				name = "Odious Joker",
 				text = {
 					"{C:dark_edition}It would be in your best interests to stop.{}",
 					"{C:dark_edition}These cards are my domain, and I their master.{}",
+				},
+			},
+			j_csau_odio1_detailed = {
+				name = "Odious Joker",
+				text = {
+					"{C:attention}Transforms{} into a new form during each {C:attention}Boss Blind{}",
+					"Form determined by the current {C:attention}Ante{} level",
+					"{C:inactive}(Does not transform in {C:attention}Endless Mode{C:inactive})"
 				},
 			},
 			j_csau_odio2 = {
@@ -1122,8 +1151,16 @@ return {
 			j_csau_roger = {
 				name = "Mr. Roger",
 				text = {
-					"This Joker gains {X:mult,C:white}X0.1{} Mult",
+					"This Joker gains {X:mult,C:white} X0.1 {} Mult",
 					"for each {C:attention}finger{} played this {C:attention}Blind{}",
+					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
+				},
+			},
+			j_csau_roger_detailed = {
+				name = "Mr. Roger",
+				text = {
+					"This Joker gains {X:mult,C:white} X#2# {} Mult",
+					"for each {C:attention}hand{} played this {C:attention}Blind{}",
 					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}",
 				},
 			},
@@ -1816,7 +1853,7 @@ return {
 				name = "Chips for Dinner",
 				text = {
 					"{C:chips}+#1#{} Chips",
-					"{C:chips}-#1#{} Chips for each {C:attention}final hand{} played",
+					"{C:chips}-#2#{} Chips for each {C:attention}final hand{} played",
 				},
 			},
 			j_csau_bonzi = {
@@ -1924,6 +1961,12 @@ return {
 					"Blows off the next {C:attention}#1# fingers{} played",
 				},
 			},
+			j_csau_fireworks_detailed = {
+				name = "Stolen Christmas",
+				text = {
+					"Destroys the next {C:attention}#1#{} hands played",
+				},
+			},
 			j_csau_plaguewalker = {
 				name = "Plaguewalker",
 				text = {
@@ -1937,6 +1980,84 @@ return {
 					"{C:chips}+#1#{} Chips and {X:mult,C:white} X#2# {} for",
 					"each active {C:attention}Food Joker{}",
 					"{C:inactive}(Currently {C:chips}+#3#{}{C:inactive} Chips and {X:mult,C:white} X#4# {C:inactive} Mult)",
+				},
+			},
+			j_csau_mug = {
+				name = "Mug",
+				text = {
+					"{C:mult}+#1#{} Mult",
+					"Mult {C:attention}doubles{} at end of round",
+					"{E:1,C:mug}Mug Moment{} in {C:attention}#2#{} Rounds",
+				},
+			},
+			j_csau_mug_mug = {
+				name = "Mug",
+				text = {
+					"{C:mult}+#1#{} Mult",
+					"Mult {C:attention}doubles{} at end of round",
+					"{E:1,C:mug}Mug Moment{} in {C:attention}#2#{} Rounds",
+				},
+			},
+			j_csau_mug_moment = {
+				name = "Mug",
+				text = {
+					"{X:mult,C:white} X#3# {} Mult",
+					"{C:red}Self destructs{} at end of round",
+				},
+			},
+			j_csau_powers = {
+				name = "Live Dangerously",
+				text = {
+					"{X:mult,C:white} X#1# {} Mult",
+					"{C:green}Probabilities{} never trigger",
+				},
+			},
+			j_csau_protogent = {
+				name = "Protogent Antivirus",
+				text = {
+					"{C:green}#1# in #2#{} chance to disable {C:attention}boss blinds{}",
+					"{C:green}#1# in #3#{} chance to prevent death",
+					"{S:1.1,C:red,E:2}self destructs{}",
+				},
+			},
+			j_csau_scam = {
+				name = "BITCONNEEEEEEEEEEEEEEEEE",
+				text = {
+					"Lose {C:money}$#1#{} per played {C:attention}High Card{}, {C:attention}Pair{}, and {C:attention}Two Pair{}",
+					"Gain {C:money}$#1#{} per any other Poker Hand played",
+				},
+			},
+			j_csau_sprunk = {
+				name = "Sprunk",
+				text = {
+					"Gain {C:mult}+#1#{} Mult and {C:green}+#2#{} chance per {C:money}$1{} spent",
+					"{C:green}#3# in #4#{} chance to get sprunk'd and",
+					"{E:1,C:attention}maybe{} {C:attention}lose the run{} when hand is played",
+					"{C:inactive}(Currently {}{C:mult}+#5#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+			},
+			j_csau_itsafeature = {
+				name = "IT'S A FEATURE",
+				text = {
+					"This Joker gains {C:money}$#1#{} per hand played",
+					"{C:green}#2# in #3#{} chance to gain accumulated",
+					"money when a {C:attention}Straight{} is played",
+					"{C:inactive}(Currently {}{C:money}$#4#{}{C:inactive}){}",
+				},
+			},
+			j_csau_bulk = {
+				name = "Bulkin' The Mouscles",
+				text = {
+					"This Joker gains {X:mult,C:white} X#1# {} Mult each time a card",
+					"is {C:attention}Enhanced{} or upgraded a rank",
+					"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
+				},
+			},
+			j_csau_blackjack = {
+				name = "Blackjack",
+				text = {
+					"If {C:attention}total chip value{} of played cards",
+					"is {C:attention}21{}, score all cards and {X:mult,C:white} X#1# {} Mult",
 				},
 			},
 		},
@@ -2088,6 +2209,29 @@ return {
 					"Transform every {C:attention}Joker{} with \"Joker\"",
 					"in its name into {C:attention}Chadley{}"
 				},
+			},
+		},
+		Voucher = {
+			v_csau_scavenger = {
+				name = "Scavenger Hunt",
+				text = {
+					"{C:vhs}VHS Tapes{} can be purchased",
+					"from the {C:attention}shop{}"
+				}
+			},
+			v_csau_raffle = {
+				name = "Raffle",
+				text = {
+					"{C:vhs}VHS Tapes{} appear {C:attention}2X{} more",
+					"frequently in the {C:attention}shop{}"
+				}
+			},
+			v_csau_ff = {
+				name = "Foo Fighter",
+				text = {
+					"{C:stand}Stands{} can be purchased",
+					"from the {C:attention}shop{}"
+				}
 			},
 		},
 		Tag = {

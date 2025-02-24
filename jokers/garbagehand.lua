@@ -26,7 +26,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if context.individual and context.cardarea == G.play and not card.debuff and context.other_card.ability.effect == 'Base' then
-		local chip_val = context.other_card:get_id()
+		local chip_val = context.other_card.base.nominal
 		local bonus_chip = context.other_card.ability.perma_bonus or 0
 		local total_chip = to_big(chip_val) + to_big(bonus_chip)
 		if to_big(total_chip) <= to_big(8) then

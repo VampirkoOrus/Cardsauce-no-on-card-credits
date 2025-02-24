@@ -52,11 +52,7 @@ local function updateSprite(card)
 end
 
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
-	if card.config.center.discovered then
-		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
-		full_UI_table.name = localize{type = 'name', key = "j_csau_"..card.ability.extra.form or self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
-	end
-	localize{type = 'descriptions', key = "j_csau_"..card.ability.extra.form or self.key, set = self.set, nodes = desc_nodes, vars = {}}
+	G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table, "j_csau_"..card.ability.extra.form)
 end
 
 function jokerInfo.calculate(self, card, context)

@@ -20,6 +20,11 @@ end
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+	return {}
+end
+
+function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+	G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 end
 
 function jokerInfo.add_to_deck(self, card)
