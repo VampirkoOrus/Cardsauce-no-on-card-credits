@@ -261,27 +261,6 @@ return {
 			vs_options_resetTrophies_desc = "Click this button to reset all Cardsauce achievements",
 			vs_options_chadNova_r = "Undo Chadnova",
 			vs_options_chadNova_desc = "Click this button to undo the consequences of your actions",
-			vs_collab_credits = {
-				Hearts = {
-					collab_AU = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-					collab_TBoI = "King by fradavovan | Queen and Jack by CheesyDraws",
-					collab_CL = "King and Queen by BarrierTrio/Gote | King and Jack by SagaciousCejai",
-				},
-				Clubs = {
-					collab_VS = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-					collab_STS = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-					collab_WF = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-					csau_ds_mascots_VS = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-				},
-				Diamonds = {
-					collab_DTD = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-					collab_SV = "King, Queen and Jack by Arthur Effgus",
-				},
-				Spades = {
-					collab_TW = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-					collab_CYP = "King, Queen and Jack by Jazz_Jen",
-				}
-			},
 			b_set_colors = "Colors",
 			b_color_selector = "Background Colors",
 			b_color_selector_outer = "Main Menu Outer Swirl",
@@ -788,7 +767,7 @@ return {
 			guestartist10 = {
 				name = "Artist",
 				text = {
-					"{E:1}Arthur Effgus{}",
+					"{E:1}Winter Grimwell{}",
 				},
 			},
 			guestartist11 = {
