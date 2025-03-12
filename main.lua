@@ -28,6 +28,7 @@ csau_enabled = copy_table(csau_config)
 local hook_list = {
 	"card",
 	"UI_definitions",
+	"misc_functions"
 }
 
 function recursiveEnumerate(folder)

@@ -8,6 +8,7 @@ local jokerInfo = {
 	eternal_compat = false,
 	perishable_compat = true,
 	hasSoul = true,
+	bottom_sticker = true,
 	width = 284,
 	height = 380,
 	streamer = "vinny",

@@ -8,6 +8,7 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
+	bottom_sticker = true,
 	hasSoul = true,
 	streamer = "vinny",
 }
