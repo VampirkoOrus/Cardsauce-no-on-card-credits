@@ -526,7 +526,7 @@ match_indent = true
 target = "functions/state_events.lua"
 pattern = "local splashed = SMODS.always_scores(G.play.cards[i]) or next(find_joker('Splash'))"
 position = "at"
-payload = "local splashed = SMODS.always_scores(G.play.cards[i]) or next(find_joker('Splash')) or G.FUNCS.find_sts_form('diamonds') or G.FUNCS.find_blackjack(G.play.cards)"
+payload = "local splashed = SMODS.always_scores(G.play.cards[i]) or next(find_joker('Splash')) or G.FUNCS.find_sts_form('diamonds')"
 match_indent = true
 
 [[patches]]

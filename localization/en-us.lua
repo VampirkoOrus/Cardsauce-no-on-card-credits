@@ -1,5 +1,21 @@
 return {
 	misc = {
+		poker_hands = {
+			["csau_Blackjack"] = "Blackjack",
+			["csau_FlushBlackjack"] = "Flush Blackjack",
+		},
+		poker_hand_descriptions={
+			["csau_Blackjack"] = {
+				"Any amount of cards adding to a total of",
+				"exactly 21 (Aces count as either 11 or 1).",
+				"May not be played with unscored cards."
+			},
+			["csau_FlushBlackjack"] = {
+				"5 cards that share the same suit adding to a",
+				"total of exactly 21 (Aces count as either 11 or 1).",
+				"May not be played with unscored cards."
+			},
+		},
 		quips = {
 			wq_1 = {
 				"WHO'S THE BIG MEAT",
@@ -2056,8 +2072,68 @@ return {
 			j_csau_blackjack = {
 				name = "Blackjack",
 				text = {
-					"If {C:attention}total chip value{} of played cards",
-					"is {C:attention}21{}, score all cards and {X:mult,C:white} X#1# {} Mult",
+					"Allows {C:attention}Blackjack{} hands to be made",
+					"{C:inactive}(ex: {C:attention}A 8 7 5{C:inactive})",
+				},
+			},
+			j_csau_mrkill = {
+				name = "Mr. Kill",
+				text = {
+					"If {C:attention}first discard{} of round has only",
+					"{C:attention}1{} card, {C:attention}destroy{} it and gain its Chips",
+					"{C:inactive}(Currently {C:chips}+#1#{}{C:inactive} Chips)",
+				},
+			},
+			j_csau_jokerdrive = {
+				name = "Jokerdrive",
+				text = {
+					"{C:mult}+#1#{} Mult per {C:attention}Ante{} if you do not have a {C:stand}Stand{}",
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+			},
+			j_csau_memehouse = {
+				name = "Meme House",
+				text = {
+					"Create a {C:tarot}Tarot{} card if played hand",
+                    "contains a {C:attention}Full House{} and {C:attention}wins{}",
+					"{C:inactive}(Must have room)",
+				},
+			},
+			j_csau_april = {
+				name = "April Fools' Joker",
+				text = {
+					"{C:mult}+#1#{} Mult för varje {C:attention}Narren{} som",
+					"används i denna körning",
+				},
+			},
+			j_csau_april_detailed = {
+				name = "April Fools' Joker",
+				text = {
+					"{C:mult}+#1#{} Mult per {C:attention}The Fool{}",
+					"card used this run",
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+			},
+			j_csau_duane = {
+				name = "Dancing Joker",
+				text = {
+					"Retrigger each played card",
+                    "with {V:1}#1#{} suit",
+					"{s:0.8}suit changes at end of round",
+				},
+			},
+			j_csau_vinewrestle = {
+				name = "Vinewrestle",
+				text = {
+					"Create a {C:attention}random free Joker Tag",
+					"when {C:attention}Boss Blind{} is defeated",
+				},
+			},
+			j_csau_bootleg = {
+				name = "Bootleg Joker",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
 				},
 			},
 		},
@@ -2184,6 +2260,26 @@ return {
 					"Played {C:attention}Jacks{} become {C:attention}Steel{} cards",
 					"{C:attention}Steel Jacks{} act as {C:attention}Glass{} cards when played",
 				},
+			},
+		},
+		Planet = {
+			c_csau_lutetia = {
+				name = "Lutetia",
+				text = {
+					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+					"{C:attention}#2#",
+					"{C:mult}+#3#{} Mult and",
+					"{C:chips}+#4#{} chips",
+				}
+			},
+			c_csau_varuna = {
+				name = "Varuna",
+				text = {
+					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+					"{C:attention}#2#",
+					"{C:mult}+#3#{} Mult and",
+					"{C:chips}+#4#{} chips",
+				}
 			},
 		},
 		Tarot = {

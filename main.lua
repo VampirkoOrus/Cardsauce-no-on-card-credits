@@ -103,7 +103,7 @@ local conf_cardsauce = {
 		'anotherlight',
 		'sohappy',
 		'code',
-		'werewolves',
+		'deathcard',
 		'maskedjoker',
 		'dontmind',
 		'kerosene',
@@ -115,7 +115,7 @@ local conf_cardsauce = {
 		'chromedup',
 		-- Rare
 		'thisiscrack',
-		'deathcard',
+		'werewolves',
 		'hell',
 		'odio',
 		-- Common (Locked)
@@ -223,11 +223,19 @@ if twoPointO then
 		'raffle',
 		'ff',
 	}
-	conf_cardsauce.consumablesToLoad[#conf_cardsauce.consumablesToLoad+1] = 'arrow'
+	local consumables = {
+		'arrow',
+		'lutetia',
+		'varuna',
+	}
+	for i, k in ipairs(consumables) do
+		conf_cardsauce.consumablesToLoad[#conf_cardsauce.consumablesToLoad+1] = k
+	end
 	local jokers = {
 		--Common
 		'frens',
 		'powers',
+		'memehouse',
 		'nutbuster',
 		'chips',
 		'bonzi',
@@ -238,6 +246,7 @@ if twoPointO then
 		'facade',
 		'vomitblast',
 		'itsmeaustin',
+		'bootleg',
 		'bald',
 		'protogent',
 		--Uncommon
@@ -250,7 +259,11 @@ if twoPointO then
 		'fireworks',
 		'sprunk',
 		'flusher',
+		'vinewrestle',
 		'plaguewalker',
+		'duane',
+		'april',
+		'mrkill',
 		'itsafeature',
 		'bulk',
 		'mug',
@@ -260,6 +273,7 @@ if twoPointO then
 		'tetris',
 
 		-- Jojo Jokers
+		'jokerdrive',
 		'no2joker',
 		'sotw',
 	}
@@ -546,6 +560,8 @@ function SMODS.current_mod.reset_game_globals(run_start)
 		local randCard = pseudorandom_element(valid_joeycastle_cards, pseudoseed('fent'..G.GAME.round_resets.ante))
 		G.GAME.current_round.joeycastle.suit = randCard.base.suit
 	end
+	local randCard = pseudorandom_element(G.playing_cards, pseudoseed('DUANE'..G.GAME.round_resets.ante))
+	G.GAME.current_round.duane_suit = randCard.base.suit
 end
 
 local get_straight_ref = get_straight
@@ -901,7 +917,7 @@ end
 
 -- Load Jokers
 for i, v in ipairs(conf_cardsauce.jokersToLoad) do
-	local jokerInfo = assert(SMODS.load_file("jokers/" .. v .. ".lua"))()
+	local jokerInfo = assert(SMODS.load_file("items/jokers/" .. v .. ".lua"))()
 	local enabled = false
 	if jokerInfo.streamer then
 		if ((jokerInfo.streamer == 'vinny' or jokerInfo.streamer == 'othervinny') and csau_enabled['enableVinkers'])
@@ -936,7 +952,7 @@ for i, v in ipairs(conf_cardsauce.jokersToLoad) do
 end
 
 local loadConsumable = function(folder, v)
-	local consumInfo = assert(SMODS.load_file(folder.."/" .. v .. ".lua"))()
+	local consumInfo = assert(SMODS.load_file("items/"..folder.."/" .. v .. ".lua"))()
 
 	consumInfo.key = consumInfo.key or v
 	consumInfo.atlas = v
@@ -969,7 +985,7 @@ for i, v in ipairs(conf_cardsauce.standsToLoad) do
 end
 
 for i, v in ipairs(conf_cardsauce.packsToLoad) do
-	local packInfo = assert(SMODS.load_file("packs/" .. v .. ".lua"))()
+	local packInfo = assert(SMODS.load_file("items/packs/" .. v .. ".lua"))()
 
 	packInfo.key = v
 	packInfo.atlas = v
@@ -987,7 +1003,7 @@ for i, v in ipairs(conf_cardsauce.packsToLoad) do
 end
 
 for i, v in ipairs(conf_cardsauce.tagsToLoad) do
-	local tagInfo = assert(SMODS.load_file("tags/" .. v .. ".lua"))()
+	local tagInfo = assert(SMODS.load_file("items/tags/" .. v .. ".lua"))()
 
 	tagInfo.key = v
 	tagInfo.atlas = v
@@ -1003,7 +1019,7 @@ for i, v in ipairs(conf_cardsauce.tagsToLoad) do
 	SMODS.Atlas({ key = v, path ="tags/" .. v .. ".png", px = tag.width or 34, py = tag.height or 34 })
 end
 for i, v in ipairs(conf_cardsauce.vouchersToLoad) do
-	local voucherInfo = assert(SMODS.load_file("vouchers/" .. v .. ".lua"))()
+	local voucherInfo = assert(SMODS.load_file("items/vouchers/" .. v .. ".lua"))()
 
 	voucherInfo.key = v
 	voucherInfo.atlas = v
@@ -1021,7 +1037,7 @@ end
 
 if csau_enabled['enableDecks'] then
 	for i, v in ipairs(conf_cardsauce.decksToLoad) do
-		local deckInfo = assert(SMODS.load_file("decks/" .. v .. ".lua"))()
+		local deckInfo = assert(SMODS.load_file("items/decks/" .. v .. ".lua"))()
 
 		deckInfo.key = v
 		deckInfo.atlas = v
@@ -1043,7 +1059,7 @@ if csau_enabled['enableDecks'] then
 end
 if csau_enabled['enableChallenges'] then
 	for i, v in ipairs(conf_cardsauce.challengesToLoad) do
-		local chalInfo = assert(SMODS.load_file("challenges/" .. v .. ".lua"))()
+		local chalInfo = assert(SMODS.load_file("items/challenges/" .. v .. ".lua"))()
 
 		chalInfo.key = v
 
@@ -1057,7 +1073,7 @@ if csau_enabled['enableChallenges'] then
 end
 if csau_enabled['enableBosses'] then
 	for i, v in ipairs(conf_cardsauce.blindsToLoad) do
-		local blindInfo = assert(SMODS.load_file("blinds/" .. v .. ".lua"))()
+		local blindInfo = assert(SMODS.load_file("items/blinds/" .. v .. ".lua"))()
 
 		blindInfo.key = v
 		blindInfo.atlas = v
@@ -1077,7 +1093,7 @@ if csau_enabled['enableBosses'] then
 	end
 end
 for i, v in ipairs(conf_cardsauce.trophiesToLoad) do
-	local trophyInfo = assert(SMODS.load_file("achievements/" .. v))()
+	local trophyInfo = assert(SMODS.load_file("items/achievements/" .. v))()
 
 	trophyInfo.key = v:sub(2, -5)
 	trophyInfo.atlas = 'csau_achievements'
