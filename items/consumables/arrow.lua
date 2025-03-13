@@ -17,6 +17,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 get_replaceable_stand = function()
+    if not G.consumeables then return nil end
     for i, v in ipairs(G.consumeables.cards) do
         if v.ability.set == "Stand" then
             return v

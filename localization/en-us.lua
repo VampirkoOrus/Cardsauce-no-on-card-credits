@@ -344,7 +344,8 @@ return {
 			k_allgone = "All Gone!",
 			k_mug_moment = "Mug Moment!",
 			k_mug_gone = "I Love My Mug!",
-			k_blackjack = "Blackjack!"
+			k_blackjack = "Blackjack!",
+			a_in_one = " in 1",
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
@@ -1736,6 +1737,14 @@ return {
 					"when playing a {C:attention}Poker Hand{}",
 					"If card has any enhancements, add",
 					"its {C:attention}effect to scoring",
+				},
+			},
+			j_csau_sts = {
+				name = "Murder the Monolith",
+				text = {
+					"{C:attention}Transforms{} into a different Joker",
+					"depending on the {C:attention}suit{} of the",
+					"first card scored!",
 				},
 			},
 			j_csau_sts_base = {

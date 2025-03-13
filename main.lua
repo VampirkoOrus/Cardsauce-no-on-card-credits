@@ -394,15 +394,19 @@ G.FUNCS.csau_set_big_sprites = function(self, card)
 	end
 end
 
-G.FUNCS.csau_generate_detail_desc = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table, key)
+G.FUNCS.csau_generate_detail_desc = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table, key, no_title)
+	no_title = no_title or false
 	key = key or card.config.center.key
-	if card.config.center.discovered then
+	if card.config.center.discovered and not no_title then
 		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
 		full_UI_table.name = localize{type = 'name', key = key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
 	end
+
 	if mod.config['detailedDescs'] and G.localization.descriptions.Joker[key.."_detailed"] then
+		send(self)
 		localize{type = 'descriptions', key = key.."_detailed", set = self.set, nodes = desc_nodes, vars = self.loc_vars and self.loc_vars(self, info_queue, card).vars or {}}
 	else
+		send(self)
 		localize{type = 'descriptions', key = key, set = self.set, nodes = desc_nodes, vars = self.loc_vars and self.loc_vars(self, info_queue, card).vars or {}}
 	end
 end

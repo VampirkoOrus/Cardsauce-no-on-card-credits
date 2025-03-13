@@ -14,7 +14,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    return { vars = { localize(G.GAME.current_round.duane_suit, 'suits_singular') } }
+    return { vars = { localize(G.GAME.current_round.duane_suit, 'suits_singular'), colours = {G.C.SUITS[G.GAME.current_round.duane_suit]}} }
 end
 
 function jokerInfo.add_to_deck(self, card)
