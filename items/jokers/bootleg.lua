@@ -59,14 +59,16 @@ local function get_all_in_one_joker(card)
     return order.." . "..G.localization.descriptions.Joker[key].name
 end
 
-function jokerInfo.loc_vars(self, info_queue, card)
-    return { vars = {  } }
-end
-
 function jokerInfo.load(self, card, card_table, other_card)
-    if card.ability.bootlegged_center and card.ability.bootlegged_key then
+    send(card.ability)
+    if (card.ability.bootlegged_center and card.ability.bootlegged_key) or G.GAME.bootleg_joker_key then
+        local key = (card.ability.bootlegged_center and card.ability.bootlegged_key) or G.GAME.bootleg_joker_key
         if type(card.ability.bootlegged_center) ~= "table" then
-            card.ability.bootlegged_center = get_joker_center(card.ability.bootlegged_key)
+            local center = get_joker_center(key)
+            card.ability.bootlegged_center = center
+            card.ability.bootlegged_key = center.key
+            G.GAME.bootleg_joker_key = center.key
+            card.ability.name = center.name or center.key
         end
     end
 end
@@ -110,6 +112,7 @@ function jokerInfo.calculate(self, card, context)
         end
         card.ability.bootlegged_center = center
         card.ability.bootlegged_key = center.key
+        G.GAME.bootleg_joker_key = center.key
         card.ability.name = center.name or center.key
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = G.localization.descriptions.Joker[card.ability.bootlegged_center.key].name, colour = G.C.IMPORTANT})
     end
@@ -121,6 +124,7 @@ function jokerInfo.calculate(self, card, context)
         card.ability.bootlegged_center = nil
         card.ability.bootlegged_key = nil
         card.ability.name = nil
+        G.GAME.bootleg_joker_key = nil
         card:juice_up()
     end
 end
