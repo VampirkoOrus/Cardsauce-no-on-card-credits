@@ -271,6 +271,8 @@ if twoPointO then
 		'bsi',
 		--Rare
 		'tetris',
+		'skeletonmetal',
+		'byebye',
 
 		-- Jojo Jokers
 		'jokerdrive',
@@ -403,10 +405,8 @@ G.FUNCS.csau_generate_detail_desc = function(self, info_queue, card, desc_nodes,
 	end
 
 	if mod.config['detailedDescs'] and G.localization.descriptions.Joker[key.."_detailed"] then
-		send(self)
 		localize{type = 'descriptions', key = key.."_detailed", set = self.set, nodes = desc_nodes, vars = self.loc_vars and self.loc_vars(self, info_queue, card).vars or {}}
 	else
-		send(self)
 		localize{type = 'descriptions', key = key, set = self.set, nodes = desc_nodes, vars = self.loc_vars and self.loc_vars(self, info_queue, card).vars or {}}
 	end
 end

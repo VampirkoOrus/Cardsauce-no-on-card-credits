@@ -2124,6 +2124,21 @@ return {
 					"{C:inactive}(WIP, no ability yet)"
 				},
 			},
+			j_csau_skeletonmetal = {
+				name = "Skeleton Metal",
+				text = {
+					"When {C:attention}final hand{} of round is played,",
+					"add #1# random {C:attention}Steel Cards{} to your hand",
+				},
+			},
+			j_csau_byebye = {
+				name = "Bye-Bye, Norway",
+				text = {
+					"Sell this Joker to destroy all",
+					"{C:attention}Face Cards{} held in hand and",
+					"earn {C:money}$#1#{} for each"
+				},
+			},
 		},
 		VHS = {
 			c_csau_blackspine = {

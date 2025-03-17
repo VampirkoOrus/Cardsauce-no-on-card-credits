@@ -1,3 +1,8 @@
+SMODS.Shader {
+    key = 'bootleg',
+    path = 'bootleg.fs',
+}
+
 local jokerInfo = {
     name = 'Bootleg Joker',
     config = {},
@@ -59,8 +64,28 @@ local function get_all_in_one_joker(card)
     return order.." . "..G.localization.descriptions.Joker[key].name
 end
 
+local function updateSprite(card)
+    if card.ability.bootlegged_center then
+        if card.config.center.atlas ~= card.ability.bootlegged_center.atlas then
+            card.config.center.atlas = card.ability.bootlegged_center.atlas
+            card.config.center.pos = card.ability.bootlegged_center.pos
+            card:set_sprites(card.config.center)
+        end
+    else
+        if card.config.center.atlas ~= "csau_bootleg" then
+            card.config.center.atlas = "csau_bootleg"
+            card.config.center.pos = { x = 0, y = 0 }
+            card:set_sprites(card.config.center)
+        end
+    end
+end
+
+function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+    return { vars = {  } }
+end
+
 function jokerInfo.load(self, card, card_table, other_card)
-    send(card.ability)
     if (card.ability.bootlegged_center and card.ability.bootlegged_key) or G.GAME.bootleg_joker_key then
         local key = (card.ability.bootlegged_center and card.ability.bootlegged_key) or G.GAME.bootleg_joker_key
         if type(card.ability.bootlegged_center) ~= "table" then
@@ -69,6 +94,7 @@ function jokerInfo.load(self, card, card_table, other_card)
             card.ability.bootlegged_key = center.key
             G.GAME.bootleg_joker_key = center.key
             card.ability.name = center.name or center.key
+            updateSprite(card)
         end
     end
 end
@@ -114,6 +140,7 @@ function jokerInfo.calculate(self, card, context)
         card.ability.bootlegged_key = center.key
         G.GAME.bootleg_joker_key = center.key
         card.ability.name = center.name or center.key
+        updateSprite(card)
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = G.localization.descriptions.Joker[card.ability.bootlegged_center.key].name, colour = G.C.IMPORTANT})
     end
     if card.ability.bootlegged_center and card.ability.bootlegged_center.calculate then
@@ -125,6 +152,7 @@ function jokerInfo.calculate(self, card, context)
         card.ability.bootlegged_key = nil
         card.ability.name = nil
         G.GAME.bootleg_joker_key = nil
+        updateSprite(card)
         card:juice_up()
     end
 end
@@ -325,7 +353,7 @@ end
 
 local function get_loc_vars(self, card, info_queue)
     if card.ability.bootlegged_center.loc_vars then
-        return card.ability.bootlegged_center.loc_vars(card.ability.bootlegged_center, info_queue, card).vars, nil, nil
+        return card.ability.bootlegged_center.loc_vars(card.ability.bootlegged_center, info_queue, card).vars or {}, nil, nil
     elseif card.ability.bootlegged_center then
         local loc_vars, main_start, main_end = nil, nil, nil
         loc_vars, main_start, main_end = fuck_you_generate_ui_box_ability_table(card)
@@ -353,6 +381,7 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
             desc_nodes[#desc_nodes+1] = main_end
         end
     else
+        info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
         set_discover_tallies()
         local tally = G.DISCOVER_TALLIES.jokers.of
         local main_start = {
@@ -388,6 +417,12 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
         }
         desc_nodes[#desc_nodes+1] = main_start
         desc_nodes[#desc_nodes+1] = main_end
+    end
+end
+
+function jokerInfo.draw(self, card, layer)
+    if card.config.center.atlas ~= "csau_bootleg" then
+        card.children.center:draw_shader('csau_bootleg', nil, card.ARGS.send_to_shader)
     end
 end
 

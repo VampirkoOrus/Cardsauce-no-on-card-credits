@@ -20,7 +20,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.setting_blind and context.blind.boss and not card.getting_sliced then
-        if pseudorandom('malwarespywaretrojan') < G.GAME.probabilities.normal / card.ability.boss_prob then
+        if pseudorandom('malwarespywaretrojan') < G.GAME.probabilities.normal / card.ability.extra.boss_prob then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     G.GAME.blind:disable()
@@ -47,7 +47,7 @@ function jokerInfo.calculate(self, card, context)
         end
     end
     if not context.blueprint_card and context.game_over then
-        if pseudorandom('allgoneforever') < G.GAME.probabilities.normal / card.ability.save_prob then
+        if pseudorandom('allgoneforever') < G.GAME.probabilities.normal / card.ability.extra.save_prob then
             return {
                 message = localize('k_saved_ex'),
                 saved = true,
