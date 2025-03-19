@@ -761,3 +761,106 @@ match_indent = true
 payload = '''
     csau_loc_colors()
 '''
+
+# Card:draw()
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if self.sticker and G.shared_stickers[self.sticker] then
+    G.shared_stickers[self.sticker].role.draw_major = self
+    G.shared_stickers[self.sticker]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+    G.shared_stickers[self.sticker]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+elseif (self.sticker_run and G.shared_stickers[self.sticker_run]) and G.SETTINGS.run_stake_stickers then
+    G.shared_stickers[self.sticker_run].role.draw_major = self
+    G.shared_stickers[self.sticker_run]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+    G.shared_stickers[self.sticker_run]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+end'''
+position = 'at'
+match_indent = true
+payload = '''if self.sticker and G.shared_stickers[self.sticker] then
+    local t, vt = scale_joker_sticker(G.shared_stickers[self.sticker], self)
+    G.shared_stickers[self.sticker].role.draw_major = self
+    G.shared_stickers[self.sticker]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+    G.shared_stickers[self.sticker]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+    reset_sticker_scale(self, t, vt)
+elseif (self.sticker_run and G.shared_stickers[self.sticker_run]) and G.SETTINGS.run_stake_stickers then
+    local t, vt = scale_joker_sticker(G.shared_stickers[self.sticker_run], self)
+    G.shared_stickers[self.sticker_run].role.draw_major = self
+    G.shared_stickers[self.sticker_run]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+    G.shared_stickers[self.sticker_run]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+    reset_sticker_scale(self, t, vt)
+end'''
+
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if self.ability.eternal then
+    G.shared_sticker_eternal.role.draw_major = self
+    G.shared_sticker_eternal:draw_shader('dissolve', nil, nil, nil, self.children.center)
+    G.shared_sticker_eternal:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+end
+if self.ability.perishable then
+    G.shared_sticker_perishable.role.draw_major = self
+    G.shared_sticker_perishable:draw_shader('dissolve', nil, nil, nil, self.children.center)
+    G.shared_sticker_perishable:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+end
+if self.ability.rental then
+    G.shared_sticker_rental.role.draw_major = self
+    G.shared_sticker_rental:draw_shader('dissolve', nil, nil, nil, self.children.center)
+    G.shared_sticker_rental:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+end'''
+position = 'at'
+match_indent = true
+payload = '''if self.ability.eternal then
+    local t, vt = scale_joker_sticker(G.shared_sticker_eternal, self)
+    G.shared_sticker_eternal.role.draw_major = self
+    G.shared_sticker_eternal:draw_shader('dissolve', nil, nil, nil, self.children.center)
+    G.shared_sticker_eternal:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+    reset_sticker_scale(self, t, vt)
+end
+if self.ability.perishable then
+    local t, vt = scale_joker_sticker(G.shared_sticker_perishable, self)
+    G.shared_sticker_perishable.role.draw_major = self
+    G.shared_sticker_perishable:draw_shader('dissolve', nil, nil, nil, self.children.center)
+    G.shared_sticker_perishable:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+    reset_sticker_scale(self, t, vt)
+end
+if self.ability.rental then
+    local t, vt = scale_joker_sticker(G.shared_sticker_rental, self)
+    G.shared_sticker_rental.role.draw_major = self
+    G.shared_sticker_rental:draw_shader('dissolve', nil, nil, nil, self.children.center)
+    G.shared_sticker_rental:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+    reset_sticker_scale(self, t, vt)
+end'''
+
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''for k, v in pairs(SMODS.Stickers) do
+    if self.ability[v.key] then
+        if v and v.draw and type(v.draw) == 'function' then
+            v:draw(self, layer)
+        else
+            G.shared_stickers[v.key].role.draw_major = self
+            G.shared_stickers[v.key]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+            G.shared_stickers[v.key]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+        end
+    end
+end'''
+position = 'at'
+match_indent = true
+payload = '''for k, v in pairs(SMODS.Stickers) do
+    if self.ability[v.key] then
+        if v and v.draw and type(v.draw) == 'function' then
+            v:draw(self, layer)
+        else
+            local t, vt = scale_joker_sticker(G.shared_stickers[v.key], self)
+            G.shared_stickers[v.key].role.draw_major = self
+            G.shared_stickers[v.key]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+            G.shared_stickers[v.key]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+            reset_sticker_scale(self, t, vt)
+        end
+    end
+end'''
