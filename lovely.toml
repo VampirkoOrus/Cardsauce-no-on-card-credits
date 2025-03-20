@@ -864,3 +864,245 @@ payload = '''for k, v in pairs(SMODS.Stickers) do
         end
     end
 end'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = "context.other_card:is_suit(self.ability.extra.suit) then"
+position = 'at'
+match_indent = true
+payload = "context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or self.ability.extra.suit) then"
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = "self.ability.name == 'Wrathful Joker' or self.ability.name == 'Gluttonous Joker' then loc_vars = {self.ability.extra.s_mult, localize(self.ability.extra.suit, 'suits_singular')}"
+position = 'at'
+match_indent = true
+payload = "self.ability.name == 'Wrathful Joker' or self.ability.name == 'Gluttonous Joker' then loc_vars = {self.ability.extra.s_mult, localize(G.GAME and G.GAME.wigsaw_suit or self.ability.extra.suit, 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or self.ability.extra.suit]}}"
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''context.other_card:is_suit("Diamonds") then'''
+position = 'at'
+match_indent = true
+payload = '''context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or "Diamonds") then'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''context.other_card:is_suit("Clubs") then'''
+position = 'at'
+match_indent = true
+payload = '''context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or "Clubs") then'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''context.other_card:is_suit("Spades") then'''
+position = 'at'
+match_indent = true
+payload = '''context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or "Spades") then'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''context.other_card:is_suit("Hearts") and'''
+position = 'at'
+match_indent = true
+payload = '''context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or "Hearts") and'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''elseif self.ability.name == 'Rough Gem' then loc_vars = {self.ability.extra}
+elseif self.ability.name == 'Bloodstone' then loc_vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), self.ability.extra.odds, self.ability.extra.Xmult}
+elseif self.ability.name == 'Arrowhead' then loc_vars = {self.ability.extra}
+elseif self.ability.name == 'Onyx Agate' then loc_vars = {self.ability.extra}'''
+position = 'at'
+match_indent = true
+payload = '''elseif self.ability.name == 'Rough Gem' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or 'Diamonds', 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Diamonds']}}
+elseif self.ability.name == 'Bloodstone' then loc_vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), self.ability.extra.odds, self.ability.extra.Xmult, localize(G.GAME and G.GAME.wigsaw_suit or 'Hearts', 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Hearts']}}
+elseif self.ability.name == 'Arrowhead' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or 'Spades', 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Spades']}}
+elseif self.ability.name == 'Onyx Agate' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or 'Clubs', 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Clubs']}}'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''context.other_card:is_suit(G.GAME.current_round.ancient_card.suit) then'''
+position = 'at'
+match_indent = true
+payload = '''context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.ancient_card.suit) then'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''elseif self.ability.name == 'Ancient Joker' then loc_vars = {self.ability.extra, localize(G.GAME.current_round.ancient_card.suit, 'suits_singular'), colours = {G.C.SUITS[G.GAME.current_round.ancient_card.suit]}}'''
+position = 'at'
+match_indent = true
+payload = '''elseif self.ability.name == 'Ancient Joker' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.ancient_card.suit, 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.ancient_card.suit]}}'''
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''if not SMODS.has_no_suit(v) and not SMODS.has_no_rank(v) then'''
+position = 'at'
+match_indent = true
+payload = '''if G.GAME and G.GAME.wigsaw_suit and not SMODS.has_no_suit(v) and not SMODS.has_no_rank(v) and v:is_suit(G.GAME.wigsaw_suit) then
+    valid_idol_cards[#valid_idol_cards+1] = v
+elseif not SMODS.has_no_suit(v) and not SMODS.has_no_rank(v) and not G.GAME and G.GAME.wigsaw_suit then'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if v:is_suit('Clubs', nil, true) or v:is_suit('Spades', nil, true) then'''
+position = 'at'
+match_indent = true
+payload = '''if v:is_suit(G.GAME and G.GAME.wigsaw_suit or 'Clubs', nil, true) or v:is_suit(G.GAME and G.GAME.wigsaw_suit or 'Spades', nil, true) then'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''elseif self.ability.name == 'Blackboard' then loc_vars = {self.ability.extra, localize('Spades', 'suits_plural'), localize('Clubs', 'suits_plural')}'''
+position = 'at'
+match_indent = true
+payload = '''elseif self.ability.name == 'Blackboard' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or 'Spades', 'suits_plural'), localize(G.GAME and G.GAME.wigsaw_suit or 'Clubs', 'suits_plural'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Spades'], G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Clubs']}}'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''context.other_card:is_suit(G.GAME.current_round.castle_card.suit) and not context.blueprint then'''
+position = 'at'
+match_indent = true
+payload = '''context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.castle_card.suit) and not context.blueprint then'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''elseif self.ability.name == 'Castle' then loc_vars = {self.ability.extra.chip_mod, localize(G.GAME.current_round.castle_card.suit, 'suits_singular'), self.ability.extra.chips, colours = {G.C.SUITS[G.GAME.current_round.castle_card.suit]}}'''
+position = 'at'
+match_indent = true
+payload = '''elseif self.ability.name == 'Castle' then loc_vars = {self.ability.extra.chip_mod, localize(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.castle_card.suit, 'suits_singular'), self.ability.extra.chips, colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.castle_card.suit]}}'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if suits["Hearts"] > 0 and
+suits["Diamonds"] > 0 and
+suits["Spades"] > 0 and
+suits["Clubs"] > 0 then
+    return {
+        message = localize{type='variable',key='a_xmult',vars={self.ability.extra}},
+        Xmult_mod = self.ability.extra
+    }
+end'''
+position = 'at'
+match_indent = true
+payload = '''if G.GAME and G.GAME.wigsaw_suit then
+    if suits[G.GAME.wigsaw_suit] > 0 then
+        return {
+            message = localize{type='variable',key='a_xmult',vars={self.ability.extra}},
+            Xmult_mod = self.ability.extra
+        }
+    end
+else
+    if suits["Hearts"] > 0 and
+    suits["Diamonds"] > 0 and
+    suits["Spades"] > 0 and
+    suits["Clubs"] > 0 then
+        return {
+            message = localize{type='variable',key='a_xmult',vars={self.ability.extra}},
+            Xmult_mod = self.ability.extra
+        }
+    end
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''elseif self.ability.name == 'Flower Pot' then loc_vars = {self.ability.extra}'''
+position = 'at'
+match_indent = true
+payload = '''elseif self.ability.name == 'Flower Pot' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or 'Diamonds', 'suits_singular'), localize(G.GAME and G.GAME.wigsaw_suit or 'Clubs', 'suits_singular'), localize(G.GAME and G.GAME.wigsaw_suit or 'Hearts', 'suits_singular'), localize(G.GAME and G.GAME.wigsaw_suit or 'Spades', 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Diamonds'], G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Clubs'], G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Hearts'], G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Spades']}}'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if (suits["Hearts"] > 0 or
+suits["Diamonds"] > 0 or
+suits["Spades"] > 0) and
+suits["Clubs"] > 0 then
+    return {
+        message = localize{type='variable',key='a_xmult',vars={self.ability.extra}},
+        Xmult_mod = self.ability.extra
+    }
+end'''
+position = 'at'
+match_indent = true
+payload = '''
+if G.GAME and G.GAME.wigsaw_suit then
+    local function has_any_other_suit(count, suit)
+        for k, v in pairs(count) do
+            if k ~= suit then
+                if v > 0 then
+                    return true
+                end
+            end
+        end
+        return false
+    end
+    local function saw_double(count, suit)
+        if count[suit] > 0 and has_any_other_suit(count, suit) then return true else return false end
+    end
+
+    local hand = context.scoring_hand
+    local suit_tally = {}
+    for i = #SMODS.Suit.obj_buffer, 1, -1 do
+        suit_tally[SMODS.Suit.obj_buffer[i]] = 0
+    end
+    for i = 1, #hand do
+        if not SMODS.has_any_suit(hand[i]) then
+            for k, v in pairs(suit_tally) do
+                if hand[i]:is_suit(k) then suit_tally[k] = suit_tally[k] + 1 end
+            end
+        elseif SMODS.has_any_suit(hand[i]) then
+            if hand[i]:is_suit('Clubs') and suit_tally["Clubs"] == 0 then suit_tally["Clubs"] = suit_tally["Clubs"] + 1
+            elseif hand[i]:is_suit('Diamonds') and suit_tally["Diamonds"] == 0  then suit_tally["Diamonds"] = suit_tally["Diamonds"] + 1
+            elseif hand[i]:is_suit('Spades') and suit_tally["Spades"] == 0  then suit_tally["Spades"] = suit_tally["Spades"] + 1
+            elseif hand[i]:is_suit('Hearts') and suit_tally["Hearts"] == 0  then suit_tally["Hearts"] = suit_tally["Hearts"] + 1 end
+            for k, v in pairs(suit_tally) do
+                if k ~= "Clubs" and k ~= "Diamonds" and k ~= "Hearts" and k ~= "Spades" then
+                    if hand[i]:is_suit(k) and suit_tally[k] == 0  then suit_tally[k] = suit_tally[k] + 1 end
+                end
+            end
+        end
+    end
+    if saw_double(suit_tally, G.GAME and G.GAME.wigsaw_suit or 'Clubs') then
+        return {
+            message = localize{type='variable',key='a_xmult',vars={self.ability.extra}},
+            Xmult_mod = self.ability.extra
+        }
+    end
+else
+    if (suits["Hearts"] > 0 or
+    suits["Diamonds"] > 0 or
+    suits["Spades"] > 0) and
+    suits["Clubs"] > 0 then
+        return {
+            message = localize{type='variable',key='a_xmult',vars={self.ability.extra}},
+            Xmult_mod = self.ability.extra
+        }
+    end
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''elseif self.ability.name == 'Seeing Double' then loc_vars = {self.ability.extra}'''
+position = 'at'
+match_indent = true
+payload = '''elseif self.ability.name == 'Seeing Double' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or 'Clubs', 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Clubs']}}'''
+

@@ -321,7 +321,6 @@ return {
 			k_odio9 = "Armageddon",
 			k_glass = "Glass",
 			k_dontmind = "\"Ah, yes...\"",
-			k_red = "HEARTS!!!",
 			k_werewolves = "Not allowed [That's Werewolves]",
 			k_val_down = "Value Down...",
 			k_worthless_ex = "Worthless!",
@@ -346,6 +345,9 @@ return {
 			k_mug_gone = "I Love My Mug!",
 			k_blackjack = "Blackjack!",
 			a_in_one = " in 1",
+		},
+		v_dictionary = {
+			a_red = "#1#!!!",
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
@@ -927,6 +929,126 @@ return {
 			}
 		},
 		Joker = {
+			j_greedy_joker={
+				name="Greedy Joker",
+				text={
+					"Played cards with",
+					"{V:1}#2#{} suit give",
+					"{C:mult}+#1#{} Mult when scored",
+				},
+			},
+			j_lusty_joker={
+				name="Lusty Joker",
+				text={
+					"Played cards with",
+					"{V:1}#2#{} suit give",
+					"{C:mult}+#1#{} Mult when scored",
+				},
+			},
+			j_wrathful_joker={
+				name="Wrathful Joker",
+				text={
+					"Played cards with",
+					"{V:1}#2#{} suit give",
+					"{C:mult}+#1#{} Mult when scored",
+				},
+			},
+			j_gluttenous_joker={
+				name="Gluttonous Joker",
+				text={
+					"Played cards with",
+					"{V:1}#2#{} suit give",
+					"{C:mult}+#1#{} Mult when scored",
+				},
+			},
+			j_rough_gem={
+				name="Rough Gem",
+				text={
+					"Played cards with",
+					"{V:1}#2#{} suit earn",
+					"{C:money}$#1#{} when scored",
+				},
+				unlock={
+					"Have at least {E:1,C:attention}#1#",
+					"cards with {E:1,C:attention}#2#",
+					"suit in your deck",
+				},
+			},
+			j_bloodstone={
+				name="Bloodstone",
+				text={
+					"{C:green}#1# in #2#{} chance for",
+					"played cards with",
+					"{V:1}#4#{} suit to give",
+					"{X:mult,C:white} X#3# {} Mult when scored",
+				},
+				unlock={
+					"Have at least {E:1,C:attention}#1#",
+					"cards with {E:1,C:attention}#2#",
+					"suit in your deck",
+				},
+			},
+			j_onyx_agate={
+				name="Onyx Agate",
+				text={
+					"Played cards with",
+					"{V:1}#2#{} suit give",
+					"{C:mult}+#1#{} Mult when scored",
+				},
+				unlock={
+					"Have at least {E:1,C:attention}#1#",
+					"cards with {E:1,C:attention}#2#",
+					"suit in your deck",
+				},
+			},
+			j_arrowhead={
+				name="Arrowhead",
+				text={
+					"Played cards with",
+					"{V:1}#2#{} suit give",
+					"{C:chips}+#1#{} Chips when scored",
+				},
+				unlock={
+					"Have at least {E:1,C:attention}#1#",
+					"cards with {E:1,C:attention}#2#",
+					"suit in your deck",
+				},
+			},
+			j_blackboard={
+				name="Blackboard",
+				text={
+					"{X:red,C:white} X#1# {} Mult if all",
+					"cards held in hand",
+					"are {V:1}#2#{} or {V:2}#3#{}",
+				},
+			},
+			j_flower_pot={
+				name="Flower Pot",
+				text={
+					"{X:mult,C:white} X#1# {} Mult if poker",
+					"hand contains a",
+					"{V:1}#2#{} card, {V:2}#3#{} card,",
+					"{V:3}#4#{} card, and {V:4}#5#{} card",
+				},
+				unlock={
+					"Reach Ante",
+					"level {E:1,C:attention}#1#",
+				},
+			},
+			j_seeing_double={
+				name="Seeing Double",
+				text={
+					"{X:mult,C:white} X#1# {} Mult if played",
+					"hand has a scoring",
+					"{V:1}#2#{} card and a scoring",
+					"card of any other {C:attention}suit",
+				},
+				unlock={
+					"Play a hand",
+					"that contains",
+					"{E:1,C:attention}#1#",
+				},
+			},
 			j_csau_diaper = {
 				name = "Diaper Joker",
 				text = {
@@ -1369,7 +1491,7 @@ return {
 				name = "Cousin's Club",
 				text = {
 					"This Joker gains {C:chips}+#2#{} Chips",
-					"for each {C:clubs}Club{} card scored,",
+					"for each {V:1}#3#{} card scored,",
 					"{C:attention}double{} if hand contains a {C:attention}Flush{}",
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",
 				},
@@ -1503,7 +1625,7 @@ return {
 				text = {
 					"{C:green}#1# in #2#{} chance to",
 					"convert all scored",
-					"cards to {C:hearts}Hearts{}",
+					"cards to {V:1}#3#{}",
 				},
 			},
 			j_csau_kerosene = {
@@ -1519,7 +1641,7 @@ return {
 				name = "The Purple Joker",
 				text = {
 					"If {C:attention}first hand{} of round",
-					"contains a {C:attention}Flush{} of {C:spades}Spades{},",
+					"contains a {C:attention}Flush{} of {V:1}#2#{},",
 					"create up to #1# {C:purple}Tarot{} cards",
 					"{C:inactive}(Must have room)",
 				},
@@ -1873,7 +1995,7 @@ return {
 			j_csau_bbq = {
 				name = "Barbeque Shoes",
 				text = {
-					"Earn {C:money}$#1#{} for every {C:attention}#2#{} {C:hearts}Hearts{} in your",
+					"Earn {C:money}$#1#{} for every {C:attention}#2#{} {V:1}#4#{} in your",
 					"{C:attention}full deck{} at end of round",
 					"{C:inactive}(Currently {}{C:money}$#3#{}{C:inactive})"
 				},
@@ -2134,9 +2256,18 @@ return {
 			j_csau_byebye = {
 				name = "Bye-Bye, Norway",
 				text = {
+					"This Joker gains a bonus {C:money}$#1#{} in sell",
+					"value per {C:attention}Face Card{} held in hand",
 					"Sell this Joker to destroy all",
-					"{C:attention}Face Cards{} held in hand and",
-					"earn {C:money}$#1#{} for each"
+					"{C:attention}Face Cards{} held in hand"
+				},
+			},
+			j_csau_wigsaw = {
+				name = "Wigsaw",
+				text = {
+					"All {C:attention}suit{} effects instead target the suit",
+					"with the {C:attention}most cards{} in your full deck",
+					"{C:inactive}(Not active if {C:attention}2 or more suits{C:inactive} are tied)"
 				},
 			},
 		},

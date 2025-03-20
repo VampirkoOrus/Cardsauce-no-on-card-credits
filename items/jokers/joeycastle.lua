@@ -13,7 +13,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "guestartist9", set = "Other"}
-    return { vars = { card.ability.money, localize(G.GAME.current_round.joeycastle.suit, 'suits_singular'), colours = {G.C.SUITS[G.GAME.current_round.joeycastle.suit]} }}
+    return { vars = { card.ability.money, localize(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.joeycastle.suit, 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.joeycastle.suit]} }}
 end
 
 function jokerInfo.add_to_deck(self, card)
@@ -21,7 +21,7 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.discard and not context.other_card.debuff and context.other_card:is_suit(G.GAME.current_round.joeycastle.suit) and not context.blueprint then
+    if context.discard and not context.other_card.debuff and context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.joeycastle.suit) and not context.blueprint then
         return {
             dollars = to_big(card.ability.money),
             colour = G.C.MONEY,

@@ -274,6 +274,8 @@ if twoPointO then
 		'tetris',
 		'skeletonmetal',
 		'byebye',
+		--Legendary
+		'wigsaw',
 
 		-- Jojo Jokers
 		'jokerdrive',
@@ -545,7 +547,9 @@ function SMODS.current_mod.reset_game_globals(run_start)
 	local valid_choicevoice_cards = {}
 	for _, v in ipairs(G.playing_cards) do
 		if not SMODS.has_no_suit(v) then
-			valid_choicevoice_cards[#valid_choicevoice_cards+1] = v
+			if (G.GAME and G.GAME.wigsaw_suit and v:is_suit(G.GAME.wigsaw_suit)) or (G.GAME and not G.GAME.wigsaw_suit) then
+				valid_choicevoice_cards[#valid_choicevoice_cards+1] = v
+			end
 		end
 	end
 	if valid_choicevoice_cards[1] then

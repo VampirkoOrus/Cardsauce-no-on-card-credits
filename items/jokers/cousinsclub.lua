@@ -16,7 +16,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
-	return { vars = {card.ability.extra.chips, card.ability.extra.chip_mod} }
+	return { vars = {card.ability.extra.chips, card.ability.extra.chip_mod, localize(G.GAME and G.GAME.wigsaw_suit or "Clubs", 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or "Clubs"]}} }
 end
 
 function jokerInfo.add_to_deck(self, card)
@@ -24,7 +24,7 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.individual and context.cardarea == G.play and not card.debuff and not context.blueprint and context.other_card:is_suit('Clubs') then
+	if context.individual and context.cardarea == G.play and not card.debuff and not context.blueprint and context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or "Clubs") then
 		local chip = to_big(card.ability.extra.chip_mod)
 		if next(context.poker_hands['Flush']) then
 			chip = to_big(chip) * to_big(2)
@@ -35,7 +35,7 @@ function jokerInfo.calculate(self, card, context)
 			card = card
 		}
 	end
-	if context.joker_main and context.cardarea == G.jokers then
+	if context.joker_main and context.cardarea == G.jokers and to_big(card.ability.extra.chips) > to_big(0) then
 		return {
 			message = localize{type='variable',key='a_chips',vars={to_big(card.ability.extra.chips)}},
 			chip_mod = card.ability.extra.chips, 
