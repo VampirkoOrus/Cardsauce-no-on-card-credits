@@ -339,14 +339,6 @@ match_indent = true
 
 [[patches]]
 [patches.pattern]
-target = "card.lua"
-pattern = "if self.ability.name == 'Hologram' then"
-position = "at"
-payload = "if self.ability.name == 'Hologram' or self.ability.name == 'Shrimp Joker' then"
-match_indent = true
-
-[[patches]]
-[patches.pattern]
 target = "functions/common_events.lua"
 pattern = "{n=G.UIT.O, config={object = DynaText({string = {' '..localize('ph_mr_bones')..' '}, colours = {G.C.FILTER}, shadow = true, pop_in = 0, scale = 0.5*scale, silent = true})}}"
 position = "at"
@@ -620,40 +612,6 @@ if fool_c == 'c_csau_arrow' then
     last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set, vars = { G.GAME.max_stands or 1, (card.area.config.collection and localize('k_stand')) or (G.GAME.max_stands > 1 and localize('b_stand_cards') or localize('k_stand')) }} or localize('k_none')
 else
     last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set} or localize('k_none')
-end
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = 'card.lua'
-pattern = "if self.ability.name == 'Invisible Joker' and (self.config.center.discovered or self.bypass_discovery_center) then"
-match_indent = true
-position = 'before'
-payload = '''
-if self.cured_debuff then
-    self.children.center:draw_shader('debuff', nil, self.ARGS.send_to_shader)
-    if self.children.front and self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card then
-        self.children.front:draw_shader('debuff', nil, self.ARGS.send_to_shader)
-    end
-end
-'''
-
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''
-if self.debuff then
-    self.children.center:draw_shader('debuff', nil, self.ARGS.send_to_shader)
-'''
-position = "before"
-payload = '''
-if self.ability.stand_overlay then
-    if not G[self.config.center.key..'_overlay'] then
-        G[self.config.center.key..'_overlay'] = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS[string.sub(self.config.center.key, 3)], {x = 3,y = 0})
-    end
-    G[self.config.center.key..'_overlay'].role.draw_major = self
-    G[self.config.center.key..'_overlay']:draw_shader('dissolve', nil, nil, nil, self.children.center)
 end
 '''
 match_indent = true
@@ -1030,73 +988,10 @@ payload = '''elseif self.ability.name == 'Flower Pot' then loc_vars = {self.abil
 [[patches]]
 [patches.pattern]
 target = 'card.lua'
-pattern = '''if (suits["Hearts"] > 0 or
-suits["Diamonds"] > 0 or
-suits["Spades"] > 0) and
-suits["Clubs"] > 0 then
-    return {
-        message = localize{type='variable',key='a_xmult',vars={self.ability.extra}},
-        Xmult_mod = self.ability.extra
-    }
-end'''
+pattern = "if SMODS.seeing_double_check(context.scoring_hand, 'Clubs') then"
 position = 'at'
 match_indent = true
-payload = '''
-if G.GAME and G.GAME.wigsaw_suit then
-    local function has_any_other_suit(count, suit)
-        for k, v in pairs(count) do
-            if k ~= suit then
-                if v > 0 then
-                    return true
-                end
-            end
-        end
-        return false
-    end
-    local function saw_double(count, suit)
-        if count[suit] > 0 and has_any_other_suit(count, suit) then return true else return false end
-    end
-
-    local hand = context.scoring_hand
-    local suit_tally = {}
-    for i = #SMODS.Suit.obj_buffer, 1, -1 do
-        suit_tally[SMODS.Suit.obj_buffer[i]] = 0
-    end
-    for i = 1, #hand do
-        if not SMODS.has_any_suit(hand[i]) then
-            for k, v in pairs(suit_tally) do
-                if hand[i]:is_suit(k) then suit_tally[k] = suit_tally[k] + 1 end
-            end
-        elseif SMODS.has_any_suit(hand[i]) then
-            if hand[i]:is_suit('Clubs') and suit_tally["Clubs"] == 0 then suit_tally["Clubs"] = suit_tally["Clubs"] + 1
-            elseif hand[i]:is_suit('Diamonds') and suit_tally["Diamonds"] == 0  then suit_tally["Diamonds"] = suit_tally["Diamonds"] + 1
-            elseif hand[i]:is_suit('Spades') and suit_tally["Spades"] == 0  then suit_tally["Spades"] = suit_tally["Spades"] + 1
-            elseif hand[i]:is_suit('Hearts') and suit_tally["Hearts"] == 0  then suit_tally["Hearts"] = suit_tally["Hearts"] + 1 end
-            for k, v in pairs(suit_tally) do
-                if k ~= "Clubs" and k ~= "Diamonds" and k ~= "Hearts" and k ~= "Spades" then
-                    if hand[i]:is_suit(k) and suit_tally[k] == 0  then suit_tally[k] = suit_tally[k] + 1 end
-                end
-            end
-        end
-    end
-    if saw_double(suit_tally, G.GAME and G.GAME.wigsaw_suit or 'Clubs') then
-        return {
-            message = localize{type='variable',key='a_xmult',vars={self.ability.extra}},
-            Xmult_mod = self.ability.extra
-        }
-    end
-else
-    if (suits["Hearts"] > 0 or
-    suits["Diamonds"] > 0 or
-    suits["Spades"] > 0) and
-    suits["Clubs"] > 0 then
-        return {
-            message = localize{type='variable',key='a_xmult',vars={self.ability.extra}},
-            Xmult_mod = self.ability.extra
-        }
-    end
-end
-'''
+payload = "if SMODS.seeing_double_check(context.scoring_hand, G.GAME and G.GAME.wigsaw_suit or 'Clubs') then"
 
 [[patches]]
 [patches.pattern]

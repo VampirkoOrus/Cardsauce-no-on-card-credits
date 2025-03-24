@@ -1,5 +1,5 @@
 local packInfo = {
-    name = 'Jumbo Analog Pack',
+    name = 'Analog',
     alerted = true,
     config = {
         extra = 6,

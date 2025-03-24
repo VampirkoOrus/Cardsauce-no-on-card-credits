@@ -36,6 +36,7 @@ function consumInfo.use(self, card, context)
         card:juice_up(0.3, 0.5)
         return true end }))
     delay(0.6)
+    SMODS.calculate_context({vhs_death = true, card = card})
 end
 
 function consumInfo.can_use(self, card)

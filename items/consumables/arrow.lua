@@ -36,10 +36,14 @@ stand_count = function()
     return count
 end
 
-replace_stand = function()
+replace_stand = function(evolve)
+    evolve = evolve or false
     local card = get_replaceable_stand()
     local new_stand_key = pseudorandom_element(get_current_pool('Stand', nil, nil, 'arrow'), pseudoseed('arrowreplace'))
     G.FUNCS.transform_card(card, new_stand_key)
+    if not evolve then
+        SMODS.calculate_context({replace_stand = true})
+    end
 end
 
 new_stand = function()

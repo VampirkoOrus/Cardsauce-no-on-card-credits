@@ -274,11 +274,18 @@ if twoPointO then
 		'tetris',
 		'skeletonmetal',
 		'byebye',
+		'ufo',
 		--Legendary
 		'wigsaw',
 
+		-- RLM Jokers
+		'weretrulyfrauds',
+		'junka',
+
 		-- Jojo Jokers
+		'gravity',
 		'jokerdrive',
+		'photodad',
 		'no2joker',
 		'sotw',
 	}
@@ -835,6 +842,42 @@ G.FUNCS.csau_add_chance = function(num, multiply, startAtOne)
 	end
 end
 
+local old_draw_step_fs = SMODS.DrawSteps.floating_sprite.func
+SMODS.DrawStep:take_ownership('floating_sprite', {
+	func = function(self, layer)
+		old_draw_step_fs(self,layer)
+		local scale_mod = 0.07 + 0.02*math.sin(1.8*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
+		local rotate_mod = 0.05*math.sin(1.219*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2
+		if self.config.center.soul_pos and (self.config.center.discovered or self.bypass_discovery_center) then
+			if self.config.center.key == "j_csau_shrimp" then
+				self.hover_tilt = self.hover_tilt*1.5
+				self.children.floating_sprite:draw_shader('hologram', nil, self.ARGS.send_to_shader, nil, self.children.center, 2*scale_mod, 2*rotate_mod)
+				self.hover_tilt = self.hover_tilt/1.5
+			end
+		end
+		if self.ability.stand_overlay then
+			if not G[self.config.center.key..'_overlay'] then
+				G[self.config.center.key..'_overlay'] = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS[string.sub(self.config.center.key, 3)], {x = 3,y = 0})
+			end
+			G[self.config.center.key..'_overlay'].role.draw_major = self
+			G[self.config.center.key..'_overlay']:draw_shader('dissolve', nil, nil, nil, self.children.center)
+		end
+	end,
+})
+
+local old_draw_step_db = SMODS.DrawSteps.debuff.func
+SMODS.DrawStep:take_ownership('debuff', {
+	func = function(self, layer)
+		old_draw_step_db(self,layer)
+		if self.cured_debuff then
+			self.children.center:draw_shader('debuff', nil, self.ARGS.send_to_shader)
+			if self.children.front and self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card then
+				self.children.front:draw_shader('debuff', nil, self.ARGS.send_to_shader)
+			end
+		end
+	end,
+})
+
 
 SMODS.Atlas({ key = 'csau_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
 
@@ -893,12 +936,19 @@ if twoPointO and #conf_cardsauce.vhsToLoad > 0 then
 						 return true
 					 end
 				}))
+				G.E_MANAGER:add_event(Event({trigger = 'after',
+					 func = function()
+						 SMODS.calculate_context({vhs_death = true, card = card})
+						 return true
+					 end
+				}))
 				if ach then
 					check_for_unlock({ type = ach })
 				end
 				return true
 			end
 		}))
+
 	end
 end
 
@@ -3720,6 +3770,7 @@ vs_credit_30 = "Crisppyboat"
 vs_credit_31 = "Alli"
 vs_credit_32 = "Lyman"
 vs_credit_33 = "AlizarinRed"
+vs_credit_34 = "PaperMoon"
 vs_credit_st1 = "tortoise"
 vs_credit_st2 = "Protokyuuu"
 vs_credit_st3 = "ShrineFox"
@@ -3873,6 +3924,9 @@ SMODS.current_mod.credits_tab = function()
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_33, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_34, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},
