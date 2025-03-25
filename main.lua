@@ -879,6 +879,38 @@ SMODS.DrawStep:take_ownership('floating_sprite', {
 	end,
 })
 
+SMODS.DrawStep:take_ownership('stickers', {
+	func = function(self, layer)
+        if self.sticker and G.shared_stickers[self.sticker] then
+			local t, vt = scale_joker_sticker(G.shared_stickers[self.sticker], self)
+            G.shared_stickers[self.sticker].role.draw_major = self
+            G.shared_stickers[self.sticker]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+            G.shared_stickers[self.sticker]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+			reset_sticker_scale(self, t, vt)
+		elseif (self.sticker_run and G.shared_stickers[self.sticker_run]) and G.SETTINGS.run_stake_stickers then
+            local t, vt = scale_joker_sticker(G.shared_stickers[self.sticker_run], self)
+			G.shared_stickers[self.sticker_run].role.draw_major = self
+            G.shared_stickers[self.sticker_run]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+            G.shared_stickers[self.sticker_run]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+			reset_sticker_scale(self, t, vt)
+		end
+
+        for k, v in pairs(SMODS.Stickers) do
+            if self.ability[v.key] then
+                if v and v.draw and type(v.draw) == 'function' then
+                    v:draw(self, layer)
+                else
+					local t, vt = scale_joker_sticker(G.shared_stickers[v.key], self)
+                    G.shared_stickers[v.key].role.draw_major = self
+                    G.shared_stickers[v.key]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+                    G.shared_stickers[v.key]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+					reset_sticker_scale(self, t, vt)
+				end
+            end
+        end
+    end,
+})
+
 local old_draw_step_db = SMODS.DrawSteps.debuff.func
 SMODS.DrawStep:take_ownership('debuff', {
 	func = function(self, layer)
@@ -891,7 +923,6 @@ SMODS.DrawStep:take_ownership('debuff', {
 		end
 	end,
 })
-
 
 SMODS.Atlas({ key = 'csau_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
 
