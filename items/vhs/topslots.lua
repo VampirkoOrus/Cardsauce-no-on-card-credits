@@ -83,6 +83,7 @@ function consumInfo.use(self, card, area, copier)
             return true end }))
     end
     delay(0.6)
+    SMODS.calculate_context({vhs_death = true, card = card})
 end
 
 function consumInfo.can_use(self, card)

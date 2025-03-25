@@ -34,10 +34,8 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.before and card.ability.activated then
+    if context.joker_main and context.cardarea == G.jokers and card.ability.activated then
         card.ability.extra.uses = card.ability.extra.uses+1
-    end
-    if card.ability.activated and context.main_scoring then
         return {
             x_mult = card.ability.extra.x_mult,
             card = card

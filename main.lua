@@ -272,9 +272,23 @@ if twoPointO then
 		'bsi',
 		--Rare
 		'tetris',
+		'skeletonmetal',
+		'byebye',
+		'ufo',
+		--Legendary
+		'wigsaw',
+
+		-- RLM Jokers
+		'hack',
+		'endlesstrash',
+		'genres',
+		'weretrulyfrauds',
+		'junka',
 
 		-- Jojo Jokers
+		'gravity',
 		'jokerdrive',
+		'photodad',
 		'no2joker',
 		'sotw',
 	}
@@ -395,12 +409,14 @@ G.FUNCS.csau_set_big_sprites = function(self, card)
 	end
 end
 
-G.FUNCS.csau_generate_detail_desc = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table, key)
+G.FUNCS.csau_generate_detail_desc = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table, key, no_title)
+	no_title = no_title or false
 	key = key or card.config.center.key
-	if card.config.center.discovered then
+	if card.config.center.discovered and not no_title then
 		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
 		full_UI_table.name = localize{type = 'name', key = key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
 	end
+
 	if mod.config['detailedDescs'] and G.localization.descriptions.Joker[key.."_detailed"] then
 		localize{type = 'descriptions', key = key.."_detailed", set = self.set, nodes = desc_nodes, vars = self.loc_vars and self.loc_vars(self, info_queue, card).vars or {}}
 	else
@@ -541,7 +557,9 @@ function SMODS.current_mod.reset_game_globals(run_start)
 	local valid_choicevoice_cards = {}
 	for _, v in ipairs(G.playing_cards) do
 		if not SMODS.has_no_suit(v) then
-			valid_choicevoice_cards[#valid_choicevoice_cards+1] = v
+			if (G.GAME and G.GAME.wigsaw_suit and v:is_suit(G.GAME.wigsaw_suit)) or (G.GAME and not G.GAME.wigsaw_suit) then
+				valid_choicevoice_cards[#valid_choicevoice_cards+1] = v
+			end
 		end
 	end
 	if valid_choicevoice_cards[1] then
@@ -827,6 +845,53 @@ G.FUNCS.csau_add_chance = function(num, multiply, startAtOne)
 	end
 end
 
+G.FUNCS.get_vhs_count = function()
+	if not G.consumables then return 0 end
+	local count = 0
+	for i, v in ipairs(G.consumeables.cards) do
+		if v.ability.set == "VHS" then
+			count = count+1
+		end
+	end
+	return count
+end
+
+local old_draw_step_fs = SMODS.DrawSteps.floating_sprite.func
+SMODS.DrawStep:take_ownership('floating_sprite', {
+	func = function(self, layer)
+		old_draw_step_fs(self,layer)
+		local scale_mod = 0.07 + 0.02*math.sin(1.8*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
+		local rotate_mod = 0.05*math.sin(1.219*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2
+		if self.config.center.soul_pos and (self.config.center.discovered or self.bypass_discovery_center) then
+			if self.config.center.key == "j_csau_shrimp" then
+				self.hover_tilt = self.hover_tilt*1.5
+				self.children.floating_sprite:draw_shader('hologram', nil, self.ARGS.send_to_shader, nil, self.children.center, 2*scale_mod, 2*rotate_mod)
+				self.hover_tilt = self.hover_tilt/1.5
+			end
+		end
+		if self.ability.stand_overlay then
+			if not G[self.config.center.key..'_overlay'] then
+				G[self.config.center.key..'_overlay'] = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS[string.sub(self.config.center.key, 3)], {x = 3,y = 0})
+			end
+			G[self.config.center.key..'_overlay'].role.draw_major = self
+			G[self.config.center.key..'_overlay']:draw_shader('dissolve', nil, nil, nil, self.children.center)
+		end
+	end,
+})
+
+local old_draw_step_db = SMODS.DrawSteps.debuff.func
+SMODS.DrawStep:take_ownership('debuff', {
+	func = function(self, layer)
+		old_draw_step_db(self,layer)
+		if self.cured_debuff then
+			self.children.center:draw_shader('debuff', nil, self.ARGS.send_to_shader)
+			if self.children.front and self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card then
+				self.children.front:draw_shader('debuff', nil, self.ARGS.send_to_shader)
+			end
+		end
+	end,
+})
+
 
 SMODS.Atlas({ key = 'csau_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
 
@@ -885,12 +950,19 @@ if twoPointO and #conf_cardsauce.vhsToLoad > 0 then
 						 return true
 					 end
 				}))
+				G.E_MANAGER:add_event(Event({trigger = 'after',
+					 func = function()
+						 SMODS.calculate_context({vhs_death = true, card = card})
+						 return true
+					 end
+				}))
 				if ach then
 					check_for_unlock({ type = ach })
 				end
 				return true
 			end
 		}))
+
 	end
 end
 
@@ -3712,6 +3784,7 @@ vs_credit_30 = "Crisppyboat"
 vs_credit_31 = "Alli"
 vs_credit_32 = "Lyman"
 vs_credit_33 = "AlizarinRed"
+vs_credit_34 = "PaperMoon"
 vs_credit_st1 = "tortoise"
 vs_credit_st2 = "Protokyuuu"
 vs_credit_st3 = "ShrineFox"
@@ -3865,6 +3938,9 @@ SMODS.current_mod.credits_tab = function()
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_33, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_34, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},

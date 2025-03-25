@@ -13,7 +13,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "guestartist18", set = "Other"}
-    return {vars = { card.ability.tarot } }
+    return {vars = { card.ability.tarot, localize(G.GAME and G.GAME.wigsaw_suit or "Spades", 'suits_plural'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or "Spades"]} } }
 end
 
 function jokerInfo.add_to_deck(self, card)
@@ -22,7 +22,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff and to_big(G.GAME.current_round.hands_played) == to_big(0) and next(context.poker_hands['Flush']) then
-        local purp = G.FUNCS.csau_all_suit(context, "Spades")
+        local purp = G.FUNCS.csau_all_suit(context, G.GAME and G.GAME.wigsaw_suit or "Spades")
         if purp then
             for i = 1, math.min(card.ability.tarot, G.consumeables.config.card_limit - #G.consumeables.cards) do
                 G.E_MANAGER:add_event(Event({func = function()
