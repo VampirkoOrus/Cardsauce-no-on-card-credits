@@ -924,19 +924,6 @@ SMODS.DrawStep:take_ownership('debuff', {
 	end,
 })
 
-SMODS.DrawStep:take_ownership('debuff', {
-	func = function(self, layer)
-		old_draw_step_db(self,layer)
-		if self.cured_debuff then
-			self.children.center:draw_shader('debuff', nil, self.ARGS.send_to_shader)
-			if self.children.front and self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card then
-				self.children.front:draw_shader('debuff', nil, self.ARGS.send_to_shader)
-			end
-		end
-	end,
-})
-
-
 SMODS.Atlas({ key = 'csau_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
 
 if twoPointO and #conf_cardsauce.vhsToLoad > 0 then
