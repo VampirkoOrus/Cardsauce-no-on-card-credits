@@ -2168,6 +2168,28 @@ return {
 					"in the shop are {C:attention}free{}",
 				},
 			},
+			j_csau_genres = {
+				name = "Battle of the Genres",
+				text = {
+					"{C:attention}+#1#{} Hand Size for each {C:vhs}VHS Tape{} held",
+					"{C:inactive}(Currently {}{C:attention}+#2#{}{C:inactive} Hand Size{}{C:inactive}){}",
+				},
+			},
+			j_csau_endlesstrash = {
+				name = "ENDLESS TRASH",
+				text = {
+					"{C:mult}+#1#{} Discard for each {C:vhs}VHS Tape{} held",
+				},
+			},
+			j_csau_hack = {
+				name = "Hack Fraud",
+				text = {
+					"{C:chips}+#1#{} Chips per unique",
+					"{C:vhs}VHS Tape{} obtained this run",
+					"Double if {C:attention}Director's Cut{} is redeemed",
+					"{C:inactive}(Currently {C:chips}+#2#{}{C:inactive} Chips)",
+				},
+			},
 		},
 		VHS = {
 			c_csau_blackspine = {

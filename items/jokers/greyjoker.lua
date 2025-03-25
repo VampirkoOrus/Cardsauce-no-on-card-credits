@@ -15,10 +15,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {card.ability.extra} }
 end
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_grey" })
-end
-
 function jokerInfo.calculate(self, card, context)
 	if context.setting_blind and not card.getting_sliced and not card.debuff then
 		if not (context.blueprint_card or card).getting_sliced then

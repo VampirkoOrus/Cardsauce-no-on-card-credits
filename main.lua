@@ -279,6 +279,9 @@ if twoPointO then
 		'wigsaw',
 
 		-- RLM Jokers
+		'hack',
+		'endlesstrash',
+		'genres',
 		'weretrulyfrauds',
 		'junka',
 
@@ -840,6 +843,17 @@ G.FUNCS.csau_add_chance = function(num, multiply, startAtOne)
 			end
 		end
 	end
+end
+
+G.FUNCS.get_vhs_count = function()
+	if not G.consumables then return 0 end
+	local count = 0
+	for i, v in ipairs(G.consumeables.cards) do
+		if v.ability.set == "VHS" then
+			count = count+1
+		end
+	end
+	return count
 end
 
 local old_draw_step_fs = SMODS.DrawSteps.floating_sprite.func
