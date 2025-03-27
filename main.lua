@@ -10,6 +10,7 @@
 --- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1406b]
 
 SMODS.current_mod.optional_features = {
+	quantum_enhancements = true,
 	retrigger_joker = true,
 	post_trigger = true,
 	quantum_enhancements = true,
@@ -215,6 +216,7 @@ if twoPointO then
 		'crazydiamond',
 		'moodyblues',
 		'metallica',
+		'epitaph',
 		'd4c',
 	}
 	conf_cardsauce.tagsToLoad = {
@@ -297,6 +299,7 @@ if twoPointO then
 		conf_cardsauce.jokersToLoad[#conf_cardsauce.jokersToLoad+1] = k
 	end
 	conf_cardsauce.decksToLoad[#conf_cardsauce.decksToLoad+1] = 'varg'
+	conf_cardsauce.decksToLoad[#conf_cardsauce.decksToLoad+1] = 'cbt'
 	conf_cardsauce.decksToLoad[#conf_cardsauce.decksToLoad+1] = 'wheel'
 	conf_cardsauce.decksToLoad[#conf_cardsauce.decksToLoad+1] = 'disc'
 	conf_cardsauce.packsToLoad = {
@@ -305,6 +308,12 @@ if twoPointO then
 		'analog3',
 		'analog4',
 	}
+end
+
+local jerma = false
+
+if jerma then
+	conf_cardsauce.jokersToLoad[#conf_cardsauce.jokersToLoad+1] = 'jerma'
 end
 
 local start = Game.start_run
@@ -677,6 +686,41 @@ G.FUNCS.transform_card = function(card, to_key)
 	end
 end
 
+G.FUNCS.talking_card = function(card, dialogue)
+	G.E_MANAGER:add_event(Event({
+		trigger = 'before',
+		delay = 0.0,
+		blockable = false,
+		blocking = false,
+		func = function()
+			card:vic_say_stuff(dialogue.shake or 2, nil, true, dialogue.sound or nil)
+			local speech_key = dialogue.message
+			card:vic_add_speech_bubble(speech_key, dialogue.top and 'tm' or 'bm', nil, {text_alignment = "cm"})
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					if dialogue.start_func then
+						dialogue.start_func(card)
+					end
+					return true
+				end
+			}))
+			G.E_MANAGER:add_event(Event({
+				trigger = 'after',
+				delay = dialogue.delay or 8,
+				blocking = false,
+				func = function()
+					card:vic_remove_speech_bubble()
+					if dialogue.end_func then
+						dialogue.end_func(card)
+					end
+					return true
+				end
+			}))
+			return true
+		end
+	}))
+end
+
 function get_stand_overlay(card)
 	return mod[card.config.center.key..'_overlay']
 end
@@ -711,7 +755,7 @@ function G.UIDEF.use_and_sell_buttons(card)
 					}}
 				}}
 			}}
-			if not card.config.center.unpauseable then
+			if not card.ability.unpauseable then
 				pull = {n=G.UIT.R, config={align = 'cr', minw = 1.7*G.CARD_W}, nodes={
 					{n=G.UIT.R, config={minh = 0.65}},
 					{n=G.UIT.R, nodes = {
@@ -766,11 +810,7 @@ G.FUNCS.can_reserve_card = function(e)
 		if not e.config.colour == G.C.IMPORTANT then
 			e.config.colour = G.C.RED
 		end
-		if (e.config.ref_table.config.center.activation and e.config.activate) or e.config.pull then
-			e.config.button = "reserve_card"
-		else
-			e.config.button = "use_card"
-		end
+		e.config.button = "reserve_card"
 	else
 		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
 		e.config.button = nil
@@ -949,7 +989,7 @@ if twoPointO and #conf_cardsauce.vhsToLoad > 0 then
 	}
 
 	G.FUNCS.tape_activate = function(card)
-		if not card.config.center.activation then return end
+		if not card.ability.activation then return end
 		if card.ability.activated then
 			card.ability.activated = false
 			play_sound('csau_vhsclose', 0.9 + math.random()*0.1, 0.4)
@@ -3817,6 +3857,7 @@ vs_credit_31 = "Alli"
 vs_credit_32 = "Lyman"
 vs_credit_33 = "AlizarinRed"
 vs_credit_34 = "PaperMoon"
+vs_credit_35 = "yankee101"
 vs_credit_st1 = "tortoise"
 vs_credit_st2 = "Protokyuuu"
 vs_credit_st3 = "ShrineFox"
@@ -3973,6 +4014,9 @@ SMODS.current_mod.credits_tab = function()
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_34, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_35, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},

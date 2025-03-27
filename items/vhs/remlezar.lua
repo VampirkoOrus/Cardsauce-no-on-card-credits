@@ -4,10 +4,9 @@ local consumInfo = {
     set = "VHS",
     cost = 3,
     alerted = true,
-    activation = true,
     config = {
-        extra = {
-        },
+        activation = true,
+        unpauseable = true,
         activated = false,
         slide_move = 0,
         slide_out_delay = 0,

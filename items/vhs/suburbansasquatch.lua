@@ -4,8 +4,8 @@ local consumInfo = {
     set = "VHS",
     cost = 3,
     alerted = true,
-    activation = true,
     config = {
+        activation = true,
         extra = {
         },
         activated = false,

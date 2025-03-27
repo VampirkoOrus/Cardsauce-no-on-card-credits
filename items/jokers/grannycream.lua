@@ -84,7 +84,6 @@ function Game:update(dt)
             obj.pos.y = obj.pos.y + 1
         end
     end
-
 end
 
 return jokerInfo

@@ -1,3 +1,5 @@
+local mod = SMODS.current_mod
+
 SMODS.Shader {
     key = 'bootleg',
     path = 'bootleg.fs',
@@ -381,42 +383,46 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
             desc_nodes[#desc_nodes+1] = main_end
         end
     else
-        info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
-        set_discover_tallies()
-        local tally = G.DISCOVER_TALLIES.jokers.of
-        local main_start = {
-            {n=G.UIT.T, config={text = tally..localize('a_in_one'), colour = G.C.DARK_EDITION, scale = 0.4}},
-        }
-        local main_end = {
-            {n=G.UIT.O, config={object = DynaText(
-                    {string = {
-                        {string = '0 . rand()', colour = G.C.JOKER_GREY},
-                        get_all_in_one_joker(card),
-                        get_all_in_one_joker(card),
-                        get_all_in_one_joker(card),
-                        get_all_in_one_joker(card),
-                        get_all_in_one_joker(card),
-                        get_all_in_one_joker(card),
-                        get_all_in_one_joker(card),
-                        get_all_in_one_joker(card),
-                        get_all_in_one_joker(card),
-                        get_all_in_one_joker(card),
-                        get_all_in_one_joker(card),
-                        get_all_in_one_joker(card),
-                        get_all_in_one_joker(card)
-                    },
-                     colours = {G.C.UI.TEXT_DARK},
-                     pop_in_rate = 9999999,
-                     silent = true,
-                     random_element = true,
-                     pop_delay = 0.2011,
-                     scale = 0.32,
-                     min_cycle_time = 0
-                    }
-            )}},
-        }
-        desc_nodes[#desc_nodes+1] = main_start
-        desc_nodes[#desc_nodes+1] = main_end
+        if mod.config['detailedDescs'] then
+            G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table, nil, true)
+        else
+            info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+            set_discover_tallies()
+            local tally = G.DISCOVER_TALLIES.jokers.of
+            local main_start = {
+                {n=G.UIT.T, config={text = tally..localize('a_in_one'), colour = G.C.DARK_EDITION, scale = 0.4}},
+            }
+            local main_end = {
+                {n=G.UIT.O, config={object = DynaText(
+                        {string = {
+                            {string = '0 . rand()', colour = G.C.JOKER_GREY},
+                            get_all_in_one_joker(card),
+                            get_all_in_one_joker(card),
+                            get_all_in_one_joker(card),
+                            get_all_in_one_joker(card),
+                            get_all_in_one_joker(card),
+                            get_all_in_one_joker(card),
+                            get_all_in_one_joker(card),
+                            get_all_in_one_joker(card),
+                            get_all_in_one_joker(card),
+                            get_all_in_one_joker(card),
+                            get_all_in_one_joker(card),
+                            get_all_in_one_joker(card),
+                            get_all_in_one_joker(card)
+                        },
+                         colours = {G.C.UI.TEXT_DARK},
+                         pop_in_rate = 9999999,
+                         silent = true,
+                         random_element = true,
+                         pop_delay = 0.2011,
+                         scale = 0.32,
+                         min_cycle_time = 0
+                        }
+                )}},
+            }
+            desc_nodes[#desc_nodes+1] = main_start
+            desc_nodes[#desc_nodes+1] = main_end
+        end
     end
 end
 

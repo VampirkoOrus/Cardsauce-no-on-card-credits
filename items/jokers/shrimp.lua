@@ -56,6 +56,15 @@ function jokerInfo.calculate(self, card, context)
 				}
 			end
 		end
+		if context.cardarea == G.hand then
+			if context.other_card.seal == 'Red' then
+				return {
+					message = localize('k_again_ex'),
+					repetitions = 1,
+					card = card
+				}
+			end
+		end
 	end
 	if context.discard and not card.debuff then
 		if context.other_card.seal == 'Purple' and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then

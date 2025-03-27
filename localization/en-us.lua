@@ -94,6 +94,20 @@ return {
 				"A {C:planet}Planet{} card for",
 				"you, my friend!"
 			},
+			jerma_lootget = {
+				"LOOT GET!"
+			},
+			jerma_blood = {
+				"THERE'S {C:red}BLOOD{}",
+				"IN THE BOX"
+			},
+			jerma_perfect = {
+				"Absolute perfection."
+			},
+			jerma_godgamer = {
+				"What a GOD of a",
+				"gamer, seriously."
+			},
 			chad_greeting1 = {
 				"Ah! Greetings, Cloud!"
 			},
@@ -345,7 +359,8 @@ return {
 			k_mug_gone = "I Love My Mug!",
 			k_blackjack = "Blackjack!",
 			a_in_one = " in 1",
-			k_junka_lose = "Loser!"
+			k_junka_lose = "Loser!",
+			k_metal = "Metal!",
 		},
 		v_dictionary = {
 			a_red = "#1#!!!",
@@ -737,6 +752,12 @@ return {
 				name = "Artist",
 				text = {
 					"{E:1}PaperMoon{}",
+				},
+			},
+			guestartist30 = {
+				name = "Artist",
+				text = {
+					"{E:1}yankee101{}",
 				},
 			},
 			twoartists0 = {
@@ -2050,6 +2071,12 @@ return {
 					"{C:inactive}(Currently {C:chips}+#1#{}{C:inactive} Chips)",
 				},
 			},
+			j_csau_jerma = {
+				name = "Joker985",
+				text = {
+					"{E:1,s:1.3,C:dark_edition}I'm invading this mod!{}",
+				},
+			},
 			j_csau_jokerdrive = {
 				name = "Jokerdrive",
 				text = {
@@ -2099,7 +2126,14 @@ return {
 				name = "Bootleg Joker",
 				text = {
 					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			j_csau_bootleg_detailed = {
+				name = "Bootleg Joker",
+				text = {
+					"{C:attention}Transforms{} into a random",
+					"Joker during each {C:attention}round{}",
+					"{C:inactive}(bugs are a feature)"
 				},
 			},
 			j_csau_skeletonmetal = {
@@ -2276,7 +2310,7 @@ return {
 			c_csau_tohth = {
 				name = "Tohth",
 				text = {
-					"The top {C:attention}3{} cards of your deck are shown here!",
+					"The top {C:attention}#1#{} cards of your deck are shown here!",
 				},
 			},
 			c_csau_starplatinum = {
@@ -2313,6 +2347,13 @@ return {
 				text = {
 					"Played {C:attention}Jacks{} become {C:attention}Steel{} cards",
 					"{C:attention}Steel Jacks{} act as {C:attention}Glass{} cards when played",
+				},
+			},
+			c_csau_epitaph = {
+				name = "Epitaph",
+				text = {
+					"The top card of your deck is shown here",
+					"{C:stand}Evolves{} after {C:attention}#1#{} Blinds are skipped {C:inactive}({}{C:attention}#2#{}{C:inactive}/#1#)",
 				},
 			},
 		},
@@ -2426,6 +2467,15 @@ return {
 					"Start run with {C:purple}#1#{}",
 					"You can have as many",
 					"{C:stand}Stands{} as you wish",
+				},
+			},
+			b_csau_cbt = {
+				name = "CBT Deck",
+				text = {
+					"{C:chips}#1#{} hand every round",
+					"{C:mult}#2#{} discard every round",
+					"After defeating each {C:attention}Boss Blind{},",
+					"{C:planet}level down{} every hand",
 				},
 			},
 		},
