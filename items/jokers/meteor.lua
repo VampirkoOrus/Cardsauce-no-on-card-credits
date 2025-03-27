@@ -31,21 +31,21 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.individual and context.cardarea == G.play and not card.debuff then
-        if context.other_card:get_id() == 7 and context.other_card.ability.effect ~= "Glass Card" then
+    if context.check_enhancement and context.cardarea == G.jokers then
+		if context.other_card.ability.effect ~= "Glass Card" and context.other_card.ability.effect ~= "Stone Card" and
+		context.other_card.base.id == 7 then	
             return {
-                x_mult = card.ability.extra.x_mult,
-                card = card
+                ['m_glass'] = true,
             }
         end
-    end
-    if context.destroying_card then
+	end 
+    --[[if context.destroying_card then
         if context.destroying_card:get_id() == 7 and context.destroying_card.ability.effect ~= "Glass Card" and not context.blueprint then
             if pseudorandom('meteor') < G.GAME.probabilities.normal / 4 then
                 return true
             end
         end
-    end
+    end]]--
 end
 
 return jokerInfo
