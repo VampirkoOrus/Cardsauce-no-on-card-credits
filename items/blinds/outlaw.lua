@@ -5,7 +5,6 @@ local blindInfo = {
     dollars = 5,
     mult = 2,
     vars = {},
-    debuff = {},
     boss = {min = 2, max = 10},
 }
 
@@ -14,37 +13,72 @@ function blindInfo.defeat(self)
 end
 
 function blindInfo.set_blind(self)
-    self.played_ranks = {}
+    G.GAME.blind.played_ranks = {}
 end
 
-local function inPlayed(table, num)
-    for i, v in ipairs(table) do
-        if v == num then
-            return true
-        end
+function blindInfo.drawn_to_hand(self)
+    if G.GAME.current_round.hands_played < 1 or not G.GAME.blind.debuff_queued then
+        return
     end
-    return false
+
+    G.GAME.blind.debuff_queued = nil
+
+    for _, v in ipairs(G.playing_cards) do
+        G.GAME.blind:debuff_card(v)
+    end
+
+    G.GAME.blind:alert_debuff(false)
 end
 
-local function checkDebuffs(self, card)
-    if not self.disabled and card.area ~= G.jokers and #self.played_ranks > 0 then
-        if not inPlayed(self.played_ranks, card:get_id()) then
-            self:debuff_card(card)
-        end
+function blindInfo.get_loc_debuff_text(self)
+    if not (next(G.GAME.blind.played_ranks)) then
+        return "Debuffs all ranks played last hand"
     end
+
+ 
+    local ordered_array = {}
+    for k, v in pairs(G.GAME.blind.played_ranks) do table.insert(ordered_array, {rank = k, nominal = v}) end
+    table.sort(ordered_array, function(a, b) return a.nominal < b.nominal end)  
+
+    local debuff_str = 'All '
+    for i, v in ipairs(ordered_array) do
+        if #ordered_array > 1 and i == #ordered_array then
+            debuff_str = debuff_str..'and '
+        end
+        debuff_str = debuff_str..(v.rank)..'s'
+
+        if #ordered_array > 2 and i < #ordered_array then
+            debuff_str = debuff_str..','
+        end
+
+        debuff_str = debuff_str..' '
+    end
+    debuff_str = debuff_str..'debuffed!'
+    return debuff_str
+end
+
+function blindInfo.recalc_debuff(self, card, from_blind)
+    if card.area == G.jokers or G.GAME.blind.disabled or SMODS.has_no_rank(card) then
+        return false
+    end
+
+    return G.GAME.blind.played_ranks[SMODS.Ranks[card.base.value].key]
 end
 
 function blindInfo.modify_hand(self, cards, poker_hands, text, mult, hand_chips)
-    if self.disabled then return end
-    for k, v in pairs(cards) do
-        if not inPlayed(self.played_ranks, v:get_id()) then
-            self.played_ranks[#self.played_ranks + 1] = v:get_id()
+    if G.GAME.blind.disabled then return end
+
+    G.GAME.blind.played_ranks = {}
+    for _, card in pairs(cards) do
+        local rank = SMODS.Ranks[card.base.value]
+        if not G.GAME.blind.played_ranks[rank.key] or SMODS.has_no_rank(card) then
+            G.GAME.blind.played_ranks[rank.key] = card:get_nominal()
         end
     end
-    for _, v in ipairs(G.playing_cards) do
-        checkDebuffs(self, v)
-    end
-end
 
+    G.GAME.blind.debuff_queued = true
+
+    return mult, hand_chips, false
+end
 
 return blindInfo

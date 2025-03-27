@@ -453,8 +453,8 @@ return {
 			bl_csau_outlaw = {
 				name="The Outlaw",
 				text={
-					"Debuffs all cards of the",
-					"ranks played last hand"
+					"Debuffs all ranks",
+					"played last hand"
 				},
 			},
 			bl_csau_finger = {
