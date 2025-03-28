@@ -454,13 +454,13 @@ return {
 				name="The Outlaw",
 				text={
 					"Debuffs all ranks",
-					"played last hand"
+					"scored last hand"
 				},
 			},
 			bl_csau_darkest = {
 				name="The Darkest",
 				text={
-					"Played face cards become",
+					"Scoring face cards become",
 					"a random numbered rank"
 				},
 			},
