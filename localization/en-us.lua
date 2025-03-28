@@ -457,6 +457,13 @@ return {
 					"played last hand"
 				},
 			},
+			bl_csau_darkest = {
+				name="The Darkest",
+				text={
+					"Played face cards become",
+					"a random numbered rank"
+				},
+			},
 			bl_csau_finger = {
 				name="The Finger",
 				text={
