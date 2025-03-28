@@ -898,3 +898,19 @@ position = 'at'
 match_indent = true
 payload = '''elseif self.ability.name == 'Seeing Double' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or 'Clubs', 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Clubs']}}'''
 
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''function Card:set_base(card, initial)'''
+position = 'at'
+match_indent = true
+payload = '''function Card:set_base(card, initial, delay_sprites)'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if next(card) then'''
+position = 'at'
+match_indent = true
+payload = '''if next(card) and not delay_sprites then'''
