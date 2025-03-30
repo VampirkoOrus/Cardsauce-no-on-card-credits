@@ -221,7 +221,7 @@ if G.GAME.selected_back and G.GAME.selected_back.effect.center.key == "b_csau_vi
     end
 end
 if next(SMODS.find_card('j_csau_frich')) then
-    if G.FUNCS.is_food(v.key) then
+    if G.foodjokers[v.key] then
         _pool[#_pool + 1] = v.key
         _pool_size = _pool_size + 1
     end
@@ -709,17 +709,6 @@ end
 self.cost = math.max(1, math.floor((self.base_cost + self.extra_cost + 0.5)*(100-(G.GAME.discount_percent+voucher_discount))/100))'''
 match_indent = true
 
-# loc_colour()
-[[patches]]
-[patches.pattern]
-target = 'functions/misc_functions.lua'
-pattern = 'return G.ARGS.LOC_COLOURS[_c] or _default or G.C.UI.TEXT_DARK'
-position = 'before'
-match_indent = true
-payload = '''
-    csau_loc_colors()
-'''
-
 [[patches]]
 [patches.pattern]
 target = 'card.lua'
@@ -914,3 +903,40 @@ pattern = '''if next(card) then'''
 position = 'at'
 match_indent = true
 payload = '''if next(card) and not delay_sprites then'''
+
+
+#
+# Adds the ability to emplace cards at a specified index
+#
+
+# CardArea:emplace()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''
+function CardArea:emplace(card, location, stay_flipped)'''
+position = "at"
+payload = '''function CardArea:emplace(card, location, stay_flipped, created, copied, index)'''
+match_indent = true
+times = 1
+
+# CardArea:emplace()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''if location == 'front' or self.config.type == 'deck' then 
+    table.insert(self.cards, 1, card)
+else
+    self.cards[#self.cards+1] = card
+end'''
+position = "at"
+payload = '''
+if index then
+    table.insert(self.cards, index, card)
+elseif location == 'front' or self.config.type == 'deck' then 
+    table.insert(self.cards, 1, card)
+else
+    self.cards[#self.cards+1] = card
+end'''
+match_indent = true
+times = 1

@@ -24,9 +24,11 @@ function consumInfo.calculate(self, card, context)
 end
 
 function consumInfo.use(self, card, context)
+    local food_options = {}
+    for k,v in pairs (G.foodjokers) do food_options[#food_options+1] = k end
     local rand_food
     repeat
-        rand_food = pseudorandom_element(G.foodjokers, pseudoseed('WEGOTBAGELS'))
+        rand_food = pseudorandom_element(food_options, pseudoseed('WEGOTBAGELS'))
     until (rand_food == 'j_cavendish' and G.GAME.pool_flags.gros_michel_extinct) or rand_food ~= 'j_cavendish'
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
         play_sound('timpani')

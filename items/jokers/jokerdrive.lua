@@ -15,7 +15,7 @@ local jokerInfo = {
 
 
 local function get_mult(card)
-    if not get_replaceable_stand() then
+    if not G.FUNCS.get_leftmost_stand() then
         return G.GAME.round_resets.ante * card.ability.extra.mult_mod
     else
         return 0

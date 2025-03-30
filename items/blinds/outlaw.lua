@@ -68,8 +68,9 @@ end
 function blindInfo.modify_hand(self, cards, poker_hands, text, mult, hand_chips)
     if G.GAME.blind.disabled then return end
 
+    local scoring_hand = poker_hands[text][1]
     G.GAME.blind.played_ranks = {}
-    for _, card in pairs(cards) do
+    for _, card in ipairs(scoring_hand) do
         local rank = SMODS.Ranks[card.base.value]
         if not G.GAME.blind.played_ranks[rank.key] or SMODS.has_no_rank(card) then
             G.GAME.blind.played_ranks[rank.key] = card:get_nominal()

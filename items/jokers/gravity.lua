@@ -20,7 +20,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.setting_blind and not card.debuff and not card.getting_sliced and not context.blueprint and stand_count() > 0 then
+    if context.setting_blind and not card.debuff and not card.getting_sliced and not context.blueprint and G.FUNCS.get_num_stands() > 0 then
         card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
         return {
             card = card,

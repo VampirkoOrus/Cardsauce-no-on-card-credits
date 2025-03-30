@@ -1,24 +1,3 @@
-local banned = {}
-
-local function csauJokerCheck(k)
-    if not containsKey(banned, k) then
-        if starts_with(k, "j_") then
-            if not starts_with(k, "j_csau_") then
-                banned[#banned+1] = { id = k }
-            end
-        end
-    end
-end
-
-function csau_tucker_addBanned()
-    for k, v in pairs(G.P_CENTERS) do
-        csauJokerCheck(k)
-    end
-    for k, v in pairs(SMODS.Centers) do
-        csauJokerCheck(k)
-    end
-end
-
 local chalInfo = {
     rules = {
         custom = {
@@ -26,7 +5,19 @@ local chalInfo = {
         }
     },
     restrictions = {
-        banned_cards = banned,
+        banned_cards = function()
+            local banned = {}
+            for k, v in pairs(G.P_CENTERS) do
+                if not banned[k] then
+                    if starts_with(k, "j_") then
+                        if not starts_with(k, "j_csau_") then
+                            banned[#banned+1] = { id = k }
+                        end
+                    end
+                end
+            end
+            return  banned 
+        end,
     },
     unlocked = function(self)
         for k, v in pairs(SMODS.Achievements) do

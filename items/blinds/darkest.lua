@@ -26,19 +26,19 @@ function blindInfo.modify_hand(self, cards, poker_hands, text, mult, hand_chips)
 
     -- record flip cards and do initial flip
     local change_cards = {}
-    for i=1, #cards do
-        if cards[i]:is_face() then
-            local suit = SMODS.Suits[cards[i].base.suit].card_key
+    for _, card in ipairs(poker_hands[text][1]) do
+        if card:is_face() then
+            local suit = SMODS.Suits[card.base.suit].card_key
             local rank = pseudorandom_element(valid_ranks, pseudoseed('darkestblind'))
-            cards[i]:set_base(G.P_CARDS[suit..'_'..rank], nil, true)
-            change_cards[#change_cards+1] = cards[i]
+            card:set_base(G.P_CARDS[suit..'_'..rank], nil, true)
+            change_cards[#change_cards+1] = card
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                    cards[i]:flip()
+                    card:flip()
                     play_sound('card1')
-                    cards[i]:juice_up(0.3, 0.3)
+                    card:juice_up(0.3, 0.3)
                     return true 
                 end 
             }))
