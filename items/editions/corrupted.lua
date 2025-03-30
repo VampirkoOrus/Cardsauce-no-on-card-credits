@@ -23,13 +23,13 @@ SMODS.Shader {
 }
 
 local editionInfo = {
-    shader = "glitched",
+    shader = "csau_glitched",
     config = {
         min = 2,
         max = 25,
     },
-    discovered = false,
     unlocked = true,
+    discovered = true,
     in_shop = true,
     weight = 14,
     extra_cost = 4,
