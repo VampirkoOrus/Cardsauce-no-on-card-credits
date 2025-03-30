@@ -4,9 +4,10 @@ local consumInfo = {
     set = "VHS",
     cost = 3,
     alerted = true,
-    activation = false,
-    unpauseable = true,
+
     config = {
+        activation = false,
+        unpauseable = true,
         extra = {
             prob_base = 3,
             dollars = 20,

@@ -48,10 +48,10 @@ function Card:vic_say_stuff(n, not_first, def_speed, voice, playVoice)
             new_said = math.random(1, 11)
         end
         self.last_said = new_said
-        if not voice then
+        if voice == 'jimbo' then
             play_sound('voice'..math.random(1, 11), speed*(math.random()*0.2+1), 0.5)
         else
-            if playVoice == 1 then
+            if voice and playVoice == 1 then
                 voice:play(1, (G.SETTINGS.SOUND.volume/100.0) * (G.SETTINGS.SOUND.game_sounds_volume/50.0),true);
                 playVoice = 2
             end

@@ -94,6 +94,20 @@ return {
 				"A {C:planet}Planet{} card for",
 				"you, my friend!"
 			},
+			jerma_lootget = {
+				"LOOT GET!"
+			},
+			jerma_blood = {
+				"THERE'S {C:red}BLOOD{}",
+				"IN THE BOX"
+			},
+			jerma_perfect = {
+				"Absolute perfection."
+			},
+			jerma_godgamer = {
+				"What a GOD of a",
+				"gamer, seriously."
+			},
 			chad_greeting1 = {
 				"Ah! Greetings, Cloud!"
 			},
@@ -221,7 +235,9 @@ return {
 		},
 		labels = {
 			vhs = "VHS Tape",
-			stand = "Stands"
+			stand = "Stands",
+
+			csau_corrupted = "Corrupted",
 		},
 		dictionary = {
 			k_vhs = "VHS Tape",
@@ -348,7 +364,7 @@ return {
 			k_blackjack = "Blackjack!",
 			a_in_one = " in 1",
 			k_junka_lose = "Loser!",
-
+			k_metal = "Metal!",
 			-- badge colors for jojo parts
 			ba_phantom = 'Phantom Blood',
 			co_phantom = '3358A2',
@@ -780,11 +796,35 @@ return {
 					"{E:1}PaperMoon{}",
 				},
 			},
+			guestartist30 = {
+				name = "Artist",
+				text = {
+					"{E:1}yunkie101{}",
+				},
+			},
+			guestartist31 = {
+				name = "Artist",
+				text = {
+					"{E:1}plunch{}",
+				},
+			},
+			guestartist32 = {
+				name = "Artist",
+				text = {
+					"{E:1}MightyKingWario{}",
+				},
+			},
 			guestartist33 = {
 				name = "Artist",
 				text = {
-					"{E:1}Cauthen Currie{}",
+					"{E:1}KawaiiRerun{}",
 				},
+			},
+			guestartist41 = {
+				name = "Artist",
+				text = {
+					"{E:1}Cauthen Currie{}",
+				}
 			},
 			twoartists0 = {
 				name = "Artists",
@@ -2097,6 +2137,12 @@ return {
 					"{C:inactive}(Currently {C:chips}+#1#{}{C:inactive} Chips)",
 				},
 			},
+			j_csau_jerma = {
+				name = "Joker985",
+				text = {
+					"{E:1,s:1.3,C:dark_edition}I'm invading this mod!{}",
+				},
+			},
 			j_csau_jokerdrive = {
 				name = "Jokerdrive",
 				text = {
@@ -2146,7 +2192,14 @@ return {
 				name = "Bootleg Joker",
 				text = {
 					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			j_csau_bootleg_detailed = {
+				name = "Bootleg Joker",
+				text = {
+					"{C:attention}Transforms{} into a random",
+					"Joker during each {C:attention}round{}",
+					"{C:inactive}(bugs are a feature)"
 				},
 			},
 			j_csau_skeletonmetal = {
@@ -2652,6 +2705,13 @@ return {
 					"into that suit",
 				},
 			},
+			c_csau_epitaph = {
+				name = "Epitaph",
+				text = {
+					"The top card of your deck is shown here",
+					"{C:stand}Evolves{} after {C:attention}#1#{} Blinds are skipped {C:inactive}({}{C:attention}#2#{}{C:inactive}/#1#)",
+				},
+			},
 		},
 		Planet = {
 			c_csau_lutetia = {
@@ -2753,6 +2813,14 @@ return {
 				},
 			},
 		},
+		Edition = {
+			e_csau_corrupted = {
+				name = "Corrupted",
+				text = {
+					"???",
+				},
+			}
+		},
 		Back = {
 			b_csau_vine = {
 				name = "Vine Deck",
@@ -2785,6 +2853,15 @@ return {
 					"Start with the",
 					"{C:tarot}Crystal Ball{} voucher",
 					"There is no {C:stand}Stand{} limit",
+				},
+			},
+			b_csau_cbt = {
+				name = "CBT Deck",
+				text = {
+					"{C:chips}#1#{} hand every round",
+					"{C:mult}#2#{} discard every round",
+					"After defeating each {C:attention}Boss Blind{},",
+					"{C:planet}level down{} every hand",
 				},
 			},
 		},

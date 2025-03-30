@@ -4,7 +4,9 @@ local consumInfo = {
     cost = 3,
     alerted = true,
     nosleeve = true,
-    unpauseable = true,
+    config = {
+        unpauseable = true,
+    },
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
