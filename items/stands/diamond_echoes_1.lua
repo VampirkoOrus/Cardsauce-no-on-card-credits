@@ -72,7 +72,7 @@ function consumInfo.calculate(self, card, context)
     
     if context.cardarea == G.jokers and G.GAME.current_round.hands_played < 1 and context.before and #context.full_hand == card.ability.extra.num_cards then
         card.ability.extra.trigger_suit = SMODS.Suits[context.full_hand[1].base.suit].key
-        flare_stand_aura(card, 0.5)
+        G.FUNCS.flare_stand_aura(card, 0.5)
         return {
             message = localize('k_echoes_recorded'),
             message_card = card,
@@ -83,7 +83,7 @@ function consumInfo.calculate(self, card, context)
     end
 
     if card.ability.extra.trigger_suit and context.individual and context.cardarea == G.play and context.other_card:is_suit(card.ability.extra.trigger_suit) then
-        flare_stand_aura(card, 0.25)
+        G.FUNCS.flare_stand_aura(card, 0.25)
         return {
             mult = card.ability.extra.mult,
             colour = G.C.RED,
