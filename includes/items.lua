@@ -378,7 +378,7 @@ SMODS.ConsumableType {
 -- actual loading
 for k, v in pairs(twoPointOItems) do
 	if next(twoPointOItems[k]) then
-        if (k == 'Joker' or k == 'Booster' or ((k == 'VHS' or k == 'Stand') and csau_enabled['enableConsumables']) or csau_enabled['enable'..k..'s']) then
+        if (k == 'Joker' or ((k == 'VHS' or k == 'Stand') and csau_enabled['enableConsumables']) or csau_enabled['enable'..k..'s']) then
             for i = 1, #v do
                 load_cardsauce_item(v[i], k, false)
             end

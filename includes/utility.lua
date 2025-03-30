@@ -67,8 +67,8 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 		end
 	end
 
-    if item_type == 'Challenge' then
-        -- no need for visuals for challenges
+    if item_type == 'Challenge' or item_type == 'Edition' then
+        -- these dont need visuals
         return
     end
 
