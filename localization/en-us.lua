@@ -226,8 +226,10 @@ return {
 		dictionary = {
 			k_vhs = "VHS Tape",
 			k_stand = "Stand",
-			b_vhs_cards = "VHS Tapes",
 			b_stand_cards = "Stands",
+			k_evolved = "Evolved Stand",
+			b_evolved_cards = "Evolved Stands",
+			b_vhs_cards = "VHS Tapes",
 			b_and_activate = "& Activate",
 			b_activate = "Activate",
 			vs_credits1 = "Concepting/Direction",
@@ -246,19 +248,19 @@ return {
 			vs_options_enableVinkers = "Vinny-centric Jokers",
 			vs_options_enableJoelkers = "Joel-centric Jokers",
 			vs_options_enableOtherJokers = "Other Jokers",
-			vs_options_enableSpectrals = "Spectral Cards",
+			vs_options_enableConsumables = "Consumable Cards",
 			vs_options_enableDecks = "Decks",
-			vs_options_enableBosses = "Boss Blinds",
+			vs_options_enableBlinds = "Boss Blinds",
 			vs_options_enableSkins = "Custom Playing Cards",
 			vs_options_enableChallenges = "Challenges",
 			vs_options_enableMusic = "Cardsauce Music",
-			vs_options_enableTrophies = "Cardsauce Achievements",
+			vs_options_enableAchievements = "Cardsauce Achievements",
 			vs_options_enableLogo = "Main Menu Logo",
 			vs_options_enableColors = "Custom Colors",
 			vs_options_enableTarotSkins = "Tarot Card Reskins",
 			vs_options_enableEasterEggs = "Easter Eggs",
-			vs_options_resetTrophies_r = "Reset Achievements",
-			vs_options_resetTrophies_desc = "Click this button to reset all Cardsauce achievements",
+			vs_options_resetAchievements_r = "Reset Achievements",
+			vs_options_resetAchievements_desc = "Click this button to reset all Cardsauce achievements",
 			vs_options_chadNova_r = "Undo Chadnova",
 			vs_options_chadNova_desc = "Click this button to undo the consequences of your actions",
 			b_set_colors = "Colors",
@@ -345,7 +347,40 @@ return {
 			k_mug_gone = "I Love My Mug!",
 			k_blackjack = "Blackjack!",
 			a_in_one = " in 1",
-			k_junka_lose = "Loser!"
+			k_junka_lose = "Loser!",
+
+			-- badge colors for jojo parts
+			ba_phantom = 'Phantom Blood',
+			co_phantom = '3358A2',
+			te_phantom = 'B74582',
+			ba_battle = 'Battle Tendency',
+			co_battle = 'DD5668',
+			te_battle = '338FC4',
+			ba_stardust = 'Stardust Crusaders',
+			co_stardust = '425F7C',
+			te_stardust = 'EFCB70',
+			ba_diamond = 'Diamond is Unbreakable',
+			co_diamond = 'BEE5E5',
+			te_diamond = 'C479BE',
+			ba_vento = 'Golden Wind',
+			co_vento = 'EDCE49',
+			te_vento = 'D168BC',
+			ba_stone = 'Stone Ocean',
+			co_stone = '99B5B5',
+			te_stone = '61DFF8',
+			ba_steel = 'Steel Ball Run',
+			co_steel = 'A38168',
+			te_steel = 'A9CF3C',
+			ba_lion = 'JoJolion',
+			co_lion = 'BCBCE5',
+			te_lion = 'DCF7FC',
+			ba_lands = 'The JOJOLands',
+			co_lands = '394E90',
+			te_lands = '409CE8',
+
+			-- stand related loc strings
+			k_stand_evolved = 'Evolved!',
+			k_echoes_recorded = 'Recorded!',
 		},
 		v_dictionary = {
 			a_red = "#1#!!!",
@@ -451,15 +486,15 @@ return {
 				},
 			},
 			bl_csau_outlaw = {
-				name="The Outlaw",
-				text={
+				name = "The Outlaw",
+				text = {
 					"Debuffs all ranks",
 					"scored last hand"
 				},
 			},
 			bl_csau_darkest = {
-				name="The Darkest",
-				text={
+				name = "The Darkest",
+				text = {
 					"Scoring face cards become",
 					"a random numbered rank"
 				},
@@ -545,21 +580,20 @@ return {
 				},
 			},
 			stand_info = {
-				name = "Acquiring Stands",
+				name = "Stand Limit",
 				text = {
-					"You can only have {C:attention}#1#{} {C:stand}#2#{} at a time",
-					"{C:inactive}(Also limited by consumable slots){}",
-					"If you have no more room for {C:stand}Stands{} and",
-					"get a new one, it will replace the leftmost",
-					"{C:stand}Stand{} in your consumables."
+					"You can only",
+					"have {C:attention}#1#{} {C:stand}#2#{}",
+					"at a time",
 				},
 			},
 			stand_info_unlimited = {
-				name = "Acquiring Stands",
+				name = "Stand Limit",
 				text = {
-					"If you have no more room for {C:stand}Stands{}",
-					"and get a new one, it will replace the leftmost",
-					"{C:stand}Stand{} in your consumables."
+					"You can have",
+					"as many {C:stand}Stands{}",
+					"as you have",
+					"consumable slots"
 				},
 			},
 			artist = {
@@ -744,6 +778,12 @@ return {
 				name = "Artist",
 				text = {
 					"{E:1}PaperMoon{}",
+				},
+			},
+			guestartist33 = {
+				name = "Artist",
+				text = {
+					"{E:1}Cauthen Currie{}",
 				},
 			},
 			twoartists0 = {
@@ -2273,53 +2313,343 @@ return {
 			},
 		},
 		Stand = {
-			c_csau_moodyblues = {
-				name = "Moody Blues",
-				text = {
-					"{C:vhs}VHS Tapes{} have {C:attention}double{}",
-					"the {C:vhs}Running Time",
-				},
-			},
-			c_csau_tohth = {
-				name = "Tohth",
-				text = {
-					"The top {C:attention}3{} cards of your deck are shown here!",
-				},
-			},
-			c_csau_starplatinum = {
+			c_csau_stardust_star = {
 				name = "Star Platinum",
 				text = {
-					"If {C:attention}first hand{} of round is",
-					"all {C:diamonds}Diamonds{}, gain {C:blue}+1{} Hand",
+					"If {C:attention}first hand{} of round",
+					"is all {C:diamonds}Diamonds{}, gain {C:blue}+1{} Hand",
 				},
 			},
-			c_csau_diosworld = {
+			c_csau_stardust_thoth = {
+				name = "Thoth",
+				text = {
+					"{C:attention}Preview{} the top {C:attention}#1#{}",
+					"cards in your deck{}",
+				},
+			},
+			c_csau_stardust_world = {
 				name = "DIO's World",
 				text = {
-					"If {C:attention}first hand{} of round is",
-					"all {C:spades}Spades{}, gain {C:blue}+1{} Hand",
+					"If {C:attention}first hand{} of round",
+					"is all {C:spades}Spades{}, gain {C:blue}+1{} Hand",
 				},
 			},
-			c_csau_crazydiamond = {
+			c_csau_diamond_crazy = {
 				name = "Crazy Diamond",
 				text = {
-					"Played {C:attention}debuffed{} cards are {C:attention}healed{}",
+					"Played {C:attention}debuffed{} cards",
+					"are {C:attention}healed{}",
 				},
 			},
-			c_csau_d4c = {
+			c_csau_diamond_hand = {
+				name = "The Hand",
+				text = {
+					"Whenever a card is {C:attention}destroyed{},",
+					"give adjacent cards the same",
+					"{C:attention}rank{}, {C:attention}suit{}, and {C:attention}enhancement{}",
+				},
+			},
+			c_csau_diamond_echoes_1 = {
+				name = "Echoes ACT1",
+				text = {
+					"If {C:attention}first hand{} of round",
+					"has only {C:attention}#1#{} card, cards",
+					"with {V:1}#2#{}{C:attention}#3#{} give",
+					"{C:mult}+#4#{} Mult when scored",
+					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after{} {C:attention}#5#{} {C:inactive}rounds){}",
+				},
+			},
+			c_csau_diamond_echoes_2 = {
+				name = "Echoes ACT2",
+				text = {
+					"If {C:attention}first hand{} of round",
+					"has only {C:attention}#1#{} card, cards",
+					"with matching {C:attention}suit{} give",
+					"{C:mult}+#2#{} Mult when scored",
+					"{s:0.1} {}",
+					"The first {C:attention}non-matching{}",
+					"card turns into that suit",
+					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after{} {C:attention}#3#{} {C:inactive}rounds){}",
+				},
+			},
+			c_csau_diamond_echoes_3 = {
+				name = "Echoes ACT3",
+				text = {
+					"{C:attention}#1#s{} count as {C:attention}all suits{}",
+					"and give {C:mult}+#2#{} Mult when scored",
+				},
+			},
+			c_csau_diamond_killer = {
+				name = "Killer Queen",
+				text = {
+					"My name is Yoshikage Kira. I'm",
+					"years old. My house is in the",
+					"northeast section of Morioh,",
+					"where all the villas are, and",
+					"I am not married. I am an",
+					"employee for the Kame Yu",
+					"department stores, and I get",
+					"home every day by 8 PM at the",
+					"latest. I don't smoke, but I",
+					"occasionally drink. I'm in bed",
+					"by 11 PM and make sure I get",
+					"eight hours of sleep, no",
+					"matter what. After having a",
+					"glass of warm milk and doing",
+					"about twenty minutes of",
+					"stretches before going to bed,",
+					"I usually have no problems",
+					"sleeping until morning. Just",
+					"like a baby, I wake up without",
+					"any fatigue or stress in the",
+					"morning. I was told there were",
+					"no issues at my last check-up.",
+					"I'm trying to explain that I'm",
+					"a person who wishes to live a",
+					"very quiet life. I take care",
+					"not to trouble myself with any",
+					"enemies, like winning and",
+					"losing, that would cause me to",
+					"lose sleep at night. That is",
+					"how I deal with society, and I",
+					"know that is what brings me",
+					"happiness. Although, if I were",
+					"to fight I wouldn't lose to",
+					"anyone.",
+				},
+			},
+			c_csau_diamond_killer_btd = {
+				name = "Killer Queen: Bites the Dust",
+				text = {
+					"After your {C:attention}last card{} is scored,",
+					"retrigger the others in {C:attention}reverse order{}"
+				},
+			},
+			c_csau_vento_gold = {
+				name = "Gold Experience",
+				text = {
+					"All played {C:hearts}Hearts{}",
+					"become {C:attention}Gold Cards{}",
+					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after using{} {C:tarot}The Arrow{} {C:inactive}){}",
+				},
+			},
+			c_csau_vento_gold_requiem = {
+				name = "Gold Experience Requiem",
+				text = {
+					"{C:green}#1# in #2#{} chance to {C:planet}level up{} played",
+					"{C:attention}poker hand{}",
+					"{s:0.1} {}",
+					"Each scoring {C:attention}Gold Card{}",
+					"increases the chance by {C:green}#3# in #2#{}",
+				},
+			},
+			c_csau_vento_moody = {
+				name = "Moody Blues",
+				text = {
+					"Pauseable {C:vhs}VHS Tapes{} have",
+					"{C:attention}double{} the Running Time",
+				},
+			},
+			c_csau_vento_metallica = {
+				name = "Metallica",
+				text = {
+					"Played {C:attention}Jacks{} become {C:attention}Steel Cards{}",
+					"{s:0.1} {}",
+					"{C:attention}Steel Jacks{} act as {C:attention}Glass Cards{}",
+					"when played",
+				},
+			},
+			c_csau_vento_epitaph = {
+				name = "Epitaph",
+				text = {
+					"{C:attention}Preview{} the top card",
+					"of your deck",
+					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after{}",
+					"{C:inactive}skipping{} {C:attention}#1# Blinds{}{C:inactive}){}",
+				},
+			},
+			c_csau_vento_epitaph_king = {
+				name = "King Crimson",
+				text = {
+					"Each selected {C:attention}Blind{}",
+					"awards its {C:attention}skip tag{}",
+					"when defeated"
+				},
+			},
+			c_csau_stone_stone = {
+				name = "Stone Free",
+				text = {
+					"Scoring {C:attention}Stone Cards{} lose",
+					"their enhancement but",
+					"permanently gain {C:chips}+#1#{} Chips"
+				},
+			},
+			c_csau_stone_marilyn = {
+				name = "Marilyn Manson",
+				text = {
+					"Prevents {C:red}death{} by exchanging",
+					"{C:money}$#1#{} for {C:attention}#2#%{} of Blind score",
+					"If no {C:money}Money{}, sells random {C:attention}Jokers{}",
+					"If no {C:attention}Jokers{}, sells random {C:attention}Playing Cards{}"
+				},
+			},
+			c_csau_stone_white = {
+				name = "Whitesnake",
+				text = {
+					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after playing{}",
+					"{C:attention}#1#{} {C:inactive}scoring{} {C:attention}#2#s{}{C:inactive}){}"
+				},
+			},
+			c_csau_stone_white_moon = {
+				name = "C-MOON",
+				text = {
+					"All cards in played",
+					"{C:attention}straights{} are retriggered",
+					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after playing straights{}",
+					"{C:inactive}containing{} {C:attention}#1#{} {C:inactive}unique ranks){}",
+				},
+			},
+			c_csau_stone_white_heaven = {
+				name = "Made in Heaven",
+				text = {
+					"After {C:attention}playing{} or {C:attention}discarding{}",
+					"a hand, gain a {C:blue}hand{} or {C:red}discard{}",
+				},
+			},
+			c_csau_steel_tusk_1 = {
+				name = "Tusk ACT1",
+				text = {
+					"Each played {C:attention}Ace{} or {C:attention}2{} gives",
+					"{C:chips}+#1#{} Chips when scored",
+					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after {C:attention}#2#{}{}",
+					"{C:attention}Aces or 2s{} {C:inactive}are scored){}",
+				},
+			},
+			c_csau_steel_tusk_2 = {
+				name = "Tusk ACT2",
+				text = {
+					"Each played {C:attention}Ace{}, {C:attention}2{}, or {C:attention}3{} gives",
+					"{C:chips}+#1#{} Chips when scored",
+					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after {C:attention}#2#{} cards{}",
+					"{C:inactive}are{} {C:attention}destroyed{}{C:inactive}){}",
+				},
+			},
+			c_csau_steel_tusk_3 = {
+				name = "Tusk ACT3",
+				text = {
+					"Each played {C:attention}Ace{}, {C:attention}2{}, {C:attention}3{}, or {C:attention}5{}",
+					"gives {C:chips}+#1#{} Chips when scored",
+					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after defeating a{} {C:attention}Blind{}",
+					"{C:inactive}within{} {C:attention}#2#%{} {C:inactive}of required chips){}",
+				},
+			},
+			c_csau_steel_tusk_4 = {
+				name = "Tusk ACT4",
+				text = {
+					"{C:dark_edition}Unlocks Fibonacci poker hands{}", 
+					"{s:0.1} {}",
+					"Played Fibonacci {C:attention}ranks{} give",
+					"{C:chips}+#1#{} Chips when scored",
+					"{s:0.1} {}",
+					"If played hand contains a",
+					"{C:attention}Fibonacci{}, gain {C:blue}+#2#{} Hand",
+				},
+			},
+			c_csau_steel_civil = {
+				name = "Civil War",
+				text = {
+					"{C:tarot}The Fool{} always creates",
+					"{C:tarot,T:c_hanged_man}#1#{}",
+				},
+			},
+			c_csau_steel_d4c = {
 				name = "Dirty Deeds Done Dirt Cheap",
 				text = {
 					"Your first scored {C:attention}Pair{}",
 					"each round is {C:attention}destroyed{}",
-					"{C:stand}Evolves{} after your Deck",
-					"contains 9 {C:attention}Lucky Cards"
+					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after your deck{}",
+					"{C:inactive}contains{} {C:attention}#1# Lucky Cards{}{C:inactive}){}",
 				},
 			},
-			c_csau_metallica = {
-				name = "Metallica",
+			c_csau_steel_d4c_love = {
+				name = "D4C -Love Train-",
 				text = {
-					"Played {C:attention}Jacks{} become {C:attention}Steel{} cards",
-					"{C:attention}Steel Jacks{} act as {C:attention}Glass{} cards when played",
+					"All played {C:attention}Lucky Cards{}",
+					"always payout at least {C:attention}once{}",
+				},
+			},
+			c_csau_lion_soft = {
+				name = "Soft & Wet",
+				text = {
+					"When an {C:attention}Enhanced Card{} is",
+					"scored, {C:attention}remove{} its enhancement",
+					"and gain {C:mult}+#1#{} Mult",
+					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
+					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after playing a{}",
+					"{C:attention}Secret Hand{}{C:inactive}){}",
+				},
+			},
+			c_csau_lion_soft_beyond = {
+				name = "Soft & Wet: Go Beyond",
+				text = {
+					"When an {C:attention}Enhanced Card{} is",
+					"scored, {C:attention}remove{} its enhancement",
+					"and gain {X:mult,C:white}X#1#{} Mult",
+					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}and{} {X:mult,C:white}X#3#{} {C:inactive}Mult){}",
+					
+				},
+			},
+			c_csau_lion_paper = {
+				name = "Paper Moon King",
+				text = {
+					"All {C:attention}face{} cards are",
+					"considered {C:attention}#1#s{}",
+					"{s:0.8}Rank changes at end of round",
+					
+				},
+			},
+			c_csau_lion_rock = {
+				name = "I Am a Rock",
+				text = {
+					"If played hand contains",
+					"a {C:attention}Stone Card{}, add a",
+					"{C:attention}Stone Card{} to your hand",
+					
+				},
+			},
+			c_csau_lion_wonder= {
+				name = "Wonder of U",
+				text = {
+					"When a {C:attention}Lucky Card{} is",
+					"scored, {C:attention}destroy{} it",
+					"and gain {C:mult}+#1#{} Mult",
+					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
+					
+				},
+			},
+			c_csau_lands_november = {
+				name = "November Rain",
+				text = {
+					"All playing cards ranked",
+					"{C:attention}#1# or lower{} are always",
+					"scored and give {C:chips}+#2#{} Chips",
+				},
+			},
+			c_csau_lands_smooth = {
+				name = "Smooth Operators",
+				text = {
+					"Before scoring, if an unscored card",
+					"is an {C:attention}adjacent rank{} to a scored card",
+					"{C:attention}upgrade or downgrade{} it one rank",
+				},
+			},
+			c_csau_lands_bigmouth = {
+				name = "Bigmouth Strikes Again",
+				text = {
+					"If played hand is {C:attention}5{} cards",
+					"and four are the {C:attention}same suit{},",
+					"transform the {C:attention}fifth card{}",
+					"into that suit",
 				},
 			},
 		},
@@ -2344,14 +2674,13 @@ return {
 			},
 		},
 		Tarot = {
-			c_csau_arrow = {
+			c_csau_tarot_arrow = {
 				name = "The Arrow",
 				text = {
-					"Create a random {C:stand}Stand",
-					"{C:inactive}(Must have room or",
-					"{C:inactive}a {C:stand}Stand{}{C:inactive} to {}{C:attention}replace{}{C:inactive}){}",
-				},
-			},
+					"Create a random {C:stand}Stand{}",
+					"{C:inactive}(Must have room){}",
+				}
+			}
 		},
 		Spectral = {
 			c_csau_quixotic = {
@@ -2366,6 +2695,22 @@ return {
 					"Transform every {C:attention}Joker{} with \"Joker\"",
 					"in its name into {C:attention}Chadley{}"
 				},
+			},
+			c_csau_spec_stone = {
+				name = "Stone Mask",
+				text = {
+					"Add {C:dark_edition}Holographic{} and {C:attention}Eternal{},",
+					"to a random Joker, overwriting",
+					"existing {C:dark_edition}editions{} and {C:attention}stickers{}"
+				}
+			},
+			c_csau_spec_diary = {
+				name = "The Diary",
+				text = {
+					"Create a random",
+					"{C:stand}Evolved Stand{}",
+					"{C:inactive}(Must have room){}",
+				}
 			},
 		},
 		Voucher = {
@@ -2383,13 +2728,20 @@ return {
 					"frequently in the {C:attention}shop{}"
 				}
 			},
-			v_csau_ff = {
-				name = "Foo Fighter",
+			v_csau_foo = {
+				name = 'Foo Fighters',
 				text = {
 					"{C:stand}Stands{} can be purchased",
 					"from the {C:attention}shop{}"
 				}
 			},
+			v_csau_plant = {
+				name = 'Plant Appraiser',
+				text = {
+					"{C:stand}Evolved Stands{} can be purchased",
+					"from the {C:attention}shop{}"
+				}
+			}
 		},
 		Tag = {
 			tag_csau_spirit = {
@@ -2430,9 +2782,9 @@ return {
 			b_csau_disc = {
 				name = "DISC Deck",
 				text = {
-					"Start run with {C:purple}#1#{}",
-					"You can have as many",
-					"{C:stand}Stands{} as you wish",
+					"Start with the",
+					"{C:tarot}Crystal Ball{} voucher",
+					"There is no {C:stand}Stand{} limit",
 				},
 			},
 		},

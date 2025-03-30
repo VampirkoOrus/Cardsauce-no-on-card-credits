@@ -7,7 +7,7 @@ local tagInfo = {
 tagInfo.apply = function(self, tag, context)
     if context.type == self.config.type then
         tag:yep('+', G.C.STAND,function()
-            new_stand()
+            G.FUNCS.new_stand(false)
             return true
         end)
         tag.triggered = true

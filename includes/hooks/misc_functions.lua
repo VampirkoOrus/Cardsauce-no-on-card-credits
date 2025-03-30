@@ -1,0 +1,86 @@
+-- I replaced a lovely patch with this, since hooking is generally more stable
+-- Since it's a vanilla function, you're less likely to run into an issue when SMODS updates ~Winter
+local ref_loc_colour = loc_colour
+function loc_colour(_c, _default)
+	ref_loc_colour(_c, _default)
+	G.ARGS.LOC_COLOURS.mug = G.C.MUG
+    G.ARGS.LOC_COLOURS.vhs = G.C.VHS
+    G.ARGS.LOC_COLOURS.stand = G.C.STAND
+    return G.ARGS.LOC_COLOURS[_c] or _default or G.C.UI.TEXT_DARK
+end
+
+local get_straight_ref = get_straight
+function get_straight(hand)
+	local base = get_straight_ref(hand)
+	local results = {}
+	local vals = {}
+	local verified = {}
+	local can_loop = next(find_joker('Rekoj Gnorts'))
+	local target = next(find_joker('Four Fingers')) and 4 or 5
+	local skip_var = next(find_joker('Shortcut'))
+	local skipped = false
+	if not(can_loop) or #hand < target then
+		G.GAME.gnortstraight = false
+		return base
+	else
+		local hand_ref = {}
+		for k, v in pairs(hand) do
+			table.insert(hand_ref, v)
+		end
+		table.sort(hand_ref, function(a,b) return a:get_id() < b:get_id() end)
+		local ranks = {}
+		local _next = nil
+		local val = 0
+		for k, v in pairs(G.P_CARDS) do
+			if (ranks[v.pos.x+1] == nil) then
+				ranks[v.pos.x+1] = v.value
+			end
+		end
+		while val < #hand_ref*2 do
+			local i = val%#hand_ref + 1
+			local id = hand_ref[i]:get_id()-1
+			val = val + 1
+			if _next == nil then
+				table.insert(results,hand_ref[i])
+				_next = ranks[id%#ranks+1]
+				skipped = false
+			else
+				if (ranks[id] == _next) then
+
+					table.insert(results,hand_ref[i])
+					_next = ranks[id%#ranks+1]
+					skipped = false
+				elseif skip_var and not skipped then
+					_next = ranks[id%#ranks+1]
+					skipped = true
+				else
+					_next = nil
+					val = val-1
+					results = {}
+					skipped = false
+				end
+			end
+			if (#results == target) then
+				table.sort(hand, function(a,b) return a.T.x < b.T.x end)
+				table.sort(results, function(a,b) return a.T.x < b.T.x end)
+				return {results}
+			elseif _next ~= nil then
+
+			end
+		end
+	end
+
+	return {}
+end
+
+-- I put this in misc_functions because this is where similar functions are in Vanilla ~Winter
+
+--- Resets the rank used by the Paper Moon King stand card
+function reset_paper_rank()
+    G.GAME.current_paper_rank = {'Jack'}
+	local valid_ranks = {}
+    for _, rank in pairs(SMODS.Ranks) do
+        if rank.face then valid_ranks[#valid_ranks+1] = rank.card_key end
+    end
+    G.GAME.current_paper_rank = pseudorandom_element(valid_ranks, pseudoseed('papermoon'..G.GAME.round_resets.ante))
+end
