@@ -194,7 +194,8 @@ local conf_cardsauce = {
 		'outlaw',
 		'darkest'
 	},
-	trophiesToLoad = {}
+	trophiesToLoad = {},
+	editionsToLoad = {}
 }
 
 local twoPointO = true
@@ -309,6 +310,9 @@ if twoPointO then
 		'analog2',
 		'analog3',
 		'analog4',
+	}
+	conf_cardsauce.editionsToLoad = {
+		'corrupted'
 	}
 end
 
@@ -1257,6 +1261,18 @@ for i, v in ipairs(conf_cardsauce.trophiesToLoad) do
 	end
 
 	SMODS.Achievement(trophyInfo)
+end
+for i, v in ipairs(conf_cardsauce.editionsToLoad) do
+	local editionInfo = assert(SMODS.load_file("items/editions/" .. v .. ".lua"))()
+
+	editionInfo.key = v
+
+	local edition = SMODS.Edition(editionInfo)
+	for k_, v_ in pairs(edition) do
+		if type(v_) == 'function' then
+			edition[k_] = editionInfo[k_]
+		end
+	end
 end
 
 SMODS.Atlas({ key = 'csau_achievements', path = "csau_achievements.png", px = 66, py = 66})
@@ -3859,7 +3875,12 @@ vs_credit_31 = "Alli"
 vs_credit_32 = "Lyman"
 vs_credit_33 = "AlizarinRed"
 vs_credit_34 = "PaperMoon"
-vs_credit_35 = "yankee101"
+vs_credit_35 = "yunkie101"
+vs_credit_36 = "plunch"
+vs_credit_37 = "MightyKingWario"
+vs_credit_38 = "KawaiiRerun"
+vs_credit_39 = "TheWinterComet"
+vs_credit_40 = "Sir. Gameboy"
 vs_credit_st1 = "tortoise"
 vs_credit_st2 = "Protokyuuu"
 vs_credit_st3 = "ShrineFox"
@@ -3871,6 +3892,7 @@ local header_scale = 1.1
 local bonus_padding = 1.15
 local support_padding = 0.015
 local artist_size = 0.43
+local seperator_mod = 1.5
 
 SMODS.current_mod.credits_tab = function()
 	chosen = true
@@ -3897,7 +3919,7 @@ SMODS.current_mod.credits_tab = function()
 						}},
 						{n=G.UIT.R, config={align = "tm", padding = 0,outline_colour = G.C.CLEAR, r = 0.1, outline = 1}, nodes={
 							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.4, colour = G.C.CLEAR, shadow = true}},
+								{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = (text_scale*0.4)*seperator_mod, colour = G.C.CLEAR, shadow = true}},
 							}},
 						}},
 						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
@@ -3918,7 +3940,7 @@ SMODS.current_mod.credits_tab = function()
 						}},
 						{n=G.UIT.R, config={align = "tm", padding = 0,outline_colour = G.C.CLEAR, r = 0.1, outline = 1}, nodes={
 							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.4, colour = G.C.CLEAR, shadow = true}},
+								{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = (text_scale*0.4)*seperator_mod, colour = G.C.CLEAR, shadow = true}},
 							}},
 						}},
 						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
@@ -3985,11 +4007,11 @@ SMODS.current_mod.credits_tab = function()
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_21, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
-							}},
-							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_22, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
+							}},
+							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_23, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
@@ -4019,6 +4041,15 @@ SMODS.current_mod.credits_tab = function()
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = vs_credit_35, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_37, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_36, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = vs_credit_38, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},
@@ -4052,6 +4083,12 @@ SMODS.current_mod.credits_tab = function()
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
 										{n=G.UIT.T, config={text = vs_credit_13, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									}},
+									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+										{n=G.UIT.T, config={text = vs_credit_40, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									}},
+									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
+										{n=G.UIT.T, config={text = vs_credit_39, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 								}},
 							}},

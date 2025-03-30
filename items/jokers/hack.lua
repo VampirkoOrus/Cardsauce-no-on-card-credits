@@ -1,5 +1,5 @@
 local jokerInfo = {
-    name = "ENDLESS TRASH",
+    name = "Hack Fraud",
     config = {
         extra = {
             chip_mod = 10,
@@ -22,6 +22,7 @@ local function get_chips(card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "guestartist30", set = "Other"}
     return { vars = { card.ability.extra.chip_mod, get_chips(card) } }
 end
 

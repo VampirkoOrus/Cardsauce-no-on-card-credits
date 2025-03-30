@@ -235,7 +235,9 @@ return {
 		},
 		labels = {
 			vhs = "VHS Tape",
-			stand = "Stands"
+			stand = "Stands",
+
+			csau_corrupted = "Corrupted",
 		},
 		dictionary = {
 			k_vhs = "VHS Tape",
@@ -764,7 +766,25 @@ return {
 			guestartist30 = {
 				name = "Artist",
 				text = {
-					"{E:1}yankee101{}",
+					"{E:1}yunkie101{}",
+				},
+			},
+			guestartist31 = {
+				name = "Artist",
+				text = {
+					"{E:1}plunch{}",
+				},
+			},
+			guestartist32 = {
+				name = "Artist",
+				text = {
+					"{E:1}MightyKingWario{}",
+				},
+			},
+			guestartist33 = {
+				name = "Artist",
+				text = {
+					"{E:1}KawaiiRerun{}",
 				},
 			},
 			twoartists0 = {
@@ -2441,6 +2461,14 @@ return {
 					"{C:inactive}a {C:stand}Stand{}{C:inactive} to {}{C:attention}replace{}{C:inactive}){}",
 				},
 			},
+		},
+		Edition = {
+			e_csau_corrupted = {
+				name = "Corrupted",
+				text = {
+					"???",
+				},
+			}
 		},
 		Back = {
 			b_csau_vine = {
