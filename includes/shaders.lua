@@ -156,3 +156,14 @@ SMODS.DrawStep {
     end,
     conditions = { vortex = false, facing = 'front' },
 }
+
+SMODS.DrawStep {
+    key = 'stand_mask',
+    order = 62,
+    func = function(self)
+        if self.ability.stand_mask and (self.config.center.discovered or self.bypass_discovery_center) then
+            self.children.floating_sprite:draw_shader('csau_stand_mask')
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
