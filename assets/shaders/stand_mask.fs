@@ -62,12 +62,12 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 	vec4 tex = Texel(texture, texture_coords);
     vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
-	vec2 soul_uv = (((texture_coords + sprite_size)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
-	vec4 soul = soul_move(texture, soul_uv);
+	//vec2 soul_uv = (((texture_coords + sprite_size)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
+	vec4 soul = soul_move(texture, vec2(texture_coords.x + sprite_size.x, texture_coords.y));
 
-	vec4 mask = Texel(texture, texture_coords + sprite_size * 2.);
+	vec4 mask = Texel(texture, vec2(texture_coords.x + sprite_size.x * 2., texture_coords.y));
 
-    soul = mask_layer(soul, mask.a);
+    soul = mask_layer(soul, 1. - mask.r);
     tex = layer(soul, tex);
 
   	// required for dissolve fx
