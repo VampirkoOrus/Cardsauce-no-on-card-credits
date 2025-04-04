@@ -212,10 +212,14 @@ local twoPointOItems = {
 		'plant',
 	},
 	Consumable = {
+		-- Planet
 		'lutetia',
 		'varuna',
+		'lost_galaxy',
+		-- Spectral
         'spec_stone',
 		'spec_diary',
+		-- Tarot
 		'tarot_arrow',
 	},
 

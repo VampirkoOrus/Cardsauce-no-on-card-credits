@@ -3,6 +3,7 @@ return {
 		poker_hands = {
 			["csau_Blackjack"] = "Blackjack",
 			["csau_FlushBlackjack"] = "Flush Blackjack",
+			["csau_FlushFibonacci"] = "Flush Fibonacci",
 		},
 		poker_hand_descriptions={
 			["csau_Blackjack"] = {
@@ -240,6 +241,9 @@ return {
 			csau_corrupted = "Corrupted",
 		},
 		dictionary = {
+			k_asteroid = "Asteroid",
+			k_galaxy = "Galaxy",
+			k_galaxy_q = "Galaxy?",
 			k_vhs = "VHS Tape",
 			k_stand = "Stand",
 			b_stand_cards = "Stands",
@@ -2538,6 +2542,15 @@ return {
 			},
 			c_csau_varuna = {
 				name = "Varuna",
+				text = {
+					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+					"{C:attention}#2#",
+					"{C:mult}+#3#{} Mult and",
+					"{C:chips}+#4#{} chips",
+				}
+			},
+			c_csau_lost_galaxy = {
+				name = "Lost Galaxy",
 				text = {
 					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
 					"{C:attention}#2#",

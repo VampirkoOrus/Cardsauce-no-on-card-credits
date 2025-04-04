@@ -1,3 +1,26 @@
+SMODS.PokerHand {
+    key = "FlushFibonacci",
+    chips = 144,
+    mult = 13,
+    l_chips = 55,
+    l_mult = 5,
+    visible = false,
+    example = {
+        { 'D_A', true },
+        { 'D_2', true },
+        { 'D_3', true },
+        { 'D_5', true },
+        { 'D_8', true },
+    },
+    evaluate = function(parts, hand)
+        if next(SMODS.find_card("c_csau_steel_tusk_4")) then
+            if next(parts._flush) then
+                return { hand }
+            end
+        end
+    end,
+}
+
 local consumInfo = {
     name = 'Tusk ACT4',
     set = 'Stand',

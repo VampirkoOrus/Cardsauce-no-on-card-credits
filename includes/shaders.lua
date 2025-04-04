@@ -7,7 +7,7 @@ SMODS.DrawStep:take_ownership('floating_sprite', {
 
             if type(self.config.center.soul_pos.draw) == 'function' then
                 self.config.center.soul_pos.draw(self, scale_mod, rotate_mod)
-            elseif self.ability.name == 'Hologram' then
+            elseif self.ability.name == 'Hologram' or self.config.center.key == "j_csau_shrimp" then
                 self.hover_tilt = self.hover_tilt*1.5
                 self.children.floating_sprite:draw_shader('hologram', nil, self.ARGS.send_to_shader, nil, self.children.center, 2*scale_mod, 2*rotate_mod)
                 self.hover_tilt = self.hover_tilt/1.5
@@ -29,15 +29,6 @@ SMODS.DrawStep:take_ownership('floating_sprite', {
                 end
             end
         end
-		local scale_mod = 0.07 + 0.02*math.sin(1.8*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
-		local rotate_mod = 0.05*math.sin(1.219*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2
-		if self.config.center.soul_pos and (self.config.center.discovered or self.bypass_discovery_center) then
-			if self.config.center.key == "j_csau_shrimp" then
-				self.hover_tilt = self.hover_tilt*1.5
-				self.children.floating_sprite:draw_shader('hologram', nil, self.ARGS.send_to_shader, nil, self.children.center, 2*scale_mod, 2*rotate_mod)
-				self.hover_tilt = self.hover_tilt/1.5
-			end
-		end
 	end,
 })
 
