@@ -37,7 +37,7 @@ vec4 soul_move(Image tex, vec2 uv) {
     float scale_mod = 0.07 + 0.02*sin(1.8*stand_mask.y);
     float rotate_mod = 0.0025*sin(1.219*stand_mask.y);
 
-    vec2 transformedUV = uv - 0.5; // translate uv to center
+    vec2 transformedUV = vec2(uv.x - 0.125, uv.y - 0.5); // translate uv to center
 
     transformedUV *= 1.0 + scale_mod; // apply scaling
 
@@ -49,23 +49,21 @@ vec4 soul_move(Image tex, vec2 uv) {
                                sinAngle, cosAngle);
     transformedUV *= rotationMatrix;
 
-    transformedUV += 0.5; // translate uv back
+    transformedUV += vec2(transformedUV.x + 0.125, transformedUV.y + 0.5); // translate uv back
 
     return Texel(tex, transformedUV);
 }
 
 vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 {
-    vec2 sprite_size = vec2(texture_details.z, texture_details.a);
-    vec2 sprite_pos = vec2(texture_details.x, texture_details.y);
+    float sprite_width = texture_details.z / image_details.x;
 
 	vec4 tex = Texel(texture, texture_coords);
     vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
-	//vec2 soul_uv = (((texture_coords + sprite_size)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
-	vec4 soul = soul_move(texture, vec2(texture_coords.x + sprite_size.x, texture_coords.y));
+	vec4 soul = soul_move(texture, vec2(texture_coords.x + sprite_width, texture_coords.y));
 
-	vec4 mask = Texel(texture, vec2(texture_coords.x + sprite_size.x * 2., texture_coords.y));
+	vec4 mask = Texel(texture, vec2(texture_coords.x + sprite_width * 2., texture_coords.y));
 
     soul = mask_layer(soul, 1. - mask.r);
     tex = layer(soul, tex);

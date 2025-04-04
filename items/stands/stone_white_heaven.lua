@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Made in Heaven',
     set = 'Stand',
     config = {
+        stand_mask = true,
         evolved = true,
     },
     cost = 8,

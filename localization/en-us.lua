@@ -2339,7 +2339,7 @@ return {
 				name = "All Along The Watchtower",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult if deck is {C:attention}52{} cards,",
-					"{C:attention}2{}-{C:attention}A{} for each suit"
+					"{C:attention}2-A{} for each suit"
 				},
 			},
 			c_csau_stone_stone = {
@@ -2572,7 +2572,7 @@ return {
 			c_csau_spec_stone = {
 				name = "Stone Mask",
 				text = {
-					"Add {C:dark_edition}Holographic{} and {C:attention}Eternal{},",
+					"Add {C:dark_edition}Holographic{} and {C:attention}Eternal{}",
 					"to a random Joker, overwriting",
 					"existing {C:dark_edition}editions{} and {C:attention}stickers{}"
 				}

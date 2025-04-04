@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'C-MOON',
     set = 'Stand',
     config = {
+        stand_mask = true,
         evolved = true,
         evolve_key = 'c_stand_stone_white_heaven',
         extra = {
