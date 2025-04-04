@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Killer Queen',
     set = 'Stand',
     config = {
+        stand_overlay = true,
         evolve_key = 'c_stand_diamond_killer_btd'
     },
     cost = 4,
@@ -11,6 +12,10 @@ local consumInfo = {
     part = 'diamond',
     in_progress = true,
 }
+
+function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.guff } }
+end
 
 function consumInfo.in_pool(self, args)
     if next(SMODS.find_card('j_showman')) then

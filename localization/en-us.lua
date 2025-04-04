@@ -2183,8 +2183,7 @@ return {
 			c_csau_stardust_thoth = {
 				name = "Thoth",
 				text = {
-					"{C:attention}Preview{} the top {C:attention}#1#{}",
-					"cards in your deck{}",
+					"{C:attention}Preview{} the top {C:attention}#1#{} cards in your deck{}",
 				},
 			},
 			c_csau_stardust_world = {
@@ -2334,6 +2333,13 @@ return {
 					"Each selected {C:attention}Blind{}",
 					"awards its {C:attention}skip tag{}",
 					"when defeated"
+				},
+			},
+			c_csau_vento_watchtower = {
+				name = "All Along The Watchtower",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult if deck is {C:attention}52{} cards,",
+					"{C:attention}2{}-{C:attention}A{} for each suit"
 				},
 			},
 			c_csau_stone_stone = {
@@ -2611,6 +2617,21 @@ return {
 			}
 		},
 		Tag = {
+			tag_csau_corrupted = {
+				name = "Corrupted Tag",
+				text = {
+					"Next base edition shop",
+					"Joker is free and",
+					"becomes {C:dark_edition}Corrupted"
+				},
+			},
+			tag_csau_plinkett = {
+				name = "Plinkett Tag",
+				text = {
+					"Gives a free",
+					"{C:vhs}Mega Analog Pack{}",
+				},
+			},
 			tag_csau_spirit = {
 				name = "Spirit Tag",
 				text = {

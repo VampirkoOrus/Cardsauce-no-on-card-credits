@@ -75,8 +75,11 @@ function load_cardsauce_item(file_key, item_type, no_badges)
     if item_type == 'Blind' then
         -- separation for animated spritess
         SMODS.Atlas({ key = file_key, atlas_table = "ANIMATION_ATLAS", path = "blinds/" .. file_key .. ".png", px = 34, py = 34, frames = 21, })
-    else 
-        SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or 71, py = new_item.height or  95 })
+	else
+		local width = 71
+		local height = 95
+		if item_type == 'Tag' then width = 34; height = 34 end
+        SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or width, py = new_item.height or height })
     end
 end
 

@@ -14,9 +14,9 @@ function consumInfo.add_to_deck(self, card)
     set_consumeable_usage(card)
 end
 
-local function detect_jacks(scoring_hand)
-    for k, v in ipairs(scoring_hand) do
-        if v:get_id() == 11 and v.ability.effect == "Base" then
+local function is_removed(card, removed)
+    for i, v in ipairs(removed) do
+        if card == v then
             return true
         end
     end
@@ -24,27 +24,40 @@ local function detect_jacks(scoring_hand)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.before and not card.debuff and not context.blueprint then
-        if detect_jacks(context.full_hand) then
-            for i, v in ipairs(context.full_hand) do
-                if v:get_id() == 11 and v.ability.effect == "Base" then
-                    v:set_ability(G.P_CENTERS.m_steel, nil, true)
+    if context.remove_playing_cards then
+        local juice = false
+        for i, card in ipairs(context.removed) do
+            local pos = card.rank
+            local cards_to_convert = {}
+            for i=1, 2 do
+                local mod = -1
+                if i == 2 then mod = 1 end
+                if card.area.cards[card.rank+mod] and not is_removed(card.area.cards[card.rank+mod], context.removed) then
+                    cards_to_convert[#cards_to_convert+1] = card.area.cards[card.rank+mod]
+                end
+            end
+            if #cards_to_convert > 0 then
+                for i, v in ipairs(cards_to_convert) do
                     G.E_MANAGER:add_event(Event({
                         func = function()
+                            v:set_ability(card.config.center)
+                            v:set_base(card.config.card)
                             v:juice_up()
                             return true
                         end
                     }))
+                    juice = true
                 end
             end
-            return {
-                message = localize('k_metal'),
-                card = card,
-            }
         end
-    end
-    if context.check_enhancement and context.other_card.config.center.key == 'm_steel' then
-        return { m_glass = true }
+        if juice then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    card:juice_up()
+                    return true
+                end
+            }))
+        end
     end
 end
 

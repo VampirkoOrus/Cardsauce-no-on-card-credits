@@ -65,6 +65,7 @@ csau_team = {
 	['gameboy'] = "Sir. Gameboy",
 	['cauthen'] = "Cauthen Currie",
 	['joey'] = "Joey",
+	['burlap'] = "ABBurlap",
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",

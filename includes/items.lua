@@ -170,6 +170,7 @@ local twoPointOItems = {
 		'vento_metallica',
 		'vento_epitaph',
 		'vento_epitaph_king',
+		'vento_watchtower',
 
 		-- stone ocean
 		'stone_stone',
@@ -200,6 +201,8 @@ local twoPointOItems = {
 		'lands_bigmouth',
 	},
 	Tag = {
+		'corrupted',
+		'plinkett',
 		'spirit',
 	},
 	Voucher = {
@@ -279,6 +282,7 @@ local twoPointOItems = {
 
     Deck = {
         'varg',
+		'cbt',
 	    'wheel',
 	    'disc'
     },
@@ -344,7 +348,7 @@ SMODS.Rarity {
 
 -- Stand Consumable
 SMODS.Atlas({ key = 'undiscovered', path = "undiscovered.png", px = 71, py = 95 })
-SMODS.UndiscoveredSprite { key = "Stand", atlas = "undiscovered", pos = { x = 1, y = 0 } }
+SMODS.UndiscoveredSprite { key = "Stand", atlas = "undiscovered", pos = { x = 1, y = 0 }, overlay_pos = { x = 2, y = 0 } }
 SMODS.ConsumableType {
 	key = 'Stand',
 	primary_colour = G.C.STAND,

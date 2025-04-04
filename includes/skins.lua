@@ -165,25 +165,25 @@ SMODS.Joker:take_ownership('rough_gem', {
 ---------------------------
 
 -- Recolored Clubs Collabs
-SMODS.Atlas{ key = 'csau_c_collab_VS', px = 71, py = 95, path = 'cards/recolored/csau_c_collab_VS.png', prefix_config = {key = false},}
-SMODS.Atlas{ key = 'csau_c_collab_STS', px = 71, py = 95, path = 'cards/recolored/csau_c_collab_STS.png', prefix_config = {key = false},}
-SMODS.Atlas{ key = 'csau_c_collab_PC', px = 71, py = 95, path = 'cards/recolored/csau_c_collab_PC.png', prefix_config = {key = false},}
-SMODS.Atlas{ key = 'csau_c_collab_WF', px = 71, py = 95, path = 'cards/recolored/csau_c_collab_WF.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_VS', px = 71, py = 95, path = 'cards/recolored/csau_collab_VS.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_STS', px = 71, py = 95, path = 'cards/recolored/csau_collab_STS.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_PC', px = 71, py = 95, path = 'cards/recolored/csau_collab_PC.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_WF', px = 71, py = 95, path = 'cards/recolored/csau_collab_WF.png', prefix_config = {key = false},}
 -- Recolored Diamonds Collabs
-SMODS.Atlas{ key = 'csau_d_collab_DTD', px = 71, py = 95, path = 'cards/recolored/csau_d_collab_DTD.png', prefix_config = {key = false},}
-SMODS.Atlas{ key = 'csau_d_collab_SV', px = 71, py = 95, path = 'cards/recolored/csau_d_collab_SV.png', prefix_config = {key = false},}
-SMODS.Atlas{ key = 'csau_d_collab_EG', px = 71, py = 95, path = 'cards/recolored/csau_d_collab_EG.png', prefix_config = {key = false},}
-SMODS.Atlas{ key = 'csau_d_collab_XR', px = 71, py = 95, path = 'cards/recolored/csau_d_collab_XR.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_DTD', px = 71, py = 95, path = 'cards/recolored/csau_collab_DTD.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_SV', px = 71, py = 95, path = 'cards/recolored/csau_collab_SV.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_EG', px = 71, py = 95, path = 'cards/recolored/csau_collab_EG.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_XR', px = 71, py = 95, path = 'cards/recolored/csau_collab_XR.png', prefix_config = {key = false},}
 -- Recolored Hearts Collabs
-SMODS.Atlas{ key = 'csau_h_collab_AU', px = 71, py = 95, path = 'cards/recolored/csau_h_collab_AU.png', prefix_config = {key = false},}
-SMODS.Atlas{ key = 'csau_h_collab_TBoI', px = 71, py = 95, path = 'cards/recolored/csau_h_collab_TBoI.png', prefix_config = {key = false},}
-SMODS.Atlas{ key = 'csau_h_collab_CL', px = 71, py = 95, path = 'cards/recolored/csau_h_collab_CL.png', prefix_config = {key = false},}
-SMODS.Atlas{ key = 'csau_h_collab_D2', px = 71, py = 95, path = 'cards/recolored/csau_h_collab_D2.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_AU', px = 71, py = 95, path = 'cards/recolored/csau_collab_AU.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_TBoI', px = 71, py = 95, path = 'cards/recolored/csau_collab_TBoI.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_CL', px = 71, py = 95, path = 'cards/recolored/csau_collab_CL.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_D2', px = 71, py = 95, path = 'cards/recolored/csau_collab_D2.png', prefix_config = {key = false},}
 -- Recolored Spades Collabs
-SMODS.Atlas{ key = 'csau_s_collab_TW', px = 71, py = 95, path = 'cards/recolored/csau_s_collab_TW.png', prefix_config = {key = false}, }
-SMODS.Atlas{ key = 'csau_s_collab_CYP', px = 71, py = 95, path = 'cards/recolored/csau_s_collab_CYP.png', prefix_config = {key = false}, }
-SMODS.Atlas{ key = 'csau_s_collab_SK', px = 71, py = 95, path = 'cards/recolored/csau_s_collab_SK.png', prefix_config = {key = false}, }
-SMODS.Atlas{ key = 'csau_s_collab_DS', px = 71, py = 95, path = 'cards/recolored/csau_s_collab_DS.png', prefix_config = {key = false}, }
+SMODS.Atlas{ key = 'csau_collab_TW', px = 71, py = 95, path = 'cards/recolored/csau_collab_TW.png', prefix_config = {key = false}, }
+SMODS.Atlas{ key = 'csau_collab_CYP', px = 71, py = 95, path = 'cards/recolored/csau_collab_CYP.png', prefix_config = {key = false}, }
+SMODS.Atlas{ key = 'csau_collab_SK', px = 71, py = 95, path = 'cards/recolored/csau_collab_SK.png', prefix_config = {key = false}, }
+SMODS.Atlas{ key = 'csau_collab_DS', px = 71, py = 95, path = 'cards/recolored/csau_collab_DS.png', prefix_config = {key = false}, }
 
 local color = {
     Hearts = HEX("e14e62"),
@@ -192,1227 +192,79 @@ local color = {
     Spades = HEX("8d619a"),
 }
 
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_VS'], {
-    key = 'csau_collab_VS',
-    ranks = full_ranks,
-    display_ranks = face,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_c_collab_VS', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_c_collab_VS', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_c_collab_VS', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Clubs,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_VS'], {
-    key = 'csau_collab_VS_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_c_collab_VS', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_c_collab_VS', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_c_collab_VS', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "CSAU Colors & Darkshroom"
-    },
-    colour = color.Clubs,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_VS'], {
-    key = 'csau_collab_VS_vineshroom',
-    ranks = full_ranks,
-    display_ranks = face_ace,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_c_collab_VS', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_c_collab_VS', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_c_collab_VS', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_c_vineshroom', pos = {x = 0, y = 0} }
-    },
-    loc_txt = {
-        ['en-us'] = "CSAU Colors & Vineshroom"
-    },
-    colour = color.Clubs,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_STS'], {
-    key = 'csau_collab_STS',
-    ranks = full_ranks,
-    display_ranks = face,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_c_collab_STS', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_c_collab_STS', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_c_collab_STS', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Clubs,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_STS'], {
-    key = 'csau_collab_STS_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_c_collab_STS', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_c_collab_STS', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_c_collab_STS', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "CSAU Colors & Darkshroom"
-    },
-    colour = color.Clubs,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_STS'], {
-    key = 'csau_collab_STS_vineshroom',
-    ranks = full_ranks,
-    display_ranks = face_ace,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_c_collab_STS', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_c_collab_STS', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_c_collab_STS', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_c_vineshroom', pos = {x = 0, y = 0} }
-    },
-    loc_txt = {
-        ['en-us'] = "CSAU Colors & Vineshroom"
-    },
-    colour = color.Clubs,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_PC'], {
-    key = 'csau_collab_PC',
-    ranks = full_ranks,
-    display_ranks = face,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_c_collab_PC', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_c_collab_PC', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_c_collab_PC', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Clubs,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_PC'], {
-    key = 'csau_collab_PC_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_c_collab_PC', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_c_collab_PC', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_c_collab_PC', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "CSAU Colors & Darkshroom"
-    },
-    colour = color.Clubs,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_PC'], {
-    key = 'csau_collab_PC_vineshroom',
-    ranks = full_ranks,
-    display_ranks = face_ace,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_c_collab_PC', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_c_collab_PC', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_c_collab_PC', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_c_vineshroom', pos = {x = 0, y = 0} }
-    },
-    loc_txt = {
-        ['en-us'] = "CSAU Colors & Vineshroom"
-    },
-    colour = color.Clubs,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_WF'], {
-    key = 'csau_collab_WF',
-    ranks = full_ranks,
-    display_ranks = face,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_c_collab_WF', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_c_collab_WF', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_c_collab_WF', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Clubs,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_WF'], {
-    key = 'csau_collab_WF_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_c_collab_WF', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_c_collab_WF', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_c_collab_WF', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "CSAU Colors & Darkshroom"
-    },
-    colour = color.Clubs,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_WF'], {
-    key = 'csau_collab_WF_vineshroom',
-    ranks = full_ranks,
-    display_ranks = face_ace,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_c_collab_WF', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_c_collab_WF', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_c_collab_WF', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_c_vineshroom', pos = {x = 0, y = 0} }
-    },
-    loc_txt = {
-        ['en-us'] = "CSAU Colors & Vineshroom"
-    },
-    colour = color.Clubs,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_DTD'], {
-    key = 'csau_collab_DTD',
-    ranks = full_ranks,
-    display_ranks = face,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_d_collab_DTD', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_d_collab_DTD', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_d_collab_DTD', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 2} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Diamonds,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_DTD'], {
-    key = 'csau_collab_DTD_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace,
-    atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_d_collab_DTD', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_d_collab_DTD', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_d_collab_DTD', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors & Shroom"
-    },
-    colour = color.Diamonds,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_SV'], {
-    key = 'csau_collab_SV',
-    ranks = full_ranks,
-    display_ranks = face, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_d_collab_SV', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_d_collab_SV', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_d_collab_SV', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 2} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Diamonds,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_SV'], {
-    key = 'csau_collab_SV_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_d_collab_SV', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_d_collab_SV', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_d_collab_SV', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors & Shroom"
-    },
-    colour = color.Diamonds,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_EG'], {
-    key = 'csau_collab_EG',
-    ranks = full_ranks,
-    display_ranks = face, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_d_collab_EG', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_d_collab_EG', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_d_collab_EG', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 2} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Diamonds,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_EG'], {
-    key = 'csau_collab_EG_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_d_collab_EG', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_d_collab_EG', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_d_collab_EG', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors & Shroom"
-    },
-    colour = color.Diamonds,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_XR'], {
-    key = 'csau_collab_XR',
-    ranks = full_ranks,
-    display_ranks = face, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_d_collab_XR', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_d_collab_XR', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_d_collab_XR', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 2} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Diamonds,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_XR'], {
-    key = 'csau_collab_XR_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_d_collab_XR', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_d_collab_XR', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_d_collab_XR', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors & Shroom"
-    },
-    colour = color.Diamonds,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_AU'], {
-    key = 'csau_collab_AU',
-    ranks = full_ranks,
-    display_ranks = face, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_h_collab_AU', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_h_collab_AU', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_h_collab_AU', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Hearts,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_AU'], {
-    key = 'csau_collab_AU_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_h_collab_AU', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_h_collab_AU', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_h_collab_AU', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors & Shroom"
-    },
-    colour = color.Hearts,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_TBoI'], {
-    key = 'csau_collab_TBoI',
-    ranks = full_ranks,
-        display_ranks = face, atlas = 'csau_default',
+local function assemble_vanilla_palettes(key, suit)
+    local suit_y = 0; if suit == "Clubs" then suit_y = 1 elseif suit == "Diamonds" then suit_y = 2 elseif suit == "Spades" then suit_y = 3 end
+    SMODS.DeckSkin.add_palette(SMODS.DeckSkins[key], {
+        key = 'csau_'..key,
+        ranks = full_ranks,
+        display_ranks = face,
+        atlas = 'csau_default',
         pos_style = {
             fallback_style = 'deck',
-            Jack = { atlas = 'csau_h_collab_TBoI', pos = {x = 0, y = 0} },
-            Queen = { atlas = 'csau_h_collab_TBoI', pos = {x = 1, y = 0} },
-            King = { atlas = 'csau_h_collab_TBoI', pos = {x = 2, y = 0} },
-            Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
+            Jack = { atlas = 'csau_'..key, pos = {x = 0, y = 0} },
+            Queen = { atlas = 'csau_'..key, pos = {x = 1, y = 0} },
+            King = { atlas = 'csau_'..key, pos = {x = 2, y = 0} },
+            Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = suit_y} }
         },
         loc_txt = {
             ['en-us'] = "Cardsauce Colors"
         },
-        colour = color.Hearts,
+        colour = color[suit],
         suit_icon = {
             atlas = 'csau_suits'
         }
-})
+    })
 
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_TBoI'], {
-    key = 'csau_collab_TBoI_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_h_collab_TBoI', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_h_collab_TBoI', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_h_collab_TBoI', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors & Shroom"
-    },
-    colour = color.Hearts,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_CL'], {
-    key = 'csau_collab_CL',
-    ranks = full_ranks,
-    display_ranks = face, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_h_collab_CL', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_h_collab_CL', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_h_collab_CL', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Hearts,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_CL'], {
-    key = 'csau_collab_CL_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_h_collab_CL', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_h_collab_CL', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_h_collab_CL', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors & Shroom"
-    },
-    colour = color.Hearts,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_D2'], {
-    key = 'csau_collab_D2',
-    ranks = full_ranks,
-    display_ranks = face, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_h_collab_D2', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_h_collab_D2', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_h_collab_D2', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Hearts,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_D2'], {
-    key = 'csau_collab_D2_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_h_collab_D2', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_h_collab_D2', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_h_collab_D2', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors & Shroom"
-    },
-    colour = color.Hearts,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_TW'], {
-    key = 'csau_collab_TW',
-    ranks = full_ranks,
-    display_ranks = face, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_s_collab_TW', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_s_collab_TW', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_s_collab_TW', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 3} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Spades,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_TW'], { key = 'csau_collab_TW_shroom', ranks = full_ranks,
-    display_ranks = face_ace, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_s_collab_TW', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_s_collab_TW', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_s_collab_TW', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors & Shroom"
-    },
-    colour = color.Spades,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_CYP'], {
-    key = 'csau_collab_CYP',
-    ranks = full_ranks,
-    display_ranks = face, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_s_collab_CYP', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_s_collab_CYP', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_s_collab_CYP', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 3} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Spades,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_CYP'], {
-    key = 'csau_collab_CYP_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_s_collab_CYP', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_s_collab_CYP', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_s_collab_CYP', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors & Shroom"
-    },
-    colour = color.Spades,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_SK'], {
-    key = 'csau_collab_SK',
-    ranks = full_ranks,
-    display_ranks = face, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_s_collab_SK', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_s_collab_SK', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_s_collab_SK', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 3} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Spades,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_SK'], {
-    key = 'csau_collab_SK_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_s_collab_SK', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_s_collab_SK', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_s_collab_SK', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors & Shroom"
-    },
-    colour = color.Spades,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_DS'], {
-    key = 'csau_collab_DS',
-    ranks = full_ranks,
-    display_ranks = face, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_s_collab_DS', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_s_collab_DS', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_s_collab_DS', pos = {x = 2, y = 0} },
-        Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 3} }
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors"
-    },
-    colour = color.Spades,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-SMODS.DeckSkin.add_palette(SMODS.DeckSkins['collab_DS'], {
-    key = 'csau_collab_DS_shroom',
-    ranks = full_ranks,
-    display_ranks = face_ace, atlas = 'csau_default',
-    pos_style = {
-        fallback_style = 'deck',
-        Jack = { atlas = 'csau_s_collab_DS', pos = {x = 0, y = 0} },
-        Queen = { atlas = 'csau_s_collab_DS', pos = {x = 1, y = 0} },
-        King = { atlas = 'csau_s_collab_DS', pos = {x = 2, y = 0} },
-    },
-    loc_txt = {
-        ['en-us'] = "Cardsauce Colors & Shroom"
-    },
-    colour = color.Spades,
-    suit_icon = {
-        atlas = 'csau_suits'
-    }
-})
-
-
-
-
-
----------------------------
---------------------------- Vine Character Skins
----------------------------
-
-SMODS.Atlas{ key = 'c_mascots', px = 71, py = 95, path = 'cards/csau/c_mascots.png',}
-SMODS.Atlas{ key = 'd_classics', px = 71, py = 95, path = 'cards/csau/d_classics.png',}
-SMODS.Atlas{ key = 'h_wildcards', px = 71, py = 95, path = 'cards/csau/h_wildcards.png',}
-SMODS.Atlas{ key = 's_confidants', px = 71, py = 95, path = 'cards/csau/s_confidants.png',}
-SMODS.DeckSkin{
-    key = "csau_mascots",
-    suit = "Clubs",
-    palettes = {
-        {
-            key = 'csau_mascots', ranks = full_ranks,
-            display_ranks = face_ace, atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Jack = { atlas = 'csau_c_mascots', pos = {x = 0, y = 0} },
-                Queen = { atlas = 'csau_c_mascots', pos = {x = 1, y = 0} },
-                King = { atlas = 'csau_c_mascots', pos = {x = 2, y = 0} },
-            },
-            loc_txt = {
-                ['en-us'] = "Cardsauce Colors"
-            },
-            colour = color.Clubs,
-            suit_icon = {
-                atlas = 'csau_suits'
-            }
-        },
-        {
-            key = 'csau_mascots_vineshroom', ranks = full_ranks,
-            display_ranks = face_ace, atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Jack = { atlas = 'csau_c_mascots', pos = {x = 0, y = 0} },
-                Queen = { atlas = 'csau_c_mascots', pos = {x = 1, y = 0} },
-                King = { atlas = 'csau_c_mascots', pos = {x = 2, y = 0} },
-                Ace = { atlas = 'csau_c_vineshroom', pos = {x = 0, y = 0} }
-            },
-            loc_txt = {
-                ['en-us'] = "Vineshroom"
-            },
-            colour = color.Clubs,
-            suit_icon = {
-                atlas = 'csau_suits'
-            }
-        },
-        {
-            key = 'csau_mascots_ace', ranks = full_ranks,
-            display_ranks = face_ace, atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Jack = { atlas = 'csau_c_mascots', pos = {x = 0, y = 0} },
-                Queen = { atlas = 'csau_c_mascots', pos = {x = 1, y = 0} },
-                King = { atlas = 'csau_c_mascots', pos = {x = 2, y = 0} },
-                Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 1} }
-            },
-            loc_txt = {
-                ['en-us'] = "Vanilla Ace"
-            },
-            colour = color.Clubs,
-            suit_icon = {
-                atlas = 'csau_suits'
-            }
-        },
-    },
-    loc_txt = {
-        ['en-us'] = "The Mascots"
-    }
-}
-
-SMODS.DeckSkin{
-    key = "csau_classics",
-    suit = "Diamonds",
-    palettes = {
-        {
-            key = 'csau_classics', ranks = full_ranks,
-            display_ranks = face_ace, atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Jack = { atlas = 'csau_d_classics', pos = {x = 0, y = 0} },
-                Queen = { atlas = 'csau_d_classics', pos = {x = 1, y = 0} },
-                King = { atlas = 'csau_d_classics', pos = {x = 2, y = 0} },
-            },
-            loc_txt = {
-                ['en-us'] = "Cardsauce Colors"
-            },
-            colour = color.Diamonds,
-            suit_icon = {
-                atlas = 'csau_suits'
-            }
-        },
-        {
-            key = 'csau_classics_ace', ranks = full_ranks,
-            display_ranks = face_ace, atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Jack = { atlas = 'csau_d_classics', pos = {x = 0, y = 0} },
-                Queen = { atlas = 'csau_d_classics', pos = {x = 1, y = 0} },
-                King = { atlas = 'csau_d_classics', pos = {x = 2, y = 0} },
-                Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 2} }
-            },
-            loc_txt = {
-                ['en-us'] = "Vanilla Ace"
-            },
-            colour = color.Diamonds,
-            suit_icon = {
-                atlas = 'csau_suits'
-            }
-        },
-    },
-    loc_txt = {
-        ['en-us'] = "The Classics"
-    }
-}
-
-SMODS.DeckSkin{
-    key = "csau_wildcards",
-    suit = "Hearts",
-    palettes = {
-        {
-            key = 'csau_wildcards', ranks = full_ranks,
-            display_ranks = face_ace, atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Jack = { atlas = 'csau_h_wildcards', pos = {x = 0, y = 0} },
-                Queen = { atlas = 'csau_h_wildcards', pos = {x = 1, y = 0} },
-                King = { atlas = 'csau_h_wildcards', pos = {x = 2, y = 0} },
-            },
-            loc_txt = {
-                ['en-us'] = "Cardsauce Colors"
-            },
-            colour = color.Hearts,
-            suit_icon = {
-                atlas = 'csau_suits'
-            }
-        },
-        {
-            key = 'csau_wildcards_ace', ranks = full_ranks,
-            display_ranks = face_ace, atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Jack = { atlas = 'csau_h_wildcards', pos = {x = 0, y = 0} },
-                Queen = { atlas = 'csau_h_wildcards', pos = {x = 1, y = 0} },
-                King = { atlas = 'csau_h_wildcards', pos = {x = 2, y = 0} },
-                Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
-            },
-            loc_txt = {
-                ['en-us'] = "Vanilla Ace"
-            },
-            colour = color.Hearts,
-            suit_icon = {
-                atlas = 'csau_suits'
-            }
-        },
-    },
-    loc_txt = {
-        ['en-us'] = "The Wildcards"
-    }
-}
-
-SMODS.DeckSkin{
-    key = "csau_confidants",
-    suit = "Spades",
-    palettes = {
-        {
-            key = 'csau_confidants', ranks = full_ranks,
-            display_ranks = face_ace, atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Jack = { atlas = 'csau_s_confidants', pos = {x = 0, y = 0} },
-                Queen = { atlas = 'csau_s_confidants', pos = {x = 1, y = 0} },
-                King = { atlas = 'csau_s_confidants', pos = {x = 2, y = 0} },
-            },
-            loc_txt = {
-                ['en-us'] = "Cardsauce Colors"
-            },
-            colour = color.Spades,
-            suit_icon = {
-                atlas = 'csau_suits'
-            }
-        },
-        {
-            key = 'csau_confidants_ace', ranks = full_ranks,
-            display_ranks = face_ace, atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Jack = { atlas = 'csau_s_confidants', pos = {x = 0, y = 0} },
-                Queen = { atlas = 'csau_s_confidants', pos = {x = 1, y = 0} },
-                King = { atlas = 'csau_s_confidants', pos = {x = 2, y = 0} },
-                Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 3} }
-            },
-            loc_txt = {
-                ['en-us'] = "Vanilla Ace"
-            },
-            colour = color.Spades,
-            suit_icon = {
-                atlas = 'csau_suits'
-            }
-        },
-    },
-    loc_txt = {
-        ['en-us'] = "The Confidants"
-    }
-}
-
-
-
-
-
----------------------------
---------------------------- Varg Character Skins
----------------------------
-
-if twoPointO then
-    -- Varg Characters
-    SMODS.Atlas{ key = 'c_voices', px = 71, py = 95, path = 'cards/csau/c_voices.png',}
-    SMODS.Atlas{ key = 'd_duendes', px = 71, py = 95, path = 'cards/csau/d_duendes.png',}
-    SMODS.Atlas{ key = 'h_americans', px = 71, py = 95, path = 'cards/csau/h_americans.png',}
-    SMODS.Atlas{ key = 's_powerful', px = 71, py = 95, path = 'cards/csau/s_powerful.png',}
-
-    SMODS.DeckSkin{
-        key = "csau_voices",
-        suit = "Clubs",
-        palettes = {
-            {
-                key = 'csau_voices', ranks = full_ranks,
-                display_ranks = face_ace, atlas = 'csau_default',
-                pos_style = {
-                    fallback_style = 'deck',
-                    Jack = { atlas = 'csau_c_voices', pos = {x = 0, y = 0} },
-                    Queen = { atlas = 'csau_c_voices', pos = {x = 1, y = 0} },
-                    King = { atlas = 'csau_c_voices', pos = {x = 2, y = 0} },
-                    Ace = { atlas = 'csau_varg_aces', pos = {x = 0, y = 1} }
-                },
-                loc_txt = {
-                    ['en-us'] = "Cardsauce Colors"
-                },
-                colour = color.Clubs,
-                suit_icon = {
-                    atlas = 'csau_suits'
-                }
-            },
-            {
-                key = 'csau_voices_ace', ranks = full_ranks,
-                display_ranks = face_ace, atlas = 'csau_default',
-                pos_style = {
-                    fallback_style = 'deck',
-                    Jack = { atlas = 'csau_c_voices', pos = {x = 0, y = 0} },
-                    Queen = { atlas = 'csau_c_voices', pos = {x = 1, y = 0} },
-                    King = { atlas = 'csau_c_voices', pos = {x = 2, y = 0} },
-                    Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 1} }
-                },
-                loc_txt = {
-                    ['en-us'] = "Vanilla Ace"
-                },
-                colour = color.Clubs,
-                suit_icon = {
-                    atlas = 'csau_suits'
-                }
-            },
+    SMODS.DeckSkin.add_palette(SMODS.DeckSkins[key], {
+        key = 'csau_'..key..'_darkshroom',
+        ranks = full_ranks,
+        display_ranks = face_ace,
+        atlas = 'csau_default',
+        pos_style = {
+            fallback_style = 'deck',
+            Jack = { atlas = 'csau_'..key, pos = {x = 0, y = 0} },
+            Queen = { atlas = 'csau_'..key, pos = {x = 1, y = 0} },
+            King = { atlas = 'csau_'..key, pos = {x = 2, y = 0} },
         },
         loc_txt = {
-            ['en-us'] = "The Voices"
+            ['en-us'] = "CSAU Colors & Darkshroom"
+        },
+        colour = color[suit],
+        suit_icon = {
+            atlas = 'csau_suits'
         }
-    }
-    SMODS.DeckSkin{
-        key = "csau_duendes",
-        suit = "Diamonds",
-        palettes = {
-            {
-                key = 'csau_duendes', ranks = full_ranks,
-                display_ranks = face_ace, atlas = 'csau_default',
-                pos_style = {
-                    fallback_style = 'deck',
-                    Jack = { atlas = 'csau_d_duendes', pos = {x = 0, y = 0} },
-                    Queen = { atlas = 'csau_d_duendes', pos = {x = 1, y = 0} },
-                    King = { atlas = 'csau_d_duendes', pos = {x = 2, y = 0} },
-                    Ace = { atlas = 'csau_varg_aces', pos = {x = 0, y = 2} }
-                },
-                loc_txt = {
-                    ['en-us'] = "Cardsauce Colors"
-                },
-                colour = color.Diamonds,
-                suit_icon = {
-                    atlas = 'csau_suits'
-                }
-            },
-            {
-                key = 'csau_duendes_ace', ranks = full_ranks,
-                display_ranks = face_ace, atlas = 'csau_default',
-                pos_style = {
-                    fallback_style = 'deck',
-                    Jack = { atlas = 'csau_d_duendes', pos = {x = 0, y = 0} },
-                    Queen = { atlas = 'csau_d_duendes', pos = {x = 1, y = 0} },
-                    King = { atlas = 'csau_d_duendes', pos = {x = 2, y = 0} },
-                    Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 2} }
-                },
-                loc_txt = {
-                    ['en-us'] = "Vanilla Ace"
-                },
-                colour = color.Diamonds,
-                suit_icon = {
-                    atlas = 'csau_suits'
-                }
-            },
+    })
+
+    SMODS.DeckSkin.add_palette(SMODS.DeckSkins[key], {
+        key = 'csau_'..key..'_lightshroom',
+        ranks = full_ranks,
+        display_ranks = face_ace,
+        atlas = 'csau_default',
+        pos_style = {
+            fallback_style = 'deck',
+            Jack = { atlas = 'csau_'..key, pos = {x = 0, y = 0} },
+            Queen = { atlas = 'csau_'..key, pos = {x = 1, y = 0} },
+            King = { atlas = 'csau_'..key, pos = {x = 2, y = 0} },
+            Ace = { atlas = 'csau_lightshrooms', pos = {x = 0, y = suit_y} }
         },
         loc_txt = {
-            ['en-us'] = "The Duendes"
-        }
-    }
-    SMODS.DeckSkin{
-        key = "csau_americans",
-        suit = "Hearts",
-        palettes = {
-            {
-                key = 'csau_americans', ranks = full_ranks,
-                display_ranks = face_ace, atlas = 'csau_default',
-                pos_style = {
-                    fallback_style = 'deck',
-                    Jack = { atlas = 'csau_h_americans', pos = {x = 0, y = 0} },
-                    Queen = { atlas = 'csau_h_americans', pos = {x = 1, y = 0} },
-                    King = { atlas = 'csau_h_americans', pos = {x = 2, y = 0} },
-                    Ace = { atlas = 'csau_varg_aces', pos = {x = 0, y = 0} }
-                },
-                loc_txt = {
-                    ['en-us'] = "Cardsauce Colors"
-                },
-                colour = color.Hearts,
-                suit_icon = {
-                    atlas = 'csau_suits'
-                }
-            },
-            {
-                key = 'csau_americans_ace', ranks = full_ranks,
-                display_ranks = face_ace, atlas = 'csau_default',
-                pos_style = {
-                    fallback_style = 'deck',
-                    Jack = { atlas = 'csau_h_americans', pos = {x = 0, y = 0} },
-                    Queen = { atlas = 'csau_h_americans', pos = {x = 1, y = 0} },
-                    King = { atlas = 'csau_h_americans', pos = {x = 2, y = 0} },
-                    Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
-                },
-                loc_txt = {
-                    ['en-us'] = "Vanilla Ace"
-                },
-                colour = color.Hearts,
-                suit_icon = {
-                    atlas = 'csau_suits'
-                }
-            },
+            ['en-us'] = "CSAU Colors & Lightshroom"
         },
-        loc_txt = {
-            ['en-us'] = "The Americans"
+        colour = color[suit],
+        suit_icon = {
+            atlas = 'csau_suits'
         }
-    }
-    SMODS.DeckSkin{
-        key = "csau_powerful",
-        suit = "Spades",
-        palettes = {
-            {
-                key = 'csau_powerful', ranks = full_ranks,
-                display_ranks = face_ace, atlas = 'csau_default',
-                pos_style = {
-                    fallback_style = 'deck',
-                    Jack = { atlas = 'csau_s_powerful', pos = {x = 0, y = 0} },
-                    Queen = { atlas = 'csau_s_powerful', pos = {x = 1, y = 0} },
-                    King = { atlas = 'csau_s_powerful', pos = {x = 2, y = 0} },
-                    Ace = { atlas = 'csau_varg_aces', pos = {x = 0, y = 3} }
-                },
-                loc_txt = {
-                    ['en-us'] = "Cardsauce Colors"
-                },
-                colour = color.Spades,
-                suit_icon = {
-                    atlas = 'csau_suits'
-                }
-            },
-            {
-                key = 'csau_confidants_ace', ranks = full_ranks,
-                display_ranks = face_ace, atlas = 'csau_default',
-                pos_style = {
-                    fallback_style = 'deck',
-                    Jack = { atlas = 'csau_s_powerful', pos = {x = 0, y = 0} },
-                    Queen = { atlas = 'csau_s_powerful', pos = {x = 1, y = 0} },
-                    King = { atlas = 'csau_s_powerful', pos = {x = 2, y = 0} },
-                    Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 3} }
-                },
-                loc_txt = {
-                    ['en-us'] = "Vanilla Ace"
-                },
-                colour = color.Spades,
-                suit_icon = {
-                    atlas = 'csau_suits'
-                }
-            },
-        },
-        loc_txt = {
-            ['en-us'] = "The Powerful"
-        }
-    }
+    })
 end
 
-
-
-
-
----------------------------
---------------------------- Mike Character skins
----------------------------
-
-SMODS.Atlas{ key = 'h_poops', px = 71, py = 95, path = 'cards/csau/h_poops.png',}
-SMODS.Atlas{ key = 's_ocs', px = 71, py = 95, path = 'cards/csau/s_ocs.png',}
-
-SMODS.DeckSkin{
-    key = "csau_poops",
-    suit = "Hearts",
-    palettes = {
-        {
-            key = 'csau_poops', ranks = full_ranks,
-            display_ranks = face_ace, atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Jack = { atlas = 'csau_h_poops', pos = {x = 0, y = 0} },
-                Queen = { atlas = 'csau_h_poops', pos = {x = 1, y = 0} },
-                King = { atlas = 'csau_h_poops', pos = {x = 2, y = 0} },
-            },
-            loc_txt = {
-                ['en-us'] = "Cardsauce Colors"
-            },
-            colour = color.Hearts,
-            suit_icon = {
-                atlas = 'csau_suits'
-            }
-        },
-        {
-            key = 'csau_poops_ace', ranks = full_ranks,
-            display_ranks = face_ace, atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Jack = { atlas = 'csau_h_poops', pos = {x = 0, y = 0} },
-                Queen = { atlas = 'csau_h_poops', pos = {x = 1, y = 0} },
-                King = { atlas = 'csau_h_poops', pos = {x = 2, y = 0} },
-                Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
-            },
-            loc_txt = {
-                ['en-us'] = "Vanilla Ace"
-            },
-            colour = color.Hearts,
-            suit_icon = {
-                atlas = 'csau_suits'
-            }
-        },
-    },
-    loc_txt = {
-        ['en-us'] = "The Poops"
-    }
-}
-if twoPointO then
-    SMODS.DeckSkin{
-        key = "csau_ocs",
-        suit = "Spades",
-        palettes = {
-            {
-                key = 'csau_ocs', ranks = full_ranks,
-                display_ranks = face_ace, atlas = 'csau_default',
-                pos_style = {
-                    fallback_style = 'deck',
-                    Jack = { atlas = 'csau_s_ocs', pos = {x = 0, y = 0} },
-                    Queen = { atlas = 'csau_s_ocs', pos = {x = 1, y = 0} },
-                    King = { atlas = 'csau_s_ocs', pos = {x = 2, y = 0} },
-                },
-                loc_txt = {
-                    ['en-us'] = "Cardsauce Colors"
-                },
-                colour = color.Spades,
-                suit_icon = {
-                    atlas = 'csau_suits'
-                }
-            },
-            {
-                key = 'csau_ocs_ace', ranks = full_ranks,
-                display_ranks = face_ace, atlas = 'csau_default',
-                pos_style = {
-                    fallback_style = 'deck',
-                    Jack = { atlas = 'csau_s_ocs', pos = {x = 0, y = 0} },
-                    Queen = { atlas = 'csau_s_ocs', pos = {x = 1, y = 0} },
-                    King = { atlas = 'csau_s_ocs', pos = {x = 2, y = 0} },
-                    Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = 0} }
-                },
-                loc_txt = {
-                    ['en-us'] = "Vanilla Ace"
-                },
-                colour = color.Hearts,
-                suit_icon = {
-                    atlas = 'csau_suits'
-                }
-            },
-        },
-        loc_txt = {
-            ['en-us'] = "The OCs"
-        }
-    }
+for k, v in pairs(SMODS.DeckSkins) do
+    if not v.mod and starts_with(k, 'collab_') then
+        if SMODS.Atlases['csau_'..k] then
+            assemble_vanilla_palettes(k, v.suit)
+        else
+            sendWarnMessage("[Cardsauce] Friends of Jimbo collab with key \'"..k.."\' has no texture for recolored cardsauce colors! Go bug Keku to add it.")
+        end
+    end
 end
 
 
@@ -1430,7 +282,8 @@ SMODS.Atlas{ key = 'balcolor_varg_lc', px = 71, py = 95, path = 'cards/balcolor_
 SMODS.Atlas{ key = 'balcolor_varg_hc', px = 71, py = 95, path = 'cards/balcolor_varg_hc.png' }
 SMODS.Atlas{ key = 'varg_willo', px = 71, py = 95, path = 'cards/csau_varg_willo.png' }
 SMODS.Atlas{ key = 'color_aces', px = 71, py = 95, path = 'cards/csau_color_aces.png' }
-SMODS.Atlas{ key = 'c_vineshroom', px = 71, py = 95, path = 'cards/c_vineshroom.png' }
+SMODS.Atlas{ key = 'c_vineshroom', px = 71, py = 95, path = 'cards/c_vineshroom.png' } -- REMOVE THIS
+SMODS.Atlas{ key = 'lightshrooms', px = 71, py = 95, path = 'cards/csau_lightshrooms.png' }
 SMODS.Atlas{ key = 'csau_default', px = 71, py = 95, path = 'cards/csau_default.png', prefix_config = {key = false} }
 
 SMODS.Atlas{ key = 'suits', px = 18, py = 18, path = 'cards/suits.png' }
@@ -1482,36 +335,33 @@ for _, suit in ipairs(suits) do
         atlas = 'csau_default',
         pos_style = 'deck',
         loc_txt = {
-            ['en-us'] = "Cardsauce Colors"
+            ['en-us'] = "Darkshroom"
         },
         colour = color[suit:gsub("^%l", string.upper)],
         suit_icon = {
             atlas = 'csau_suits'
         }
     }
-
-    if suit == 'clubs' then
-        palettes[#palettes+1] = {
-            key = 'csau_vineshroom',
-            ranks = full_ranks,
-            display_ranks = face_ace,
-            atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Ace = {
-                    atlas = 'csau_c_vineshroom',
-                    pos = {x = 0, y = 0}
-                }
-            },
-            loc_txt = {
-                ['en-us'] = "Vineshroom Ace"
-            },
-            colour = color[suit:gsub("^%l", string.upper)],
-            suit_icon = {
-                atlas = 'csau_suits'
+    palettes[#palettes+1] = {
+        key = 'csau_vineshroom',
+        ranks = full_ranks,
+        display_ranks = face_ace,
+        atlas = 'csau_default',
+        pos_style = {
+            fallback_style = 'deck',
+            Ace = {
+                atlas = 'csau_lightshrooms',
+                pos = {x = 0, y = (suit == 'hearts' and 0) or (suit == 'clubs' and 1) or (suit == 'diamonds' and 2) or (suit == 'spades' and 3)}
             }
+        },
+        loc_txt = {
+            ['en-us'] = "Lightshroom"
+        },
+        colour = color[suit:gsub("^%l", string.upper)],
+        suit_icon = {
+            atlas = 'csau_suits'
         }
-    end
+    }
 
     palettes[#palettes+1] = {
         key = 'csau_baldef_'..suit.."_lc",
@@ -1605,7 +455,7 @@ if twoPointO then
                 }
             },
             loc_txt = {
-                ['en-us'] = "Cardsauce Colors"
+                ['en-us'] = "Vargshroom"
             },
             colour = color[suit:gsub("^%l", string.upper)],
             suit_icon = {
@@ -1679,5 +529,172 @@ if twoPointO then
             },
             prefix_config = { key = false },
         }
+    end
+end
+
+
+
+
+
+---------------------------
+--------------------------- Character Skins
+---------------------------
+
+-- Vine Skins
+SMODS.Atlas{ key = 'mascots', px = 71, py = 95, path = 'cards/csau/mascots.png',}
+SMODS.Atlas{ key = 'classics', px = 71, py = 95, path = 'cards/csau/classics.png',}
+SMODS.Atlas{ key = 'wildcards', px = 71, py = 95, path = 'cards/csau/wildcards.png',}
+SMODS.Atlas{ key = 'confidants', px = 71, py = 95, path = 'cards/csau/confidants.png',}
+
+if twoPointO then
+    -- Varg Skins
+    SMODS.Atlas{ key = 'voices', px = 71, py = 95, path = 'cards/csau/voices.png',}
+    SMODS.Atlas{ key = 'duendes', px = 71, py = 95, path = 'cards/csau/duendes.png',}
+    SMODS.Atlas{ key = 'americans', px = 71, py = 95, path = 'cards/csau/americans.png',}
+    SMODS.Atlas{ key = 'powerful', px = 71, py = 95, path = 'cards/csau/powerful.png',}
+
+    -- Mike Skins
+    SMODS.Atlas{ key = 'poops', px = 71, py = 95, path = 'cards/csau/poops.png',}
+    SMODS.Atlas{ key = 'ocs', px = 71, py = 95, path = 'cards/csau/ocs.png',}
+end
+
+
+local skins = {
+    Spades = {
+        {key = 'csau_confidants', type = 'vine',
+         loc_txt = {
+             ['en-us'] = "The Confidants"
+         }},
+        {key = 'csau_powerful', type = 'varg',
+         loc_txt = {
+            ['en-us'] = "The Powerful"
+         }},
+        {key = 'csau_ocs', type = 'mike',
+         loc_txt = {
+             ['en-us'] = "The OCs"
+         }},
+    },
+    Hearts = {
+        {key = 'csau_wildcards', type = 'vine',
+         loc_txt = {
+            ['en-us'] = "The Wildcards"
+         }},
+        {key = 'csau_americans', type = 'varg',
+         loc_txt = {
+            ['en-us'] = "The Americans"
+         }},
+        {key = 'csau_poops', type = 'mike',
+         loc_txt = {
+            ['en-us'] = "The Poops"
+         }},
+    },
+    Clubs = {
+        {key = 'csau_mascots', type = 'vine',
+         loc_txt = {
+            ['en-us'] = "The Mascots"
+         }},
+        {key = 'csau_voices', type = 'varg',
+         loc_txt = {
+            ['en-us'] = "The Voices"
+         }},
+    },
+    Diamonds = {
+        {key = 'csau_classics', type = 'vine',
+         loc_txt = {
+            ['en-us'] = "The Classics"
+         }},
+        {key = 'csau_duendes', type = 'varg',
+         loc_txt = {
+            ['en-us'] = "The Duendes"
+         }},
+    },
+}
+
+local assemble_character_skins = function(key, suit, name, type)
+    local suit_y = 0; if suit == "Clubs" then suit_y = 1 elseif suit == "Diamonds" then suit_y = 2 elseif suit == "Spades" then suit_y = 3 end
+    local palettes = {
+        {
+            key = key, ranks = full_ranks,
+            display_ranks = face_ace, atlas = 'csau_default',
+            pos_style = {
+                fallback_style = 'deck',
+                Jack = { atlas = key, pos = {x = 0, y = 0} },
+                Queen = { atlas = key, pos = {x = 1, y = 0} },
+                King = { atlas = key, pos = {x = 2, y = 0} },
+            },
+            loc_txt = {
+                ['en-us'] = "Darkshroom"
+            },
+            colour = color[suit],
+            suit_icon = {
+                atlas = 'csau_suits'
+            }
+        }
+    }
+    if type == 'vine' then
+        palettes[#palettes+1] = {
+            key = key..'_lightshroom', ranks = full_ranks,
+            display_ranks = face_ace, atlas = 'csau_default',
+            pos_style = {
+                fallback_style = 'deck',
+                Jack = { atlas = key, pos = {x = 0, y = 0} },
+                Queen = { atlas = key, pos = {x = 1, y = 0} },
+                King = { atlas = key, pos = {x = 2, y = 0} },
+                Ace = { atlas = 'csau_lightshrooms', pos = {x = 0, y = suit_y} }
+            },
+            loc_txt = {
+                ['en-us'] = "Lightshroom"
+            },
+            colour = color[suit],
+            suit_icon = {
+                atlas = 'csau_suits'
+            }
+        }
+    elseif type == "varg" then
+        palettes[1].pos_style.Ace = { atlas = 'csau_varg_aces', pos = {x = 0, y = suit_y} }
+        palettes[1].loc_txt = {
+            ['en-us'] = "Vargshroom"
+        }
+    elseif type == 'mike' then
+        palettes[1].loc_txt = {
+            ['en-us'] = "Cardsauce Colors"
+        }
+        palettes[1].pos_style.Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = suit_y} }
+    end
+    if type == "vine" or type == "varg" then
+        palettes[#palettes+1] = {
+            key = key..'_ace', ranks = full_ranks,
+            display_ranks = face_ace, atlas = 'csau_default',
+            pos_style = {
+                fallback_style = 'deck',
+                Jack = { atlas = key, pos = {x = 0, y = 0} },
+                Queen = { atlas = key, pos = {x = 1, y = 0} },
+                King = { atlas = key, pos = {x = 2, y = 0} },
+                Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = suit_y} }
+            },
+            loc_txt = {
+                ['en-us'] = "Vanilla Ace"
+            },
+            colour = color[suit],
+            suit_icon = {
+                atlas = 'csau_suits'
+            }
+        }
+    end
+
+    SMODS.DeckSkin{
+        key = key,
+        suit = suit,
+        palettes = palettes,
+        loc_txt = name
+    }
+end
+
+for suit, v in pairs(skins) do
+    for i, skin in ipairs(v) do
+        if SMODS.Atlases[skin.key] then
+            send(skin.key)
+            assemble_character_skins(skin.key, suit, skin.loc_txt, skin.type)
+        end
     end
 end
