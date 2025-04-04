@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Killer Queen',
     set = 'Stand',
     config = {
+        stand_mask = true,
         stand_overlay = true,
         evolve_key = 'c_stand_diamond_killer_btd'
     },

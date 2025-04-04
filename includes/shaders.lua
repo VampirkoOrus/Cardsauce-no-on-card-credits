@@ -1,6 +1,7 @@
 local old_draw_step_fs = SMODS.DrawSteps.floating_sprite.func
 SMODS.DrawStep:take_ownership('floating_sprite', {
 	func = function(self, layer)
+        if self.ability.stand_mask then return end
 		old_draw_step_fs(self,layer)
 		local scale_mod = 0.07 + 0.02*math.sin(1.8*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
 		local rotate_mod = 0.05*math.sin(1.219*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2

@@ -378,6 +378,10 @@ SMODS.ConsumableType {
 		end
 	end,
 }
+SMODS.Shader {
+	key = 'stand_mask',
+	path = 'stand_mask.fs',
+}
 
 -- actual loading
 for k, v in pairs(twoPointOItems) do

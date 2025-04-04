@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Whitesnake',
     set = 'Stand',
     config = {
+        stand_mask = true,
         stand_overlay = true,
         evolve_key = 'c_stand_stone_white_moon',
         extra = {
