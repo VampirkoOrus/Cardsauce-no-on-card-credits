@@ -2,6 +2,7 @@ local tagInfo = {
     name = 'Spirit Tag',
     config = {type = 'immediate'},
     alerted = true,
+    part = 'jojo',
 }
 
 tagInfo.apply = function(self, tag, context)

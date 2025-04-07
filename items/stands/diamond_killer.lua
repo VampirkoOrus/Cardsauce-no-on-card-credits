@@ -2,7 +2,7 @@ local consumInfo = {
     name = 'Killer Queen',
     set = 'Stand',
     config = {
-        stand_overlay = true,
+        stand_mask = true,
         evolve_key = 'c_stand_diamond_killer_btd'
     },
     cost = 4,

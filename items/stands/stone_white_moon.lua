@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'C-MOON',
     set = 'Stand',
     config = {
+        stand_mask = true,
         evolved = true,
         evolve_key = 'c_stand_stone_white_heaven',
         extra = {
@@ -18,6 +19,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.wario } }
     return { vars = {card.ability.extra.evolve_num - card.ability.extra.evolve_ranks}}
 end
 

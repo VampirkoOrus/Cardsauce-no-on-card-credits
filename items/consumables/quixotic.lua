@@ -3,6 +3,7 @@ local consumInfo = {
     set = "Spectral",
     cost = 4,
     alerted = true,
+    streamer = 'vinny',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

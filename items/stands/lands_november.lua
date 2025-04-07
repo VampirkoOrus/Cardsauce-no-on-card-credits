@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'November Rain',
     set = 'Stand',
     config = {
+        stand_mask = true,
         extra = {
             max_rank = 9,
             chips = 9,
@@ -14,6 +15,10 @@ local consumInfo = {
     part = 'lands',
     in_progress = true,
 }
+
+function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gote } }
+end
 
 function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.max_rank, card.ability.extra.chips}}

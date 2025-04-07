@@ -2,8 +2,8 @@ local consumInfo = {
     name = 'Metallica',
     set = 'Stand',
     config = {
-        aura_colors = { 'F97C87DA', 'CE3749DA' }, 
-        stand_overlay = true,
+        stand_mask = true,
+        aura_colors = { 'F97C87DA', 'CE3749DA' },
     },
     cost = 4,
     rarity = 'StandRarity',

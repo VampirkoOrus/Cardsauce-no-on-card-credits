@@ -9,6 +9,7 @@ local deckInfo = {
         },
     },
     unlock_condition = {type = 'win_deck', deck = 'b_csau_vine'},
+    origin = 'rlm',
 }
 
 deckInfo.loc_vars = function(self, info_queue, card)

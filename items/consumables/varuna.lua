@@ -16,4 +16,8 @@ consumInfo.in_pool = function(self, args)
     end
 end
 
+consumInfo.set_badges = function(self, card, badges)
+    badges[1] = create_badge(localize('k_dwarf_planet'), get_type_colour(self or card.config, card), nil, 1.2)
+end
+
 return consumInfo

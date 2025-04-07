@@ -212,10 +212,14 @@ local twoPointOItems = {
 		'plant',
 	},
 	Consumable = {
+		-- Planet
 		'lutetia',
 		'varuna',
+		'lost_galaxy',
+		-- Spectral
         'spec_stone',
 		'spec_diary',
+		-- Tarot
 		'tarot_arrow',
 	},
 
@@ -377,6 +381,10 @@ SMODS.ConsumableType {
 			SMODS.remove_pool(self.rarity_pools[center.rarity], center.key)
 		end
 	end,
+}
+SMODS.Shader {
+	key = 'stand_mask',
+	path = 'stand_mask.fs',
 }
 
 -- actual loading

@@ -3,6 +3,7 @@ return {
 		poker_hands = {
 			["csau_Blackjack"] = "Blackjack",
 			["csau_FlushBlackjack"] = "Flush Blackjack",
+			["csau_FlushFibonacci"] = "Flush Fibonacci",
 		},
 		poker_hand_descriptions={
 			["csau_Blackjack"] = {
@@ -240,6 +241,9 @@ return {
 			csau_corrupted = "Corrupted",
 		},
 		dictionary = {
+			k_asteroid = "Asteroid",
+			k_galaxy = "Galaxy",
+			k_galaxy_q = "Galaxy?",
 			k_vhs = "VHS Tape",
 			k_stand = "Stand",
 			b_stand_cards = "Stands",
@@ -365,6 +369,21 @@ return {
 			a_in_one = " in 1",
 			k_junka_lose = "Loser!",
 			k_metal = "Metal!",
+			-- badge titles
+			ba_vinny = "Vinesauce",
+			co_vinny = "32A852",
+			te_vinny = "FFFFFF",
+			ba_joel = "Vargskelethor",
+			ba_mike = "Jabroni Mike",
+			co_mike = "8867a5",
+			te_mike = "FFFF00",
+			ba_redvox = "Red Vox",
+			co_redvox = "841f20",
+			te_redvox = "cac5b7",
+			ba_rlm = "RedLetterMedia",
+			ba_jojo = "Jojo's Bizarre Adventure",
+			ba_uzumaki = "Uzumaki",
+
 			-- badge colors for jojo parts
 			ba_phantom = 'Phantom Blood',
 			co_phantom = '3358A2',
@@ -2339,7 +2358,7 @@ return {
 				name = "All Along The Watchtower",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult if deck is {C:attention}52{} cards,",
-					"{C:attention}2{}-{C:attention}A{} for each suit"
+					"{C:attention}2-A{} for each suit"
 				},
 			},
 			c_csau_stone_stone = {
@@ -2545,6 +2564,15 @@ return {
 					"{C:chips}+#4#{} chips",
 				}
 			},
+			c_csau_lost_galaxy = {
+				name = "Lost Galaxy",
+				text = {
+					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+					"{C:attention}#2#",
+					"{C:mult}+#3#{} Mult and",
+					"{C:chips}+#4#{} chips",
+				}
+			},
 		},
 		Tarot = {
 			c_csau_tarot_arrow = {
@@ -2572,7 +2600,7 @@ return {
 			c_csau_spec_stone = {
 				name = "Stone Mask",
 				text = {
-					"Add {C:dark_edition}Holographic{} and {C:attention}Eternal{},",
+					"Add {C:dark_edition}Holographic{} and {C:attention}Eternal{}",
 					"to a random Joker, overwriting",
 					"existing {C:dark_edition}editions{} and {C:attention}stickers{}"
 				}

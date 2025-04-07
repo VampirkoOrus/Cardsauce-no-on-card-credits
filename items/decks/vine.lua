@@ -8,7 +8,8 @@ local deckInfo = {
             'v_overstock_norm',
         },
     },
-    unlock_condition = {type = 'win_deck', deck = 'b_green'}
+    unlock_condition = {type = 'win_deck', deck = 'b_green'},
+    streamer = 'vinny',
 }
 
 deckInfo.loc_vars = function(self, info_queue, card)
