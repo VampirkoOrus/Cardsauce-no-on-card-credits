@@ -7,6 +7,7 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable_compat = true,
 	streamer = "vinny",
+	origin = "redvox",
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

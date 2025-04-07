@@ -556,6 +556,7 @@ if twoPointO then
     -- Mike Skins
     SMODS.Atlas{ key = 'poops', px = 71, py = 95, path = 'cards/csau/poops.png',}
     SMODS.Atlas{ key = 'ocs', px = 71, py = 95, path = 'cards/csau/ocs.png',}
+    SMODS.Atlas{ key = 'pets', px = 71, py = 95, path = 'cards/csau/pets.png',}
 end
 
 
@@ -596,6 +597,10 @@ local skins = {
         {key = 'csau_voices', type = 'varg',
          loc_txt = {
             ['en-us'] = "The Voices"
+         }},
+        {key = 'csau_pets', type = 'mike',
+         loc_txt = {
+             ['en-us'] = "The Pets"
          }},
     },
     Diamonds = {

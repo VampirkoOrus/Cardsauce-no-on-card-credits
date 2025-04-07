@@ -11,6 +11,7 @@ local jokerInfo = {
     eternal_compat = true,
     perishable_compat = true,
     streamer = "otherjoel",
+    part = 'phantom',
 }
 
 

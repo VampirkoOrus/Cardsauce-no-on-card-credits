@@ -369,6 +369,21 @@ return {
 			a_in_one = " in 1",
 			k_junka_lose = "Loser!",
 			k_metal = "Metal!",
+			-- badge titles
+			ba_vinny = "Vinesauce",
+			co_vinny = "32A852",
+			te_vinny = "FFFFFF",
+			ba_joel = "Vargskelethor",
+			ba_mike = "Jabroni Mike",
+			co_mike = "8867a5",
+			te_mike = "FFFF00",
+			ba_redvox = "Red Vox",
+			co_redvox = "841f20",
+			te_redvox = "cac5b7",
+			ba_rlm = "RedLetterMedia",
+			ba_jojo = "Jojo's Bizarre Adventure",
+			ba_uzumaki = "Uzumaki",
+
 			-- badge colors for jojo parts
 			ba_phantom = 'Phantom Blood',
 			co_phantom = '3358A2',

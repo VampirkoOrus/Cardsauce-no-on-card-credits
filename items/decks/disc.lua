@@ -8,7 +8,8 @@ local deckInfo = {
     loc_vars = function(self, info_queue, card)
         return {vars = {localize{type = 'name_text', key = 'v_crystal_ball', set = 'Voucher'}}}
     end,
-    unlock_condition = {type = 'win_deck', deck = 'b_green'}
+    unlock_condition = {type = 'win_deck', deck = 'b_green'},
+    part = 'stone',
 }
 
 function deckInfo.loc_vars(self, info_queue, card)

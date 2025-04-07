@@ -3,7 +3,8 @@ local voucherInfo = {
     cost = 10,
     config = {
         rate = 4,
-    }
+    },
+    origin = 'rlm',
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

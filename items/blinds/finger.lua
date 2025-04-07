@@ -6,7 +6,7 @@ local blindInfo = {
     mult = 2,
     vars = {},
     debuff = { },
-    boss = {min = 1, max = 10}
+    boss = {min = 1, max = 10},
 }
 
 function blindInfo.defeat(self)

@@ -6,7 +6,8 @@ local blindInfo = {
     mult = 2,
     vars = {},
     debuff = {},
-    boss = {min = 3, max = 10}
+    boss = {min = 3, max = 10},
+    streamer = 'vinny',
 }
 
 function blindInfo.recalc_debuff(self, card, from_blind)

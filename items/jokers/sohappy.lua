@@ -15,6 +15,7 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable_compat = true,
 	streamer = "vinny",
+	origin = 'redvox',
 }
 
 SMODS.Atlas({ key = 'sosad', path ="jokers/sosad.png", px = 71, py = 95 })

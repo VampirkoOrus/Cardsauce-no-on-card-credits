@@ -66,6 +66,7 @@ csau_team = {
 	['cauthen'] = "Cauthen Currie",
 	['joey'] = "Joey",
 	['burlap'] = "ABBurlap",
+	['chvsau'] = "chvsau",
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",
@@ -112,13 +113,13 @@ G.csau_collab_credits = {
 		Jack = {key = "artistcredit", set = "Other", vars = { csau_team.lyzerus } },
 	},
 	csau_duendes = {
-		King = nil,
+		King = {key = "artistcredit", set = "Other", vars = { csau_team.winterg } },
 		Queen = {key = "artistcredit", set = "Other", vars = { csau_team.cejai } },
 		Jack = nil,
 	},
 	csau_powerful = {
 		King = nil,
-		Queen =nil,
+		Queen = {key = "artistcredit", set = "Other", vars = { csau_team.chvsau } },
 		Jack = {key = "artistcredit", set = "Other", vars = { csau_team.cejai } },
 	},
 	-- Mike
@@ -131,6 +132,11 @@ G.csau_collab_credits = {
 		King = nil,
 		Queen = {key = "artistcredit", set = "Other", vars = { csau_team.guff } },
 		Jack = nil,
+	},
+	csau_pets = {
+		King = nil,
+		Queen = nil,
+		Jack = {key = "artistcredit", set = "Other", vars = { csau_team.winterg } },
 	},
 }
 
@@ -201,6 +207,42 @@ G.color_presets = {
 	{
 		"customhex"
 	}
+}
+
+-- colors used for dynamic badges, used to be in localization file which is a bad place to put hex codes -keku
+G.badge_colours = {
+	co_vinny = "32A852",
+	te_vinny = "FFFFFF",
+	co_joel = "3b4635",
+	te_joel = "b0cf56",
+	co_mike = "8867a5",
+	te_mike = "FFFF00",
+	co_redvox = "841f20",
+	te_redvox = "cac5b7",
+	co_rlm = "FFFFFF",
+	te_rlm = "b1212a",
+	co_uzumaki = "374244",
+	te_uzumaki = "bfc7d5",
+
+	-- badge colors for jojo parts
+	co_phantom = '3358A2',
+	te_phantom = 'B74582',
+	co_battle = 'DD5668',
+	te_battle = '338FC4',
+	co_stardust = '425F7C',
+	te_stardust = 'EFCB70',
+	co_diamond = 'BEE5E5',
+	te_diamond = 'C479BE',
+	co_vento = 'EDCE49',
+	te_vento = 'D168BC',
+	co_stone = '99B5B5',
+	te_stone = '61DFF8',
+	co_steel = 'A38168',
+	te_steel = 'A9CF3C',
+	co_lion = 'BCBCE5',
+	te_lion = 'DCF7FC',
+	co_lands = '394E90',
+	te_lands = '409CE8',
 }
 
 G.color_presets_nums = {}

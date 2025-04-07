@@ -2,6 +2,7 @@ local tagInfo = {
     name = 'Plinkett Tag',
     config = {type = 'new_blind_choice'},
     alerted = true,
+    origin = 'rlm',
 }
 
 tagInfo.apply = function(self, tag, context)

@@ -8,6 +8,98 @@ local mod = SMODS.current_mod
 --------------------------- Loading/Debug Functions
 ---------------------------
 
+-- Modified code from Cryptid
+local function dynamic_badges(info)
+	if not SMODS.config.no_mod_badges then
+		local function calc_scale_fac(text)
+			local size = 0.9
+			local font = G.LANG.font
+			local max_text_width = 2 - 2 * 0.05 - 4 * 0.03 * size - 2 * 0.03
+			local calced_text_width = 0
+			-- Math reproduced from DynaText:update_text
+			for _, c in utf8.chars(text) do
+				local tx = font.FONT:getWidth(c) * (0.33 * size) * G.TILESCALE * font.FONTSCALE
+						+ 2.7 * 1 * G.TILESCALE * font.FONTSCALE
+				calced_text_width = calced_text_width + tx / (G.TILESIZE * G.TILESCALE)
+			end
+			local scale_fac = calced_text_width > max_text_width and max_text_width / calced_text_width or 1
+			return scale_fac
+		end
+		local scale_fac = {}
+		local min_scale_fac = 1
+		local strings = { "Cardsauce" }
+		local badge_colour = HEX('32A852')
+		local text_colour = G.C.WHITE
+		if info.origin then
+			strings[#strings + 1] = localize('ba_'..info.origin)
+			badge_colour = HEX(G.badge_colours['co_'..info.origin]) or badge_colour
+			text_colour = HEX(G.badge_colours['te_'..info.origin]) or text_colour
+		elseif info.part then
+			strings[#strings + 1] = localize('ba_jojo')
+			if info.part == "jojo" then
+				badge_colour = G.C.STAND
+				text_colour = G.C.WHITE
+			else
+				strings[#strings + 1] = localize('ba_'..info.part)
+				badge_colour = HEX(G.badge_colours['co_'..info.part]) or badge_colour
+				text_colour = HEX(G.badge_colours['te_'..info.part]) or text_colour
+			end
+		elseif info.streamer then
+			strings[#strings + 1] = localize('ba_'..info.streamer)
+			badge_colour = HEX(G.badge_colours['co_'..info.streamer]) or badge_colour
+			text_colour = HEX(G.badge_colours['te_'..info.streamer]) or text_colour
+		end
+		for i = 1, #strings do
+			scale_fac[i] = calc_scale_fac(strings[i])
+			min_scale_fac = math.min(min_scale_fac, scale_fac[i])
+		end
+		local ct = {}
+		for i = 1, #strings do
+			ct[i] = {
+				string = strings[i],
+			}
+		end
+		return {
+			n = G.UIT.R,
+			config = { align = "cm" },
+			nodes = {
+				{
+					n = G.UIT.R,
+					config = {
+						align = "cm",
+						colour = badge_colour,
+						r = 0.1,
+						minw = 2 / min_scale_fac,
+						minh = 0.36,
+						emboss = 0.05,
+						padding = 0.03 * 0.9,
+					},
+					nodes = {
+						{ n = G.UIT.B, config = { h = 0.1, w = 0.03 } },
+						{
+							n = G.UIT.O,
+							config = {
+								object = DynaText({
+									string = ct or "ERROR",
+									colours = { text_colour },
+									silent = true,
+									float = true,
+									shadow = true,
+									offset_y = -0.03,
+									spacing = 1,
+									scale = 0.33 * 0.9,
+								}),
+							},
+						},
+						{ n = G.UIT.B, config = { h = 0.1, w = 0.03 } },
+					},
+				},
+			},
+		}
+	end
+end
+
+
 --- Load an item definition using SMODS
 --- @param file_key string file name to load within the "Items" directory, excluding file extension
 --- @param item_type string SMODS item type (such as Joker, Consumable, Deck, etc)
@@ -28,13 +120,15 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 
 	if no_badges then
 		info.no_mod_badges = true
-	elseif info.part then
+	elseif info.origin or info.part or (info.streamer and (info.streamer== 'vinny' or info.streamer== 'joel' or info.streamer== 'mike')) then
 		info.no_mod_badges = true
+		local sb_ref = function(self, card, badges) end
+		if info.set_badges then
+			sb_ref = info.set_badges
+		end
 		info.set_badges = function(self, card, badges)
-			local title = localize('ba_'..info.part)
-			local color = HEX(localize('co_'..info.part))
-			local text = G.localization.misc.dictionary['te_'..info.part] and HEX(localize('te_'..info.part)) or G.C.WHITE
-			badges[#badges+1] = create_badge(title, color, text, 1)
+			sb_ref(self, card, badges)
+			badges[#badges+1] = dynamic_badges(info)
 		end
 	end
 
@@ -47,7 +141,7 @@ function load_cardsauce_item(file_key, item_type, no_badges)
         -- load based on streamer type
         if ((info.streamer == 'vinny' or info.streamer == 'othervinny') and not csau_enabled['enableVinkers'])
                 or ((info.streamer == 'joel' or info.streamer == 'otherjoel') and not csau_enabled['enableJoelkers'])
-                or ((info.streamer == 'other' or info.streamer == 'othervinny') and not csau_enabled['enableOtherJokers']) then
+                or ((info.streamer == 'mike' or info.streamer == 'other' or info.streamer == 'othervinny') and not csau_enabled['enableOtherJokers']) then
             return
         end
 	end

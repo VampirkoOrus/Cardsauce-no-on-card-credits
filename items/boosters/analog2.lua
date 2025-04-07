@@ -9,6 +9,7 @@ local packInfo = {
     cost = 3,
     kind = 'VHS',
     group_key = "k_analog_pack",
+    origin = 'rlm',
 }
 
 packInfo.loc_vars = function(self, info_queue, card)

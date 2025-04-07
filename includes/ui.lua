@@ -358,11 +358,11 @@ SMODS.current_mod.credits_tab = function()
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = csau_team.greg, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
-							}},
-							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = csau_team.cheesy, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
+							}},
+							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = csau_team.akai, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
@@ -404,6 +404,9 @@ SMODS.current_mod.credits_tab = function()
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
 									{ n = G.UIT.T, config = { text = csau_team.burlap, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
+									{ n = G.UIT.T, config = { text = csau_team.chvsau, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},

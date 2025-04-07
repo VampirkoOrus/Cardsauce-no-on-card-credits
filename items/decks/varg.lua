@@ -4,7 +4,8 @@ local deckInfo = {
     unlocked = false,
     discovered = false,
     config = { hand_size = -1 },
-    unlock_condition = {type = 'win_deck', deck = 'b_checkered'}
+    unlock_condition = {type = 'win_deck', deck = 'b_checkered'},
+    streamer = 'joel',
 }
 
 deckInfo.loc_vars = function(self, info_queue, card)

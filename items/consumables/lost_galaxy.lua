@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Lost Galaxy',
     set = "Planet",
     config = { hand_type = 'csau_FlushFibonacci' },
+    origin = 'uzumaki',
 }
 
 consumInfo.loc_vars = function(self, info_queue, card)

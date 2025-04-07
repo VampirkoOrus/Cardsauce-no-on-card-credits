@@ -1,7 +1,8 @@
 local voucherInfo = {
     name = 'Raffle',
     cost = 10,
-    requires = {'v_csau_scavenger'}
+    requires = {'v_csau_scavenger'},
+    origin = 'rlm',
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)
