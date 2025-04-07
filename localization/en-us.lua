@@ -546,6 +546,13 @@ return {
 					"#1# will not score"
 				},
 			},
+			bl_csau_paint = {
+				name="The Paint",
+				text={
+					"Scoring cards change",
+					"suits randomly"
+				},
+			},
 		},
 		Other = {
 			undiscovered_vhs={
@@ -2130,7 +2137,7 @@ return {
 				name = "Double Down",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult when {C:attention}activated",
-					"{C:vhs}Running Time{}: {C:attention}#2#{} hands"
+					"{C:vhs}Running Time{}: {C:attention}#2#{} hands {C:inactive}({}{C:attention}#3#{}{C:inactive}/#2#)"
 				},
 			},
 			c_csau_topslots = {
@@ -2215,8 +2222,7 @@ return {
 			c_csau_diamond_crazy = {
 				name = "Crazy Diamond",
 				text = {
-					"Played {C:attention}debuffed{} cards",
-					"are {C:attention}healed{}",
+					"Played {C:attention}debuffed{} cards are {C:attention}healed{}",
 				},
 			},
 			c_csau_diamond_hand = {
@@ -2234,7 +2240,8 @@ return {
 					"has only {C:attention}#1#{} card, cards",
 					"with {V:1}#2#{}{C:attention}#3#{} give",
 					"{C:mult}+#4#{} Mult when scored",
-					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after{} {C:attention}#5#{} {C:inactive}rounds){}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after {C:attention}#5#{} rounds",
 				},
 			},
 			c_csau_diamond_echoes_2 = {
@@ -2247,7 +2254,8 @@ return {
 					"{s:0.1} {}",
 					"The first {C:attention}non-matching{}",
 					"card turns into that suit",
-					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after{} {C:attention}#3#{} {C:inactive}rounds){}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after {C:attention}#3#{} rounds",
 				},
 			},
 			c_csau_diamond_echoes_3 = {
@@ -2260,40 +2268,10 @@ return {
 			c_csau_diamond_killer = {
 				name = "Killer Queen",
 				text = {
-					"My name is Yoshikage Kira. I'm",
-					"years old. My house is in the",
-					"northeast section of Morioh,",
-					"where all the villas are, and",
-					"I am not married. I am an",
-					"employee for the Kame Yu",
-					"department stores, and I get",
-					"home every day by 8 PM at the",
-					"latest. I don't smoke, but I",
-					"occasionally drink. I'm in bed",
-					"by 11 PM and make sure I get",
-					"eight hours of sleep, no",
-					"matter what. After having a",
-					"glass of warm milk and doing",
-					"about twenty minutes of",
-					"stretches before going to bed,",
-					"I usually have no problems",
-					"sleeping until morning. Just",
-					"like a baby, I wake up without",
-					"any fatigue or stress in the",
-					"morning. I was told there were",
-					"no issues at my last check-up.",
-					"I'm trying to explain that I'm",
-					"a person who wishes to live a",
-					"very quiet life. I take care",
-					"not to trouble myself with any",
-					"enemies, like winning and",
-					"losing, that would cause me to",
-					"lose sleep at night. That is",
-					"how I deal with society, and I",
-					"know that is what brings me",
-					"happiness. Although, if I were",
-					"to fight I wouldn't lose to",
-					"anyone.",
+					"Whenever you {C:attention}destroy{} a card,",
+					"gain {C:chips}+#1#{} hand next round {C:inactive}({C:chips}+#2#{C:inactive})",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after destroying {C:attention}#3#{} cards {C:inactive}({C:attention}#4#{C:inactive}/#3#)"
 				},
 			},
 			c_csau_diamond_killer_btd = {
@@ -2306,19 +2284,18 @@ return {
 			c_csau_vento_gold = {
 				name = "Gold Experience",
 				text = {
-					"All played {C:hearts}Hearts{}",
-					"become {C:attention}Gold Cards{}",
-					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after using{} {C:tarot}The Arrow{} {C:inactive}){}",
+					"All played {V:1}#1#{} become {C:attention}Gold Cards{}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after using {C:tarot}The Arrow{}",
 				},
 			},
 			c_csau_vento_gold_requiem = {
 				name = "Gold Experience Requiem",
 				text = {
-					"{C:green}#1# in #2#{} chance to {C:planet}level up{} played",
-					"{C:attention}poker hand{}",
+					"{C:green}#1# in #2#{} chance to {C:planet}level up{} played {C:attention}poker hand{}",
 					"{s:0.1} {}",
-					"Each scoring {C:attention}Gold Card{}",
-					"increases the chance by {C:green}#3# in #2#{}",
+					"Each scoring {C:attention}Gold Card{} increases",
+					"the chance by {C:green}#3# in #2#{}",
 				},
 			},
 			c_csau_vento_moody = {
@@ -2333,25 +2310,22 @@ return {
 				text = {
 					"Played {C:attention}Jacks{} become {C:attention}Steel Cards{}",
 					"{s:0.1} {}",
-					"{C:attention}Steel Jacks{} act as {C:attention}Glass Cards{}",
-					"when played",
+					"{C:attention}Steel Jacks{} act as {C:attention}Glass Cards{} when played",
 				},
 			},
 			c_csau_vento_epitaph = {
 				name = "Epitaph",
 				text = {
-					"{C:attention}Preview{} the top card",
-					"of your deck",
-					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after{}",
-					"{C:inactive}skipping{} {C:attention}#1# Blinds{}{C:inactive}){}",
+					"{C:attention}Preview{} the top card of your deck",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after skipping {C:attention}#1#{} Blinds",
 				},
 			},
 			c_csau_vento_epitaph_king = {
 				name = "King Crimson",
 				text = {
-					"Each selected {C:attention}Blind{}",
-					"awards its {C:attention}skip tag{}",
-					"when defeated"
+					"Each selected {C:attention}Blind{} awards",
+					"its {C:attention}skip tag{} when defeated"
 				},
 			},
 			c_csau_vento_watchtower = {
@@ -2381,8 +2355,8 @@ return {
 			c_csau_stone_white = {
 				name = "Whitesnake",
 				text = {
-					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after playing{}",
-					"{C:attention}#1#{} {C:inactive}scoring{} {C:attention}#2#s{}{C:inactive}){}"
+					"{C:stand}Evolves{} after playing",
+					"{C:attention}#1#{} scoring {C:attention}#2#s{}"
 				},
 			},
 			c_csau_stone_white_moon = {
@@ -2390,8 +2364,9 @@ return {
 				text = {
 					"All cards in played",
 					"{C:attention}straights{} are retriggered",
-					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after playing straights{}",
-					"{C:inactive}containing{} {C:attention}#1#{} {C:inactive}unique ranks){}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after playing straights",
+					"containing {C:attention}#1#{} unique ranks",
 				},
 			},
 			c_csau_stone_white_heaven = {
@@ -2406,8 +2381,9 @@ return {
 				text = {
 					"Each played {C:attention}Ace{} or {C:attention}2{} gives",
 					"{C:chips}+#1#{} Chips when scored",
-					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after {C:attention}#2#{}{}",
-					"{C:attention}Aces or 2s{} {C:inactive}are scored){}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after {C:attention}#2#{}",
+					"{C:attention}Aces{} or {C:attention}2s{} are scored",
 				},
 			},
 			c_csau_steel_tusk_2 = {
@@ -2415,8 +2391,9 @@ return {
 				text = {
 					"Each played {C:attention}Ace{}, {C:attention}2{}, or {C:attention}3{} gives",
 					"{C:chips}+#1#{} Chips when scored",
-					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after {C:attention}#2#{} cards{}",
-					"{C:inactive}are{} {C:attention}destroyed{}{C:inactive}){}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after {C:attention}#2#{} cards",
+					"are {C:attention}destroyed{}",
 				},
 			},
 			c_csau_steel_tusk_3 = {
@@ -2424,8 +2401,9 @@ return {
 				text = {
 					"Each played {C:attention}Ace{}, {C:attention}2{}, {C:attention}3{}, or {C:attention}5{}",
 					"gives {C:chips}+#1#{} Chips when scored",
-					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after defeating a{} {C:attention}Blind{}",
-					"{C:inactive}within{} {C:attention}#2#%{} {C:inactive}of required chips){}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after defeating a {C:attention}Blind{}",
+					"within {C:attention}#2#%{} of required chips",
 				},
 			},
 			c_csau_steel_tusk_4 = {
@@ -2452,8 +2430,9 @@ return {
 				text = {
 					"Your first scored {C:attention}Pair{}",
 					"each round is {C:attention}destroyed{}",
-					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after your deck{}",
-					"{C:inactive}contains{} {C:attention}#1# Lucky Cards{}{C:inactive}){}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after your deck",
+					"contains {C:attention}#1# Lucky Cards",
 				},
 			},
 			c_csau_steel_d4c_love = {
@@ -2469,9 +2448,10 @@ return {
 					"When an {C:attention}Enhanced Card{} is",
 					"scored, {C:attention}remove{} its enhancement",
 					"and gain {C:mult}+#1#{} Mult",
+					"{s:0.1} {}",
 					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
-					"{C:inactive}({}{C:stand}Evolves{} {C:inactive}after playing a{}",
-					"{C:attention}Secret Hand{}{C:inactive}){}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after playing a {C:attention}Secret Hand{}",
 				},
 			},
 			c_csau_lion_soft_beyond = {

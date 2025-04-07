@@ -300,7 +300,7 @@ local twoPointOItems = {
 
     Blind = {
         'outlaw',
-        'darkest'
+        'darkest',
     },
 
 	Edition = {

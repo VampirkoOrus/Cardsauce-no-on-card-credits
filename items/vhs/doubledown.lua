@@ -24,7 +24,7 @@ local slide_out_delay = 1
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
-    return { vars = { card.ability.extra.x_mult, card.ability.extra.runtime } }
+    return { vars = { card.ability.extra.x_mult, card.ability.extra.runtime, card.ability.extra.uses } }
 end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)

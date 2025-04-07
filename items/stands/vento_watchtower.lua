@@ -14,6 +14,10 @@ local consumInfo = {
     part = 'vento',
 }
 
+function consumInfo.loc_vars(self, info_queue, card)
+    return { vars = { card.ability.extra.x_mult } }
+end
+
 function consumInfo.add_to_deck(self, card)
     set_consumeable_usage(card)
 end

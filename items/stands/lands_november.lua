@@ -18,9 +18,6 @@ local consumInfo = {
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gote } }
-end
-
-function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.max_rank, card.ability.extra.chips}}
 end
 

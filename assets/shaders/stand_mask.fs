@@ -26,7 +26,7 @@ vec4 RGB(vec4 c);
 const float pi = 3.141592653;
 
 vec4 layer(vec4 foreground, vec4 background) {
-    return foreground * foreground.a + background * (1 - foreground.a);
+    return mix(background, foreground, foreground.a);
 }
 
 vec4 mask_layer(vec4 layer, float mask) {
@@ -34,10 +34,10 @@ vec4 mask_layer(vec4 layer, float mask) {
 }
 
 vec4 soul_move(Image tex, vec2 uv) {
-    float scale_mod = 0.07 + 0.02*sin(1.8*time);
-    float rotate_mod = 0.0025*sin(1.219*time);
+    float scale_mod = 0.07 + 0.02*sin(1.8*stand_mask.y);
+    float rotate_mod = 0.0025*sin(1.219*stand_mask.y);
 
-    vec2 transformedUV = vec2(uv.x - 0.125, uv.y - 0.5); // translate uv to center
+    vec2 transformedUV = uv - 0.5; // translate uv to center
 
     transformedUV *= 1.0 + scale_mod; // apply scaling
 
@@ -49,26 +49,22 @@ vec4 soul_move(Image tex, vec2 uv) {
                                sinAngle, cosAngle);
     transformedUV *= rotationMatrix;
 
-    transformedUV = vec2(transformedUV.x + 0.125, transformedUV.y + 0.5); // translate uv back
+    transformedUV = transformedUV + 0.5; // translate uv back
 
-    return Texel(tex, transformedUV);
+    return Texel(tex, vec2(clamp(transformedUV.x, 0.001, 0.999), transformedUV.y));
 }
 
 vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 {
-    float sprite_width = texture_details.z / image_details.x;
-
-	vec4 tex = Texel(texture, texture_coords);
     vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
-	vec4 soul = soul_move(texture, vec2(texture_coords.x + sprite_width, texture_coords.y));
-	vec4 mask = Texel(texture, vec2(texture_coords.x + sprite_width, texture_coords.y));
+	vec4 soul = soul_move(texture, texture_coords + vec2(0.0, 0.0)); // for some reason the soul is at 0.0 (I thought it would be 0.4)
+	vec4 mask = Texel(texture, texture_coords + vec2(0.4, 0.0));
 
-    tex = mask_layer(tex, mask.r);
-    // tex = layer(soul, tex);
+    soul = mask_layer(soul, mask.r);
 
   	// required for dissolve fx
-    return dissolve_mask(tex*colour, texture_coords, uv);
+    return dissolve_mask(soul*colour, texture_coords, uv);
 }
 
 // --- below are all required functions --- //

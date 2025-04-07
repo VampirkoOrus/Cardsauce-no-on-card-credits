@@ -13,7 +13,7 @@ SMODS.DrawStep:take_ownership('floating_sprite', {
                 self.hover_tilt = self.hover_tilt/1.5
             else
                 if self.ability.stand_mask then
-                    self.children.floating_sprite:draw_shader('csau_stand_mask', nil, nil, nil, self.children.center)
+                    self.children.floating_sprite:draw_shader('csau_stand_mask', nil, self.ARGS.send_to_shader, nil, self.children.center)
                 else
                     self.children.floating_sprite:draw_shader('dissolve',0, nil, nil, self.children.center,scale_mod, rotate_mod,nil, 0.1 + 0.03*math.sin(1.8*G.TIMERS.REAL),nil, 0.6)
                     self.children.floating_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
