@@ -74,7 +74,7 @@ local jokerInfo = {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
-    streamer = "otherjoel",
+    streamer = "joel",
 }
 
 mod.tetrisCardBase = love.graphics.newImage(mod_path..'assets/1x/jokers/tetris.png')

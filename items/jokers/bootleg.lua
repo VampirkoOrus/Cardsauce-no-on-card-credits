@@ -83,7 +83,6 @@ local function updateSprite(card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gote } }
     return { vars = {  } }
 end
 
@@ -373,6 +372,7 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
         -- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
         full_UI_table.name = localize{type = 'name', key = key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
     end
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gote } }
     if card.ability.bootlegged_center then
         local loc_vars, main_start, main_end = get_loc_vars(self, card, info_queue)
         localize{type = 'descriptions', key = card.ability.bootlegged_center.key, set = self.set, nodes = desc_nodes, vars = loc_vars}
@@ -386,7 +386,6 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
         if mod.config['detailedDescs'] then
             G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table, nil, true)
         else
-            info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gote } }
             set_discover_tallies()
             local tally = G.DISCOVER_TALLIES.jokers.of
             local main_start = {

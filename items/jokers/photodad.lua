@@ -6,11 +6,12 @@ local jokerInfo = {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
+    hasSoul = true,
     streamer = "joel",
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    return {vars = {  } }
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gote } }
 end
 
 function jokerInfo.calculate(self, card, context)

@@ -25,19 +25,19 @@ vec4 RGB(vec4 c);
 
 const float pi = 3.141592653;
 
-vec4 layer(vec4 foreground, vec4 background) {
-    return mix(background, foreground, foreground.a);
-}
-
 vec4 mask_layer(vec4 layer, float mask) {
     return vec4(layer.rgb, min(layer.a, mask));
 }
 
-vec4 soul_move(Image tex, vec2 uv) {
+vec4 soul_move(Image tex, vec2 uv, vec2 uv_min, vec2 uv_max) {
     float scale_mod = 0.07 + 0.02*sin(1.8*stand_mask.y);
     float rotate_mod = 0.0025*sin(1.219*stand_mask.y);
 
-    vec2 transformedUV = uv - 0.5; // translate uv to center
+    vec2 uv_center = (uv_min + uv_max) * 0.5;
+
+    vec2 transformedUV = uv;
+
+    transformedUV -= uv_center; // translate uv to center
 
     transformedUV *= 1.0 + scale_mod; // apply scaling
 
@@ -49,16 +49,28 @@ vec4 soul_move(Image tex, vec2 uv) {
                                sinAngle, cosAngle);
     transformedUV *= rotationMatrix;
 
-    transformedUV = transformedUV + 0.5; // translate uv back
+    transformedUV += uv_center; // translate uv back
 
-    return Texel(tex, vec2(clamp(transformedUV.x, 0.001, 0.999), transformedUV.y));
+    float epsilon = 0.0001;
+    if (transformedUV.x < (uv_min.x - epsilon) || transformedUV.x > (uv_max.x + epsilon) ||
+        transformedUV.y < (uv_min.y - epsilon) || transformedUV.y > (uv_max.y + epsilon))
+    {
+        return vec4(0.0); // outside the bounds, return transparent
+    }
+    else
+    {
+        return Texel(tex, transformedUV); // inside the bounds, sample the texture at the transformed coordinate
+    }
 }
 
 vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 {
     vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
-	vec4 soul = soul_move(texture, texture_coords + vec2(0.0, 0.0)); // for some reason the soul is at 0.0 (I thought it would be 0.4)
+    vec2 soul_min = vec2(0.4, 0.0);
+    vec2 soul_max = vec2(0.6, 1.0);
+
+	vec4 soul = soul_move(texture, texture_coords, soul_min, soul_max); // for some reason the texture_coords is already starting at 0.4
 	vec4 mask = Texel(texture, texture_coords + vec2(0.4, 0.0));
 
     soul = mask_layer(soul, mask.r);
