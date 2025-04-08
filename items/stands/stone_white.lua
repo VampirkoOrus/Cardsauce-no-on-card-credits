@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'Stand',
     config = {
         stand_mask = true,
-        evolve_key = 'c_stand_stone_white_moon',
+        evolve_key = 'c_csau_stone_white_moon',
         extra = {
             evolve_cards = 0,
             evolve_num = 36,
@@ -28,8 +28,8 @@ function consumInfo.in_pool(self, args)
         return true
     end
 
-    if G.GAME.used_jokers['c_stand_stone_white_moon']
-    or G.GAME.used_jokers['c_stand_stone_white_heaven'] then
+    if G.GAME.used_jokers['c_csau_stone_white_moon']
+    or G.GAME.used_jokers['c_csau_stone_white_heaven'] then
         return false
     end
     
@@ -41,7 +41,24 @@ function consumInfo.add_to_deck(self, card)
 end
 
 function consumInfo.calculate(self, card, context)
-
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.before and not card.debuff and not bad_context then
+        local six = {}
+        for k, v in ipairs(context.scoring_hand) do
+            if v:get_id() == 6 then
+                six[#six+1] = v
+            end
+        end
+        card.ability.extra.evolve_cards = card.ability.extra.evolve_cards + #six
+        if card.ability.extra.evolve_cards >= card.ability.extra.evolve_num then
+            G.FUNCS.evolve_stand(card)
+        else
+            return {
+                message = card.ability.extra.evolve_cards..'/'..card.ability.extra.evolve_num,
+                colour = G.C.STAND
+            }
+        end
+    end
 end
 
 function consumInfo.can_use(self, card)

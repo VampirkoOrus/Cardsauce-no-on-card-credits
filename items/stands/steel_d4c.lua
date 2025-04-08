@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'Stand',
     config = {
         stand_overlay = true,
-        evolve_key = 'c_stand_steel_d4c_love',
+        evolve_key = 'c_csau_steel_d4c_love',
         extra = {
             evolve_cards = 0,
             evolve_num = 9,
@@ -26,7 +26,7 @@ function consumInfo.in_pool(self, args)
         return true
     end
 
-    if G.GAME.used_jokers['c_stand_steel_d4c_love'] then
+    if G.GAME.used_jokers['c_csau_steel_d4c_love'] then
         return false
     end
     

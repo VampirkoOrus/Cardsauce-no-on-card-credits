@@ -2,7 +2,7 @@ local consumInfo = {
     name = 'Gold Experience',
     set = 'Stand',
     config = {
-        evolve_key = 'c_stand_vento_gold_requiem'
+        evolve_key = 'c_csau_vento_gold_requiem'
     },
     cost = 4,
     rarity = 'StandRarity',
@@ -21,7 +21,7 @@ function consumInfo.in_pool(self, args)
         return true
     end
     
-    return G.GAME.used_jokers['c_stand_vento_gold_requiem'] ~= nil
+    return G.GAME.used_jokers['c_csau_vento_gold_requiem'] ~= nil
 end
 
 function consumInfo.add_to_deck(self, card)
@@ -46,7 +46,7 @@ function consumInfo.calculate(self, card, context)
         end
         if #gold > 0 then
             return {
-                message = localize('k_gold'),
+                message = localize('k_gold_exp'),
                 colour = G.C.MONEY,
                 card = card
             }

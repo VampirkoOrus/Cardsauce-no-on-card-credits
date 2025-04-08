@@ -2,7 +2,7 @@ local consumInfo = {
     name = 'Epitaph',
     set = 'Stand',
     config = {
-        evolve_key = 'c_stand_vento_epitaph_king',
+        evolve_key = 'c_csau_vento_epitaph_king',
         extra = {
             evolve_skips = 0,
             evolve_num = 3,
@@ -26,7 +26,7 @@ function consumInfo.in_pool(self, args)
         return true
     end
     
-    return G.GAME.used_jokers['c_stand_vento_epitaph_king'] ~= nil
+    return G.GAME.used_jokers['c_csau_vento_epitaph_king'] ~= nil
 end
 
 function consumInfo.add_to_deck(self, card)
@@ -93,6 +93,21 @@ function consumInfo.generate_ui(self, info_queue, card, desc_nodes, specific_var
                                              },
                                          }}
             desc_nodes[#desc_nodes+1] = {cardarea}
+        end
+    end
+end
+
+function consumInfo.calculate(self, card, context)
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.skip_blind and not bad_context then
+        card.ability.extra.evolve_skips = card.ability.extra.evolve_skips + 1
+        if card.ability.extra.evolve_skips >= card.ability.extra.evolve_num then
+            G.FUNCS.evolve_stand(card)
+        else
+            return {
+                message = card.ability.extra.evolve_skips..'/'..card.ability.extra.evolve_num,
+                colour = G.C.STAND
+            }
         end
     end
 end

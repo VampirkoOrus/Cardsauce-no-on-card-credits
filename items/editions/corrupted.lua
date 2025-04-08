@@ -25,8 +25,14 @@ SMODS.Shader {
 local editionInfo = {
     shader = "csau_glitched",
     config = {
-        min = 2,
-        max = 25,
+        chips = 50,
+        mult = 10,
+        xmult = 1.5,
+        poly_chance = 3,
+        holo_chance = 7,
+        foil_chance = 10,
+        prob_min = 1,
+        prob = 20,
     },
     unlocked = true,
     discovered = true,
@@ -47,9 +53,20 @@ editionInfo.calculate = function(self, card, context)
                     and context.cardarea == G.play
     )
     then
-        return {
-            mult = pseudorandom("CORRUPTED", self.config.min, self.config.max),
-        }
+        local pull = pseudorandom("CORRUPTED", self.config.prob_min, self.config.prob)
+        if pull > 10 then
+            return {
+                chips = self.config.chips,
+            }
+        elseif pull <= 10 and pull > 3 then
+            return {
+                mult = self.config.mult,
+            }
+        else
+            return {
+                x_mult = self.config.xmult,
+            }
+        end
     end
     if context.joker_main then
         card.config.trigger = true -- context.edition triggers twice, this makes it only trigger once (only for jonklers)

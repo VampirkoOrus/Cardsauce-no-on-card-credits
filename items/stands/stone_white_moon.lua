@@ -4,7 +4,7 @@ local consumInfo = {
     config = {
         stand_mask = true,
         evolved = true,
-        evolve_key = 'c_stand_stone_white_heaven',
+        evolve_key = 'c_csau_stone_white_heaven',
         extra = {
             evolve_ranks = 0,
             evolve_num = 14,
@@ -28,8 +28,8 @@ function consumInfo.in_pool(self, args)
         return true
     end
 
-    if G.GAME.used_jokers['c_stand_stone_white']
-    or G.GAME.used_jokers['c_stand_stone_white_heaven'] then
+    if G.GAME.used_jokers['c_csau_stone_white']
+    or G.GAME.used_jokers['c_csau_stone_white_heaven'] then
         return false
     end
     

@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'Stand',
     config = {
         stand_mask = true,
-        evolve_key = 'c_stand_diamond_killer_btd',
+        evolve_key = 'c_csau_diamond_killer_btd',
         extra = {
             evolve_cards = 0,
             evolve_num = 8,
@@ -30,7 +30,7 @@ function consumInfo.in_pool(self, args)
         return true
     end
 
-    if G.GAME.used_jokers['c_stand_diamond_killer_btd'] then
+    if G.GAME.used_jokers['c_csau_diamond_killer_btd'] then
         return false
     end
     

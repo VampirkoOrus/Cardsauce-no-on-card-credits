@@ -25,7 +25,7 @@ function consumInfo.in_pool(self, args)
         return true
     end
     
-    return G.GAME.used_jokers['c_stand_vento_gold'] ~= nil
+    return G.GAME.used_jokers['c_csau_vento_gold'] ~= nil
 end
 
 function consumInfo.add_to_deck(self, card)
@@ -33,7 +33,29 @@ function consumInfo.add_to_deck(self, card)
 end
 
 function consumInfo.calculate(self, card, context)
-
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.before and not card.debuff and not bad_context then
+        local gold = {}
+        for k, v in ipairs(context.scoring_hand) do
+            if v:is_suit(G.GAME and G.GAME.wigsaw_suit or "Hearts") then
+                gold[#gold+1] = v
+                v:set_ability(G.P_CENTERS.m_gold, nil, true)
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        v:juice_up()
+                        return true
+                    end
+                }))
+            end
+        end
+        if pseudorandom('thisisrequiem') < G.FUNCS.csau_add_chance(card.ability.extra.chance+#gold, true) / card.ability.extra.divide then
+            return {
+                card = card,
+                level_up = true,
+                message = localize('k_level_up_ex')
+            }
+        end
+    end
 end
 
 function consumInfo.can_use(self, card)

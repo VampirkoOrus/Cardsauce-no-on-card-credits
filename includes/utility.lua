@@ -375,7 +375,9 @@ end
 --- Replaces a card in-place with a card of the specified key
 --- @param card Card Balatro card table of the card to replace
 --- @param to_key string string key (including prefixes) to replace the given card
-G.FUNCS.transform_card = function(card, to_key)
+--- @param evolve boolean boolean for stand evolution
+G.FUNCS.transform_card = function(card, to_key, evolve)
+	evolve = evolve or false
 	local new_card = G.P_CENTERS[to_key]
 	card.children.center = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.pos)
 	card.children.center.states.hover = card.states.hover
@@ -385,6 +387,10 @@ G.FUNCS.transform_card = function(card, to_key)
 	card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})
 	card:set_ability(new_card)
 	card:set_cost()
+	if new_card.on_evolve and type(new_card.on_evolve) == 'function' then
+		card.on_evolve = new_card.on_evolve
+		card:on_evolve()
+	end
 	if new_card.soul_pos then
 		card.children.floating_sprite = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.soul_pos)
 		card.children.floating_sprite.role.draw_major = card
@@ -617,21 +623,7 @@ end
 G.FUNCS.evolve_stand = function(stand)
 	G.E_MANAGER:add_event(Event({
         func = function()
-			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-			local evolved_stand = create_card('EvolvedPool', G.consumables, nil, nil, true, nil, stand.ability.evolve_key, 'standevolve')
-			evolved_stand:hard_set_T(stand.T.x, stand.T.y, stand.T.w, stand.T.h)
-		
-			evolved_stand:set_edition(stand.edition)
-			evolved_stand:set_seal(stand.ability.seal)
-			if evolved_stand.on_evolve and type(evolved_stand.on_evolve) == 'function' then
-				evolved_stand:on_evolve(evolved_stand, stand)
-			end
-		
-			evolved_stand:add_to_deck()		
-			G.consumeables:emplace(evolved_stand, nil, nil, true, nil, stand.rank)   
-			stand:remove()
-			G.GAME.consumeable_buffer = 0
-	
+			G.FUNCS.transform_card(stand, stand.ability.evolve_key, true)
 
 			attention_text({
                 text = localize('k_stand_evolved'),
@@ -639,14 +631,14 @@ G.FUNCS.evolve_stand = function(stand)
                 hold = 0.55,
                 backdrop_colour = G.C.STAND,
                 align = 'bm',
-                major = evolved_stand,
-                offset = {x = 0, y = 0.05*evolved_stand.T.h}
+                major = stand,
+                offset = {x = 0, y = 0.05*stand.T.h}
             })
 
-			if not evolved_stand.edition then 
+			if not stand.edition then
 				play_sound('polychrome1')
 			end
-			evolved_stand:juice_up(0.3, 0.5)
+			stand:juice_up(0.3, 0.5)
 
 			return true
 		end

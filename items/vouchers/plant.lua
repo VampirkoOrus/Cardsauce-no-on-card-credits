@@ -1,6 +1,7 @@
 local voucherInfo = {
     name = 'Plant Appraiser',
     cost = 10,
+    requires = {'v_csau_foo'},
     config = {
         extra = {
             rate = 0.12,

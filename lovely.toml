@@ -940,3 +940,27 @@ else
 end'''
 match_indent = true
 times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, G.GAME.last_tarot_planet, 'fool')"
+position = "at"
+payload = '''
+if next(SMODS.find_card("c_csau_steel_civil")) then
+    local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, 'c_hanged_man', 'fool')
+else
+    local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, G.GAME.last_tarot_planet, 'fool')
+end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "local fool_c = G.GAME.last_tarot_planet and G.P_CENTERS[G.GAME.last_tarot_planet] or nil"
+position = "at"
+payload = "local fool_c = ((next(SMODS.find_card('c_csau_steel_civil')) and G.P_CENTERS['c_hanged_man']) or G.GAME.last_tarot_planet and G.P_CENTERS[G.GAME.last_tarot_planet] or nil)"
+match_indent = true
+times = 1

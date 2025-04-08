@@ -26,7 +26,7 @@ function consumInfo.in_pool(self, args)
         return true
     end
 
-    if G.GAME.used_jokers['c_stand_lion_soft'] then
+    if G.GAME.used_jokers['c_csau_lion_soft'] then
         return false
     end
     

@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'Stand',
     
     config = {   
-        evolve_key = 'c_stand_diamond_echoes_3',    
+        evolve_key = 'c_csau_diamond_echoes_3',
         extra = {
             evolved = true,
             num_cards = 1,
@@ -29,8 +29,8 @@ function consumInfo.in_pool(self, args)
         return true
     end
 
-    if G.GAME.used_jokers['c_stand_diamond_echoes_1']
-    or G.GAME.used_jokers['c_stand_diamond_echoes_3'] then
+    if G.GAME.used_jokers['c_csau_diamond_echoes_1']
+    or G.GAME.used_jokers['c_csau_diamond_echoes_3'] then
         return false
     end
     

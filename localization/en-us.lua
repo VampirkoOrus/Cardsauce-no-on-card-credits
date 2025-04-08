@@ -252,7 +252,7 @@ return {
 			b_vhs_cards = "VHS Tapes",
 			b_and_activate = "& Activate",
 			b_activate = "Activate",
-			vs_credits1 = "Concepting/Direction",
+			vs_credits1 = "Direction",
 			vs_credits2 = "Artists",
 			vs_credits2_2 = "Playing Cards",
 			vs_credits3 = "Coding",
@@ -260,6 +260,7 @@ return {
 			vs_credits5 = "Support",
 			vs_credits6 = "Special Thanks",
 			vs_credits7 = "Music",
+			vs_credits8 = "Shaders",
 			vs_options_sub = "(Restart required to apply)",
 			vs_options_muteWega = "Mute WAAUGGHGHHHHGHH",
 			vs_options_muteWega_desc = "Check this box to mute WAAUGGHGHHHHGHH's screams",
@@ -369,6 +370,11 @@ return {
 			a_in_one = " in 1",
 			k_junka_lose = "Loser!",
 			k_metal = "Metal!",
+			k_gold_exp = "Gold Experience!",
+			k_stone_free = "Stone Free!",
+
+
+
 			-- badge titles
 			ba_vinny = "Vinesauce",
 			co_vinny = "32A852",
@@ -1433,7 +1439,7 @@ return {
 					"{C:green}1 in 6{} chance to create",
 					"{C:attention}2{} completely random {C:attention}Tags{},",
 					"or {C:green}3 in 6{} chance to get nothing",
-					"{C:inactive}(Odds not affected by probability manipulation){}"
+					"{s:0.8,C:inactive}(Odds not affected by probability manipulation){}"
 				},
 			},
 			j_csau_businesstrading = {
@@ -2294,8 +2300,7 @@ return {
 				text = {
 					"{C:green}#1# in #2#{} chance to {C:planet}level up{} played {C:attention}poker hand{}",
 					"{s:0.1} {}",
-					"Each scoring {C:attention}Gold Card{} increases",
-					"the chance by {C:green}#3# in #2#{}",
+					"Each scoring {C:attention}Gold Card{} increases odds by {C:green}#3#{}",
 				},
 			},
 			c_csau_vento_moody = {
@@ -2653,7 +2658,10 @@ return {
 			e_csau_corrupted = {
 				name = "Corrupted",
 				text = {
-					"???",
+					"{C:green}3 in 20{} chance for {X:mult,C:white}X1.5{} Mult,",
+					"{C:green}7 in 20{} chance for {C:mult}+10{} Mult,",
+					"or {C:green}10 in 20{} chance for {C:chips}+50{} Chips",
+					"{s:0.8,C:inactive}(Odds not affected by probability manipulation){}",
 				},
 			}
 		},

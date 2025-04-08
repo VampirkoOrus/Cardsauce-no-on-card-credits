@@ -2,7 +2,7 @@ local consumInfo = {
     name = 'Soft & Wet',
     set = 'Stand',
     config = {
-        evolve_key = 'c_stand_lion_soft_beyond',
+        evolve_key = 'c_csau_lion_soft_beyond',
         extra = {
             mult = 0,
             mult_mod = 1,
@@ -25,7 +25,7 @@ function consumInfo.in_pool(self, args)
         return true
     end
 
-    if G.GAME.used_jokers['c_stand_lion_soft_beyond'] then
+    if G.GAME.used_jokers['c_csau_lion_soft_beyond'] then
         return false
     end
     
