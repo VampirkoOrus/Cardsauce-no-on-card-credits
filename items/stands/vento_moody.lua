@@ -1,7 +1,9 @@
 local consumInfo = {
     name = 'Moody Blues',
     set = 'Stand',
-    config = {},
+    config = {
+        stand_mask = true,
+    },
     cost = 4,
     rarity = 'StandRarity',
     alerted = true,
