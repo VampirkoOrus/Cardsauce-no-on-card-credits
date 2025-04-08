@@ -30,7 +30,7 @@ end
 
 function consumInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.individual or context.blueprint
-    if context.cardarea == G.jokers and context.before and not card.debuff and not bad_context then
+    if context.before and not card.debuff and not bad_context then
         local gold = {}
         for k, v in ipairs(context.scoring_hand) do
             if v:is_suit(G.GAME and G.GAME.wigsaw_suit or "Hearts") then
@@ -48,7 +48,7 @@ function consumInfo.calculate(self, card, context)
             return {
                 message = localize('k_gold'),
                 colour = G.C.MONEY,
-                card = self
+                card = card
             }
         end
     end

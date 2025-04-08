@@ -19,7 +19,11 @@ end
 function consumInfo.use(self, card, area, copier)
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
         play_sound('timpani')
-        G.FUNCS.new_stand(false)
+        if next(SMODS.find_card("c_csau_gold")) then
+            G.FUNCS.evolve_stand(next(SMODS.find_card("c_csau_gold")))
+        else
+            G.FUNCS.new_stand(false)
+        end
         return true
     end }))
     delay(0.6)
