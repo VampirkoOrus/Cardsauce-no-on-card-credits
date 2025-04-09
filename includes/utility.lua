@@ -127,7 +127,9 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 		end
 		info.set_badges = function(self, card, badges)
 			sb_ref(self, card, badges)
-			badges[#badges+1] = dynamic_badges(info)
+			if card.config.center.discovered then
+				badges[#badges+1] = dynamic_badges(info)
+			end
 		end
 	end
 
@@ -624,6 +626,7 @@ G.FUNCS.evolve_stand = function(stand)
 	G.E_MANAGER:add_event(Event({
         func = function()
 			G.FUNCS.transform_card(stand, stand.ability.evolve_key, true)
+			check_for_unlock({ type = "evolve_stand" })
 
 			attention_text({
                 text = localize('k_stand_evolved'),
@@ -738,5 +741,22 @@ G.FUNCS.set_stand_sprites = function(stand)
 			draw_major = stand
 		})
 		stand.children.stand_overlay.custom_draw = true
+	end
+end
+
+G.FUNCS.discovery_check = function(args)
+	local csau_only = args.csau_only or false
+	if not args.mode then return end
+	if args.mode == 'key' and args.key then
+		for k, v in pairs(SMODS.Centers) do
+			if (csau_only and starts_with(k, 'j_csau_')) or not csau_only then
+				if k == args.key then
+					if v.discovered == true then
+						return true
+					end
+				end
+			end
+		end
+		return false
 	end
 end

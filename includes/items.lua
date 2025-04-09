@@ -138,13 +138,39 @@ end
 local twoPointOItems = {
     VHS = {
 		'blackspine',
-		'doubledown',
-		'topslots',
 		'donbeveridge',
-		'tbone',
+		'topslots',
 		'remlezar',
+		'sew',
+		'shakma',
+		'troll2',
+		'swhs',
+		'exploding',
+
+		'roar',
 		'calibighunks',
+
+		'nukie',
+		'deadlyprey',
+
+		'blooddebts',
+		'doubledown',
 		'twistedpair',
+
+		'streetsmarts',
+
+
+		'tbone',
+
+		'sos',
+		'macandme',
+
+		'miami',
+		'lowblow',
+		'kidsand',
+		'spacecop',
+		'theroom',
+
 		'suburbansasquatch',
 	},
 
@@ -226,9 +252,7 @@ local twoPointOItems = {
 	Joker = {
 		--Common
 		'frens',
-		'powers',
 		'memehouse',
-		'nutbuster',
 		'chips',
 		'bonzi',
 		'bbq',
@@ -236,17 +260,13 @@ local twoPointOItems = {
 		'toeofsatan',
 		'superghostbusters',
 		'facade',
-		'vomitblast',
-		'itsmeaustin',
 		'bootleg',
 		'bald',
 		'protogent',
 		--Uncommon
 		'scam',
-		'monkey',
 		'skeletor',
 		'agga',
-		'triptoamerica',
 		'passport',
 		'fireworks',
 		'sprunk',
@@ -259,13 +279,22 @@ local twoPointOItems = {
 		'itsafeature',
 		'bulk',
 		'mug',
-		'blackjack',
 		'bsi',
 		--Rare
 		'tetris',
 		'skeletonmetal',
-		'byebye',
 		'ufo',
+		-- Common (Locked)
+		'powers',
+		'nutbuster',
+		'itsmeaustin',
+		'vomitblast',
+		-- Uncommon (Locked)
+		'triptoamerica',
+		'monkey',
+		'blackjack',
+		-- Rare (Locked)
+		'byebye',
 		--Legendary
 		'wigsaw',
 

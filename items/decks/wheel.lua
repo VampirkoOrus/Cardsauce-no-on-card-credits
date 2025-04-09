@@ -4,11 +4,11 @@ local deckInfo = {
     unlocked = false,
     discovered = false,
     config = {
+        unlock = 20,
         vouchers = {
             'v_crystal_ball',
         },
     },
-    unlock_condition = {type = 'win_deck', deck = 'b_csau_vine'},
     origin = 'rlm',
 }
 
@@ -17,6 +17,19 @@ deckInfo.loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.keku } }
     end
     return {vars = {localize{type = 'name_text', key = 'v_crystal_ball', set = 'Voucher'}}}
+end
+
+function deckInfo.locked_loc_vars(self, info_queue, card)
+    return { vars = { self.config.unlock, G.DISCOVER_TALLIES.vhss.tally } }
+
+end
+
+function deckInfo.check_for_unlock(self, args)
+    if args.type == 'discover_amount' then
+        if G.DISCOVER_TALLIES.vhss.tally >= self.config.unlock then
+            return true
+        end
+    end
 end
 
 deckInfo.calculate = function(self, card, context)

@@ -1,6 +1,7 @@
 local jokerInfo = {
     name = 'Black Spine Junka',
     config = {
+        unlock = 10,
         extra = {
             mult_mod = 2,
             mult = 0,
@@ -11,6 +12,7 @@ local jokerInfo = {
     },
     rarity = 3,
     cost = 8,
+    unlocked = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -21,6 +23,19 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.yunkie } }
     return { vars = { card.ability.extra.mult_mod, card.ability.extra.prob_mod, G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true), card.ability.extra.prob, card.ability.extra.mult } }
+end
+
+function jokerInfo.locked_loc_vars(self, info_queue, card)
+    return { vars = { card.ability.unlock, G.DISCOVER_TALLIES.vhss.tally } }
+
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if args.type == 'discover_amount' then
+        if G.DISCOVER_TALLIES.vhss.tally >= self.config.unlock then
+            return true
+        end
+    end
 end
 
 function jokerInfo.calculate(self, card, context)

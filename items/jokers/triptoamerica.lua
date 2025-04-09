@@ -8,6 +8,7 @@ local jokerInfo = {
     },
     rarity = 2,
     cost = 6,
+    unlocked = false,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
@@ -17,6 +18,12 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gote } }
     return { vars = { card.ability.extra.mult_mod, card.ability.extra.mult } }
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if args.type == "discover_d4c" then
+        return true
+    end
 end
 
 function jokerInfo.calculate(self, card, context)

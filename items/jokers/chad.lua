@@ -18,7 +18,7 @@ end
 
 function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_chad" })
-	ach_jokercheck(self, ach_checklists.ff7)
+	ach_jokercheck(self, G.ach_checklists.ff7)
 end
 
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)

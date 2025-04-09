@@ -5,6 +5,7 @@ local jokerInfo = {
     },
     rarity = 1,
     cost = 6,
+    unlocked = false,
     blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = true,
@@ -22,6 +23,12 @@ G.FUNCS.powers_active = function(card)
         end
     end
     return false
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if args.type == "wheel_nope" then
+        return true
+    end
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)

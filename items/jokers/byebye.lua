@@ -14,15 +14,23 @@ local jokerInfo = {
     },
     rarity = 3,
     cost = 10,
+    unlocked = false,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
+    unlock_condition = {type = 'win_deck', deck = 'b_abandoned'},
     streamer = "joel",
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.guff } }
     return { vars = { card.ability.extra.dollars_mod } }
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if (args.type == "win_deck" and get_deck_win_stake(self.unlock_condition.deck)) then
+        return true
+    end
 end
 
 function jokerInfo.calculate(self, card, context)

@@ -6,6 +6,7 @@ local jokerInfo = {
             prob = 6,
         },
     },
+    unlocked = false,
     rarity = 2,
     cost = 6,
     blueprint_compat = true,
@@ -17,6 +18,12 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.lyzerus } }
     return { vars = { card.ability.extra.mult, G.GAME.probabilities.normal, card.ability.extra.prob } }
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if args.type == "gros_extinct" then
+        return true
+    end
 end
 
 function jokerInfo.calculate(self, card, context)

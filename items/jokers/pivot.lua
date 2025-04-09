@@ -17,7 +17,7 @@ end
 
 function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_pivot" })
-	ach_jokercheck(self, ach_checklists.high)
+	ach_jokercheck(self, G.ach_checklists.high)
 end
 
 function jokerInfo.calculate(self, card, context)

@@ -7,6 +7,7 @@ local jokerInfo = {
     },
     rarity = 1,
     cost = 6,
+    unlocked = false,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
@@ -15,6 +16,12 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.mult } }
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if args.type == "defeat_wall" then
+        return true
+    end
 end
 
 function jokerInfo.calculate(self, card, context)

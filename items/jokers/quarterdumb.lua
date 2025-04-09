@@ -20,7 +20,7 @@ end
 
 function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_quarterdumb" })
-	ach_jokercheck(self, ach_checklists.band)
+	ach_jokercheck(self, G.ach_checklists.band)
 end
 
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)

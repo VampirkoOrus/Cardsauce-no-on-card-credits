@@ -964,3 +964,61 @@ position = "at"
 payload = "local fool_c = ((next(SMODS.find_card('c_csau_steel_civil')) and G.P_CENTERS['c_hanged_man']) or G.GAME.last_tarot_planet and G.P_CENTERS[G.GAME.last_tarot_planet] or nil)"
 match_indent = true
 times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if pseudorandom(self.ability.name == 'Cavendish' and 'cavendish' or 'gros_michel') < G.GAME.probabilities.normal/self.ability.extra.odds then"
+position = "after"
+payload = "if self.ability.name == 'Gros Michel' then check_for_unlock({ type = 'gros_extinct' }) end"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+                attention_text({
+                    text = localize('k_nope_ex'),
+'''
+position = "before"
+payload = "check_for_unlock({ type = 'wheel_nope' })"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+                attention_text({
+                    text = localize('k_nope_ex'),
+'''
+position = "before"
+payload = "check_for_unlock({ type = 'wheel_nope' })"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "elseif self.ability.name == 'The Wheel of Fortune' then"
+position = "after"
+payload = "check_for_unlock({ type = 'wheel_trigger' })"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = "elseif self.name == 'The Manacle' and not self.disabled then"
+position = "before"
+payload = "elseif self.name == 'The Wall' and not self.disabled then check_for_unlock({ type = 'defeat_wall' })"
+match_indent = true
+times = 1
+
+
+
+
+
+
+

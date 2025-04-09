@@ -35,6 +35,11 @@ csau_team = {
 	['sin'] = "SinCityAssassin",
 	['aure'] = "aure",
 	['eremel'] = "Eremel",
+	['voyager'] = "TheVoyger1234",
+	['vinny'] = "Vinny",
+	['joel'] = "Joel",
+	['mike'] = "Mike",
+
 	['lyman'] = "Lyman",
 	['akai'] = "Akai",
 	['victin'] = "Victin",

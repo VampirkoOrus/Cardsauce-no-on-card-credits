@@ -8,9 +8,15 @@ local deckInfo = {
     loc_vars = function(self, info_queue, card)
         return {vars = {localize{type = 'name_text', key = 'v_crystal_ball', set = 'Voucher'}}}
     end,
-    unlock_condition = {type = 'win_deck', deck = 'b_green'},
+    unlocked = false,
     part = 'stone',
 }
+
+function deckInfo.check_for_unlock(self, args)
+    if args.type == 'evolve_stand' then
+        return true
+    end
+end
 
 function deckInfo.loc_vars(self, info_queue, card)
     if info_queue then
