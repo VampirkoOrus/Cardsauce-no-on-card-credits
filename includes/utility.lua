@@ -432,8 +432,36 @@ function scale_joker_sticker(sticker, card)
     if sticker.atlas.px ~= card.children.center.atlas.px and sticker.atlas.py ~= card.children.center.atlas.px then
         local x_scale = sticker.atlas.px / card.children.center.atlas.px
         local y_scale = sticker.atlas.py / card.children.center.atlas.py
-        local t = {w = card.T.w, h = card.T.h}
-        local vt = {w = card.VT.w, h = card.VT.h}
+		-- dividing 71/95 is 0.74736842105, using this we can make sure that stickers are not too wide or too tall
+		-- if the aspect ratio of a card is not the same as a standard card
+		if card.config.center.display_size then
+			local target_ratio = 71/95
+			local ratio = card.config.center.display_size.w / card.config.center.display_size.h
+			if ratio > target_ratio then
+				-- Too wide
+				x_scale = x_scale * (ratio*2)
+			else
+				-- Too tall
+				y_scale = y_scale * (ratio*2)
+			end
+		end
+		local x_mod = 0
+		local y_mod = 0
+		if card.config.center.sticker_offset then
+			if card.config.center.sticker_offset.x then
+				x_mod = card.config.center.sticker_offset.x
+			end
+			if card.config.center.sticker_offset.y then
+				y_mod = card.config.center.sticker_offset.y
+			end
+		end
+        local t = {w = card.T.w, h = card.T.h, x = card.T.x, y = card.T.y}
+        local vt = {w = card.VT.w, h = card.VT.h, x = card.VT.x, y = card.VT.y}
+		card.T.x = sticker.T.x + x_mod
+		card.VT.x = sticker.T.x + x_mod
+		card.T.y = sticker.T.y + y_mod
+		card.VT.y = sticker.T.y + y_mod
+
         card.T.w  = sticker.T.w * x_scale
         card.VT.w = sticker.T.w * x_scale
         card.T.h = sticker.T.h * y_scale
@@ -450,7 +478,10 @@ end
 --- @param vt table Visual transform values to reset to
 function reset_sticker_scale(card, t, vt)
     if not t and not vt then return end
-
+	card.T.x = t and t.x
+	card.VT.x = vt and vt.x
+	card.T.y = t and t.y
+	card.VT.y = vt and vt.y
     card.T.w = t and t.w or G.CARD_W
     card.VT.w = vt and vt.w or G.CARD_W
     card.T.h = t and t.h or G.CARD_H

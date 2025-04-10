@@ -1016,6 +1016,77 @@ payload = "elseif self.name == 'The Wall' and not self.disabled then check_for_u
 match_indent = true
 times = 1
 
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "local mult = card:get_chip_mult()"
+position = "before"
+payload = '''
+local proc = nil
+if next(SMODS.find_card('c_csau_steel_d4c_love')) then
+    local triggers = {
+        [1] = 'mult',
+        [2] = 'dollars',
+    }
+    proc = triggers[pseudorandom('d4c_lovetrain', 1, 2)]
+end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "local mult = card:get_chip_mult()"
+position = "at"
+payload = "local mult = card:get_chip_mult(proc)"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "local p_dollars = card:get_p_dollars()"
+position = "at"
+payload = "local p_dollars = card:get_p_dollars(proc)"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "function Card:get_chip_mult()"
+position = "at"
+payload = "function Card:get_chip_mult(proc)"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if pseudorandom('lucky_mult') < G.GAME.probabilities.normal/5 then"
+position = "at"
+payload = "if proc and proc == 'mult' or (pseudorandom('lucky_mult') < G.GAME.probabilities.normal/5) then"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "function Card:get_p_dollars()"
+position = "at"
+payload = "function Card:get_p_dollars(proc)"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if pseudorandom('lucky_money') < G.GAME.probabilities.normal/15 then"
+position = "at"
+payload = "if proc and proc == 'dollars' or (pseudorandom('lucky_money') < G.GAME.probabilities.normal/15) then"
+match_indent = true
+times = 1
 
 
 

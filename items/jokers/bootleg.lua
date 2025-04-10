@@ -59,10 +59,20 @@ local function get_random_joker_key()
     return key
 end
 
+local function get_joker_collection_pos(key)
+    for i, v in pairs(G.P_CENTER_POOLS["Joker"]) do
+        if v.key == key then
+            return i
+        end
+    end
+    return "?"
+end
+
 local function get_all_in_one_joker(card)
     local key = get_random_joker_key(card, true)
+
     local center = get_joker_center(key)
-    local order = center.order
+    local order = get_joker_collection_pos(key)
     return order.." . "..G.localization.descriptions.Joker[key].name
 end
 

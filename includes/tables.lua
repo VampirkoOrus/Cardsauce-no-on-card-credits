@@ -39,7 +39,6 @@ csau_team = {
 	['vinny'] = "Vinny",
 	['joel'] = "Joel",
 	['mike'] = "Mike",
-
 	['lyman'] = "Lyman",
 	['akai'] = "Akai",
 	['victin'] = "Victin",
@@ -75,6 +74,7 @@ csau_team = {
 	['burlap'] = "ABBurlap",
 	['chvsau'] = "chvsau",
 	['dolos'] = "Dolos",
+	['kuro'] = "SoloDimeKuro",
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",

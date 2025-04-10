@@ -36,6 +36,7 @@ local function get_x_mult(card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.kuro } }
     return { vars = { card.ability.extra.x_mult_mod, get_x_mult(card) } }
 end
 

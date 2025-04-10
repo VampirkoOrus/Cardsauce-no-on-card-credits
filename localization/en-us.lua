@@ -2627,7 +2627,7 @@ return {
 					"each round is {C:attention}destroyed{}",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} after your deck",
-					"contains {C:attention}#1# Lucky Cards",
+					"contains {C:attention}#1# Lucky Cards {C:inactive}({}{C:attention}#2#{}{C:inactive}/#1#)",
 				},
 			},
 			c_csau_steel_d4c_love = {
