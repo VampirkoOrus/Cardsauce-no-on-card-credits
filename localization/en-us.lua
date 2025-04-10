@@ -839,8 +839,8 @@ return {
 			rogernote = {
 				name = "Conversion Table",
 				text = {
-					"#1# {C:attention}fingers{} =",
-					"1 {C:attention}hand{}",
+					"1 {C:attention}hand{} =",
+					"#1# {C:attention}fingers{}",
 				},
 			},
 			diapernote = {
@@ -1325,7 +1325,7 @@ return {
 				},
 			},
 			j_csau_pivot = {
-				name = "Pivyot",
+				name = "Pivyot Joker",
 				text = {
 					"{C:green}#1# in 3{} chance to upgrade",
 					"level of played {C:attention}High Card{}",
@@ -1423,7 +1423,7 @@ return {
 			j_csau_cousinsclub = {
 				name = "Cousin's Club",
 				text = {
-					"This Joker gains {C:chips}+#2#{} Chips",
+					"This Joker gains {C:chips}+#2#{} Chip",
 					"for each {V:1}#3#{} card scored,",
 					"{C:attention}double{} if hand contains a {C:attention}Flush{}",
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",
@@ -1850,11 +1850,11 @@ return {
 			j_csau_tetris = {
 				name = "YOU GOT THE TETRIS!",
 				text = {
-					"Tetris. Use {C:attention}Arrow Keys{}/{C:attention}D-Pad{},",
+					"Use {C:attention}Arrow Keys{}/{C:attention}D-Pad{},",
 					"{C:attention}Z{}/{C:attention}L3{}, and {C:attention}X{}/{C:attention}R3{} to play",
 					"{C:inactive}(Pausing not allowed)",
 					"Gain {C:mult}Mult{} equal to",
-					"amount of lines cleared.",
+					"amount of lines cleared",
 					"{C:inactive}(Currently {}{C:mult}+#1#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
@@ -1908,7 +1908,7 @@ return {
 			j_csau_nutbuster = {
 				name = "Nutbuster",
 				text = {
-					"All {C:tarot}Wheel of Fortune{} cards have",
+					"{C:tarot}Wheel of Fortune{} cards have",
 					"{C:green}3 in 4{} chance to succeed",
 				},
 				unlock={
@@ -1919,7 +1919,8 @@ return {
 				name = "Chips for Dinner",
 				text = {
 					"{C:chips}+#1#{} Chips",
-					"{C:chips}-#2#{} Chips for each {C:attention}final hand{} played",
+					"{C:chips}-#2#{} Chips for each",
+					"{C:attention}final hand{} played",
 				},
 			},
 			j_csau_bonzi = {
@@ -1927,8 +1928,7 @@ return {
 				text = {
 					"When {C:attention}Blind{} is selected, this Joker",
 					"gains {C:mult}+#1#{} Mult if it can take {C:money}$#2#{}",
-					"If it can't take {C:money}$#2#{}, the Mult",
-					"becomes negative for that round.",
+					"If not, Mult becomes {C:attention}negative{} this round",
 					"{C:inactive}(Currently {}{C:mult}#3#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
@@ -1941,7 +1941,7 @@ return {
 				},
 			},
 			j_csau_lidl = {
-				name = "Lidl",
+				name = "LiDL",
 				text = {
 					"All Vouchers in",
 					"shop are {C:attention}#1#%{} off"
@@ -1951,7 +1951,7 @@ return {
 				name = "Toe of Satan",
 				text = {
 					"{C:red}+#1#{} discards each round",
-					"{C:red}-#2#{} discards per round played"
+					"{C:red}-#2#{} discard per round played"
 				},
 			},
 			j_csau_superghostbusters = {
@@ -1983,7 +1983,8 @@ return {
 			j_csau_itsmeaustin = {
 				name = "IT'S ME AUSTIN",
 				text = {
-					"{C:mult}+#1#{} Mult, {C:attention}Boss Blinds{} are hidden",
+					"{C:mult}+#1#{} Mult",
+					"{C:attention}Boss Blinds{} are hidden",
 					"until they are selected",
 				},
 				unlock={
@@ -1993,15 +1994,16 @@ return {
 			j_csau_bald = {
 				name = "Bald Joker",
 				text = {
-					"Earn {C:money}$#1#{} if {C:attention}5 numbered cards{] are",
-					"discarded at the same time",
+					"Earn {C:money}$#1#{} if {C:attention}5 non-face cards{}",
+					"are discarded at the same time",
 				},
 			},
 			j_csau_monkey = {
 				name = "Monkey Mondays",
 				text = {
-					"All played cards have {C:mult}+#1#{} Mult and",
-					"{C:green}#2# in #3#{} chance to be destroyed when scored",
+					"All cards have {C:mult}+#1#{} Mult and",
+					"{C:green}#2# in #3#{} chance to be",
+					"destroyed when scored",
 				},
 				unlock={
 					"Have a {E:1,C:attention}Gros Michel{} go {E:1,C:attention}extinct",
@@ -2017,8 +2019,8 @@ return {
 				name = "Trip To America",
 				text = {
 					"This Joker gains {C:mult}+#1#{} Mult per",
-					"{C:attention}consecutive{} hand played without",
-					"a scoring {C:attention}numbered{} card",
+					"{C:attention}consecutive{} hand played",
+					"containing only {C:attention}face{} cards",
 					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 				unlock={
@@ -2050,13 +2052,13 @@ return {
 				name = "Plaguewalker",
 				text = {
 					"{C:attention}Glass Cards{} have {X:mult,C:white} X3 {} Mult",
-					"and {C:green}#1# in 2{} chance to break"
+					"and {C:green}#1# in 2{} chance to dbreak"
 				},
 			},
 			j_csau_skeletor = {
 				name = "EAT IT",
 				text = {
-					"{C:chips}+#1#{} Chips and {X:mult,C:white} X#2# {} for",
+					"{C:chips}+#1#{} Chips and {X:mult,C:white}X#2#{} Mult for",
 					"each active {C:attention}Food Joker{}",
 					"{C:inactive}(Currently {C:chips}+#3#{}{C:inactive} Chips and {X:mult,C:white} X#4# {C:inactive} Mult)",
 				},
@@ -2097,7 +2099,7 @@ return {
 			j_csau_protogent = {
 				name = "Protogent Antivirus",
 				text = {
-					"{C:green}#1# in #2#{} chance to disable {C:attention}boss blinds{}",
+					"{C:green}#1# in #2#{} chance to disable {C:attention}Boss Blinds{}",
 					"{C:green}#1# in #3#{} chance to prevent death",
 					"{S:1.1,C:red,E:2}self destructs{}",
 				},
@@ -2113,7 +2115,7 @@ return {
 				name = "Sprunk",
 				text = {
 					"Gain {C:mult}+#1#{} Mult and {C:green}+#2#{} chance per {C:money}$1{} spent",
-					"{C:green}#3# in #4#{} chance to get sprunk'd and",
+					"{C:green}#3# in #4#{} chance to get {C:green}Sprunk'd{} and",
 					"{E:1,C:attention}maybe{} {C:attention}lose the run{} when hand is played",
 					"{C:inactive}(Currently {}{C:mult}+#5#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
@@ -2171,7 +2173,8 @@ return {
 				name = "Meme House",
 				text = {
 					"Create a {C:tarot}Tarot{} card if played hand",
-                    "contains a {C:attention}Full House{} and {C:attention}wins{}",
+                    "contains a {C:attention}Full House{} and",
+					"{C:attention}3{} or more {C:attention}face{} cards",
 					"{C:inactive}(Must have room)",
 				},
 			},
@@ -2223,7 +2226,7 @@ return {
 				name = "Skeleton Metal",
 				text = {
 					"When {C:attention}final hand{} of round is played,",
-					"add #1# random {C:attention}Steel Cards{} to your hand",
+					"add {C:attention}#1#{} random {C:attention}Steel Cards{} to your hand",
 				},
 			},
 			j_csau_byebye = {
@@ -2252,8 +2255,8 @@ return {
 			j_csau_wigsaw = {
 				name = "Wigsaw",
 				text = {
-					"All {C:attention}suit{} effects instead target the suit",
-					"with the {C:attention}most cards{} in your full deck",
+					"All {C:attention}suit{} effects target the suit with",
+					"the {C:attention}most cards{} in your full deck instead",
 					"{C:inactive}(Not active if {C:attention}2 or more suits{C:inactive} are tied)"
 				},
 				unlock = {
@@ -2861,7 +2864,7 @@ return {
 				text = {
 					"Start run with {C:attention}#1#{}",
 					"{C:clubs}Cardsauce{} Jokers appear",
-					"{C:attention}3x{} more often",
+					"{C:attention}2x{} more often",
 				},
 			},
 			b_csau_varg = {

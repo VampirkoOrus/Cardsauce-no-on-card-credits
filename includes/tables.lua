@@ -75,6 +75,7 @@ csau_team = {
 	['burlap'] = "ABBurlap",
 	['chvsau'] = "chvsau",
 	['dolos'] = "Dolos",
+	['kuro'] = "SoloDimeKuro",
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",
