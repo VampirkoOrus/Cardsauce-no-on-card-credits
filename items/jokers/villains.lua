@@ -41,16 +41,10 @@ function jokerInfo.calculate(self, card, context)
             end
         end
         if most_played == context.scoring_name then
-            SMODS.eval_this(card, {
-                message = localize{type = 'variable', key = 'a_chips', vars = {to_big(card.ability.extra.chips)}},
-                chip_mod = card.ability.extra.chips,
-                colour = G.C.CHIPS
-            })
-            SMODS.eval_this(card, {
-                message = localize{type = 'variable', key = 'a_mult', vars = {to_big(card.ability.extra.mult)}},
-                mult_mod = card.ability.extra.mult,
-                colour = G.C.MULT
-            })
+            return {
+                chips = card.ability.extra.chips,
+                mult = card.ability.extra.mult
+            }
         end
     end
 end

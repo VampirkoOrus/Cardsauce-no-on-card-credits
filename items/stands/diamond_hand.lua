@@ -10,6 +10,10 @@ local consumInfo = {
     in_progress = true,
 }
 
+function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.wario } }
+end
+
 function consumInfo.add_to_deck(self, card)
     set_consumeable_usage(card)
 end

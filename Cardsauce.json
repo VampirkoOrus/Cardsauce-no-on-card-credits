@@ -11,7 +11,7 @@
 	"display_name": "Cardsauce",
 	"version": "2.0~EXPERIMENTAL",
 	"dependencies": [
-		"Steamodded (>=1.0.0~ALPHA-1406b)"
+		"Steamodded (>=1.0.0~BETA-0319c)"
 	],
 	"conflicts": [
 	], 

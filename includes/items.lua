@@ -232,8 +232,8 @@ local twoPointOItems = {
 		'spirit',
 	},
 	Voucher = {
-		'scavenger',
 		'raffle',
+		'scavenger',
         'foo',
 		'plant',
 	},
@@ -248,7 +248,6 @@ local twoPointOItems = {
 		-- Tarot
 		'tarot_arrow',
 	},
-
 	Joker = {
 		--Common
 		'frens',
@@ -332,8 +331,9 @@ local twoPointOItems = {
     Blind = {
         'outlaw',
         'darkest',
+		'wasp',
+		'feltfortress',
     },
-
 	Edition = {
 		'corrupted'
 	}

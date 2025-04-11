@@ -370,6 +370,7 @@ return {
 			a_in_one = " in 1",
 			k_junka_lose = "Loser!",
 			k_csau_chips = "Chips",
+			k_fort_doubled = "Blind requirement doubled!",
 			k_metal = "Metal!",
 			k_gold_exp = "Gold Experience!",
 			k_stone_free = "Stone Free!",
@@ -708,6 +709,19 @@ return {
 				text={
 					"Scoring cards change",
 					"suits randomly"
+				},
+			},
+			bl_csau_wasp = {
+				name = "The Wasp",
+				text = {
+					"Cards cannot retrigger"
+				},
+			},
+			bl_csau_feltfortress = {
+				name = "Felt Fortress",
+				text = {
+					"Blind requirement doubles",
+					"after each hand scored"
 				},
 			},
 		},
@@ -2116,7 +2130,7 @@ return {
 				text = {
 					"Gain {C:mult}+#1#{} Mult and {C:green}+#2#{} chance per {C:money}$1{} spent",
 					"{C:green}#3# in #4#{} chance to get {C:green}Sprunk'd{} and",
-					"{E:1,C:attention}maybe{} {C:attention}lose the run{} when hand is played",
+					"{E:1,C:dark_edition}maybe{} {C:attention}lose the run{} when hand is played",
 					"{C:inactive}(Currently {}{C:mult}+#5#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
@@ -2643,10 +2657,9 @@ return {
 			c_csau_lion_soft = {
 				name = "Soft & Wet",
 				text = {
-					"When an {C:attention}Enhanced Card{} is",
-					"scored, {C:attention}remove{} its enhancement",
-					"and gain {C:mult}+#1#{} Mult",
-					"{s:0.1} {}",
+					"This Card gains {C:mult}+#1#{} Mult",
+					"per scoring {C:attention}Enhanced card{} played,",
+					"removes card {C:attention}Enhancement",
 					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} after playing a {C:attention}Secret Hand{}",
@@ -2683,9 +2696,8 @@ return {
 			c_csau_lion_wonder= {
 				name = "Wonder of U",
 				text = {
-					"When a {C:attention}Lucky Card{} is",
-					"scored, {C:attention}destroy{} it",
-					"and gain {C:mult}+#1#{} Mult",
+					"When a {C:attention}Lucky Card{} is scored,",
+					"{C:attention}destroy{} it and gain {C:mult}+#1#{} Mult",
 					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
 					
 				},
@@ -2793,19 +2805,25 @@ return {
 			},
 		},
 		Voucher = {
-			v_csau_scavenger = {
-				name = "Scavenger Hunt",
+			v_csau_raffle = {
+				name = "Raffle",
 				text = {
 					"{C:vhs}VHS Tapes{} can be purchased",
 					"from the {C:attention}shop{}"
 				}
 			},
-			v_csau_raffle = {
-				name = "Raffle",
+			v_csau_scavenger = {
+				name = "Scavenger Hunt",
 				text = {
 					"{C:vhs}VHS Tapes{} appear {C:attention}2X{} more",
 					"frequently in the {C:attention}shop{}"
-				}
+				},
+				unlock = {
+					"Buy a total of ",
+					"{C:attention}#1#{} {C:vhs}VHS Tapes",
+					"from the shop",
+					"{C:inactive}(#2#)",
+				},
 			},
 			v_csau_foo = {
 				name = 'Foo Fighters',
@@ -2819,7 +2837,13 @@ return {
 				text = {
 					"{C:stand}Evolved Stands{} can be purchased",
 					"from the {C:attention}shop{}"
-				}
+				},
+				unlock = {
+					"Buy a total of",
+					"{C:attention}#1#{} {C:stand}Stands",
+					"from the shop",
+					"{C:inactive}(#2#)",
+				},
 			}
 		},
 		Tag = {
@@ -2842,8 +2866,7 @@ return {
 				name = "Spirit Tag",
 				text = {
 					"Create a random {C:stand}Stand",
-					"{C:inactive}(Must have room or",
-					"{C:inactive}a {C:stand}Stand{}{C:inactive} to {}{C:attention}replace{}{C:inactive}){}",
+					"{C:inactive}(Must have room)",
 				},
 			},
 		},

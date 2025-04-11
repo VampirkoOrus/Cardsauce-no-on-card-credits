@@ -49,8 +49,13 @@ local includes = {
 	'skins',
 	'colors',
 	'items',
-	'achievements'
+	'achievements',
 }
+
+-- blank function that is run on starting the main menu,
+-- other parts of the mod can hook into this to run code
+-- that needs to be run after the game has initialized
+G.FUNCS.initPostSplash = function() end
 
 for _, include in ipairs(includes) do
 	local init, error = NFS.load(SMODS.current_mod.path .. "includes/" .. include ..".lua")

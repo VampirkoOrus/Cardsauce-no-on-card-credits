@@ -27,24 +27,12 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	local rightmost_joker = G.jokers.cards[#G.jokers.cards]
-	if rightmost_joker and rightmost_joker ~= card and not context.no_blueprint then
-		context.blueprint = (context.blueprint and (context.blueprint + 1)) or 1
-		context.blueprint_card = context.blueprint_card or card
-		if context.blueprint > #G.jokers.cards + 1 then return end
-		local other_joker_ret = rightmost_joker:calculate_joker(context)
-		context.blueprint = nil
-		local eff_card = context.blueprint_card or card
-		context.blueprint_card = nil
-		if other_joker_ret then
-			other_joker_ret.card = eff_card
-			other_joker_ret.colour = G.C.BLUE
-			return other_joker_ret
-		end
-	end
+	local ret = SMODS.blueprint_effect(card, rightmost_joker, context)
+	if ret then return ret end
 end
 
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
-	if card.config.center.discovered then
+	if card.area and card.area == G.jokers or card.config.center.discovered then
 		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
 		full_UI_table.name = localize{type = 'name', key = self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
 	end

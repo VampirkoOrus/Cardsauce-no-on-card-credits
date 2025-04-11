@@ -24,7 +24,28 @@ function consumInfo.add_to_deck(self, card)
 end
 
 function consumInfo.calculate(self, card, context)
-
+    if context.individual and context.cardarea == G.play and not card.debuff and not context.blueprint then
+        if context.other_card.ability.effect == 'Lucky Card' and not context.other_card.debuff then
+            card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
+            return {
+                message = localize('k_upgrade_ex'),
+                colour = G.C.RED,
+                card = card
+            }
+        end
+    end
+    if context.joker_main then
+        return {
+            mult = card.ability.extra.mult,
+        }
+    end
+    if context.destroy_card and not context.blueprint then
+        if context.destroy_card.ability.effect == 'Lucky Card' then
+            return {
+                remove = true,
+            }
+        end
+    end
 end
 
 function consumInfo.can_use(self, card)

@@ -515,14 +515,6 @@ match_indent = true
 
 [[patches]]
 [patches.pattern]
-target = "functions/state_events.lua"
-pattern = "local splashed = SMODS.always_scores(G.play.cards[i]) or next(find_joker('Splash'))"
-position = "at"
-payload = "local splashed = SMODS.always_scores(G.play.cards[i]) or next(find_joker('Splash')) or G.FUNCS.find_sts_form('diamonds')"
-match_indent = true
-
-[[patches]]
-[patches.pattern]
 target = "functions/UI_definitions.lua"
 pattern = '''
 {n=G.UIT.B, config = {w=0.1,h=0.6}},
@@ -947,10 +939,11 @@ target = "card.lua"
 pattern = "local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, G.GAME.last_tarot_planet, 'fool')"
 position = "at"
 payload = '''
+local card
 if next(SMODS.find_card("c_csau_steel_civil")) then
-    local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, 'c_hanged_man', 'fool')
+    card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, 'c_hanged_man', 'fool')
 else
-    local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, G.GAME.last_tarot_planet, 'fool')
+    card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, G.GAME.last_tarot_planet, 'fool')
 end
 '''
 match_indent = true

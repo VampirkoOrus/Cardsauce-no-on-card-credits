@@ -21,7 +21,6 @@ end
 
 function deckInfo.locked_loc_vars(self, info_queue, card)
     return { vars = { self.config.unlock, G.DISCOVER_TALLIES.vhss.tally } }
-
 end
 
 function deckInfo.check_for_unlock(self, args)

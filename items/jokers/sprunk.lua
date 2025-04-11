@@ -23,6 +23,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.donk } }
     return { vars = {card.ability.extra.mult_mod, card.ability.extra.prob_mod, G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true), card.ability.extra.prob, card.ability.extra.mult }}
 end
 
@@ -411,7 +412,25 @@ function ease_dollars(mod, instant)
             end
         end
     end
+end
 
+local upd = Game.update
+csau_sprunk_dt = 0
+function Game:update(dt)
+    upd(self,dt)
+    csau_sprunk_dt = csau_sprunk_dt + dt
+    if G.P_CENTERS and G.P_CENTERS.j_csau_sprunk and csau_sprunk_dt > 0.025 then
+        csau_sprunk_dt = 0
+        local obj = G.P_CENTERS.j_csau_sprunk
+        if (obj.pos.x == 4 and obj.pos.y == 7) then
+            obj.pos.x = 0
+            obj.pos.y = 0
+        elseif (obj.pos.x < 9) then obj.pos.x = obj.pos.x + 1
+        elseif (obj.pos.y < 7) then
+            obj.pos.x = 0
+            obj.pos.y = obj.pos.y + 1
+        end
+    end
 end
 
 return jokerInfo

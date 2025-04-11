@@ -35,7 +35,22 @@ function consumInfo.add_to_deck(self, card)
 end
 
 function consumInfo.calculate(self, card, context)
-
+    if context.before and not card.debuff and G.GAME.current_round.hands_played == 0 then
+        ease_hands_played(1)
+        return {
+            card = card,
+            message = localize{type = 'variable', key = 'a_hands', vars = {1}},
+            colour = G.C.BLUE
+        }
+    end
+    if context.pre_discard and context.cardarea == G.play then
+        ease_discard(1)
+        return {
+            card = card,
+            message = "+1 "..localize('k_hud_discards'),
+            colour = G.C.RED
+        }
+    end
 end
 
 function consumInfo.can_use(self, card)

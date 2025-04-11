@@ -38,7 +38,19 @@ function consumInfo.add_to_deck(self, card)
 end
 
 function consumInfo.calculate(self, card, context)
+    if context.individual and context.cardarea == G.play and not card.debuff then
+        if context.other_card.ability.effect == 'Stone Card' then
+            return {
+                mult = card.ability.extra.mult
+            }
+        end
+    end
+end
 
+local ref_is = Card.is_suit
+function Card:is_suit(suit, bypass_debuff, flush_calc)
+    if next(SMODS.find_card("c_csau_diamond_echoes_3")) and self.ability.effect == 'Stone Card' then return true end
+    return ref_is(self, suit, bypass_debuff, flush_calc)
 end
 
 function consumInfo.can_use(self, card)

@@ -127,7 +127,7 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 		end
 		info.set_badges = function(self, card, badges)
 			sb_ref(self, card, badges)
-			if card.config.center.discovered then
+			if card.area and card.area == G.jokers or card.config.center.discovered then
 				badges[#badges+1] = dynamic_badges(info)
 			end
 		end
@@ -252,24 +252,14 @@ end
 --- @param level string Debug level ('debug', 'info', 'warn')
 function send(message, level)
 	level = level or 'debug'
-	if level == 'debug' then
-		if type(message) == 'table' then
-			sendDebugMessage(tprint(message))
-		else
-			sendDebugMessage(message)
-		end
-	elseif level == 'info' then
-		if type(message) == 'table' then
-			sendInfoMessage(tprint(message))
-		else
-			sendInfoMessage(message)
-		end
-	elseif level == 'error' then
-		if type(message) == 'table' then
-			sendErrorMessage(tprint(message))
-		else
-			sendErrorMessage(message)
-		end
+	if type(message) == 'table' then
+		if level == 'debug' then sendDebugMessage(tprint(message))
+		elseif level == 'info' then sendInfoMessage(tprint(message))
+		elseif level == 'error' then sendErrorMessage(tprint(message)) end
+	else
+		if level == 'debug' then sendDebugMessage(tprint(message))
+		elseif level == 'info' then sendInfoMessage(tprint(message))
+		elseif level == 'error' then sendErrorMessage(tprint(message)) end
 	end
 end
 
@@ -380,6 +370,7 @@ end
 --- @param evolve boolean boolean for stand evolution
 G.FUNCS.transform_card = function(card, to_key, evolve)
 	evolve = evolve or false
+	local old_card = card
 	local new_card = G.P_CENTERS[to_key]
 	card.children.center = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.pos)
 	card.children.center.states.hover = card.states.hover
@@ -391,7 +382,7 @@ G.FUNCS.transform_card = function(card, to_key, evolve)
 	card:set_cost()
 	if new_card.on_evolve and type(new_card.on_evolve) == 'function' then
 		card.on_evolve = new_card.on_evolve
-		card:on_evolve()
+		card:on_evolve(old_card, card)
 	end
 	if new_card.soul_pos then
 		card.children.floating_sprite = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.soul_pos)
@@ -789,5 +780,13 @@ G.FUNCS.discovery_check = function(args)
 			end
 		end
 		return false
+	end
+end
+
+G.FUNCS.hand_is_secret = function(name)
+	for i, k in ipairs(G.csau_secret_hands) do
+		if k == name then
+			return true
+		end
 	end
 end
