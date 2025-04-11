@@ -114,7 +114,7 @@ G.csau_collab_credits = {
 	csau_americans = {
 		King = {key = "artistcredit", set = "Other", vars = { csau_team.burd } },
 		Queen = {key = "artistcredit", set = "Other", vars = { csau_team.guff } },
-		Jack = nil,
+		Jack = {key = "artistcredit", set = "Other", vars = { csau_team.plunch } },
 	},
 	csau_voices = {
 		King = {key = "artistcredit", set = "Other", vars = { csau_team.lyzerus } },

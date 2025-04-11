@@ -36,6 +36,11 @@ vec4 mask_layer(vec4 layer, float mask) {
     return vec4(layer.rgb, min(layer.a, mask));
 }
 
+vec4 greyscale(vec4 color, float factor) {
+   float grey = 0.21 * color.r + 0.71 * color.g + 0.07 * color.b;
+   return vec4(color.rgb * (1.0 - factor) + (grey * factor), color.a);
+}
+
 vec4 soul_move(Image tex, vec2 uv, vec2 uv_min, vec2 uv_max) {
     // roughly what the values are:
     // float scale_mod = 0.07 + 0.02*sin(1.8*stand_mask.y);
@@ -50,7 +55,7 @@ vec4 soul_move(Image tex, vec2 uv, vec2 uv_min, vec2 uv_max) {
     transformed_uv *= 1.0 - scale_mod; // apply scaling
 
     // apply rotation
-    float angle = rotate_mod * 0.33;
+    float angle = rotate_mod * 0.33; //TODO: REMOVE TILT
     float cos_angle = cos(angle);
     float sin_angle = sin(angle);
     mat2 rotation_matrix = mat2(cos_angle, -sin_angle, 
@@ -100,10 +105,10 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
     vec2 screen_offset = (screen_coords - light_screen_pos) * vec2(-1.0); // mirror shadow because Balatro shadows work weird
     vec2 uv_offset = screen_offset / love_ScreenSize.xy;
 
-    float shadow_strength = 0.025; // controls shadow length 
+    float shadow_strength = 0.33 * scale_mod;//0.033 * (1. + scale_mod * 10.); // controls shadow length 
     vec2 final_shadow_uv_offset = uv_offset * shadow_strength;
 
-    float max_shadow_alpha = 0.25;
+    float max_shadow_alpha = 0.33;
 
     vec4 shadow_layer = draw_shadow(texture, texture_coords, soul_min, soul_max, final_shadow_uv_offset, max_shadow_alpha);
 
@@ -111,10 +116,13 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 	vec4 mask = Texel(texture, texture_coords + vec2(0.4, 0.0));
     vec4 base = Texel(texture, texture_coords + vec2(-0.2, 0.0)); // base color
 
+    soul += vec4(vec3(1. - soul.a) * 0.8, 0.); // brighten
+
     shadow_layer = vec4(shadow_layer.rgb, min(shadow_layer.a, base.a)); // prevent shadow from drawing outside the base card
 
-    vec4 soul_with_shadow = mix(shadow_layer, soul, ceil(soul.a));
-    soul = vec4(soul_with_shadow.rgb, max(soul.a, shadow_layer.a));
+    float blend_alpha = min(25. * greyscale(soul, 1.).r, 1.);
+    vec3 soul_with_shadow = mix(shadow_layer.rgb, soul.rgb, soul.a); // TODO: FIX OUTLINE CRUST and SHADOW OVER TITLE
+    soul = vec4(soul_with_shadow, max(soul.a, shadow_layer.a));
 
     soul = mask_layer(soul, mask.r);
 

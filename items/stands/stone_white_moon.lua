@@ -6,8 +6,10 @@ local consumInfo = {
         evolved = true,
         evolve_key = 'c_csau_stone_white_heaven',
         extra = {
+            repetitions = 1,
             evolve_ranks = 0,
-            evolve_num = 14,
+            evolve_num = 13,
+            ranks = {}
         }
     },
     cost = 6,
@@ -20,7 +22,7 @@ local consumInfo = {
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.wario } }
-    return { vars = {card.ability.extra.evolve_num - card.ability.extra.evolve_ranks}}
+    return { vars = {card.ability.extra.evolve_num}}
 end
 
 function consumInfo.in_pool(self, args)
@@ -40,8 +42,43 @@ function consumInfo.add_to_deck(self, card)
     set_consumeable_usage(card)
 end
 
-function consumInfo.calculate(self, card, context)
+local function unique_ranks_check(card, new_rank, num)
+    card.ability.extra.ranks[new_rank] = true
+    local count = 0
+    for k, v in pairs(card.ability.extra.ranks) do
+        if v == true then count = count + 1 end
+    end
+    return count >= num
+end
 
+function consumInfo.calculate(self, card, context)
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.before and not card.debuff and not bad_context then
+        if next(context.poker_hands["Straight"]) then
+            local evolved = false
+            for k, v in ipairs(context.full_hand) do
+                if not v.debuff then
+                    evolved = unique_ranks_check(card, v.base.value, card.ability.extra.evolve_num)
+                end
+            end
+            if evolved then
+                G.FUNCS.evolve_stand(card)
+            end
+        end
+    end
+    if context.cardarea == G.play and context.repetition and not context.repetition_only and not card.debuff then
+        if next(context.poker_hands["Straight"]) then
+            for k, v in ipairs(context.full_hand) do
+                if not v.debuff then
+                    return {
+                        message = 'Again!',
+                        repetitions = card.ability.extra.repetitions,
+                        card = context.other_card
+                    }
+                end
+            end
+        end
+    end
 end
 
 function consumInfo.can_use(self, card)

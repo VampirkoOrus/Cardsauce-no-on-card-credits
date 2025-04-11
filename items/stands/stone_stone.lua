@@ -42,9 +42,6 @@ function consumInfo.calculate(self, card, context)
                 }))
             end
         end
-        if #stone > 0 then
-
-        end
     end
 end
 

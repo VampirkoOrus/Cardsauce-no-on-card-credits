@@ -348,7 +348,7 @@ SMODS.ConsumableType{
     key = "VHS",
     primary_colour = G.C.VHS,
     secondary_colour = G.C.VHS,
-    collection_rows = { 8, 8 },
+    collection_rows = { 7, 7 },
     shop_rate = 0,
     loc_txt = {},
     default = "c_csau_blackspine",

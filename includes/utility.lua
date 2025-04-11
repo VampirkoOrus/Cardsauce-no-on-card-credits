@@ -790,3 +790,55 @@ G.FUNCS.hand_is_secret = function(name)
 		end
 	end
 end
+
+local function check_secret(name, visible)
+	for k, v in pairs(SMODS.PokerHands) do
+		if k == name then
+			if v.visible == visible then
+				return true
+			end
+		end
+	end
+end
+
+G.FUNCS.recheck_hand = function(last_hand, scoring)
+	local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(scoring)
+	G.FUNCS.ach_pepsecretunlock(text)
+	if G.GAME.current_round.current_hand.handname ~= disp_text then delay(0.3) end
+	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, blockable = false,
+		 func = function()
+			 if text ~= G.GAME.last_hand_played then
+				 G.GAME.hands[G.GAME.last_hand_played].played = G.GAME.hands[G.GAME.last_hand_played].played - 1
+				 G.GAME.hands[G.GAME.last_hand_played].played_this_round = G.GAME.hands[G.GAME.last_hand_played].played_this_round + 1
+			 end
+			 if check_secret(G.GAME.last_hand_played, true) and check_secret(text, false) then
+				 check_for_unlock({ type = "red_convert" })
+			 end
+			 G.GAME.hands[text].played = G.GAME.hands[text].played + 1
+			 G.GAME.hands[text].played_this_round = G.GAME.hands[text].played_this_round + 1
+			 G.GAME.last_hand_played = text
+			 set_hand_usage(text)
+			 G.GAME.hands[text].visible = true
+			 update_hand_text({sound = G.GAME.current_round.current_hand.handname ~= disp_text and 'button' or nil, volume = 0.4, immediate = true, nopulse = true,
+							   delay = G.GAME.current_round.current_hand.handname ~= disp_text and 0.4 or 0}, {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult, chips = G.GAME.hands[text].chips})
+			 hand_chips = G.GAME.hands[text].chips
+			 mult = G.GAME.hands[text].mult
+			 return true
+		 end
+	}))
+	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, blockable = false,
+		 func = function()
+			 update_hand_text({sound = G.GAME.current_round.current_hand.handname ~= last_hand and 'button' or nil, volume = 0.4, immediate = true, nopulse = true,
+							   delay = G.GAME.current_round.current_hand.handname ~= last_hand and 0.4 or 0}, {handname=last_hand, level=G.GAME.hands[last_hand].level, mult = G.GAME.hands[last_hand].mult, chips = G.GAME.hands[last_hand].chips})
+			 return true
+		 end
+	}))
+	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 4.5, blockable = false,
+		 func = function()
+			 update_hand_text({sound = G.GAME.current_round.current_hand.handname ~= disp_text and 'button' or nil, volume = 0.4, immediate = true, nopulse = nil,
+							   delay = G.GAME.current_round.current_hand.handname ~= disp_text and 0.4 or 0}, {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult, chips = G.GAME.hands[text].chips})
+			 return true
+		 end
+	}))
+	return text
+end

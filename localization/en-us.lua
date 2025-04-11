@@ -53,6 +53,9 @@ return {
 			wq_9 = {
 				"That's my streamer!",
 			},
+			wq_10 = {
+				"GAMER'D!",
+			},
 			lq_1 = {
 				"HUGE waste of",
 				"brain cells!",
@@ -363,6 +366,8 @@ return {
 			b_pull = "PULL",
 			k_negative_mult = "Negative Mult!",
 			a_discards = "+#1# Discards",
+			a_plus_discard = "+#1# Discard",
+			a_plus_hand = "+#1# Hand",
 			k_allgone = "All Gone!",
 			k_mug_moment = "Mug Moment!",
 			k_mug_gone = "I Love My Mug!",
@@ -424,6 +429,7 @@ return {
 			-- stand related loc strings
 			k_stand_evolved = 'Evolved!',
 			k_echoes_recorded = 'Recorded!',
+			k_boing = "Boing!",
 		},
 		v_dictionary = {
 			a_red = "#1#!!!",
@@ -2451,10 +2457,11 @@ return {
 				text = {
 					"If {C:attention}first hand{} of round",
 					"has only {C:attention}#1#{} card, cards",
-					"with {V:1}#2#{}{C:attention}#3#{} give",
-					"{C:mult}+#4#{} Mult when scored",
+					"with matching {C:attention}suit{} give",
+					"{C:mult}+#2#{} Mult when scored",
+					"{C:inactive}(Current suit:{} {V:1}#4#{}{C:inactive})",
 					"{s:0.1} {}",
-					"{C:stand}Evolves{} after {C:attention}#5#{} rounds",
+					"{C:stand}Evolves{} after {C:attention}#3#{} rounds",
 				},
 			},
 			c_csau_diamond_echoes_2 = {
@@ -2464,9 +2471,9 @@ return {
 					"has only {C:attention}#1#{} card, cards",
 					"with matching {C:attention}suit{} give",
 					"{C:mult}+#2#{} Mult when scored",
-					"{s:0.1} {}",
 					"The first {C:attention}non-matching{}",
 					"card turns into that suit",
+					"{C:inactive}(Current suit:{} {V:1}#4#{}{C:inactive})",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} after {C:attention}#3#{} rounds",
 				},
