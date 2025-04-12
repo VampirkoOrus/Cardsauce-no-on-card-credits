@@ -4,6 +4,8 @@ function SMODS.current_mod.reset_game_globals(run_start)
 		G.GAME.morshu_cards = 0
     end
 
+	G.GAME.csau_shop_dollars_spent = 0
+
     reset_paper_rank()
 
 	G.GAME.current_round.choicevoice = { suit = 'Clubs' }

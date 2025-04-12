@@ -2866,6 +2866,10 @@ return {
 				text = {
 					"Allows shop cards to be saved",
 					"for an {C:attention}indefinite time{}"
+				},
+				unlock = {
+					"Spent {C:money}$#1#{}",
+					"in one shop"
 				}
 			}
 		},

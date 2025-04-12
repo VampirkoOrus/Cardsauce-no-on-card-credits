@@ -8,10 +8,21 @@ local voucherInfo = {
             rounds = nil,
         }
     },
+    unlock_condition = {type = 'csau_spent_in_shop', spent_money = 100},
+    unlocked = false
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.wario } }
+end
+
+function voucherInfo.locked_loc_vars(self, info_queue, card)
+    return { vars = { self.unlock_condition.spent_money }}
+end
+
+function voucherInfo.check_for_unlock(self, args)
+    if args.type ~= self.unlock_condition.type then return end
+    return args.dollars >= self.unlock_condition.spent_money
 end
 
 function voucherInfo.redeem(self, card, area, copier)
