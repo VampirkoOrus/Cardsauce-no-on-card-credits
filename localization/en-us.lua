@@ -293,6 +293,9 @@ return {
 			b_color_selector_hex = "Enter HEX Code",
 			b_color_selector_paste_hex = {"Paste"},
 			b_color_selector_hex_set = {"Apply Colors"},
+			b_save_morshu_1 = 'Come Back',
+			b_save_morshu_2 = 'MMMMMMM',
+			b_save_morshu_3 = 'Richer',
 			ml_color_selector_opt={
 				"Default (Cardsauce)",
 				"Default (Balatro)",
@@ -372,8 +375,7 @@ return {
 			k_metal = "Metal!",
 			k_gold_exp = "Gold Experience!",
 			k_stone_free = "Stone Free!",
-
-
+			k_morshu_ui = "CAN'T GIVE CREDIT",
 
 			-- badge titles
 			ba_vinny = "Vinesauce",
@@ -2626,6 +2628,20 @@ return {
 				text = {
 					"{C:stand}Evolved Stands{} can be purchased",
 					"from the {C:attention}shop{}"
+				}
+			},
+			v_csau_lampoil = {
+				name = 'Lamp Oil',
+				text = {
+					"Allows {C:attention}#1#{} shop card#2# to be saved",
+					"until the {C:attention}next shop{}"
+				}
+			},
+			v_csau_ropebombs = {
+				name = 'Rope & Bombs',
+				text = {
+					"Allows shop cards to be saved",
+					"for an {C:attention}indefinite time{}"
 				}
 			}
 		},
