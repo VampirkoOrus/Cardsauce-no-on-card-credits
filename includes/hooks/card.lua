@@ -213,6 +213,27 @@ function Card:gunshot_func()
 end
 
 
+
+
+
+---------------------------
+--------------------------- For tracking shop purchases for Morshu
+---------------------------
+
+local ref_redeem = Card.redeem
+function Card:redeem()
+    local ret = ref_redeem(self)
+    if self.ability.set == "Voucher" then
+        G.GAME.csau_shop_dollars_spent = G.GAME.csau_shop_dollars_spent + self.cost
+        check_for_unlock({type = 'csau_spent_in_shop', dollars = G.GAME.csau_shop_dollars_spent})
+    end
+    return ret
+end
+
+
+
+
+
 ---------------------------
 --------------------------- For loading overlays and auras
 ---------------------------

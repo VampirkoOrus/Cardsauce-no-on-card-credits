@@ -185,3 +185,30 @@ function G.UIDEF.settings_tab(tab)
 	end
 	return setting_tab
 end
+
+function G.UIDEF.morshu_save(existing_morshu_area)
+	-- keep the old one if it exists to maintain
+	G.morshu_area = existing_morshu_area or CardArea(
+		G.hand.T.x+0,
+		G.hand.T.y+G.ROOM.T.y + 9,
+		1.25*G.CARD_W,
+		0.85*G.CARD_H, 
+		{card_limit = G.GAME.morshu_cards or 0, type = 'shop', highlight_limit = 1})
+	
+	local t = {n=G.UIT.ROOT, config = {align = 'cl', colour = G.C.CLEAR}, nodes={
+		UIBox_dyn_container({{
+			n=G.UIT.C, config={align = "cm", padding = 0.05, emboss = 0.05, r = 0.1, colour = G.C.BLACK}, nodes={
+				{n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
+					{n=G.UIT.C, config={align = "cm", padding = 0.15, r=0.2, colour = G.C.L_BLACK, emboss = 0.05}, nodes={
+						{n=G.UIT.C, config={align = "cm", padding = 0.2, r=0.2, colour = G.C.BLACK, maxh = G.morshu_area.T.h+0.4}, nodes={
+						{n=G.UIT.T, config={text = localize('k_morshu_ui'), scale = 0.45, colour = G.C.L_BLACK, vert = true}},
+						{n=G.UIT.O, config={object = G.morshu_area}},
+						}},
+					}},
+				}}
+			}
+		}}, false, G.C.CLEAR, G.C.CLEAR)
+	}}
+	t.nodes[1].config.colour = G.C.CLEAR
+    return t
+end

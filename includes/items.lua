@@ -236,6 +236,8 @@ local twoPointOItems = {
 		'scavenger',
         'foo',
 		'plant',
+		'lampoil',
+		'ropebombs'
 	},
 	Consumable = {
 		-- Planet

@@ -1,7 +1,10 @@
 function SMODS.current_mod.reset_game_globals(run_start)
     if run_start then
         G.GAME.max_stands = 1
+		G.GAME.morshu_cards = 0
     end
+
+	G.GAME.csau_shop_dollars_spent = 0
 
     reset_paper_rank()
 
@@ -33,5 +36,4 @@ function SMODS.current_mod.reset_game_globals(run_start)
 	end
 	local randCard = pseudorandom_element(G.playing_cards, pseudoseed('DUANE'..G.GAME.round_resets.ante))
 	G.GAME.current_round.duane_suit = randCard.base.suit
-
 end
