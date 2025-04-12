@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Stone Free',
     set = 'Stand',
     config = {
+        stand_mask = true,
         extra = {
             chips = 60,
         }
@@ -15,6 +16,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.chvsau } }
     return { vars = {card.ability.extra.chips}}
 end
 
@@ -39,9 +41,6 @@ function consumInfo.calculate(self, card, context)
                     end
                 }))
             end
-        end
-        if #stone > 0 then
-
         end
     end
 end

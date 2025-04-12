@@ -127,7 +127,9 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 		end
 		info.set_badges = function(self, card, badges)
 			sb_ref(self, card, badges)
-			badges[#badges+1] = dynamic_badges(info)
+			if card.area and card.area == G.jokers or card.config.center.discovered then
+				badges[#badges+1] = dynamic_badges(info)
+			end
 		end
 	end
 
@@ -250,24 +252,14 @@ end
 --- @param level string Debug level ('debug', 'info', 'warn')
 function send(message, level)
 	level = level or 'debug'
-	if level == 'debug' then
-		if type(message) == 'table' then
-			sendDebugMessage(tprint(message))
-		else
-			sendDebugMessage(message)
-		end
-	elseif level == 'info' then
-		if type(message) == 'table' then
-			sendInfoMessage(tprint(message))
-		else
-			sendInfoMessage(message)
-		end
-	elseif level == 'error' then
-		if type(message) == 'table' then
-			sendErrorMessage(tprint(message))
-		else
-			sendErrorMessage(message)
-		end
+	if type(message) == 'table' then
+		if level == 'debug' then sendDebugMessage(tprint(message))
+		elseif level == 'info' then sendInfoMessage(tprint(message))
+		elseif level == 'error' then sendErrorMessage(tprint(message)) end
+	else
+		if level == 'debug' then sendDebugMessage(tprint(message))
+		elseif level == 'info' then sendInfoMessage(tprint(message))
+		elseif level == 'error' then sendErrorMessage(tprint(message)) end
 	end
 end
 
@@ -378,6 +370,7 @@ end
 --- @param evolve boolean boolean for stand evolution
 G.FUNCS.transform_card = function(card, to_key, evolve)
 	evolve = evolve or false
+	local old_card = card
 	local new_card = G.P_CENTERS[to_key]
 	card.children.center = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.pos)
 	card.children.center.states.hover = card.states.hover
@@ -389,7 +382,7 @@ G.FUNCS.transform_card = function(card, to_key, evolve)
 	card:set_cost()
 	if new_card.on_evolve and type(new_card.on_evolve) == 'function' then
 		card.on_evolve = new_card.on_evolve
-		card:on_evolve()
+		card:on_evolve(old_card, card)
 	end
 	if new_card.soul_pos then
 		card.children.floating_sprite = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.soul_pos)
@@ -430,8 +423,36 @@ function scale_joker_sticker(sticker, card)
     if sticker.atlas.px ~= card.children.center.atlas.px and sticker.atlas.py ~= card.children.center.atlas.px then
         local x_scale = sticker.atlas.px / card.children.center.atlas.px
         local y_scale = sticker.atlas.py / card.children.center.atlas.py
-        local t = {w = card.T.w, h = card.T.h}
-        local vt = {w = card.VT.w, h = card.VT.h}
+		-- dividing 71/95 is 0.74736842105, using this we can make sure that stickers are not too wide or too tall
+		-- if the aspect ratio of a card is not the same as a standard card
+		if card.config.center.display_size then
+			local target_ratio = 71/95
+			local ratio = card.config.center.display_size.w / card.config.center.display_size.h
+			if ratio > target_ratio then
+				-- Too wide
+				x_scale = x_scale * (ratio*2)
+			else
+				-- Too tall
+				y_scale = y_scale * (ratio*2)
+			end
+		end
+		local x_mod = 0
+		local y_mod = 0
+		if card.config.center.sticker_offset then
+			if card.config.center.sticker_offset.x then
+				x_mod = card.config.center.sticker_offset.x
+			end
+			if card.config.center.sticker_offset.y then
+				y_mod = card.config.center.sticker_offset.y
+			end
+		end
+        local t = {w = card.T.w, h = card.T.h, x = card.T.x, y = card.T.y}
+        local vt = {w = card.VT.w, h = card.VT.h, x = card.VT.x, y = card.VT.y}
+		card.T.x = sticker.T.x + x_mod
+		card.VT.x = sticker.T.x + x_mod
+		card.T.y = sticker.T.y + y_mod
+		card.VT.y = sticker.T.y + y_mod
+
         card.T.w  = sticker.T.w * x_scale
         card.VT.w = sticker.T.w * x_scale
         card.T.h = sticker.T.h * y_scale
@@ -448,7 +469,10 @@ end
 --- @param vt table Visual transform values to reset to
 function reset_sticker_scale(card, t, vt)
     if not t and not vt then return end
-
+	card.T.x = t and t.x
+	card.VT.x = vt and vt.x
+	card.T.y = t and t.y
+	card.VT.y = vt and vt.y
     card.T.w = t and t.w or G.CARD_W
     card.VT.w = vt and vt.w or G.CARD_W
     card.T.h = t and t.h or G.CARD_H
@@ -624,6 +648,7 @@ G.FUNCS.evolve_stand = function(stand)
 	G.E_MANAGER:add_event(Event({
         func = function()
 			G.FUNCS.transform_card(stand, stand.ability.evolve_key, true)
+			check_for_unlock({ type = "evolve_stand" })
 
 			attention_text({
                 text = localize('k_stand_evolved'),
@@ -739,4 +764,81 @@ G.FUNCS.set_stand_sprites = function(stand)
 		})
 		stand.children.stand_overlay.custom_draw = true
 	end
+end
+
+G.FUNCS.discovery_check = function(args)
+	local csau_only = args.csau_only or false
+	if not args.mode then return end
+	if args.mode == 'key' and args.key then
+		for k, v in pairs(SMODS.Centers) do
+			if (csau_only and starts_with(k, 'j_csau_')) or not csau_only then
+				if k == args.key then
+					if v.discovered == true then
+						return true
+					end
+				end
+			end
+		end
+		return false
+	end
+end
+
+G.FUNCS.hand_is_secret = function(name)
+	for i, k in ipairs(G.csau_secret_hands) do
+		if k == name then
+			return true
+		end
+	end
+end
+
+local function check_secret(name, visible)
+	for k, v in pairs(SMODS.PokerHands) do
+		if k == name then
+			if v.visible == visible then
+				return true
+			end
+		end
+	end
+end
+
+G.FUNCS.recheck_hand = function(last_hand, scoring)
+	local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(scoring)
+	G.FUNCS.ach_pepsecretunlock(text)
+	if G.GAME.current_round.current_hand.handname ~= disp_text then delay(0.3) end
+	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, blockable = false,
+		 func = function()
+			 if text ~= G.GAME.last_hand_played then
+				 G.GAME.hands[G.GAME.last_hand_played].played = G.GAME.hands[G.GAME.last_hand_played].played - 1
+				 G.GAME.hands[G.GAME.last_hand_played].played_this_round = G.GAME.hands[G.GAME.last_hand_played].played_this_round + 1
+			 end
+			 if check_secret(G.GAME.last_hand_played, true) and check_secret(text, false) then
+				 check_for_unlock({ type = "red_convert" })
+			 end
+			 G.GAME.hands[text].played = G.GAME.hands[text].played + 1
+			 G.GAME.hands[text].played_this_round = G.GAME.hands[text].played_this_round + 1
+			 G.GAME.last_hand_played = text
+			 set_hand_usage(text)
+			 G.GAME.hands[text].visible = true
+			 update_hand_text({sound = G.GAME.current_round.current_hand.handname ~= disp_text and 'button' or nil, volume = 0.4, immediate = true, nopulse = true,
+							   delay = G.GAME.current_round.current_hand.handname ~= disp_text and 0.4 or 0}, {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult, chips = G.GAME.hands[text].chips})
+			 hand_chips = G.GAME.hands[text].chips
+			 mult = G.GAME.hands[text].mult
+			 return true
+		 end
+	}))
+	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, blockable = false,
+		 func = function()
+			 update_hand_text({sound = G.GAME.current_round.current_hand.handname ~= last_hand and 'button' or nil, volume = 0.4, immediate = true, nopulse = true,
+							   delay = G.GAME.current_round.current_hand.handname ~= last_hand and 0.4 or 0}, {handname=last_hand, level=G.GAME.hands[last_hand].level, mult = G.GAME.hands[last_hand].mult, chips = G.GAME.hands[last_hand].chips})
+			 return true
+		 end
+	}))
+	G.E_MANAGER:add_event(Event({trigger = 'after', delay = 4.5, blockable = false,
+		 func = function()
+			 update_hand_text({sound = G.GAME.current_round.current_hand.handname ~= disp_text and 'button' or nil, volume = 0.4, immediate = true, nopulse = nil,
+							   delay = G.GAME.current_round.current_hand.handname ~= disp_text and 0.4 or 0}, {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult, chips = G.GAME.hands[text].chips})
+			 return true
+		 end
+	}))
+	return text
 end

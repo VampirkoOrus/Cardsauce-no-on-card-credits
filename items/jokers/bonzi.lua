@@ -12,6 +12,11 @@ local jokerInfo = {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
+    display_size = { w = 71*1.47887323944, h = 95 },
+    width = 105,
+    sticker_offset = {
+        x = 0,
+    },
     streamer = "joel",
 }
 
@@ -25,6 +30,7 @@ end
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.crispy } }
     return { vars = {card.ability.extra.mult_mod, card.ability.extra.dollars, getSignum(card.ability.extra.mult)..card.ability.extra.mult} }
 end
 
@@ -48,6 +54,25 @@ function jokerInfo.calculate(self, card, context)
         return {
             mult = card.ability.extra.mult,
         }
+    end
+end
+
+local upd = Game.update
+csau_bonzi_dt = 0
+function Game:update(dt)
+    upd(self,dt)
+    csau_bonzi_dt = csau_bonzi_dt + dt
+    if G.P_CENTERS and G.P_CENTERS.j_csau_bonzi and csau_bonzi_dt > 0.1 then
+        csau_bonzi_dt = 0
+        local obj = G.P_CENTERS.j_csau_bonzi
+        if (obj.pos.x == 5 and obj.pos.y == 1) then
+            obj.pos.x = 0
+            obj.pos.y = 0
+        elseif (obj.pos.x < 5) then obj.pos.x = obj.pos.x + 1
+        elseif (obj.pos.y < 1) then
+            obj.pos.x = 0
+            obj.pos.y = obj.pos.y + 1
+        end
     end
 end
 

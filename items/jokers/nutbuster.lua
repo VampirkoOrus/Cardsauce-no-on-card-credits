@@ -3,6 +3,7 @@ local jokerInfo = {
     config = {},
     rarity = 1,
     cost = 4,
+    unlocked = false,
     blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = true,
@@ -17,6 +18,12 @@ G.FUNCS.nutbuster_active = function()
         end
     end
     return false
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if args.type == "wheel_trigger" then
+        return true
+    end
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)

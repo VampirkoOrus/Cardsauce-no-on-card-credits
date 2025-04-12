@@ -7,11 +7,17 @@ local voucherInfo = {
             rate = 0.12,
         }
     },
-    part = 'lion'
+    part = 'lion',
+    unlocked = false,
+    unlock_condition = {type = 'c_stands_bought', extra = 25}
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gote } }
+end
+
+function voucherInfo.locked_loc_vars(self, info_queue, card)
+    return { vars = { self.unlock_condition.extra, G.PROFILES[G.SETTINGS.profile].career_stats.c_stands_bought or 0} }
 end
 
 function voucherInfo.redeem(self, card, area, copier)

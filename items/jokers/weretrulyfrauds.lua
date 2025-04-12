@@ -9,7 +9,7 @@ function Card.set_cost(self)
 end
 
 local jokerInfo = {
-    name = "WE'RE TRULY FRAUDS",
+    name = "WE'RE TRULY FRAUDS!",
     config = {},
     rarity = 2,
     cost = 8,

@@ -515,14 +515,6 @@ match_indent = true
 
 [[patches]]
 [patches.pattern]
-target = "functions/state_events.lua"
-pattern = "local splashed = SMODS.always_scores(G.play.cards[i]) or next(find_joker('Splash'))"
-position = "at"
-payload = "local splashed = SMODS.always_scores(G.play.cards[i]) or next(find_joker('Splash')) or G.FUNCS.find_sts_form('diamonds')"
-match_indent = true
-
-[[patches]]
-[patches.pattern]
 target = "functions/UI_definitions.lua"
 pattern = '''
 {n=G.UIT.B, config = {w=0.1,h=0.6}},
@@ -947,10 +939,11 @@ target = "card.lua"
 pattern = "local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, G.GAME.last_tarot_planet, 'fool')"
 position = "at"
 payload = '''
+local card
 if next(SMODS.find_card("c_csau_steel_civil")) then
-    local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, 'c_hanged_man', 'fool')
+    card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, 'c_hanged_man', 'fool')
 else
-    local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, G.GAME.last_tarot_planet, 'fool')
+    card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, G.GAME.last_tarot_planet, 'fool')
 end
 '''
 match_indent = true
@@ -965,19 +958,126 @@ payload = "local fool_c = ((next(SMODS.find_card('c_csau_steel_civil')) and G.P_
 match_indent = true
 times = 1
 
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if pseudorandom(self.ability.name == 'Cavendish' and 'cavendish' or 'gros_michel') < G.GAME.probabilities.normal/self.ability.extra.odds then"
+position = "after"
+payload = "if self.ability.name == 'Gros Michel' then check_for_unlock({ type = 'gros_extinct' }) end"
+match_indent = true
+times = 1
 
 [[patches]]
 [patches.pattern]
-target = "functions/button_callbacks.lua"
-pattern = '''if G.shop and not G.shop.alignment.offset.py then
-  G.shop.alignment.offset.py = G.shop.alignment.offset.y
-  G.shop.alignment.offset.y = G.ROOM.T.y + 29
-end'''
+target = "card.lua"
+pattern = '''
+                attention_text({
+                    text = localize('k_nope_ex'),
+'''
+position = "before"
+payload = "check_for_unlock({ type = 'wheel_nope' })"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+                attention_text({
+                    text = localize('k_nope_ex'),
+'''
+position = "before"
+payload = "check_for_unlock({ type = 'wheel_nope' })"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "elseif self.ability.name == 'The Wheel of Fortune' then"
 position = "after"
-payload = '''if G.morshu_save and not G.morshu_save.alignment.offset.py then
-  G.morshu_save.alignment.offset.py = G.morshu_save.alignment.offset.y
-  G.morshu_save.alignment.offset.y = G.ROOM.T.y + 29
-end'''
+payload = "check_for_unlock({ type = 'wheel_trigger' })"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = "elseif self.name == 'The Manacle' and not self.disabled then"
+position = "before"
+payload = "elseif self.name == 'The Wall' and not self.disabled then check_for_unlock({ type = 'defeat_wall' })"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "local mult = card:get_chip_mult()"
+position = "before"
+payload = '''
+local proc = nil
+if next(SMODS.find_card('c_csau_steel_d4c_love')) then
+    local triggers = {
+        [1] = 'mult',
+        [2] = 'dollars',
+    }
+    proc = triggers[pseudorandom('d4c_lovetrain', 1, 2)]
+end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "local mult = card:get_chip_mult()"
+position = "at"
+payload = "local mult = card:get_chip_mult(proc)"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "local p_dollars = card:get_p_dollars()"
+position = "at"
+payload = "local p_dollars = card:get_p_dollars(proc)"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "function Card:get_chip_mult()"
+position = "at"
+payload = "function Card:get_chip_mult(proc)"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if pseudorandom('lucky_mult') < G.GAME.probabilities.normal/5 then"
+position = "at"
+payload = "if proc and proc == 'mult' or (pseudorandom('lucky_mult') < G.GAME.probabilities.normal/5) then"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "function Card:get_p_dollars()"
+position = "at"
+payload = "function Card:get_p_dollars(proc)"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if pseudorandom('lucky_money') < G.GAME.probabilities.normal/15 then"
+position = "at"
+payload = "if proc and proc == 'dollars' or (pseudorandom('lucky_money') < G.GAME.probabilities.normal/15) then"
 match_indent = true
 times = 1
 
@@ -999,6 +1099,21 @@ times = 1
 [[patches]]
 [patches.pattern]
 target = "functions/button_callbacks.lua"
+pattern = '''if G.shop and not G.shop.alignment.offset.py then
+  G.shop.alignment.offset.py = G.shop.alignment.offset.y
+  G.shop.alignment.offset.y = G.ROOM.T.y + 29
+end'''
+position = "after"
+payload = '''if G.morshu_save and not G.morshu_save.alignment.offset.py then
+  G.morshu_save.alignment.offset.py = G.morshu_save.alignment.offset.y
+  G.morshu_save.alignment.offset.y = G.ROOM.T.y + 29
+end'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
 pattern = '''if G.shop and G.shop.alignment.offset.py then 
     G.shop.alignment.offset.y = G.shop.alignment.offset.py
     G.shop.alignment.offset.py = nil
@@ -1008,32 +1123,6 @@ payload = '''if G.morshu_save and G.morshu_save.alignment.offset.py then
     G.morshu_save.alignment.offset.y = G.morshu_save.alignment.offset.py
     G.morshu_save.alignment.offset.py = nil
 end'''
-match_indent = true
-times = 1
-
-[[patches]]
-[patches.pattern]
-target = "functions/button_callbacks.lua"
-pattern = '''G.shop.alignment.offset.y = G.ROOM.T.y + 29
-G.SHOP_SIGN.alignment.offset.y = -15
-return true'''
-position = "at"
-payload = '''G.shop.alignment.offset.y = G.ROOM.T.y + 29
-if G.morshu_save then G.morshu_save.alignment.offset.y = G.ROOM.T.y + 29 end
-G.SHOP_SIGN.alignment.offset.y = -15
-return true
-'''
-match_indent = true
-times = 1
-
-[[patches]]
-[patches.pattern]
-target = "game.lua"
-pattern = '''self.load_shop_vouchers = nil'''
-position = "after"
-payload = '''self.load_morshu_area = nil
-if G.morshu_save then G.morshu_save:remove() end
-G.morshu_save = nil'''
 match_indent = true
 times = 1
 
@@ -1082,6 +1171,31 @@ times = 1
 
 [[patches]]
 [patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = '''G.shop.alignment.offset.y = G.ROOM.T.y + 29
+G.SHOP_SIGN.alignment.offset.y = -15
+return true'''
+position = "at"
+payload = '''G.shop.alignment.offset.y = G.ROOM.T.y + 29
+if G.morshu_save then G.morshu_save.alignment.offset.y = G.ROOM.T.y + 29 end
+G.SHOP_SIGN.alignment.offset.y = -15
+return true'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''self.load_shop_vouchers = nil'''
+position = "after"
+payload = '''self.load_morshu_area = nil
+if G.morshu_save then G.morshu_save:remove() end
+G.morshu_save = nil'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
 target = "functions/UI_definitions.lua"
 pattern = '''card.children.buy_button = UIBox{
     definition = t2,
@@ -1107,4 +1221,3 @@ payload = '''card.children.buy_button = UIBox{
 }'''
 match_indent = true
 times = 1
-

@@ -99,7 +99,7 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
-    if card.config.center.discovered then
+    if card.area and card.area == G.jokers or card.config.center.discovered then
         -- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
         full_UI_table.name = localize{type = 'name', key = "j_csau_sts_"..card.ability.form, set = self.set, name_nodes = {}, vars = specific_vars or {}}
     end
@@ -229,6 +229,12 @@ function jokerInfo.calculate(self, card, context)
             G.GAME.csau_stss_drawthreeextra = 0
         end
     end
+end
+
+local ref_as = SMODS.always_scores
+SMODS.always_scores = function(card)
+    if G.FUNCS.find_sts_form('diamonds') then return true end
+    ref_as(card)
 end
 
 function jokerInfo.update(self, card)

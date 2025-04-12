@@ -1,6 +1,6 @@
 local blindInfo = {
-    name = "The Outlaw",
-    color = HEX('a0a0cc'),
+    name = "The Darkest",
+    color = HEX('c0a800'),
     pos = {x = 0, y = 0},
     dollars = 5,
     mult = 2,
@@ -10,7 +10,7 @@ local blindInfo = {
 }
 
 function blindInfo.defeat(self)
-    check_for_unlock({ type = "defeat_outlaw" })
+    check_for_unlock({ type = "defeat_darkest" })
 end
 
 function blindInfo.set_blind(self)

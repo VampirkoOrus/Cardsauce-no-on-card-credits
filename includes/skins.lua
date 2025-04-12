@@ -169,21 +169,29 @@ SMODS.Atlas{ key = 'csau_collab_VS', px = 71, py = 95, path = 'cards/recolored/c
 SMODS.Atlas{ key = 'csau_collab_STS', px = 71, py = 95, path = 'cards/recolored/csau_collab_STS.png', prefix_config = {key = false},}
 SMODS.Atlas{ key = 'csau_collab_PC', px = 71, py = 95, path = 'cards/recolored/csau_collab_PC.png', prefix_config = {key = false},}
 SMODS.Atlas{ key = 'csau_collab_WF', px = 71, py = 95, path = 'cards/recolored/csau_collab_WF.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_FO', px = 71, py = 95, path = 'cards/recolored/csau_collab_FO.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_DBD', px = 71, py = 95, path = 'cards/recolored/csau_collab_DBD.png', prefix_config = {key = false},}
 -- Recolored Diamonds Collabs
 SMODS.Atlas{ key = 'csau_collab_DTD', px = 71, py = 95, path = 'cards/recolored/csau_collab_DTD.png', prefix_config = {key = false},}
 SMODS.Atlas{ key = 'csau_collab_SV', px = 71, py = 95, path = 'cards/recolored/csau_collab_SV.png', prefix_config = {key = false},}
 SMODS.Atlas{ key = 'csau_collab_EG', px = 71, py = 95, path = 'cards/recolored/csau_collab_EG.png', prefix_config = {key = false},}
 SMODS.Atlas{ key = 'csau_collab_XR', px = 71, py = 95, path = 'cards/recolored/csau_collab_XR.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_C7', px = 71, py = 95, path = 'cards/recolored/csau_collab_C7.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_R', px = 71, py = 95, path = 'cards/recolored/csau_collab_R.png', prefix_config = {key = false},}
 -- Recolored Hearts Collabs
 SMODS.Atlas{ key = 'csau_collab_AU', px = 71, py = 95, path = 'cards/recolored/csau_collab_AU.png', prefix_config = {key = false},}
 SMODS.Atlas{ key = 'csau_collab_TBoI', px = 71, py = 95, path = 'cards/recolored/csau_collab_TBoI.png', prefix_config = {key = false},}
 SMODS.Atlas{ key = 'csau_collab_CL', px = 71, py = 95, path = 'cards/recolored/csau_collab_CL.png', prefix_config = {key = false},}
 SMODS.Atlas{ key = 'csau_collab_D2', px = 71, py = 95, path = 'cards/recolored/csau_collab_D2.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_CR', px = 71, py = 95, path = 'cards/recolored/csau_collab_CR.png', prefix_config = {key = false},}
+SMODS.Atlas{ key = 'csau_collab_BUG', px = 71, py = 95, path = 'cards/recolored/csau_collab_BUG.png', prefix_config = {key = false},}
 -- Recolored Spades Collabs
 SMODS.Atlas{ key = 'csau_collab_TW', px = 71, py = 95, path = 'cards/recolored/csau_collab_TW.png', prefix_config = {key = false}, }
 SMODS.Atlas{ key = 'csau_collab_CYP', px = 71, py = 95, path = 'cards/recolored/csau_collab_CYP.png', prefix_config = {key = false}, }
 SMODS.Atlas{ key = 'csau_collab_SK', px = 71, py = 95, path = 'cards/recolored/csau_collab_SK.png', prefix_config = {key = false}, }
 SMODS.Atlas{ key = 'csau_collab_DS', px = 71, py = 95, path = 'cards/recolored/csau_collab_DS.png', prefix_config = {key = false}, }
+SMODS.Atlas{ key = 'csau_collab_AC', px = 71, py = 95, path = 'cards/recolored/csau_collab_AC.png', prefix_config = {key = false}, }
+SMODS.Atlas{ key = 'csau_collab_STP', px = 71, py = 95, path = 'cards/recolored/csau_collab_STP.png', prefix_config = {key = false}, }
 
 local color = {
     Hearts = HEX("e14e62"),
@@ -255,6 +263,27 @@ local function assemble_vanilla_palettes(key, suit)
             atlas = 'csau_suits'
         }
     })
+
+    SMODS.DeckSkin.add_palette(SMODS.DeckSkins[key], {
+        key = 'csau_'..key..'_vargshroom',
+        ranks = full_ranks,
+        display_ranks = face_ace,
+        atlas = 'csau_default',
+        pos_style = {
+            fallback_style = 'deck',
+            Jack = { atlas = 'csau_'..key, pos = {x = 0, y = 0} },
+            Queen = { atlas = 'csau_'..key, pos = {x = 1, y = 0} },
+            King = { atlas = 'csau_'..key, pos = {x = 2, y = 0} },
+            Ace = { atlas = 'csau_varg_aces', pos = {x = 0, y = suit_y} }
+        },
+        loc_txt = {
+            ['en-us'] = "CSAU Colors & Vargshroom"
+        },
+        colour = color[suit],
+        suit_icon = {
+            atlas = 'csau_suits'
+        }
+    })
 end
 
 for k, v in pairs(SMODS.DeckSkins) do
@@ -278,6 +307,7 @@ end
 SMODS.Atlas{ key = 'balcolor_shrooms_lc', px = 71, py = 95, path = 'cards/balcolor_shrooms_lc.png' }
 SMODS.Atlas{ key = 'balcolor_shrooms_hc', px = 71, py = 95, path = 'cards/balcolor_shrooms_hc.png' }
 SMODS.Atlas{ key = 'varg_aces', px = 71, py = 95, path = 'cards/csau_varg_aces.png' }
+SMODS.Atlas{ key = 'jazz_aces', px = 71, py = 95, path = 'cards/jazz_aces.png' }
 SMODS.Atlas{ key = 'balcolor_varg_lc', px = 71, py = 95, path = 'cards/balcolor_varg_lc.png' }
 SMODS.Atlas{ key = 'balcolor_varg_hc', px = 71, py = 95, path = 'cards/balcolor_varg_hc.png' }
 SMODS.Atlas{ key = 'varg_willo', px = 71, py = 95, path = 'cards/csau_varg_willo.png' }
@@ -664,7 +694,7 @@ local assemble_character_skins = function(key, suit, name, type)
         palettes[1].loc_txt = {
             ['en-us'] = "Cardsauce Colors"
         }
-        palettes[1].pos_style.Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = suit_y} }
+        palettes[1].pos_style.Ace = { atlas = 'csau_jazz_aces', pos = {x = 0, y = suit_y} }
     end
     if type == "vine" or type == "varg" then
         palettes[#palettes+1] = {
@@ -698,7 +728,6 @@ end
 for suit, v in pairs(skins) do
     for i, skin in ipairs(v) do
         if SMODS.Atlases[skin.key] then
-            send(skin.key)
             assemble_character_skins(skin.key, suit, skin.loc_txt, skin.type)
         end
     end

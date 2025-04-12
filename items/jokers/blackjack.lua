@@ -81,13 +81,30 @@ local jokerInfo = {
     config = {},
     rarity = 2,
     cost = 6,
+    unlocked = false,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
     streamer = "joel",
 }
 
+function jokerInfo.check_for_unlock(self, args)
+    if args.type == 'hand' and args.scoring_hand then
+        local grand_total = to_big(0)
+        for i, v in ipairs(args.scoring_hand) do
+            local chip_val = v.base.nominal
+            local bonus_chip = v.ability.perma_bonus or 0
+            local total_chip = to_big(chip_val) + to_big(bonus_chip)
+            grand_total = grand_total + total_chip
+        end
+        if grand_total == to_big(21) then
+            return true
+        end
+    end
+end
+
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gote } }
     return { vars = { } }
 end
 

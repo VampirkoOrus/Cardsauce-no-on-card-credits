@@ -35,6 +35,10 @@ csau_team = {
 	['sin'] = "SinCityAssassin",
 	['aure'] = "aure",
 	['eremel'] = "Eremel",
+	['voyager'] = "TheVoyger1234",
+	['vinny'] = "Vinny",
+	['joel'] = "Joel",
+	['mike'] = "Mike",
 	['lyman'] = "Lyman",
 	['akai'] = "Akai",
 	['victin'] = "Victin",
@@ -70,6 +74,8 @@ csau_team = {
 	['burlap'] = "ABBurlap",
 	['chvsau'] = "chvsau",
 	['dolos'] = "Dolos",
+	['kuro'] = "SoloDimeKuro",
+	['donk'] = "Donk.TK",
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",
@@ -108,7 +114,7 @@ G.csau_collab_credits = {
 	csau_americans = {
 		King = {key = "artistcredit", set = "Other", vars = { csau_team.burd } },
 		Queen = {key = "artistcredit", set = "Other", vars = { csau_team.guff } },
-		Jack = nil,
+		Jack = {key = "artistcredit", set = "Other", vars = { csau_team.plunch } },
 	},
 	csau_voices = {
 		King = {key = "artistcredit", set = "Other", vars = { csau_team.lyzerus } },
@@ -142,6 +148,46 @@ G.csau_collab_credits = {
 		Jack = {key = "artistcredit", set = "Other", vars = { csau_team.winterg } },
 	},
 }
+
+-- Automatically inserts vanilla friends of Jimbo credits into G.csau_collab_credits. cause why not
+local ref_ips = G.FUNCS.initPostSplash
+G.FUNCS.initPostSplash = function()
+	ref_ips()
+	local visited = {}
+	local function recursive_search(t)
+		if visited[t] then return false end
+		visited[t] = true
+		if type(t) == "table" and t.label == "Collabs" and type(t.tab_definition_function) == "function" then
+			t.tab_definition_function()
+			return true
+		end
+		for _, v in ipairs(t) do
+			if type(v) == "table" and recursive_search(v) then
+				return true
+			end
+		end
+		for k, v in pairs(t) do
+			if type(v) == "table" and recursive_search(v) then
+				return true
+			end
+		end
+		return false
+	end
+	G.FUNCS.show_credits()
+	local result = recursive_search(G.OVERLAY_MENU)
+	G.FUNCS:exit_overlay_menu()
+	if result then
+		for k, v in pairs(G.collab_credits) do
+			if v.artist then
+				G.csau_collab_credits[v.art] = {
+					King = {key = "artistcredit", set = "Other", vars = { v.artist } },
+					Queen = {key = "artistcredit", set = "Other", vars = { v.artist } },
+					Jack = {key = "artistcredit", set = "Other", vars = { v.artist } },
+				}
+			end
+		end
+	end
+end
 
 -- A table of preset color settings when Colors are enabled in mod configs
 G.color_presets = {

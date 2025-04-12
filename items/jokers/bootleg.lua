@@ -59,10 +59,20 @@ local function get_random_joker_key()
     return key
 end
 
+local function get_joker_collection_pos(key)
+    for i, v in pairs(G.P_CENTER_POOLS["Joker"]) do
+        if v.key == key then
+            return i
+        end
+    end
+    return "?"
+end
+
 local function get_all_in_one_joker(card)
     local key = get_random_joker_key(card, true)
+
     local center = get_joker_center(key)
-    local order = center.order
+    local order = get_joker_collection_pos(key)
     return order.." . "..G.localization.descriptions.Joker[key].name
 end
 
@@ -368,7 +378,7 @@ end
 
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
     local key = card.config.center.key
-    if card.config.center.discovered then
+    if card.area and card.area == G.jokers or card.config.center.discovered then
         -- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
         full_UI_table.name = localize{type = 'name', key = key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
     end

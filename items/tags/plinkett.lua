@@ -5,6 +5,10 @@ local tagInfo = {
     origin = 'rlm',
 }
 
+tagInfo.loc_vars = function(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gote } }
+end
+
 tagInfo.apply = function(self, tag, context)
     if context.type == self.config.type then
         tag:yep('+', G.C.VHS,function()
@@ -22,6 +26,5 @@ tagInfo.apply = function(self, tag, context)
         return true
     end
 end
-
 
 return tagInfo

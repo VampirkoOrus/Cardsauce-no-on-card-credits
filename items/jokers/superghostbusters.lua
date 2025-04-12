@@ -1,7 +1,7 @@
 local jokerInfo = {
     name = "Super Jokebusters",
     config = {
-        extra = 3,
+        extra = 5,
     },
     rarity = 1,
     cost = 6,

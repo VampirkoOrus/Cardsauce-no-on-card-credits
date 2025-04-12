@@ -4,6 +4,10 @@ local tagInfo = {
     alerted = true,
 }
 
+tagInfo.loc_vars = function(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gote } }
+end
+
 tagInfo.apply = function(self, tag, context)
     if context.type == self.config.type then
         local applied = nil
@@ -27,6 +31,5 @@ tagInfo.apply = function(self, tag, context)
         return applied
     end
 end
-
 
 return tagInfo

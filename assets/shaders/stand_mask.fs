@@ -17,66 +17,117 @@ extern bool shadow;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_1;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_2;
 
+extern MY_HIGHP_OR_MEDIUMP float screen_scale;
+
+extern MY_HIGHP_OR_MEDIUMP number shadow_height;
+extern MY_HIGHP_OR_MEDIUMP float scale_mod;
+extern MY_HIGHP_OR_MEDIUMP float rotate_mod;
+extern MY_HIGHP_OR_MEDIUMP number my; // vertical offset
+
 // function defs for required functions later in the code
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv);
 number hue(number s, number t, number h);
 vec4 HSL(vec4 c);
 vec4 RGB(vec4 c);
 
-const float pi = 3.141592653;
+#define PI 3.141592653;
 
 vec4 mask_layer(vec4 layer, float mask) {
     return vec4(layer.rgb, min(layer.a, mask));
 }
 
+vec4 greyscale(vec4 color, float factor) {
+   float grey = 0.21 * color.r + 0.71 * color.g + 0.07 * color.b;
+   return vec4(color.rgb * (1.0 - factor) + (grey * factor), color.a);
+}
+
 vec4 soul_move(Image tex, vec2 uv, vec2 uv_min, vec2 uv_max) {
-    float scale_mod = 0.07 + 0.02*sin(1.8*stand_mask.y);
-    float rotate_mod = 0.0025*sin(1.219*stand_mask.y);
+    // roughly what the values are:
+    // float scale_mod = 0.07 + 0.02*sin(1.8*stand_mask.y);
+    // float rotate_mod = 0.0025*sin(1.219*stand_mask.y);
 
     vec2 uv_center = (uv_min + uv_max) * 0.5;
 
-    vec2 transformedUV = uv;
+    vec2 transformed_uv = uv;
 
-    transformedUV -= uv_center; // translate uv to center
+    transformed_uv -= uv_center; // translate uv to center
 
-    transformedUV *= 1.0 + scale_mod; // apply scaling
+    transformed_uv *= 1.0 - scale_mod; // apply scaling
 
     // apply rotation
-    float angle = rotate_mod * 2.0 * pi;
-    float cosAngle = cos(angle);
-    float sinAngle = sin(angle);
-    mat2 rotationMatrix = mat2(cosAngle, -sinAngle, 
-                               sinAngle, cosAngle);
-    transformedUV *= rotationMatrix;
+    float angle = rotate_mod * 0.33; //TODO: REMOVE TILT
+    float cos_angle = cos(angle);
+    float sin_angle = sin(angle);
+    mat2 rotation_matrix = mat2(cos_angle, -sin_angle, 
+                               sin_angle, cos_angle);
+    transformed_uv *= rotation_matrix;
 
-    transformedUV += uv_center; // translate uv back
+    transformed_uv += uv_center; // translate uv back
 
     float epsilon = 0.0001;
-    if (transformedUV.x < (uv_min.x - epsilon) || transformedUV.x > (uv_max.x + epsilon) ||
-        transformedUV.y < (uv_min.y - epsilon) || transformedUV.y > (uv_max.y + epsilon))
+    if (transformed_uv.x < (uv_min.x - epsilon) || transformed_uv.x > (uv_max.x + epsilon) ||
+        transformed_uv.y < (uv_min.y - epsilon) || transformed_uv.y > (uv_max.y + epsilon))
     {
         return vec4(0.0); // outside the bounds, return transparent
     }
     else
     {
-        return Texel(tex, transformedUV); // inside the bounds, sample the texture at the transformed coordinate
+        return Texel(tex, transformed_uv); // inside the bounds, sample the texture at the transformed coordinate
     }
+}
+
+vec4 draw_shadow(Image tex, vec2 uv,  vec2 uv_min, vec2 uv_max, vec2 shadow_uv_offset, float max_shadow_alpha) {
+    vec2 shadow_origin_uv = uv - shadow_uv_offset;
+
+    vec4 shadow_caster_color = soul_move(tex, shadow_origin_uv, uv_min, uv_max);
+    vec4 mask_at_origin = Texel(tex, shadow_origin_uv + vec2(0.4, 0.0));
+
+    float effective_caster_alpha = min(shadow_caster_color.a, mask_at_origin.r);
+
+    float final_shadow_alpha = effective_caster_alpha * max_shadow_alpha;
+
+    return vec4(0.0, 0.0, 0.0, final_shadow_alpha); // black shadow
 }
 
 vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 {
-    vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
+    vec2 dissolve_uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
+
+    // dummy, doesn't do anything but makes the compiler happy (need to use the shader name uniform) 
+    if (dissolve_uv.x > dissolve_uv.x * 2){
+        dissolve_uv = stand_mask;
+    }
 
     vec2 soul_min = vec2(0.4, 0.0);
     vec2 soul_max = vec2(0.6, 1.0);
 
+    vec2 light_screen_pos = vec2(0.5, 2.0) * love_ScreenSize.xy; // light origin, seems to be top-middle off screen a bit (but need to invert y because shadow length is inverted for some reason)
+    vec2 screen_offset = (screen_coords - light_screen_pos) * vec2(-1.0); // mirror shadow because Balatro shadows work weird
+    vec2 uv_offset = screen_offset / love_ScreenSize.xy;
+
+    float shadow_strength = 0.33 * scale_mod;//0.033 * (1. + scale_mod * 10.); // controls shadow length 
+    vec2 final_shadow_uv_offset = uv_offset * shadow_strength;
+
+    float max_shadow_alpha = 0.33;
+
+    vec4 shadow_layer = draw_shadow(texture, texture_coords, soul_min, soul_max, final_shadow_uv_offset, max_shadow_alpha);
+
 	vec4 soul = soul_move(texture, texture_coords, soul_min, soul_max); // for some reason the texture_coords is already starting at 0.4
 	vec4 mask = Texel(texture, texture_coords + vec2(0.4, 0.0));
+    vec4 base = Texel(texture, texture_coords + vec2(-0.2, 0.0)); // base color
+
+    soul += vec4(vec3(1. - soul.a) * 0.8, 0.); // brighten
+
+    shadow_layer = vec4(shadow_layer.rgb, min(shadow_layer.a, base.a)); // prevent shadow from drawing outside the base card
+
+    float blend_alpha = min(25. * greyscale(soul, 1.).r, 1.);
+    vec3 soul_with_shadow = mix(shadow_layer.rgb, soul.rgb, soul.a); // TODO: FIX OUTLINE CRUST and SHADOW OVER TITLE
+    soul = vec4(soul_with_shadow, max(soul.a, shadow_layer.a));
 
     soul = mask_layer(soul, mask.r);
 
   	// required for dissolve fx
-    return dissolve_mask(soul*colour, texture_coords, uv);
+    return dissolve_mask(soul*colour, texture_coords, dissolve_uv);
 }
 
 // --- below are all required functions --- //
@@ -164,7 +215,7 @@ vec4 HSL(vec4 c)
 
 extern MY_HIGHP_OR_MEDIUMP vec2 mouse_screen_pos;
 extern MY_HIGHP_OR_MEDIUMP float hovering;
-extern MY_HIGHP_OR_MEDIUMP float screen_scale;
+// extern MY_HIGHP_OR_MEDIUMP float screen_scale; // moved to top
 
 #ifdef VERTEX
 vec4 position( mat4 transform_projection, vec4 vertex_position )

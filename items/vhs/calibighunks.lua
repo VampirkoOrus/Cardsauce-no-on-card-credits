@@ -33,7 +33,7 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.before and not card.debuff and not context.blueprint then
+    if context.before and not card.debuff and not context.blueprint then
         for i, v in ipairs(context.scoring_hand) do
             if v:get_id() == 13 and card.ability.extra.uses < card.ability.extra.runtime then
                 v:set_ability(G.P_CENTERS.m_mult)

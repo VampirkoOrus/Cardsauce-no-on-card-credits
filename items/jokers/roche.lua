@@ -21,7 +21,7 @@ end
 
 function jokerInfo.add_to_deck(self, card)
 	check_for_unlock({ type = "discover_roche" })
-	ach_jokercheck(self, ach_checklists.ff7)
+	ach_jokercheck(self, G.ach_checklists.ff7)
 end
 
 local roche = SMODS.Sound({

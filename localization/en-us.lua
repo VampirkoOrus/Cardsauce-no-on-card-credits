@@ -53,6 +53,9 @@ return {
 			wq_9 = {
 				"That's my streamer!",
 			},
+			wq_10 = {
+				"GAMER'D!",
+			},
 			lq_1 = {
 				"HUGE waste of",
 				"brain cells!",
@@ -366,12 +369,16 @@ return {
 			b_pull = "PULL",
 			k_negative_mult = "Negative Mult!",
 			a_discards = "+#1# Discards",
+			a_plus_discard = "+#1# Discard",
+			a_plus_hand = "+#1# Hand",
 			k_allgone = "All Gone!",
 			k_mug_moment = "Mug Moment!",
 			k_mug_gone = "I Love My Mug!",
 			k_blackjack = "Blackjack!",
 			a_in_one = " in 1",
 			k_junka_lose = "Loser!",
+			k_csau_chips = "Chips",
+			k_fort_doubled = "Blind requirement doubled!",
 			k_metal = "Metal!",
 			k_gold_exp = "Gold Experience!",
 			k_stone_free = "Stone Free!",
@@ -424,6 +431,7 @@ return {
 			-- stand related loc strings
 			k_stand_evolved = 'Evolved!',
 			k_echoes_recorded = 'Recorded!',
+			k_boing = "Boing!",
 		},
 		v_dictionary = {
 			a_red = "#1#!!!",
@@ -436,15 +444,90 @@ return {
 			ch_c_csau_tucker = {"All Non-{C:clubs}Cardsauce{} Jokers are banned"}
 		},
 		achievement_names = {
+			ach_csau_discover_fisheye = "As You Know...",
+			ach_csau_discover_cousinsclub = "You Gotta Come to Club Club.",
+			ach_csau_discover_disguy = "BLS BLAY BALABRO BINTY",
+			ach_csau_discover_greenneedle = "Brainstorm",
+			ach_csau_discover_twoface = "Walrus mmmmmmm",
+			ach_csau_discover_garbage = "They Don't Give a Damn",
+			ach_csau_discover_sohappy = "I'm So Happy For You",
+			ach_csau_discover_kings = "Cursed in the Name of the LORD",
+			ach_csau_discover_chad = "Why Is He Here...",
+			ach_csau_discover_code = "Alyx!",
+			ach_csau_discover_chrome = "Hey Jahnny!",
+			ach_csau_discover_shrimp = "I'm Ready, You Ready?",
+			ach_csau_discover_kerosene = "Throw Another on the Fire",
+			ach_csau_discover_werewolves = "Never Going To Happen",
+			ach_csau_discover_supper = "Shoutouts to SupperMarioBroth",
+			ach_csau_discover_red = "Red-Blooded Italian",
+			ach_csau_discover_miracle = "Johnny's Fault",
+			ach_csau_discover_pep = "Secret Hoppin'",
+			ach_csau_discover_grey = "Milky Way!",
+			ach_csau_discover_meat = "EEEEYEOW!",
+			ach_csau_discover_sponge = "Negativity Soak",
+			ach_csau_discover_claus = "16-Hit Combo",
+			ach_csau_discover_speed = "~~~~~~~~~~~~~~~",
+			ach_csau_discover_disturbed = "Creative Exercise",
+			ach_csau_discover_reyn = "Reyn Time",
+			ach_csau_discover_bsf = "Great Pretender",
+			ach_csau_discover_roger = "Like He Would Have Wanted",
+			ach_csau_discover_odio = "Lord of All Demons",
+			ach_csau_discover_btc = "Fake Rarity",
+			ach_csau_discover_watto = "I'm A Watto",
+			ach_csau_discover_muppet = "Could Become a Habit",
+			ach_csau_discover_dontmind = "Hmmm, What To Play...",
+			ach_csau_discover_crack = "It's Not Cool",
+			ach_csau_discover_charity = "Compassionate Card",
+			ach_csau_discover_roche = "We Meet Again, My Friend!",
+			ach_csau_discover_new = "Wiseau Serious?",
+			ach_csau_discover_pivot = "Never Too Late",
+			ach_csau_discover_speen = "RÖTATE",
+			ach_csau_discover_diaper = "I'm Vetoing That Bit",
+			ach_csau_discover_blast = "Emmanuel in Chat",
+			ach_csau_discover_dink = "Hua Ha!",
+			ach_csau_discover_deathcard = "Say Cheese!",
+			ach_csau_discover_hell = "290",
+			ach_csau_discover_epoch = "Good Morning, Crono",
+			ach_csau_discover_gnorts = "Rettegrof",
+			ach_csau_discover_al = "See It All",
+			ach_csau_discover_pacman = "Drugs Are Bad",
+			ach_csau_discover_purple = "I Do What I Want",
+			ach_csau_discover_fantabulous = "I Feel Fantastic",
+			ach_csau_discover_joeycastle = "SHIT CANNON",
+			ach_csau_discover_grand = "Nourish the Blood",
+			ach_csau_discover_voice = "maarrrio̸̊oò̶o̿̀o͚͂ooo",
+			ach_csau_discover_beginners = "Join Me At The Table",
+			ach_csau_discover_rotten = "It Degrades, Douglath",
+			ach_csau_discover_ten = "I Did All That For YOU!?!?",
+			ach_csau_discover_rapture = "I've Been A Good Christian!",
+			ach_csau_discover_killjester = "Well Worth It",
+			ach_csau_discover_villains = "Magic Bullet",
+			ach_csau_discover_meteor = "Did Sephiroth... Do This?",
+			ach_csau_discover_dud = "A DUHD!?",
+			ach_csau_discover_koffing = "NOT CLICKBAIT",
+			ach_csau_discover_frich = "FINE DINING",
+			ach_csau_discover_bunji = "Lemme Just Say This... Yum",
+			ach_csau_discover_crudeoil = "I CAN'T STOP",
+			ach_csau_discover_grannycream = "Heat n' Sip",
+			ach_csau_discover_sts = "ResidentSleeper",
+			ach_csau_discover_bjbros = "*Chain Attack OST Plays*",
+			ach_csau_discover_drippy = "The Dripping Tap",
+
+			ach_csau_activate_quixotic = "From Some Place Even Higher",
 			ach_csau_flip_sosad = "I'm Unhappy When You're Happy",
 			ach_csau_activate_roche = "You Earned It, Big Boy!",
 			ach_csau_fuckingkill_jimbo = "NOOOOOO HOW COULD YOU",
 			ach_csau_high_one = "All You Need Is One",
+			ach_csau_defeat_hog = "The Hawg Strikes Again",
 			ach_csau_miracle_inherit = "Recessive Genes",
 			ach_csau_reno_colors = "Headin' On Back",
 			ach_csau_skin_vineshroom = "thwomp.mp3",
 			ach_csau_skin_characters = "The Gang's All Here",
+			ach_csau_defeat_tray = "One Third Tray of: Chips!",
+			ach_csau_defeat_vod = "The Final Cut",
 			ach_csau_supreme_ascend = "Supreme Ascendancy",
+			ach_csau_defeat_finger = "Handy",
+			ach_csau_defeat_mochamike = "Put Your Deck Away",
 			ach_csau_triple_seven = "Triple Seven",
 
 			ach_csau_discover_vincenzo = "Step Right In",
@@ -463,15 +546,90 @@ return {
 			ach_csau_big_meat = "The Big Meat",
 		},
 		achievement_descriptions = {
+			ach_csau_discover_fisheye = "Discover Fisheye",
+			ach_csau_discover_cousinsclub = "Discover Cousin's Club",
+			ach_csau_discover_disguy = "Discover DIS JOAKERRR",
+			ach_csau_discover_greenneedle = "Discover Green Needle",
+			ach_csau_discover_twoface = "Discover Two-Faced Joker",
+			ach_csau_discover_garbage = "Discover Garbage Hand",
+			ach_csau_discover_sohappy = "Discover I'm So Happy",
+			ach_csau_discover_kings = "Discover 2 Kings 2:23-24",
+			ach_csau_discover_chad = "Discover No No No No No No No No No No",
+			ach_csau_discover_code = "Discover Industry Code",
+			ach_csau_discover_chrome = "Discover Chromed Up",
+			ach_csau_discover_shrimp = "Discover Shrimp Joker",
+			ach_csau_discover_kerosene = "Discover Kerosene",
+			ach_csau_discover_werewolves = "Discover That's Werewolves",
+			ach_csau_discover_supper = "Discover WAAUGGHGHHHHGHH",
+			ach_csau_discover_red = "Discover Why Are You Red?",
+			ach_csau_discover_miracle = "Discover Miracle of Life",
+			ach_csau_discover_pep = "Discover Pepperoni Secret",
+			ach_csau_discover_grey = "Discover Grey Joker",
+			ach_csau_discover_meat = "Discover Meat",
+			ach_csau_discover_sponge = "Discover Depressed Brother",
+			ach_csau_discover_claus = "Discover Masked Joker",
+			ach_csau_discover_speed = "Discover Speed Joker",
+			ach_csau_discover_disturbed = "Discover Disturbed Joker",
+			ach_csau_discover_reyn = "Discover Bunch of Jokers",
+			ach_csau_discover_bsf = "Discover Be Someone Forever",
+			ach_csau_discover_roger = "Discover Mr. Roger",
+			ach_csau_discover_odio = "Discover Odious Joker",
+			ach_csau_discover_btc = "Discover Business Trading Card",
+			ach_csau_discover_watto = "Discover Let Fate Decide",
+			ach_csau_discover_muppet = "Discover Movin' Right Along",
+			ach_csau_discover_dontmind = "Discover Don't Mind If I Do",
+			ach_csau_discover_crack = "Discover This Is Crack",
+			ach_csau_discover_charity = "Discover Charity Stream",
+			ach_csau_discover_roche = "Discover Motorcyclist Joker",
+			ach_csau_discover_new = "Discover The NEW Joker!",
+			ach_csau_discover_pivot = "Discover Pivyot",
+			ach_csau_discover_speen = "Discover SPEEEEEEN",
+			ach_csau_discover_diaper = "Discover Diaper Joker",
+			ach_csau_discover_blast = "Discover Emmanuel Blast",
+			ach_csau_discover_dink = "Discover Very Expensive Joker",
+			ach_csau_discover_deathcard = "Discover Deathcard",
+			ach_csau_discover_hell = "Discover Running Hell",
+			ach_csau_discover_epoch = "Discover Wings Of Time",
+			ach_csau_discover_gnorts = "Discover Rekoj Gnorts",
+			ach_csau_discover_al = "Discover Another Light",
+			ach_csau_discover_pacman = "Discover PAC-MAN Incident",
+			ach_csau_discover_purple = "Discover The Purple Joker",
+			ach_csau_discover_fantabulous = "Discover Fantabulous Joker",
+			ach_csau_discover_joeycastle = "Discover Joey's Castle",
+			ach_csau_discover_grand = "Discover 7 Funny Story",
+			ach_csau_discover_voice = "Discover Choicest Voice",
+			ach_csau_discover_beginners = "Discover Beginner's Luck",
+			ach_csau_discover_rotten = "Discover Rotten Joker",
+			ach_csau_discover_ten = "Discover 10 ARROWS!?!?",
+			ach_csau_discover_rapture = "Discover Rapture",
+			ach_csau_discover_killjester = "Discover Kill Jester",
+			ach_csau_discover_villains = "Discover Jokers of Circumstance",
+			ach_csau_discover_meteor = "Discover Meteor",
+			ach_csau_discover_dud = "Discover The Dud",
+			ach_csau_discover_koffing = "Discover That Fucking Koffing Again",
+			ach_csau_discover_frich = "Discover Gourmand of Faramore",
+			ach_csau_discover_bunji = "Discover Scourge Of Pantsylvania",
+			ach_csau_discover_crudeoil = "Discover Crude Oil",
+			ach_csau_discover_grannycream = "Discover Granny Cream",
+			ach_csau_discover_sts = "Discover Murder the Monolith",
+			ach_csau_discover_bjbros = "Discover Blowzo Brothers",
+			ach_csau_discover_drippy = "Discover Dripping Joker",
+
+			ach_csau_activate_quixotic = "Use a Quixotic Card",
 			ach_csau_flip_sosad = "Win a round with I'm So Happy, causing it to flip to I'm So Sad",
 			ach_csau_activate_roche = "Receive a gift from Motorcyclist Joker",
 			ach_csau_fuckingkill_jimbo = "Fucking kill Jimbo",
 			ach_csau_high_one = "Have 2 High Card enhancing Jokers in your Joker slots",
+			ach_csau_defeat_hog = "Defeat The Hog",
 			ach_csau_miracle_inherit = "Use Miracle of Life to create a child that inherits an Enhancement, Seal, or Edition",
 			ach_csau_reno_colors = "Set the title screen colors to black and red",
 			ach_csau_skin_vineshroom = "Customize your deck to use the Classic Vineshroom for the Ace of Clubs",
 			ach_csau_skin_characters = "Customize your deck to include all of the Vinesauce characters",
+			ach_csau_defeat_tray = "Defeat The Tray",
+			ach_csau_defeat_vod = "Defeat The Vod",
 			ach_csau_supreme_ascend = "Have Rapture at or above +30 Mult and 2 Kings 2:23-24 in your Joker slots",
+			ach_csau_defeat_finger = "Defeat The Finger",
+			ach_csau_defeat_mochamike = "Defeat Mocha Mike",
 			ach_csau_triple_seven = "Have all 3 Final Fantasy Jokers in your Joker Slots",
 
 			ach_csau_discover_vincenzo = "Discover Vincenzo",
@@ -559,6 +717,19 @@ return {
 				text={
 					"Scoring cards change",
 					"suits randomly"
+				},
+			},
+			bl_csau_wasp = {
+				name = "The Wasp",
+				text = {
+					"Cards cannot retrigger"
+				},
+			},
+			bl_csau_feltfortress = {
+				name = "Felt Fortress",
+				text = {
+					"Blind requirement doubles",
+					"after each hand scored"
 				},
 			},
 		},
@@ -690,8 +861,8 @@ return {
 			rogernote = {
 				name = "Conversion Table",
 				text = {
-					"#1# {C:attention}fingers{} =",
-					"1 {C:attention}hand{}",
+					"1 {C:attention}hand{} =",
+					"#1# {C:attention}fingers{}",
 				},
 			},
 			diapernote = {
@@ -1074,8 +1245,8 @@ return {
 					"Draw {C:attention}+1{} card each {C:mult}discard{}",
 				},
 				unlock = {
-					"Flip {C:attention}I'm So Happy{}",
-					"to {C:attention}I'm So Sad{}"
+					"Flip {E:1,C:attention}I'm So Happy{}",
+					"to {E:1,C:attention}I'm So Sad{}"
 				},
 			},
 			j_csau_disturbedjoker_hidden = {
@@ -1144,7 +1315,7 @@ return {
 				},
 				unlock = {
 					"Recieve all of",
-					"{C:attention}Meat's Seals"
+					"{E:1,C:attention}Meat's Seals"
 				},
 			},
 			j_csau_shrimp_hidden = {
@@ -1172,11 +1343,11 @@ return {
 					"upgraded when played",
 				},
 				unlock = {
-					"Play a {C:attention}Secret Hand{}"
+					"Play a {E:1,C:attention}Secret Hand{}"
 				},
 			},
 			j_csau_pivot = {
-				name = "Pivyot",
+				name = "Pivyot Joker",
 				text = {
 					"{C:green}#1# in 3{} chance to upgrade",
 					"level of played {C:attention}High Card{}",
@@ -1188,7 +1359,7 @@ return {
 					"Draw {C:attention}+1{} card each {C:chips}hand{}",
 				},
 				unlock = {
-					"Discover {C:attention}I'm So Happy{}"
+					"Discover {E:1,C:attention}I'm So Happy{}"
 				},
 			},
 			j_csau_speedjoker_hidden = {
@@ -1274,7 +1445,7 @@ return {
 			j_csau_cousinsclub = {
 				name = "Cousin's Club",
 				text = {
-					"This Joker gains {C:chips}+#2#{} Chips",
+					"This Joker gains {C:chips}+#2#{} Chip",
 					"for each {V:1}#3#{} card scored,",
 					"{C:attention}double{} if hand contains a {C:attention}Flush{}",
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",
@@ -1316,7 +1487,7 @@ return {
                     "{S:1.1,C:red,E:2}self destructs{}",
                 },
 				unlock = {
-					"Use {C:attention}Mr. Bones{} to",
+					"Use {E:1,C:attention}Mr. Bones{} to",
 					"prevent your death"
 				},
 			},
@@ -1388,7 +1559,7 @@ return {
 					"{C:inactive}this Joker is sold/destroyed){}",
 				},
 				unlock = {
-					"Use an {C:spectral}Immolate{} card"
+					"Use an {E:1,C:spectral}Immolate{} card"
 				},
 			},
 			j_csau_kings_hidden = {
@@ -1546,7 +1717,7 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
 				},
 				unlock={
-					"{C:attention}Sacrifice{} a Joker",
+					"{E:1,C:attention}Sacrifice{} a Joker",
 				},
 			},
 			j_csau_villains = {
@@ -1556,8 +1727,8 @@ return {
 					"hand is your {C:attention}most played",
 				},
 				unlock={
-					"Turn a {C:attention}Queen",
-					"into a {C:attention}Stone Card"
+					"Turn a {E:1,C:attention}Queen",
+					"into a {E:1,C:attention}Stone Card"
 				},
 			},
 			j_csau_meteor = {
@@ -1569,7 +1740,7 @@ return {
 				},
 				unlock={
 					"Sell or destroy",
-					"{C:attention}Motorcyclist Joker",
+					"{E:1,C:attention}Motorcyclist Joker",
 				},
 			},
 			j_csau_frich = {
@@ -1579,7 +1750,7 @@ return {
 				},
 				unlock={
 					"Discover",
-					"{C:attention}5 Food Jokers",
+					"{E:1,C:attention}5 Food Jokers",
 				},
 			},
 			j_csau_bunji = {
@@ -1589,7 +1760,7 @@ return {
 				},
 				unlock={
 					"Discover",
-					"{C:attention}Gourmand of Faramore",
+					"{E:1,C:attention}Gourmand of Faramore",
 				},
 			},
 			j_csau_koffing = {
@@ -1608,7 +1779,7 @@ return {
 				unlock = {
 					"Win a run with any",
 					"deck on at least",
-					"{V:1}Black Stake{} difficulty",
+					"{E:1,V:1}Black Stake{} difficulty",
 				},
 			},
 			j_csau_crudeoil = {
@@ -1701,11 +1872,11 @@ return {
 			j_csau_tetris = {
 				name = "YOU GOT THE TETRIS!",
 				text = {
-					"Tetris. Use {C:attention}Arrow Keys{}/{C:attention}D-Pad{},",
+					"Use {C:attention}Arrow Keys{}/{C:attention}D-Pad{},",
 					"{C:attention}Z{}/{C:attention}L3{}, and {C:attention}X{}/{C:attention}R3{} to play",
 					"{C:inactive}(Pausing not allowed)",
 					"Gain {C:mult}Mult{} equal to",
-					"amount of lines cleared.",
+					"amount of lines cleared",
 					"{C:inactive}(Currently {}{C:mult}+#1#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
@@ -1734,6 +1905,10 @@ return {
 					"{C:attention}unique{} {C:stand}Stand{} obtained this run",
 					"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
 				},
+				unlock = {
+					"Discover {E:1,C:attention}#1#{} {E:1,C:stand}Stands",
+					"{C:inactive}(#2#)",
+				},
 			},
 			j_csau_flusher = {
 				name = "THE FLUSHER™",
@@ -1755,15 +1930,19 @@ return {
 			j_csau_nutbuster = {
 				name = "Nutbuster",
 				text = {
-					"All {C:tarot}Wheel of Fortune{} cards have",
+					"{C:tarot}Wheel of Fortune{} cards have",
 					"{C:green}3 in 4{} chance to succeed",
+				},
+				unlock={
+					"Have a {E:1,C:tarot}Wheel of Fortune{} trigger",
 				},
 			},
 			j_csau_chips = {
 				name = "Chips for Dinner",
 				text = {
 					"{C:chips}+#1#{} Chips",
-					"{C:chips}-#2#{} Chips for each {C:attention}final hand{} played",
+					"{C:chips}-#2#{} Chips for each",
+					"{C:attention}final hand{} played",
 				},
 			},
 			j_csau_bonzi = {
@@ -1771,8 +1950,7 @@ return {
 				text = {
 					"When {C:attention}Blind{} is selected, this Joker",
 					"gains {C:mult}+#1#{} Mult if it can take {C:money}$#2#{}",
-					"If it can't take {C:money}$#2#{}, the Mult",
-					"becomes negative for that round.",
+					"If not, Mult becomes {C:attention}negative{} this round",
 					"{C:inactive}(Currently {}{C:mult}#3#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
@@ -1785,7 +1963,7 @@ return {
 				},
 			},
 			j_csau_lidl = {
-				name = "Lidl",
+				name = "LiDL",
 				text = {
 					"All Vouchers in",
 					"shop are {C:attention}#1#%{} off"
@@ -1795,7 +1973,7 @@ return {
 				name = "Toe of Satan",
 				text = {
 					"{C:red}+#1#{} discards each round",
-					"{C:red}-#2#{} discards per round played"
+					"{C:red}-#2#{} discard per round played"
 				},
 			},
 			j_csau_superghostbusters = {
@@ -1820,26 +1998,37 @@ return {
 					"{C:attention}5 cards{} used this {C:attention}Blind{}",
 					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
+				unlock={
+					"Discover {E:1,C:attention}Grey Joker",
+				},
 			},
 			j_csau_itsmeaustin = {
 				name = "IT'S ME AUSTIN",
 				text = {
-					"{C:mult}+#1#{} Mult, {C:attention}Boss Blinds{} are hidden",
+					"{C:mult}+#1#{} Mult",
+					"{C:attention}Boss Blinds{} are hidden",
 					"until they are selected",
+				},
+				unlock={
+					"Defeat {E:1,C:attention}The Wall",
 				},
 			},
 			j_csau_bald = {
 				name = "Bald Joker",
 				text = {
-					"Earn {C:money}$#1#{} if {C:attention}5 numbered cards{] are",
-					"discarded at the same time",
+					"Earn {C:money}$#1#{} if {C:attention}5 non-face cards{}",
+					"are discarded at the same time",
 				},
 			},
 			j_csau_monkey = {
 				name = "Monkey Mondays",
 				text = {
-					"All played cards have {C:mult}+#1#{} Mult and",
-					"{C:green}#2# in #3#{} chance to be destroyed when scored",
+					"All cards have {C:mult}+#1#{} Mult and",
+					"{C:green}#2# in #3#{} chance to be",
+					"destroyed when scored",
+				},
+				unlock={
+					"Have a {E:1,C:attention}Gros Michel{} go {E:1,C:attention}extinct",
 				},
 			},
 			j_csau_no2joker = {
@@ -1852,9 +2041,13 @@ return {
 				name = "Trip To America",
 				text = {
 					"This Joker gains {C:mult}+#1#{} Mult per",
-					"{C:attention}consecutive{} hand played without",
-					"a scoring {C:attention}numbered{} card",
+					"{C:attention}consecutive{} hand played",
+					"containing only {C:attention}face{} cards",
 					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+				unlock={
+					"Discover {E:1,C:stand}Dirty Deeds",
+					"{E:1,C:stand}Done Dirt Cheap"
 				},
 			},
 			j_csau_passport = {
@@ -1881,13 +2074,13 @@ return {
 				name = "Plaguewalker",
 				text = {
 					"{C:attention}Glass Cards{} have {X:mult,C:white} X3 {} Mult",
-					"and {C:green}#1# in 2{} chance to break"
+					"and {C:green}#1# in 2{} chance to dbreak"
 				},
 			},
 			j_csau_skeletor = {
 				name = "EAT IT",
 				text = {
-					"{C:chips}+#1#{} Chips and {X:mult,C:white} X#2# {} for",
+					"{C:chips}+#1#{} Chips and {X:mult,C:white}X#2#{} Mult for",
 					"each active {C:attention}Food Joker{}",
 					"{C:inactive}(Currently {C:chips}+#3#{}{C:inactive} Chips and {X:mult,C:white} X#4# {C:inactive} Mult)",
 				},
@@ -1921,11 +2114,14 @@ return {
 					"{X:mult,C:white} X#1# {} Mult",
 					"{C:green}Probabilities{} never trigger",
 				},
+				unlock={
+					"Have a {E:1,C:tarot}Wheel of Fortune{} Nope!",
+				},
 			},
 			j_csau_protogent = {
 				name = "Protogent Antivirus",
 				text = {
-					"{C:green}#1# in #2#{} chance to disable {C:attention}boss blinds{}",
+					"{C:green}#1# in #2#{} chance to disable {C:attention}Boss Blinds{}",
 					"{C:green}#1# in #3#{} chance to prevent death",
 					"{S:1.1,C:red,E:2}self destructs{}",
 				},
@@ -1941,8 +2137,8 @@ return {
 				name = "Sprunk",
 				text = {
 					"Gain {C:mult}+#1#{} Mult and {C:green}+#2#{} chance per {C:money}$1{} spent",
-					"{C:green}#3# in #4#{} chance to get sprunk'd and",
-					"{E:1,C:attention}maybe{} {C:attention}lose the run{} when hand is played",
+					"{C:green}#3# in #4#{} chance to get {C:green}Sprunk'd{} and",
+					"{E:1,C:dark_edition}maybe{} {C:attention}lose the run{} when hand is played",
 					"{C:inactive}(Currently {}{C:mult}+#5#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
@@ -1968,6 +2164,10 @@ return {
 				text = {
 					"Allows {C:attention}Blackjack{} hands to be made",
 					"{C:inactive}(ex: {C:attention}A 8 7 5{C:inactive})",
+				},
+				unlock={
+					"Play a hand with total chip value",
+					"of all scoring cards equal to {E:1,C:attention}21",
 				},
 			},
 			j_csau_mrkill = {
@@ -1995,7 +2195,8 @@ return {
 				name = "Meme House",
 				text = {
 					"Create a {C:tarot}Tarot{} card if played hand",
-                    "contains a {C:attention}Full House{} and {C:attention}wins{}",
+                    "contains a {C:attention}Full House{} and",
+					"{C:attention}3{} or more {C:attention}face{} cards",
 					"{C:inactive}(Must have room)",
 				},
 			},
@@ -2047,7 +2248,7 @@ return {
 				name = "Skeleton Metal",
 				text = {
 					"When {C:attention}final hand{} of round is played,",
-					"add #1# random {C:attention}Steel Cards{} to your hand",
+					"add {C:attention}#1#{} random {C:attention}Steel Cards{} to your hand",
 				},
 			},
 			j_csau_byebye = {
@@ -2057,6 +2258,11 @@ return {
 					"value per {C:attention}Face Card{} held in hand",
 					"Sell this Joker to destroy all",
 					"{C:attention}Face Cards{} held in hand"
+				},
+				unlock = {
+					"Win a run with",
+					"{E:1,C:attention}Abandoned Deck{}",
+					"on any difficulty",
 				},
 			},
 			j_csau_ufo={
@@ -2071,10 +2277,13 @@ return {
 			j_csau_wigsaw = {
 				name = "Wigsaw",
 				text = {
-					"All {C:attention}suit{} effects instead target the suit",
-					"with the {C:attention}most cards{} in your full deck",
+					"All {C:attention}suit{} effects target the suit with",
+					"the {C:attention}most cards{} in your full deck instead",
 					"{C:inactive}(Not active if {C:attention}2 or more suits{C:inactive} are tied)"
 				},
+				unlock = {
+					"{E:1,s:1.3}?????"
+				}
 			},
 			j_csau_junka = {
 				name = "Black Spine Junka",
@@ -2083,6 +2292,10 @@ return {
 					"{C:green}#3# in #4#{} chance to {C:red}self destruct{}",
 					"each time a {C:vhs}VHS Tape{} finishes",
 					"{C:inactive}(Currently {}{C:mult}+#5#{}{C:inactive} Mult{}{C:inactive}){}",
+				},
+				unlock = {
+					"Discover {E:1,C:attention}#1#{} {E:1,C:vhs}VHS Tapes",
+					"{C:inactive}(#2#)",
 				},
 			},
 			j_csau_gravity = {
@@ -2103,7 +2316,7 @@ return {
 				},
 			},
 			j_csau_weretrulyfrauds = {
-				name = "WE'RE TRULY FRAUDS",
+				name = "WE'RE TRULY FRAUDS!",
 				text = {
 					"All {C:vhs}VHS Tapes{} and {C:vhs}Analog Packs{}",
 					"in the shop are {C:attention}free{}",
@@ -2246,10 +2459,11 @@ return {
 				text = {
 					"If {C:attention}first hand{} of round",
 					"has only {C:attention}#1#{} card, cards",
-					"with {V:1}#2#{}{C:attention}#3#{} give",
-					"{C:mult}+#4#{} Mult when scored",
+					"with matching {C:attention}suit{} give",
+					"{C:mult}+#2#{} Mult when scored",
+					"{C:inactive}(Current suit:{} {V:1}#4#{}{C:inactive})",
 					"{s:0.1} {}",
-					"{C:stand}Evolves{} after {C:attention}#5#{} rounds",
+					"{C:stand}Evolves{} after {C:attention}#3#{} rounds",
 				},
 			},
 			c_csau_diamond_echoes_2 = {
@@ -2259,9 +2473,9 @@ return {
 					"has only {C:attention}#1#{} card, cards",
 					"with matching {C:attention}suit{} give",
 					"{C:mult}+#2#{} Mult when scored",
-					"{s:0.1} {}",
 					"The first {C:attention}non-matching{}",
 					"card turns into that suit",
+					"{C:inactive}(Current suit:{} {V:1}#4#{}{C:inactive})",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} after {C:attention}#3#{} rounds",
 				},
@@ -2439,7 +2653,7 @@ return {
 					"each round is {C:attention}destroyed{}",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} after your deck",
-					"contains {C:attention}#1# Lucky Cards",
+					"contains {C:attention}#1# Lucky Cards {C:inactive}({}{C:attention}#2#{}{C:inactive}/#1#)",
 				},
 			},
 			c_csau_steel_d4c_love = {
@@ -2452,10 +2666,9 @@ return {
 			c_csau_lion_soft = {
 				name = "Soft & Wet",
 				text = {
-					"When an {C:attention}Enhanced Card{} is",
-					"scored, {C:attention}remove{} its enhancement",
-					"and gain {C:mult}+#1#{} Mult",
-					"{s:0.1} {}",
+					"This Card gains {C:mult}+#1#{} Mult",
+					"per scoring {C:attention}Enhanced card{} played,",
+					"removes card {C:attention}Enhancement",
 					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} after playing a {C:attention}Secret Hand{}",
@@ -2492,9 +2705,8 @@ return {
 			c_csau_lion_wonder= {
 				name = "Wonder of U",
 				text = {
-					"When a {C:attention}Lucky Card{} is",
-					"scored, {C:attention}destroy{} it",
-					"and gain {C:mult}+#1#{} Mult",
+					"When a {C:attention}Lucky Card{} is scored,",
+					"{C:attention}destroy{} it and gain {C:mult}+#1#{} Mult",
 					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
 					
 				},
@@ -2602,19 +2814,25 @@ return {
 			},
 		},
 		Voucher = {
-			v_csau_scavenger = {
-				name = "Scavenger Hunt",
+			v_csau_raffle = {
+				name = "Raffle",
 				text = {
 					"{C:vhs}VHS Tapes{} can be purchased",
 					"from the {C:attention}shop{}"
 				}
 			},
-			v_csau_raffle = {
-				name = "Raffle",
+			v_csau_scavenger = {
+				name = "Scavenger Hunt",
 				text = {
 					"{C:vhs}VHS Tapes{} appear {C:attention}2X{} more",
 					"frequently in the {C:attention}shop{}"
-				}
+				},
+				unlock = {
+					"Buy a total of ",
+					"{C:attention}#1#{} {C:vhs}VHS Tapes",
+					"from the shop",
+					"{C:inactive}(#2#)",
+				},
 			},
 			v_csau_foo = {
 				name = 'Foo Fighters',
@@ -2628,7 +2846,13 @@ return {
 				text = {
 					"{C:stand}Evolved Stands{} can be purchased",
 					"from the {C:attention}shop{}"
-				}
+				},
+				unlock = {
+					"Buy a total of",
+					"{C:attention}#1#{} {C:stand}Stands",
+					"from the shop",
+					"{C:inactive}(#2#)",
+				},
 			},
 			v_csau_lampoil = {
 				name = 'Lamp Oil',
@@ -2665,8 +2889,7 @@ return {
 				name = "Spirit Tag",
 				text = {
 					"Create a random {C:stand}Stand",
-					"{C:inactive}(Must have room or",
-					"{C:inactive}a {C:stand}Stand{}{C:inactive} to {}{C:attention}replace{}{C:inactive}){}",
+					"{C:inactive}(Must have room)",
 				},
 			},
 		},
@@ -2687,7 +2910,7 @@ return {
 				text = {
 					"Start run with {C:attention}#1#{}",
 					"{C:clubs}Cardsauce{} Jokers appear",
-					"{C:attention}3x{} more often",
+					"{C:attention}2x{} more often",
 				},
 			},
 			b_csau_varg = {
@@ -2706,6 +2929,10 @@ return {
 					"After each {C:attention}Boss Blind,{} ",
 					"gain a {C:vhs}Black Spine{}",
 				},
+				unlock = {
+					"Discover {C:attention}#1#{} {C:vhs}VHS Tapes",
+					"{C:inactive}(#2#)",
+				},
 			},
 			b_csau_disc = {
 				name = "DISC Deck",
@@ -2713,6 +2940,9 @@ return {
 					"Start with the",
 					"{C:tarot}Crystal Ball{} voucher",
 					"There is no {C:stand}Stand{} limit",
+				},
+				unlock = {
+					"{C:attention}Evolve{} a {C:stand}Stand",
 				},
 			},
 			b_csau_cbt = {

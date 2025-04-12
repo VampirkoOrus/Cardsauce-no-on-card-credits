@@ -6,20 +6,20 @@ SMODS.Atlas({ key = 'csau_undiscovered', path ="undiscovered.png", px = 71, py =
 local itemsToLoad = {
     Joker = {
         -- Common
+		'newjoker',
         'twoface',
-        'newjoker',
         'depressedbrother',
         'pivot',
-        'fisheye',
+		'disguy',
+		'gnorts',
         'diaper',
         'speen',
         'pacman',
         'besomeone',
-        'disguy',
         'roche',
         'reyn',
         'emmanuel',
-        'gnorts',
+        'fisheye',
         'chad',
     
         'purple',
@@ -138,13 +138,39 @@ end
 local twoPointOItems = {
     VHS = {
 		'blackspine',
-		'doubledown',
-		'topslots',
 		'donbeveridge',
-		'tbone',
+		'topslots',
 		'remlezar',
+		'sew',
+		'shakma',
+		'troll2',
+		'swhs',
+		'exploding',
+
+		'roar',
 		'calibighunks',
+
+		'nukie',
+		'deadlyprey',
+
+		'blooddebts',
+		'doubledown',
 		'twistedpair',
+
+		'streetsmarts',
+
+
+		'tbone',
+
+		'sos',
+		'macandme',
+
+		'miami',
+		'lowblow',
+		'kidsand',
+		'spacecop',
+		'theroom',
+
 		'suburbansasquatch',
 	},
 
@@ -206,8 +232,8 @@ local twoPointOItems = {
 		'spirit',
 	},
 	Voucher = {
-		'scavenger',
 		'raffle',
+		'scavenger',
         'foo',
 		'plant',
 		'lampoil',
@@ -224,50 +250,54 @@ local twoPointOItems = {
 		-- Tarot
 		'tarot_arrow',
 	},
-
 	Joker = {
 		--Common
 		'frens',
-		'powers',
 		'memehouse',
-		'nutbuster',
-		'chips',
 		'bonzi',
 		'bbq',
-		'lidl',
-		'toeofsatan',
-		'superghostbusters',
-		'facade',
-		'vomitblast',
-		'itsmeaustin',
-		'bootleg',
-		'bald',
 		'protogent',
+
+		'lidl',
+		'superghostbusters',
+		'chips',
+		'toeofsatan',
+		'bald',
+		'bootleg',
+		'facade',
 		--Uncommon
-		'scam',
-		'monkey',
+		'flusher',
+		'bulk',
+		'duane',
+		'mrkill',
 		'skeletor',
 		'agga',
-		'triptoamerica',
-		'passport',
-		'fireworks',
-		'sprunk',
-		'flusher',
-		'vinewrestle',
 		'plaguewalker',
-		'duane',
-		'april',
-		'mrkill',
-		'itsafeature',
-		'bulk',
-		'mug',
-		'blackjack',
 		'bsi',
+
+		'mug',
+		'fireworks',
+		'scam',
+		'april',
+		'sprunk',
+		'itsafeature',
+		'passport',
+		'vinewrestle',
 		--Rare
-		'tetris',
 		'skeletonmetal',
-		'byebye',
 		'ufo',
+		'tetris',
+		-- Common (Locked)
+		'powers',
+		'nutbuster',
+		'itsmeaustin',
+		'vomitblast',
+		-- Uncommon (Locked)
+		'triptoamerica',
+		'monkey',
+		'blackjack',
+		-- Rare (Locked)
+		'byebye',
 		--Legendary
 		'wigsaw',
 
@@ -303,8 +333,9 @@ local twoPointOItems = {
     Blind = {
         'outlaw',
         'darkest',
+		'wasp',
+		'feltfortress',
     },
-
 	Edition = {
 		'corrupted'
 	}
@@ -319,7 +350,7 @@ SMODS.ConsumableType{
     key = "VHS",
     primary_colour = G.C.VHS,
     secondary_colour = G.C.VHS,
-    collection_rows = { 8, 8 },
+    collection_rows = { 7, 7 },
     shop_rate = 0,
     loc_txt = {},
     default = "c_csau_blackspine",
