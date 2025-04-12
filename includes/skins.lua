@@ -307,6 +307,7 @@ end
 SMODS.Atlas{ key = 'balcolor_shrooms_lc', px = 71, py = 95, path = 'cards/balcolor_shrooms_lc.png' }
 SMODS.Atlas{ key = 'balcolor_shrooms_hc', px = 71, py = 95, path = 'cards/balcolor_shrooms_hc.png' }
 SMODS.Atlas{ key = 'varg_aces', px = 71, py = 95, path = 'cards/csau_varg_aces.png' }
+SMODS.Atlas{ key = 'jazz_aces', px = 71, py = 95, path = 'cards/jazz_aces.png' }
 SMODS.Atlas{ key = 'balcolor_varg_lc', px = 71, py = 95, path = 'cards/balcolor_varg_lc.png' }
 SMODS.Atlas{ key = 'balcolor_varg_hc', px = 71, py = 95, path = 'cards/balcolor_varg_hc.png' }
 SMODS.Atlas{ key = 'varg_willo', px = 71, py = 95, path = 'cards/csau_varg_willo.png' }
@@ -693,7 +694,7 @@ local assemble_character_skins = function(key, suit, name, type)
         palettes[1].loc_txt = {
             ['en-us'] = "Cardsauce Colors"
         }
-        palettes[1].pos_style.Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = suit_y} }
+        palettes[1].pos_style.Ace = { atlas = 'csau_jazz_aces', pos = {x = 0, y = suit_y} }
     end
     if type == "vine" or type == "varg" then
         palettes[#palettes+1] = {
