@@ -39,7 +39,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card)
-    send(G.GAME.blind)
     G.E_MANAGER:add_event(Event({
         func = function()
             reset_idol_card()

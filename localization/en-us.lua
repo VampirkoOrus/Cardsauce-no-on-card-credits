@@ -379,9 +379,6 @@ return {
 			k_junka_lose = "Loser!",
 			k_csau_chips = "Chips",
 			k_fort_doubled = "Blind requirement doubled!",
-			k_metal = "Metal!",
-			k_gold_exp = "Gold Experience!",
-			k_stone_free = "Stone Free!",
 			k_morshu_ui = "COME BACK RICHER",
 			b_save = "SAVE",
 
@@ -417,6 +414,11 @@ return {
 			k_stand_evolved = 'Evolved!',
 			k_echoes_recorded = 'Recorded!',
 			k_boing = "Boing!",
+			k_metal = "Metal!",
+			k_gold_exp = "Gold Experience!",
+			k_stone_free = "Stone Free!",
+			k_bsa = "Bigmouth Strikes Again!",
+			k_smooth_operators = "Smooth Operators!"
 		},
 		v_dictionary = {
 			a_red = "#1#!!!",
@@ -1022,8 +1024,7 @@ return {
 			j_csau_gnorts = {
 				name = "Rekoj Gnorts",
 				text = {
-					"Allows {C:attention}Straights{} to be made",
-					"with {C:attention}Aces{} in the middle",
+					"Allows {C:attention}Straights{} to {C:attention}wrap around{}",
 					"{C:inactive}(ex:{} {C:attention}3 2 A K Q{}{C:inactive}){}",
 				},
 			},
@@ -2404,7 +2405,7 @@ return {
 				},
 			},
 		},
-		Stand = {
+		csau_Stand = {
 			c_csau_stardust_star = {
 				name = "Star Platinum",
 				text = {
@@ -2651,10 +2652,10 @@ return {
 			c_csau_lion_soft = {
 				name = "Soft & Wet",
 				text = {
-					"This Card gains {C:mult}+#1#{} Mult",
-					"per scoring {C:attention}Enhanced card{} played,",
-					"removes card {C:attention}Enhancement",
-					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
+					"Scoring {C:attention}Bonus{}/{C:attention}Mult Cards{}",
+					"lose their enhancements but",
+					"permanently gain {C:attention}half{} their",
+					"enhancements' bonuses",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} after playing a {C:attention}Secret Hand{}",
 				},
@@ -2662,11 +2663,10 @@ return {
 			c_csau_lion_soft_beyond = {
 				name = "Soft & Wet: Go Beyond",
 				text = {
-					"When an {C:attention}Enhanced Card{} is",
-					"scored, {C:attention}remove{} its enhancement",
-					"and gain {X:mult,C:white}X#1#{} Mult",
-					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}and{} {X:mult,C:white}X#3#{} {C:inactive}Mult){}",
-					
+					"Scoring {C:attention}Bonus{}/{C:attention}Mult Cards{}",
+					"lose their enhancements but",
+					"permanently gain {C:attention}all{} of",
+					"their enhancements' bonuses"
 				},
 			},
 			c_csau_lion_paper = {
