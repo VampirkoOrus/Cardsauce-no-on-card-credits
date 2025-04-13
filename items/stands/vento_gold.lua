@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Gold Experience',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'fff679DC' , 'f9d652DC' },
         evolve_key = 'c_csau_vento_gold_requiem'
     },
     cost = 4,

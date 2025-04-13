@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Moody Blues',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'a3f2d7DC', '4fedd0DC' },
         stand_mask = true,
     },
     cost = 4,

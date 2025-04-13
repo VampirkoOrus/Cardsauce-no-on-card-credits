@@ -4,6 +4,7 @@ local consumInfo = {
     config = {   
         evolve_key = 'c_csau_diamond_echoes_3',
         evolved = true,
+        aura_colors = { 'adebbbDC' , '3bcc7bDC' },
         extra = {
             num_cards = 1,
             mult = 4,

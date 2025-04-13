@@ -2799,15 +2799,15 @@ return {
 			},
 		},
 		Voucher = {
-			v_csau_raffle = {
-				name = "Raffle",
+			v_csau_scavenger = {
+				name = "Scavenger Hunt",
 				text = {
 					"{C:vhs}VHS Tapes{} can be purchased",
 					"from the {C:attention}shop{}"
 				}
 			},
-			v_csau_scavenger = {
-				name = "Scavenger Hunt",
+			v_csau_raffle = {
+				name = "Raffle",
 				text = {
 					"{C:vhs}VHS Tapes{} appear {C:attention}2X{} more",
 					"frequently in the {C:attention}shop{}"

@@ -2,7 +2,8 @@ local consumInfo = {
     name = 'Killer Queen: Bites the Dust',
     set = 'csau_Stand',
     config = {
-        evolved = true
+        evolved = true,
+        aura_colors = { '151590DC', '5f277dDC' },
     },
     cost = 8,
     rarity = 'csau_EvolvedRarity',

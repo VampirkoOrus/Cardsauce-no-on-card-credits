@@ -2,7 +2,8 @@ local consumInfo = {
     name = 'King Crimson',
     set = 'csau_Stand',
     config = {
-        evolved = true
+        evolved = true,
+        aura_colors = { 'e53663DC', 'a71d40DC' },
     },
     cost = 8,
     rarity = 'csau_EvolvedRarity',

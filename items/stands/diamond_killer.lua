@@ -4,6 +4,7 @@ local consumInfo = {
     config = {
         stand_mask = true,
         evolve_key = 'c_csau_diamond_killer_btd',
+        aura_colors = { 'de7cf9DC', 'e059e9DC' },
         extra = {
             evolve_cards = 0,
             evolve_num = 8,

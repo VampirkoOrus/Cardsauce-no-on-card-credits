@@ -2,6 +2,7 @@ local consumInfo = {
     name = "DIO's World",
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'ce9c36DC' , 'ffd575DC' },
         extra = {
             hand_mod = 1,
         }

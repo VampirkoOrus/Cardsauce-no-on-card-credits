@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Star Platinum',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'c640ffDC' , 'f96bffDC' },
         extra = {
             hand_mod = 1,
         }

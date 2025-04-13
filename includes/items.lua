@@ -232,8 +232,8 @@ local twoPointOItems = {
 		'spirit',
 	},
 	Voucher = {
-		'raffle',
 		'scavenger',
+		'raffle',
         'foo',
 		'plant',
 		'lampoil',

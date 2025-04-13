@@ -1,7 +1,9 @@
 local consumInfo = {
     name = 'The Hand',
     set = 'csau_Stand',
-    config = {},
+    config = {
+        aura_colors = { '1d94e0DC', '4bc6e7DC' },
+    },
     cost = 4,
     rarity = 'csau_StandRarity',
     alerted = true,

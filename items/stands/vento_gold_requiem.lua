@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Gold Experience Requiem',
     set = 'csau_Stand',
     config = {
+        aura_colors = { '99d3ffDC' , 'd3f5fbDC' },
         evolved = true,
         extra = {
             chance = 0,

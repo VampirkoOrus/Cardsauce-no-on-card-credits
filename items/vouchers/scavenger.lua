@@ -1,24 +1,20 @@
 local voucherInfo = {
     name = 'Scavenger Hunt',
     cost = 10,
+    config = {
+        rate = 4,
+    },
     origin = 'rlm',
-    requires = {'v_csau_scavenger'},
-    unlocked = false,
-    unlock_condition = {type = 'c_vhss_bought', extra = 25}
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)
-    return {}
-end
-
-function voucherInfo.locked_loc_vars(self, info_queue, card)
-    return { vars = { self.unlock_condition.extra, G.PROFILES[G.SETTINGS.profile].career_stats.c_vhss_bought or 0} }
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.joey } }
 end
 
 function voucherInfo.redeem(self, card, area, copier)
     G.E_MANAGER:add_event(Event({
         func = (function()
-            G.GAME.vhs_rate = G.GAME.vhs_rate * 2
+            G.GAME.vhs_rate = card.ability.rate
             return true
         end)
     }))

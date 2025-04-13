@@ -1,7 +1,9 @@
 local consumInfo = {
     name = 'Crazy Diamond',
     set = 'csau_Stand',
-    config = {},
+    config = {
+        aura_colors = { 'e099e8DC' , 'f5ccf4DC' },
+    },
     cost = 4,
     rarity = 'csau_StandRarity',
     alerted = true,
