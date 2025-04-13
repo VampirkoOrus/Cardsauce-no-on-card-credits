@@ -239,7 +239,7 @@ return {
 		},
 		labels = {
 			vhs = "VHS Tape",
-			stand = "Stands",
+			csau_stand = "Stands",
 
 			csau_corrupted = "Corrupted",
 		},
@@ -248,10 +248,10 @@ return {
 			k_galaxy = "Galaxy",
 			k_galaxy_q = "Galaxy?",
 			k_vhs = "VHS Tape",
-			k_stand = "Stand",
-			b_stand_cards = "Stands",
-			k_evolved = "Evolved Stand",
-			b_evolved_cards = "Evolved Stands",
+			k_csau_stand = "Stand",
+			b_csau_stand_cards = "Stands",
+			k_csau_evolved = "Evolved Stand",
+			b_csau_evolved_cards = "Evolved Stands",
 			b_vhs_cards = "VHS Tapes",
 			b_and_activate = "& Activate",
 			b_activate = "Activate",
@@ -779,7 +779,7 @@ return {
 
 				},
 			},
-			stand_info = {
+			csau_stand_info = {
 				name = "Stand Limit",
 				text = {
 					"You can only",
@@ -787,7 +787,7 @@ return {
 					"at a time",
 				},
 			},
-			stand_info_unlimited = {
+			csau_stand_info_unlimited = {
 				name = "Stand Limit",
 				text = {
 					"You can have",
@@ -2398,7 +2398,7 @@ return {
 				},
 			},
 		},
-		Stand = {
+		csau_Stand = {
 			c_csau_stardust_star = {
 				name = "Star Platinum",
 				text = {

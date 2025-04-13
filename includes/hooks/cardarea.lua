@@ -4,9 +4,9 @@ function CardArea:align_cards()
     -- hate doing this after it already sorted and ranked the cards but w/e
     if self.config.type == 'joker' then
         table.sort(self.cards, function (a, b)
-            if a.ability.set == 'Stand' and b.ability.set ~= 'Stand' then
+            if a.ability.set == 'csau_Stand' and b.ability.set ~= 'csau_Stand' then
                 return true
-            elseif a.ability.set ~= 'Stand' and b.ability.set == 'Stand' then
+            elseif a.ability.set ~= 'csau_Stand' and b.ability.set == 'csau_Stand' then
                 return false
             end
 

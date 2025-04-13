@@ -1,13 +1,13 @@
 local consumInfo = {
     name = 'Thoth',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         extra = {
             preview = 3
         }
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     part = 'stardust',

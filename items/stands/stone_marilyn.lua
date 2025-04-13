@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Marilyn Manson',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         extra = {
             conv_money = 1,
@@ -8,7 +8,7 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     part = 'stone',

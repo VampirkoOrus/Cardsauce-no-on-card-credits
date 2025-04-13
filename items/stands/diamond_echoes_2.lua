@@ -1,10 +1,10 @@
 local consumInfo = {
     name = 'Echoes ACT2',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {   
         evolve_key = 'c_csau_diamond_echoes_3',
+        evolved = true,
         extra = {
-            evolved = true,
             num_cards = 1,
             mult = 4,
             evolve_rounds = 0,
@@ -12,7 +12,7 @@ local consumInfo = {
         }
     },
     cost = 6,
-    rarity = 'EvolvedRarity',
+    rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,
     part = 'diamond',
@@ -68,6 +68,10 @@ local get_first_non_matching = function(suit, hand)
         end
     end
     return nil
+end
+
+function consumInfo.on_evolve(self, old_stand, new_stand)
+    sendDebugMessage('hello')
 end
 
 function consumInfo.calculate(self, card, context)

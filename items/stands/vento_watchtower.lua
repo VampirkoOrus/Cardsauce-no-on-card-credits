@@ -1,13 +1,13 @@
 local consumInfo = {
     name = 'All Along Watchtower',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         extra = {
             x_mult = 4,
         }
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     in_progress = true,

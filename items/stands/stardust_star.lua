@@ -1,13 +1,13 @@
 local consumInfo = {
     name = 'Star Platinum',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         extra = {
             hand_mod = 1,
         }
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     part = 'stardust',

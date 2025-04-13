@@ -1,7 +1,7 @@
 local consumInfo = {
     key = 'c_csau_diamond_echoes_1',
     name = 'Echoes ACT1',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         stand_mask = true,
         aura_colors = { 'DCFB8CDC', '5EEB2FDC' },
@@ -14,7 +14,7 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     part = 'diamond',

@@ -1,12 +1,12 @@
 local consumInfo = {
     name = 'Metallica',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         stand_mask = true,
         aura_colors = { 'F97C87DA', 'CE3749DA' },
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     in_progress = true,

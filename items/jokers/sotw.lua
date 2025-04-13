@@ -23,13 +23,13 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
-    return { vars = { card.ability.unlock, G.DISCOVER_TALLIES.stands.tally } }
+    return { vars = { card.ability.unlock, G.DISCOVER_TALLIES.csau_stands.tally } }
 
 end
 
 function jokerInfo.check_for_unlock(self, args)
     if args.type == 'discover_amount' then
-        if G.DISCOVER_TALLIES.stands.tally >= self.config.unlock then
+        if G.DISCOVER_TALLIES.csau_stands.tally >= self.config.unlock then
             return true
         end
     end
@@ -46,7 +46,7 @@ end
 
 function jokerInfo.update(self, card, dt)
     local stands_obtained = 0
-    for k, v in pairs(G.GAME.consumeable_usage) do if v.set == 'Stand' then stands_obtained = stands_obtained + 1 end end
+    for k, v in pairs(G.GAME.consumeable_usage) do if v.set == 'csau_Stand' then stands_obtained = stands_obtained + 1 end end
     card.ability.extra.x_mult = 1 + (card.ability.extra.x_mult_mod*stands_obtained)
 end
 

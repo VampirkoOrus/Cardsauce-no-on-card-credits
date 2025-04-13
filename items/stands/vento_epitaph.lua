@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Epitaph',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         evolve_key = 'c_csau_vento_epitaph_king',
         extra = {
@@ -10,7 +10,7 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     part = 'vento',

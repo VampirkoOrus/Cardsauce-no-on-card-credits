@@ -1,12 +1,14 @@
 SMODS.PokerHandPart {
-    key = 'fibonacci',
-    func = function(hand)
+    key = 'csau_fibonacci',
+    prefix_config = false,
+    func = function(hand) 
         return csau_get_fibonacci(hand) 
     end,
 }
 
 SMODS.PokerHand {
-    key = 'Fibonacci',
+    key = 'csau_Fibonacci',
+    prefix_config = false,
     evaluate = function(parts, hand)
         if not (next(SMODS.find_card('j_fnwk_plancks_jokestar'))
         or next(SMODS.find_card("c_csau_steel_tusk_4")))
@@ -30,7 +32,7 @@ SMODS.PokerHand {
 }
 
 SMODS.PokerHand {
-    key = 'FlushFibonacci',
+    key = 'csau_FlushFibonacci',
     prefix_config = false,
     evaluate = function(parts, hand)
         if not (next(SMODS.find_card('j_fnwk_plancks_jokestar'))
@@ -56,7 +58,7 @@ SMODS.PokerHand {
 
 local consumInfo = {
     name = 'Tusk ACT4',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         evolved = true,
         extra = {
@@ -65,7 +67,7 @@ local consumInfo = {
         }
     },
     cost = 8,
-    rarity = 'EvolvedRarity',
+    rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,
     part = 'steel',
@@ -107,26 +109,7 @@ function consumInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.individual and context.cardarea == G.play and not card.debuff and not context.repetition then
-        if context.other_card:get_id() == 2 or
-        context.other_card:get_id() == 3 or
-        context.other_card:get_id() == 5 or
-        context.other_card:get_id() == 8 or
-        context.other_card:get_id() == 14 then
-            return {
-                chips = card.ability.extra.chips
-            }
-        end
-    end
 
-    if context.before and not card.debuff and next(context.poker_hands['Fibonacci']) then
-        ease_hands_played(card.ability.extra.hand_mod)
-        return {
-            card = card,
-            message = localize('k_plus_hand'),
-            colour = G.C.BLUE
-        }
-    end
 end
 
 function consumInfo.can_use(self, card)

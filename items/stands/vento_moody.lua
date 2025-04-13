@@ -1,11 +1,11 @@
 local consumInfo = {
     name = 'Moody Blues',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         stand_mask = true,
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     part = 'vento',
