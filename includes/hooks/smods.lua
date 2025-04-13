@@ -48,3 +48,7 @@ function SMODS.current_mod.reset_game_globals(run_start)
 	local randCard_4 = pseudorandom_element(valid_paper_ranks, pseudoseed('papermoon'..G.GAME.round_resets.ante))
 	G.GAME.current_round.paper_rank = randCard_4.base.value
 end
+
+SMODS.PokerHandPart:take_ownership('_straight', {
+	func = function(hand) return get_straight(hand, next(SMODS.find_card('j_four_fingers')) and 4 or 5, not not next(SMODS.find_card('j_shortcut')), next(SMODS.find_card('j_csau_gnorts'))) end
+})
