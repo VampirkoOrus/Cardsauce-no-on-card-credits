@@ -80,7 +80,7 @@ function csau_reset_paper_rank()
     G.GAME.csau_current_paper_rank = {'Jack'}
 	local valid_ranks = {}
     for _, rank in pairs(SMODS.Ranks) do
-        if rank.face then valid_ranks[#valid_ranks+1] = rank.card_key end
+        if rank.face then valid_ranks[#valid_ranks+1] = rank.key end
     end
     G.GAME.csau_current_paper_rank = pseudorandom_element(valid_ranks, pseudoseed('papermoon'..G.GAME.round_resets.ante))
 end
