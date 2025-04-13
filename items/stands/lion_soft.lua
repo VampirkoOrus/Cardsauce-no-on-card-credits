@@ -38,8 +38,7 @@ end
 
 function consumInfo.calculate(self, card, context)
     if context.before and not card.debuff and not context.blueprint  then
-        local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(context.scoring_hand)
-        if G.FUNCS.hand_is_secret(text) then
+        if not SMODS.PokerHands[context.scoring_name].visible then
             G.FUNCS.evolve_stand(card)
         else
             local enhanced = {}

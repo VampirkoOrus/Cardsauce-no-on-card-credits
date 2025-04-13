@@ -16,10 +16,8 @@ end
 
 local function hasPlayedSecret()
 	for k, v in pairs(G.handlist) do
-		if G.GAME.hands[v].visible then
-			if G.FUNCS.hand_is_secret(v) then
-				return true
-			end
+		if G.GAME.hands[v].visible and not SMODS.PokerHands[v.scoring_name].visible then
+			return true
 		end
 	end
 end
@@ -41,9 +39,8 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.cardarea == G.jokers and context.before and not card.debuff then
-		local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(context.scoring_hand)
-		if G.FUNCS.hand_is_secret(text) then
+	if context.cardarea == G.jokers and context.before and not card.debuff then	
+		if not SMODS.PokerHands[context.scoring_name].visible then
 			return {
 				card = card,
 				level_up = true,
@@ -51,18 +48,6 @@ function jokerInfo.calculate(self, card, context)
 			}
 		end
 	end
-end
-
-local igo = Game.init_game_object
-function Game:init_game_object()
-	local ret = igo(self)
-	G.csau_secret_hands = {}
-	for k, v in pairs(SMODS.PokerHands) do
-		if not v.visible then
-			G.csau_secret_hands[#G.csau_secret_hands + 1] = v.original_key
-		end
-	end
-	return ret
 end
 
 return jokerInfo
