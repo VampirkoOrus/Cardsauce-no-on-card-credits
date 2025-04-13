@@ -9,24 +9,6 @@ function loc_colour(_c, _default)
     return G.ARGS.LOC_COLOURS[_c] or _default or G.C.UI.TEXT_DARK
 end
 
---- Calculation for Fibonacci Scoring
-function csau_get_fibonacci(hand)
-	local ret = {}
-	if #hand < 5 then return ret end
-	local vals = {}
-	for i = 1, #hand do
-		local value = hand[i].base.nominal
-		if hand[i].base.value == 'Ace' then
-			value = 1
-		elseif SMODS.has_no_rank(hand[i]) then
-			value = 0
-		end
-		vals[#vals+1] = value
-	end
-
-	return {}
-end
-
 -- I put this in misc_functions because this is where similar functions are in Vanilla ~Winter
 
 --- Resets the rank used by the Paper Moon King stand card
