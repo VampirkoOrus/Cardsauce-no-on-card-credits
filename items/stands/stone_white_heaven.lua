@@ -1,12 +1,12 @@
 local consumInfo = {
     name = 'Made in Heaven',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         stand_mask = true,
         evolved = true,
     },
     cost = 8,
-    rarity = 'EvolvedRarity',
+    rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,
     part = 'stone',

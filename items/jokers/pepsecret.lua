@@ -16,7 +16,7 @@ end
 
 local function hasPlayedSecret()
 	for k, v in pairs(G.handlist) do
-		if G.GAME.hands[v].visible and not SMODS.PokerHands[v.scoring_name].visible then
+		if G.GAME.hands[v].visible and not SMODS.PokerHands[v].visible then
 			return true
 		end
 	end

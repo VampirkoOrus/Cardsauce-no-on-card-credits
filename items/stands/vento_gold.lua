@@ -1,11 +1,11 @@
 local consumInfo = {
     name = 'Gold Experience',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         evolve_key = 'c_csau_vento_gold_requiem'
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     in_progress = true,

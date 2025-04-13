@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'C-MOON',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         stand_mask = true,
         evolved = true,
@@ -13,7 +13,7 @@ local consumInfo = {
         }
     },
     cost = 6,
-    rarity = 'EvolvedRarity',
+    rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,
     part = 'stone',

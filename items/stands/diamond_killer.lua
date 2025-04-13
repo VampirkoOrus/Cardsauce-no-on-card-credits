@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Killer Queen',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         stand_mask = true,
         evolve_key = 'c_csau_diamond_killer_btd',
@@ -13,7 +13,7 @@ local consumInfo = {
 
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     part = 'diamond',

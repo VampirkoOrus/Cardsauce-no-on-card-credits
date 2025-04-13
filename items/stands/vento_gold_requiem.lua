@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Gold Experience Requiem',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         evolved = true,
         extra = {
@@ -9,7 +9,7 @@ local consumInfo = {
         }
     },
     cost = 8,
-    rarity = 'EvolvedRarity',
+    rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,
     in_progress = true,

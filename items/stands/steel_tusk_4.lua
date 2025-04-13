@@ -1,12 +1,14 @@
 SMODS.PokerHandPart {
-    key = 'fibonacci',
+    key = 'csau_fibonacci',
+    prefix_config = false,
     func = function(hand) 
         return csau_get_fibonacci(hand) 
     end,
 }
 
 SMODS.PokerHand {
-    key = 'Fibonacci',
+    key = 'csau_Fibonacci',
+    prefix_config = false,
     evaluate = function(parts, hand)
         if not (next(SMODS.find_card('j_fnwk_plancks_jokestar'))
         or next(SMODS.find_card("c_csau_steel_tusk_4")))
@@ -30,7 +32,7 @@ SMODS.PokerHand {
 }
 
 SMODS.PokerHand {
-    key = 'FlushFibonacci',
+    key = 'csau_FlushFibonacci',
     prefix_config = false,
     evaluate = function(parts, hand)
         if not (next(SMODS.find_card('j_fnwk_plancks_jokestar'))
@@ -56,7 +58,7 @@ SMODS.PokerHand {
 
 local consumInfo = {
     name = 'Tusk ACT4',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         evolved = true,
         extra = {
@@ -65,7 +67,7 @@ local consumInfo = {
         }
     },
     cost = 8,
-    rarity = 'EvolvedRarity',
+    rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,
     part = 'steel',

@@ -381,8 +381,7 @@ G.FUNCS.transform_card = function(card, to_key, evolve)
 	card:set_ability(new_card)
 	card:set_cost()
 	if new_card.on_evolve and type(new_card.on_evolve) == 'function' then
-		card.on_evolve = new_card.on_evolve
-		card:on_evolve(old_card, card)
+		new_card:on_evolve(old_card, card)
 	end
 	if new_card.soul_pos then
 		card.children.floating_sprite = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.soul_pos)
@@ -618,7 +617,7 @@ G.FUNCS.get_leftmost_stand = function()
 
     local stand = nil
     for i, card in ipairs(G.consumeables.cards) do
-        if card.ability.set == "Stand" then
+        if card.ability.set == "csau_Stand" then
             stand = card
             break
         end
@@ -634,7 +633,7 @@ G.FUNCS.get_num_stands = function()
 
     local count = 0
     for i, v in ipairs(G.consumeables.cards) do
-        if v.ability.set == "Stand" then
+        if v.ability.set == "csau_Stand" then
             count = count+1
         end
     end
@@ -673,7 +672,7 @@ end
 --- Creates a new stand in the consumables card area, on the side of Stands
 --- @param evolved boolean Whether or not to use the Evolved Stand pool
 G.FUNCS.new_stand = function(evolved)
-	local pool_key = evolved and 'EvolvedPool' or 'StandPool'
+	local pool_key = evolved and 'csau_EvolvedPool' or 'csau_StandPool'
     G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 	local stand = create_card(pool_key, G.consumeables, nil, nil, nil, nil, nil, 'arrow')
 	stand:add_to_deck()

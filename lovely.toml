@@ -601,7 +601,7 @@ position = "at"
 payload = '''
 local last_tarot_planet = localize('k_none')
 if fool_c == 'c_csau_arrow' then
-    last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set, vars = { G.GAME.max_stands or 1, (card.area.config.collection and localize('k_stand')) or (G.GAME.max_stands > 1 and localize('b_stand_cards') or localize('k_stand')) }} or localize('k_none')
+    last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set, vars = { G.GAME.csau_max_stands or 1, (card.area.config.collection and localize('k_stand')) or (G.GAME.csau_max_stands > 1 and localize('b_stand_cards') or localize('k_stand')) }} or localize('k_none')
 else
     last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set} or localize('k_none')
 end
@@ -618,7 +618,7 @@ pattern = '''if G.consumeables.cards[1] then'''
 position = "at"
 payload = '''local eligibleJokers = {}
 for i = 1, #G.consumeables.cards do
-    if G.consumeables.cards[i].ability.consumeable and G.consumeables.cards[i].ability.set ~= "Stand" then
+    if G.consumeables.cards[i].ability.consumeable and G.consumeables.cards[i].ability.set ~= "csau_Stand" then
         eligibleJokers[#eligibleJokers + 1] = G.consumeables.cards[i]
     end
 end
@@ -638,7 +638,7 @@ match_indent = true
 target = "card.lua"
 pattern = '''if G.consumeables.cards[i].ability.consumeable then'''
 position = "at"
-payload = '''if G.consumeables.cards[i].ability.consumeable and not G.consumeables.cards[i].ability.set == "Stand" then'''
+payload = '''if G.consumeables.cards[i].ability.consumeable and not G.consumeables.cards[i].ability.set == "csau_Stand" then'''
 match_indent = true
 
 [[patches]]

@@ -63,7 +63,7 @@ function G.UIDEF.use_and_sell_buttons(card)
 		end
 	end
 
-	if card.ability.set == "Stand" then
+	if card.ability.set == "csau_Stand" then
 		local sell = {n=G.UIT.C, config={align = "cr"}, nodes={
 			{n=G.UIT.C, config={ref_table = card, align = "cr",padding = 0.1, r=0.08, minw = 1.25, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'sell_card', func = 'can_sell_card'}, nodes={
 				{n=G.UIT.B, config = {w=0.1,h=0.6}},

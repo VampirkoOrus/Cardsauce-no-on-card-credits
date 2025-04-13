@@ -1,6 +1,6 @@
 function SMODS.current_mod.reset_game_globals(run_start)
     if run_start then
-        G.GAME.max_stands = 1
+        G.GAME.csau_max_stands = 1
 		G.GAME.morshu_cards = 0
     end
 
