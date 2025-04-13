@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Whitesnake',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         stand_mask = true,
         evolve_key = 'c_csau_stone_white_moon',
@@ -11,7 +11,7 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     part = 'stone',

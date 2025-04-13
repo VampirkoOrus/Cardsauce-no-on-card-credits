@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Wonder of U',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         extra = {
             mult = 0,
@@ -8,7 +8,7 @@ local consumInfo = {
         }
     },
     cost = 8,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     part = 'lion',

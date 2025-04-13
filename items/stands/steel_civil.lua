@@ -1,13 +1,13 @@
 local consumInfo = {
     name = 'Civil War',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         extra = {
             tarot = 'c_hanged_man'
         }
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     part = 'steel',

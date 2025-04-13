@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Dirty Deeds Done Dirt Cheap',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         stand_overlay = true,
         evolve_key = 'c_csau_steel_d4c_love',
@@ -9,7 +9,7 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     part = 'steel',

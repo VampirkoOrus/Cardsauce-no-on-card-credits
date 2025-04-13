@@ -1,11 +1,11 @@
 local consumInfo = {
     name = 'King Crimson',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         evolved = true
     },
     cost = 8,
-    rarity = 'EvolvedRarity',
+    rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,
     part = 'vento',

@@ -1,12 +1,12 @@
 local consumInfo = {
     name = 'D4C -Love Train-',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         stand_overlay = true,
         evolved = true,
     },
     cost = 8,
-    rarity = 'EvolvedRarity',
+    rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,
     part = 'steel',

@@ -1,9 +1,9 @@
 local consumInfo = {
     name = 'Bigmouth Strikes Again',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {},
     cost = 4,
-    rarity = 'StandRarity',
+    rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
     part = 'lands',

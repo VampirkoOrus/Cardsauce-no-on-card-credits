@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Tusk ACT2',
-    set = 'Stand',
+    set = 'csau_Stand',
     config = {
         evolved = true,
         evolve_key = 'c_csau_steel_tusk_3',
@@ -11,7 +11,7 @@ local consumInfo = {
         }
     },
     cost = 6,
-    rarity = 'EvolvedRarity',
+    rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,
     part = 'steel',

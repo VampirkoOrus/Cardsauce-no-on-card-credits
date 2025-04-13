@@ -242,7 +242,7 @@ local ref_set_ability = Card.set_ability
 function Card:set_ability(center, initial, delay_sprites)
     local ret = ref_set_ability(self, center, initial, delay_sprites)
 
-    if self.ability.set == 'Stand' then
+    if self.ability.set == 'csau_Stand' then
         G.FUNCS.set_stand_sprites(self)
     end
 
@@ -253,7 +253,7 @@ local ref_card_load = Card.load
 function Card:load(cardTable, other_card)
     local ret = ref_card_load(self, cardTable, other_card)
 
-    if self.ability.set == 'Stand' then
+    if self.ability.set == 'csau_Stand' then
         G.FUNCS.set_stand_sprites(self)
     end
 
