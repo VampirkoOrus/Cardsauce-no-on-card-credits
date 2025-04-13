@@ -19,8 +19,8 @@ function get_straight(hand)
 	local target = next(find_joker('Four Fingers')) and 4 or 5
 	local skip_var = next(find_joker('Shortcut'))
 	local skipped = false
+	send(find_joker('Shortcut')))
 	if not(can_loop) or #hand < target then
-		G.GAME.gnortstraight = false
 		return base
 	else
 		local hand_ref = {}
@@ -73,19 +73,6 @@ function get_straight(hand)
 	return {}
 end
 
--- I put this in misc_functions because this is where similar functions are in Vanilla ~Winter
-
---- Resets the rank used by the Paper Moon King stand card
-function reset_paper_rank()
-    G.GAME.current_paper_rank = {'Jack'}
-	local valid_ranks = {}
-    for _, rank in pairs(SMODS.Ranks) do
-        if rank.face then valid_ranks[#valid_ranks+1] = rank.card_key end
-    end
-    G.GAME.current_paper_rank = pseudorandom_element(valid_ranks, pseudoseed('papermoon'..G.GAME.round_resets.ante))
-end
-
-
 --- Calculation for Fibonacci Scoring
 function csau_get_fibonacci(hand)
 	local ret = {}
@@ -98,7 +85,7 @@ function csau_get_fibonacci(hand)
 		elseif SMODS.has_no_rank(hand[i]) then
 			value = 0
 		end
-		
+
 		vals[#vals+1] = value
 	end
 	table.sort(vals, function(a, b) return a < b end)
@@ -112,7 +99,7 @@ function csau_get_fibonacci(hand)
 	local prev_2 = 0
 	for i=1, #vals do
 		sum = prev_1 + prev_2
-		
+
 		if vals[i] ~= sum then
 			return ret
 		end

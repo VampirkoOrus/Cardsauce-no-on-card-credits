@@ -11,7 +11,7 @@ local consumInfo = {
     alerted = true,
     hasSoul = true,
     in_progress = true,
-    part = 'vento',
+    part = 'feedback',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

@@ -382,51 +382,30 @@ return {
 			k_metal = "Metal!",
 			k_gold_exp = "Gold Experience!",
 			k_stone_free = "Stone Free!",
-			k_morshu_ui = "CAN'T GIVE CREDIT",
+			k_morshu_ui = "COME BACK RICHER",
+			b_save = "SAVE",
 
 			-- badge titles
 			ba_vinny = "Vinesauce",
-			co_vinny = "32A852",
-			te_vinny = "FFFFFF",
 			ba_joel = "Vargskelethor",
 			ba_mike = "Jabroni Mike",
-			co_mike = "8867a5",
-			te_mike = "FFFF00",
 			ba_redvox = "Red Vox",
-			co_redvox = "841f20",
-			te_redvox = "cac5b7",
 			ba_rlm = "RedLetterMedia",
 			ba_jojo = "Jojo's Bizarre Adventure",
 			ba_uzumaki = "Uzumaki",
 
 			-- badge colors for jojo parts
 			ba_phantom = 'Phantom Blood',
-			co_phantom = '3358A2',
-			te_phantom = 'B74582',
 			ba_battle = 'Battle Tendency',
-			co_battle = 'DD5668',
-			te_battle = '338FC4',
 			ba_stardust = 'Stardust Crusaders',
-			co_stardust = '425F7C',
-			te_stardust = 'EFCB70',
 			ba_diamond = 'Diamond is Unbreakable',
-			co_diamond = 'BEE5E5',
-			te_diamond = 'C479BE',
 			ba_vento = 'Golden Wind',
-			co_vento = 'EDCE49',
-			te_vento = 'D168BC',
 			ba_stone = 'Stone Ocean',
-			co_stone = '99B5B5',
-			te_stone = '61DFF8',
 			ba_steel = 'Steel Ball Run',
-			co_steel = 'A38168',
-			te_steel = 'A9CF3C',
 			ba_lion = 'JoJolion',
-			co_lion = 'BCBCE5',
-			te_lion = 'DCF7FC',
 			ba_lands = 'The JOJOLands',
-			co_lands = '394E90',
-			te_lands = '409CE8',
+
+			ba_feedback = 'Purple Haze Feedback',
 
 			-- stand related loc strings
 			k_stand_evolved = 'Evolved!',
@@ -2666,10 +2645,10 @@ return {
 			c_csau_lion_soft = {
 				name = "Soft & Wet",
 				text = {
-					"This Card gains {C:mult}+#1#{} Mult",
-					"per scoring {C:attention}Enhanced card{} played,",
-					"removes card {C:attention}Enhancement",
-					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
+					"Scoring {C:attention}Bonus{}/{C:attention}Mult Cards{}",
+					"lose their enhancements but",
+					"permanently gain {C:attention}half{} their",
+					"enhancements' bonuses",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} after playing a {C:attention}Secret Hand{}",
 				},
@@ -2677,11 +2656,10 @@ return {
 			c_csau_lion_soft_beyond = {
 				name = "Soft & Wet: Go Beyond",
 				text = {
-					"When an {C:attention}Enhanced Card{} is",
-					"scored, {C:attention}remove{} its enhancement",
-					"and gain {X:mult,C:white}X#1#{} Mult",
-					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}and{} {X:mult,C:white}X#3#{} {C:inactive}Mult){}",
-					
+					"Scoring {C:attention}Bonus{}/{C:attention}Mult Cards{}",
+					"lose their enhancements but",
+					"permanently gain {C:attention}all{} of",
+					"their enhancements' bonuses"
 				},
 			},
 			c_csau_lion_paper = {
@@ -2850,18 +2828,18 @@ return {
 			v_csau_lampoil = {
 				name = 'Lamp Oil',
 				text = {
-					"Allows {C:attention}#1#{} shop card#2# to be saved",
-					"until the {C:attention}next shop{}"
+					"Allows {C:attention}#1#{} shop card#2# to be",
+					"saved until the {C:attention}next shop{}"
 				}
 			},
 			v_csau_ropebombs = {
 				name = 'Rope & Bombs',
 				text = {
-					"Allows shop cards to be saved",
-					"for an {C:attention}indefinite time{}"
+					"Allows shop cards to",
+					"be saved {C:attention}indefinitely{}"
 				},
 				unlock = {
-					"Spent {C:money}$#1#{}",
+					"Spend {C:money}$#1#{}",
 					"in one shop"
 				}
 			}

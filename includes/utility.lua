@@ -257,9 +257,9 @@ function send(message, level)
 		elseif level == 'info' then sendInfoMessage(tprint(message))
 		elseif level == 'error' then sendErrorMessage(tprint(message)) end
 	else
-		if level == 'debug' then sendDebugMessage(tprint(message))
-		elseif level == 'info' then sendInfoMessage(tprint(message))
-		elseif level == 'error' then sendErrorMessage(tprint(message)) end
+		if level == 'debug' then sendDebugMessage(message)
+		elseif level == 'info' then sendInfoMessage(message)
+		elseif level == 'error' then sendErrorMessage(message) end
 	end
 end
 
@@ -380,9 +380,9 @@ G.FUNCS.transform_card = function(card, to_key, evolve)
 	card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})
 	card:set_ability(new_card)
 	card:set_cost()
-	if new_card.on_evolve and type(new_card.on_evolve) == 'function' then
-		card.on_evolve = new_card.on_evolve
-		card:on_evolve(old_card, card)
+	if old_card.on_evolve and type(old_card.on_evolve) == 'function' then
+		send('uh')
+		old_card:on_evolve(old_card, card)
 	end
 	if new_card.soul_pos then
 		card.children.floating_sprite = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.soul_pos)
