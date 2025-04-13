@@ -126,7 +126,7 @@ function consumInfo.calculate(self, card, context)
         card.ability.extra.nm = false
         card.ability.extra.evolve_rounds = card.ability.extra.evolve_rounds + 1
         if card.ability.extra.evolve_rounds >= card.ability.extra.evolve_num then
-            G.FUNCS.evolve_stand(card)
+            G.FUNCS.csau_evolve_stand(card)
         else
             return {
                 message = card.ability.extra.evolve_rounds..'/'..card.ability.extra.evolve_num,

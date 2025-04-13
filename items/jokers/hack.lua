@@ -23,7 +23,7 @@ local function get_chips(card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.yunkie } }
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.yunkie } }
     return { vars = { card.ability.extra.chip_mod, get_chips(card) } }
 end
 

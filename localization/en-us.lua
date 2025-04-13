@@ -827,13 +827,13 @@ return {
 					"{C:inactive}Artists",
 				},
 			},
-			artistcredit = {
+			csau_artistcredit = {
 				name = "Artist",
 				text = {
 					"{E:1}#1#{}"
 				},
 			},
-			artistcredit_2 = {
+			csau_artistcredit_2 = {
 				name = "Artists",
 				text = {
 					"{E:1}#1#{}",

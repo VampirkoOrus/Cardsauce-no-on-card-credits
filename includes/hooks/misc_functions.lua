@@ -76,13 +76,13 @@ end
 -- I put this in misc_functions because this is where similar functions are in Vanilla ~Winter
 
 --- Resets the rank used by the Paper Moon King stand card
-function reset_paper_rank()
-    G.GAME.current_paper_rank = {'Jack'}
+function csau_reset_paper_rank()
+    G.GAME.csau_current_paper_rank = {'Jack'}
 	local valid_ranks = {}
     for _, rank in pairs(SMODS.Ranks) do
         if rank.face then valid_ranks[#valid_ranks+1] = rank.card_key end
     end
-    G.GAME.current_paper_rank = pseudorandom_element(valid_ranks, pseudoseed('papermoon'..G.GAME.round_resets.ante))
+    G.GAME.csau_current_paper_rank = pseudorandom_element(valid_ranks, pseudoseed('papermoon'..G.GAME.round_resets.ante))
 end
 
 

@@ -19,7 +19,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.wario } }
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } }
     return { vars = {card.ability.extra.evolve_num - card.ability.extra.evolve_cards, SMODS.Ranks[card.ability.extra.evolve_val].key}}
 end
 
@@ -51,7 +51,7 @@ function consumInfo.calculate(self, card, context)
         end
         card.ability.extra.evolve_cards = card.ability.extra.evolve_cards + #six
         if card.ability.extra.evolve_cards >= card.ability.extra.evolve_num then
-            G.FUNCS.evolve_stand(card)
+            G.FUNCS.csau_evolve_stand(card)
         else
             return {
                 message = card.ability.extra.evolve_cards..'/'..card.ability.extra.evolve_num,

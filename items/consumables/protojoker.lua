@@ -10,7 +10,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.lyman } }
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.lyman } }
     return {}
 end
 
@@ -22,7 +22,7 @@ function consumInfo.use(self, card, area, copier)
                 trigger = 'after',
                 delay = 0.4,
                 func = function()
-                G.FUNCS.transform_card(G.jokers.cards[i], 'j_csau_chad')
+                G.FUNCS.csau_transform_card(G.jokers.cards[i], 'j_csau_chad')
                 return true end
             }))
         end

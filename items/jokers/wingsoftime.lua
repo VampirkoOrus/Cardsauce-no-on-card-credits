@@ -26,7 +26,7 @@ function jokerInfo.in_pool(self, args)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.guff } }
+	info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.guff } }
 	return { vars = { } }
 end
 

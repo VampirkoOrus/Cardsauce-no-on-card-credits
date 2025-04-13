@@ -21,7 +21,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.wario } }
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } }
     return { vars = {card.ability.extra.evolve_num}}
 end
 
@@ -62,7 +62,7 @@ function consumInfo.calculate(self, card, context)
                 end
             end
             if evolved then
-                G.FUNCS.evolve_stand(card)
+                G.FUNCS.csau_evolve_stand(card)
             end
         end
     end

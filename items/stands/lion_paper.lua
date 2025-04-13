@@ -11,11 +11,11 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    if not G.GAME or not G.GAME.current_paper_rank then
+    if not G.GAME or not G.GAME.csau_current_paper_rank then
         return {vars = {'Jack'}}
     end
 
-    return {vars = {G.GAME.current_paper_rank}}
+    return {vars = {G.GAME.csau_current_paper_rank}}
 end
 
 function consumInfo.add_to_deck(self, card)

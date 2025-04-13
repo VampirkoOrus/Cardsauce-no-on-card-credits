@@ -209,16 +209,40 @@ SMODS.current_mod.config_tab = function()
 		'enableTarotSkins',
 		'enableEasterEggs',
 	}
-	local left_settings = { n = G.UIT.C, config = { align = "tm", padding = 0.05 }, nodes = {} }
-	local right_settings = { n = G.UIT.C, config = { align = "tm", padding = 0.05 }, nodes = {} }
+	local left_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
+	local right_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
+	local left_count = 0
+	local right_count = 0
+
 	for i, k in ipairs(ordered_config) do
-		if #right_settings.nodes < #left_settings.nodes then
-			right_settings.nodes[#right_settings.nodes + 1] = create_toggle({ label = localize("vs_options_"..ordered_config[i]), ref_table = csau_config, ref_value = ordered_config[i], callback = G.FUNCS.csau_restart})
+		if right_count < left_count then
+			local main_node = create_toggle({
+				label = localize("vs_options_"..ordered_config[i]),
+				w = 1,
+				ref_table = csau_config,
+				ref_value = ordered_config[i],
+				callback = G.FUNCS.csau_restart
+			})
+			main_node.config.align = 'tr'
+			main_node.nodes[#main_node.nodes+1] = { n = G.UIT.C, config = { minw = 0.25, align = "cm" } }
+			right_settings.nodes[#right_settings.nodes + 1] = main_node
+			right_count = right_count + 1
 		else
-			left_settings.nodes[#left_settings.nodes + 1] = create_toggle({ label = localize("vs_options_"..ordered_config[i]), ref_table = csau_config, ref_value = ordered_config[i], callback = G.FUNCS.csau_restart})
+			local main_node = create_toggle({
+				label = localize("vs_options_"..ordered_config[i]),
+				w = 1,
+				ref_table = csau_config,
+				ref_value = ordered_config[i],
+				callback = G.FUNCS.csau_restart
+			})
+			main_node.config.align = 'tr'
+			main_node.nodes[#main_node.nodes+1] = { n = G.UIT.C, config = { minw = 0.25, align = "cm" } }
+			left_settings.nodes[#left_settings.nodes + 1]  = main_node
+			left_count = left_count + 1
 		end
 	end
-	local csau_config_ui = { n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = { left_settings, right_settings } }
+
+	local csau_config_ui = { n = G.UIT.R, config = { align = "tm", padding = 0.25 }, nodes = { left_settings, right_settings } }
 	return {
 		n = G.UIT.ROOT,
 		config = {
@@ -263,10 +287,10 @@ SMODS.current_mod.credits_tab = function()
 							}},
 							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = csau_team.gote, scale = text_scale*0.55*first_column_text_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.T, config={text = G.csau_team.gote, scale = text_scale*0.55*first_column_text_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = csau_team.keku, scale = text_scale*0.55*first_column_text_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.T, config={text = G.csau_team.keku, scale = text_scale*0.55*first_column_text_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 							}},
 						}},
@@ -281,10 +305,10 @@ SMODS.current_mod.credits_tab = function()
 							}},
 							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = csau_team.bass, scale = text_scale*0.55*first_column_text_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.T, config={text = G.csau_team.bass, scale = text_scale*0.55*first_column_text_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = csau_team.extra.bass, scale = text_scale*0.45*first_column_text_mod, colour = G.C.JOKER_GREY, shadow = true}},
+									{n=G.UIT.T, config={text = G.csau_team.extra.bass, scale = text_scale*0.45*first_column_text_mod, colour = G.C.JOKER_GREY, shadow = true}},
 								}},
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
 									{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.05, colour = G.C.CLEAR, shadow = true}},
@@ -302,10 +326,10 @@ SMODS.current_mod.credits_tab = function()
 							}},
 							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = G.SETTINGS.roche and csau_team.amtrax or "?????", scale = text_scale*0.55*first_column_text_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.T, config={text = G.SETTINGS.roche and G.csau_team.amtrax or "?????", scale = text_scale*0.55*first_column_text_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = G.SETTINGS.roche and csau_team.extra.amtrax or "?????", scale = text_scale*0.45*first_column_text_mod, colour = G.C.JOKER_GREY, shadow = true}},
+									{n=G.UIT.T, config={text = G.SETTINGS.roche and G.csau_team.extra.amtrax or "?????", scale = text_scale*0.45*first_column_text_mod, colour = G.C.JOKER_GREY, shadow = true}},
 								}},
 							}},
 						}},
@@ -320,10 +344,10 @@ SMODS.current_mod.credits_tab = function()
 							}},
 							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = csau_team.gameboy, scale = text_scale*0.55*first_column_text_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.T, config={text = G.csau_team.gameboy, scale = text_scale*0.55*first_column_text_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = csau_team.winterc, scale = text_scale*0.55*first_column_text_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.T, config={text = G.csau_team.winterc, scale = text_scale*0.55*first_column_text_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 							}},
 						}},
@@ -337,111 +361,111 @@ SMODS.current_mod.credits_tab = function()
 						{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
 							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.gote, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.gote, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.cejai, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.cejai, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.keku, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.keku, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.gappie, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.gappie, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.winterg, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.winterg, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.fenix, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.fenix, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.cherry, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.cherry, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.trance, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.trance, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.lyzerus, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.lyzerus, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.bard, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.bard, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.guff, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.guff, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.jen, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.jen, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.sine, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.sine, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.frada, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.frada, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.greg, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.greg, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.cheesy, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.cheesy, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.akai, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.akai, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.alli, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.alli, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}},
 							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.swizik, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.swizik, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.burd, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.burd, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.crispy, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.crispy, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.lyman, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.lyman, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.alizarin, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.alizarin, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.moon, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.moon, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.yunkie, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.yunkie, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.wario, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.wario, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.plunch, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.plunch, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.rerun, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.rerun, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.cauthen, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.cauthen, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.burlap, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.burlap, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.chvsau, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.chvsau, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.dolos, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.dolos, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.joey, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.joey, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.kuro, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.kuro, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
-									{ n = G.UIT.T, config = { text = csau_team.donk, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+									{ n = G.UIT.T, config = { text = G.csau_team.donk, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},
@@ -456,28 +480,28 @@ SMODS.current_mod.credits_tab = function()
 								}},
 								{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
 									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = csau_team.gote, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.gote, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = csau_team.dps, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.dps, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = csau_team.nether, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.nether, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = csau_team.myst, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.myst, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = csau_team.numbuh, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.numbuh, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = csau_team.aure, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.aure, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = csau_team.keku, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.keku, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = csau_team.winterc, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.winterc, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 								}},
 							}},
@@ -492,28 +516,28 @@ SMODS.current_mod.credits_tab = function()
 								}},
 								{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
 									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.lyman, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.lyman, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.extra.lyman, scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.extra.lyman, scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.akai, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.akai, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.extra.akai, scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.extra.akai, scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.myst, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.myst, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.extra.myst, scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.extra.myst, scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.victin, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.victin, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.extra.victin, scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.extra.victin, scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
 									}},
 								}},
 							}},
@@ -530,16 +554,16 @@ SMODS.current_mod.credits_tab = function()
 							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
 								{n=G.UIT.C, config={align = "tm", padding = 0}, nodes={
 									{n=G.UIT.R, config={align = "tm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.vinny, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.vinny, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.tort, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.tort, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.recon, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.recon, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.aure, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.aure, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 								}},
 								{n=G.UIT.C, config={align = "tm", padding = 0,outline_colour = G.C.CLEAR, r = 0.1, outline = 1}, nodes={
@@ -549,16 +573,16 @@ SMODS.current_mod.credits_tab = function()
 								}},
 								{n=G.UIT.C, config={align = "tm", padding = 0}, nodes={
 									{n=G.UIT.R, config={align = "tm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.joel, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.joel, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.proto, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.proto, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.cyro, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.cyro, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.eremel, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.eremel, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 								}},
 								{n=G.UIT.C, config={align = "tm", padding = 0,outline_colour = G.C.CLEAR, r = 0.1, outline = 1}, nodes={
@@ -568,16 +592,16 @@ SMODS.current_mod.credits_tab = function()
 								}},
 								{n=G.UIT.C, config={align = "tm", padding = 0}, nodes={
 									{n=G.UIT.R, config={align = "tm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.mike, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.mike, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.shrine, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.shrine, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.sin, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.sin, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = csau_team.voyager, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = G.csau_team.voyager, scale = text_scale*0.36*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 								}}
 							}},
