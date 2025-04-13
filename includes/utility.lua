@@ -32,8 +32,8 @@ local function dynamic_badges(info)
 		local text_colour = G.C.WHITE
 		if info.origin then
 			strings[#strings + 1] = localize('ba_'..info.origin)
-			badge_colour = HEX(G.badge_colours['co_'..info.origin]) or badge_colour
-			text_colour = HEX(G.badge_colours['te_'..info.origin]) or text_colour
+			badge_colour = HEX(G.csau_badge_colours['co_'..info.origin]) or badge_colour
+			text_colour = HEX(G.csau_badge_colours['te_'..info.origin]) or text_colour
 		elseif info.part then
 			strings[#strings + 1] = localize('ba_jojo')
 			if info.part == "jojo" then
@@ -41,13 +41,13 @@ local function dynamic_badges(info)
 				text_colour = G.C.WHITE
 			else
 				strings[#strings + 1] = localize('ba_'..info.part)
-				badge_colour = HEX(G.badge_colours['co_'..info.part]) or badge_colour
-				text_colour = HEX(G.badge_colours['te_'..info.part]) or text_colour
+				badge_colour = HEX(G.csau_badge_colours['co_'..info.part]) or badge_colour
+				text_colour = HEX(G.csau_badge_colours['te_'..info.part]) or text_colour
 			end
 		elseif info.streamer then
 			strings[#strings + 1] = localize('ba_'..info.streamer)
-			badge_colour = HEX(G.badge_colours['co_'..info.streamer]) or badge_colour
-			text_colour = HEX(G.badge_colours['te_'..info.streamer]) or text_colour
+			badge_colour = HEX(G.csau_badge_colours['co_'..info.streamer]) or badge_colour
+			text_colour = HEX(G.csau_badge_colours['te_'..info.streamer]) or text_colour
 		end
 		for i = 1, #strings do
 			scale_fac[i] = calc_scale_fac(strings[i])
@@ -368,7 +368,7 @@ end
 --- @param card Card Balatro card table of the card to replace
 --- @param to_key string string key (including prefixes) to replace the given card
 --- @param evolve boolean boolean for stand evolution
-G.FUNCS.transform_card = function(card, to_key, evolve)
+G.FUNCS.csau_transform_card = function(card, to_key, evolve)
 	evolve = evolve or false
 	local old_card = card
 	local new_card = G.P_CENTERS[to_key]
@@ -613,7 +613,7 @@ end
 
 --- Gets the leftmost stand in the consumable slots
 --- @return Card | nil # The first Stand in the consumables slot, or nil if you have no Stands
-G.FUNCS.get_leftmost_stand = function()
+G.FUNCS.csau_get_leftmost_stand = function()
     if not G.consumeables then return nil end
 
     local stand = nil
@@ -629,7 +629,7 @@ end
 
 --- Gets the number of stands in your consumable slots
 --- @return integer
-G.FUNCS.get_num_stands = function()
+G.FUNCS.csau_get_num_stands = function()
     if not G.consumeables then return 0 end
 
     local count = 0
@@ -644,10 +644,10 @@ end
 
 --- Evolves a Stand. A Stand must have an 'evolve_key' field to evolve
 --- @param stand Card Balatro card table representing a Stand consumable
-G.FUNCS.evolve_stand = function(stand)
+G.FUNCS.csau_evolve_stand = function(stand)
 	G.E_MANAGER:add_event(Event({
         func = function()
-			G.FUNCS.transform_card(stand, stand.ability.evolve_key, true)
+			G.FUNCS.csau_transform_card(stand, stand.ability.evolve_key, true)
 			check_for_unlock({ type = "evolve_stand" })
 
 			attention_text({
@@ -672,12 +672,12 @@ end
 
 --- Creates a new stand in the consumables card area, on the side of Stands
 --- @param evolved boolean Whether or not to use the Evolved Stand pool
-G.FUNCS.new_stand = function(evolved)
-	local pool_key = evolved and 'EvolvedPool' or 'StandPool'
+G.FUNCS.csau_new_stand = function(evolved)
+	local pool_key = evolved and 'csau_EvolvedPool' or 'csau_StandPool'
     G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 	local stand = create_card(pool_key, G.consumeables, nil, nil, nil, nil, nil, 'arrow')
 	stand:add_to_deck()
-	G.consumeables:emplace(stand, nil, nil, nil, nil, G.FUNCS.get_num_stands() + 1)
+	G.consumeables:emplace(stand, nil, nil, nil, nil, G.FUNCS.csau_get_num_stands() + 1)
 	stand:juice_up(0.3, 0.5)
 	G.GAME.consumeable_buffer = 0
 end
@@ -685,7 +685,7 @@ end
 --- Queues a stand aura to flare for delay_time if a Stand has an aura attached
 --- @param stand Card Balatro card table representing a stand
 --- @param delay_time delay_time length of flare in seconds
-G.FUNCS.flare_stand_aura = function(stand, delay_time)
+G.FUNCS.csau_flare_stand_aura = function(stand, delay_time)
 	if not stand.children.stand_aura then
 		return
 	end
@@ -703,7 +703,7 @@ end
 
 --- Sets relevant sprites for stand auras and overlays (if applicable)
 --- @param stand Card Balatro card table representing a stand
-G.FUNCS.set_stand_sprites = function(stand)
+G.FUNCS.csau_set_stand_sprites = function(stand)
 	-- add stand aura
 	if stand.ability.aura_colors and #stand.ability.aura_colors == 2 then
 		stand.no_shadow = true

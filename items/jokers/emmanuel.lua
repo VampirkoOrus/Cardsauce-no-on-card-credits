@@ -13,7 +13,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = G.P_TAGS.tag_negative
-	info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gappie } }
+	info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gappie } }
 	return { vars = {G.GAME.probabilities.normal, card.ability.extra} }
 end
 

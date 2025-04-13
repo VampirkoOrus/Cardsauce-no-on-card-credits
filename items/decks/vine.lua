@@ -14,7 +14,7 @@ local deckInfo = {
 
 deckInfo.loc_vars = function(self, info_queue, card)
     if info_queue then
-        info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.keku } }
+        info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.keku } }
     end
     return {vars = {localize{type = 'name_text', key = 'v_overstock_norm', set = 'Voucher'}}}
 end

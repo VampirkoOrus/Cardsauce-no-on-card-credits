@@ -46,7 +46,7 @@ function consumInfo.calculate(self, card, context)
             send(card.ability.extra.evolve_scores)
             if card.ability.extra.evolve_scores >= card.ability.extra.evolve_num then
                 if not context.blueprint then
-                    G.FUNCS.evolve_stand(card)
+                    G.FUNCS.csau_evolve_stand(card)
                 end
             else
                 return {

@@ -7,30 +7,30 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    if G.GAME.unlimited_stands then
+    if G.GAME.csau_unlimited_stands then
         info_queue[#info_queue+1] = {key = "csau_stand_info_unlimited", set = "Other"}
     else
         info_queue[#info_queue+1] = {key = "csau_stand_info", set = "Other", vars = { G.GAME.csau_max_stands or 1, (card.area.config.collection and localize('k_csau_stand')) or (G.GAME.csau_max_stands > 1 and localize('b_csau_stand_cards') or localize('k_stand')) }}
     end
 
-    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.cejai } }
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.cejai } }
 end
 
 function consumInfo.use(self, card, area, copier)
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
         play_sound('timpani')
-        G.FUNCS.new_stand(true)
+        G.FUNCS.csau_new_stand(true)
         return true
     end }))
     delay(0.6)
 end
 
 function consumInfo.can_use(self, card)
-    if G.GAME.unlimited_stands then
+    if G.GAME.csau_unlimited_stands then
         return G.consumeables.config.card_limit > #G.consumeables.cards - (card.area == G.consumeables and 1 or 0)
     end
 
-    return G.FUNCS.get_num_stands() < G.GAME.csau_max_stands
+    return G.FUNCS.csau_get_num_stands() < G.GAME.csau_max_stands
 end
 
 return consumInfo

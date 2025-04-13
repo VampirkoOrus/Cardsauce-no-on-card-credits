@@ -28,7 +28,7 @@ local function changeHandsAndDiscards(handcrement, discardcrement)
 end
 
 function jokerInfo.loc_vars(self, info_queue)
-	info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { csau_team.gote } }
+	info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
 end
 
 function jokerInfo.add_to_deck(self, card)

@@ -65,7 +65,7 @@ end
 
 function consumInfo.update(self, card)
     if not card.area.config.collection and get_lucky() >= card.ability.extra.evolve_num then
-        G.FUNCS.evolve_stand(card)
+        G.FUNCS.csau_evolve_stand(card)
     end
 end
 

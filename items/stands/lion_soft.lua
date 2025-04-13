@@ -51,7 +51,7 @@ end
 function consumInfo.calculate(self, card, context)
     if context.before and not card.debuff and not context.blueprint then
         if not SMODS.PokerHands[context.scoring_name].visible then
-            G.FUNCS.evolve_stand(card)
+            G.FUNCS.csau_evolve_stand(card)
         else
             local enhanced = {}
             for k, v in ipairs(context.scoring_hand) do
