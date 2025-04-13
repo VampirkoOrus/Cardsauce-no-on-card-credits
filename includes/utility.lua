@@ -783,14 +783,6 @@ G.FUNCS.discovery_check = function(args)
 	end
 end
 
-G.FUNCS.hand_is_secret = function(name)
-	for i, k in ipairs(G.csau_secret_hands) do
-		if k == name then
-			return true
-		end
-	end
-end
-
 local function check_secret(name, visible)
 	for k, v in pairs(SMODS.PokerHands) do
 		if k == name then

@@ -21,16 +21,6 @@ function jokerInfo.add_to_deck(self, card)
     check_for_unlock({ type = "discover_red" })
 end
 
-local function check_secret(name, visible)
-    for k, v in pairs(SMODS.PokerHands) do
-        if k == name then
-            if v.visible == visible then
-                return true
-            end
-        end
-    end
-end
-
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff then
         local last_hand = G.GAME.last_hand_played
