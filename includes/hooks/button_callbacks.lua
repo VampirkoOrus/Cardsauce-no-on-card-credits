@@ -51,7 +51,7 @@ G.FUNCS.toggle_shop = function(e)
 		end
 		
         if removed > 0 then
-            play_sound('csau_sorry_link', 1, 0.38)
+            --play_sound('csau_sorry_link', 1, 0.38)
             delay(1.2)
         end
 	end
@@ -100,7 +100,7 @@ G.FUNCS.save_to_morshu = function(e)
             
             c1:start_dissolve()
 
-            play_sound('csau_mmmmmm', 1, 0.38)
+            --play_sound('csau_mmmmmm', 1, 0.38)
             return true
             end
         }))

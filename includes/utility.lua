@@ -257,9 +257,9 @@ function send(message, level)
 		elseif level == 'info' then sendInfoMessage(tprint(message))
 		elseif level == 'error' then sendErrorMessage(tprint(message)) end
 	else
-		if level == 'debug' then sendDebugMessage(tprint(message))
-		elseif level == 'info' then sendInfoMessage(tprint(message))
-		elseif level == 'error' then sendErrorMessage(tprint(message)) end
+		if level == 'debug' then sendDebugMessage(message)
+		elseif level == 'info' then sendInfoMessage(message)
+		elseif level == 'error' then sendErrorMessage(message) end
 	end
 end
 
@@ -380,8 +380,9 @@ G.FUNCS.csau_transform_card = function(card, to_key, evolve)
 	card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})
 	card:set_ability(new_card)
 	card:set_cost()
-	if new_card.on_evolve and type(new_card.on_evolve) == 'function' then
-		new_card:on_evolve(old_card, card)
+	if old_card.on_evolve and type(old_card.on_evolve) == 'function' then
+		send('uh')
+		old_card:on_evolve(old_card, card)
 	end
 	if new_card.soul_pos then
 		card.children.floating_sprite = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.soul_pos)
@@ -617,7 +618,7 @@ G.FUNCS.csau_get_leftmost_stand = function()
 
     local stand = nil
     for i, card in ipairs(G.consumeables.cards) do
-        if card.ability.set == "csau_Stand" then
+        if card.ability.set == "Stand" then
             stand = card
             break
         end
@@ -633,7 +634,7 @@ G.FUNCS.csau_get_num_stands = function()
 
     local count = 0
     for i, v in ipairs(G.consumeables.cards) do
-        if v.ability.set == "csau_Stand" then
+        if v.ability.set == "Stand" then
             count = count+1
         end
     end

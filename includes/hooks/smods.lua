@@ -31,9 +31,22 @@ function SMODS.current_mod.reset_game_globals(run_start)
 		end
 	end
 	if valid_joeycastle_cards[1] then
-		local randCard = pseudorandom_element(valid_joeycastle_cards, pseudoseed('fent'..G.GAME.round_resets.ante))
-		G.GAME.current_round.joeycastle.suit = randCard.base.suit
+		local randCard_2 = pseudorandom_element(valid_joeycastle_cards, pseudoseed('fent'..G.GAME.round_resets.ante))
+		G.GAME.current_round.joeycastle.suit = randCard_2.base.suit
 	end
-	local randCard = pseudorandom_element(G.playing_cards, pseudoseed('DUANE'..G.GAME.round_resets.ante))
-	G.GAME.current_round.duane_suit = randCard.base.suit
+	local randCard_3 = pseudorandom_element(G.playing_cards, pseudoseed('DUANE'..G.GAME.round_resets.ante))
+	G.GAME.current_round.duane_suit = randCard_3.base.suit
+
+	local valid_paper_ranks = {}
+	for _, v in ipairs(G.playing_cards) do
+		if not SMODS.has_no_rank(v) then
+			for _, rank in pairs(SMODS.Ranks) do
+				if rank.key == v.base.value and rank.face then
+					valid_paper_ranks[#valid_paper_ranks+1] = v
+				end
+			end
+		end
+	end
+	local randCard_4 = pseudorandom_element(valid_paper_ranks, pseudoseed('papermoon'..G.GAME.round_resets.ante))
+	G.GAME.current_round.paper_rank = randCard_4.base.value
 end

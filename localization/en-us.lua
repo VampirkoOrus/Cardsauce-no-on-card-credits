@@ -382,7 +382,8 @@ return {
 			k_metal = "Metal!",
 			k_gold_exp = "Gold Experience!",
 			k_stone_free = "Stone Free!",
-			k_morshu_ui = "CAN'T GIVE CREDIT",
+			k_morshu_ui = "COME BACK RICHER",
+			b_save = "SAVE",
 
 			-- badge titles
 			ba_vinny = "Vinesauce",
@@ -425,8 +426,8 @@ return {
 			co_lion = 'BCBCE5',
 			te_lion = 'DCF7FC',
 			ba_lands = 'The JOJOLands',
-			co_lands = '394E90',
-			te_lands = '409CE8',
+
+			ba_feedback = 'Purple Haze Feedback',
 
 			-- stand related loc strings
 			k_stand_evolved = 'Evolved!',
@@ -800,7 +801,7 @@ return {
 
 				},
 			},
-			csau_stand_info = {
+			stand_info = {
 				name = "Stand Limit",
 				text = {
 					"You can only",
@@ -808,7 +809,7 @@ return {
 					"at a time",
 				},
 			},
-			csau_stand_info_unlimited = {
+			stand_info_unlimited = {
 				name = "Stand Limit",
 				text = {
 					"You can have",
@@ -2419,7 +2420,7 @@ return {
 				},
 			},
 		},
-		csau_Stand = {
+		Stand = {
 			c_csau_stardust_star = {
 				name = "Star Platinum",
 				text = {
@@ -2734,6 +2735,13 @@ return {
 					"and four are the {C:attention}same suit{},",
 					"transform the {C:attention}fifth card{}",
 					"into that suit",
+				},
+			},
+			c_csau_epitaph = {
+				name = "Epitaph",
+				text = {
+					"The top card of your deck is shown here",
+					"{C:stand}Evolves{} after {C:attention}#1#{} Blinds are skipped {C:inactive}({}{C:attention}#2#{}{C:inactive}/#1#)",
 				},
 			},
 		},
