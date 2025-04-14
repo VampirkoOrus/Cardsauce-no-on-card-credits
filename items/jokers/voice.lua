@@ -19,10 +19,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { localize(card.ability.voice_hand, 'poker_hands'), localize(G.GAME.current_round.choicevoice.rank, 'ranks'), localize(G.GAME.current_round.choicevoice.suit, 'suits_plural'), colours = {G.C.SUITS[G.GAME.current_round.choicevoice.suit]} }}
 end
 
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_voice" })
-end
-
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
     local _poker_hands = {}
     for k, v in pairs(G.GAME.hands) do
@@ -49,6 +45,7 @@ function jokerInfo.calculate(self, card, context)
         if next(context.poker_hands[card.ability.voice_hand]) then
             for k, v in ipairs(context.full_hand) do
                 if v:is_suit(G.GAME.current_round.choicevoice.suit) and v:get_id() == G.GAME.current_round.choicevoice.id then
+                    check_for_unlock({ type = "activate_voice" })
                     return {
                         message = 'Again!',
                         repetitions = card.ability.extra.repetitions,

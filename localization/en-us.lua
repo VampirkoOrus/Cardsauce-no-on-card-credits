@@ -431,6 +431,16 @@ return {
 			ch_c_csau_tucker = {"All Non-{C:clubs}Cardsauce{} Jokers are banned"}
 		},
 		achievement_names = {
+			ach_csau_activate_red = "Red-Blooded Italian",
+			ach_csau_activate_code = "Alyx!",
+			ach_csau_activate_voice = "maarrrio̸̊oò̶o̿̀o͚͂ooo",
+			ach_csau_activate_watto = "I'm A Watto",
+			ach_csau_transform_sts = "ResidentSleeper",
+			ach_csau_expire_grannycream = "Heat n' Sip",
+			ach_csau_expire_crudeoil = "I CAN'T STOP",
+
+
+
 			ach_csau_discover_fisheye = "As You Know...",
 			ach_csau_discover_cousinsclub = "You Gotta Come to Club Club.",
 			ach_csau_discover_disguy = "BLS BLAY BALABRO BINTY",
@@ -440,13 +450,11 @@ return {
 			ach_csau_discover_sohappy = "I'm So Happy For You",
 			ach_csau_discover_kings = "Cursed in the Name of the LORD",
 			ach_csau_discover_chad = "Why Is He Here...",
-			ach_csau_discover_code = "Alyx!",
 			ach_csau_discover_chrome = "Hey Jahnny!",
 			ach_csau_discover_shrimp = "I'm Ready, You Ready?",
 			ach_csau_discover_kerosene = "Throw Another on the Fire",
 			ach_csau_discover_werewolves = "Never Going To Happen",
 			ach_csau_discover_supper = "Shoutouts to SupperMarioBroth",
-			ach_csau_discover_red = "Red-Blooded Italian",
 			ach_csau_discover_miracle = "Johnny's Fault",
 			ach_csau_discover_pep = "Secret Hoppin'",
 			ach_csau_discover_grey = "Milky Way!",
@@ -460,7 +468,6 @@ return {
 			ach_csau_discover_roger = "Like He Would Have Wanted",
 			ach_csau_discover_odio = "Lord of All Demons",
 			ach_csau_discover_btc = "Fake Rarity",
-			ach_csau_discover_watto = "I'm A Watto",
 			ach_csau_discover_muppet = "Could Become a Habit",
 			ach_csau_discover_dontmind = "Hmmm, What To Play...",
 			ach_csau_discover_crack = "It's Not Cool",
@@ -482,7 +489,6 @@ return {
 			ach_csau_discover_fantabulous = "I Feel Fantastic",
 			ach_csau_discover_joeycastle = "SHIT CANNON",
 			ach_csau_discover_grand = "Nourish the Blood",
-			ach_csau_discover_voice = "maarrrio̸̊oò̶o̿̀o͚͂ooo",
 			ach_csau_discover_beginners = "Join Me At The Table",
 			ach_csau_discover_rotten = "It Degrades, Douglath",
 			ach_csau_discover_ten = "I Did All That For YOU!?!?",
@@ -494,9 +500,6 @@ return {
 			ach_csau_discover_koffing = "NOT CLICKBAIT",
 			ach_csau_discover_frich = "FINE DINING",
 			ach_csau_discover_bunji = "Lemme Just Say This... Yum",
-			ach_csau_discover_crudeoil = "I CAN'T STOP",
-			ach_csau_discover_grannycream = "Heat n' Sip",
-			ach_csau_discover_sts = "ResidentSleeper",
 			ach_csau_discover_bjbros = "*Chain Attack OST Plays*",
 			ach_csau_discover_drippy = "The Dripping Tap",
 
@@ -519,6 +522,7 @@ return {
 
 			ach_csau_discover_vincenzo = "Step Right In",
 			ach_csau_discover_quarterdumb = "Drown In It",
+			ach_csau_discover_wigsaw = "Playing My Game",
 			ach_csau_purchase_dink = "VERY Expensive.",
 			ach_csau_final_odio = "MEGALOMANIA",
 			ach_csau_win_vine = "Growing Free",
@@ -533,6 +537,16 @@ return {
 			ach_csau_big_meat = "The Big Meat",
 		},
 		achievement_descriptions = {
+			ach_csau_activate_red = "Activate Why Are You Red?",
+			ach_csau_activate_code = "Activate Industry Code",
+			ach_csau_activate_voice = "Activate Choicest Voice",
+			ach_csau_activate_watto = "Activate Let Fate Decide",
+			ach_csau_transform_sts = "Transform Murder the Monolith",
+			ach_csau_expire_grannycream = "Have Granny Cream expire",
+			ach_csau_expire_crudeoil = "Have Crude Oil expire",
+
+
+
 			ach_csau_discover_fisheye = "Discover Fisheye",
 			ach_csau_discover_cousinsclub = "Discover Cousin's Club",
 			ach_csau_discover_disguy = "Discover DIS JOAKERRR",
@@ -542,13 +556,13 @@ return {
 			ach_csau_discover_sohappy = "Discover I'm So Happy",
 			ach_csau_discover_kings = "Discover 2 Kings 2:23-24",
 			ach_csau_discover_chad = "Discover No No No No No No No No No No",
-			ach_csau_discover_code = "Discover Industry Code",
+
 			ach_csau_discover_chrome = "Discover Chromed Up",
 			ach_csau_discover_shrimp = "Discover Shrimp Joker",
 			ach_csau_discover_kerosene = "Discover Kerosene",
 			ach_csau_discover_werewolves = "Discover That's Werewolves",
 			ach_csau_discover_supper = "Discover WAAUGGHGHHHHGHH",
-			ach_csau_discover_red = "Discover Why Are You Red?",
+
 			ach_csau_discover_miracle = "Discover Miracle of Life",
 			ach_csau_discover_pep = "Discover Pepperoni Secret",
 			ach_csau_discover_grey = "Discover Grey Joker",
@@ -562,7 +576,6 @@ return {
 			ach_csau_discover_roger = "Discover Mr. Roger",
 			ach_csau_discover_odio = "Discover Odious Joker",
 			ach_csau_discover_btc = "Discover Business Trading Card",
-			ach_csau_discover_watto = "Discover Let Fate Decide",
 			ach_csau_discover_muppet = "Discover Movin' Right Along",
 			ach_csau_discover_dontmind = "Discover Don't Mind If I Do",
 			ach_csau_discover_crack = "Discover This Is Crack",
@@ -584,7 +597,6 @@ return {
 			ach_csau_discover_fantabulous = "Discover Fantabulous Joker",
 			ach_csau_discover_joeycastle = "Discover Joey's Castle",
 			ach_csau_discover_grand = "Discover 7 Funny Story",
-			ach_csau_discover_voice = "Discover Choicest Voice",
 			ach_csau_discover_beginners = "Discover Beginner's Luck",
 			ach_csau_discover_rotten = "Discover Rotten Joker",
 			ach_csau_discover_ten = "Discover 10 ARROWS!?!?",
@@ -596,9 +608,7 @@ return {
 			ach_csau_discover_koffing = "Discover That Fucking Koffing Again",
 			ach_csau_discover_frich = "Discover Gourmand of Faramore",
 			ach_csau_discover_bunji = "Discover Scourge Of Pantsylvania",
-			ach_csau_discover_crudeoil = "Discover Crude Oil",
-			ach_csau_discover_grannycream = "Discover Granny Cream",
-			ach_csau_discover_sts = "Discover Murder the Monolith",
+
 			ach_csau_discover_bjbros = "Discover Blowzo Brothers",
 			ach_csau_discover_drippy = "Discover Dripping Joker",
 
@@ -621,6 +631,7 @@ return {
 
 			ach_csau_discover_vincenzo = "Discover Vincenzo",
 			ach_csau_discover_quarterdumb = "Discover Quarterdumb",
+			ach_csau_discover_wigsaw = "Discover Wigsaw",
 			ach_csau_purchase_dink = "Purchase Very Expensive Joker at a price of at least $60",
 			ach_csau_final_odio = "Reach the final form of Odious Joker, Armageddon",
 			ach_csau_win_vine = "Win a run with Vine Deck on any difficulty",
@@ -2404,6 +2415,13 @@ return {
 					"{C:inactive}(WIP, no ability yet)"
 				},
 			},
+			c_csau_streetsmarts = {
+				name = "Street Smarts: Straight Talk For Kids, Teens & Parents",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
 		},
 		csau_Stand = {
 			c_csau_stardust_star = {
@@ -2508,8 +2526,8 @@ return {
 			c_csau_vento_moody = {
 				name = "Moody Blues",
 				text = {
-					"Pauseable {C:vhs}VHS Tapes{} have",
-					"{C:attention}double{} the Running Time",
+					"{C:vhs}VHS Tapes{} have {C:attention}double{}",
+					"the Running Time",
 				},
 			},
 			c_csau_vento_metallica = {

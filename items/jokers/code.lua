@@ -19,10 +19,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = { card.ability.extra.money } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_code" })
-end
-
 function jokerInfo.calculate(self, card, context)
 	if context.joker_main and context.cardarea == G.jokers and not card.debuff then
 		local code5 = 0
@@ -36,11 +32,9 @@ function jokerInfo.calculate(self, card, context)
 			if v:get_id() == 8 then code8 = code8 + 1 end
 		end
 		if code5 == 1 and code6 == 1 and code7 == 2 and code8 == 1 then
-			ease_dollars(to_big(card.ability.extra.money))
+			check_for_unlock({ type = "activate_code" })
 			return {
-				message = localize('$')..card.ability.extra.money,
-				colour = G.C.MONEY,
-				card = card
+				dollars = card.ability.extra.money
 			}
 		end
 	end

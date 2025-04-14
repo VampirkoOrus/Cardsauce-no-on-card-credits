@@ -1,9 +1,9 @@
 local trophyInfo = {
-    rarity = 1,
+    rarity = 2,
     hidden_text = true,
     bypass_all_unlocked = true,
     unlock_condition = function(self, args)
-        if args.type == "discover_crudeoil" then
+        if args.type == "defeat_paint" then
             return true
         end
     end,

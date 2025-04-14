@@ -9,8 +9,8 @@ G.loadTrophies = true
 -- enumerate all achievements in the achievements directory instead of loading it directly
 SMODS.Atlas({ key = 'csau_achievements', path = "csau_achievements.png", px = 66, py = 66})
 local achievementsToLoad = {}
-for s in recursiveEnumerate(UsableModPath .. "/achievements/"):gmatch("[^\r\n]+") do
-    achievementsToLoad[#achievementsToLoad + 1] = s:gsub(PathPatternReplace .. "/achievements/", "")
+for s in recursiveEnumerate(UsableModPath .. "/items/achievements"):gmatch("[^\r\n]+") do
+    achievementsToLoad[#achievementsToLoad + 1] = s:gsub(PathPatternReplace .. "/items/achievements/", "")
 end
 
 -- I retained the individual achievement loading because it's so different from the centralized
@@ -18,7 +18,7 @@ end
 for i, v in ipairs(achievementsToLoad) do
 	local trophyInfo = assert(SMODS.load_file("items/achievements/" .. v))()
 
-	trophyInfo.key = v:sub(2, -5)
+	trophyInfo.key = v:sub(1, -5)
 	trophyInfo.atlas = 'csau_achievements'
 	if trophyInfo.rarity then
 		if trophyInfo.rarity == 1 then

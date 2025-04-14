@@ -9,6 +9,10 @@ local blindInfo = {
     boss = {min = 1, max = 10, showdown = true}
 }
 
+function blindInfo.defeat(self)
+    check_for_unlock({ type = "defeat_feltfortress" })
+end
+
 blindInfo.set_blind = function(self, reset, silent)
     if not G.GAME.blind.disabled then
         G.GAME.blind.backup_chips = G.GAME.blind.chips

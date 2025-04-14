@@ -3,7 +3,7 @@ local trophyInfo = {
     hidden_text = true,
     bypass_all_unlocked = true,
     unlock_condition = function(self, args)
-        if args.type == "discover_watto" then
+        if args.type == "activate_voice" then
             return true
         end
     end,

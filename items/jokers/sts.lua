@@ -42,6 +42,7 @@ local forms = {
     }
 
 local change_form = function(card, form)
+    check_for_unlock({ type = "transform_sts" })
     if forms[form] then
         card.ability.form = forms[form][1]
         card.config.center.pos = forms[form][2]
@@ -92,10 +93,6 @@ end
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
     return { vars = {card.ability.diamonds.mult_mod, card.ability.diamonds.mult, card.ability.spades.x_mult, card.ability.spades.extra_cards, card.ability.spades.hands, card.ability.spades.discards } }
-end
-
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_sts" })
 end
 
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)

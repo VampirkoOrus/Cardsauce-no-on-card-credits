@@ -1,10 +1,11 @@
 local trophyInfo = {
-    rarity = 3,
+    rarity = 2,
     hidden_text = true,
     bypass_all_unlocked = true,
-    unlock_key = 'j_csau_vincenzo',
     unlock_condition = function(self, args)
-        return G.FUNCS.csau_center_discovered(self.unlock_key)
+        if args.type == "defeat_wasp" then
+            return true
+        end
     end,
 }
 

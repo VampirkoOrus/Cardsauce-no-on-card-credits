@@ -19,10 +19,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.dollars, card.ability.extra.dollars_mod } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_crudeoil" })
-end
-
 function jokerInfo.calc_dollar_bonus(self, card)
     if not card.debuff then
         return card.ability.extra.dollars
@@ -37,6 +33,7 @@ function G.UIDEF.shop()
             for _, v in ipairs(SMODS.find_card("j_csau_crudeoil")) do
                 v.ability.extra.dollars = to_big(v.ability.extra.dollars) - to_big(v.ability.extra.dollars_mod)
                 if v.ability.extra.dollars <= to_big(0) then
+                    check_for_unlock({ type = "expire_crudeoil" })
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             play_sound('tarot1')
@@ -70,7 +67,5 @@ function G.UIDEF.shop()
     end
     return t
 end
-
-
 
 return jokerInfo

@@ -76,8 +76,7 @@ function consumInfo.calculate(self, card, context)
     end
 
     if #change_cards < 1 then return end
-    
-    sendDebugMessage(target_key..'s')
+
     card_eval_status_text(card, 'extra', nil, nil, nil, {
         message = localize(target_key, 'suits_plural'),
         colour = G.C.SUITS[target_key]

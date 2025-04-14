@@ -10,6 +10,10 @@ local blindInfo = {
     streamer = 'joel',
 }
 
+function blindInfo.defeat(self)
+    check_for_unlock({ type = "defeat_wasp" })
+end
+
 local function american_hornet(blind)
     if blind.boss and blind.name == "The Wasp" and not G.GAME.blind.disabled then
         return true

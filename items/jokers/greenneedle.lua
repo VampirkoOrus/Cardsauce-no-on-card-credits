@@ -16,7 +16,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.check_for_unlock(self, args)
-	if (args.type == "win_deck" and get_deck_win_stake(self.unlock_condition.deck)) or args.type == "actuallyunlocksorry" then
+	if (args.type == "win_deck" and get_deck_win_stake(self.unlock_condition.deck)) or G.FUNCS.csau_center_discovered('b_green') then
 		return true
 	end
 end

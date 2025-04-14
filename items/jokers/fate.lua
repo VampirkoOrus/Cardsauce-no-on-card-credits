@@ -14,10 +14,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_watto" })
-end
-
 local function starts_with(str, start)
     return string.sub(str, 1, #start) == start
 end
@@ -52,6 +48,9 @@ local tag_colors = {
 function jokerInfo.calculate(self, card, context)
     if context.end_of_round and not card.debuff and not context.individual and not context.repetition then
         local roll = pseudorandom('fate', 1, 6)
+        if roll < 0 and roll < 4 then
+            check_for_unlock({ type = "activate_watto" })
+        end
         if roll == 1 then
             local free_joker_tags = {}
             for k, v in pairs(G.P_TAGS) do
