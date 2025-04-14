@@ -729,9 +729,9 @@ return {
 					"learn what it does",
 				},
 			},
-			undiscovered_stand={
-				name="Not Discovered",
-				text={
+			undiscovered_csau_stand={
+				name = "Not Discovered",
+				text = {
 					"Purchase this card in",
 					"an unseeded run to",
 					"learn what it does",
@@ -2748,7 +2748,7 @@ return {
 					"{C:chips}+#4#{} chips",
 				}
 			},
-			c_csau_lost_galaxy = {
+			c_csau_planet_lost = {
 				name = "Lost Galaxy",
 				text = {
 					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",

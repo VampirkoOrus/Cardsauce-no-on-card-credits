@@ -243,7 +243,7 @@ local twoPointOItems = {
 		-- Planet
 		'lutetia',
 		'varuna',
-		'lost_galaxy',
+		'planet_lost',
 		-- Spectral
         'spec_stone',
 		'spec_diary',
@@ -335,6 +335,7 @@ local twoPointOItems = {
         'darkest',
 		'wasp',
 		'feltfortress',
+		'paint',
     },
 	Edition = {
 		'corrupted'
@@ -385,7 +386,7 @@ SMODS.Rarity {
 
 -- Stand Consumable
 SMODS.Atlas({ key = 'undiscovered', path = "undiscovered.png", px = 71, py = 95 })
-SMODS.UndiscoveredSprite { key = "Stand", atlas = "undiscovered", pos = { x = 1, y = 0 }, overlay_pos = { x = 2, y = 0 } }
+SMODS.UndiscoveredSprite { key = "csau_Stand", atlas = "csau_undiscovered", pos = { x = 1, y = 0 }, overlay_pos = { x = 2, y = 0 }, prefix_config = false }
 SMODS.ConsumableType {
 	key = 'csau_Stand',
 	prefix_config = false,
