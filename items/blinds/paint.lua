@@ -1,6 +1,6 @@
 local blindInfo = {
     name = "The Paint",
-    color = HEX('c0a800'),
+    color = HEX('6957b0'),
     pos = {x = 0, y = 0},
     dollars = 5,
     mult = 2,
