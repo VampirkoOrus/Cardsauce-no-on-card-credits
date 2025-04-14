@@ -21,6 +21,10 @@ function csau_reset_paper_rank()
     G.GAME.csau_current_paper_rank = pseudorandom_element(valid_ranks, pseudoseed('papermoon'..G.GAME.round_resets.ante))
 end
 
+local function is_perfect_square(x)
+	local sqrt = math.sqrt(x)
+	return sqrt^2 == x
+end
 
 --- Calculation for Fibonacci Scoring
 function csau_get_fibonacci(hand)
