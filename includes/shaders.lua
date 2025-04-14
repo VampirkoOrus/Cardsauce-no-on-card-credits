@@ -151,7 +151,7 @@ SMODS.DrawStep {
             local hovering = (self.hover_tilt or 0)
 
             G.SHADERS['csau_aura']:send('step_size', {0.021, 0.021})
-            G.SHADERS['csau_aura']:send('time', (G.TIMERS.REAL) + self.ability.aura_offset)
+            G.SHADERS['csau_aura']:send('time', G.TIMERS.REAL + self.ability.aura_offset)
             G.SHADERS['csau_aura']:send('noise_tex', G.ASSET_ATLAS['csau_noise'].image)
             G.SHADERS['csau_aura']:send('gradient_tex', G.ASSET_ATLAS['csau_gradient'].image)
             G.SHADERS['csau_aura']:send('outline_color', HEX(self.ability.aura_colors[1]))

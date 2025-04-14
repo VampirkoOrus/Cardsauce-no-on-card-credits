@@ -719,8 +719,7 @@ G.FUNCS.csau_set_stand_sprites = function(stand)
 		
 		stand.ability.aura_spread = 0.45
 		stand.ability.aura_rate = 0.7
-		local rand = math.random(-10, 10)
-		stand.ability.aura_offset = math.max(0, rand + G.TIMERS.REAL)
+		stand.ability.aura_offset = math.random(0, 10)
 		stand.children.stand_aura = Sprite(
 			stand.T.x - aura_x_offset,
 			stand.T.y - aura_y_offset,
@@ -833,4 +832,53 @@ G.FUNCS.recheck_hand = function(last_hand, scoring)
 		 end
 	}))
 	return text
+end
+
+--- Formats a numeral for display. Numerals between 0 and 1 are written out fully
+--- @param n number Numeral to format
+--- @param number_type string Type of display number ('number', 'order')
+--- @param caps_style string | nil Style of capitalization ('lower', 'upper', 'first')
+function csau_format_display_number(n, number_type, caps_style)
+	number_type = number_type or 'number'
+	local dict = {
+		[0] = {number = 'zero', order = 'zeroth'},
+		[1] = {number = 'one', order = 'first'},
+		[2] = {number = 'two', order = 'second'},
+		[3] = {number = 'three', order = 'third'},
+		[4] = {number = 'four', order = 'fourth'},
+		[5] = {number = 'five', order = 'fifth'},
+		[6] = {number = 'six', order = 'sixth'},
+		[7] = {number = 'seven', order = 'seventh'},
+		[8] = {number = 'eight', order = 'eighth'},
+		[9] = {number = 'nine', order = 'ninth'},
+		[10] = {number = 'ten', order = 'tenth'},
+		[11] = {number = '11', order = '11th'},
+		[12] = {number = '12', order = '12th'},
+	}
+	if n < 0 or n > #dict then
+		if number_type == 'number' then return n end
+
+		local ret = ''
+		local mod = n % 10
+		if mod == 1 then 
+			ret = n..'st'
+		elseif mod == 2 then
+			ret = n..'nd'
+		elseif mod == 3 then
+			ret = n..'rd'
+		else
+			ret = n..'th'
+		end
+		return ret
+	end
+
+	local ret = dict[n][number_type]
+	local style = caps_style and string.lower(caps_style) or 'lower'
+	if style == 'upper' then
+		ret = string.upper(ret)
+	elseif n < 11 and style == 'first' then
+		ret = ret:gsub("^%l", string.upper)
+	end
+
+	return ret
 end
