@@ -418,7 +418,7 @@ return {
 			k_gold_exp = "Gold Experience!",
 			k_stone_free = "Stone Free!",
 			k_bsa = "Bigmouth Strikes Again!",
-			k_smooth_operators = "Smooth Operators!"
+			k_smooth_operators = "Modified!"
 		},
 		v_dictionary = {
 			a_red = "#1#!!!",
@@ -2715,8 +2715,8 @@ return {
 			c_csau_lands_bigmouth = {
 				name = "Bigmouth Strikes Again",
 				text = {
-					"If played hand is {C:attention}5{} cards",
-					"and four are the {C:attention}same suit{},",
+					"If played hand is {C:attention}#1#{} cards",
+					"and {C:attention}#2#{} are the {C:attention}same suit{},",
 					"transform the {C:attention}fifth card{}",
 					"into that suit",
 				},

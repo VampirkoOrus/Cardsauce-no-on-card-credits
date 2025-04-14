@@ -18,7 +18,7 @@ vec4 effect(vec4 color, Image tex, vec2 tex_coords, vec2 screen_coords) {
 	vec2 upper_coords = vec2(tex_coords.x, tex_coords.y + 0.12);
 	vec2 lower_coords = vec2(tex_coords.x, tex_coords.y - 0.03);
 	float noise_value_1 = Texel(noise_tex, upper_coords + vec2(0.0, time)).x;
-	float noise_value_2 = Texel(noise_tex, tex_coords + vec2(0.0, time + 0.43)).x;
+	float noise_value_2 = Texel(noise_tex, lower_coords + vec2(0.0, time + 0.43)).x;
 
     float alpha = 4 * ret.a;
     alpha -= Texel(tex, tex_coords + vec2(step_size.x, 0.0)).a;
