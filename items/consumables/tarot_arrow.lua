@@ -2,7 +2,7 @@ local consumInfo = {
     key = 'c_csau_tarot_arrow',
     name = 'The Arrow',
     set = 'Tarot',
-    cost = 4,
+    cost = 3,
     alerted = true,
     part = 'diamond',
 }
