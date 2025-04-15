@@ -5,7 +5,7 @@ local consumInfo = {
         evolved = true,
         aura_colors = { 'e53663DC', 'a71d40DC' },
     },
-    cost = 8,
+    cost = 10,
     rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,

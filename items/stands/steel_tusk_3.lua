@@ -9,7 +9,7 @@ local consumInfo = {
             evolve_percent = 0.1
         }
     },
-    cost = 7,
+    cost = 10,
     rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,

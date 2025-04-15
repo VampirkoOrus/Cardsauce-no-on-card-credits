@@ -1035,7 +1035,8 @@ return {
 			j_csau_gnorts = {
 				name = "Rekoj Gnorts",
 				text = {
-					"Allows {C:attention}Straights{} to {C:attention}wrap around{}",
+					"Allows {C:attention}Straights{} to",
+					"{C:attention}wrap around{}",
 					"{C:inactive}(ex:{} {C:attention}3 2 A K Q{}{C:inactive}){}",
 				},
 			},
@@ -2071,7 +2072,7 @@ return {
 				name = "Plaguewalker",
 				text = {
 					"{C:attention}Glass Cards{} have {X:mult,C:white} X3 {} Mult",
-					"and {C:green}#1# in 2{} chance to dbreak"
+					"and {C:green}#1# in 2{} chance to break"
 				},
 			},
 			j_csau_skeletor = {
@@ -2184,7 +2185,8 @@ return {
 			j_csau_jokerdrive = {
 				name = "Jokerdrive",
 				text = {
-					"{C:mult}+#1#{} Mult per {C:attention}Ante{} if you do not have a {C:stand}Stand{}",
+					"{C:mult}+#1#{} Mult per {C:attention}Ante{}",
+					"if you do not have a {C:stand}Stand{}",
 					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
@@ -2598,7 +2600,7 @@ return {
 				name = "Made in Heaven",
 				text = {
 					"After {C:attention}playing{} or {C:attention}discarding{}",
-					"a hand, gain a {C:blue}hand{} or {C:red}discard{}",
+					"a hand, gain a {C:blue}Hand{} or {C:red}Discard{}",
 				},
 			},
 			c_csau_steel_tusk_1 = {

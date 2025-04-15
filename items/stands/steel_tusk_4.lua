@@ -66,7 +66,7 @@ local consumInfo = {
             hand_mod = 1
         }
     },
-    cost = 8,
+    cost = 10,
     rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,

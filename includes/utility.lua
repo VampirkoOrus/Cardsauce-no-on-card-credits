@@ -618,7 +618,7 @@ G.FUNCS.csau_get_leftmost_stand = function()
 
     local stand = nil
     for i, card in ipairs(G.consumeables.cards) do
-        if card.ability.set == "Stand" then
+        if card.ability.set == "csau_Stand" then
             stand = card
             break
         end
@@ -634,7 +634,7 @@ G.FUNCS.csau_get_num_stands = function()
 
     local count = 0
     for i, v in ipairs(G.consumeables.cards) do
-        if v.ability.set == "Stand" then
+        if v.ability.set == "csau_Stand" then
             count = count+1
         end
     end

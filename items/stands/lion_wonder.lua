@@ -7,7 +7,7 @@ local consumInfo = {
             mult_mod = 1,
         }
     },
-    cost = 8,
+    cost = 10,
     rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,

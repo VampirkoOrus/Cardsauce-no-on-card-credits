@@ -7,7 +7,7 @@ local consumInfo = {
             perma_reduction = 1,
         }
     },
-    cost = 8,
+    cost = 10,
     rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,

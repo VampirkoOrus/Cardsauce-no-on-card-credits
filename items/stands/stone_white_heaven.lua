@@ -5,7 +5,7 @@ local consumInfo = {
         stand_mask = true,
         evolved = true,
     },
-    cost = 8,
+    cost = 10,
     rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,
@@ -43,7 +43,7 @@ function consumInfo.calculate(self, card, context)
             colour = G.C.BLUE
         }
     end
-    if context.pre_discard and context.cardarea == G.play then
+    if context.pre_discard then
         ease_discard(1)
         return {
             card = card,

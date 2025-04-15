@@ -12,7 +12,7 @@ local consumInfo = {
             ranks = {}
         }
     },
-    cost = 6,
+    cost = 10,
     rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,

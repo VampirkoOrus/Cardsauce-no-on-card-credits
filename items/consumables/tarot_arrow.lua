@@ -1,5 +1,5 @@
 local consumInfo = {
-    key = 'c_stand_tarot_arrow',
+    key = 'c_csau_tarot_arrow',
     name = 'The Arrow',
     set = 'Tarot',
     cost = 4,

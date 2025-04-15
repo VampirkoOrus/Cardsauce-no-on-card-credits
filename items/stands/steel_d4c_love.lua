@@ -5,7 +5,7 @@ local consumInfo = {
         stand_overlay = true,
         evolved = true,
     },
-    cost = 8,
+    cost = 10,
     rarity = 'csau_EvolvedRarity',
     alerted = true,
     hasSoul = true,
