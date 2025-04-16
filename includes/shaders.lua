@@ -104,6 +104,15 @@ SMODS.DrawStep:take_ownership('debuff', {
 	end,
 })
 
+local function hashString(input)
+    local hash = 5381  -- Seed value
+    for i = 1, #input do
+        local char = string.byte(input, i)
+        hash = ((hash * 32) + hash + char) % 2^15  -- Wrap to 16-bit integer
+    end
+    return hash
+end
+
 SMODS.DrawStep {
     key = 'stand_aura',
     order = -110,
@@ -150,6 +159,8 @@ SMODS.DrawStep {
             local screen_scale = G.TILESCALE*G.TILESIZE*(self.children.center.mouse_damping or 1)*G.CANV_SCALE
             local hovering = (self.hover_tilt or 0)
 
+            local seed = hashString(self.config.center.key..'_'..self.ID)
+
             G.SHADERS['csau_aura']:send('step_size', {0.021, 0.021})
             G.SHADERS['csau_aura']:send('time', G.TIMERS.REAL + self.ability.aura_offset)
             G.SHADERS['csau_aura']:send('noise_tex', G.ASSET_ATLAS['csau_noise'].image)
@@ -160,6 +171,7 @@ SMODS.DrawStep {
             G.SHADERS['csau_aura']:send('screen_scale', screen_scale)
             G.SHADERS['csau_aura']:send('hovering', hovering)
             G.SHADERS['csau_aura']:send('spread', aura_spread)
+            G.SHADERS['csau_aura']:send('seed', seed)
             love.graphics.setShader(G.SHADERS['csau_aura'], G.SHADERS['csau_aura'])
             self.children.stand_aura:draw_self()
             love.graphics.setShader()

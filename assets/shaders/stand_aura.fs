@@ -11,14 +11,16 @@ extern MY_HIGHP_OR_MEDIUMP vec4 outline_color;
 extern MY_HIGHP_OR_MEDIUMP vec4 base_color;
 extern MY_HIGHP_OR_MEDIUMP float spread;
 extern MY_HIGHP_OR_MEDIUMP vec2 step_size;
+extern MY_HIGHP_OR_MEDIUMP number seed;
 
 vec4 effect(vec4 color, Image tex, vec2 tex_coords, vec2 screen_coords) {
+	float t = time + seed / 65536.;
 
 	vec4 ret = Texel(tex, tex_coords);
 	vec2 upper_coords = vec2(tex_coords.x, tex_coords.y + 0.12);
 	vec2 lower_coords = vec2(tex_coords.x, tex_coords.y - 0.03);
-	float noise_value_1 = Texel(noise_tex, upper_coords + vec2(0.0, time)).x;
-	float noise_value_2 = Texel(noise_tex, lower_coords + vec2(0.0, time + 0.43)).x;
+	float noise_value_1 = Texel(noise_tex, upper_coords + vec2(0.0, t)).x;
+	float noise_value_2 = Texel(noise_tex, lower_coords + vec2(0.0, t + 0.43)).x;
 
     float alpha = 4 * ret.a;
     alpha -= Texel(tex, tex_coords + vec2(step_size.x, 0.0)).a;
