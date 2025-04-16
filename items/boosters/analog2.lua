@@ -9,9 +9,13 @@ local packInfo = {
     cost = 3,
     kind = 'VHS',
     group_key = "k_analog_pack",
-    origin = 'rlm',
     csau_dependencies = {
         'enableVHSs',
+    },
+    origin = {
+        'rlm',
+        'rlm_hitb',
+        color = 'rlm'
     }
 }
 

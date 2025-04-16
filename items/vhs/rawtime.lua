@@ -16,7 +16,11 @@ local consumInfo = {
         slide_out_delay = 0,
         destroyed = false,
     },
-    origin = 'vinny'
+    origin = {
+        'vinny',
+        'vinny_pa',
+        color = 'vinny'
+    }
 }
 
 local slide_out = 8.25
@@ -35,7 +39,7 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.cardarea == G.play and context.repetition and not context.repetition_only then
+    if card.ability.activated and context.cardarea == G.play and context.repetition and not context.repetition_only then
         if context.other_card:get_id() == 4 or context.other_card:get_id() == 7 or context.other_card:get_id() == 2 then
             return {
                 message = 'Again!',

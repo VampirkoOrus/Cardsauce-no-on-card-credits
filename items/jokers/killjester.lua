@@ -21,7 +21,7 @@ end
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.swizik } }
-    return { vars = {card.ability.x_mult_mod, card.ability.x_mult} }
+    return { vars = {card.ability.extra.x_mult_mod, card.ability.extra.x_mult} }
 end
 
 function jokerInfo.add_to_deck(self, card)
@@ -41,7 +41,7 @@ function jokerInfo.calculate(self, card, context)
         for i = 1, #G.jokers.cards do
             if G.jokers.cards[i] ~= card and not (G.jokers.cards[i].getting_sliced or G.jokers.cards[i].ability.eternal) then
                 if valid_name(G.jokers.cards[i].ability.name) then
-                    card.ability.x_mult = to_big(card.ability.x_mult) + to_big(card.ability.x_mult_mod)
+                    card.ability.extra.x_mult = to_big(card.ability.extra.x_mult) + to_big(card.ability.extra.x_mult_mod)
                     G.jokers.cards[i].getting_sliced = true
                     trigger = true
                     G.E_MANAGER:add_event(Event({func = function()
@@ -51,13 +51,13 @@ function jokerInfo.calculate(self, card, context)
             end
         end
         if trigger and not (context.blueprint_card or card).getting_sliced then
-            card_eval_status_text((context.blueprint_card or card), 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.x_mult}}})
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult}}})
         end
     end
     if context.joker_main and context.cardarea == G.jokers then
         return {
-            message = localize{type='variable',key='a_xmult',vars={to_big(card.ability.x_mult)}},
-            Xmult_mod = card.ability.x_mult,
+            message = localize{type='variable',key='a_xmult',vars={to_big(card.ability.extra.x_mult)}},
+            Xmult_mod = card.ability.extra.x_mult,
         }
     end
 end

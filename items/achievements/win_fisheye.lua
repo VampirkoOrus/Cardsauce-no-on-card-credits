@@ -3,8 +3,10 @@ local trophyInfo = {
     hidden_text = true,
     bypass_all_unlocked = true,
     unlock_condition = function(self, args)
-        if args.type == "discover_muppet" then
-            return true
+        if args.type == 'win' then
+            if next(SMODS.find_card('j_csau_fisheye')) then
+                return true
+            end
         end
     end,
 }

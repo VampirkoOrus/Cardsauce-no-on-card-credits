@@ -16,8 +16,9 @@ PathPatternReplace = UsableModPath:gsub("(%W)","%%%1")  -- shoot me in the foot,
 csau_config = SMODS.current_mod.config
 csau_enabled = copy_table(csau_config)
 
--- 2.0 toggle remains here as a global
-twoPointO = true
+SMODS.current_mod.DT = {
+	twoPoint0 = true,
+}
 
 -- I put the colors here I guess
 G.C.STAND = HEX('B85F8E')

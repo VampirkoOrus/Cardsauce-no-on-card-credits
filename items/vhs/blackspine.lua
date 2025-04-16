@@ -7,7 +7,12 @@ local consumInfo = {
     config = {
         use_activate = true,
     },
-    origin = 'rlm'
+    origin = 'rlm',
+    origin = {
+        'rlm',
+        'rlm_bs',
+        color = 'rlm'
+    }
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -15,7 +20,7 @@ function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
 end
 
-function consumInfo.activate(self, card)
+function consumInfo.activate(self, card, on)
     local key = pseudorandom_element(get_current_pool('VHS', nil, nil, 'blackspine'), pseudoseed('blackspine'))
     G.FUNCS.csau_transform_card(card, key)
 end

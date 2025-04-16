@@ -2,7 +2,6 @@ local tagInfo = {
     name = 'Plinkett Tag',
     config = {type = 'new_blind_choice'},
     alerted = true,
-    origin = 'rlm',
     csau_dependencies = {
         'enableVHSs',
     }

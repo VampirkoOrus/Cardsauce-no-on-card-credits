@@ -26,7 +26,7 @@ function jokerInfo.calculate(self, card, context)
             if to_big(spent_chips) > to_big(card.ability.extra.chip_pool) then
                 spent_chips = to_big(card.ability.extra.chip_pool)
             end
-            if not next(SMODS.find_card('j_csau_bunji')) then
+            if SMODS.food_expires(context) then
                 card.ability.extra.chip_pool = to_big(card.ability.extra.chip_pool) - to_big(spent_chips)
             end
             return {

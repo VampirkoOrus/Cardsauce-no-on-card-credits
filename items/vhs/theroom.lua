@@ -25,7 +25,7 @@ end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)
     if next(SMODS.find_card("c_csau_moodyblues")) then
-
+        card.ability.extra.runtime = card.ability.extra.runtime*2
     end
 end
 

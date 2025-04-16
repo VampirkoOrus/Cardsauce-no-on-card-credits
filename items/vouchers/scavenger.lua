@@ -4,9 +4,13 @@ local voucherInfo = {
     config = {
         rate = 4,
     },
-    origin = 'rlm',
     csau_dependencies = {
         'enableVHSs',
+    },
+    origin = {
+        'rlm',
+        'rlm_botw',
+        color = 'rlm'
     }
 }
 

@@ -11,7 +11,11 @@ local consumInfo = {
         slide_out_delay = 0,
         destroyed = false,
     },
-    origin = 'rlm'
+    origin = {
+        'rlm',
+        'rlm_wotw',
+        color = 'rlm'
+    }
 }
 
 local slide_out = 8.25

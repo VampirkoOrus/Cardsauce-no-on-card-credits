@@ -9,9 +9,13 @@ local packInfo = {
     cost = 5,
     kind = 'VHS',
     group_key = "k_jumbo_analog_pack",
-    origin = 'rlm',
     csau_dependencies = {
         'enableVHSs',
+    },
+    origin = {
+        'rlm',
+        'rlm_wotw',
+        color = 'rlm'
     }
 }
 

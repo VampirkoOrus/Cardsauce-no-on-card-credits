@@ -186,12 +186,11 @@ end
 local ref_uc = G.FUNCS.use_card
 G.FUNCS.use_card = function(e, mute, nosave)
     local card = e.config.ref_table
-    if card.ability.activation or card.ability.use_activate then
-        if card.ability.use_activate then
-            if card.config.center.activate and type(card.config.center.activate) == 'function' then
-                card.config.center.activate(card.config.center, card)
-            end
-        else
+    if card.ability.activation or (card.config.center.activate and type(card.config.center.activate) == 'function') then
+        if card.config.center.activate and type(card.config.center.activate) == 'function' then
+            card.config.center.activate(card.config.center, card, not card.ability.activated)
+        end
+        if card.ability.activation then
             G.FUNCS.tape_activate(card)
         end
         discover_card(card.config.center)

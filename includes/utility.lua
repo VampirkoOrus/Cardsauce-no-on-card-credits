@@ -31,9 +31,17 @@ local function dynamic_badges(info)
 		local badge_colour = HEX('32A852')
 		local text_colour = G.C.WHITE
 		if info.origin then
-			strings[#strings + 1] = localize('ba_'..info.origin)
-			badge_colour = HEX(G.csau_badge_colours['co_'..info.origin]) or badge_colour
-			text_colour = HEX(G.csau_badge_colours['te_'..info.origin]) or text_colour
+			if type(info.origin) == 'table' then
+				for i, v in ipairs(info.origin) do
+					strings[#strings + 1] = localize('ba_'..v)
+				end
+				badge_colour = HEX(G.csau_badge_colours['co_'..info.origin.color]) or badge_colour
+				text_colour = HEX(G.csau_badge_colours['te_'..info.origin.color]) or text_colour
+			else
+				strings[#strings + 1] = localize('ba_'..info.origin)
+				badge_colour = HEX(G.csau_badge_colours['co_'..info.origin]) or badge_colour
+				text_colour = HEX(G.csau_badge_colours['te_'..info.origin]) or text_colour
+			end
 		elseif info.part then
 			strings[#strings + 1] = localize('ba_jojo')
 			if info.part == "jojo" then
@@ -99,9 +107,9 @@ local function dynamic_badges(info)
 	end
 end
 
-function csau_filter_loading(type, args)
-	type = type or 'item'
-	if type == 'item' then
+function csau_filter_loading(item_type, args)
+	item_type = item_type or 'item'
+	if item_type == 'item' then
 		if args.dependencies then
 			for i, key in ipairs(args.dependencies) do
 				if not csau_enabled[key] then
@@ -117,7 +125,7 @@ function csau_filter_loading(type, args)
 				return true
 			end
 		end
-	elseif type == 'set' then
+	elseif item_type == 'set' then
 		return csau_enabled['enable'..args.key..'s']
 	end
 end
@@ -129,6 +137,7 @@ end
 function load_cardsauce_item(file_key, item_type, no_badges)
 	local key = string.lower(item_type)..(item_type == 'VHS' and '' or 's')
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
+
 
 	if info.csau_dependencies then
 		if not csau_filter_loading('item', { key = file_key, type = item_type, dependencies = info.csau_dependencies }) then
@@ -324,11 +333,16 @@ G.FUNCS.csau_set_big_sprites = function(centerInfo, card)
 	end
 end
 
+local function cardarea_check(card)
+	local cardarea = card.ability.set == 'Joker' and G.jokers or G.consumeables
+	return card.area == cardarea
+end
+
 --- Contextually swaps descriptions for cards based on the "detailedDescs" settings in mod config, params identical to center.generate_ui
 G.FUNCS.csau_generate_detail_desc = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table, key, no_title)
 	no_title = no_title or false
 	key = key or card.config.center.key
-	if card.config.center.discovered and not no_title then
+	if (cardarea_check(card) or card.config.center.discovered) and not no_title then
 		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
 		full_UI_table.name = localize{type = 'name', key = key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
 	end
@@ -554,6 +568,9 @@ G.FUNCS.destroy_tape = function(card, delay, ach, silent)
             card.children.center.pinch.x = true
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
                  func = function()
+					 if card.config.center.activate and type(card.config.center.activate) == 'function' then
+						 card.config.center.activate(card.config.center, card, false)
+					 end
                      card:start_dissolve({ G.C.VHS, G.C.RED })
                      --G.consumeables:remove_card(card)
                      --card:remove()
@@ -917,9 +934,37 @@ G.FUNCS.find_activated_tape = function(key)
 	if tapes and #tapes > 0 then
 		for i, v in ipairs(tapes) do
 			if v.ability.activated then
-				return true
+				return v
 			end
 		end
 	end
 	return false
+end
+
+SMODS.food_expires = function(context)
+	if next(SMODS.find_card('j_csau_bunji')) then return false end
+	return true
+end
+
+SMODS.return_to_hand = function(card, context)
+	if G.GAME.blind.boss and G.GAME.blind.name == "The Vod" then return true end
+	if G.FUNCS.find_activated_tape('c_csau_yoyoman') and table.contains(context.scoring_hand, card) then return true end
+	if context.scoring_name == "High Card" and next(SMODS.find_card("j_csau_besomeone")) and table.contains(context.scoring_hand, card) then return true end
+	return false
+end
+
+SMODS.modify_level_increment = function(card, hand, amount)
+	if next(find_joker("Don't Mind If I Do")) and hand == 'High Card' then
+		amount = amount * 2
+	end
+	return amount
+end
+
+G.FUNCS.have_multiple_jokers = function(tbl)
+	for i, v in ipairs(tbl) do
+		if not next(SMODS.find_card(v)) then
+			return false
+		end
+	end
+	return true
 end

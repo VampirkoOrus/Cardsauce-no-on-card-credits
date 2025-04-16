@@ -10,8 +10,17 @@ local consumInfo = {
         slide_move = 0,
         slide_out_delay = 0,
         destroyed = false,
+        extra = {
+            mult = 20,
+            runtime = 3,
+            uses = 0,
+        },
     },
-    origin = 'rlm'
+    origin = {
+        'rlm',
+        'rlm_j',
+        color = 'rlm'
+    }
 }
 
 local slide_out = 8.25
@@ -24,12 +33,24 @@ end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)
     if next(SMODS.find_card("c_csau_moodyblues")) then
-
+        card.ability.extra.runtime = card.ability.extra.runtime*2
     end
 end
 
 function consumInfo.calculate(self, card, context)
-
+    if card.ability.activated and context.joker_main and G.GAME.current_round.hands_left == 0 then
+        return {
+            mult = card.ability.extra.mult
+        }
+    end
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.after and not card.ability.destroyed and card.ability.activated and not bad_context then
+        card.ability.extra.uses = card.ability.extra.uses+1
+        if card.ability.extra.uses >= card.ability.extra.runtime then
+            G.FUNCS.destroy_tape(card)
+            card.ability.destroyed = true
+        end
+    end
 end
 
 function consumInfo.can_use(self, card)

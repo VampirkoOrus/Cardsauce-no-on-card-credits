@@ -469,7 +469,7 @@ for _, suit in ipairs(suits) do
     })
 end
 
-if twoPointO then
+if SMODS.current_mod.DT.twoPoint0 then
     for _, suit in ipairs(suits) do
         local palettes = {}
         palettes[#palettes+1] = {
@@ -576,7 +576,7 @@ SMODS.Atlas{ key = 'classics', px = 71, py = 95, path = 'cards/csau/classics.png
 SMODS.Atlas{ key = 'wildcards', px = 71, py = 95, path = 'cards/csau/wildcards.png',}
 SMODS.Atlas{ key = 'confidants', px = 71, py = 95, path = 'cards/csau/confidants.png',}
 
-if twoPointO then
+if SMODS.current_mod.DT.twoPoint0 then
     -- Varg Skins
     SMODS.Atlas{ key = 'voices', px = 71, py = 95, path = 'cards/csau/voices.png',}
     SMODS.Atlas{ key = 'duendes', px = 71, py = 95, path = 'cards/csau/duendes.png',}

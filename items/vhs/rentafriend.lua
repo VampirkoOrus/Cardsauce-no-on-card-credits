@@ -15,7 +15,11 @@ local consumInfo = {
         slide_out_delay = 0,
         destroyed = false,
     },
-    origin = 'vinny'
+    origin = {
+        'vinny',
+        'vinny_wotw',
+        color = 'vinny'
+    }
 }
 
 local slide_out = 8.25

@@ -12,6 +12,11 @@ local packInfo = {
     origin = 'rlm',
     csau_dependencies = {
         'enableVHSs',
+    },
+    origin = {
+        'rlm',
+        'rlm_r',
+        color = 'rlm'
     }
 }
 

@@ -118,7 +118,7 @@ local itemsToLoad = {
 ---------------------------
 --------------------------- 2.0 Items and Loading
 ---------------------------
-if twoPointO then
+if SMODS.current_mod.DT.twoPoint0 then
     itemsToLoad = {
         Joker = {
             --- [[[VINNY]]]
@@ -289,14 +289,13 @@ if twoPointO then
 
         VHS = {
             'blackspine',
-            'topslots',
             'remlezar',
             'sew',
             'shakma',
             'troll2',
             'swhs',
             'exploding',
-
+            'choppingmall',
             'roar',
             'calibighunks',
             'ishtar',
@@ -304,28 +303,29 @@ if twoPointO then
             'deadlyprey',
             'sataniccults',
             'blooddebts',
+            'topslots',
             'doubledown',
             'twistedpair',
-
+            'fatefulfindings',
             'streetsmarts',
-
+            'devilstory',
             'rentafriend',
             'tbone',
-
+            'wwvcr',
             'sos',
             'macandme',
-
+            'osteo',
             'miami',
             'lowblow',
             'kidsand',
             'spacecop',
             'theroom',
-
+            'ryansbabe',
+            'ritf',
             'suburbansasquatch',
-
             'rawtime',
             'donbeveridge',
-
+            'alienpi',
             'supershow',
             'yoyoman',
         },
@@ -461,7 +461,7 @@ for k, v in pairs(itemsToLoad) do
 end
 
 
-if not twoPointO then
+if not SMODS.current_mod.DT.twoPoint0 then
     return
 end
 

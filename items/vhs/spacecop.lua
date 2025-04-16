@@ -10,6 +10,10 @@ local consumInfo = {
         slide_move = 0,
         slide_out_delay = 0,
         destroyed = false,
+        extra = {
+            runtime = 3,
+            uses = 0
+        },
     },
     origin = 'rlm'
 }
@@ -24,12 +28,26 @@ end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)
     if next(SMODS.find_card("c_csau_moodyblues")) then
-
+        card.ability.extra.runtime = card.ability.extra.runtime*2
     end
 end
 
 function consumInfo.calculate(self, card, context)
 
+end
+local ref_mli = SMODS.modify_level_increment
+SMODS.modify_level_increment = function(card, hand, amount)
+    amount = ref_mli(card, hand, amount)
+    local sc = G.FUNCS.find_activated_tape('c_csau_spacecop')
+    if card.ability.set == 'Planet' and sc then
+        amount = amount * 2
+        sc.ability.extra.uses = sc.ability.extra.uses+1
+        if sc.ability.extra.uses >= sc.ability.extra.runtime then
+            G.FUNCS.destroy_tape(sc)
+            sc.ability.destroyed = true
+        end
+    end
+    return
 end
 
 function consumInfo.can_use(self, card)

@@ -10,8 +10,16 @@ local consumInfo = {
         slide_move = 0,
         slide_out_delay = 0,
         destroyed = false,
+        extra = {
+            runtime = 1,
+            uses = 0
+        },
     },
-    origin = 'rlm'
+    origin = {
+        'rlm',
+        'rlm_wotw',
+        color = 'rlm'
+    }
 }
 
 local slide_out = 8.25
@@ -20,11 +28,12 @@ local slide_out_delay = 1
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.yunkie } }
 end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)
     if next(SMODS.find_card("c_csau_moodyblues")) then
-
+        card.ability.extra.runtime = card.ability.extra.runtime*2
     end
 end
 

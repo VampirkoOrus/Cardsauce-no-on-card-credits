@@ -2,7 +2,6 @@ local tagInfo = {
     name = 'Spirit Tag',
     config = {type = 'immediate'},
     alerted = true,
-    part = 'jojo',
     csau_dependencies = {
         'enableStands',
     }

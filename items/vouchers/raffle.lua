@@ -1,12 +1,16 @@
 local voucherInfo = {
     name = 'Raffle',
     cost = 10,
-    origin = 'rlm',
     requires = {'v_csau_scavenger'},
     unlocked = false,
     unlock_condition = {type = 'c_vhss_bought', extra = 25},
     csau_dependencies = {
         'enableVHSs',
+    },
+    origin = {
+        'rlm',
+        'rlm_botw',
+        color = 'rlm'
     }
 }
 

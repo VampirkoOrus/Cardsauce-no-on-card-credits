@@ -48,7 +48,7 @@ local function get_lowest_card(hand)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.cardarea == G.play and context.repetition and not context.repetition_only then
+    if card.ability.activated and context.cardarea == G.play and context.repetition and not context.repetition_only then
         local lowest = get_lowest_card(context.scoring_hand)
         if context.other_card == lowest then
             return {

@@ -25,47 +25,38 @@ function jokerInfo.calc_dollar_bonus(self, card)
     end
 end
 
-local shopref = G.UIDEF.shop
-function G.UIDEF.shop()
-    local t = shopref()
-    if not next(SMODS.find_card('j_csau_bunji')) then
-        G.E_MANAGER:add_event(Event({trigger = 'after', blocking = false, func = function()
-            for _, v in ipairs(SMODS.find_card("j_csau_crudeoil")) do
-                v.ability.extra.dollars = to_big(v.ability.extra.dollars) - to_big(v.ability.extra.dollars_mod)
-                if v.ability.extra.dollars <= to_big(0) then
-                    check_for_unlock({ type = "expire_crudeoil" })
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            play_sound('tarot1')
-                            v.T.r = -0.2
-                            v:juice_up(0.3, 0.4)
-                            v.states.drag.is = true
-                            v.children.center.pinch.x = true
-                            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-                                 func = function()
-                                     card_eval_status_text(v, 'extra', nil, nil, nil, {message = localize('k_drank_ex'), colour = G.C.MONEY})
-                                     G.jokers:remove_card(v)
-                                     v:remove()
-                                     v = nil
-                                     return true
-                                 end
-                            }))
-                            return true
-                        end
-                    }))
-                else
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            card_eval_status_text(v, 'extra', nil, nil, nil, {message = "-"..localize('$') .. to_big(v.ability.extra.dollars_mod), colour = G.C.MONEY})
-                            return true
-                        end
-                    }))
-                end
+function jokerInfo.calculate(self, card, context)
+    if context.starting_shop and not context.blueprint then
+        if SMODS.food_expires(context) then
+            card.ability.extra.dollars = to_big(card.ability.extra.dollars) - to_big(card.ability.extra.dollars_mod)
+            if card.ability.extra.dollars <= to_big(0) then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        play_sound('tarot1')
+                        card.T.r = -0.2
+                        card:juice_up(0.3, 0.4)
+                        card.states.drag.is = true
+                        card.children.center.pinch.x = true
+                        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
+                             func = function()
+                                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_drank_ex'), colour = G.C.MONEY})
+                                 G.jokers:remove_card(card)
+                                 card:remove()
+                                 card = nil
+                                 return true
+                             end
+                        }))
+                        return true
+                    end
+                }))
+            else
+                return {
+                    message = "-"..localize('$') .. to_big(card.ability.extra.dollars_mod),
+                    colour = G.C.MONEY
+                }
             end
-            return true
-        end }))
+        end
     end
-    return t
 end
 
 return jokerInfo

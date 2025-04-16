@@ -9,9 +9,13 @@ local jokerInfo = {
     eternal_compat = true,
     perishable_compat = true,
     streamer = "othervinny",
-    origin = "rlm",
     csau_dependencies = {
         'enableVHSs',
+    },
+    origin = {
+        'rlm',
+        'rlm_hitb',
+        color = 'rlm'
     }
 }
 

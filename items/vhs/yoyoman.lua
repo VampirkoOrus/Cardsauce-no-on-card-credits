@@ -7,7 +7,7 @@ local consumInfo = {
     config = {
         activation = true,
         extra = {
-            runtime = 3,
+            runtime = 5,
             uses = 0,
         },
         activated = false,
@@ -15,7 +15,11 @@ local consumInfo = {
         slide_out_delay = 0,
         destroyed = false,
     },
-    origin = 'vinny'
+    origin = {
+        'vinny',
+        'vinny_wotw',
+        color = 'vinny'
+    }
 }
 
 local slide_out = 8.25
@@ -35,7 +39,14 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.after and not card.ability.destroyed and card.ability.activated and not bad_context then
+        card.ability.extra.uses = card.ability.extra.uses+1
+        if card.ability.extra.uses >= card.ability.extra.runtime then
+            G.FUNCS.destroy_tape(card)
+            card.ability.destroyed = true
+        end
+    end
 end
 
 function consumInfo.can_use(self, card)
