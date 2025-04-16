@@ -1174,7 +1174,20 @@ target = "game.lua"
 pattern = "Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})"
 position = "at"
 payload = '''
-Jimbo:add_speech_bubble('lq_'..math.random(1,localize('lq_14') and 14 or 10), nil, {quip = true})
+local range_start = 1
+local range_end = 10
+if localize('wq_20') then
+    range_end = 20
+    if G.GAME.selected_back and (G.GAME.selected_back.effect.center.key == "b_csau_vine" or G.GAME.selected_back.effect.center.key == "b_csau_varg") then
+        if G.GAME.selected_back.effect.center.key == "b_csau_vine" then
+            range_end = 11
+        elseif G.GAME.selected_back.effect.center.key == "b_csau_varg" then
+            range_start = 10
+            range_end = 20
+        end
+    end
+end
+Jimbo:add_speech_bubble('lq_'..math.random(range_start, range_end), nil, {quip = true})
 '''
 match_indent = true
 times = 1
@@ -1184,7 +1197,22 @@ times = 1
 target = "functions/state_events.lua"
 pattern = "Jimbo:add_speech_bubble('wq_'..math.random(1,7), nil, {quip = true})"
 position = "at"
-payload = "Jimbo:add_speech_bubble('wq_'..math.random(1,localize('wq_14') and 14 or 10), nil, {quip = true})"
+payload = '''
+local range_start = 1
+local range_end = 10
+if localize('wq_20') then
+    range_end = 20
+    if G.GAME.selected_back and (G.GAME.selected_back.effect.center.key == "b_csau_vine" or G.GAME.selected_back.effect.center.key == "b_csau_varg") then
+        if G.GAME.selected_back.effect.center.key == "b_csau_vine" then
+            range_end = 10
+        elseif G.GAME.selected_back.effect.center.key == "b_csau_varg" then
+            range_start = 10
+            range_end = 20
+        end
+    end
+end
+Jimbo:add_speech_bubble('wq_'..math.random(range_start,range_end), nil, {quip = true})
+'''
 match_indent = true
 times = 1
 
@@ -1195,7 +1223,6 @@ pattern = "edition = poll_edition('wheel_of_fortune', nil, true, true)"
 position = "at"
 payload = '''
 local nukie = G.FUNCS.find_activated_tape('c_csau_nukie')
-send(nukie and 'NUKIIEEEE' or "false :(")
 local no_neg = true
 if nukie then no_neg = false end
 edition = poll_edition('wheel_of_fortune', nil, no_neg, true)

@@ -50,11 +50,11 @@ return {
 			wq_8 = {
 				"YES! IT IS DONE!",
 			},
-			wq_9 = {
-				"That's my streamer!",
+			wq_8 = {
+				"Mental.",
 			},
 			wq_10 = {
-				"Mental.",
+				"That's my streamer!",
 			},
 			wq_11 = {
 				"GAMER'D!",
@@ -69,6 +69,29 @@ return {
 			wq_14 = {
 				"oughhhh....",
 				"gonna finna blow...",
+			},
+			wq_15 = {
+				"I'M HAVING SEXXXXXX",
+				"IN BAAALATROOOOOO!!!",
+				"SEXXX!!!!",
+			},
+			wq_16 = {
+				"it's the eye of the spider",
+				"it's poison in one bite",
+			},
+			wq_17 = {
+				"You're lonely rolling star!",
+			},
+			wq_18 = {
+				"We truly were...",
+				"a Balatro."
+			},
+			wq_19 = {
+				"Send that to Geoff Keighley's",
+				"Video Game Olympics!"
+			},
+			wq_20 = {
+				"NÜT!"
 			},
 
 
@@ -112,18 +135,41 @@ return {
 				"Northernlion now.",
 			},
 			lq_11 = {
-				"AGGA",
+				"Make sure not to",
+				"click on me :)",
 			},
 			lq_12 = {
-				"Vafaan!",
+				"AGGA",
 			},
 			lq_13 = {
+				"Vafaan!",
+			},
+			lq_14 = {
 				"YO, SHIT FOR BRAINS!",
 				"WHAT GODDAMN HAND",
 				"WAS THAT, HUH?!",
 			},
-			lq_14 = {
+			lq_15 = {
 				"Hide in shame.",
+			},
+			lq_16 = {
+				"BALATRO OVER?",
+				"What do you mean",
+				"BALATRO OVER?!",
+			},
+			lq_17 = {
+				"Grandma has died!",
+			},
+			lq_18 = {
+				"No, no, no, here's what",
+				"we're going to do instead,",
+				"everyone draw a Bunco card...",
+			},
+			lq_19 = {
+				"PLAY SOMETHING!",
+			},
+			lq_20 = {
+				"Habbo Hotel time!",
 			},
 
 
@@ -595,14 +641,7 @@ return {
 			ach_csau_discover_bunji = "Lemme Just Say This... Yum",
 			ach_csau_discover_bjbros = "*Chain Attack OST Plays*",
 			ach_csau_discover_drippy = "The Dripping Tap",
-
 			ach_csau_activate_quixotic = "From Some Place Even Higher",
-
-
-
-
-
-
 		},
 		achievement_descriptions = {
 			--- [[NEW ACHIEVEMENTS]]
@@ -660,6 +699,9 @@ return {
 			ach_csau_big_meat = "Unlock every Cardsauce Achievement",
 
 
+
+
+
 			--- [[OLD CHIEVOS]]
 			ach_csau_discover_cousinsclub = "Discover Cousin's Club",
 			ach_csau_discover_disguy = "Discover DIS JOAKERRR",
@@ -709,15 +751,8 @@ return {
 			ach_csau_discover_koffing = "Discover That Fucking Koffing Again",
 			ach_csau_discover_frich = "Discover Gourmand of Faramore",
 			ach_csau_discover_bunji = "Discover Scourge Of Pantsylvania",
-
 			ach_csau_discover_bjbros = "Discover Blowzo Brothers",
 			ach_csau_discover_drippy = "Discover Dripping Joker",
-
-
-
-
-
-
 		}
 	},
 	descriptions = {

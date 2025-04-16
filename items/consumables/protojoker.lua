@@ -5,7 +5,7 @@ local consumInfo = {
     alerted = true,
     hidden = true,
     soul_rate = 0.003,
-    soul_set = "Tarot",
+    soul_set = "Joker",
     streamer = 'vinny',
     csau_dependencies = {
         'enableVinnyContent',
