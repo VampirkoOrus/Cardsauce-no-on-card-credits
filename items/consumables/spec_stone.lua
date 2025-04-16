@@ -3,7 +3,10 @@ local consumInfo = {
     set = "Spectral",
     cost = 4,
     alerted = true,
-    part = 'phantom'
+    part = 'phantom',
+    csau_dependencies = {
+        'enableStands',
+    }
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

@@ -11,6 +11,7 @@ local consumInfo = {
         slide_out_delay = 0,
         destroyed = false,
     },
+    origin = 'joel'
 }
 
 local slide_out = 8.25
@@ -18,7 +19,7 @@ local slide_mod = 0.25
 local slide_out_delay = 1
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.akai } }
+    info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
 end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)

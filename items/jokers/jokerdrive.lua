@@ -12,6 +12,9 @@ local jokerInfo = {
     perishable_compat = true,
     streamer = "otherjoel",
     part = 'phantom',
+    csau_dependencies = {
+        'enableStands',
+    }
 }
 
 

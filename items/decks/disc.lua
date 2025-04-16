@@ -9,7 +9,9 @@ local deckInfo = {
         return {vars = {localize{type = 'name_text', key = 'v_crystal_ball', set = 'Voucher'}}}
     end,
     unlocked = false,
-    part = 'stone',
+    csau_dependencies = {
+        'enableStands',
+    }
 }
 
 function deckInfo.check_for_unlock(self, args)

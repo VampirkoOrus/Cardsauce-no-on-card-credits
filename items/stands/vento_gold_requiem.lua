@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Gold Experience Requiem',
     set = 'csau_Stand',
     config = {
+        stand_mask = true,
         aura_colors = { '99d3ffDC' , 'd3f5fbDC' },
         evolved = true,
         extra = {
@@ -18,6 +19,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } }
     return { vars = { card.ability.extra.chance, card.ability.extra.divide, G.GAME.probabilities.normal}}
 end
 

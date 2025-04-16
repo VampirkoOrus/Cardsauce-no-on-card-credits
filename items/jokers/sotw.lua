@@ -15,6 +15,9 @@ local jokerInfo = {
     perishable_compat = true,
     streamer = "joel",
     part = 'stardust',
+    csau_dependencies = {
+        'enableStands',
+    }
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -41,6 +44,15 @@ function jokerInfo.calculate(self, card, context)
             message = localize{type='variable',key='a_xmult',vars={to_big(card.ability.extra.x_mult)}},
             Xmult_mod = card.ability.extra.x_mult,
         }
+    end
+    if context.buying_card then
+        if context.card.ability.set == "Voucher" then
+            return {
+                message = localize('k_upgrade_ex'),
+                colour = G.C.RED,
+                card = card
+            }
+        end
     end
 end
 

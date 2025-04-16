@@ -2,6 +2,9 @@ local consumInfo = {
     name = 'Lutetia',
     set = "Planet",
     config = { hand_type = 'csau_Blackjack' },
+    csau_dependencies = {
+        'enableJoelContent',
+    }
 }
 
 consumInfo.loc_vars = function(self, info_queue, card)
@@ -16,7 +19,7 @@ consumInfo.in_pool = function(self, args)
     end
 end
 
-consumInfo.set_badges = function(self, card, badges)
+consumInfo.set_card_type_badge = function(self, card, badges)
     badges[1] = create_badge(localize('k_asteroid'), get_type_colour(self or card.config, card), nil, 1.2)
 end
 

@@ -4,7 +4,10 @@ local voucherInfo = {
     origin = 'rlm',
     requires = {'v_csau_scavenger'},
     unlocked = false,
-    unlock_condition = {type = 'c_vhss_bought', extra = 25}
+    unlock_condition = {type = 'c_vhss_bought', extra = 25},
+    csau_dependencies = {
+        'enableVHSs',
+    }
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

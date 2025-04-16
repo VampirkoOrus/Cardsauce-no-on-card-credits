@@ -13,6 +13,9 @@ local jokerInfo = {
     perishable_compat = false,
     streamer = "otherjoel",
     part = 'diamond',
+    csau_dependencies = {
+        'enableStands',
+    }
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

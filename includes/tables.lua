@@ -76,6 +76,7 @@ G.csau_team = {
 	['dolos'] = "Dolos",
 	['kuro'] = "SoloDimeKuro",
 	['donk'] = "Donk.TK",
+	['greeky'] = "greek_shmeek",
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",

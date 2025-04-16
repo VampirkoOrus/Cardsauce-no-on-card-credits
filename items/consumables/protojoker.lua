@@ -7,6 +7,9 @@ local consumInfo = {
     soul_rate = 0.003,
     soul_set = "Tarot",
     streamer = 'vinny',
+    csau_dependencies = {
+        'enableVinnyContent',
+    }
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

@@ -5,6 +5,9 @@ local voucherInfo = {
         rate = 4,
     },
     origin = 'rlm',
+    csau_dependencies = {
+        'enableVHSs',
+    }
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

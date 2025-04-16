@@ -13,6 +13,9 @@ local jokerInfo = {
     perishable_compat = true,
     streamer = "othervinny",
     origin = "rlm",
+    csau_dependencies = {
+        'enableVHSs',
+    }
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

@@ -3,6 +3,9 @@ local tagInfo = {
     config = {type = 'immediate'},
     alerted = true,
     part = 'jojo',
+    csau_dependencies = {
+        'enableStands',
+    }
 }
 
 tagInfo.loc_vars = function(self, info_queue, card)

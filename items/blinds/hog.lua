@@ -7,7 +7,9 @@ local blindInfo = {
     vars = {},
     debuff = {},
     boss = {min = 3, max = 10},
-    streamer = 'vinny',
+    csau_dependencies = {
+        'enableVinnyContent',
+    }
 }
 
 function blindInfo.recalc_debuff(self, card, from_blind)

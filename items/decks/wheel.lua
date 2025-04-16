@@ -9,7 +9,9 @@ local deckInfo = {
             'v_crystal_ball',
         },
     },
-    origin = 'rlm',
+    csau_dependencies = {
+        'enableVHSs',
+    }
 }
 
 deckInfo.loc_vars = function(self, info_queue, card)

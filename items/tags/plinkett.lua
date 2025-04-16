@@ -3,6 +3,9 @@ local tagInfo = {
     config = {type = 'new_blind_choice'},
     alerted = true,
     origin = 'rlm',
+    csau_dependencies = {
+        'enableVHSs',
+    }
 }
 
 tagInfo.loc_vars = function(self, info_queue, card)

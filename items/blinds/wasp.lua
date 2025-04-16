@@ -7,7 +7,9 @@ local blindInfo = {
     vars = {},
     debuff = {},
     boss = {min = 2, max = 10},
-    streamer = 'joel',
+    csau_dependencies = {
+        'enableJoelContent',
+    }
 }
 
 function blindInfo.defeat(self)

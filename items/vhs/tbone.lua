@@ -7,7 +7,7 @@ local consumInfo = {
     config = {
         activation = true,
         extra = {
-            mult = 10,
+            mult = 5,
             runtime = 3,
             uses = 0,
         },
@@ -16,6 +16,7 @@ local consumInfo = {
         slide_out_delay = 0,
         destroyed = false,
     },
+    origin = 'vinny'
 }
 
 local slide_out = 8.25
@@ -24,7 +25,7 @@ local slide_out_delay = 1
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
-    return { vars = { card.ability.extra.mult, card.ability.extra.runtime, card.ability.extra.uses } }
+    return { vars = { card.ability.extra.mult, card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)

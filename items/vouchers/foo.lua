@@ -6,7 +6,10 @@ local voucherInfo = {
             rate = 1,
         }
     },
-    part = 'stone'
+    part = 'stone',
+    csau_dependencies = {
+        'enableStands',
+    }
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

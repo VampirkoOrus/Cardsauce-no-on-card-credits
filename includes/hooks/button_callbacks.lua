@@ -183,4 +183,39 @@ function G.FUNCS.reroll_shop(e)
     return ret
 end
 
+local ref_uc = G.FUNCS.use_card
+G.FUNCS.use_card = function(e, mute, nosave)
+    local card = e.config.ref_table
+    if card.ability.activation or card.ability.use_activate then
+        if card.ability.use_activate then
+            if card.config.center.activate and type(card.config.center.activate) == 'function' then
+                card.config.center.activate(card.config.center, card)
+            end
+        else
+            G.FUNCS.tape_activate(card)
+        end
+        discover_card(card.config.center)
+        if card.area and card.area ~= G.consumeables then
+            if card.area and card.area == G.pack_cards then
+                if G.GAME.pack_choices and G.GAME.pack_choices > 1 then
+                    if G.booster_pack.alignment.offset.py then
+                        G.booster_pack.alignment.offset.y = G.booster_pack.alignment.offset.py
+                        G.booster_pack.alignment.offset.py = nil
+                    end
+                    G.GAME.pack_choices = G.GAME.pack_choices - 1
+                end
+                card.area:remove_card(card)
+            end
+            card:add_to_deck()
+            G.consumeables:emplace(card)
+            play_sound('card1', 0.8, 0.6)
+            play_sound('generic1')
+            dont_dissolve = true
+            delay_fac = 0.2
+        end
+        return
+    end
+    e.config.button = nil
+    ref_uc(e, mute, nosave)
+end
 

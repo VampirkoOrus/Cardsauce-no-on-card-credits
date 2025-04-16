@@ -54,8 +54,24 @@ return {
 				"That's my streamer!",
 			},
 			wq_10 = {
+				"Mental.",
+			},
+			wq_11 = {
 				"GAMER'D!",
 			},
+			wq_12 = {
+				"BA-BOOM, Jackpot!",
+			},
+			wq_13 = {
+				"Let's see SimpleFlips",
+				"do THAT!"
+			},
+			wq_14 = {
+				"oughhhh....",
+				"gonna finna blow...",
+			},
+
+
 			lq_1 = {
 				"HUGE waste of",
 				"brain cells!",
@@ -77,23 +93,40 @@ return {
 				"WHAT DO YOU MEAN.",
 			},
 			lq_6 = {
-				"AGGA",
-			},
-			lq_7 = {
-				"I'm watching",
-				"Northernlion now.",
-			},
-			lq_8 = {
 				"Oh, fuck you, Luigi!",
 			},
-			lq_9 = {
+			lq_7 = {
 				"What a bimbo!",
 			},
-			lq_10 = {
+			lq_8 = {
 				"Don't worry, Johnny",
 				"will cut this out.",
 				"Right?",
 			},
+			lq_9 = {
+				"Why he die?",
+				"WHY HE DIE?!",
+			},
+			lq_10 = {
+				"I'm watching",
+				"Northernlion now.",
+			},
+			lq_11 = {
+				"AGGA",
+			},
+			lq_12 = {
+				"Vafaan!",
+			},
+			lq_13 = {
+				"YO, SHIT FOR BRAINS!",
+				"WHAT GODDAMN HAND",
+				"WAS THAT, HUH?!",
+			},
+			lq_14 = {
+				"Hide in shame.",
+			},
+
+
 			roche_voiceline = {
 				"A {C:planet}Planet{} card for",
 				"you, my friend!"
@@ -268,10 +301,10 @@ return {
 			vs_options_muteWega = "Mute WAAUGGHGHHHHGHH",
 			vs_options_muteWega_desc = "Check this box to mute WAAUGGHGHHHHGHH's screams",
 			vs_options_detailedDescs = "Detailed Descriptions",
-			vs_options_detailedDescs_desc = "Replaces the jokey descriptions on certain Jokers with standard ones",
-			vs_options_enableVinkers = "Vinny-centric Jokers",
-			vs_options_enableJoelkers = "Joel-centric Jokers",
-			vs_options_enableOtherJokers = "Other Jokers",
+			vs_options_detailedDescs_desc = "Replaces the jokey descriptions on certain cards with standard ones",
+			vs_options_enableVinnyContent = "Vinny-centric Content",
+			vs_options_enableJoelContent = "Joel-centric Content",
+			vs_options_enableJokers = "Jokers",
 			vs_options_enableConsumables = "Consumable Cards",
 			vs_options_enableDecks = "Decks",
 			vs_options_enableBlinds = "Boss Blinds",
@@ -283,6 +316,12 @@ return {
 			vs_options_enableColors = "Custom Colors",
 			vs_options_enableTarotSkins = "Tarot Card Reskins",
 			vs_options_enableEasterEggs = "Easter Eggs",
+			vs_options_enableVHSs = "VHS/RedLetterMedia Content",
+			vs_options_enableStands = "Stands/Jojo Content",
+			vs_options_enableTags = "Tags",
+			vs_options_enableBoosters = "Booster Packs",
+			vs_options_enableVouchers = "Vouchers",
+			vs_options_enableEditions = "Editions",
 			vs_options_resetAchievements_r = "Reset Achievements",
 			vs_options_resetAchievements_desc = "Click this button to reset all Cardsauce achievements",
 			vs_options_chadNova_r = "Undo Chadnova",
@@ -381,6 +420,9 @@ return {
 			k_fort_doubled = "Blind requirement doubled!",
 			k_morshu_ui = "COME BACK RICHER",
 			b_save = "SAVE",
+			k_ts_doubled = "Double Winnings!",
+			k_ts_tripled = "Triple Winnings!",
+			k_ts_wild = "WIILLDDD!",
 
 			-- badge titles
 			ba_vinny = "Vinesauce",
@@ -788,17 +830,12 @@ return {
 			vhs_activation = {
 				name = "VHS Activation",
 				text = {
-					"When clicking the use button,",
-					"this {C:vhs}VHS Tape's{} Joker-like ability",
-					"will become {C:attention}activated{}, and it",
-					"won't immediately disappear.",
-					"This activation state can be {C:attention}toggled{},",
-					"and when its ability is used up, the",
-					"tape is then {C:attention}destroyed.",
-
+					"{C:vhs}VHS Tapes{} can have",
+					"their passive abilities",
+					"{C:attention}toggled{} on/off",
 				},
 			},
-			stand_info = {
+			csau_stand_info = {
 				name = "Stand Limit",
 				text = {
 					"You can only",
@@ -806,7 +843,7 @@ return {
 					"at a time",
 				},
 			},
-			stand_info_unlimited = {
+			csau_stand_info_unlimited = {
 				name = "Stand Limit",
 				text = {
 					"You can have",
@@ -1930,6 +1967,7 @@ return {
 				text = {
 					"{C:tarot}Wheel of Fortune{} cards have",
 					"{C:green}3 in 4{} chance to succeed",
+					"{s:0.8,C:inactive}(Odds not affected by probability manipulation){}",
 				},
 				unlock={
 					"Have a {E:1,C:tarot}Wheel of Fortune{} trigger",
@@ -2348,34 +2386,33 @@ return {
 			c_csau_blackspine = {
 				name = "Black Spine",
 				text = {
-					"When {C:attention}Blind{} is selected, create a",
-					"random {C:vhs}VHS Tape{}. {C:attention}Unpauseable",
-					"{C:inactive}(Must have room){}",
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
 				},
 			},
 			c_csau_doubledown = {
 				name = "Double Down",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult when {C:attention}activated",
-					"{C:vhs}Running Time{}: {C:attention}#2#{} hands {C:inactive}({}{C:attention}#3#{}{C:inactive}/#2#)"
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
 			c_csau_topslots = {
-				name = "Top Slots - Spotting The Best",
+				name = "Top Slots",
 				text = {
-					"When {C:attention}Blind{} is selected,",
-					"{C:green}#1# in #2#{} chance to win {C:money}$#3#{}",
-					"{C:green}#1# in #4#{} chance to {C:attention}double{} winnings",
-					"{C:green}#1# in #5#{} chance to {C:attention}triple{} winnings",
-					"{C:attention}Unpauseable",
+					"When {C:attention}activated{}, at end of round",
+					"gain {C:money}$#1#{} per {C:attention}#2#%{} over the required",
+					"chips to beat the blind",
+					"{C:green}#3# in #4#{} chance to {C:attention}double{} winnings",
+					"{C:green}#3# in #5#{} chance to {C:attention}triple{} winnings",
+					"{C:vhs}Running Time{}: {C:attention}#6#{} Rounds"
 				},
 			},
 			c_csau_donbeveridge = {
 				name = "Don Beveridge Customerization Seminar",
 				text = {
-					"When {C:attention}Blind{} is selected, create a",
-					"random {C:attention}Food Joker{}. {C:attention}Unpauseable",
-					"{C:inactive}(Must have room){}",
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
 				},
 			},
 			c_csau_tbone = {
@@ -2383,31 +2420,28 @@ return {
 				text = {
 					"Each Joker gives {C:mult}+#1#{} Mult",
 					"when this tape is {C:attention}activated{}",
-					"{C:vhs}Running Time{}: {C:attention}#2#{} hands {C:inactive}({}{C:attention}#3#{}{C:inactive}/#2#)"
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
 			c_csau_twistedpair = {
 				name = "Twisted Pair",
 				text = {
-					"When {C:attention}activated{}, first card in next",
-					"played pair gets a random {C:attention}Edition{}",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} hands {C:inactive}({}{C:attention}#2#{}{C:inactive}/#1#)"
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
 				},
 			},
 			c_csau_calibighunks = {
 				name = "California Big Hunks",
 				text = {
-					"When {C:attention}activated{}, next {C:attention}#1#{} played Kings",
-					"are enhanced to {C:attention}Mult Cards{}",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} hands {C:inactive}({}{C:attention}#2#{}{C:inactive}/#1#)"
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
 				},
 			},
 			c_csau_remlezar = {
 				name = "Creating Rem Lezar",
 				text = {
-					"When {C:attention}Blind{} is selected, gain an {C:attention}Ethereal Tag",
-					"If selected Blind is a {C:attention}Boss Blind{},",
-					"disable its effect. {C:attention}Unpauseable"
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
 				},
 			},
 			c_csau_suburbansasquatch = {
@@ -2418,10 +2452,169 @@ return {
 				},
 			},
 			c_csau_streetsmarts = {
-				name = "Street Smarts: Straight Talk For Kids, Teens & Parents",
+				name = "Street Smarts",
 				text = {
 					"{E:1,s:1.3}SORRY NOTHING",
 					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_supershow = {
+				name = "The Super Mario Bros. Super Show",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_blooddebts = {
+				name = "Blood Debts",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_deadlyprey = {
+				name = "Deadly Prey",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_exploding = {
+				name = "Exploding Varmints",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_sos = {
+				name = "SOS",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_swhs = {
+				name = "Star Wars Holiday Special",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_roar = {
+				name = "Roar",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_sew = {
+				name = "Surviving Edged Weapons",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_miami = {
+				name = "Miami Connection",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_nukie = {
+				name = "Nukie",
+				text = {
+					"When {C:attention}activated{}, each {C:attention}Wheel of Fortune{}",
+					"used has a chance to give {C:dark_edition}Negative",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Wheel of Fortunes"
+				},
+			},
+			c_csau_lowblow = {
+				name = "Low Blow",
+				text = {
+					"{C:attention}Retrigger{} lowest card used",
+					"in scoring {C:attention}#1#{} additional times",
+					"when this tape is {C:attention}activated{}",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
+				},
+			},
+			c_csau_spacecop = {
+				name = "Space Cop",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_shakma = {
+				name = "Shakma",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_troll2 = {
+				name = "Troll 2",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_macandme = {
+				name = "Mac and Me",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_kidsand = {
+				name = "Kid Sand Airbags",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_theroom = {
+				name = "The Room",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_sataniccults = {
+				name = "Law Enforcement Guide to Satanic Cults",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_rentafriend = {
+				name = "Rent-a-Friend",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_yoyoman = {
+				name = "Yo-Yo Man Instructional Video",
+				text = {
+					"{E:1,s:1.3}SORRY NOTHING",
+					"{C:inactive}(WIP, no ability yet)"
+				},
+			},
+			c_csau_ishtar = {
+				name = "Ishtar",
+				text = {
+					"Each scoring {C:attention}4{}, {C:attention}2{}, and {C:attention}3{} gives",
+					"{C:chips}+#1#{} Chips when this tape is {C:attention}activated{}",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
+				},
+			},
+			c_csau_rawtime = {
+				name = "rAw TiMe",
+				text = {
+					"{C:attention}Retrigger{} each played {C:attention}4{}, {C:attention}7{}, or {C:attention}3{}",
+					"when this tape is {C:attention}activated{}",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
 			},
 		},

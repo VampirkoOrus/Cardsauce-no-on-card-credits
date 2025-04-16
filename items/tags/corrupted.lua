@@ -2,6 +2,10 @@ local tagInfo = {
     name = 'Corrupted Tag',
     config = {type = 'store_joker_modify', edition = 'csau_corrupted', odds = 3},
     alerted = true,
+    csau_dependencies = {
+        'enableVinnyContent',
+        'enableEditions',
+    }
 }
 
 tagInfo.loc_vars = function(self, info_queue, card)

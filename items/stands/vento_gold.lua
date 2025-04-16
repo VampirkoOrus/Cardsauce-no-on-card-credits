@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Gold Experience',
     set = 'csau_Stand',
     config = {
+        stand_mask = true,
         aura_colors = { 'fff679DC' , 'f9d652DC' },
         evolve_key = 'c_csau_vento_gold_requiem'
     },
@@ -14,6 +15,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } }
     return { vars = { localize(G.GAME and G.GAME.wigsaw_suit or "Hearts", 'suits_plural'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or "Hearts"]}} }
 end
 

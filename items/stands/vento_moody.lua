@@ -11,6 +11,9 @@ local consumInfo = {
     hasSoul = true,
     part = 'vento',
     in_progress = true,
+    csau_dependencies = {
+        'enableVHSs'
+    }
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

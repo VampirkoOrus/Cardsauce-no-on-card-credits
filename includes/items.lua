@@ -289,7 +289,6 @@ if twoPointO then
 
         VHS = {
             'blackspine',
-            'donbeveridge',
             'topslots',
             'remlezar',
             'sew',
@@ -300,17 +299,17 @@ if twoPointO then
 
             'roar',
             'calibighunks',
-
+            'ishtar',
             'nukie',
             'deadlyprey',
-
+            'sataniccults',
             'blooddebts',
             'doubledown',
             'twistedpair',
 
             'streetsmarts',
 
-
+            'rentafriend',
             'tbone',
 
             'sos',
@@ -323,6 +322,12 @@ if twoPointO then
             'theroom',
 
             'suburbansasquatch',
+
+            'rawtime',
+            'donbeveridge',
+
+            'supershow',
+            'yoyoman',
         },
 
         Stand = {
@@ -447,7 +452,7 @@ end
 
 for k, v in pairs(itemsToLoad) do
     if next(itemsToLoad[k]) then
-        if (k == 'Joker' or ((k == 'VHS' or k == 'Stand') and csau_enabled['enableConsumables']) or csau_enabled['enable'..k..'s']) then
+        if csau_filter_loading('set', {key = k}) then
             for i = 1, #v do
                 load_cardsauce_item(v[i], k, false)
             end
@@ -461,80 +466,81 @@ if not twoPointO then
 end
 
 --------------------------- VHS Consumable Type
-
-SMODS.Sound({ key = "vhsopen", path = "vhsopen.ogg"})
-SMODS.Sound({ key = "vhsclose", path = "vhsclose.ogg"})
-SMODS.UndiscoveredSprite{ key = "VHS", atlas = "csau_undiscovered", pos = { x = 0, y = 0 }}
-SMODS.ConsumableType{
-    key = "VHS",
-    primary_colour = G.C.VHS,
-    secondary_colour = G.C.VHS,
-    collection_rows = { 7, 7 },
-    shop_rate = 0,
-    loc_txt = {},
-    default = "c_csau_blackspine",
-    can_stack = false,
-    can_divide = false,
-}
-
-
+---
+if csau_enabled['enableVHSs'] then
+    SMODS.Sound({ key = "vhsopen", path = "vhsopen.ogg"})
+    SMODS.Sound({ key = "vhsclose", path = "vhsclose.ogg"})
+    SMODS.UndiscoveredSprite{ key = "VHS", atlas = "csau_undiscovered", pos = { x = 0, y = 0 }}
+    SMODS.ConsumableType{
+        key = "VHS",
+        primary_colour = G.C.VHS,
+        secondary_colour = G.C.VHS,
+        collection_rows = { 7, 7 },
+        shop_rate = 0,
+        loc_txt = {},
+        default = "c_csau_blackspine",
+        can_stack = false,
+        can_divide = false,
+    }
+end
 
 --------------------------- Stands consumable type
 
+if csau_enabled['enableStands'] then
+    SMODS.ObjectType { default = 'c_csau_stardust_star', key = 'csau_StandPool', prefix_config = false }
+    SMODS.ObjectType { default = 'c_csau_stardust_star', key = 'csau_EvolvedPool', prefix_config = false}
 
-SMODS.ObjectType { default = 'c_csau_stardust_star', key = 'csau_StandPool', prefix_config = false }
-SMODS.ObjectType { default = 'c_csau_stardust_star', key = 'csau_EvolvedPool', prefix_config = false}
 
+    SMODS.Rarity {
+        key = 'csau_StandRarity',
+        prefix_config = false,
+        default_weight = 1,
+        no_mod_badges = true,
+        badge_colour = 'FFFFFF'
+    }
 
-SMODS.Rarity {
-	key = 'csau_StandRarity',
-	prefix_config = false,
-	default_weight = 1,
-	no_mod_badges = true,
-	badge_colour = 'FFFFFF'
-}
+    SMODS.Rarity {
+        key = 'csau_EvolvedRarity',
+        prefix_config = false,
+        default_weight = 0,
+        no_mod_badges = true,
+        badge_colour = 'FFFFFF',
+    }
 
-SMODS.Rarity {
-	key = 'csau_EvolvedRarity',
-	prefix_config = false,
-	default_weight = 0,
-	no_mod_badges = true,
-	badge_colour = 'FFFFFF',
-}
-
--- Stand Consumable
-SMODS.Atlas({ key = 'undiscovered', path = "undiscovered.png", px = 71, py = 95 })
-SMODS.UndiscoveredSprite { key = "csau_Stand", atlas = "csau_undiscovered", pos = { x = 1, y = 0 }, overlay_pos = { x = 2, y = 0 }, prefix_config = false }
-SMODS.ConsumableType {
-	key = 'csau_Stand',
-	prefix_config = false,
-	primary_colour = G.C.STAND,
-	secondary_colour = G.C.STAND,
-	collection_rows = { 8, 8 },
-	shop_rate = 0,
-	default = "c_csau_diamond_star",
-	rarities = {
-		{key = 'csau_StandRarity'},
-		{key = 'csau_EvolvedRarity'},
-	},
-	inject_card = function(self, center)
-		if center.set ~= self.key then SMODS.insert_pool(G.P_CENTER_POOLS[self.key], center) end
-		local pool_key = center.config.evolved and 'csau_EvolvedPool' or 'csau_StandPool'
-		SMODS.insert_pool(G.P_CENTER_POOLS[pool_key], center)
-		if center.rarity and self.rarity_pools[center.rarity] then
-			SMODS.insert_pool(self.rarity_pools[center.rarity], center)
-		end
-	end,
-	delete_card = function(self, center)
-		if center.set ~= self.key then SMODS.remove_pool(G.P_CENTER_POOLS[self.key], center.key) end
-		local pool_key = center.config.evolved and 'csau_EvolvedPool' or 'csau_StandPool'
-		SMODS.remove_pool(G.P_CENTER_POOLS[pool_key], center)
-		if center.rarity and self.rarity_pools[center.rarity] then
-			SMODS.remove_pool(self.rarity_pools[center.rarity], center.key)
-		end
-	end,
-}
-SMODS.Shader {
-	key = 'stand_mask',
-	path = 'stand_mask.fs',
-}
+    -- Stand Consumable
+    SMODS.Atlas({ key = 'undiscovered', path = "undiscovered.png", px = 71, py = 95 })
+    SMODS.UndiscoveredSprite { key = "csau_Stand", atlas = "csau_undiscovered", pos = { x = 1, y = 0 }, overlay_pos = { x = 2, y = 0 }, prefix_config = false }
+    SMODS.ConsumableType {
+        key = 'csau_Stand',
+        prefix_config = false,
+        primary_colour = G.C.STAND,
+        secondary_colour = G.C.STAND,
+        collection_rows = { 8, 8 },
+        shop_rate = 0,
+        default = "c_csau_diamond_star",
+        rarities = {
+            {key = 'csau_StandRarity'},
+            {key = 'csau_EvolvedRarity'},
+        },
+        inject_card = function(self, center)
+            if center.set ~= self.key then SMODS.insert_pool(G.P_CENTER_POOLS[self.key], center) end
+            local pool_key = center.config.evolved and 'csau_EvolvedPool' or 'csau_StandPool'
+            SMODS.insert_pool(G.P_CENTER_POOLS[pool_key], center)
+            if center.rarity and self.rarity_pools[center.rarity] then
+                SMODS.insert_pool(self.rarity_pools[center.rarity], center)
+            end
+        end,
+        delete_card = function(self, center)
+            if center.set ~= self.key then SMODS.remove_pool(G.P_CENTER_POOLS[self.key], center.key) end
+            local pool_key = center.config.evolved and 'csau_EvolvedPool' or 'csau_StandPool'
+            SMODS.remove_pool(G.P_CENTER_POOLS[pool_key], center)
+            if center.rarity and self.rarity_pools[center.rarity] then
+                SMODS.remove_pool(self.rarity_pools[center.rarity], center.key)
+            end
+        end,
+    }
+    SMODS.Shader {
+        key = 'stand_mask',
+        path = 'stand_mask.fs',
+    }
+end

@@ -231,7 +231,7 @@ end
 local ref_as = SMODS.always_scores
 SMODS.always_scores = function(card)
     if G.FUNCS.find_sts_form('diamonds') then return true end
-    ref_as(card)
+    return ref_as(card)
 end
 
 function jokerInfo.update(self, card)

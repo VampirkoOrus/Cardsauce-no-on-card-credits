@@ -99,6 +99,29 @@ local function dynamic_badges(info)
 	end
 end
 
+function csau_filter_loading(type, args)
+	type = type or 'item'
+	if type == 'item' then
+		if args.dependencies then
+			for i, key in ipairs(args.dependencies) do
+				if not csau_enabled[key] then
+					return false
+				end
+			end
+			return true
+		elseif args.streamer then
+			if ((args.streamer == 'vinny' or args.streamer == 'othervinny') and not csau_enabled['enableVinnyContent'])
+			or ((args.streamer == 'joel' or args.streamer == 'otherjoel') and not csau_enabled['enableJoelContent']) then
+				return false
+			else
+				return true
+			end
+		end
+	elseif type == 'set' then
+		return csau_enabled['enable'..args.key..'s']
+	end
+end
+
 --- Load an item definition using SMODS
 --- @param file_key string file name to load within the "Items" directory, excluding file extension
 --- @param item_type string SMODS item type (such as Joker, Consumable, Deck, etc)
@@ -106,6 +129,17 @@ end
 function load_cardsauce_item(file_key, item_type, no_badges)
 	local key = string.lower(item_type)..(item_type == 'VHS' and '' or 's')
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
+
+	if info.csau_dependencies then
+		if not csau_filter_loading('item', { key = file_key, type = item_type, dependencies = info.csau_dependencies }) then
+			return
+		end
+	elseif info.streamer then
+		if not csau_filter_loading('item', { key = file_key, type = item_type, streamer = info.streamer }) then
+			return
+		end
+	end
+	send(file_key)
 
 	info.key = file_key
 	if item_type ~= 'Challenge' and item_type ~= 'Edition' then
@@ -131,20 +165,6 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 				badges[#badges+1] = dynamic_badges(info)
 			end
 		end
-	end
-
-	if item_type == 'Joker' then        
-        -- need streamer information to load
-        if not info.streamer then
-            return
-        end
-
-        -- load based on streamer type
-        if ((info.streamer == 'vinny' or info.streamer == 'othervinny') and not csau_enabled['enableVinkers'])
-                or ((info.streamer == 'joel' or info.streamer == 'otherjoel') and not csau_enabled['enableJoelkers'])
-                or ((info.streamer == 'mike' or info.streamer == 'other' or info.streamer == 'othervinny') and not csau_enabled['enableOtherJokers']) then
-            return
-        end
 	end
 
 	if item_type == 'Blind' and info.color then
@@ -182,7 +202,7 @@ math.randomseed(os.time())
 --- External random function for on-load purposes
 --- @param chance number Postive integer to compare using math.random()
 --- @returns boolean # Result of the random roll
-function externalPsuedorandom(chance, total)
+function externalPseudorandom(chance, total)
 	if total <= 0 then return false end
 	local randomNumber = math.random(1, total)
 	return randomNumber <= chance
@@ -503,7 +523,7 @@ end
 --- Sends feedback for VHS tape activatio
 --- @param card Card Balatro Card object of activated VHS tape
 G.FUNCS.tape_activate = function(card)
-    if not card.config.center.activation then return end
+    if not card.ability.activation then return end
     if card.ability.activated then
         card.ability.activated = false
         play_sound('csau_vhsclose', 0.9 + math.random()*0.1, 0.4)
@@ -887,6 +907,18 @@ G.FUNCS.csau_center_discovered = function(key)
 	for k, v in pairs(SMODS.Centers) do
 		if k == key and v.discovered == true then
 			return true
+		end
+	end
+	return false
+end
+
+G.FUNCS.find_activated_tape = function(key)
+	local tapes = SMODS.find_card(key)
+	if tapes and #tapes > 0 then
+		for i, v in ipairs(tapes) do
+			if v.ability.activated then
+				return true
+			end
 		end
 	end
 	return false

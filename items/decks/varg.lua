@@ -5,7 +5,9 @@ local deckInfo = {
     discovered = false,
     config = { hand_size = -1 },
     unlock_condition = {type = 'win_deck', deck = 'b_checkered'},
-    streamer = 'joel',
+    csau_dependencies = {
+        'enableJoelContent',
+    }
 }
 
 deckInfo.loc_vars = function(self, info_queue, card)

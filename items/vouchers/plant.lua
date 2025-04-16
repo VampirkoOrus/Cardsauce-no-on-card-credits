@@ -9,7 +9,10 @@ local voucherInfo = {
     },
     part = 'lion',
     unlocked = false,
-    unlock_condition = {type = 'c_stands_bought', extra = 25}
+    unlock_condition = {type = 'c_stands_bought', extra = 25},
+    csau_dependencies = {
+        'enableStands',
+    }
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

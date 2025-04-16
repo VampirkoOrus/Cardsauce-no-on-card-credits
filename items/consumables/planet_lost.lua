@@ -3,6 +3,9 @@ local consumInfo = {
     set = "Planet",
     config = { hand_type = 'csau_FlushFibonacci' },
     origin = 'uzumaki',
+    csau_dependencies = {
+        'enableStands',
+    }
 }
 
 consumInfo.loc_vars = function(self, info_queue, card)
@@ -17,7 +20,7 @@ consumInfo.in_pool = function(self, args)
     end
 end
 
-consumInfo.set_badges = function(self, card, badges)
+consumInfo.set_card_type_badge = function(self, card, badges)
     badges[1] = create_badge(localize('k_galaxy_q'), get_type_colour(self or card.config, card), nil, 1.2)
 end
 

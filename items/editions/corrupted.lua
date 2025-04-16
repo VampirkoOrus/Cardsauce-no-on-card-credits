@@ -39,6 +39,9 @@ local editionInfo = {
     weight = 14,
     extra_cost = 4,
     apply_to_float = false,
+    csau_dependencies = {
+        'enableVinnyContent',
+    }
 }
 
 -- Modified code from Cryptid

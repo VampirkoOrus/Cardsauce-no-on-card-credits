@@ -9,7 +9,9 @@ local deckInfo = {
         },
     },
     unlock_condition = {type = 'win_deck', deck = 'b_green'},
-    streamer = 'vinny',
+    csau_dependencies = {
+        'enableVinnyContent',
+    }
 }
 
 deckInfo.loc_vars = function(self, info_queue, card)

@@ -50,7 +50,7 @@ end
 
 
 if csau_enabled['enableEasterEggs'] then
-	G.chadnova = externalPsuedorandom(1, 1000)
+	G.chadnova = externalPseudorandom(1, 1000)
 
     SMODS.Atlas({
 		key = "jimbo_shot",
@@ -194,10 +194,16 @@ SMODS.current_mod.extra_tabs = function()
 
 SMODS.current_mod.config_tab = function()
 	local ordered_config = {
-		'enableVinkers',
-		'enableJoelkers',
-		'enableOtherJokers',
+		'enableVinnyContent',
+		'enableJoelContent',
+		'enableVHSs',
+		'enableStands',
+		'enableJokers',
 		'enableConsumables',
+		'enableVouchers',
+		'enableBoosters',
+		'enableEditions',
+		'enableTags',
 		'enableBlinds',
 		'enableDecks',
 		'enableSkins',
@@ -466,6 +472,9 @@ SMODS.current_mod.credits_tab = function()
 								} },
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
 									{ n = G.UIT.T, config = { text = G.csau_team.donk, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
+									{ n = G.UIT.T, config = { text = G.csau_team.greeky, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
 							}}
 						}},

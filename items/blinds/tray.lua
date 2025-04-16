@@ -7,7 +7,9 @@ local blindInfo = {
     vars = {},
     debuff = {},
     boss = {min = 3, max = 10},
-    streamer = 'vinny',
+    csau_dependencies = {
+        'enableVinnyContent',
+    }
 }
 
 function blindInfo.modify_hand(self, cards, poker_hands, text, mult, hand_chips)

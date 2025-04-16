@@ -8,6 +8,10 @@ local jokerInfo = {
     perishable_compat = true,
     hasSoul = true,
     streamer = "joel",
+    csau_dependencies = {
+        'enableStands',
+        'enableJoelContent'
+    }
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

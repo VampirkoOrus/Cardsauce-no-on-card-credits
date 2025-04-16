@@ -26,7 +26,15 @@ function consumInfo.add_to_deck(self, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.individual and context.cardarea == G.play and not card.debuff and context.other_card.ability.effect == 'Base' then
+    if context.modify_scoring_hand then
+        local chip_val = context.other_card.base.nominal
+        if chip_val <= 9 then
+            return {
+                add_to_hand = true
+            }
+        end
+    end
+    if context.individual and context.cardarea == G.play and not card.debuff then
         local chip_val = context.other_card.base.nominal
         if chip_val <= 9 then
             return {
@@ -38,14 +46,6 @@ end
 
 function consumInfo.can_use(self, card)
     return false
-end
-
-local ref_as = SMODS.always_scores
-SMODS.always_scores = function(card)
-    if next(SMODS.find_card('c_csau_lands_november')) then
-        if card.base.nominal <= 9 then return true end
-    end
-    ref_as(card)
 end
 
 return consumInfo

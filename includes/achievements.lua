@@ -1,11 +1,3 @@
-
-if not csau_enabled['enableAchievements'] then
-    G.loadTrophies = false
-    return
-end
-G.loadTrophies = true
-
-
 -- enumerate all achievements in the achievements directory instead of loading it directly
 SMODS.Atlas({ key = 'csau_achievements', path = "csau_achievements.png", px = 66, py = 66})
 local achievementsToLoad = {}
@@ -13,27 +5,34 @@ for s in recursiveEnumerate(UsableModPath .. "/items/achievements"):gmatch("[^\r
     achievementsToLoad[#achievementsToLoad + 1] = s:gsub(PathPatternReplace .. "/items/achievements/", "")
 end
 
--- I retained the individual achievement loading because it's so different from the centralized
--- load_cardsauce_item function that it didn't matter much
-for i, v in ipairs(achievementsToLoad) do
-	local trophyInfo = assert(SMODS.load_file("items/achievements/" .. v))()
+if not csau_enabled['enableAchievements'] then
+	-- I retained the individual achievement loading because it's so different from the centralized
+	-- load_cardsauce_item function that it didn't matter much
+	for i, v in ipairs(achievementsToLoad) do
+		local trophyInfo = assert(SMODS.load_file("items/achievements/" .. v))()
 
-	trophyInfo.key = v:sub(1, -5)
-	trophyInfo.atlas = 'csau_achievements'
-	if trophyInfo.rarity then
-		if trophyInfo.rarity == 1 then
-			trophyInfo.pos = { x = 1, y = 0 }
-		elseif trophyInfo.rarity == 2 then
-			trophyInfo.pos = { x = 2, y = 0 }
-		elseif trophyInfo.rarity == 3 then
-			trophyInfo.pos = { x = 3, y = 0 }
-		elseif trophyInfo.rarity == 4 then
-			trophyInfo.pos = { x = 4, y = 0 }
+		if trophyInfo.csau_dependencies then
+			if not csau_filter_loading('item', { dependencies = trophyInfo.csau_dependencies }) then return end
 		end
-	end
 
-	SMODS.Achievement(trophyInfo)
+		trophyInfo.key = v:sub(1, -5)
+		trophyInfo.atlas = 'csau_achievements'
+		if trophyInfo.rarity then
+			if trophyInfo.rarity == 1 then
+				trophyInfo.pos = { x = 1, y = 0 }
+			elseif trophyInfo.rarity == 2 then
+				trophyInfo.pos = { x = 2, y = 0 }
+			elseif trophyInfo.rarity == 3 then
+				trophyInfo.pos = { x = 3, y = 0 }
+			elseif trophyInfo.rarity == 4 then
+				trophyInfo.pos = { x = 4, y = 0 }
+			end
+		end
+
+		SMODS.Achievement(trophyInfo)
+	end
 end
+
 
 function ach_jokercheck(card, table)
 	local counter = 0

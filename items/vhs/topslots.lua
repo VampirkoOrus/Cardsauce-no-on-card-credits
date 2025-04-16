@@ -4,23 +4,27 @@ local consumInfo = {
     set = "VHS",
     cost = 3,
     alerted = true,
-
     config = {
-        activation = false,
-        unpauseable = true,
+        activation = true,
         extra = {
-            prob_base = 3,
-            dollars = 20,
+            winnings = nil,
+
+            conv_money = 1,
+            conv_score = 5,
             prob_double = 6,
             double = 2,
             prob_triple = 8,
             triple = 3,
+
+            runtime = 2,
+            uses = 0,
         },
         activated = false,
         slide_move = 0,
         slide_out_delay = 0,
         destroy = false,
     },
+    origin = 'rlm'
 }
 
 local slide_out = 8.25
@@ -28,67 +32,57 @@ local slide_mod = 0.25
 local slide_out_delay = 1
 
 function consumInfo.loc_vars(self, info_queue, card)
-    return { vars = { G.GAME.probabilities.normal, card.ability.extra.prob_base, card.ability.extra.dollars, card.ability.extra.prob_double, card.ability.extra.prob_triple } }
+    info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
+    return { vars = { card.ability.extra.conv_money, card.ability.extra.conv_score, G.GAME.probabilities.normal, card.ability.extra.prob_double, card.ability.extra.prob_triple, card.ability.extra.runtime-card.ability.extra.uses } }
+end
+
+function consumInfo.set_ability(self, card, initial, delay_sprites)
+    if next(SMODS.find_card("c_csau_moodyblues")) then
+        card.ability.extra.runtime = card.ability.extra.runtime*2
+    end
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.setting_blind then
-        local e = {config = {ref_table = card}}
-        G.E_MANAGER:add_event(Event({func = function()
-            G.FUNCS.use_card(e, true)
-            return true
-        end }))
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if card.ability.activated and context.end_of_round and not card.debuff and not bad_context then
+        if G.GAME.chips > G.GAME.blind.chips then
+            local percent = ((G.GAME.chips - G.GAME.blind.chips) / G.GAME.blind.chips) * 100
+            local money = math.floor(percent / card.ability.extra.conv_score) + card.ability.extra.conv_money
+            local doubled, tripled = false, false
+            if pseudorandom('READYOURMACHINES') < G.GAME.probabilities.normal / card.ability.extra.prob_double then
+                money = money * card.ability.extra.double
+                doubled = true
+            end
+            if pseudorandom('NOCONTROLOVERTHAT') < G.GAME.probabilities.normal / card.ability.extra.prob_triple then
+                money = money * card.ability.extra.triple
+                tripled = true
+            end
+            card.ability.extra.winnings = money
+            card.ability.extra.uses = card.ability.extra.uses + 1
+            if doubled or tripled then
+                return {
+                    message = localize((doubled and tripled and 'k_ts_wild') or (doubled and not tripled and 'k_ts_doubled') or (tripled and not doubled and 'k_ts_tripled')),
+                    card = card
+                }
+            end
+        end
+    end
+    if context.starting_shop and not context.blueprint then
+        if card.ability.extra.uses >= card.ability.extra.runtime then
+            G.FUNCS.destroy_tape(card)
+            card.ability.destroyed = true
+        end
     end
 end
 
-function consumInfo.use(self, card, area, copier)
-    if pseudorandom('ILOST') < G.GAME.probabilities.normal / card.ability.extra.prob_base then
-        local gamble_money = card.ability.extra.dollars
-        if pseudorandom('READYOURMACHINES') < G.GAME.probabilities.normal / card.ability.extra.prob_double then
-            gamble_money = gamble_money * card.ability.extra.double
-        end
-        if pseudorandom('NOCONTROLOVERTHAT') < G.GAME.probabilities.normal / card.ability.extra.prob_triple then
-            gamble_money = gamble_money * card.ability.extra.triple
-        end
-        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
-            attention_text({
-                text = localize('$')..gamble_money,
-                scale = 1.3,
-                hold = 1.4,
-                major = card,
-                backdrop_colour = G.C.MONEY,
-                align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and 'tm' or 'cm',
-                offset = {x = 0, y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and -0.2 or 0},
-                silent = true
-            })
-            play_sound('timpani')
-            card:juice_up(0.3, 0.5)
-            ease_dollars(gamble_money, true)
-            return true end }))
-    else
-        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
-            attention_text({
-                text = localize('k_nope_ex'),
-                scale = 1.3,
-                hold = 1.4,
-                major = card,
-                backdrop_colour = G.C.MONEY,
-                align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and 'tm' or 'cm',
-                offset = {x = 0, y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and -0.2 or 0},
-                silent = true
-            })
-            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06*G.SETTINGS.GAMESPEED, blockable = false, blocking = false, func = function()
-                play_sound('tarot2', 0.76, 0.4);return true end}))
-            play_sound('tarot2', 1, 0.4)
-            card:juice_up(0.3, 0.5)
-            return true end }))
+function consumInfo.calc_dollar_bonus(self, card)
+    if card.ability.extra.winnings then
+        return card.ability.extra.winnings
     end
-    delay(0.6)
-    SMODS.calculate_context({vhs_death = true, card = card})
 end
 
 function consumInfo.can_use(self, card)
-    return false
+    if #G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables then return true end
 end
 
 local mod = SMODS.current_mod
