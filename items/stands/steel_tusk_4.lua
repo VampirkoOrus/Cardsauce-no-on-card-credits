@@ -120,14 +120,15 @@ function consumInfo.calculate(self, card, context)
             }
         end
     end
-
-    if context.before and not card.debuff and next(context.poker_hands['Fibonacci']) then
-        ease_hands_played(card.ability.extra.hand_mod)
-        return {
-            card = card,
-            message = localize('k_plus_hand'),
-            colour = G.C.BLUE
-        }
+    if context.before and context.cardarea == G.play and not card.debuff then
+        if next(context.poker_hands['csau_Fibonacci']) then
+            ease_hands_played(card.ability.extra.hand_mod)
+            return {
+                card = card,
+                message = localize('k_plus_hand'),
+                colour = G.C.BLUE
+            }
+        end
     end
 end
 

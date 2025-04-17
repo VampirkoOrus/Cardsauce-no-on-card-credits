@@ -18,15 +18,11 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.x_mult_mod, card.ability.extra.x_mult } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-
-end
-
 local function upgrade(card, amount)
     amount = amount or 1
     if not card.debuff then
         card.ability.extra.x_mult = card.ability.extra.x_mult + (card.ability.extra.x_mult_mod * amount)
-        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_mult',vars={card.ability.extra.x_mult}}})
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}}})
     end
 end
 

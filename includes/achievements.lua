@@ -5,7 +5,7 @@ for s in recursiveEnumerate(UsableModPath .. "/items/achievements"):gmatch("[^\r
     achievementsToLoad[#achievementsToLoad + 1] = s:gsub(PathPatternReplace .. "/items/achievements/", "")
 end
 
-if not csau_enabled['enableAchievements'] then
+if csau_enabled['enableAchievements'] then
 	-- I retained the individual achievement loading because it's so different from the centralized
 	-- load_cardsauce_item function that it didn't matter much
 	for i, v in ipairs(achievementsToLoad) do

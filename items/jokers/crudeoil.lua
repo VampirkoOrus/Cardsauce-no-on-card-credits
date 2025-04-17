@@ -30,6 +30,7 @@ function jokerInfo.calculate(self, card, context)
         if SMODS.food_expires(context) then
             card.ability.extra.dollars = to_big(card.ability.extra.dollars) - to_big(card.ability.extra.dollars_mod)
             if card.ability.extra.dollars <= to_big(0) then
+                check_for_unlock({ type = "expire_crudeoil" })
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         play_sound('tarot1')

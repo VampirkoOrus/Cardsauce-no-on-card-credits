@@ -30,16 +30,13 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = { } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_epoch" })
-end
-
 function jokerInfo.set_sprites(self, card, _front)
 	G.FUNCS.csau_set_big_sprites(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
 	if not context.blueprint_card and context.game_over and to_big(G.GAME.chips)/to_big(G.GAME.blind.chips) >= to_big(0.23) then
+		check_for_unlock({ type = "activate_wot" })
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				G.hand_text_area.blind_chips:juice_up()

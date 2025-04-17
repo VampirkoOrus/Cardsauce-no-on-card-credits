@@ -20,10 +20,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {card.ability.extra.chips, card.ability.extra.mult}}
 end
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_claus" })
-end
-
 function jokerInfo.in_pool(self, args)
 	for _, v in ipairs(G.playing_cards) do
 		if v.ability.effect == "Steel Card" then

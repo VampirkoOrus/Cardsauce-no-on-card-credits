@@ -5,7 +5,7 @@ local packInfo = {
         extra = 8,
         choose = 2,
     },
-    weight = 1,
+    weight = 0.15,
     cost = 7,
     kind = 'VHS',
     group_key = "k_mega_analog_pack",

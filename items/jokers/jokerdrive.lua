@@ -31,10 +31,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.mult_mod, get_mult(card) } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-
-end
-
 function jokerInfo.calculate(self, card, context)
     if context.joker_main and context.cardarea == G.jokers then
         return {

@@ -30,8 +30,4 @@ function jokerInfo.check_for_unlock(self, args)
     end
 end
 
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_frich" })
-end
-
 return jokerInfo

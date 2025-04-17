@@ -20,15 +20,14 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.money_mod, G.GAME.probabilities.normal, card.ability.extra.prob, card.ability.extra.money, } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-
-end
-
 function jokerInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.individual or context.blueprint
-    if context.cardarea == G.jokers and context.before and not card.debuff and not bad_context then
+    if context.joker_main and not card.debuff and not bad_context then
         if context.scoring_name == "Straight" and card.ability.extra.money > 0 and pseudorandom('funfudgeyspray') < G.GAME.probabilities.normal / card.ability.extra.prob then
             local cash = card.ability.extra.money
+            if cash >= 50 then
+                check_for_unlock({ type = "high_feature" })
+            end
             card.ability.extra.money = 2
             return {
                 dollars = cash

@@ -20,10 +20,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {card.ability.extra.x_mult, card.ability.extra.crack_hand and localize(card.ability.extra.crack_hand, 'poker_hands') or localize('k_none')} }
 end
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_crack" })
-end
-
 function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not context.blueprint then
 		local hand = context.scoring_name

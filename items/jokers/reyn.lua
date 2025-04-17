@@ -15,10 +15,6 @@ function jokerInfo.loc_vars(self, info_queue)
 	info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_reyn" })
-end
-
 function jokerInfo.calculate(self, card, context)
 	if context.setting_blind and not card.getting_sliced and not card.debuff and not (context.blueprint_card or card).getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
 		G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
@@ -35,6 +31,12 @@ function jokerInfo.calculate(self, card, context)
 					card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_judge'), colour = G.C.PURPLE})
 				return true
 			end)}))
+	end
+end
+
+function jokerInfo.add_to_deck(self, card)
+	if G.GAME.round_resets.ante == 1 then
+		check_for_unlock({ type = "early_reyn" })
 	end
 end
 

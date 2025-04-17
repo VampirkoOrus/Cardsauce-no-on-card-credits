@@ -32,7 +32,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_dink" })
 	if to_big(G.GAME.dollars) == to_big(card.cost) and card.ability.wasShop then
 		if card.cost >= to_big(60) then
 			check_for_unlock({ type = "purchase_dink" })

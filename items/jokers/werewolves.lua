@@ -19,10 +19,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {card.ability.extra.x_mult, localize(card.ability.extra.hand, 'poker_hands')} }
 end
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_werewolves" })
-end
-
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
 	local _poker_hands = {}
 	for k, v in pairs(G.GAME.hands) do

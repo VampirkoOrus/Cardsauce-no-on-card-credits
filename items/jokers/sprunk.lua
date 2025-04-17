@@ -27,10 +27,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.mult_mod, card.ability.extra.prob_mod, G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true), card.ability.extra.prob, card.ability.extra.mult }}
 end
 
-function jokerInfo.add_to_deck(self, card)
-
-end
-
 -- Modified code from Cryptid
 local function fake_crash()
     messages = {

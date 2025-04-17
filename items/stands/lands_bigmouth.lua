@@ -27,10 +27,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     }
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
 	if not context.before or #context.full_hand ~= card.ability.extra.hand_size then return end
 

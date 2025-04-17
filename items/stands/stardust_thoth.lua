@@ -19,10 +19,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.preview}}
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 -- Modified Code from Jimbo's Pack
 local create_tohth_cardarea = function(card, cards)
     tohth_cards = CardArea(

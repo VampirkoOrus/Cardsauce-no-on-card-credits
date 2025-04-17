@@ -12,7 +12,8 @@ local consumInfo = {
         destroyed = false,
         extra = {
             runtime = 3,
-            uses = 0
+            uses = 0,
+            prob = 2,
         },
     },
     origin = 'rlm'
@@ -24,6 +25,7 @@ local slide_out_delay = 1
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
+    return { vars = { G.GAME.probabilities.normal, card.ability.extra.prob, card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)
@@ -33,21 +35,20 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-
-end
-local ref_mli = SMODS.modify_level_increment
-SMODS.modify_level_increment = function(card, hand, amount)
-    amount = ref_mli(card, hand, amount)
-    local sc = G.FUNCS.find_activated_tape('c_csau_spacecop')
-    if card.ability.set == 'Planet' and sc then
-        amount = amount * 2
-        sc.ability.extra.uses = sc.ability.extra.uses+1
-        if sc.ability.extra.uses >= sc.ability.extra.runtime then
-            G.FUNCS.destroy_tape(sc)
-            sc.ability.destroyed = true
+    if context.modify_level_increment and context.card then
+        if context.card.ability.set == 'Planet' and pseudorandom('theclownhasarrived') < G.GAME.probabilities.normal / card.ability.extra.prob then
+            card.ability.extra.uses = card.ability.extra.uses+1
+            if card.ability.extra.uses >= card.ability.extra.runtime then
+                G.FUNCS.destroy_tape(card)
+                card.ability.destroyed = true
+            end
+            return {
+                mult_inc = 2,
+                message = localize('k_spacecop'),
+                colour = G.C.SECONDARY_SET.Planet
+            }
         end
     end
-    return
 end
 
 function consumInfo.can_use(self, card)

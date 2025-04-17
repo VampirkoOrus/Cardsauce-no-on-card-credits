@@ -30,11 +30,6 @@ function consumInfo.in_pool(self, args)
     return G.GAME.used_jokers['c_csau_vento_epitaph_king'] ~= nil
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
-
 -- Modified Code from Jimbo's Pack
 local create_tohth_cardarea = function(card, cards)
     tohth_cards = CardArea(

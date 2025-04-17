@@ -14,10 +14,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "codercredit", set = "Other", vars = { G.csau_team.myst } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_koffing" })
-end
-
 function jokerInfo.calculate(self, card, context)
     if context.ending_shop and not context.blueprint then
         card.ability.extra.rerolled = false

@@ -24,7 +24,6 @@ function jokerInfo.in_pool(self, args)
 end
 
 function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_beginners" })
     for k, v in pairs(G.GAME.probabilities) do
         G.GAME.probabilities[k] = v * card.ability.prob_mult
     end

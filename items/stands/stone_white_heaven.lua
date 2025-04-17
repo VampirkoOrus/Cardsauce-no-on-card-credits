@@ -30,10 +30,6 @@ function consumInfo.in_pool(self, args)
     return true
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
     if context.before and not card.debuff then
         ease_hands_played(1)

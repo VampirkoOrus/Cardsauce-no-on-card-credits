@@ -17,10 +17,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 local function detect_jacks(scoring_hand)
     for k, v in ipairs(scoring_hand) do
         if v:get_id() == 11 and v.ability.effect == "Base" then

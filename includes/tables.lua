@@ -77,6 +77,7 @@ G.csau_team = {
 	['kuro'] = "SoloDimeKuro",
 	['donk'] = "Donk.TK",
 	['greeky'] = "greek_shmeek",
+	['gong'] = 'Gongalicious',
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",
@@ -125,7 +126,7 @@ G.csau_collab_credits = {
 	csau_duendes = {
 		King = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.winterg } },
 		Queen = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.cejai } },
-		Jack = nil,
+		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.guff } },
 	},
 	csau_powerful = {
 		King = nil,

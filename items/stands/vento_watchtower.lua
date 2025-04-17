@@ -18,10 +18,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.x_mult } }
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 local reference_deck = {
     Hearts = { ['2'] = 1, ['3'] = 1, ['4'] = 1, ['5'] = 1, ['6'] = 1, ['7'] = 1, ['8'] = 1, ['9'] = 1, ['10'] = 1,
                ['Jack'] = 1, ['Queen'] = 1, ['King'] = 1, ['Ace'] = 1 },

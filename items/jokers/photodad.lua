@@ -28,7 +28,8 @@ function jokerInfo.calculate(self, card, context)
                 G.consumeables:emplace(_card)
                 card:juice_up(0.3, 0.5)
             end
-            return true end }))
+            return true
+        end }))
     end
 end
 

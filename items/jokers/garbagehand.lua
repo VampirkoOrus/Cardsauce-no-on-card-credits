@@ -20,7 +20,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_garbage" })
 	ach_jokercheck(self, G.ach_checklists.band)
 end
 

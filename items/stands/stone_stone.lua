@@ -20,10 +20,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.chips}}
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.individual or context.blueprint
     if context.before and not card.debuff and not bad_context then

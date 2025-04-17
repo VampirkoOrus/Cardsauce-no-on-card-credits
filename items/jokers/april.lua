@@ -31,10 +31,6 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
     G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 end
 
-function jokerInfo.add_to_deck(self, card)
-
-end
-
 function jokerInfo.calculate(self, card, context)
     if context.using_consumeable then
         if (context.consumeable.config.center.key == "c_fool") and not context.blueprint then

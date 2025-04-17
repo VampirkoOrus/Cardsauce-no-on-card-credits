@@ -27,10 +27,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.x_mult, card.ability.extra.x_mult_mod } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_muppet" })
-end
-
 function jokerInfo.calculate(self, card, context)
     if context.starting_shop and not context.blueprint then
         card.ability.dollars_before = G.GAME.dollars

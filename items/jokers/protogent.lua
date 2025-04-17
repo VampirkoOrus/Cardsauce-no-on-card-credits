@@ -49,6 +49,7 @@ function jokerInfo.calculate(self, card, context)
     end
     if not context.blueprint_card and context.game_over then
         if pseudorandom('allgoneforever') < G.GAME.probabilities.normal / card.ability.extra.save_prob then
+            check_for_unlock({ type = "activate_proto" })
             return {
                 message = localize('k_saved_ex'),
                 saved = true,

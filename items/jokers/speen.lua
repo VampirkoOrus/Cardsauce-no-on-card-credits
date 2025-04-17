@@ -40,10 +40,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "codercredit", set = "Other", vars = { G.csau_team.dps } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_speen" })
-end
-
 function jokerInfo.calculate(self, card, context)
 	if context.reroll_shop and not card.getting_sliced and not card.debuff and not (context.blueprint_card or card).getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
 		G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1

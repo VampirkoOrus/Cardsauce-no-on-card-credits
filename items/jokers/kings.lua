@@ -67,7 +67,6 @@ local function getEnhancement(name)
 end
 
 function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_kings" })
     if G.GAME.buttons then G.GAME.buttons:remove(); G.GAME.buttons = nil end
     local yOffset = -4
     if G.shop and not G.shop.REMOVED then

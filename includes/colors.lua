@@ -186,7 +186,7 @@ G.FUNCS.apply_colors = function()
 			if validHEX(hex) then
 				if i== 4 then
 					G.C.BLIND.won = HEX(hex)
-					if G.GAME and G.GAME..round_resets.ante >= 9 then
+					if G.GAME and G.GAME.round_resets.ante >= 9 then
 						ease_background_colour{new_colour = HEX(hex), contrast = 1}
 					end
 					G:save_settings()
@@ -194,7 +194,7 @@ G.FUNCS.apply_colors = function()
 				if i==3 then
 					G.C.BLIND.Small = HEX(hex)
 					G.C.BLIND.Big = HEX(hex)
-					if G.GAME and G.GAME..round_resets.ante < 9 then
+					if G.GAME and G.GAME.round_resets.ante < 9 then
 						ease_background_colour{new_colour = HEX(hex), contrast = 1}
 					end
 					G.SETTINGS["CS_COLOR"..i] = HEX(hex)

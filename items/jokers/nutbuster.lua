@@ -30,8 +30,4 @@ function jokerInfo.loc_vars(self, info_queue, card)
 
 end
 
-function jokerInfo.add_to_deck(self, card)
-
-end
-
 return jokerInfo

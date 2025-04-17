@@ -21,10 +21,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.max_rank, card.ability.extra.chips}}
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
     if context.modify_scoring_hand then
         local chip_val = context.other_card.base.nominal

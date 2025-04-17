@@ -148,7 +148,6 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 			return
 		end
 	end
-	send(file_key)
 
 	info.key = file_key
 	if item_type ~= 'Challenge' and item_type ~= 'Edition' then
@@ -182,7 +181,17 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 	end
 
 	local smods_item = item_type
-	if item_type == 'Stand' or item_type == 'VHS' then smods_item = 'Consumable' end
+	if item_type == 'Stand' or item_type == 'VHS' then
+		smods_item = 'Consumable'
+		local atd_ref = function(self, card) end
+		if info.add_to_deck then
+			atd_ref = info.add_to_deck
+		end
+		function info.add_to_deck(self, card)
+			atd_ref(self, card)
+			set_consumeable_usage(card)
+		end
+	end
 	if item_type == 'Deck' then smods_item = 'Back' end
 	local new_item = SMODS[smods_item](info)
 	for k_, v_ in pairs(new_item) do
@@ -951,13 +960,6 @@ SMODS.return_to_hand = function(card, context)
 	if G.FUNCS.find_activated_tape('c_csau_yoyoman') and table.contains(context.scoring_hand, card) then return true end
 	if context.scoring_name == "High Card" and next(SMODS.find_card("j_csau_besomeone")) and table.contains(context.scoring_hand, card) then return true end
 	return false
-end
-
-SMODS.modify_level_increment = function(card, hand, amount)
-	if next(find_joker("Don't Mind If I Do")) and hand == 'High Card' then
-		amount = amount * 2
-	end
-	return amount
 end
 
 G.FUNCS.have_multiple_jokers = function(tbl)

@@ -19,10 +19,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return {vars = {card.ability.extra.conv_money, card.ability.extra.conv_score * 100}}
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 local debt_collection = function(card)
     local percentage_left = (G.GAME.blind.chips-G.GAME.chips) / G.GAME.blind.chips
     local debt = math.ceil(percentage_left / card.ability.extra.conv_score)*card.ability.conv_money

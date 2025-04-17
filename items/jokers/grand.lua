@@ -20,10 +20,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {G.GAME.probabilities.normal, card.ability.rate, card.ability.extra.x_mult, card.ability.cardid} }
 end
 
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_grand" })
-end
-
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and not context.before and context.joker_main and not context.repetition then
         local trigger = false

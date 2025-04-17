@@ -8,6 +8,7 @@ local jokerInfo = {
             prob_mod = 1,
             prob_extra = 0,
             prob = 100,
+            destroyed = false,
         }
     },
     rarity = 3,
@@ -34,7 +35,6 @@ end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
     return { vars = { card.ability.unlock, G.DISCOVER_TALLIES.vhss.tally } }
-
 end
 
 function jokerInfo.check_for_unlock(self, args)
@@ -47,7 +47,8 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.vhs_death and not context.blueprint then
-        if pseudorandom('junka') < G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true) / card.ability.extra.prob then
+        if not card.ability.extra.destroyed and pseudorandom('junka') < G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true) / card.ability.extra.prob then
+            card.ability.extra.destroyed = true
             G.E_MANAGER:add_event(Event({
                 func = function()
                     play_sound('tarot1')

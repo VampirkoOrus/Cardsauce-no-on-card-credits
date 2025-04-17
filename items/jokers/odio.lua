@@ -14,10 +14,6 @@ local jokerInfo = {
 	streamer = "other",
 }
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_odio" })
-end
-
 function jokerInfo.in_pool(self, args)
 	if G.GAME.round_resets.ante < 9 then
 		return true

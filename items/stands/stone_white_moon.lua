@@ -38,10 +38,6 @@ function consumInfo.in_pool(self, args)
     return true
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 local function unique_ranks_check(card, new_rank, num)
     card.ability.extra.ranks[new_rank] = true
     local count = 0

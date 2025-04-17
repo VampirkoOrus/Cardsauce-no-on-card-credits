@@ -2,6 +2,7 @@ local jokerInfo = {
     name = "Super Jokebusters",
     config = {
         extra = 5,
+        mult = 0,
     },
     rarity = 1,
     cost = 6,
@@ -25,10 +26,15 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra, get_mult(card)} }
 end
 
+function jokerInfo.add_to_deck(self, card)
+    card.ability.mult = get_mult(card)
+end
+
 function jokerInfo.calculate(self, card, context)
     if context.using_consumeable and not context.blueprint then
         if context.consumeable.ability.set == "Spectral" then
             G.E_MANAGER:add_event(Event({ func = function()
+                card.ability.mult = get_mult(card)
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_mult',vars={get_mult(card)}}})
                 return true
             end}))

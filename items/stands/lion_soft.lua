@@ -31,10 +31,6 @@ function consumInfo.in_pool(self, args)
     return true
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 local enhance_match = function(center, ref_center)
     return (ref_center.set == "Enhanced" and ref_center.effect == center.effect)
 end

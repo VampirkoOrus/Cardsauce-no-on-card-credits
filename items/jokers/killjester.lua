@@ -1,8 +1,10 @@
 local jokerInfo = {
     name = 'Kill Jester',
     config = {
-        x_mult = 1,
-        x_mult_mod = 0.25,
+        extra = {
+            x_mult = 1,
+            x_mult_mod = 0.25,
+        }
     },
     rarity = 3,
     cost = 8,
@@ -22,10 +24,6 @@ end
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.swizik } }
     return { vars = {card.ability.extra.x_mult_mod, card.ability.extra.x_mult} }
-end
-
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_killjester" })
 end
 
 local function valid_name(name)

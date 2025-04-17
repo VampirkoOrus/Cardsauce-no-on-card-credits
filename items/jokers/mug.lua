@@ -41,10 +41,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.mult, card.ability.extra.rounds, card.ability.extra.x_mult } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-
-end
-
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
     if card.area and card.area == G.jokers or card.config.center.discovered then
         -- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner

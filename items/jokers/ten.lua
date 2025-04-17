@@ -19,10 +19,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.mult_mod, card.ability.extra.mult }}
 end
 
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_ten" })
-end
-
 function jokerInfo.calculate(self, card, context)
     if context.using_consumeable and not G.shop then
         card.ability.extra.mult = to_big(card.ability.extra.mult) + to_big(card.ability.extra.mult_mod)

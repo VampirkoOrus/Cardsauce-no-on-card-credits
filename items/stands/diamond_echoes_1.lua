@@ -59,10 +59,6 @@ function consumInfo.in_pool(self, args)
     return true
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
     if context.before and not card.debuff then
         if to_big(G.GAME.current_round.hands_played) == to_big(0) then

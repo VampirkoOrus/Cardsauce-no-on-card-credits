@@ -29,14 +29,6 @@ function consumInfo.in_pool(self, args)
     return true
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
-function consumInfo.calculate(self, card, context)
-
-end
-
 local get_btd = function()
     for i, v in ipairs(G.consumeables.cards) do
         if v.config.center.key == 'c_csau_diamond_killer_btd' then

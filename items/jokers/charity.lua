@@ -26,7 +26,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_charity" })
 	if not G.GAME.selected_back.effect.config.no_interest then
 		G.GAME.modifiers.no_interest = true
 	end

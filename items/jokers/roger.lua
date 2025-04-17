@@ -27,10 +27,6 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
 	G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 end
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_roger" })
-end
-
 function jokerInfo.calculate(self, card, context)
 	if context.joker_main and context.cardarea == G.jokers and not card.debuff then
 		if not context.blueprint then

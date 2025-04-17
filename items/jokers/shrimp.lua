@@ -12,10 +12,6 @@ local jokerInfo = {
 	streamer = "vinny",
 }
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_shrimp" })
-end
-
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
 end

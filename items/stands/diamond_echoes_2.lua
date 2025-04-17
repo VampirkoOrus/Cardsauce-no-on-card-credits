@@ -58,10 +58,6 @@ function consumInfo.in_pool(self, args)
     return true
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 local get_first_non_matching = function(suit, hand)
     for i, v in ipairs(hand) do
         if not v:is_suit(suit) and not SMODS.has_no_suit(v) then

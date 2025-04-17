@@ -18,12 +18,8 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.chips } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-
-end
-
 function jokerInfo.calculate(self, card, context)
-    if G.GAME.current_round.discards_used <= 0 and #context.full_hand == 1 and context.discard and not context.blueprint and not card.debuff then
+    if context.discard and G.GAME.current_round.discards_used <= 0 and #context.full_hand == 1 and context.discard and not context.blueprint and not card.debuff then
         local destroy = context.full_hand[1]
         local rank = SMODS.Ranks[destroy.base.value]
         local chips = rank.nominal

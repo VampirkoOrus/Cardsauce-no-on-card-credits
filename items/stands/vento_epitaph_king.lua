@@ -21,10 +21,6 @@ function consumInfo.in_pool(self, args)
     return G.GAME.used_jokers['c_csau_vento_epitaph'] ~= nil
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.individual or context.blueprint
     if context.end_of_round and not G.GAME.blind.boss and not bad_context then

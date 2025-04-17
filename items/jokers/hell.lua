@@ -60,7 +60,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card, context)
-	check_for_unlock({ type = "discover_hell" })
 	hand_level_reset(card, G.SETTINGS.GAMESPEED)
 	return
 end

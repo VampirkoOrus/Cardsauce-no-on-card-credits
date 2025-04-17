@@ -21,10 +21,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
     if not context.before then return end
 

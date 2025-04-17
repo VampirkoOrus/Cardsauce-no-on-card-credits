@@ -3,7 +3,6 @@ local jokerInfo = {
     config = {
         unlock = 10,
         extra = {
-            x_mult = 1,
             x_mult_mod = 0.25
         },
     },
@@ -22,12 +21,13 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
-    return { vars = {card.ability.extra.x_mult_mod, card.ability.extra.x_mult} }
+    local stands_obtained = 0
+    for k, v in pairs(G.GAME.consumeable_usage) do if v.set == 'csau_Stand' then stands_obtained = stands_obtained + 1 end end
+    return { vars = {card.ability.extra.x_mult_mod, to_big(1 + (card.ability.extra.x_mult_mod*stands_obtained))} }
 end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
     return { vars = { card.ability.unlock, G.DISCOVER_TALLIES.csau_stands.tally } }
-
 end
 
 function jokerInfo.check_for_unlock(self, args)
@@ -40,26 +40,13 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if card.ability.extra.x_mult > 1 and context.joker_main and context.cardarea == G.jokers then
+        local stands_obtained = 0
+        for k, v in pairs(G.GAME.consumeable_usage) do if v.set == 'csau_Stand' then stands_obtained = stands_obtained + 1 end end
         return {
-            message = localize{type='variable',key='a_xmult',vars={to_big(card.ability.extra.x_mult)}},
+            message = localize{type='variable',key='a_xmult',vars={to_big(1 + (card.ability.extra.x_mult_mod*stands_obtained))}},
             Xmult_mod = card.ability.extra.x_mult,
         }
     end
-    if context.buying_card then
-        if context.card.ability.set == "Voucher" then
-            return {
-                message = localize('k_upgrade_ex'),
-                colour = G.C.RED,
-                card = card
-            }
-        end
-    end
-end
-
-function jokerInfo.update(self, card, dt)
-    local stands_obtained = 0
-    for k, v in pairs(G.GAME.consumeable_usage) do if v.set == 'csau_Stand' then stands_obtained = stands_obtained + 1 end end
-    card.ability.extra.x_mult = 1 + (card.ability.extra.x_mult_mod*stands_obtained)
 end
 
 return jokerInfo

@@ -35,10 +35,6 @@ function consumInfo.in_pool(self, args)
     return true
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
     if context.individual and context.cardarea == G.play and not card.debuff and not context.repetition then
         if context.other_card:get_id() == 14 or context.other_card:get_id() == 2 then

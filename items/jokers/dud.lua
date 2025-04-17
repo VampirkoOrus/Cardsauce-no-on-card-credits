@@ -25,10 +25,6 @@ function jokerInfo.in_pool(self, args)
     end
 end
 
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_dud" })
-end
-
 function jokerInfo.check_for_unlock(self, args)
     if args.type == "win_stake" then
         local highest_win, lowest_win = get_deck_win_stake(nil)
@@ -55,6 +51,7 @@ function jokerInfo.calculate(self, card, context)
             local chosen_joker = pseudorandom_element(pool, pseudoseed('dud_choice'))
             for k, v in pairs(G.jokers.cards) do
                 if v == chosen_joker then
+                    check_for_unlock({ type = "activate_dud" })
                     if v.ability.eternal then
                         v.ability.eternal = false
                     end

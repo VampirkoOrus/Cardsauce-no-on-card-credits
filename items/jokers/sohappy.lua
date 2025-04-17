@@ -32,7 +32,6 @@ function jokerInfo.loc_vars(self, info_queue)
 end
 
 function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_sohappy" })
 	card.ability.extra.deschappy = G.localization.descriptions["Joker"]["j_csau_sohappy"]
 	if card.ability.extra.side == 'happy' then
 		changeHandsAndDiscards(card.ability.extra.plus, -card.ability.extra.minus)

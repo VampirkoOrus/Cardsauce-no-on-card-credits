@@ -13,13 +13,13 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } }
-    return { vars = {card.ability.extra, (G.GAME and G.GAME.hands and G.GAME.hands.Pair.played) or 0} }
+    return { vars = {card.ability.extra, (G.GAME and G.GAME.hands and G.GAME.hands.Pair.played*card.ability.extra) or 0} }
 end
 
 function jokerInfo.calculate(self, card, context)
     if G.GAME.hands.Pair.played > 0 and context.joker_main and context.cardarea == G.jokers then
         return {
-            mult = G.GAME.hands.Pair.played,
+            mult = G.GAME.hands.Pair.played*card.ability.extra,
         }
     end
 end

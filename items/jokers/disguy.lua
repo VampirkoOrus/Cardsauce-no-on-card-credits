@@ -27,10 +27,6 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
 	G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 end
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_disguy" })
-end
-
 function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not card.debuff and not context.blueprint then
 		if detect2or5(context.scoring_hand) then

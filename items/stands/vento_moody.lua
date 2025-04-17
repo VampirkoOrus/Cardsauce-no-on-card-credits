@@ -21,7 +21,6 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
     for i, v in ipairs(G.consumeables.cards) do
         if v.ability.set == "VHS" and (v.ability.extra and v.ability.extra.runtime) then
             v.ability.extra.runtime = v.ability.extra.runtime * 2

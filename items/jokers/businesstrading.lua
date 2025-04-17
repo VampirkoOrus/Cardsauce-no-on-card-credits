@@ -22,10 +22,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.dollars, G.GAME.probabilities.normal, card.ability.extra.destroy} }
 end
 
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_btc" })
-end
-
 function jokerInfo.set_sprites(self, card, _front)
     G.FUNCS.csau_set_big_sprites(self, card)
 end

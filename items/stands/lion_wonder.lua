@@ -19,10 +19,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return {vars = {card.ability.extra.mult_mod, card.ability.extra.mult}}
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
     if context.individual and context.cardarea == G.play and not card.debuff and not context.blueprint then
         if context.other_card.ability.effect == 'Lucky Card' and not context.other_card.debuff then

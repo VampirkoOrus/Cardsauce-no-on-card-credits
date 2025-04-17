@@ -16,7 +16,7 @@ local function isBlackjack(hand)
 end
 
 SMODS.PokerHand {
-    key = "Blackjack",
+    key = "csau_Blackjack",
     chips = 21,
     mult = 6,
     l_chips = 11,
@@ -53,7 +53,7 @@ local function allOneSuit(hand)
 end
 
 SMODS.PokerHand {
-    key = "FlushBlackjack",
+    key = "csau_FlushBlackjack",
     chips = 84,
     mult = 8,
     l_chips = 42,
@@ -109,11 +109,13 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card)
-
+    G.GAME.hands['csau_Blackjack'].visible = true
+    G.GAME.hands['csau_FlushBlackjack'].visible = true
 end
 
-function jokerInfo.calculate(self, card, context)
-
+function jokerInfo.remove_from_deck(self, card, from_debuff)
+    G.GAME.hands['csau_Blackjack'].visible = false
+    G.GAME.hands['csau_FlushBlackjack'].visible = false
 end
 
 return jokerInfo

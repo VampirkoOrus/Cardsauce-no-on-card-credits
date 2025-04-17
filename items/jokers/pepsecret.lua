@@ -28,10 +28,6 @@ function jokerInfo.in_pool(self, args)
 	end
 end
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_pep" })
-end
-
 function jokerInfo.check_for_unlock(self, args)
 	if args.type == "unlock_pep" then
 		return true

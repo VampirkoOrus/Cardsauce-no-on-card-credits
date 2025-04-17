@@ -399,16 +399,15 @@ if SMODS.current_mod.DT.twoPoint0 then
         },
 
         Consumable = {
-            --Spectral
-            'quixotic',
-            'protojoker',
             -- Planet
             'lutetia',
             'varuna',
             'planet_lost',
             -- Spectral
+            'quixotic',
             'spec_stone',
             'spec_diary',
+            'protojoker',
             -- Tarot
             'tarot_arrow',
         },

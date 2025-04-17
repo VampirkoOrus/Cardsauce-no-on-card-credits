@@ -2,7 +2,8 @@ local jokerInfo = {
     name = "Passport",
     config = {
         extra = {
-            x_mult_mod = 0.25
+            x_mult_mod = 0.25,
+            x_mult = 1,
         },
     },
     rarity = 2,
@@ -40,10 +41,18 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.x_mult_mod, get_x_mult(card) } }
 end
 
+function jokerInfo.add_to_deck(self, card)
+    card.ability.extra.x_mult = get_x_mult(card)
+end
+
 function jokerInfo.calculate(self, card, context)
-    if context.using_consumable and not context.blueprint then
-        if context.consumeable.ability.set == "Voucher" then
-            card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {get_x_mult(card)}}})
+    if context.buying_card and not context.blueprint then
+        if context.card.ability.set == "Voucher" then
+            G.E_MANAGER:add_event(Event({ func = function()
+                card.ability.extra.x_mult = get_x_mult(card)
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {get_x_mult(card)}}})
+                return true
+            end}))
         end
     end
     if get_x_mult(card) > 0 and context.joker_main and context.cardarea == G.jokers then

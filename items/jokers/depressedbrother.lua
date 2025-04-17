@@ -37,7 +37,6 @@ function jokerInfo.calculate(self, card, context)
 			chips = card.ability.extra.chips
 		}
 	end
-
 end
 
 return jokerInfo

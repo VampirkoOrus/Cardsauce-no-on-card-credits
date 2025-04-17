@@ -10,10 +10,6 @@ local consumInfo = {
     in_progress = true,
 }
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 local function has_stone(hand)
     for i, v in ipairs(hand) do
         if SMODS.has_enhancement(v, 'm_stone') then return true end

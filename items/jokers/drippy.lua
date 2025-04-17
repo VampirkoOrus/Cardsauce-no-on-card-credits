@@ -14,10 +14,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-    check_for_unlock({ type = "discover_drippy" })
-end
-
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff then
         G.playing_card = (G.playing_card and G.playing_card + 1) or 1
@@ -48,29 +44,34 @@ function jokerInfo.calculate(self, card, context)
         if context.other_card.ability.effect ~= 'Base' and context.other_card.drippy then
             context.other_card.drippy = false
             if context.other_card.ability.effect == 'Bonus Card' then
+                check_for_unlock({ type = "activate_drippy" })
                 return {
                     message = localize{type='variable',key='a_chips',vars={to_big(50)}},
                     chip_mod = 50,
                     card = context.other_card
                 }
             elseif context.other_card.ability.effect == 'Mult Card' then
+                check_for_unlock({ type = "activate_drippy" })
                 return {
                     message = localize{type='variable',key='a_mult',vars={to_big(4)}},
                     mult = 4,
                     card = context.other_card
                 }
             elseif context.other_card.ability.effect == 'Stone Card' then
+                check_for_unlock({ type = "activate_drippy" })
                 return {
                     message = localize{type='variable',key='a_chips',vars={to_big(50)}},
                     chip_mod = 50,
                     card = context.other_card
                 }
             elseif context.other_card.ability.effect == 'Glass Card' then
+                check_for_unlock({ type = "activate_drippy" })
                 return {
                     x_mult = 2,
                     card = context.other_card
                 }
             elseif context.other_card.ability.effect == 'Lucky Card' then
+                check_for_unlock({ type = "activate_drippy" })
                 local mult = 0
                 local dollars = 0
                 if pseudorandom('drippylucky1') < G.GAME.probabilities.normal / 5 then
