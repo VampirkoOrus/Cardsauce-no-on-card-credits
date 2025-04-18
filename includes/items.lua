@@ -200,13 +200,14 @@ if SMODS.current_mod.DT.twoPoint0 then
             'disturbedjoker',
             -- [[Uncommon]] (LOCKED)
             -- 1.0
+            'charity',
             'shrimp',
             'muppet',
             -- Update 1.3
             'frich',
             'bunji',
             -- [[Rare]] (LOCKED)
-            'charity', -- Page 4 End
+             -- Page 4 End
 
 
             'supper', -- Page 5 Start

@@ -4,7 +4,7 @@ local jokerInfo = {
 		mult = 0,
 		mult_gain = 0
 	}},
-	rarity = 3,
+	rarity = 2,
 	cost = 7,
 	unlocked = false,
 	blueprint_compat = false,
