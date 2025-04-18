@@ -8,7 +8,7 @@ local consumInfo = {
         activation = true,
         extra = {
             x_mult = 2,
-            runtime = 2,
+            runtime = 3,
             uses = 0,
         },
         activated = false,

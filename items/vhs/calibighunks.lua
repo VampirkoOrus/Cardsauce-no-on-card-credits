@@ -6,14 +6,14 @@ local consumInfo = {
     alerted = true,
     config = {
         activation = true,
-        extra = {
-            runtime = 3,
-            uses = 0,
-        },
         activated = false,
         slide_move = 0,
         slide_out_delay = 0,
         destroyed = false,
+        extra = {
+            runtime = 3,
+            uses = 0,
+        },
     },
     origin = {
         'rlm',
@@ -39,7 +39,33 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-
+    if card.ability.activated and context.before and not card.debuff and not context.blueprint and G.FUNCS.hand_contains_rank(context.scoring_hand, {13}) then
+        for i, v in ipairs(context.scoring_hand) do
+            if v:get_id() == 13 and v.ability.effect == "Base" and not card.ability.destroyed then
+                v:set_ability(G.P_CENTERS.m_mult, nil, true)
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        v:juice_up()
+                        return true
+                    end
+                }))
+            end
+        end
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                card:juice_up()
+                return true
+            end
+        }))
+    end
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.after and not card.ability.destroyed and card.ability.activated and not bad_context then
+        card.ability.extra.uses = card.ability.extra.uses+1
+        if card.ability.extra.uses >= card.ability.extra.runtime then
+            G.FUNCS.destroy_tape(card)
+            card.ability.destroyed = true
+        end
+    end
 end
 
 function consumInfo.can_use(self, card)

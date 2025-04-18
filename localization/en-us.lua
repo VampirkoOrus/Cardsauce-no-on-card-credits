@@ -485,6 +485,7 @@ return {
 			k_ts_tripled = "Triple Winnings!",
 			k_ts_wild = "WIILLDDD!",
 			k_spacecop = "Space Cop!",
+			k_theroom = "Love is Blind...",
 
 			-- badge titles
 			ba_vinny = "Vinesauce",
@@ -533,7 +534,9 @@ return {
 			k_gold_exp = "Gold Experience!",
 			k_stone_free = "Stone Free!",
 			k_bsa = "Bigmouth Strikes Again!",
-			k_smooth_operators = "Modified!"
+			k_smooth_operators = "Modified!",
+
+			k_stand_stickers="Stand Stickers",
 		},
 		v_dictionary = {
 			a_plus_discard = "+#1# Discard",
@@ -2450,15 +2453,18 @@ return {
 			c_csau_exploding = {
 				name = "Exploding Varmints",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}activated{}, turn all but one {C:blue}Hands",
+					"into {C:red}Discards{} when {C:attention}Blind{} is selected",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Round"
 				},
 			},
 			c_csau_choppingmall = {
 				name = "Chopping Mall",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}activated{}, if {C:attention}scoring hand{} has",
+					"{C:attention}Steel Cards{} at the start and end",
+					"of the hand, add {C:red}Red Seals{} to both",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand"
 				},
 			},
 			c_csau_roar = {
@@ -2471,8 +2477,9 @@ return {
 			c_csau_calibighunks = {
 				name = "California Big Hunks",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}activated{}, scoring {C:attention}Kings{}",
+					"are enhanced to {C:attention}Mult Cards{}",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
 			},
 			c_csau_ishtar = {
@@ -2501,8 +2508,9 @@ return {
 			c_csau_sataniccults = {
 				name = "Law Enforcement Guide to Satanic Cults",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}activated{}, {C:attention}Gold Cards{} give",
+					"{X:mult,C:white}X#1#{} Mult when held in hand",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
 			c_csau_blooddebts = {
@@ -2566,8 +2574,9 @@ return {
 			c_csau_devilstory = {
 				name = "Devil Story",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}activated{}, add {C:money}Gold Seals{} to",
+					"all {C:attention}Enhanced{} cards in scoring hand",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand"
 				},
 			},
 			c_csau_rentafriend = {
@@ -2589,22 +2598,24 @@ return {
 				name = "Wayne's World VCR Board Game",
 				text = {
 					"When {C:attention}activated{}, {C:chips}+#1#{} Chips if you",
-					"do not have the Grey Poupon{s:0.55}TM{}",
+					"do not have the {C:inactive}Grey Poupon{s:0.55}TM{}",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
 			c_csau_sos = {
 				name = "SOS",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}activated{},",
+					"{C:green}#1# in #2#{} chance for {X:mult,C:white}X#3#{}",
+					"{C:vhs}Running Time{}: {C:attention}#4#{} Hands"
 				},
 			},
 			c_csau_macandme = {
 				name = "Mac and Me",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}activated{}, retrigger first",
+					"{C:attention}2{} cards in scoring hand",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
 			},
 			c_csau_osteo = {
@@ -2635,8 +2646,9 @@ return {
 			c_csau_kidsand = {
 				name = "Kid Sand Airbags",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}activated{}, gain {C:red}+#1#{} Discard",
+					"when {C:attention}Blind{} is selected",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Rounds"
 				},
 			},
 			c_csau_spacecop = {
@@ -2651,15 +2663,18 @@ return {
 			c_csau_theroom = {
 				name = "The Room",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}activated{}, reduce",
+					"score requirements by {C:attention}#1#%{}",
+					"when {C:attention}Blind{} is selected",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Rounds"
 				},
 			},
 			c_csau_ryansbabe = {
 				name = "Ryan's Babe",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}activated{}, scoring {C:attention}Queens{}",
+					"are enhanced to {C:attention}Bonus Cards{}",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
 			},
 			c_csau_ritf = {
@@ -2687,8 +2702,8 @@ return {
 			c_csau_donbeveridge = {
 				name = "Don Beveridge Customerization Seminar",
 				text = {
-					"When {C:attention}activated{}, {C:attention}Food Jokers{}",
-					"do not expire",
+					"When {C:attention}activated{},",
+					"{C:attention}Food Jokers{} do not expire",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Triggers"
 				},
 			},

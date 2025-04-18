@@ -11,8 +11,9 @@ local consumInfo = {
         slide_out_delay = 0,
         destroyed = false,
         extra = {
-            runtime = 1,
+            runtime = 3,
             uses = 0,
+            discard_mod = 1,
         }
     },
     origin = {
@@ -29,7 +30,7 @@ local slide_out_delay = 1
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.yunkie } }
-    return { vars = {  } }
+    return { vars = { card.ability.extra.discard_mod, card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)
@@ -39,7 +40,19 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-
+    if card.ability.activated and context.setting_blind and not card.getting_sliced and not card.debuff then
+        ease_discard(card.ability.extra.discard_mod)
+        card.ability.extra.uses = card.ability.extra.uses+1
+        if card.ability.extra.uses >= card.ability.extra.runtime then
+            G.FUNCS.destroy_tape(card)
+            card.ability.destroyed = true
+        end
+        return {
+            card = card,
+            message = localize{type = 'variable', key = 'a_plus_discard', vars = {card.ability.extra.discard_mod}},
+            colour = G.C.RED
+        }
+    end
 end
 
 function consumInfo.can_use(self, card)

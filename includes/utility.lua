@@ -970,3 +970,29 @@ G.FUNCS.have_multiple_jokers = function(tbl)
 	end
 	return true
 end
+
+G.FUNCS.hand_contains_rank = function(hand, ranks, require_all)
+	require_all = require_all or false
+	local found = {}
+
+	for _, card in ipairs(hand) do
+		if card.ability.effect == "Base" then
+			local rank = card:get_id()
+			for _, target in ipairs(ranks) do
+				if rank == target then
+					found[target] = true
+				end
+			end
+		end
+	end
+	if require_all then
+		for _, target in ipairs(ranks) do
+			if not found[target] then
+				return false
+			end
+		end
+		return true
+	else
+		return next(found) ~= nil
+	end
+end

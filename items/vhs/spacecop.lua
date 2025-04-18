@@ -36,17 +36,19 @@ end
 
 function consumInfo.calculate(self, card, context)
     if context.modify_level_increment and context.card then
-        if context.card.ability.set == 'Planet' and pseudorandom('theclownhasarrived') < G.GAME.probabilities.normal / card.ability.extra.prob then
+        if context.card.ability.set == 'Planet' then
             card.ability.extra.uses = card.ability.extra.uses+1
             if card.ability.extra.uses >= card.ability.extra.runtime then
                 G.FUNCS.destroy_tape(card)
                 card.ability.destroyed = true
             end
-            return {
-                mult_inc = 2,
-                message = localize('k_spacecop'),
-                colour = G.C.SECONDARY_SET.Planet
-            }
+            if pseudorandom('theclownhasarrived') < G.GAME.probabilities.normal / card.ability.extra.prob then
+                return {
+                    mult_inc = 2,
+                    message = localize('k_spacecop'),
+                    colour = G.C.SECONDARY_SET.Planet
+                }
+            end
         end
     end
 end

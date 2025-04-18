@@ -36,13 +36,10 @@ function jokerInfo.calculate(self, card, context)
 			for k, v in ipairs(context.scoring_hand) do
 				if not v.seal then
 					activate = true
-					G.E_MANAGER:add_event(Event({
-						func = function()
-							v:juice_up()
-							v:set_seal(seal[pseudorandom('meat', 1, 4)], nil, true)
-							return true
-						end
-					}))
+					v.seal_delay = true
+					v:set_seal(seal[pseudorandom('meat', 1, 4)], nil, nil, {set_func = function()
+						card:juice_up()
+					end} )
 				end
 			end
 			if activate then

@@ -259,3 +259,9 @@ function Card:load(cardTable, other_card)
 
     return ret
 end
+
+local ref_card_ju = Card.juice_up
+function Card:juice_up(scale, rot_amount)
+    if self.seal_delay then self.seal_delay = false end
+    ref_card_ju(self, scale, rot_amount)
+end

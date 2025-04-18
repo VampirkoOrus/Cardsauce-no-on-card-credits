@@ -1270,3 +1270,65 @@ pattern = "set_joker_win()"
 position = "after"
 payload = "set_stand_win()"
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "function Card:set_seal(_seal, silent, immediate)"
+position = "at"
+payload = "function Card:set_seal(_seal, silent, immediate, args)"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''self:juice_up(0.3, 0.3)
+             play_sound(sound.sound, sound.per, sound.vol)'''
+position = "after"
+payload = '''if args and args.set_func and type(args.set_func) == 'function' then
+    args.set_func()
+end'''
+match_indent = true
+times = 2
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "local rows, protos = {}, {'collection', 'challenges', 'joker_stickers', 'deck_stake_wins'}"
+position = "at"
+payload = '''local rows, protos = {}, {'collection', 'challenges', 'joker_stickers', 'stand_stickers', 'deck_stake_wins'}'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "_profile_progress.joker_stickers.tally/_profile_progress.joker_stickers.of +"
+position = "after"
+payload = '''_profile_progress.stand_stickers.tally/_profile_progress.stand_stickers.of +'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "elseif v == 'joker_stickers' then"
+position = "before"
+payload = '''elseif v == 'stand_stickers' then
+    tab, val, max = _profile_progress.stand_stickers, 'tally', _profile_progress.stand_stickers.of'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''{n=G.UIT.T, config={text = " (".._profile_progress.challenges.tally..'/'.._profile_progress.challenges.of..")", scale = 0.35, colour = G.C.JOKER_GREY}}
+    }'''
+position = "after"
+payload = '''or v == 'stand_stickers' and {
+      {n=G.UIT.O, config={object = DynaText({string = {math.floor(0.01+100*_profile_progress.stand_stickers.tally/_profile_progress.stand_stickers.of)..'%'}, colours = {G.C.WHITE},shadow = true, float = true, scale = 0.55*text_scale})}},
+      {n=G.UIT.T, config={text = " (".._profile_progress.stand_stickers.tally..'/'.._profile_progress.stand_stickers.of..")", scale = 0.35, colour = G.C.JOKER_GREY}}
+    }'''
+match_indent = true
+times = 1

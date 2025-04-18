@@ -79,6 +79,8 @@ G.csau_team = {
 	['greeky'] = "greek_shmeek",
 	['gong'] = 'Gongalicious',
 	['zeurel'] = 'Zeurel',
+	['eld'] = 'eldritchminds',
+	['retro'] = 'Retrotype',
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",
@@ -132,7 +134,7 @@ G.csau_collab_credits = {
 	csau_powerful = {
 		King = nil,
 		Queen = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.chvsau } },
-		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.cejai } },
+		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.retro } },
 	},
 	-- Mike
 	csau_poops = {
@@ -141,7 +143,7 @@ G.csau_collab_credits = {
 		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.cejai } },
 	},
 	csau_ocs = {
-		King = nil,
+		King = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.eld } },
 		Queen = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.guff } },
 		Jack = nil,
 	},
