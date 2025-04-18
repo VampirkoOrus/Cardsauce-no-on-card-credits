@@ -355,6 +355,11 @@ return {
 			vs_credits6 = "Special Thanks",
 			vs_credits7 = "Music",
 			vs_credits8 = "Shaders",
+			vs_credits9 = "Logo",
+
+			vs_credits_logo_aliz_sub = "(Design & Vector ver.)",
+			vs_credits_logo_keku_sub = "(In-Game ver.)",
+
 			vs_options_sub = "(Restart required to apply)",
 			vs_options_muteWega = "Mute WAAUGGHGHHHHGHH",
 			vs_options_muteWega_desc = "Check this box to mute WAAUGGHGHHHHGHH's screams",
