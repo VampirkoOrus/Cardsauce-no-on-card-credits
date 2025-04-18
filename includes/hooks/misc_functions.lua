@@ -116,3 +116,16 @@ function get_stand_win_sticker(_center, index)
 	end
 	if index then return 0 end
 end
+
+local ref_spp = set_profile_progress
+function set_profile_progress()
+	ref_spp()
+	G.PROGRESS.stand_stickers = {tally = 0, of = 0}
+	for _, v in pairs(G.P_CENTERS) do
+		if v.set == 'csau_Stand' then
+			G.PROGRESS.stand_stickers.of = G.PROGRESS.stand_stickers.of + #G.P_CENTER_POOLS.Stake
+			G.PROGRESS.stand_stickers.tally = G.PROGRESS.stand_stickers.tally + get_stand_win_sticker(v, true)
+		end
+	end
+	G.PROFILES[G.SETTINGS.profile].progress.stand_stickers = copy_table(G.PROGRESS.stand_stickers)
+end

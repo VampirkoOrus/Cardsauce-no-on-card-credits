@@ -77,6 +77,17 @@ SMODS.DrawStep:take_ownership('stickers', {
 })
 
 
+local old_seal_fs = SMODS.DrawSteps.seal.func
+SMODS.DrawStep:take_ownership('seal', {
+    func = function(self, layer)
+        if not self.seal_delay then
+            old_seal_fs(self, layer)
+        end
+    end
+})
+
+
+
 
 
 

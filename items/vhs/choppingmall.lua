@@ -6,14 +6,14 @@ local consumInfo = {
     alerted = true,
     config = {
         activation = true,
-        extra = {
-            runtime = 1,
-            uses = 0,
-        },
         activated = false,
         slide_move = 0,
         slide_out_delay = 0,
         destroyed = false,
+        extra = {
+            runtime = 1,
+            uses = 0,
+        },
     },
     origin = {
         'rlm',
@@ -39,7 +39,26 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-
+    if card.ability.activated and context.before and not card.debuff and not context.blueprint then
+        if context.scoring_hand[1] and SMODS.has_enhancement(context.scoring_hand[1], 'm_steel')
+        and context.scoring_hand[#context.scoring_hand] and SMODS.has_enhancement(context.scoring_hand[#context.scoring_hand], 'm_steel') then
+            for i = 1, 2 do
+                local _card = i==1 and context.scoring_hand[1] or context.scoring_hand[#context.scoring_hand]
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        _card:juice_up()
+                        _card:set_seal("Red", nil, true)
+                        return true
+                    end
+                }))
+            end
+            card.ability.extra.uses = card.ability.extra.uses+1
+            if card.ability.extra.uses >= card.ability.extra.runtime then
+                G.FUNCS.destroy_tape(card)
+                card.ability.destroyed = true
+            end
+        end
+    end
 end
 
 function consumInfo.can_use(self, card)

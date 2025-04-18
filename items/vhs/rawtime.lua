@@ -45,7 +45,7 @@ function consumInfo.calculate(self, card, context)
             return {
                 message = 'Again!',
                 repetitions = card.ability.extra.retrigger,
-                card = context.other_card
+                card = card
             }
         end
     end

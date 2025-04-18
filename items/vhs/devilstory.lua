@@ -38,7 +38,30 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-
+    if card.ability.activated and context.before and not card.debuff and not context.blueprint then
+        local activated = false
+        for i, v in ipairs(context.scoring_hand) do
+            if not v.seal and v.ability.effect ~= "Base" then
+                activated = true
+                v.seal_delay = true
+                v:set_seal("Gold", nil, nil, {set_func = function()
+                    card:juice_up()
+                end} )
+            end
+        end
+        if activated then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    card.ability.extra.uses = card.ability.extra.uses+1
+                    if card.ability.extra.uses >= card.ability.extra.runtime then
+                        G.FUNCS.destroy_tape(card)
+                        card.ability.destroyed = true
+                    end
+                    return true
+                end
+            }))
+        end
+    end
 end
 
 function consumInfo.can_use(self, card)

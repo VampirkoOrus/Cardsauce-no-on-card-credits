@@ -10,6 +10,11 @@ local consumInfo = {
         slide_move = 0,
         slide_out_delay = 0,
         destroyed = false,
+        extra = {
+            retrigger = 1,
+            runtime = 2,
+            uses = 0,
+        }
     },
     origin = 'joel'
 }
@@ -21,16 +26,33 @@ local slide_out_delay = 1
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gong } }
+    return { vars = { card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)
     if next(SMODS.find_card("c_csau_moodyblues")) then
-
+        card.ability.extra.runtime = card.ability.extra.runtime*2
     end
 end
 
 function consumInfo.calculate(self, card, context)
-
+    if card.ability.activated and context.cardarea == G.play and context.repetition and not context.repetition_only then
+        if (context.scoring_hand[1] and context.other_card == context.scoring_hand[1]) or (context.scoring_hand[2] and context.other_card == context.scoring_hand[2]) then
+            return {
+                message = 'Again!',
+                repetitions = card.ability.extra.retrigger,
+                card = card
+            }
+        end
+    end
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.after and not card.ability.destroyed and card.ability.activated and not bad_context then
+        card.ability.extra.uses = card.ability.extra.uses+1
+        if card.ability.extra.uses >= card.ability.extra.runtime then
+            G.FUNCS.destroy_tape(card)
+            card.ability.destroyed = true
+        end
+    end
 end
 
 function consumInfo.can_use(self, card)
