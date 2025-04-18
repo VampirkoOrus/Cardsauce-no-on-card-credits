@@ -43,7 +43,6 @@ function jokerInfo.check_for_unlock(self, args)
         end
         return G.GAME.trip_to_america_hands >= goal
     end
-    send(G.GAME.trip_to_america_hands or "NO FUNNY")
     if args.type == 'round_win' then
         G.GAME.trip_to_america_hands = 0
     end
