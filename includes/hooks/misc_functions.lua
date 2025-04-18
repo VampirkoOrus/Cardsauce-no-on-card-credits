@@ -86,6 +86,7 @@ function set_stand_win()
 end
 
 function get_stand_win_sticker(_center, index)
+	if not G.PROFILES[G.SETTINGS.profile].stand_usage then return 0 end
 	local stand_usage = G.PROFILES[G.SETTINGS.profile].stand_usage[_center.key] or {}
 	if stand_usage.wins then
 		if SMODS and SMODS.can_load then

@@ -2060,7 +2060,8 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 				unlock={
-					"Discover {E:1,C:attention}Grey Joker",
+					"Discard {E:1,C:attention}30{} cards in one {E:1,C:attention}Blind{},",
+					"or discover {E:1,C:attention}Grey Joker",
 				},
 			},
 			j_csau_itsmeaustin = {
@@ -2107,8 +2108,9 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 				unlock={
-					"Discover {E:1,C:stand}Dirty Deeds",
-					"{E:1,C:stand}Done Dirt Cheap"
+					"Play {E:1,C:attention}10{} hands of only {E:1,C:attention}face{} cards",
+					"in a row, or discover",
+					"{E:1,C:stand}Dirty Deeds Done Dirt Cheap"
 				},
 			},
 			j_csau_passport = {

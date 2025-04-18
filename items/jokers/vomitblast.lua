@@ -20,9 +20,19 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.mult_mod, card.ability.extra.mult } }
 end
 
+local goal = 30
+
 function jokerInfo.check_for_unlock(self, args)
     if args.type == "discover_grey" then
         return true
+    end
+    if args.type == 'discard_custom' then
+        G.GAME.vomit_blast_discards = G.GAME.vomit_blast_discards or 0
+        G.GAME.vomit_blast_discards = G.GAME.vomit_blast_discards + #args.cards
+        return G.GAME.vomit_blast_discards >= goal
+    end
+    if args.type == 'round_win' then
+        G.GAME.vomit_blast_discards = 0
     end
 end
 

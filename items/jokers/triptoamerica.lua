@@ -20,9 +20,31 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.mult_mod, card.ability.extra.mult } }
 end
 
+local function all_face(hand)
+    for i, v in ipairs(hand) do
+        if not v:is_face() then
+            return false
+        end
+    end
+    return true
+end
+
+local goal = 10
+
 function jokerInfo.check_for_unlock(self, args)
     if args.type == "discover_d4c" then
         return true
+    end
+    if args.type == 'discard_custom' then
+        if all_face(#args.cards) then
+            G.GAME.trip_to_america_hands = (G.GAME.trip_to_america_hands or 0) + 1
+        else
+            G.GAME.trip_to_america_hands = 0
+        end
+        return G.GAME.trip_to_america_hands >= goal
+    end
+    if args.type == 'round_win' then
+        G.GAME.trip_to_america_hands = 0
     end
 end
 

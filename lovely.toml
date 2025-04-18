@@ -1295,6 +1295,21 @@ times = 2
 [[patches]]
 [patches.pattern]
 target = "functions/UI_definitions.lua"
+pattern = '''local rows, protos = {}, {'collection', 'challenges', 'joker_stickers', 'deck_stake_wins'}
+_profile_progress = _profile_progress or G.PROFILES[G.SETTINGS.profile].progress'''
+position = "at"
+payload = '''local rows, protos = {}, {'collection', 'challenges', 'joker_stickers', 'stand_stickers', 'deck_stake_wins'}
+_profile_progress = _profile_progress or G.PROFILES[G.SETTINGS.profile].progress
+if not _profile_progress.stand_stickers then
+    local of = 0; for _, v in pairs(G.P_CENTERS) do if v.set == 'csau_Stand' then of = of + 1 end end
+    _profile_progress.stand_stickers = {tally = 0, of = of*#G.P_CENTER_POOLS.Stake }
+end'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
 pattern = "local rows, protos = {}, {'collection', 'challenges', 'joker_stickers', 'deck_stake_wins'}"
 position = "at"
 payload = '''local rows, protos = {}, {'collection', 'challenges', 'joker_stickers', 'stand_stickers', 'deck_stake_wins'}'''
