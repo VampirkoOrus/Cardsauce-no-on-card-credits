@@ -1251,3 +1251,22 @@ edition = poll_edition('wheel_of_fortune', nil, no_neg, true)
 '''
 match_indent = true
 times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.set == 'Joker' and not self.sticker_run then'''
+position = "before"
+payload = '''
+if self.ability.set == 'csau_Stand' and not self.sticker_run then
+    self.sticker_run = get_stand_win_sticker(self.config.center) or 'NONE'
+end'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "set_joker_win()"
+position = "after"
+payload = "set_stand_win()"
+match_indent = true

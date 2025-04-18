@@ -505,6 +505,7 @@ return {
 			ba_rlm_r = "Re:View",
 			ba_jojo = "Jojo's Bizarre Adventure",
 			ba_uzumaki = "Uzumaki",
+			ba_monkeywrench = "Monkey Wrench",
 
 			-- badge colors for jojo parts
 			ba_phantom = 'Phantom Blood',

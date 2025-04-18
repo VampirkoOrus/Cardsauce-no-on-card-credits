@@ -9,6 +9,7 @@ local jokerInfo = {
     eternal_compat = true,
     perishable_compat = true,
     streamer = "joel",
+    origin = 'monkeywrench'
 }
 
 G.FUNCS.plaguewalker_active = function(card)
@@ -35,6 +36,7 @@ function Card:get_chip_x_mult(context)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.zeurel } }
     return { vars = { G.GAME.probabilities.normal } }
 end
 
