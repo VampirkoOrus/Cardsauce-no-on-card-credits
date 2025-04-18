@@ -35,14 +35,15 @@ function jokerInfo.check_for_unlock(self, args)
     if args.type == "discover_d4c" then
         return true
     end
-    if args.type == 'discard_custom' then
-        if all_face(#args.cards) then
+    if args.type == 'hand_contents' then
+        if all_face(args.cards) then
             G.GAME.trip_to_america_hands = (G.GAME.trip_to_america_hands or 0) + 1
         else
             G.GAME.trip_to_america_hands = 0
         end
         return G.GAME.trip_to_america_hands >= goal
     end
+    send(G.GAME.trip_to_america_hands or "NO FUNNY")
     if args.type == 'round_win' then
         G.GAME.trip_to_america_hands = 0
     end
