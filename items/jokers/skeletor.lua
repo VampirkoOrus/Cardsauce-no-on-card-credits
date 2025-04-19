@@ -5,7 +5,7 @@ local jokerInfo = {
             chips = 0,
             chips_mod = 50,
             x_mult = 1,
-            x_mult_mod = 0.25,
+            x_mult_mod = 0.5,
         },
     },
     rarity = 2,
