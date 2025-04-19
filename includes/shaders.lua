@@ -212,7 +212,7 @@ SMODS.DrawStep {
 ---
 local current_mod = SMODS.current_mod
 local slide_out = 8.25
-local slide_mod = 0.25
+local slide_mod = 0.825
 local slide_out_delay = 1
 
 local setupTapeCanvas = function(card, center, tape, sleeve)
