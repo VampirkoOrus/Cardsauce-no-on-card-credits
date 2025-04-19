@@ -24,10 +24,8 @@ function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and not context.before and context.joker_main and not context.repetition then
         local trigger = false
         for k, v in ipairs(context.full_hand) do
-            if not table.contains(context.scoring_hand, v) then
-                if v:get_id() == 7 then
-                    trigger = true
-                end
+            if v:get_id() == 7 then
+                trigger = true
             end
         end
         if trigger then

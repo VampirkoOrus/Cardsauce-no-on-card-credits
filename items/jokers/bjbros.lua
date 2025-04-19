@@ -1,7 +1,7 @@
 local jokerInfo = {
     name = 'Blowzo Brothers',
     config = {
-        prob_1 = 2,
+        prob_1 = 4,
         prob_2 = 4
     },
     rarity = 2,
@@ -18,42 +18,47 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+
     if context.cardarea == G.jokers and context.before and not card.debuff then
         if context.scoring_name == "Two Pair" then
             local bj1 = false
-            if pseudorandom('bjbros2') < G.GAME.probabilities.normal / card.ability.prob_2 then
-                if not context.blueprint_card then
+            local enhancements = {
+                [1] = G.P_CENTERS.m_bonus,
+                [2] = G.P_CENTERS.m_mult,
+                [3] = G.P_CENTERS.m_wild,
+                [4] = G.P_CENTERS.m_glass,
+                [5] = G.P_CENTERS.m_steel,
+                [6] = G.P_CENTERS.m_stone,
+                [7] = G.P_CENTERS.m_gold,
+                [8] = G.P_CENTERS.m_lucky,
+            }
+            for k, v in ipairs(context.scoring_hand) do
+                if pseudorandom('bjbros2') < G.GAME.probabilities.normal / card.ability.prob_2 and v.ability.effect == "Base" then
                     bj1 = true
-                    card:juice_up()
-                    local enhancements = {
-                        [1] = G.P_CENTERS.m_bonus,
-                        [2] = G.P_CENTERS.m_mult,
-                        [3] = G.P_CENTERS.m_wild,
-                        [4] = G.P_CENTERS.m_glass,
-                        [5] = G.P_CENTERS.m_steel,
-                        [6] = G.P_CENTERS.m_stone,
-                        [7] = G.P_CENTERS.m_gold,
-                        [8] = G.P_CENTERS.m_lucky,
-                    }
-                    local card_1 = pseudorandom('bjbros', 1, #context.scoring_hand)
-                    local card_2
-                    repeat
-                        card_2 = pseudorandom('second_pick', 1, #context.scoring_hand)
-                    until card_2 ~= card_1
-                    for i, v in ipairs(context.scoring_hand) do
-                        if (i == card_1 or i == card_2) and v.ability.effect == "Base" then
-                            v:set_ability(enhancements[pseudorandom('hookedonthebros', 1, 8)], nil, true)
-                            G.E_MANAGER:add_event(Event({
-                                func = function()
-                                    v:juice_up()
-                                    return true
-                                end
-                            }))
-                        end
+                    if bj2 then
+                        check_for_unlock({ type = "gamer_blowzo" })
                     end
+                    v:set_ability(enhancements[pseudorandom('hookedonthebros', 1, 8)], nil, true)
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            card:juice_up()
+                            v:juice_up()
+                            return {
+                                message = localize('k_enhanced'),
+                                card = context.blueprint_card or card,
+                                }
+                        end
+                    }))
                 end
             end
+        end
+    end
+
+    if context.cardarea == G.jokers and context.before and not card.debuff then
+        if context.scoring_name == "Two Pair" then
+            local bj2 = false
             if pseudorandom('bjbros1') < G.GAME.probabilities.normal / card.ability.prob_1 then
+                bj2 = true
                 if bj1 then
                     check_for_unlock({ type = "gamer_blowzo" })
                 end

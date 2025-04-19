@@ -486,6 +486,7 @@ return {
 			k_ts_wild = "WIILLDDD!",
 			k_spacecop = "Space Cop!",
 			k_theroom = "Love is Blind...",
+			k_enhanced = "Enhanced!",
 
 			-- badge titles
 			ba_vinny = "Vinesauce",
@@ -910,12 +911,6 @@ return {
 				name = "Voice Acting",
 				text = {
 					"{E:1}#1#{}"
-				},
-			},
-			drippyforce = {
-				name = "Forced in the mod by",
-				text = {
-					"{E:1}SinCityAssassin{}",
 				},
 			},
 			rogernote = {
@@ -1578,9 +1573,8 @@ return {
 			j_csau_garbagehand = {
 				name = "Garbage Hand",
 				text = {
-					"Played cards without an",
-					"{C:attention}Enhancement{} and a chip",
-					"value of {C:chips}8{} or less give",
+					"Played {C:attention}Unenhanced{} cards of",
+					"rank {C:attention}8{} or less give",
 					"{C:mult}+#1#{} Mult when scored",
 				},
 			},
@@ -1655,10 +1649,10 @@ return {
 			j_csau_purple = {
 				name = "The Purple Joker",
 				text = {
-					"If {C:attention}first hand{} of round",
-					"contains a {C:attention}Flush{} of {V:1}#2#{},",
-					"create up to #1# {C:purple}Tarot{} cards",
-					"{C:inactive}(Must have room)",
+					"If played hand contains",
+					"a {C:attention}Flush{} of {V:1}#2#{},",
+					"create a #1# {C:purple}Tarot{} card",
+					"{C:inactive}(Must have room)"
 				},
 			},
 			j_csau_fate = {
@@ -1716,9 +1710,8 @@ return {
 			j_csau_grand = {
 				name = "7 Funny Story",
 				text = {
-					"{C:green}#1# in #2#{} chance to give",
-					"{X:mult,C:white}X#3#{} Mult if played hand",
-					"contains a {C:attention}non-scoring 7"
+					"{C:green}#1# in #2#{} chance to give {X:mult,C:white}X#3#{} Mult",
+					"if played hand contains a {C:attention}7"
 				},
 			},
 			j_csau_voice = {
@@ -1853,10 +1846,9 @@ return {
 			j_csau_bjbros = {
 				name = "Blowzo Brothers",
 				text = {
-					"{C:green}#1# in #2#{} chance to upgrade",
-					"level of played {C:attention}Two Pair{}",
-					"{C:green}#1# in #3#{} chance to {C:attention}enhance{} two",
-					"cards in played {C:attention}Two Pair{}",
+					"If played hand is a {C:attention}Two Pair{},",
+					"{C:green}#1# in #2#{} chance to upgrade {C:attention}Two Pair{}",
+					"{C:green}#1# in #3#{} chance to {C:attention}enhance{} each scored card",
 				},
 			},
 			j_csau_grannycream = {
@@ -1870,10 +1862,9 @@ return {
 			j_csau_drippy = {
 				name = "Dripping Joker",
 				text = {
-					"Adds a random {C:attention}playing card{} to hand",
-					"when playing a {C:attention}Poker Hand{}",
-					"If card has any enhancements, add",
-					"its {C:attention}effect to scoring",
+					"When {C:attention}first hand{} of round is played,",
+					"add a random {C:attention}Enhancement{}",
+					"to a card held in hand",
 				},
 			},
 			j_csau_sts = {

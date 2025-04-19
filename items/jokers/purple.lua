@@ -1,7 +1,7 @@
 local jokerInfo = {
     name = 'The Purple Joker',
     config = {
-        tarot = 2
+        tarot = 1
     },
     rarity = 1,
     cost = 4,
@@ -17,7 +17,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.before and not card.debuff and to_big(G.GAME.current_round.hands_played) == to_big(0) and next(context.poker_hands['Flush']) then
+    if context.cardarea == G.jokers and context.before and not card.debuff and next(context.poker_hands['Flush']) then
         local purp = G.FUNCS.csau_all_suit(context.full_hand, G.GAME and G.GAME.wigsaw_suit or "Spades")
         if purp then
             for i = 1, math.min(card.ability.tarot, G.consumeables.config.card_limit - #G.consumeables.cards) do
