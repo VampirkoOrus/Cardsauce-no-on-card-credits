@@ -56,5 +56,4 @@ function consumInfo.can_use(self, card)
     end
 end
 
-
 return consumInfo
