@@ -38,5 +38,4 @@ function consumInfo.can_use(self, card)
     return #G.jokers.cards > 0
 end
 
-
 return consumInfo

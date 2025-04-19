@@ -192,6 +192,7 @@ G.FUNCS.use_card = function(e, mute, nosave)
         end
         if card.ability.activation then
             G.FUNCS.tape_activate(card)
+            card:highlight(true)
         end
         discover_card(card.config.center)
         if card.area and card.area ~= G.consumeables then
@@ -214,7 +215,7 @@ G.FUNCS.use_card = function(e, mute, nosave)
         end
         return
     end
-    e.config.button = nil
-    ref_uc(e, mute, nosave)
+
+    return ref_uc(e, mute, nosave)
 end
 

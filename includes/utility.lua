@@ -1,8 +1,5 @@
 local mod = SMODS.current_mod
-
-
-
-
+local mod_path = SMODS.current_mod.path:match("Mods/[^/]+")..'/'
 
 ---------------------------
 --------------------------- Loading/Debug Functions
@@ -138,7 +135,6 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 	local key = string.lower(item_type)..(item_type == 'VHS' and '' or 's')
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
 
-
 	if info.csau_dependencies then
 		if not csau_filter_loading('item', { key = file_key, type = item_type, dependencies = info.csau_dependencies }) then
 			return
@@ -180,6 +176,12 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 		info.color = nil
 	end
 
+	-- tape image loading
+	if item_type == 'VHS' then
+		mod['c_csau_'..info.key..'_tape'] = love.graphics.newImage(mod_path..'assets/1x/vhs/'..(info.tapeKey or 'blackspine')..'.png')
+		mod['c_csau_'..info.key..'_sleeve'] = love.graphics.newImage(mod_path..'assets/1x/vhs/'..info.key..'.png')
+	end
+
 	local smods_item = item_type
 	if item_type == 'Stand' or item_type == 'VHS' then
 		smods_item = 'Consumable'
@@ -192,6 +194,7 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 			set_consumeable_usage(card)
 		end
 	end
+
 	if item_type == 'Deck' then smods_item = 'Back' end
 	local new_item = SMODS[smods_item](info)
 	for k_, v_ in pairs(new_item) do
@@ -547,6 +550,7 @@ end
 --- @param card Card Balatro Card object of activated VHS tape
 G.FUNCS.tape_activate = function(card)
     if not card.ability.activation then return end
+	sendDebugMessage('tape activation')
     if card.ability.activated then
         card.ability.activated = false
         play_sound('csau_vhsclose', 0.9 + math.random()*0.1, 0.4)
