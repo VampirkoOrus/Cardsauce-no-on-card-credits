@@ -18,7 +18,19 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-
+    if context.cardarea == G.jokers and context.before and not card.debuff then
+        if context.scoring_name == "Two Pair" then
+            local bj1 = false
+            if pseudorandom('bjbros1') < G.GAME.probabilities.normal / card.ability.prob_1 then
+                bj1 = true
+                return {
+                    card = card,
+                    level_up = true,
+                    message = localize('k_level_up_ex')
+                }
+            end
+        end
+    end
     if context.cardarea == G.jokers and context.before and not card.debuff then
         if context.scoring_name == "Two Pair" then
             local bj1 = false
@@ -34,8 +46,7 @@ function jokerInfo.calculate(self, card, context)
             }
             for k, v in ipairs(context.scoring_hand) do
                 if pseudorandom('bjbros2') < G.GAME.probabilities.normal / card.ability.prob_2 and v.ability.effect == "Base" then
-                    bj1 = true
-                    if bj2 then
+                    if bj1 then
                         check_for_unlock({ type = "gamer_blowzo" })
                     end
                     v:set_ability(enhancements[pseudorandom('hookedonthebros', 1, 8)], nil, true)
@@ -50,23 +61,6 @@ function jokerInfo.calculate(self, card, context)
                         end
                     }))
                 end
-            end
-        end
-    end
-
-    if context.cardarea == G.jokers and context.before and not card.debuff then
-        if context.scoring_name == "Two Pair" then
-            local bj2 = false
-            if pseudorandom('bjbros1') < G.GAME.probabilities.normal / card.ability.prob_1 then
-                bj2 = true
-                if bj1 then
-                    check_for_unlock({ type = "gamer_blowzo" })
-                end
-                return {
-                    card = card,
-                    level_up = true,
-                    message = localize('k_level_up_ex')
-                }
             end
         end
     end

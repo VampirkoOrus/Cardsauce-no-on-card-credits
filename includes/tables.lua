@@ -81,6 +81,7 @@ G.csau_team = {
 	['zeurel'] = 'Zeurel',
 	['eld'] = 'eldritchminds',
 	['retro'] = 'Retrotype',
+	['mary'] = 'Drawer_Mary',
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",
@@ -88,7 +89,7 @@ G.csau_team = {
 		['akai'] = "(Balatrostuck)",
 		['myst'] = "(LobotomyCorp)",
 		['victin'] = "(Victin's Collection)",
-
+		['alizarin'] = "(vinemon.link)",
 	}
 }
 
@@ -132,25 +133,34 @@ G.csau_collab_credits = {
 		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.guff } },
 	},
 	csau_powerful = {
-		King = nil,
+		King = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } },
 		Queen = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.chvsau } },
 		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.retro } },
 	},
 	-- Mike
 	csau_poops = {
+		Ace = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } },
 		King = {key = "csau_artistcredit_2", set = "Other", vars = { G.csau_team.gote, G.csau_team.cejai } , plural = true},
 		Queen = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } },
 		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.cejai } },
 	},
 	csau_ocs = {
+		Ace = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } },
 		King = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.eld } },
 		Queen = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.guff } },
-		Jack = nil,
+		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } },
 	},
 	csau_pets = {
+		Ace = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } },
 		King = nil,
 		Queen = nil,
 		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.winterg } },
+	},
+	csau_fingies = {
+		Ace = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } },
+		King = nil,
+		Queen = nil,
+		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } },
 	},
 }
 

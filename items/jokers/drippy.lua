@@ -1,6 +1,6 @@
 local jokerInfo = {
     name = 'Dripping Joker',
-    config = { rand_card },
+    config = {},
     rarity = 2,
     cost = 7,
     blueprint_compat = true,
@@ -15,7 +15,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.before and not card.debuff and G.GAME.current_round.hands_played == 0 then
+    if context.cardarea == G.jokers and context.before and not card.debuff and G.GAME.current_round.hands_played == 0 and not context.debuffed then
 
         local enhancements = {
             [1] = G.P_CENTERS.m_bonus,
@@ -27,28 +27,22 @@ function jokerInfo.calculate(self, card, context)
             [7] = G.P_CENTERS.m_gold,
             [8] = G.P_CENTERS.m_lucky,
         }
+        local enhancements = {}
+        for k, v in pairs(G.P_CENTERS) do if v.set == "Enhanced" then table.insert(enhancements, v) end end
+        for k, v in pairs (SMODS.Centers) do if v.set == "Enhanced" then table.insert(enhancements, v) end end
 
-        if context.debuffed then return end
-
-        if context.before and not card.debuff and G.GAME.current_round.hands_played == 0 and #G.hand.cards > 0 then
-            rand_card = pseudorandom_element(G.hand.cards, pseudoseed('stickybytylerthecreator'))
-            rand_card.enhance_flag = true
-        end
-
-        if context.cardarea == G.jokers and rand_card and rand_card.enhance_flag == true then
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    rand_card:set_ability(enhancements[pseudorandom('sticky', 1, 8)], nil, true)
-                    rand_card:juice_up()
-
-                    return true
-                end
-            })) 
-            return {
-                message = localize('k_enhanced'),
-                card = context.blueprint_card or card,
-            }
-        end
+        local rand_card = pseudorandom_element(G.hand.cards, pseudoseed('stickybytylerthecreator'))
+        rand_card:set_ability(pseudorandom_element(enhancements, pseudoseed('whothefuckisdrippysaidvinny')), nil, true)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                rand_card:juice_up()
+                return true
+            end
+        }))
+        return {
+            message = localize('k_enhanced'),
+            card = context.blueprint_card or card,
+        }
     end
 end
 

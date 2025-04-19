@@ -587,6 +587,7 @@ if SMODS.current_mod.DT.twoPoint0 then
     SMODS.Atlas{ key = 'poops', px = 71, py = 95, path = 'cards/csau/poops.png',}
     SMODS.Atlas{ key = 'ocs', px = 71, py = 95, path = 'cards/csau/ocs.png',}
     SMODS.Atlas{ key = 'pets', px = 71, py = 95, path = 'cards/csau/pets.png',}
+    SMODS.Atlas{ key = 'fingies', px = 71, py = 95, path = 'cards/csau/fingies.png',}
 end
 
 
@@ -641,6 +642,10 @@ local skins = {
         {key = 'csau_duendes', type = 'varg',
          loc_txt = {
             ['en-us'] = "The Duendes"
+         }},
+        {key = 'csau_fingies', type = 'mike',
+         loc_txt = {
+             ['en-us'] = "The Fingies"
          }},
     },
 }

@@ -357,9 +357,6 @@ return {
 			vs_credits8 = "Shaders",
 			vs_credits9 = "Logo",
 
-			vs_credits_logo_aliz_sub = "(Design & Vector ver.)",
-			vs_credits_logo_keku_sub = "(In-Game ver.)",
-
 			vs_options_sub = "(Restart required to apply)",
 			vs_options_muteWega = "Mute WAAUGGHGHHHHGHH",
 			vs_options_muteWega_desc = "Check this box to mute WAAUGGHGHHHHGHH's screams",
@@ -1847,8 +1844,9 @@ return {
 				name = "Blowzo Brothers",
 				text = {
 					"If played hand is a {C:attention}Two Pair{},",
-					"{C:green}#1# in #2#{} chance to upgrade {C:attention}Two Pair{}",
-					"{C:green}#1# in #3#{} chance to {C:attention}enhance{} each scored card",
+					"{C:green}#1# in #2#{} chance to upgrade {C:attention}Two Pair{} and",
+					"{C:green}#1# in #3#{} chance for each scored card",
+					"to recieve a random {C:attention}enhancement{} ",
 				},
 			},
 			j_csau_grannycream = {

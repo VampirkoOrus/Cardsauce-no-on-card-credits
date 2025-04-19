@@ -33,6 +33,7 @@ local slide_out_delay = 1
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.chvsau } }
     return { vars = { card.ability.extra.conv_money, card.ability.extra.conv_score, G.GAME.probabilities.normal, card.ability.extra.prob_double, card.ability.extra.prob_triple, card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
@@ -67,7 +68,7 @@ function consumInfo.calculate(self, card, context)
             end
         end
     end
-    if context.starting_shop and not context.blueprint then
+    if card.ability.activated and context.starting_shop and not context.blueprint then
         if card.ability.extra.uses >= card.ability.extra.runtime then
             G.FUNCS.destroy_tape(card)
             card.ability.destroyed = true
