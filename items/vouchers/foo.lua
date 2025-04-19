@@ -1,5 +1,5 @@
 local voucherInfo = {
-    name = 'Foo Fighters',
+    name = 'Foo Fighter',
     cost = 10,
     config = {
         extra = {

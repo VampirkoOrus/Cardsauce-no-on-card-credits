@@ -3138,7 +3138,7 @@ return {
 				},
 			},
 			v_csau_foo = {
-				name = 'Foo Fighters',
+				name = 'Foo Fighter',
 				text = {
 					"{C:stand}Stands{} can be purchased",
 					"from the {C:attention}shop{}"
