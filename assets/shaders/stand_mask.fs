@@ -22,7 +22,7 @@ extern MY_HIGHP_OR_MEDIUMP float screen_scale;
 extern MY_HIGHP_OR_MEDIUMP number shadow_height;
 extern MY_HIGHP_OR_MEDIUMP float scale_mod;
 extern MY_HIGHP_OR_MEDIUMP float rotate_mod;
-extern MY_HIGHP_OR_MEDIUMP number my; // vertical offset
+extern MY_HIGHP_OR_MEDIUMP number output_scale; // neutralise canvas scaling
 
 // function defs for required functions later in the code
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv);
@@ -89,7 +89,10 @@ vec4 draw_shadow(Image tex, vec2 uv,  vec2 uv_min, vec2 uv_max, vec2 shadow_uv_o
 
 vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 {
-    vec2 dissolve_uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
+    vec2 centre = vec2(0.5, 0.5);
+    vec2 scaled_texture_coords = (texture_coords - centre) / vec2(output_scale, 1.) + centre; // scale the entire uv to counter edge clipping
+
+    vec2 dissolve_uv = (((scaled_texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
     // dummy, doesn't do anything but makes the compiler happy (need to use the shader name uniform) 
     if (dissolve_uv.x > dissolve_uv.x * 2){
@@ -99,9 +102,9 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
     vec2 soul_min = vec2(0.4, 0.0);
     vec2 soul_max = vec2(0.6, 1.0);
 
-    vec4 soul = soul_move(texture, texture_coords, soul_min, soul_max); // for some reason the texture_coords is already starting at 0.4
-	vec4 mask = Texel(texture, texture_coords + vec2(0.4, 0.0));
-    vec4 base = Texel(texture, texture_coords + vec2(-0.2, 0.0)); // base color
+    vec4 soul = soul_move(texture, scaled_texture_coords, soul_min, soul_max); // for some reason the texture_coords is already starting at 0.4
+	vec4 mask = Texel(texture, scaled_texture_coords + vec2(0.4, 0.0));
+    vec4 base = Texel(texture, scaled_texture_coords + vec2(-0.2, 0.0)); // base color
 
     vec2 light_screen_pos = vec2(0.5, 2.0) * love_ScreenSize.xy; // light origin, seems to be top-middle off screen a bit (but need to invert y because shadow length is inverted for some reason)
     vec2 screen_offset = (screen_coords - light_screen_pos) * vec2(-1.0); // mirror shadow because Balatro shadows work weird
@@ -112,7 +115,7 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 
     float max_shadow_alpha = 0.33;
 
-    vec4 shadow_layer = draw_shadow(texture, texture_coords, soul_min, soul_max, final_shadow_uv_offset, max_shadow_alpha);
+    vec4 shadow_layer = draw_shadow(texture, scaled_texture_coords, soul_min, soul_max, final_shadow_uv_offset, max_shadow_alpha);
 
     //soul += vec4(vec3(1. - soul.a) * 0.8, 0.); // brighten
 
@@ -125,7 +128,7 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
     soul = mask_layer(soul, mask.r);
 
   	// required for dissolve fx
-    return dissolve_mask(soul*colour, texture_coords, dissolve_uv);
+    return dissolve_mask(soul*colour, scaled_texture_coords, dissolve_uv);
 }
 
 // --- below are all required functions --- //
