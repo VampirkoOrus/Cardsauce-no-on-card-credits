@@ -5,7 +5,8 @@ local jokerInfo = {
 	config = {
 		extra = {
 			x_mult = 1.5
-		}
+		},
+		proc = 0
 	},
 	rarity = 3,
 	cost = 6,
@@ -35,6 +36,10 @@ SMODS.Sound({
 function jokerInfo.calculate(self, card, context)
 	if context.individual and context.cardarea == G.play and not card.debuff then
 		if context.other_card:get_id() == 2 or context.other_card:get_id() == 4 or context.other_card:get_id() == 14 then
+			card.ability.proc = card.ability.proc + 1
+			if card.ability.proc >= 10 then
+				check_for_unlock({ type = "high_supper" })
+			end
 			local silent = false
 			if mod.config['muteWega'] then silent = true end
 			local pitch = 1
@@ -45,6 +50,9 @@ function jokerInfo.calculate(self, card, context)
 				card = card
 			}
 		end
+	end
+	if context.after then
+		card.ability.proc = 0
 	end
 end
 

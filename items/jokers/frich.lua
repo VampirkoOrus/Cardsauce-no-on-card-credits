@@ -30,4 +30,12 @@ function jokerInfo.check_for_unlock(self, args)
     end
 end
 
+function jokerInfo.calculate(self, card, context)
+    if context.buying_card then
+        if context.card.config.center.key == 'j_cavendish' then
+            check_for_unlock({ type = "frich_cavendish" })
+        end
+    end
+end
+
 return jokerInfo

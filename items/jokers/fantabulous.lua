@@ -33,6 +33,7 @@ function jokerInfo.calculate(self, card, context)
 					card = card
 				}
 			else
+				check_for_unlock({ type = "expire_fantabulous" })
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						play_sound('tarot1')

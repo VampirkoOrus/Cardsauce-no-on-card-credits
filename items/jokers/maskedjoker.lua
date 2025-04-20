@@ -49,6 +49,7 @@ function jokerInfo.calculate(self, card, context)
 		if not chimera then
 			return nil
 		end
+		check_for_unlock({ type = "activate_claus" })
 		choomeraCheck(context)
 		return {
 			chips = card.ability.extra.chips,
