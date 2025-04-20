@@ -46,23 +46,21 @@ vec4 soul_move(Image tex, vec2 uv, vec2 uv_min, vec2 uv_max) {
     // float scale_mod = 0.07 + 0.02*sin(1.8*stand_mask.y);
     // float rotate_mod = 0.0025*sin(1.219*stand_mask.y);
 
-    vec2 uv_center = (uv_min + uv_max) * 0.5;
+    vec2 uv_size = uv_max - uv_min;
+    vec2 uv_centre = (uv_min + uv_max) * 0.5;
 
-    vec2 transformed_uv = uv;
+    vec2 centred_normalized_uv = (uv - uv_centre) / uv_size; // translate uv to centre and normalise
 
-    transformed_uv -= uv_center; // translate uv to center
-
-    transformed_uv *= 1.0 - scale_mod; // apply scaling
+    centred_normalized_uv *= (1.0 - scale_mod); // apply scaling
 
     // apply rotation
-    float angle = rotate_mod * 0.33; //TODO: REMOVE TILT
-    float cos_angle = cos(angle);
-    float sin_angle = sin(angle);
+    float cos_angle = cos(rotate_mod);
+    float sin_angle = sin(rotate_mod);
     mat2 rotation_matrix = mat2(cos_angle, -sin_angle, 
                                sin_angle, cos_angle);
-    transformed_uv *= rotation_matrix;
+    centred_normalized_uv *= rotation_matrix;
 
-    transformed_uv += uv_center; // translate uv back
+    vec2 transformed_uv = centred_normalized_uv * uv_size + uv_centre; // translate uv back and un-normalise
 
     float epsilon = 0.0001;
     if (transformed_uv.x < (uv_min.x - epsilon) || transformed_uv.x > (uv_max.x + epsilon) ||
@@ -120,8 +118,8 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 
     shadow_layer = vec4(shadow_layer.rgb, min(shadow_layer.a, base.a)); // prevent shadow from drawing outside the base card
 
-    float blend_alpha = min(25. * greyscale(soul, 1.).r, 1.);
-    vec3 soul_with_shadow = mix(shadow_layer.rgb, soul.rgb, ceil(soul.a)); // TODO: FIX OUTLINE CRUST and SHADOW OVER TITLE
+    float blend_alpha = min(pow(1. + soul.a, 2) - 1., 1.);
+    vec3 soul_with_shadow = mix(shadow_layer.rgb, soul.rgb, blend_alpha); // TODO: FIX OUTLINE CRUST and SHADOW OVER TITLE
     soul = vec4(soul_with_shadow, max(soul.a, shadow_layer.a));
 
     soul = mask_layer(soul, mask.r);
