@@ -6,7 +6,7 @@ local packInfo = {
         choose = 1,
     },
     weight = 0.3,
-    cost = 5,
+    cost = 6,
     kind = 'VHS',
     group_key = "k_jumbo_analog_pack",
     csau_dependencies = {
