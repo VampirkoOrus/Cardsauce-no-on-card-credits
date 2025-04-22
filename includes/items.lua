@@ -2,7 +2,6 @@
 --------------------------- 1.0 Items and Loading
 ---------------------------
 
-SMODS.Atlas({ key = 'csau_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
 local itemsToLoad = {
     Joker = {
         -- Common
@@ -301,7 +300,6 @@ if SMODS.current_mod.DT.twoPoint0 then
             'calibighunks',
             'ishtar',
             'nukie',
-            'deadlyprey',
             'sataniccults',
             'blooddebts',
             'topslots',
@@ -475,7 +473,7 @@ if csau_enabled['enableVHSs'] then
         key = "VHS",
         primary_colour = G.C.VHS,
         secondary_colour = G.C.VHS,
-        collection_rows = { 7, 7 },
+        collection_rows = { 7, 6 },
         shop_rate = 0,
         loc_txt = {},
         default = "c_csau_blackspine",
@@ -508,6 +506,7 @@ if csau_enabled['enableStands'] then
     }
 
     -- Stand Consumable
+    SMODS.Atlas({ key = 'stickers', path = "stickers.png", px = 71, py = 95 })
     SMODS.Atlas({ key = 'undiscovered', path = "undiscovered.png", px = 71, py = 95 })
     SMODS.UndiscoveredSprite { key = "csau_Stand", atlas = "csau_undiscovered", pos = { x = 1, y = 0 }, overlay_pos = { x = 2, y = 0 }, prefix_config = false }
     SMODS.ConsumableType {

@@ -21,7 +21,11 @@ function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff then
         if context.scoring_name == "Two Pair" then
             local bj1 = false
-            if pseudorandom('bjbros1') < G.GAME.probabilities.normal / card.ability.prob_1 then
+            local ps1 = pseudorandom('bjbros1')
+            local ps2 = G.GAME.probabilities.normal / card.ability.prob_1
+            send(ps1)
+            send(ps2)
+            if ps1 < ps2 then
                 bj1 = true
                 return {
                     card = card,

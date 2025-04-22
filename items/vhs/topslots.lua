@@ -7,6 +7,8 @@ local consumInfo = {
     config = {
         activation = true,
         extra = {
+            max_initial_money = 20,
+
             winnings = nil,
             conv_money = 1,
             conv_score = 20,
@@ -29,7 +31,7 @@ local consumInfo = {
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.chvsau } }
-    return { vars = { card.ability.extra.conv_money, card.ability.extra.conv_score, G.GAME.probabilities.normal, card.ability.extra.prob_double, card.ability.extra.prob_triple, card.ability.extra.runtime-card.ability.extra.uses } }
+    return { vars = { card.ability.extra.conv_money, card.ability.extra.conv_score, card.ability.extra.max_initial_money, G.GAME.probabilities.normal, card.ability.extra.prob_double, card.ability.extra.prob_triple, card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)
@@ -44,6 +46,9 @@ function consumInfo.calculate(self, card, context)
         if G.GAME.chips > G.GAME.blind.chips then
             local percent = ((G.GAME.chips - G.GAME.blind.chips) / G.GAME.blind.chips) * 100
             local money = math.floor(percent / card.ability.extra.conv_score) + card.ability.extra.conv_money
+            if money > card.ability.extra.max_initial_money then
+                money = card.ability.extra.max_initial_money
+            end
             local doubled, tripled = false, false
             if pseudorandom('READYOURMACHINES') < G.GAME.probabilities.normal / card.ability.extra.prob_double then
                 money = money * card.ability.extra.double

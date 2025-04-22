@@ -375,8 +375,9 @@ match_indent = true
 [patches.pattern]
 target = "card.lua"
 pattern = "if v ~= chosen_joker then"
-position = "after"
+position = "at"
 payload = '''
+if v ~= chosen_joker and SMODS.will_destroy_card() then
 check_for_unlock({ type = "unlock_killjester" })
 '''
 match_indent = true
@@ -387,7 +388,7 @@ target = "card.lua"
 pattern = "if v ~= eligible_card and (not v.ability.eternal) then v:start_dissolve(nil, _first_dissolve);_first_dissolve = true end"
 position = "at"
 payload = '''
-if v ~= eligible_card and (not v.ability.eternal) then
+if v ~= eligible_card and (not v.ability.eternal) and SMODS.will_destroy_card() then
  v:start_dissolve(nil, _first_dissolve)
  _first_dissolve = true
  check_for_unlock({ type = "unlock_killjester" })
@@ -410,11 +411,18 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = '''
-if joker_to_destroy and not (context.blueprint_card or self).getting_sliced then
-'''
-position = "after"
+pattern = "if my_pos and G.jokers.cards[my_pos+1] and not self.getting_sliced and not G.jokers.cards[my_pos+1].ability.eternal and not G.jokers.cards[my_pos+1].getting_sliced then "
+position = "at"
+payload = "if my_pos and G.jokers.cards[my_pos+1] and not self.getting_sliced and not G.jokers.cards[my_pos+1].ability.eternal and not G.jokers.cards[my_pos+1].getting_sliced and SMODS.will_destroy_card() then "
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if joker_to_destroy and not (context.blueprint_card or self).getting_sliced then"
+position = "at"
 payload = '''
+if joker_to_destroy and not (context.blueprint_card or self).getting_sliced and SMODS.will_destroy_card() then
 check_for_unlock({ type = "unlock_killjester" })
 '''
 match_indent = true
@@ -1348,5 +1356,69 @@ payload = '''or v == 'stand_stickers' and {
       {n=G.UIT.O, config={object = DynaText({string = {math.floor(0.01+100*_profile_progress.stand_stickers.tally/_profile_progress.stand_stickers.of)..'%'}, colours = {G.C.WHITE},shadow = true, float = true, scale = 0.55*text_scale})}},
       {n=G.UIT.T, config={text = " (".._profile_progress.stand_stickers.tally..'/'.._profile_progress.stand_stickers.of..")", scale = 0.35, colour = G.C.JOKER_GREY}}
     }'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "if G.GAME.blind.name == 'The Serpent' and"
+position = "before"
+payload = '''
+if G.GAME.blind.name ~= 'The Serpent' then
+    local miami = G.FUNCS.find_activated_tape('c_csau_miami')
+    if miami then
+        miami:juice_up()
+        hand_space = hand_space + miami.ability.extra.draw_mod
+        miami.ability.extra.uses = miami.ability.extra.uses+1
+        if miami.ability.extra.uses >= miami.ability.extra.runtime then
+            G.FUNCS.destroy_tape(miami)
+            miami.ability.destroyed = true
+        end
+    end
+end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''for i=1, hand_space do --draw cards from deckL
+        if G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK then
+            draw_card(G.deck,G.hand, i*100/hand_space,'up', true)
+        else
+            draw_card(G.deck,G.hand, i*100/hand_space,'up', true)
+        end
+    end
+'''
+position = "at"
+payload = '''
+SMODS.draw_cards_from_deck(hand_space)
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''end
+if self.ability.name == 'Ectoplasm' then'''
+position = "at"
+payload = '''end
+if self.ability.name == 'Ectoplasm' and SMODS.spectral_lower_handsize() then'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "G.hand:change_size(-1)"
+position = "at"
+payload = '''
+if SMODS.spectral_lower_handsize() then
+    G.hand:change_size(-1)
+end
+'''
 match_indent = true
 times = 1

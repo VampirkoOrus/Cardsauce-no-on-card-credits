@@ -11,6 +11,7 @@ local consumInfo = {
         extra = {
             runtime = 5,
             uses = 0,
+            pi_index = 1,
         },
     },
     origin = {
@@ -33,8 +34,32 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
     end
 end
 
-function consumInfo.calculate(self, card, context)
+local pi_digits = "314159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172"
 
+local function get_pi_digit(i)
+    local len = #pi_digits
+    local index = ((i - 1) % len) + 1 -- Wrap around to 1-based index
+    return tonumber(pi_digits:sub(index, index))
+end
+
+function consumInfo.calculate(self, card, context)
+    if context.individual and not context.end_of_round then
+        if context.cardarea == G.play then
+            card.ability.extra.pi_index = card.ability.extra.pi_index+1
+            return {
+                mult = get_pi_digit(card.ability.extra.pi_index-1)
+            }
+        elseif context.cardarea == G.hand then
+            card.ability.extra.pi_index = card.ability.extra.pi_index+1
+            return {
+                chips = get_pi_digit(card.ability.extra.pi_index-1)
+            }
+        end
+    end
+end
+
+function consumInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+    G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 end
 
 function consumInfo.can_use(self, card)

@@ -550,7 +550,6 @@ end
 --- @param card Card Balatro Card object of activated VHS tape
 G.FUNCS.tape_activate = function(card)
     if not card.ability.activation then return end
-	sendDebugMessage('tape activation')
     if card.ability.activated then
         card.ability.activated = false
         play_sound('csau_vhsclose', 0.9 + math.random()*0.1, 0.4)
@@ -999,4 +998,110 @@ G.FUNCS.hand_contains_rank = function(hand, ranks, require_all)
 	else
 		return next(found) ~= nil
 	end
+end
+
+function SMODS.skip_cards_until(requirements)
+	if not requirements then return end
+	local len = #G.deck.cards
+	for i = 1, len do
+		local card = G.deck.cards[#G.deck.cards]
+		local results = {}
+
+		if requirements.rank_min then
+			send(card.base.nominal)
+			results.rank_min = card.base.nominal >= requirements.rank_min
+		end
+
+		local requirements_met = true
+		for _, met in pairs(results) do
+			if not met then
+				requirements_met = false
+				break
+			end
+		end
+
+		if requirements_met then
+			return card
+		else
+			table.remove(G.deck.cards, #G.deck.cards)
+			table.insert(G.deck.cards, 1, card)
+		end
+	end
+	return nil
+end
+
+function SMODS.draw_card_filtered(i, hand_space, mod_table)
+	if mod_table.roar then
+		local card = SMODS.skip_cards_until({ rank_min = 6 })
+		if not card then return end
+	end
+	draw_card(G.deck,G.hand, i*100/hand_space,'up', true)
+end
+
+function SMODS.draw_cards_from_deck(hand_space, mod_table)
+	mod_table = mod_table or {}
+	local roar = G.FUNCS.find_activated_tape('c_csau_roar')
+	local draw = true
+	if roar and not roar.ability.destroyed then
+		mod_table.roar = true
+		roar.ability.extra.uses = roar.ability.extra.uses+1
+		if roar.ability.extra.uses >= roar.ability.extra.runtime then
+			G.FUNCS.destroy_tape(roar)
+			roar.ability.destroyed = true
+		end
+	end
+	for i=1, hand_space do --draw cards from deckL
+		SMODS.draw_card_filtered(i, hand_space, mod_table)
+	end
+end
+
+function G.FUNCS.stand_preview_deck(amount)
+	local preview_cards = {}
+	local roar = G.FUNCS.find_activated_tape('c_csau_roar')
+	local count = 0
+	local i = #G.deck.cards
+
+	while count < amount and i >= 1 do
+		local card = G.deck.cards[i]
+		if card then
+			if roar then
+				if card.base.nominal >= 6 then
+					table.insert(preview_cards, card)
+					count = count + 1
+				end
+			else
+				table.insert(preview_cards, card)
+				count = count + 1
+			end
+		end
+		i = i - 1
+	end
+
+	return preview_cards
+end
+
+SMODS.spectral_lower_handsize = function(context)
+	local rem = G.FUNCS.find_activated_tape('c_csau_remlezar')
+	if rem and not rem.ability.destroyed  then
+		rem.ability.extra.uses = rem.ability.extra.uses+1
+		if rem.ability.extra.uses >= rem.ability.extra.runtime then
+			G.FUNCS.destroy_tape(rem)
+			rem.ability.destroyed = true
+		end
+		return false
+	end
+	return true
+end
+
+SMODS.will_destroy_card = function(context)
+	local sew = G.FUNCS.find_activated_tape('c_csau_sew')
+	if sew and not sew.ability.destroyed then
+		sew.ability.extra.uses = sew.ability.extra.uses+1
+		if sew.ability.extra.uses >= sew.ability.extra.runtime then
+			G.FUNCS.destroy_tape(sew)
+			sew.ability.destroyed = true
+		end
+		return false
+	end
+	return true
 end

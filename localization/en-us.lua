@@ -484,6 +484,7 @@ return {
 			k_spacecop = "Space Cop!",
 			k_theroom = "Love is Blind...",
 			k_enhanced = "Enhanced!",
+			k_troll2 = "Oh My God!!!",
 
 			-- badge titles
 			ba_vinny = "Vinesauce",
@@ -1594,8 +1595,8 @@ return {
 			j_csau_garbagehand = {
 				name = "Garbage Hand",
 				text = {
-					"Played {C:attention}Unenhanced{} cards of",
-					"rank {C:attention}8{} or less give",
+					"Played {C:attention}Unenhanced{} cards",
+					"at rank {C:attention}8{} or less give",
 					"{C:mult}+#1#{} Mult when scored",
 				},
 			},
@@ -2433,29 +2434,34 @@ return {
 			c_csau_remlezar = {
 				name = "Creating Rem Lezar",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, {C:spectral}Spectral{} Cards",
+					"cannot lower your hand size",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Card"
 				},
 			},
 			c_csau_sew = {
 				name = "Surviving Edged Weapons",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, will {C:attention}take the hit{} for",
+					"the next Joker to be destroyed",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Joker"
 				},
 			},
 			c_csau_shakma = {
 				name = "Shakma",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, always",
+					"trigger {C:green}probabilities{}",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} {C:green}Chances"
 				},
 			},
 			c_csau_troll2 = {
 				name = "Troll 2",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, a random card",
+					"held in hand is enhanced to a",
+					"{C:attention}Stone Card{} when hand is played",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
 			},
 			c_csau_swhs = {
@@ -2485,8 +2491,9 @@ return {
 			c_csau_roar = {
 				name = "Roar",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, do not draw",
+					"any cards less than a C:attention}6{}",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Draws"
 				},
 			},
 			c_csau_calibighunks = {
@@ -2511,13 +2518,6 @@ return {
 					"When {C:attention}playing{}, each {C:attention}Wheel of Fortune{}",
 					"used has a chance to give {C:dark_edition}Negative",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Wheel of Fortunes"
-				},
-			},
-			c_csau_deadlyprey = {
-				name = "Deadly Prey",
-				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
 				},
 			},
 			c_csau_sataniccults = {
@@ -2553,9 +2553,10 @@ return {
 					"When {C:attention}playing{}, at end of round",
 					"gain {C:money}$#1#{} per {C:attention}#2#%{} over the required",
 					"chips to beat the blind",
-					"{C:green}#3# in #4#{} chance to {C:attention}double{} winnings",
-					"{C:green}#3# in #5#{} chance to {C:attention}triple{} winnings",
-					"{C:vhs}Running Time{}: {C:attention}#6#{} Rounds"
+					"{C:inactive}(Max initial winnings: {C:money}$#3#{C:inactive})",
+					"{C:green}#4# in #5#{} chance to {C:attention}double{} winnings",
+					"{C:green}#4# in #6#{} chance to {C:attention}triple{} winnings",
+					"{C:vhs}Running Time{}: {C:attention}#7#{} Rounds"
 				},
 			},
 			c_csau_doubledown = {
@@ -2568,15 +2569,18 @@ return {
 			c_csau_twistedpair = {
 				name = "Twisted Pair",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, add a {C:attention}copy of the",
+					"first card scored to your deck",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
 			},
 			c_csau_fatefulfindings = {
 				name = "Fateful Findings",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, steal the next {C:tarot}Tarot{}, {C:planet}Planet{}",
+					"or {C:spectral}Spectral{} card found in a {C:attention}Booster Pack{}",
+					"and put it in your consumables",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Cards"
 				},
 			},
 			c_csau_streetsmarts = {
@@ -2597,8 +2601,9 @@ return {
 			c_csau_rentafriend = {
 				name = "Rent-a-Friend",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, all Jokers in ",
+					"shop are {C:money}Rental{} and {C:dark_edition}Negative{}",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Joker"
 				},
 			},
 			c_csau_tbone = {
@@ -2645,8 +2650,9 @@ return {
 			c_csau_miami = {
 				name = "Miami Connection",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, always",
+					"{C:attention}#1#{} more cards",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Draws"
 				},
 			},
 			c_csau_lowblow = {
@@ -2695,15 +2701,34 @@ return {
 			c_csau_ritf = {
 				name = "Robot in the Family",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, for the entirety of its",
+					"{C:vhs}Running Time{} of {C:attention}#1#{} Hands, each card that",
+					"is played will give an additional amount",
+					"of Mult and each card held in hand will",
+					"give an additional amount of Chips equal",
+					"to the next digit of pi, where pi is here",
+					"defined as {C:attention}3.141592653589793238462643383",
+					"{C:attention}2795028841971693993751058209749445923078",
+					"{C:attention}1640628620899862803482534211706798214808",
+					"{C:attention}651328230664709384460955058223172"
+				},
+			},
+			c_csau_ritf_detailed = {
+				name = "Robot in the Family",
+				text = {
+					"When {C:attention}playing{}, all scored cards give Mult",
+					"and all cards held in hand give Chips",
+					"{s:0.1} {}",
+					"Mult and Chips given are digits of pi in order",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
 			},
 			c_csau_suburbansasquatch = {
 				name = "Suburban Sasquatch",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, each scoring",
+					"card increases in rank by {C:attention}#1#{}",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
 			c_csau_rawtime = {
@@ -2717,23 +2742,28 @@ return {
 			c_csau_donbeveridge = {
 				name = "Don Beveridge Customerization Seminar",
 				text = {
-					"When {C:attention}playing{},",
-					"{C:attention}Food Jokers{} do not expire",
+					"When {C:attention}playing{}, {C:attention}Food Jokers{}",
+					"do not expire",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Triggers"
 				},
 			},
 			c_csau_alienpi = {
 				name = "Alien Private Eye",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, scoring cards give",
+					"{X:mult,C:white}X#1#{} and add {C:green}+#2#{} chance to this Tape",
+					"When completely used, you {C:attention}die",
+					"When sold, {C:green}#3# in #4#{} chance to {C:attention}die",
+					"{C:vhs}Running Time{}: {C:attention}#5#{} cards"
 				},
 			},
 			c_csau_supershow = {
 				name = "The Super Mario Bros. Super Show",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, creates {C:attention}copies of",
+					"destroyed cards and gives them",
+					"a random {C:attention}edition",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} cards"
 				},
 			},
 			c_csau_yoyoman = {

@@ -7,7 +7,7 @@ local consumInfo = {
     config = {
         activation = true,
         extra = {
-            runtime = 1,
+            runtime = 2,
             uses = 0,
         },
         activated = false,
@@ -29,7 +29,23 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-
+    if card.ability.activated and context.before and not card.debuff and not context.blueprint then
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                local _card = copy_card(context.scoring_hand[1])
+                _card:start_materialize({G.C.SECONDARY_SET.Enhanced})
+                G.hand:emplace(_card)
+                table.insert(G.playing_cards, _card)
+                playing_card_joker_effects({_card})
+                card:juice_up()
+                card.ability.extra.uses = card.ability.extra.uses+1
+                if card.ability.extra.uses >= card.ability.extra.runtime then
+                    G.FUNCS.destroy_tape(card)
+                    card.ability.destroyed = true
+                end
+                return true
+            end}))
+    end
 end
 
 function consumInfo.can_use(self, card)

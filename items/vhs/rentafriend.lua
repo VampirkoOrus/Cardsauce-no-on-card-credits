@@ -7,7 +7,7 @@ local consumInfo = {
     config = {
         activation = true,
         extra = {
-            runtime = 3,
+            runtime = 1,
             uses = 0,
         },
         activated = false,
@@ -34,7 +34,53 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
+    if card.ability.activated and context.buying_card then
+        if context.card.ability.rent_ref then
+            context.card.ability.rent_ref = nil
+            card.ability.extra.uses = card.ability.extra.uses+1
+            if card.ability.extra.uses >= card.ability.extra.runtime then
+                G.FUNCS.destroy_tape(card)
+                card.ability.destroyed = true
+            end
+        end
+    end
+end
 
+local upd = Game.update
+function Game:update(dt)
+    upd(self,dt)
+    if G.shop_jokers and G.shop_jokers.cards then
+        for i, v in ipairs(G.shop_jokers.cards) do
+            if v.ability.set == "Joker" then
+                local rent = G.FUNCS.find_activated_tape('c_csau_rentafriend')
+                if rent then
+                    if not v.ability.rent_ref then
+                        v.ability.rent_ref = {}
+                        if v.edition and v.edition.type then
+                            v.ability.rent_ref.edition = v.edition.type
+                        end
+                        if v.ability.rental then
+                            v.ability.rent_ref.rental = true
+                        end
+                        v:set_edition({ negative = true }, true)
+                        v:set_rental(true)
+                    end
+                else
+                    if v.ability.rent_ref then
+                        if v.ability.rent_ref.edition then
+                            v:set_edition({ [v.ability.rent_ref.edition] = true }, true)
+                        else
+                            v:set_edition(nil, true)
+                        end
+                        if not v.ability.rent_ref.rental then
+                            v:set_rental(false)
+                        end
+                        v.ability.rent_ref = nil
+                    end
+                end
+            end
+        end
+    end
 end
 
 function consumInfo.can_use(self, card)

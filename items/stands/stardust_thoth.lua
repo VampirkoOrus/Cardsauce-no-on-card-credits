@@ -19,6 +19,10 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.preview}}
 end
 
+local function get_card()
+
+end
+
 -- Modified Code from Jimbo's Pack
 local create_tohth_cardarea = function(card, cards)
     tohth_cards = CardArea(
@@ -55,12 +59,7 @@ function consumInfo.generate_ui(self, info_queue, card, desc_nodes, specific_var
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
     localize{type = 'descriptions', key = self.key, set = self.set, nodes = desc_nodes, vars = self.loc_vars(self, info_queue, card).vars}
     if G.deck and not card.area.config.collection then
-        local cards = {}
-        for i = 1, card.ability.extra.preview do
-            if G.deck.cards[i] then
-                cards[#cards+1]=G.deck.cards[#G.deck.cards-(i-1)]
-            end
-        end
+        local cards = G.FUNCS.stand_preview_deck(card.ability.extra.preview)
         if cards[1] then
             local cardarea = create_tohth_cardarea(card, cards)
             desc_nodes[#desc_nodes+1] = {{

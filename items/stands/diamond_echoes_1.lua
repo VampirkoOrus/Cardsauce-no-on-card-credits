@@ -3,7 +3,6 @@ local consumInfo = {
     name = 'Echoes ACT1',
     set = 'csau_Stand',
     config = {
-        stand_mask = true,
         aura_colors = { 'DCFB8CDC', '5EEB2FDC' },
         evolve_key = 'c_csau_diamond_echoes_2',
         extra = {
@@ -22,6 +21,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "csau_artistcredit_2", set = "Other", vars = { G.csau_team.chvsau, G.csau_team.dolos } }
     local color = G.C.IMPORTANT
     if G.GAME and G.GAME.wigsaw_suit then
         color = G.C.SUITS[G.GAME and G.GAME.wigsaw_suit]
@@ -42,7 +42,6 @@ function consumInfo.loc_vars(self, info_queue, card)
             suit = localize(card.ability.extra.ref_suit, 'suits_plural')
         end
     end
-
     return {vars = {card.ability.extra.num_cards, card.ability.extra.mult, card.ability.extra.evolve_num - card.ability.extra.evolve_rounds, suit, colours = { color } } }
 end
 
