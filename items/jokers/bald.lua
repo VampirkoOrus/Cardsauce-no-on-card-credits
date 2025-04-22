@@ -20,7 +20,7 @@ function jokerInfo.calculate(self, card, context)
     if context.pre_discard and #context.full_hand >= 5 then
         local non_face_count = 0
         for i, v in ipairs(context.full_hand) do
-            if not v:is_face() then non_face_count = non_face_count + 1 end
+            if not v:is_face() and not v.debuff then non_face_count = non_face_count + 1 end
         end
         if non_face_count >= 5 then
             local mod = math.floor(non_face_count / 5)
