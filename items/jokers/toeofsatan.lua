@@ -23,7 +23,7 @@ function jokerInfo.calculate(self, card, context)
     if context.setting_blind and not card.getting_sliced and not card.debuff and not context.blueprint then
         if not (context.blueprint_card or card).getting_sliced then
             G.E_MANAGER:add_event(Event({func = function()
-                ease_discard(card.ability.extra)
+                ease_discard(card.ability.extra.discard_mod)
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_discards', vars = {card.ability.extra.discards}, colour = G.C.RED}})
                 return true
             end }))

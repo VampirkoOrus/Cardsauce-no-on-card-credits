@@ -86,7 +86,7 @@ pattern = "amount = amount or 1"
 position = "after"
 payload = '''
     local eff = {}
-    SMODS.calculate_context({modify_level_increment = true, card =  card, hand = hand, amount = amount}, eff)
+    SMODS.calculate_context({modify_level_increment = true, card = card, hand = hand, amount = amount}, eff)
     local flags = SMODS.trigger_effects(eff)
     for i, v in ipairs(eff) do
         if v.jokers then

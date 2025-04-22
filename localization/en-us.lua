@@ -2533,7 +2533,7 @@ return {
 				name = "Roar",
 				text = {
 					"When {C:attention}playing{}, do not draw",
-					"any cards less than a C:attention}6{}",
+					"any cards less than a {C:attention}6{}",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Draws"
 				},
 			},
@@ -2685,7 +2685,6 @@ return {
 				text = {
 					"When {C:attention}playing{}, gain {C:blue}+1{} Hand",
 					"when {C:attention}Blind{} is selected",
-					"when this tape is ",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Rounds"
 				},
 			},

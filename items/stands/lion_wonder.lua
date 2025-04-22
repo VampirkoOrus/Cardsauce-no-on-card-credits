@@ -4,7 +4,7 @@ local consumInfo = {
     config = {
         extra = {
             mult = 0,
-            mult_mod = 1,
+            mult_mod = 5,
         }
     },
     cost = 10,

@@ -189,7 +189,7 @@ local function fuck_you_generate_ui_box_ability_table(self)
     elseif self.ability.name == 'Green Joker' then loc_vars = {self.ability.extra.hand_add, self.ability.extra.discard_sub, self.ability.mult}
     elseif self.ability.name == 'Credit Card' then loc_vars = {self.ability.extra}
     elseif self.ability.name == 'Greedy Joker' or self.ability.name == 'Lusty Joker' or
-            self.ability.name == 'Wrathful Joker' or self.ability.name == 'Gluttonous Joker' then loc_vars = {self.ability.extra.s_mult, localize(self.ability.extra.suit, 'suits_singular')}
+            self.ability.name == 'Wrathful Joker' or self.ability.name == 'Gluttonous Joker' then loc_vars = {self.ability.extra.s_mult, localize(G.GAME and G.GAME.wigsaw_suit or self.ability.extra.suit, 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or self.ability.extra.suit]}}
     elseif self.ability.name == 'Blue Joker' then loc_vars = {self.ability.extra, self.ability.extra*((G.deck and G.deck.cards) and #G.deck.cards or 52)}
     elseif self.ability.name == 'Sixth Sense' then loc_vars = {}
     elseif self.ability.name == 'Mime' then
