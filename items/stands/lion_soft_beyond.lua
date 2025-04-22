@@ -39,11 +39,11 @@ function consumInfo.calculate(self, card, context)
                 enhanced[#enhanced+1] = v
                 local colour = v.config.center == G.P_CENTERS.m_bonus and G.C.CHIPS or v.config.center == G.P_CENTERS.m_mult and G.C.MULT
                 if v.config.center == G.P_CENTERS.m_bonus then
-                    v.ability.perma_bonus = context.other_card.ability.perma_bonus or 0
-                    v.ability.perma_bonus = context.other_card.ability.perma_bonus + (v.config.center.config.bonus*card.ability.extra.perma_reduction)
+                    v.ability.perma_bonus = v.ability.perma_bonus or 0
+                    v.ability.perma_bonus = v.ability.perma_bonus + (v.config.center.config.bonus*card.ability.extra.perma_reduction)
                 elseif v.config.center == G.P_CENTERS.m_mult then
-                    v.ability.perma_mult = context.other_card.ability.perma_mult or 0
-                    v.ability.perma_mult = context.other_card.ability.perma_mult + (v.config.center.config.mult*card.ability.extra.perma_reduction)
+                    v.ability.perma_mult = v.ability.perma_mult or 0
+                    v.ability.perma_mult = v.ability.perma_mult + (v.config.center.config.mult*card.ability.extra.perma_reduction)
                 end
                 v.vampired = true
                 v:set_ability(G.P_CENTERS.c_base, nil, true)

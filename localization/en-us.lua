@@ -2596,8 +2596,9 @@ return {
 			c_csau_streetsmarts = {
 				name = "Street Smarts",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, final hands",
+					"have {C:mult}+#1#{} Mult",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Rounds"
 				},
 			},
 			c_csau_devilstory = {
@@ -2770,9 +2771,9 @@ return {
 			c_csau_supershow = {
 				name = "The Super Mario Bros. Super Show",
 				text = {
-					"When {C:attention}playing{}, creates {C:attention}copies of",
-					"destroyed cards and gives them",
-					"a random {C:attention}edition",
+					"When {C:attention}playing{}, creates {C:attention}copies",
+					"of destroyed cards and gives",
+					"them a random {C:attention}edition",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} cards"
 				},
 			},
