@@ -12,10 +12,13 @@ local jokerInfo = {
     blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
+    hasSoul = true,
     streamer = "joel",
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
+	info_queue[#info_queue+1] = G.P_TAGS.tag_negative
+    info_queue[#info_queue+1] = {key = "csau_artistcredit_2", set = "Other", vars = { G.csau_team.gote, G.csau_team.ele } }
     return { vars = { card.ability.ufo_rounds, card.ability.extra } }
 end
 

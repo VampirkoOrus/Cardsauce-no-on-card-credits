@@ -1211,7 +1211,7 @@ return {
 				text = {
 					"Big card give big {C:mult}Mult{}",
 					"{C:inactive}(Gain Mult equal to the highest{}",
-					"{C:inactive}valued card in scored hand){}",
+					"{C:inactive}ranked card in scored hand){}",
 				},
 			},
 			j_csau_odio3 = {
@@ -2630,7 +2630,7 @@ return {
 			c_csau_lowblow = {
 				name = "Low Blow",
 				text = {
-					"{C:attention}Retrigger{} lowest card used",
+					"{C:attention}Retrigger{} lowest ranked card used",
 					"in scoring {C:attention}#1#{} additional times",
 					"when this tape is {C:attention}activated{}",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"

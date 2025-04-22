@@ -81,6 +81,7 @@ G.csau_team = {
 	['zeurel'] = 'Zeurel',
 	['eld'] = 'eldritchminds',
 	['retro'] = 'Retrotype',
+	['ele'] = 'elebant',
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",
