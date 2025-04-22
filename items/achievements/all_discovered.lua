@@ -1,6 +1,5 @@
 local trophyInfo = {
     rarity = 4,
-    bypass_all_unlocked = true,
     unlock_condition = function(self, args)
         if args.type == "discover_amount" then
             local csauJokers = 0

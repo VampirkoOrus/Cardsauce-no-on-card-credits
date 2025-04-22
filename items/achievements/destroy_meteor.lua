@@ -1,6 +1,5 @@
 local trophyInfo = {
     rarity = 1,
-    bypass_all_unlocked = true,
     unlock_condition = function(self, args)
         if args.type == "destroy_meteor" then
             return true

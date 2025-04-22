@@ -47,6 +47,7 @@ end
 function consumInfo.calculate(self, card, context)
     if context.before and not card.debuff and not context.blueprint then
         if not SMODS.PokerHands[context.scoring_name].visible then
+            check_for_unlock({ type = "evolve_soft" })
             G.FUNCS.csau_evolve_stand(card)
         else
             local enhanced = {}

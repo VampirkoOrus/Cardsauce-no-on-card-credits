@@ -120,6 +120,9 @@ function jokerInfo.update(self, card, dt)
         --swing your arms from side to side
         if mod.tetris.isActive then
             card.ability.extra.mult = mod.tetris.linesCleared
+            if mod.tetris.speedLevel >= 17 then
+                check_for_unlock({ type = "high_tetris" })
+            end
             if mod.tetris.queue and #mod.tetris.queue > 0 then
                 local msg = mod.tetris.queue[1]
                 if msg.type == 'line' then

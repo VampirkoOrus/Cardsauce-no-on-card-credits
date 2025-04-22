@@ -45,6 +45,7 @@ function consumInfo.calculate(self, card, context)
         card.ability.extra.hands = hands
         card.ability.extra.evolve_cards = card.ability.extra.evolve_cards + hands
         if card.ability.extra.evolve_cards >= card.ability.extra.evolve_num then
+            check_for_unlock({ type = "evolve_btd" })
             G.FUNCS.csau_evolve_stand(card)
             return
         end

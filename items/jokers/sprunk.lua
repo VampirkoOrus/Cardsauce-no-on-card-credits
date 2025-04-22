@@ -365,6 +365,7 @@ function jokerInfo.calculate(self, card, context)
         if pseudorandom('essenceofcrash') < G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true) / card.ability.extra.prob then
             if pseudorandom('sprunkdit') < (card.ability.hidden_prob.manip and G.GAME.probabilities.normal or card.ability.hidden_prob.non_manip_rate) / card.ability.hidden_prob.prob then
                 send("RUN DELETED! LOL")
+                check_for_unlock({ type = "get_sprunked" })
                 if G.STAGE == G.STAGES.RUN then
                     G.STATE = G.STATES.GAME_OVER
                     G.STATE_COMPLETE = false

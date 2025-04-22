@@ -629,7 +629,19 @@ return {
 			ach_csau_defeat_tray = "One Third Tray of: Chips!",
 			ach_csau_defeat_vod = "The Final Cut",
 			ach_csau_defeat_mochamike = "Put Your Deck Away",
+			ach_csau_grey_vomit = "Murder of the Universe",
+			ach_csau_get_sprunked = "Essence of Life",
+			ach_csau_evolve_echoes = "S! H! I! T!",
+			ach_csau_evolve_btd = "The Next Day",
+			ach_csau_evolve_ger = "This Is... Requiem",
+			ach_csau_evolve_kingcrimson = "Perfect Pair",
+			ach_csau_evolve_heaven = "STAIRWAY TO HEAVEN",
+			ach_csau_evolve_tusk = "Heeeeere's Johnny!",
+			ach_csau_evolve_d4c = "Dimes 4 Crimes",
+			ach_csau_evolve_soft = "Highly Illogical",
 			--- Gold
+			ach_csau_high_tetris = "WEE-OOO",
+			ach_csau_fucking_idiot = "YOU FUCKING IDIOT",
 			ach_csau_discover_vincenzo = "Step Right In",
 			ach_csau_discover_quarterdumb = "Drown In It",
 			ach_csau_discover_wigsaw = "Playing My Game",
@@ -645,6 +657,9 @@ return {
 			--- Vine
 			ach_csau_all_discovered = "Card Addict",
 			ach_csau_big_meat = "The Big Meat",
+			ach_csau_cardsauceplus = "Cardsauce+",
+			ach_csau_cardsauceplusplus = "Cardsauce++",
+			ach_csau_stand_master = "Stand Master",
 		},
 		achievement_descriptions = {
 			--- [[NEW ACHIEVEMENTS]]
@@ -728,7 +743,19 @@ return {
 			ach_csau_defeat_vod = "Defeat The Vod",
 			ach_csau_defeat_finger = "Defeat The Finger",
 			ach_csau_defeat_mochamike = "Defeat Mocha Mike",
+			ach_csau_grey_vomit = "Have Grey Joker and Vomit Blast in your Joker slots",
+			ach_csau_get_sprunked = "Get Sprunk'd",
+			ach_csau_evolve_echoes = "Evolve your Stand into Echoes ACT3",
+			ach_csau_evolve_btd = "Evolve your Stand into Killer Queen: Bites the Dust",
+			ach_csau_evolve_ger = "Evolve your Stand into Gold Experience Requiem",
+			ach_csau_evolve_kingcrimson = "Evolve your Stand into King Crimson",
+			ach_csau_evolve_heaven = "Evolve your Stand into Made In Heaven",
+			ach_csau_evolve_tusk = "Evolve your Stand into Tusk ACT4",
+			ach_csau_evolve_d4c = "Evolve your Stand into D4C -Love Train-",
+			ach_csau_evolve_soft = "Evolve your Stand into Soft & Wet: Go Beyond",
 			--- Gold
+			ach_csau_high_tetris = "Get to maximum speed in YOU GOT THE TETRIS!",
+			ach_csau_fucking_idiot = "Have both Live Dangerously and Nutbuster in your Joker slots",
 			ach_csau_discover_vincenzo = "Discover Vincenzo",
 			ach_csau_discover_quarterdumb = "Discover Quarterdumb",
 			ach_csau_discover_wigsaw = "Discover Wigsaw",
@@ -744,6 +771,9 @@ return {
 			--- Vine
 			ach_csau_all_discovered = "Discover All Cardsauce Jokers",
 			ach_csau_big_meat = "Unlock every Cardsauce Achievement",
+			ach_csau_cardsauceplus = "Win a run with all Cardsauce Decks on Gold Stake",
+			ach_csau_cardsauceplusplus = "Get Gold Stickers on all Cardsauce Jokers",
+			ach_csau_stand_master = "Get Gold Stickers on all Cardsauce Stands",
 		}
 	},
 	descriptions = {

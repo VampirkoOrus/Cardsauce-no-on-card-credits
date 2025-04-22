@@ -64,6 +64,7 @@ end
 
 function consumInfo.update(self, card)
     if not card.area.config.collection and get_lucky() >= card.ability.extra.evolve_num then
+        check_for_unlock({ type = "evolve_d4c" })
         G.FUNCS.csau_evolve_stand(card)
     end
 end

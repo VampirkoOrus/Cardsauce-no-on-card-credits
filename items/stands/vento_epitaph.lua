@@ -93,6 +93,7 @@ function consumInfo.calculate(self, card, context)
     if context.skip_blind and not bad_context then
         card.ability.extra.evolve_skips = card.ability.extra.evolve_skips + 1
         if card.ability.extra.evolve_skips >= card.ability.extra.evolve_num then
+            check_for_unlock({ type = "evolve_kingcrimson" })
             G.FUNCS.csau_evolve_stand(card)
         else
             return {

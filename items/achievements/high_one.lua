@@ -1,6 +1,5 @@
 local trophyInfo = {
     rarity = 2,
-    bypass_all_unlocked = true,
     unlock_condition = function(self, args)
         if G.jokers and #G.jokers.cards > 0 then
             local jokers = {

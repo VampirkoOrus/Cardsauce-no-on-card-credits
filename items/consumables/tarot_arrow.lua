@@ -24,6 +24,7 @@ function consumInfo.use(self, card, area, copier)
         play_sound('timpani')
         if next(SMODS.find_card("c_csau_vento_gold")) then
             local stand = SMODS.find_card("c_csau_vento_gold")[1]
+            check_for_unlock({ type = "evolve_ger" })
             G.FUNCS.csau_evolve_stand(stand)
         else
             G.FUNCS.csau_new_stand(false)

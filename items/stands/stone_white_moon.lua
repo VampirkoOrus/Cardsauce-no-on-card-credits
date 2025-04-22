@@ -58,6 +58,7 @@ function consumInfo.calculate(self, card, context)
                 end
             end
             if evolved then
+                check_for_unlock({ type = "evolve_heaven" })
                 G.FUNCS.csau_evolve_stand(card)
             end
         end

@@ -1,6 +1,5 @@
 local trophyInfo = {
     rarity = 1,
-    bypass_all_unlocked = true,
     unlock_condition = function(self, args)
         local cards = SMODS.find_card('j_csau_frens')
         if cards and #cards > 0 then
