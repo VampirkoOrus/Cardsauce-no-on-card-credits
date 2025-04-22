@@ -2477,8 +2477,9 @@ return {
 			c_csau_swhs = {
 				name = "Star Wars Holiday Special",
 				text = {
-					"{E:1,s:1.3}SORRY NOTHING",
-					"{C:inactive}(WIP, no ability yet)"
+					"When {C:attention}playing{}, each played card",
+					"gives {C:money}$#1#{} when scored",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
 			c_csau_exploding = {
