@@ -1672,7 +1672,7 @@ return {
 				text = {
 					"If played hand contains",
 					"a {C:attention}Flush{} of {V:1}#2#{},",
-					"create a #1# {C:purple}Tarot{} card",
+					"create a {C:purple}Tarot{} card",
 					"{C:inactive}(Must have room)"
 				},
 			},
