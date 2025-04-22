@@ -363,13 +363,13 @@ if SMODS.current_mod.DT.twoPoint0 then
             'stone_white_heaven',
 
             -- steel ball run
+            'steel_d4c',
+            'steel_d4c_love',
             'steel_tusk_1',
             'steel_tusk_2',
             'steel_tusk_3',
             'steel_tusk_4',
             'steel_civil',
-            'steel_d4c',
-            'steel_d4c_love',
 
             -- jojolion
             'lion_soft',

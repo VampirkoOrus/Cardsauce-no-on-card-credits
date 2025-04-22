@@ -344,8 +344,7 @@ return {
 			k_csau_evolved = "Evolved Stand",
 			b_csau_evolved_cards = "Evolved Stands",
 			b_vhs_cards = "VHS Tapes",
-			b_and_activate = "& Activate",
-			b_activate = "Activate",
+			b_and_activate = "& PLAY",
 			vs_credits1 = "Direction",
 			vs_credits2 = "Artists",
 			vs_credits2_2 = "Playing Cards",
@@ -356,9 +355,6 @@ return {
 			vs_credits7 = "Music",
 			vs_credits8 = "Shaders",
 			vs_credits9 = "Logo",
-
-			vs_credits_logo_aliz_sub = "(Design & Vector ver.)",
-			vs_credits_logo_keku_sub = "(In-Game ver.)",
 
 			vs_options_sub = "(Restart required to apply)",
 			vs_options_muteWega = "Mute WAAUGGHGHHHHGHH",
@@ -467,7 +463,8 @@ return {
 			k_analog_pack = "Analog Pack",
 			k_jumbo_analog_pack = "Jumbo Analog Pack",
 			k_mega_analog_pack = "Mega Analog Pack",
-			b_activate = "ACTIVATE",
+			b_activate = "PLAY",
+			b_deactivate = "PAUSE",
 			b_pull = "PULL",
 			k_negative_mult = "Negative Mult!",
 			a_discards = "+#1# Discards",
@@ -563,14 +560,24 @@ return {
 			ach_csau_activate_wot = "Good Morning, Crono",
 			ach_csau_activate_eman = "Emmanuel in Chat",
 			ach_csau_activate_drippy = "The Dripping Tap",
+			ach_csau_activate_claus = "16-Hit Combo",
+			ach_csau_activate_mug = "I LOVE MY MUG ROOT BEER",
+			ach_csau_destroy_meteor = "Did Sephiroth... Do This?",
+			ach_csau_destroy_killer = "What A Beautiful Duwang",
 			ach_csau_gamer_blowzo = "*Chain Attack OST Plays*",
 			ach_csau_transform_sts = "ResidentSleeper",
 			ach_csau_expire_grannycream = "Heat n' Sip",
 			ach_csau_expire_crudeoil = "I CAN'T STOP",
+			ach_csau_expire_fantabulous = "I Feel Fantastic",
 			ach_csau_win_fisheye = "As You Know...",
+			ach_csau_frich_cavendish = "FINE DINING",
 			ach_csau_high_kerosene = "Throw Another on the Fire",
 			ach_csau_get_reyn = "Reyn Time",
 			ach_csau_discover_muppet = "Could Become a Habit",
+			ach_csau_high_speen = "RÖTATE",
+			ach_csau_high_joeyscastle = "SHIT CANNON",
+			ach_csau_high_agga = "YUUUUUUKEIIIIIIIIII",
+			ach_csau_high_newjoker = "Wiseau Serious?",
 			ach_csau_high_dontmind = "Hmmm, What To Play...",
 			ach_csau_high_crack = "It's Not Cool",
 			ach_csau_high_charity = "Compassionate Card",
@@ -592,11 +599,13 @@ return {
 			ach_csau_high_junka = "Never A Winner",
 			ach_csau_high_feature = "Here Forever",
 			ach_csau_high_muppet = "Could Become a Habit",
+			ach_csau_high_supper = "Shoutouts to SupperMarioBroth",
 			ach_csau_play_flushfib = "Art of the Spiral",
 			ach_csau_play_flushblackjack = "Double Down Again",
 			ach_csau_preserve_gros = "Lemme Just Say This... Yum",
 			ach_csau_early_reyn = "Reyn Time",
 			ach_csau_hold_botw = "Best of the Worst!",
+			ach_csau_three_pepsecret = "Secret Hoppin'",
 			--- Silver
 			ach_csau_flip_sosad = "I'm Unhappy When You're Happy",
 			ach_csau_activate_roche = "You Earned It, Big Boy!",
@@ -643,14 +652,24 @@ return {
 			ach_csau_activate_wot = "Activate Wings Of Time",
 			ach_csau_activate_eman = "Activate Emmanual Blast",
 			ach_csau_activate_drippy = "Activate an Enhancement with Dripping Joker",
+			ach_csau_activate_claus = "Play a 5 Steel Card hand with Masked Joker",
+			ach_csau_activate_mug = "Get a MUG MOMENT",
+			ach_csau_destroy_meteor = "Break a 7 with Meteor",
+			ach_csau_destroy_killer = "Destroy a card with Killer Queen",
 			ach_csau_gamer_blowzo = "Activate both triggers of Blowzo Brothers",
+			ach_csau_frich_cavendish = "Use Gourmand of Faramore to buy Cavendish",
 			ach_csau_transform_sts = "Transform Murder the Monolith",
 			ach_csau_expire_grannycream = "Have Granny Cream expire",
 			ach_csau_expire_crudeoil = "Have Crude Oil expire",
+			ach_csau_expire_fantabulous = "Have Fantabulous Joker expire",
 			ach_csau_win_fisheye = "Win a run with Fisheye",
 			ach_csau_high_kerosene = "Get Kerosene to +200 Chips",
 			ach_csau_get_reyn = "Obtain Bunch of Jokers on Ante 1",
 			ach_csau_discover_muppet = "Get Movin' Right Along to X4 Mult",
+			ach_csau_high_speen = "Get Polychrome from a Wheel of Fortune with SPEEEEEEN in your Joker slots",
+			ach_csau_high_joeyscastle = "Activate Joey's Castle 5 times with one discard",
+			ach_csau_high_agga = "Have AGGA reset at above X3 Mult",
+			ach_csau_high_newjoker = "Play a card of 5 Enhanced cards with The NEW Joker!",
 			ach_csau_high_dontmind = "Get High Card to Level 20 with Don't Mind If I Do and/or Pivyot",
 			ach_csau_high_crack = "Get This Is Crack to X4 Mult",
 			ach_csau_high_charity = "Get Charity Stream to +50 Mult",
@@ -672,11 +691,13 @@ return {
 			ach_csau_high_junka = "Get Black Spine Junka to +50 Mult",
 			ach_csau_high_feature = "Have IT'S A FEATURE pay out $50 or more",
 			ach_csau_high_muppet = "Get Movin' Right Along to X4 Mult",
+			ach_csau_high_supper = "Proc WAAUGGHGHHHHGHH 10 times in one hand",
 			ach_csau_play_flushfib = "Play a Flush Fibonacci",
 			ach_csau_play_flushblackjack = "Play a Flush Blackjack",
 			ach_csau_preserve_gros = "Use Scourge of Pantsylvania to preserve Gros Michel",
 			ach_csau_early_reyn = "Obtain Bunch of Jokers on Ante 1",
 			ach_csau_hold_botw = "Hold 3 VHS Tapes at one time",
+			ach_csau_three_pepsecret = "Use Pepperoni Secret on three different Secret Hands in one run",
 			--- Silver
 			ach_csau_activate_quixotic = "From Some Place Even Higher",
 			ach_csau_flip_sosad = "Win a round with I'm So Happy, causing it to flip to I'm So Sad",
@@ -854,7 +875,7 @@ return {
 				},
 			},
 			vhs_activation = {
-				name = "VHS Activation",
+				name = "VHS Playing",
 				text = {
 					"{C:vhs}VHS Tapes{} can have",
 					"their passive abilities",
@@ -1847,8 +1868,9 @@ return {
 				name = "Blowzo Brothers",
 				text = {
 					"If played hand is a {C:attention}Two Pair{},",
-					"{C:green}#1# in #2#{} chance to upgrade {C:attention}Two Pair{}",
-					"{C:green}#1# in #3#{} chance to {C:attention}enhance{} each scored card",
+					"{C:green}#1# in #2#{} chance to upgrade {C:attention}Two Pair{} and",
+					"{C:green}#1# in #3#{} chance for each scored card",
+					"to recieve a random {C:attention}enhancement{} ",
 				},
 			},
 			j_csau_grannycream = {
@@ -2404,7 +2426,7 @@ return {
 			c_csau_blackspine = {
 				name = "Black Spine",
 				text = {
-					"When {C:attention}activated{}, {C:attention}transforms",
+					"When {C:attention}playing{}, {C:attention}transforms",
 					"into a random {C:vhs}VHS Tape"
 				},
 			},
@@ -2446,7 +2468,7 @@ return {
 			c_csau_exploding = {
 				name = "Exploding Varmints",
 				text = {
-					"When {C:attention}activated{}, turn all but one {C:blue}Hands",
+					"When {C:attention}playing{}, turn all but one {C:blue}Hands",
 					"into {C:red}Discards{} when {C:attention}Blind{} is selected",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Round"
 				},
@@ -2454,7 +2476,7 @@ return {
 			c_csau_choppingmall = {
 				name = "Chopping Mall",
 				text = {
-					"When {C:attention}activated{}, if {C:attention}scoring hand{} has",
+					"When {C:attention}playing{}, if {C:attention}scoring hand{} has",
 					"{C:attention}Steel Cards{} at the start and end",
 					"of the hand, add {C:red}Red Seals{} to both",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand"
@@ -2470,7 +2492,7 @@ return {
 			c_csau_calibighunks = {
 				name = "California Big Hunks",
 				text = {
-					"When {C:attention}activated{}, scoring {C:attention}Kings{}",
+					"When {C:attention}playing{}, scoring {C:attention}Kings{}",
 					"are enhanced to {C:attention}Mult Cards{}",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
@@ -2479,14 +2501,14 @@ return {
 				name = "Ishtar",
 				text = {
 					"Each scoring {C:attention}4{}, {C:attention}2{}, and {C:attention}3{} gives",
-					"{C:chips}+#1#{} Chips when this tape is {C:attention}activated{}",
+					"{C:chips}+#1#{} Chips when this tape is {C:attention}playing{}",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
 			c_csau_nukie = {
 				name = "Nukie",
 				text = {
-					"When {C:attention}activated{}, each {C:attention}Wheel of Fortune{}",
+					"When {C:attention}playing{}, each {C:attention}Wheel of Fortune{}",
 					"used has a chance to give {C:dark_edition}Negative",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Wheel of Fortunes"
 				},
@@ -2501,7 +2523,7 @@ return {
 			c_csau_sataniccults = {
 				name = "Law Enforcement Guide to Satanic Cults",
 				text = {
-					"When {C:attention}activated{}, {C:attention}Gold Cards{} give",
+					"When {C:attention}playing{}, {C:attention}Gold Cards{} give",
 					"{X:mult,C:white}X#1#{} Mult when held in hand",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
@@ -2509,7 +2531,7 @@ return {
 			c_csau_blooddebts = {
 				name = "Blood Debts",
 				text = {
-					"When {C:attention}activated{}, gain {C:money}$#1#{} more",
+					"When {C:attention}playing{}, gain {C:money}$#1#{} more",
 					"per {C:money}Interest{} earned",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Rounds"
 				},
@@ -2517,7 +2539,7 @@ return {
 			c_csau_topslots = {
 				name = "Top Slots",
 				text = {
-					"When {C:attention}activated{}, at end of round",
+					"When {C:attention}playing{}, at end of round",
 					"gain {C:money}$#1#{} per {C:attention}#2#%{} over the required",
 					"chips to beat the blind",
 					"{C:green}#3# in #4#{} chance to {C:attention}double{} winnings",
@@ -2528,7 +2550,7 @@ return {
 			c_csau_topslots_alt_title = {
 				name = "Top Slots - Spotting The Best",
 				text = {
-					"When {C:attention}activated{}, at end of round",
+					"When {C:attention}playing{}, at end of round",
 					"gain {C:money}$#1#{} per {C:attention}#2#%{} over the required",
 					"chips to beat the blind",
 					"{C:green}#3# in #4#{} chance to {C:attention}double{} winnings",
@@ -2539,7 +2561,7 @@ return {
 			c_csau_doubledown = {
 				name = "Double Down",
 				text = {
-					"{X:mult,C:white}X#1#{} Mult when {C:attention}activated",
+					"{X:mult,C:white}X#1#{} Mult when {C:attention}playing{}",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
@@ -2567,7 +2589,7 @@ return {
 			c_csau_devilstory = {
 				name = "Devil Story",
 				text = {
-					"When {C:attention}activated{}, add {C:money}Gold Seals{} to",
+					"When {C:attention}playing{}, add {C:money}Gold Seals{} to",
 					"all {C:attention}Enhanced{} cards in scoring hand",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand"
 				},
@@ -2583,14 +2605,14 @@ return {
 				name = "T-Bone's World of Clowning",
 				text = {
 					"Each Joker gives {C:mult}+#1#{} Mult",
-					"when this tape is {C:attention}activated{}",
+					"when this tape is {C:attention}playing{}",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
 			c_csau_wwvcr = {
 				name = "Wayne's World VCR Board Game",
 				text = {
-					"When {C:attention}activated{}, {C:chips}+#1#{} Chips if you",
+					"When {C:attention}playing{}, {C:chips}+#1#{} Chips if you",
 					"do not have the {C:inactive}Grey Poupon{s:0.55}TM{}",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
@@ -2598,7 +2620,7 @@ return {
 			c_csau_sos = {
 				name = "SOS",
 				text = {
-					"When {C:attention}activated{},",
+					"When {C:attention}playing{},",
 					"{C:green}#1# in #2#{} chance for {X:mult,C:white}X#3#{}",
 					"{C:vhs}Running Time{}: {C:attention}#4#{} Hands"
 				},
@@ -2606,7 +2628,7 @@ return {
 			c_csau_macandme = {
 				name = "Mac and Me",
 				text = {
-					"When {C:attention}activated{}, retrigger first",
+					"When {C:attention}playing{}, retrigger first",
 					"{C:attention}2{} cards in scoring hand",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
@@ -2614,7 +2636,7 @@ return {
 			c_csau_osteo = {
 				name = "The Osteoporosis Dance",
 				text = {
-					"When {C:attention}activated{}, gain {C:blue}+1{} Hand",
+					"When {C:attention}playing{}, gain {C:blue}+1{} Hand",
 					"when {C:attention}Blind{} is selected",
 					"when this tape is ",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Rounds"
@@ -2632,14 +2654,14 @@ return {
 				text = {
 					"{C:attention}Retrigger{} lowest ranked card used",
 					"in scoring {C:attention}#1#{} additional times",
-					"when this tape is {C:attention}activated{}",
+					"when this tape is {C:attention}playing{}",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
 			c_csau_kidsand = {
 				name = "Kid Sand Airbags",
 				text = {
-					"When {C:attention}activated{}, gain {C:red}+#1#{} Discard",
+					"When {C:attention}playing{}, gain {C:red}+#1#{} Discard",
 					"when {C:attention}Blind{} is selected",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Rounds"
 				},
@@ -2647,7 +2669,7 @@ return {
 			c_csau_spacecop = {
 				name = "Space Cop",
 				text = {
-					"When {C:attention}activated{}, {C:green}#1# in #2#{} chance to",
+					"When {C:attention}playing{}, {C:green}#1# in #2#{} chance to",
 					"level up by {C:attention}double{} the standard",
 					"increment when using a {C:planet}Planet Card",
 					"{C:vhs}Running Time{}: {C:attention}#3# {C:planet}Planet Cards"
@@ -2656,7 +2678,7 @@ return {
 			c_csau_theroom = {
 				name = "The Room",
 				text = {
-					"When {C:attention}activated{}, reduce",
+					"When {C:attention}playing{}, reduce",
 					"score requirements by {C:attention}#1#%{}",
 					"when {C:attention}Blind{} is selected",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Rounds"
@@ -2665,7 +2687,7 @@ return {
 			c_csau_ryansbabe = {
 				name = "Ryan's Babe",
 				text = {
-					"When {C:attention}activated{}, scoring {C:attention}Queens{}",
+					"When {C:attention}playing{}, scoring {C:attention}Queens{}",
 					"are enhanced to {C:attention}Bonus Cards{}",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
@@ -2688,14 +2710,14 @@ return {
 				name = "rAw TiMe",
 				text = {
 					"{C:attention}Retrigger{} each played {C:attention}4{}, {C:attention}7{}, or {C:attention}3{}",
-					"when this tape is {C:attention}activated{}",
+					"when this tape is {C:attention}playing{}",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
 			},
 			c_csau_donbeveridge = {
 				name = "Don Beveridge Customerization Seminar",
 				text = {
-					"When {C:attention}activated{},",
+					"When {C:attention}playing{},",
 					"{C:attention}Food Jokers{} do not expire",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Triggers"
 				},
@@ -2717,7 +2739,7 @@ return {
 			c_csau_yoyoman = {
 				name = "Yo-Yo Man Instructional Video",
 				text = {
-					"When {C:attention}activated{}, return all ",
+					"When {C:attention}playing{}, return all ",
 					"scoring cards to hand",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},

@@ -11,7 +11,6 @@ local consumInfo = {
             hand_mod = 1,
             hands = 0,
         }
-
     },
     cost = 4,
     rarity = 'csau_StandRarity',
@@ -30,18 +29,17 @@ function consumInfo.in_pool(self, args)
     if next(SMODS.find_card('j_showman')) then
         return true
     end
-
     if G.GAME.used_jokers['c_csau_diamond_killer_btd'] then
         return false
     end
-    
     return true
 end
 
 function consumInfo.calculate(self, card, context)
     if context.remove_playing_cards then
         local hands = 0
-        for i, card in ipairs(context.removed) do
+        for i, _card in ipairs(context.removed) do
+            check_for_unlock({ type = "destroy_killer" })
             hands = hands + card.ability.extra.hand_mod
         end
         card.ability.extra.hands = hands
@@ -56,7 +54,7 @@ function consumInfo.calculate(self, card, context)
         if not (context.blueprint_card or card).getting_sliced then
             G.E_MANAGER:add_event(Event({func = function()
                 ease_hands_played(card.ability.extra.hands)
-                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..card.ability.extra.." "..localize('k_hud_hands')})
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..card.ability.extra.hands.." "..localize('k_hud_hands')})
                 card.ability.extra.hands = 0
                 return true
             end }))

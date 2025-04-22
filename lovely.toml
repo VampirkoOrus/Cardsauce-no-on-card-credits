@@ -490,7 +490,7 @@ pattern = '''
 position = "at"
 payload = '''
 {n=G.UIT.B, config = {w=card.ability.set == "VHS" and 0.2 or 0.1,h=0.6 }},
-{n=G.UIT.T, config={text = card.ability.set == "VHS" and localize('b_activate') or localize('b_use'),colour = G.C.UI.TEXT_LIGHT, scale = card.ability.set == "VHS" and 0.75 or 0.55, shadow = true}}
+{n=G.UIT.T, config={text = card.ability.set == "VHS" and (card.ability.activated and localize('b_deactivate') or localize('b_activate')) or localize('b_use'),colour = G.C.UI.TEXT_LIGHT, scale = card.ability.set == "VHS" and 0.75 or 0.55, shadow = true}}
 '''
 match_indent = true
 
@@ -1248,6 +1248,9 @@ local nukie = G.FUNCS.find_activated_tape('c_csau_nukie')
 local no_neg = true
 if nukie then no_neg = false end
 edition = poll_edition('wheel_of_fortune', nil, no_neg, true)
+if edition == 'e_polychrome' and next(SMODS.find_card('j_csau_speen')) then
+    check_for_unlock({ type = "high_speen" })
+end
 '''
 match_indent = true
 times = 1

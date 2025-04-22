@@ -2,6 +2,7 @@ local jokerInfo = {
     name = "Joey's Castle",
     config = {
         money = 1,
+        ach_disc = 0
     },
     rarity = 2,
     cost = 6,
@@ -17,7 +18,14 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+    if context.pre_discard then
+        card.ability.ach_disc = 0
+    end
     if context.discard and not context.other_card.debuff and context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.joeycastle.suit) and not context.blueprint then
+        card.ability.ach_disc = card.ability.ach_disc + 1
+        if card.ability.ach_disc >= 5 then
+            check_for_unlock({ type = "high_joeyscastle" })
+        end
         return {
             dollars = to_big(card.ability.money),
             colour = G.C.MONEY,

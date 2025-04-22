@@ -95,6 +95,7 @@ function jokerInfo.calculate(self, card, context)
             card.ability.extra.mult = card.ability.extra.mult * 2
             card.ability.extra.rounds = card.ability.extra.rounds - 1
             if card.ability.extra.rounds <= 0 then
+                check_for_unlock({ type = "activate_mug" })
                 change_form(card, "Moment")
                 card:juice_up(1, 1)
                 card:set_sprites(card.config.center)

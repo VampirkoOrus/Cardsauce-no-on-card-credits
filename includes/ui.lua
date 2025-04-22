@@ -276,8 +276,9 @@ local special_thanks_mod = 1
 local special_thanks_padding = 0
 local artist_padding = 0.015
 local coding_scale = 0.90
-local logo_scale = 0.75
-local shader_scale = 0.75
+local logo_scale = 0.9
+local shader_scale = 0.9
+local logo_shader_padding_mod = 1.5
 text_scale = 0.98
 
 SMODS.current_mod.credits_tab = function()
@@ -475,6 +476,9 @@ SMODS.current_mod.credits_tab = function()
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
 									{ n = G.UIT.T, config = { text = G.csau_team.retro, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
+									{ n = G.UIT.T, config = { text = G.csau_team.mary, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
 							}}
 						}},
 					} },
@@ -483,7 +487,7 @@ SMODS.current_mod.credits_tab = function()
 					{ n = G.UIT.C, config = { align = "tm", padding = 0, r = 0.1, }, nodes = {
 						{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
 							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
-								{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+								{n=G.UIT.R, config={align = "tm", padding = 0.1, minh=1.85, outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
 									{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
 										{n=G.UIT.T, config={text = localize('vs_credits9'), scale = header_scale * 0.6, colour = G.C.PURPLE, shadow = true}},
 									}},
@@ -492,22 +496,16 @@ SMODS.current_mod.credits_tab = function()
 											{n=G.UIT.T, config={text = G.csau_team.alizarin, scale = text_scale*0.575*logo_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 										}},
 										{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-											{n=G.UIT.T, config={text = localize('vs_credits_logo_aliz_sub'), scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
-										}},
-										{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-											{n=G.UIT.T, config={text = G.csau_team.keku, scale = text_scale*0.55*logo_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-										}},
-										{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-											{n=G.UIT.T, config={text = localize('vs_credits_logo_keku_sub'), scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
+											{n=G.UIT.T, config={text = G.csau_team.extra.alizarin, scale = text_scale*0.475*logo_scale, colour = G.C.JOKER_GREY, shadow = true}},
 										}},
 									}},
 								}},
-								{n=G.UIT.R, config={align = "tm", padding = 0,outline_colour = G.C.CLEAR, r = 0.1, outline = 1}, nodes={
+								{n=G.UIT.R, config={align = "tm", padding = 0 ,outline_colour = G.C.CLEAR, r = 0.1, outline = 1}, nodes={
 									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
 										{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = (text_scale*0.3), colour = G.C.CLEAR, shadow = true}},
 									}},
 								}},
-								{n=G.UIT.R, config={align = "tm", padding = 0.1 ,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+								{n=G.UIT.R, config={align = "tm", padding = 0.1, minh=1.85, outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
 									{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
 										{n=G.UIT.T, config={text = localize('vs_credits8'), scale = header_scale * 0.515, colour = G.C.DARK_EDITION, shadow = true}},
 									}},

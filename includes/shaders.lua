@@ -15,6 +15,7 @@ SMODS.DrawStep:take_ownership('floating_sprite', {
                 if self.ability.stand_mask then
                     G.SHADERS['csau_stand_mask']:send("scale_mod",scale_mod)
                     G.SHADERS['csau_stand_mask']:send("rotate_mod",rotate_mod)
+                    G.SHADERS['csau_stand_mask']:send("output_scale",1.0)
                     --G.SHADERS['csau_stand_mask']:send("my",0.1 + 0.03*math.sin(1.8*G.TIMERS.REAL)) -- my (vertical y offset i think)
                     --G.SHADERS['csau_stand_mask']:send("shadow_height",self.shadow_height)
 
@@ -198,6 +199,70 @@ SMODS.DrawStep {
         if self.children.stand_overlay and (self.config.center.discovered or self.bypass_discovery_center) then
             self.children.stand_overlay:draw_shader('dissolve')
         end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
+
+
+
+
+
+---------------------------
+--------------------------- Temp VHS Draw Steps
+---------------------------
+---
+local current_mod = SMODS.current_mod
+local slide_out = 8.25
+local slide_mod = 0.825
+local slide_out_delay = 1
+
+local setupTapeCanvas = function(card, center, tape, sleeve)
+    card.children.center.video = love.graphics.newCanvas(center.width or 71, center.height or 95)
+    card.children.center.video:renderTo(function()
+        love.graphics.clear(1,1,1,0)
+        love.graphics.setColor(1,1,1,1)
+        love.graphics.draw(current_mod[card.config.center.key..'_tape'], ((center.width or 71)/2)+card.ability.slide_move, (center.height or 95)/2,0,1,1,71/2,95/2)
+        love.graphics.draw(current_mod[card.config.center.key..'_sleeve'],((center.width or 71)/2)-card.ability.slide_move,(center.height or 95)/2,0,1,1,71/2,95/2)
+    end)
+end
+
+SMODS.DrawStep {
+    key = 'vhs_slide',
+    order = -1,
+    func = function(self)
+        if self.ability.set ~= 'VHS' or (self.area and self.area.config.collection and not self.config.center.discovered) then
+            return
+        end
+
+        if not self.ability.slide_move or not self.ability.slide_out_delay then
+            self.ability.slide_move = 0
+            self.ability.slide_out_delay = 0
+        end
+
+        local center = self.config.center
+        love.graphics.push('all')
+        love.graphics.reset()
+        if not self.children.center.video then
+            setupTapeCanvas(self, center, current_mod[center.key..'_tape'], current_mod[center.key..'_sleeve'])
+        end
+
+        if self.ability.activated and self.ability.slide_move < slide_out then
+            if self.ability.slide_out_delay < slide_out_delay then
+                self.ability.slide_out_delay = self.ability.slide_out_delay + slide_mod
+            else
+                self.ability.slide_move = self.ability.slide_move + slide_mod
+            end
+        elseif not self.ability.activated and self.ability.slide_move > 0 then
+            self.ability.slide_out_delay = 0
+            self.ability.slide_move = self.ability.slide_move - slide_mod
+        end
+
+        self.children.center.video:renderTo(function()
+            love.graphics.clear(1,1,1,0)
+            love.graphics.draw(current_mod[self.config.center.key..'_tape'], ((self.config.center.width or 71)/2)+self.ability.slide_move, (self.config.center.height or 95)/2,0,1,1,71/2,95/2)
+            love.graphics.draw(current_mod[self.config.center.key..'_sleeve'],((self.config.center.width or 71)/2)-self.ability.slide_move,(self.config.center.height or 95)/2,0,1,1,71/2,95/2)
+        end)
+        love.graphics.pop()
     end,
     conditions = { vortex = false, facing = 'front' },
 }
