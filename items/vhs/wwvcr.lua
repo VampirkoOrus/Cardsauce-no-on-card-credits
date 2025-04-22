@@ -43,6 +43,7 @@ function consumInfo.calculate(self, card, context)
     if context.after and not card.ability.destroyed and card.ability.activated and not bad_context then
         card.ability.extra.uses = card.ability.extra.uses+1
         if card.ability.extra.uses >= card.ability.extra.runtime then
+            check_for_unlock({ type = "monkey_butt" })
             G.FUNCS.destroy_tape(card)
             card.ability.destroyed = true
         end

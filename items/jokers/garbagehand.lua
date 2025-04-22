@@ -19,10 +19,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return {vars = {card.ability.extra.mult}}
 end
 
-function jokerInfo.add_to_deck(self, card)
-	ach_jokercheck(self, G.ach_checklists.band)
-end
-
 function jokerInfo.calculate(self, card, context)
 	if context.individual and context.cardarea == G.play and not card.debuff and context.other_card.ability.effect == 'Base' then
 		if to_big(context.other_card.base.nominal) <= to_big(8) then

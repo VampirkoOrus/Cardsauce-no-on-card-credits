@@ -17,11 +17,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {G.GAME.probabilities.normal} }
 end
 
-function jokerInfo.add_to_deck(self, card)
-	check_for_unlock({ type = "discover_quarterdumb" })
-	ach_jokercheck(self, G.ach_checklists.band)
-end
-
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 	if card.area and card.area == G.jokers or card.config.center.discovered then
 		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner

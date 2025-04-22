@@ -15,10 +15,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {G.GAME.probabilities.normal} }
 end
 
-function jokerInfo.add_to_deck(self, card)
-	ach_jokercheck(self, G.ach_checklists.high)
-end
-
 function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not self.debuff then
 		if context.scoring_name == "High Card" then

@@ -74,6 +74,9 @@ function consumInfo.calculate(self, card, context)
             card.ability.destroyed = true
         end
     end
+    if card.ability.activated and context.game_over then
+        check_for_unlock({ type = "the_scot" })
+    end
 end
 
 function consumInfo.calc_dollar_bonus(self, card)

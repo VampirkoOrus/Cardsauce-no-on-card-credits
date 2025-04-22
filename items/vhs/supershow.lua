@@ -37,6 +37,7 @@ function consumInfo.calculate(self, card, context)
         end
         for i, v in ipairs(context.removed) do
             if not card.ability.destroyed then
+                check_for_unlock({ type = "activate_supershow" })
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         local _card = copy_card(v, nil, nil, nil, true)

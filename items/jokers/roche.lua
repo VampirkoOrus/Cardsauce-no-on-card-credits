@@ -19,10 +19,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {card.ability.gil} }
 end
 
-function jokerInfo.add_to_deck(self, card)
-	ach_jokercheck(self, G.ach_checklists.ff7)
-end
-
 local roche = SMODS.Sound({
 	key = "roche",
 	path = "roche.wav"

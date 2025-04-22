@@ -16,10 +16,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = { } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-	ach_jokercheck(self, G.ach_checklists.ff7)
-end
-
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 	G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 end

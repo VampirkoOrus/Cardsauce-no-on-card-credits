@@ -965,15 +965,6 @@ SMODS.return_to_hand = function(card, context)
 	return false
 end
 
-G.FUNCS.have_multiple_jokers = function(tbl)
-	for i, v in ipairs(tbl) do
-		if not next(SMODS.find_card(v)) then
-			return false
-		end
-	end
-	return true
-end
-
 G.FUNCS.hand_contains_rank = function(hand, ranks, require_all)
 	require_all = require_all or false
 	local found = {}
@@ -1104,4 +1095,18 @@ SMODS.will_destroy_card = function(context)
 		return false
 	end
 	return true
+end
+
+G.FUNCS.have_multiple_jokers = function(tbl, amount)
+	local found = 0
+	for i, v in ipairs(tbl) do
+		if next(SMODS.find_card(v)) then
+			found = found + 1
+		end
+	end
+	if amount then
+		return found >= amount
+	else
+		return found == #tbl
+	end
 end

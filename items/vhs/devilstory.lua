@@ -34,17 +34,20 @@ end
 
 function consumInfo.calculate(self, card, context)
     if card.ability.activated and context.before and not card.debuff and not context.blueprint then
-        local activated = false
+        local count = 0
         for i, v in ipairs(context.scoring_hand) do
             if not v.seal and v.ability.effect ~= "Base" then
-                activated = true
+                count = count + 1
                 v.seal_delay = true
                 v:set_seal("Gold", nil, nil, {set_func = function()
                     card:juice_up()
                 end} )
             end
         end
-        if activated then
+        if count > 0 then
+            if count >= 5 then
+                check_for_unlock({ type = "high_horse" })
+            end
             G.E_MANAGER:add_event(Event({
                 func = function()
                     card.ability.extra.uses = card.ability.extra.uses+1

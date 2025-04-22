@@ -2,8 +2,16 @@ local trophyInfo = {
     rarity = 3,
     bypass_all_unlocked = true,
     unlock_condition = function(self, args)
-        if args.type == "the_band" then
-            return true
+        if G.jokers and #G.jokers.cards > 0 then
+            local jokers = {
+                'j_csau_besomeone',
+                'j_csau_garbagehand',
+                'j_csau_anotherlight',
+                'j_csau_kerosene',
+                'j_csau_vincenzo',
+                'j_csau_quarterdumb'
+            }
+            return G.FUNCS.have_multiple_jokers(jokers, 4)
         end
     end,
 }

@@ -197,12 +197,13 @@ G.FUNCS.use_card = function(e, mute, nosave)
         discover_card(card.config.center)
         if card.area and card.area ~= G.consumeables then
             if card.area and card.area == G.pack_cards then
-                if G.GAME.pack_choices and G.GAME.pack_choices > 1 then
-                    if G.booster_pack.alignment.offset.py then
-                        G.booster_pack.alignment.offset.y = G.booster_pack.alignment.offset.py
-                        G.booster_pack.alignment.offset.py = nil
-                    end
-                    G.GAME.pack_choices = G.GAME.pack_choices - 1
+                if G.booster_pack.alignment.offset.py then
+                    G.booster_pack.alignment.offset.y = G.booster_pack.alignment.offset.py
+                    G.booster_pack.alignment.offset.py = nil
+                end
+                G.GAME.pack_choices = G.GAME.pack_choices - 1
+                if G.GAME.pack_choices <= 0 then
+                    G.FUNCS.end_consumeable(nil, delay_fac)
                 end
                 card.area:remove_card(card)
             end

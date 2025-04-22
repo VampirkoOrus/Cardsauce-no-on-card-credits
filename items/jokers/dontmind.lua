@@ -15,10 +15,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = { } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-	ach_jokercheck(self, G.ach_checklists.high)
-end
-
 function jokerInfo.calculate(self, card, context)
 	if context.modify_level_increment then
 		if context.hand == "High Card" then

@@ -335,41 +335,6 @@ for i, v in ipairs(G.color_presets) do
 	end
 end
 
---- Table representing collection checklist for Cardsauce achievements
-G.ach_checklists = {
-	band = {
-		4,
-		'the_band',
-		{
-			'Be Someone Forever',
-			'Garbage Hand',
-			'Another Light',
-			'Kerosene',
-			'Vincenzo',
-			'Quarterdumb'
-		},
-	},
-	high = {
-		2,
-		'high_one',
-		{
-			'Be Someone Forever',
-			'Pivyot',
-			'Meat',
-			"Don't Mind If I Do",
-		},
-	},
-	ff7 = {
-		3,
-		'triple_seven',
-		{
-			'Motorcyclist Joker',
-			'No No No No No No No No No No No',
-			'Meteor',
-		}
-	}
-}
-
 -- I'll be honest, I have no idea what this does
 -- But it's a global table, so it goes here
 mgt = {"m", "e", "t", "a", "l", "g", "e", "a", "r", "t", "a", "c", "o"}

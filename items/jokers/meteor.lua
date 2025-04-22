@@ -19,10 +19,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.trance } }
 end
 
-function jokerInfo.add_to_deck(self, card)
-    ach_jokercheck(self, G.ach_checklists.ff7)
-end
-
 function jokerInfo.check_for_unlock(self, args)
     if args.type == "roche_destroyed" then
         return true
