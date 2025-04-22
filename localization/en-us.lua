@@ -2662,7 +2662,7 @@ return {
 				name = "Miami Connection",
 				text = {
 					"When {C:attention}playing{}, always",
-					"{C:attention}#1#{} more cards",
+					"draw {C:attention}#1#{} more cards",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Draws"
 				},
 			},
