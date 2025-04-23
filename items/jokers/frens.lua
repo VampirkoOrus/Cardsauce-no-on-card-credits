@@ -30,7 +30,7 @@ function jokerInfo.calculate(self, card, context)
         if not G.playing_cards then return end
         local faces = 0
         for k, v in pairs(G.playing_cards) do
-            if v:is_face(true) then faces = faces+1 end
+            if v:is_face() then faces = faces+1 end
         end
         local chips = card.ability.extra.chips_mod * faces
         if chips > 0 then
