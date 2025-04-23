@@ -18,11 +18,11 @@ SMODS.PokerHand {
         return { hand }
     end,
     example = {
-        {'S_A', true},
         {'D_8', true},
         {'D_5', true},
         {'C_3', true},
         {'S_2', true},
+        {'S_A', true},
     },
     mult = 6,
     l_mult = 3,
@@ -43,11 +43,11 @@ SMODS.PokerHand {
         return { SMODS.merge_lists(parts.csau_fibonacci, parts._flush) }
     end,
     example = {
-        {'H_A', true},
         {'H_8', true},
         {'H_5', true},
         {'H_3', true},
         {'H_2', true},
+        {'H_A', true},
     },
     mult = 15,
     l_mult = 4,

@@ -9,11 +9,22 @@ function SMODS.current_mod.reset_game_globals(run_start)
     csau_reset_paper_rank()
 
 	G.GAME.current_round.choicevoice = { suit = 'Clubs' }
+	local _poker_hands = {}
+	for k, v in pairs(G.GAME.hands) do
+		if v.visible then _poker_hands[#_poker_hands+1] = k end
+	end
+	G.GAME.current_round.choicevoice.hand = pseudorandom_element(_poker_hands, pseudoseed('voice'))
 	local valid_choicevoice_cards = {}
 	for _, v in ipairs(G.playing_cards) do
 		if not SMODS.has_no_suit(v) then
 			if (G.GAME and G.GAME.wigsaw_suit and v:is_suit(G.GAME.wigsaw_suit)) or (G.GAME and not G.GAME.wigsaw_suit) then
-				valid_choicevoice_cards[#valid_choicevoice_cards+1] = v
+				if G.GAME.current_round.choicevoice.hand == 'csau_Fibonacci' or G.GAME.current_round.choicevoice.hand == 'FlushFibonacci' then
+					if is_perfect_square(v.base.nominal) then
+						valid_choicevoice_cards[#valid_choicevoice_cards+1] = v
+					end
+				else
+					valid_choicevoice_cards[#valid_choicevoice_cards+1] = v
+				end
 			end
 		end
 	end
