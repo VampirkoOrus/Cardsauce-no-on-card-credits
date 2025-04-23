@@ -4,7 +4,7 @@ require("src.misc_functions")
 local game = require("src.game")
 
 game.canvasWidth = 59
-game.canvasHeight = 63
+game.canvasHeight = 65
 game.scale = 8
 game.blockSize = math.floor(math.min(game.canvasWidth / 10, game.canvasHeight / 20))
 game.gridOffsetX = 15
@@ -37,7 +37,7 @@ end
 function love.draw()
     love.graphics.setCanvas(game.canvas)
     love.graphics.clear()
-    game.draw()
+    game.draw(nil, 2)
     love.graphics.setCanvas()
 
     love.graphics.setColor(1, 1, 1)

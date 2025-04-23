@@ -51,6 +51,10 @@ function consumInfo.calculate(self, card, context)
     end
 end
 
+function consumInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+    G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+end
+
 function consumInfo.can_use(self, card)
     if #G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables then return true end
 end

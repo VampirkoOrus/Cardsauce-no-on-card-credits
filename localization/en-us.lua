@@ -2667,6 +2667,13 @@ return {
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
+			c_csau_wwvcr_detailed = {
+				name = "Wayne's World VCR Board Game",
+				text = {
+					"{C:chips}+#1#{} Chips when {C:attention}playing{}",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
+				},
+			},
 			c_csau_sos = {
 				name = "SOS",
 				text = {
