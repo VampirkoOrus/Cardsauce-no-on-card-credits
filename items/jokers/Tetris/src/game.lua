@@ -275,12 +275,16 @@ local function draw_corners(x_offset, y_offset)
         {x = 0, y = Tetris.canvasHeight-1},
         {x = Tetris.canvasWidth-1, y = 0},
         {x = Tetris.canvasWidth-1, y = Tetris.canvasHeight-1},
+        {x = 0, y = -2, width = 59, height = 2}
+
     }
     for i, v in ipairs(corners) do
         local screenX = corners[i].x + x_offset
         local screenY = corners[i].y + y_offset
+        local width = corners[i].width or 1
+        local height = corners[i].height or 1
         love.graphics.setColor(Tetris.colors.edges)
-        love.graphics.rectangle("fill", screenX, screenY, Tetris.blockSize*(1/3), Tetris.blockSize*(1/3))
+        love.graphics.rectangle("fill", screenX, screenY, Tetris.blockSize*(1/3)*width, Tetris.blockSize*(1/3)*height)
     end
 end
 

@@ -35,7 +35,10 @@ function SMODS.current_mod.reset_game_globals(run_start)
 		G.GAME.current_round.joeycastle.suit = randCard_2.base.suit
 	end
 	local randCard_3 = pseudorandom_element(G.playing_cards, pseudoseed('DUANE'..G.GAME.round_resets.ante))
+	G.GAME.csau_delay_duane = true
+	SMODS.calculate_context({csau_duane_change = true, suit = randCard_3.base.suit})
 	G.GAME.current_round.duane_suit = randCard_3.base.suit
+
 
 	local valid_paper_ranks = {}
 	for _, v in ipairs(G.playing_cards) do

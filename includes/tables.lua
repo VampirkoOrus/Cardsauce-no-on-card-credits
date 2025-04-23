@@ -83,6 +83,8 @@ G.csau_team = {
 	['retro'] = 'Retrotype',
 	['ele'] = 'elebant',
 	['mary'] = 'Drawer_Mary',
+	['lwb'] = 'LolWutBurger',
+	['yumz'] = 'yumz',
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",
@@ -160,7 +162,7 @@ G.csau_collab_credits = {
 	csau_fingies = {
 		Ace = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } },
 		King = nil,
-		Queen = nil,
+		Queen = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.lwb } },
 		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } },
 	},
 }
@@ -313,6 +315,8 @@ G.csau_badge_colours = {
 	co_lands = '394E90',
 	te_lands = '409CE8',
 }
+
+G.csau_animated_centers = {}
 
 G.color_presets_nums = {}
 G.color_presets_strings = {}

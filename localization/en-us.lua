@@ -541,6 +541,7 @@ return {
 			a_plus_discard = "+#1# Discard",
 			a_plus_hand = "+#1# Hand",
 			a_red = "#1#!!!",
+			a_duane = "#1#!",
 			a_chance = "#1# in #2#"
 		},
 		challenge_names = {
@@ -631,6 +632,7 @@ return {
 			ach_csau_defeat_mochamike = "Put Your Deck Away",
 			ach_csau_grey_vomit = "Murder of the Universe",
 			ach_csau_get_sprunked = "Essence of Life",
+			ach_csau_dark_luigi = "DARK LUIGI",
 			ach_csau_evolve_echoes = "S! H! I! T!",
 			ach_csau_evolve_btd = "The Next Day",
 			ach_csau_evolve_ger = "This Is... Requiem",
@@ -745,6 +747,7 @@ return {
 			ach_csau_defeat_mochamike = "Defeat Mocha Mike",
 			ach_csau_grey_vomit = "Have Grey Joker and Vomit Blast in your Joker slots",
 			ach_csau_get_sprunked = "Get Sprunk'd",
+			ach_csau_dark_luigi = "Obtain a Negative WAAUGGHGHHHHGHH",
 			ach_csau_evolve_echoes = "Evolve your Stand into Echoes ACT3",
 			ach_csau_evolve_btd = "Evolve your Stand into Killer Queen: Bites the Dust",
 			ach_csau_evolve_ger = "Evolve your Stand into Gold Experience Requiem",
@@ -1997,11 +2000,11 @@ return {
 			j_csau_agga = {
 				name = "AGGA",
 				text = {
-					"This Joker gains {X:mult,C:white}X#2#{} Mult for",
+					"This Joker gains {X:mult,C:white}X#3#{} Mult for",
 					"every time a card is {C:attention}retriggered",
-					"{C:green}1 in #3#{} chance this Joker",
+					"{C:green}#1# in #2#{} chance this Joker",
 					"{C:attention}resets{} when {C:attention}triggered{}",
-					"{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
+					"{C:inactive}(Currently {X:mult,C:white} X#4# {C:inactive} Mult)",
 				},
 			},
 			j_csau_bsi = {
@@ -2336,8 +2339,8 @@ return {
 			j_csau_duane = {
 				name = "Dancing Joker",
 				text = {
-					"Retrigger each played card",
-                    "with {V:1}#1#{} suit",
+					"Retrigger each played",
+                    "card with {V:1}#1#{} suit",
 					"{s:0.8}suit changes at end of round",
 				},
 			},
@@ -2583,9 +2586,9 @@ return {
 					"When {C:attention}playing{}, at end of round",
 					"gain {C:money}$#1#{} per {C:attention}#2#%{} over the required",
 					"chips to beat the blind",
-					"{C:green}#3# in #4#{} chance to {C:attention}double{} winnings",
-					"{C:green}#3# in #5#{} chance to {C:attention}triple{} winnings",
-					"{C:vhs}Running Time{}: {C:attention}#6#{} Rounds"
+					"{C:green}#4# in #5#{} chance to {C:attention}double{} winnings",
+					"{C:green}#4# in #6#{} chance to {C:attention}triple{} winnings",
+					"{C:vhs}Running Time{}: {C:attention}#7#{} Rounds"
 				},
 			},
 			c_csau_topslots_alt_title = {
@@ -2661,6 +2664,13 @@ return {
 				text = {
 					"When {C:attention}playing{}, {C:chips}+#1#{} Chips if you",
 					"do not have the {C:inactive}Grey Poupon{s:0.55}TM{}",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
+				},
+			},
+			c_csau_wwvcr_detailed = {
+				name = "Wayne's World VCR Board Game",
+				text = {
+					"{C:chips}+#1#{} Chips when {C:attention}playing{}",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},

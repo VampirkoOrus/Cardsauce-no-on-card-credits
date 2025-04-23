@@ -144,7 +144,7 @@ function jokerInfo.load(self, card, card_table, other_card)
 end
 
 function jokerInfo.draw(self,card,layer)
-    --Withouth love.graphics.push, .pop, and .reset, it will attempt to use values from the rest of
+    --Without love.graphics.push, .pop, and .reset, it will attempt to use values from the rest of
     --the rendering code. We need a clean slate for rendering to canvases.
     if card.area ~= G.jokers then
         return
@@ -157,7 +157,7 @@ function jokerInfo.draw(self,card,layer)
     end
     card.children.center.video:renderTo(function()
         if mod.tetris.isActive then
-            mod.tetris.draw(6, 6.5)
+            mod.tetris.draw(6, 6)
         end
     end)
     love.graphics.pop()

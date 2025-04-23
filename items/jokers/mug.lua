@@ -14,6 +14,7 @@ local jokerInfo = {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    pixel_size = { w = 71, h = 73 },
     streamer = "joel",
 }
 
@@ -31,6 +32,7 @@ local change_form = function(card, form)
             if v[1] == form then
                 card.ability.form = v[1]
                 card.config.center.pos = v[2]
+                card.children.center.scale.y = card.children.center.scale.y*(95/95)
             end
         end
     end
@@ -68,7 +70,7 @@ function jokerInfo.calculate(self, card, context)
         end
     end
     if context.end_of_round and not context.other_card then
-        if card.ability.form == "moment" then
+        if card.ability.form == "moment" and SMODS.food_expires(context) then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     play_sound('tarot1')
