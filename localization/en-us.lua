@@ -2586,9 +2586,9 @@ return {
 					"When {C:attention}playing{}, at end of round",
 					"gain {C:money}$#1#{} per {C:attention}#2#%{} over the required",
 					"chips to beat the blind",
-					"{C:green}#3# in #4#{} chance to {C:attention}double{} winnings",
-					"{C:green}#3# in #5#{} chance to {C:attention}triple{} winnings",
-					"{C:vhs}Running Time{}: {C:attention}#6#{} Rounds"
+					"{C:green}#4# in #5#{} chance to {C:attention}double{} winnings",
+					"{C:green}#4# in #6#{} chance to {C:attention}triple{} winnings",
+					"{C:vhs}Running Time{}: {C:attention}#7#{} Rounds"
 				},
 			},
 			c_csau_topslots_alt_title = {

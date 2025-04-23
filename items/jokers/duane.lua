@@ -63,7 +63,7 @@ end
 local igo = Game.init_game_object
 function Game:init_game_object()
     local ret = igo(self)
-    ret.current_round.duane_suit = 'Clubs'
+    ret.current_round.duane_suit = 'Diamonds'
     return ret
 end
 
