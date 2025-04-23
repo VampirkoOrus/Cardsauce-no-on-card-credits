@@ -22,7 +22,7 @@ function Game:main_menu(change_context)
 end
 local ref_update_shop = Game.update_shop
 function Game:update_shop(dt)
-	if not G.STATE_COMPLETE and (next(SMODS.find_card('v_csau_lampoil')) or next(SMODS.find_card('ropebombs'))) then
+	if not G.STATE_COMPLETE and (next(SMODS.find_card('v_csau_lampoil')) or next(SMODS.find_card('v_csau_ropebombs'))) then
 		local morshu_exists = not not G.morshu_save
 
 		-- this is the result of stupid UI layerin bullshit

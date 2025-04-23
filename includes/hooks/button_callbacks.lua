@@ -109,7 +109,7 @@ G.FUNCS.save_to_morshu = function(e)
             delay = 0.8,
             func = function()
             if c2.ability.set == "Voucher" then
-                if c2.shop_voucher then G.GAME.current_round.voucher.spawn[c2.config.center_key] = false end 
+                G.GAME.current_round.voucher.spawn[c2.config.center_key] = false
                 G.GAME.used_vouchers[c2.config.center_key] = true
             end
 
