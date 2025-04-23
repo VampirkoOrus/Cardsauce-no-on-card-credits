@@ -32,10 +32,12 @@ function jokerInfo.calculate(self, card, context)
         for k, v in pairs(G.playing_cards) do
             if v:is_face() then faces = faces+1 end
         end
-        if card.ability.extra.chip_mod*faces > 0 then
+        local chips = card.ability.extra.chips_mod * faces
+        if chips > 0 then
             return {
-                message = localize{type='variable',key='a_chips',vars={to_big(card.ability.extra.chips_mod * faces)}},
-                chip_mod = card.ability.extra.chips
+                message = localize{type='variable',key='a_chips',vars={to_big(chips)}},
+                chip_mod = chips,
+                colour = G.C.CHIPS
             }
         end
     end
