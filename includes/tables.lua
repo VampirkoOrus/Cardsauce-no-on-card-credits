@@ -316,6 +316,8 @@ G.csau_badge_colours = {
 	te_lands = '409CE8',
 }
 
+G.csau_animated_centers = {}
+
 G.color_presets_nums = {}
 G.color_presets_strings = {}
 for i, v in ipairs(G.color_presets) do

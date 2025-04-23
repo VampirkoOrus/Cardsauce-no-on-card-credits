@@ -18,6 +18,12 @@ local jokerInfo = {
         x = 0,
     },
     streamer = "joel",
+    animated = {
+        tiles = {
+            x = 6,
+            y = 2,
+        },
+    }
 }
 
 local function invertNum(n)
@@ -54,25 +60,6 @@ function jokerInfo.calculate(self, card, context)
         return {
             mult = card.ability.extra.mult,
         }
-    end
-end
-
-local upd = Game.update
-csau_bonzi_dt = 0
-function Game:update(dt)
-    upd(self,dt)
-    csau_bonzi_dt = csau_bonzi_dt + dt
-    if G.P_CENTERS and G.P_CENTERS.j_csau_bonzi and csau_bonzi_dt > 0.1 then
-        csau_bonzi_dt = 0
-        local obj = G.P_CENTERS.j_csau_bonzi
-        if (obj.pos.x == 5 and obj.pos.y == 1) then
-            obj.pos.x = 0
-            obj.pos.y = 0
-        elseif (obj.pos.x < 5) then obj.pos.x = obj.pos.x + 1
-        elseif (obj.pos.y < 1) then
-            obj.pos.x = 0
-            obj.pos.y = obj.pos.y + 1
-        end
     end
 end
 

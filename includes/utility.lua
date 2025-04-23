@@ -208,6 +208,11 @@ function load_cardsauce_item(file_key, item_type, no_badges)
         return
     end
 
+	if info.animated then
+		G.csau_animated_centers[info.key] = info.animated
+		G.csau_animated_centers[info.key].dt = 0
+	end
+
     if item_type == 'Blind' then
         -- separation for animated spritess
         SMODS.Atlas({ key = file_key, atlas_table = "ANIMATION_ATLAS", path = "blinds/" .. file_key .. ".png", px = 34, py = 34, frames = 21, })

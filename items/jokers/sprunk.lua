@@ -20,6 +20,14 @@ local jokerInfo = {
     eternal_compat = true,
     perishable_compat = false,
     streamer = "joel",
+    animated = {
+        tiles = {
+            x = 10,
+            y = 8,
+            last_tile = { x = 5, y = 8}
+        },
+        speed = 0.025
+    }
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -404,28 +412,8 @@ function ease_dollars(mod, instant)
                             return true
                         end
                     }))
-
                 end
             end
-        end
-    end
-end
-
-local upd = Game.update
-csau_sprunk_dt = 0
-function Game:update(dt)
-    upd(self,dt)
-    csau_sprunk_dt = csau_sprunk_dt + dt
-    if G.P_CENTERS and G.P_CENTERS.j_csau_sprunk and csau_sprunk_dt > 0.025 then
-        csau_sprunk_dt = 0
-        local obj = G.P_CENTERS.j_csau_sprunk
-        if (obj.pos.x == 4 and obj.pos.y == 7) then
-            obj.pos.x = 0
-            obj.pos.y = 0
-        elseif (obj.pos.x < 9) then obj.pos.x = obj.pos.x + 1
-        elseif (obj.pos.y < 7) then
-            obj.pos.x = 0
-            obj.pos.y = obj.pos.y + 1
         end
     end
 end

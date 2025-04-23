@@ -541,6 +541,7 @@ return {
 			a_plus_discard = "+#1# Discard",
 			a_plus_hand = "+#1# Hand",
 			a_red = "#1#!!!",
+			a_duane = "#1#!",
 			a_chance = "#1# in #2#"
 		},
 		challenge_names = {
@@ -2338,8 +2339,8 @@ return {
 			j_csau_duane = {
 				name = "Dancing Joker",
 				text = {
-					"Retrigger each played card",
-                    "with {V:1}#1#{} suit",
+					"Retrigger each played",
+                    "card with {V:1}#1#{} suit",
 					"{s:0.8}suit changes at end of round",
 				},
 			},
