@@ -68,7 +68,7 @@ function jokerInfo.calculate(self, card, context)
         end
     end
     if context.end_of_round and not context.other_card then
-        if card.ability.form == "moment" then
+        if card.ability.form == "moment" and SMODS.food_expires(context) then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     play_sound('tarot1')

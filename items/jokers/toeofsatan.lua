@@ -30,32 +30,34 @@ function jokerInfo.calculate(self, card, context)
         end
     end
     if context.end_of_round and not context.blueprint then
-        card.ability.extra.discards = card.ability.extra.discards - 1
-        if card.ability.extra.discards > 0 then
-            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_remaining',vars={card.ability.extra.discards}}, colour = G.C.FILTER})
-        else
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    play_sound('tarot1')
-                    card.T.r = -0.2
-                    card:juice_up(0.3, 0.4)
-                    card.states.drag.is = true
-                    card.children.center.pinch.x = true
-                    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-                         func = function()
-                             G.jokers:remove_card(card)
-                             card:remove()
-                             card = nil
-                             return true
-                         end
-                    }))
-                    return true
-                end
-            }))
-            return {
-                message = localize('k_eaten_ex'),
-                colour = G.C.FILTER
-            }
+        if SMODS.food_expires(context) then
+            card.ability.extra.discards = card.ability.extra.discards - 1
+            if card.ability.extra.discards > 0 then
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_remaining',vars={card.ability.extra.discards}}, colour = G.C.FILTER})
+            else
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        play_sound('tarot1')
+                        card.T.r = -0.2
+                        card:juice_up(0.3, 0.4)
+                        card.states.drag.is = true
+                        card.children.center.pinch.x = true
+                        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
+                                                     func = function()
+                                                         G.jokers:remove_card(card)
+                                                         card:remove()
+                                                         card = nil
+                                                         return true
+                                                     end
+                        }))
+                        return true
+                    end
+                }))
+                return {
+                    message = localize('k_eaten_ex'),
+                    colour = G.C.FILTER
+                }
+            end
         end
     end
 end
