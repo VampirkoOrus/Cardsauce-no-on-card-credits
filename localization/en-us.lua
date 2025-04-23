@@ -1999,11 +1999,11 @@ return {
 			j_csau_agga = {
 				name = "AGGA",
 				text = {
-					"This Joker gains {X:mult,C:white}X#2#{} Mult for",
+					"This Joker gains {X:mult,C:white}X#3#{} Mult for",
 					"every time a card is {C:attention}retriggered",
-					"{C:green}1 in #3#{} chance this Joker",
+					"{C:green}#1# in #2#{} chance this Joker",
 					"{C:attention}resets{} when {C:attention}triggered{}",
-					"{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
+					"{C:inactive}(Currently {X:mult,C:white} X#4# {C:inactive} Mult)",
 				},
 			},
 			j_csau_bsi = {
