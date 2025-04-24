@@ -3169,6 +3169,15 @@ return {
 					"{C:chips}+#4#{} chips",
 				}
 			},
+			c_csau_whirlpool = {
+				name = "Whirlpool",
+				text = {
+					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+					"{C:attention}#2#",
+					"{C:mult}+#3#{} Mult and",
+					"{C:chips}+#4#{} chips",
+				}
+			},
 			c_csau_planet_lost = {
 				name = "Lost Galaxy",
 				text = {
