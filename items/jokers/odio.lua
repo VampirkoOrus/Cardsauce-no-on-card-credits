@@ -41,8 +41,10 @@ end
 local function updateSprite(card)
 	if card.ability.extra.form then
 		if card.config.center.atlas ~= card.ability.extra.form then
+			local old_atlas = card.config.center.atlas
 			card.config.center.atlas = "csau_"..card.ability.extra.form
 			card:set_sprites(card.config.center)
+			card.config.center.atlas = old_atlas
 		end
 	end
 end

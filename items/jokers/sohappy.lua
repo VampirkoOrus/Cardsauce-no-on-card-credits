@@ -84,16 +84,20 @@ function jokerInfo.update(self, card)
 			G.localization.descriptions["Joker"]["j_csau_sohappy"] = G.localization.descriptions["Joker"]["j_csau_sohappy2"]
 		end
 		if card.config.center.atlas ~= "csau_sohappy" then
+			local old_atlas = card.config.center.atlas
 			card.config.center.atlas = "csau_sohappy"
 			card:set_sprites(card.config.center)
+			card.config.center.atlas = old_atlas
 		end
 	elseif card.ability.extra.side == 'sad' then
 		if G.localization.descriptions["Joker"]["j_csau_sohappy"] ~= G.localization.descriptions["Joker"]["j_csau_sosad"] then
 			G.localization.descriptions["Joker"]["j_csau_sohappy"] = G.localization.descriptions["Joker"]["j_csau_sosad"]
 		end
 		if card.config.center.atlas ~= "csau_sosad" then
+			local old_atlas = card.config.center.atlas
 			card.config.center.atlas = "csau_sosad"
 			card:set_sprites(card.config.center)
+			card.config.center.atlas = old_atlas
 		end
 	end
 end

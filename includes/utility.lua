@@ -423,7 +423,11 @@ G.FUNCS.csau_transform_card = function(card, to_key, evolve)
 	evolve = evolve or false
 	local old_card = card
 	local new_card = G.P_CENTERS[to_key]
-	card.children.center = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.pos)
+	card.children.center = Sprite(card.T.x, card.T.y, G.CARD_W, G.CARD_H, G.ASSET_ATLAS[new_card.atlas], new_card.pos)
+	card.children.center.scale = {
+		x = 71,
+		y = 95
+	}
 	card.children.center.states.hover = card.states.hover
 	card.children.center.states.click = card.states.click
 	card.children.center.states.drag = card.states.drag
