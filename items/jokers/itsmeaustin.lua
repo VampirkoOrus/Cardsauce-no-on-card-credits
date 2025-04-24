@@ -199,6 +199,12 @@ local reveal_boss = function(e)
     }))
 end
 
+function jokerInfo.add_to_deck(self, card)
+    if G.STATE == G.STATES.BLIND_SELECT then
+        reveal_boss()
+    end
+end
+
 function jokerInfo.remove_from_deck(self, card)
     if G.STATE == G.STATES.BLIND_SELECT then
         reveal_boss()
