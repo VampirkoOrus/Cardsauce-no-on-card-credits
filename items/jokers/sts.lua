@@ -122,9 +122,22 @@ function jokerInfo.calculate(self, card, context)
                 if first.ability.effect == 'Wild Card' then
                     local form = change_form(card, "Wild Card")
                     card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_sts_'..card.ability.form), colour = form_color(form), update_sprites = true, juice_num1 = 0.7, juice_num2 = 0.7})
+                    
+                    -- resetting collection sprites
+                    G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
+                        card.config.center.pos = forms.Base[2]
+                        return true end
+                    }))
+                    
                 else
                     local form = change_form(card, first.base.suit)
                     card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_sts_'..card.ability.form), colour = form_color(form), update_sprites = true, juice_num1 = 0.7, juice_num2 = 0.7})
+                    
+                    -- resetting collection sprites
+                    G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
+                        card.config.center.pos = forms.Base[2]
+                        return true end
+                    }))
                 end
                 if card.ability.form == "spades" then
                     ease_discard(-G.GAME.current_round.discards_left, nil, true)
@@ -218,6 +231,7 @@ function jokerInfo.calculate(self, card, context)
             change_form(card, "Base")
             card:juice_up(1, 1)
             card:set_sprites(card.config.center)
+            card.config.center.pos = forms.Base[2]
         end
         if card.ability.diamonds.mult > 0 then
             card.ability.diamonds.mult = 0
@@ -238,6 +252,7 @@ function jokerInfo.update(self, card)
     if G.screenwipe then
         change_form(card, card.ability.form)
         card:set_sprites(card.config.center)
+        card.config.center.pos = forms.Base[2]
     end
 end
 

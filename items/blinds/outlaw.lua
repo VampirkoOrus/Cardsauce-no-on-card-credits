@@ -58,7 +58,11 @@ function blindInfo.get_loc_debuff_text(self)
 end
 
 function blindInfo.recalc_debuff(self, card, from_blind)
-    if card.area == G.jokers or G.GAME.blind.disabled or SMODS.has_no_rank(card) then
+    if not G.GAME.blind.played_ranks then
+        G.GAME.blind.played_ranks = {}
+    end
+
+    if card.area == G.jokers or G.GAME.blind.disabled or SMODS.has_no_rank(card) or not card.base.value then
         return false
     end
 

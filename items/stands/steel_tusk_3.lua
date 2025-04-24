@@ -48,7 +48,7 @@ function consumInfo.calculate(self, card, context)
     if context.end_of_round and not card.debuff and not context.individual and not context.repetition and not context.blueprint then
         if G.GAME.chips <= (G.GAME.blind.chips * (1+card.ability.extra.evolve_percent)) then
             check_for_unlock({ type = "evolve_tusk" })
-            G.FUNCS.evolve_stand(card)
+            G.FUNCS.csau_evolve_stand(card)
         end
     end
 end

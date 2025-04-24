@@ -53,7 +53,7 @@ function consumInfo.calculate(self, card, context)
         end
         card.ability.extra.evolve_destroys = card.ability.extra.evolve_destroys + cards
         if card.ability.extra.evolve_destroys >= card.ability.extra.evolve_num then
-            G.FUNCS.evolve_stand(card)
+            G.FUNCS.csau_evolve_stand(card)
             return
         else
             return {

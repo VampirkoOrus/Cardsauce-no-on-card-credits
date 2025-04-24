@@ -364,7 +364,8 @@ end
 
 local function get_loc_vars(self, card, info_queue)
     if card.ability.bootlegged_center.loc_vars then
-        return card.ability.bootlegged_center.loc_vars(card.ability.bootlegged_center, info_queue, card).vars or {}, nil, nil
+        local ret = card.ability.bootlegged_center.loc_vars(card.ability.bootlegged_center, info_queue, card)
+        return ret and ret.vars or {}, nil, nil
     elseif card.ability.bootlegged_center then
         local loc_vars, main_start, main_end = nil, nil, nil
         loc_vars, main_start, main_end = fuck_you_generate_ui_box_ability_table(card)

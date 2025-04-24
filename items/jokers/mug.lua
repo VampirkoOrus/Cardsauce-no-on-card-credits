@@ -19,36 +19,39 @@ local jokerInfo = {
 }
 
 local forms = {
-    ["Mug"] = {'mug', {x=0,y=0} },
-    ["Moment"] = {'moment', {x=1,y=0} },
+    ["Mug"] = {'mug', {x=0,y=0}, {w=71,h=73} },
+    ["Moment"] = {'moment', {x=1,y=0}, {w=71,h=95} },
 }
 
 local change_form = function(card, form)
     if forms[form] then
         card.ability.form = forms[form][1]
         card.config.center.pos = forms[form][2]
+        card.config.center.pixel_size = forms[form][3]
     else
         for k, v in pairs(forms) do
             if v[1] == form then
                 card.ability.form = v[1]
                 card.config.center.pos = v[2]
-                card.children.center.scale.y = card.children.center.scale.y*(95/95)
+                card.config.center.pixel_size = v[3]
             end
         end
     end
+
+    card.T.w = G.CARD_W
+    card.T.h = G.CARD_H
+    card:set_sprites(card.config.center)
+    card.config.center.pos = forms.Mug[2]
+    card.config.center.pixel_size = forms.Mug[3]
+    
     return card.ability.form
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    return { vars = { card.ability.extra.mult, card.ability.extra.rounds, card.ability.extra.x_mult } }
-end
-
-function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
-    if card.area and card.area == G.jokers or card.config.center.discovered then
-        -- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
-        full_UI_table.name = localize{type = 'name', key = "j_csau_mug_"..card.ability.form, set = self.set, name_nodes = {}, vars = specific_vars or {}}
-    end
-    localize{type = 'descriptions', key = "j_csau_mug_"..card.ability.form, set = self.set, nodes = desc_nodes, vars = self.loc_vars(self, info_queue, card).vars}
+    return { 
+        vars = { card.ability.extra.mult, card.ability.extra.rounds, card.ability.extra.x_mult },
+        key = "j_csau_mug_"..card.ability.form
+    }
 end
 
 function jokerInfo.set_sprites(self, card, _front)
@@ -100,7 +103,6 @@ function jokerInfo.calculate(self, card, context)
                 check_for_unlock({ type = "activate_mug" })
                 change_form(card, "Moment")
                 card:juice_up(1, 1)
-                card:set_sprites(card.config.center)
                 return {
                     message = localize('k_mug_moment'),
                     colour = G.C.MUG
@@ -118,7 +120,6 @@ end
 function jokerInfo.update(self, card)
     if G.screenwipe then
         change_form(card, card.ability.form)
-        card:set_sprites(card.config.center)
     end
 end
 
