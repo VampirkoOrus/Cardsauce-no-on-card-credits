@@ -1,7 +1,9 @@
 local consumInfo = {
     name = 'Paper Moon King',
     set = 'csau_Stand',
-    config = {},
+    config = {
+        aura_colors = { 'afb5b1DC', '4a7e38DC' },
+    },
     cost = 4,
     rarity = 'csau_StandRarity',
     alerted = true,

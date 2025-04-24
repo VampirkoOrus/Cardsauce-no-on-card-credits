@@ -3,6 +3,7 @@ local consumInfo = {
     name = 'Bigmouth Strikes Again',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'f3e2b5DC', 'd2caa4DC' },
         extra = {
             hand_size = 5,
             suit_count = 4

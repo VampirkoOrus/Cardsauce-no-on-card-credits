@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'C-MOON',
     set = 'csau_Stand',
     config = {
+        aura_colors = { '73b481DC', 'a3d88fDC' },
         stand_mask = true,
         evolved = true,
         evolve_key = 'c_csau_stone_white_heaven',

@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Dirty Deeds Done Dirt Cheap',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'f3b7f5DC', 'c77ecfDC' },
         stand_overlay = true,
         evolve_key = 'c_csau_steel_d4c_love',
         extra = {

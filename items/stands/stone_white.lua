@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Whitesnake',
     set = 'csau_Stand',
     config = {
+        aura_colors = { '8b6cc9DC', '6c4ca0DC' },
         stand_mask = true,
         evolve_key = 'c_csau_stone_white_moon',
         extra = {

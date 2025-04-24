@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Soft & Wet',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'ebfafeDC', 'b48df1DC' },
         evolve_key = 'c_csau_lion_soft_beyond',
         extra = {
             perma_reduction = 0.5,

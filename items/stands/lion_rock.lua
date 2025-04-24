@@ -1,7 +1,9 @@
 local consumInfo = {
     name = 'I Am a Rock',
     set = 'csau_Stand',
-    config = {},
+    config = {
+        aura_colors = { '4c6eb9DC', 'd01d3dDC' },
+    },
     cost = 4,
     rarity = 'csau_StandRarity',
     alerted = true,

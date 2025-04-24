@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Made in Heaven',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'bd53f3DC', '491d96DC' },
         stand_mask = true,
         evolved = true,
     },

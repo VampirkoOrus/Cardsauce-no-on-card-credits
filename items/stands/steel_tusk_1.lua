@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Tusk ACT1',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'ff7dbcDC', 'e675c2DC' },
         evolve_key = 'c_csau_steel_tusk_2',
         extra = {
             chips = 20,

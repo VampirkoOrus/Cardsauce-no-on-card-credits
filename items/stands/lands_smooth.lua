@@ -3,6 +3,7 @@ local consumInfo = {
     name = 'Smooth Operators',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'f2be53DC', 'f7e580DC' },
         extra = {
             rank_range = 1,
             rank_mod = 1

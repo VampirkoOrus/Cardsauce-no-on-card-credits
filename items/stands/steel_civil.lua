@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Civil War',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'c09f5fDC', '6c161fDC' },
         extra = {
             tarot = 'c_hanged_man'
         }

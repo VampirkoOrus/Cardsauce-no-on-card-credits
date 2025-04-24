@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'D4C -Love Train-',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'f3b7f5DC', '8ae5ffDC' },
         stand_overlay = true,
         evolved = true,
     },

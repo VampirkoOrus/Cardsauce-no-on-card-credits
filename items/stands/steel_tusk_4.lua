@@ -60,6 +60,7 @@ local consumInfo = {
     name = 'Tusk ACT4',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'ff7dbcDC', '55a3ffDC' },
         stand_mask = true,
         evolved = true,
         extra = {

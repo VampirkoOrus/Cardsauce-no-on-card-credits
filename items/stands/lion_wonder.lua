@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Wonder of U',
     set = 'csau_Stand',
     config = {
+        aura_colors = { '280101DC', '711b1aDC' },
         extra = {
             mult = 0,
             mult_mod = 5,

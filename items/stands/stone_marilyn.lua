@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Marilyn Manson',
     set = 'csau_Stand',
     config = {
+        aura_colors = { 'efac55DC', 'df7f32DC' },
         extra = {
             conv_money = 1,
             conv_score = 0.005

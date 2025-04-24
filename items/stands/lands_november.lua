@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'November Rain',
     set = 'csau_Stand',
     config = {
+        aura_colors = { '43b7abDC', '2e8cfaDC' },
         stand_mask = true,
         extra = {
             max_rank = 9,

@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Stone Free',
     set = 'csau_Stand',
     config = {
+        aura_colors = { '4db8cfDC', '4d89cfDC' },
         stand_mask = true,
         extra = {
             chips = 60,

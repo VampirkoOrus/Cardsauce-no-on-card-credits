@@ -52,17 +52,13 @@ function SMODS.current_mod.reset_game_globals(run_start)
 
 
 	local valid_paper_ranks = {}
-	for _, v in ipairs(G.playing_cards) do
-		if not SMODS.has_no_rank(v) then
-			for _, rank in pairs(SMODS.Ranks) do
-				if rank.key == v.base.value and rank.face then
-					valid_paper_ranks[#valid_paper_ranks+1] = v
-				end
-			end
+	for _, rank in pairs(SMODS.Ranks) do
+		if rank.face then
+			valid_paper_ranks[#valid_paper_ranks+1] = v
 		end
 	end
 	local randCard_4 = pseudorandom_element(valid_paper_ranks, pseudoseed('papermoon'..G.GAME.round_resets.ante))
-	G.GAME.current_round.paper_rank = randCard_4.base.value
+	G.GAME.current_round.paper_rank = randCard_4 and randCard_4.base.value
 end
 
 SMODS.PokerHandPart:take_ownership('_straight', {
