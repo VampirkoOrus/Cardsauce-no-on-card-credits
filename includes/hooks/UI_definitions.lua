@@ -456,3 +456,19 @@ function G.UIDEF.card_focus_ui(card)
 	end
 	return ret
 end
+
+function G.FUNCS.csau_run_challenge_functions(challenge)
+	if challenge.restrictions and challenge.restrictions.banned_cards and type(challenge.restrictions.banned_cards) == 'function' then
+		challenge.restrictions.banned_cards = challenge.restrictions.banned_cards()
+	end
+end
+
+local ref_cdt = G.UIDEF.challenge_description_tab
+function G.UIDEF.challenge_description_tab(args)
+	args = args or {}
+	if args._tab == 'Restrictions' then
+		local challenge = G.CHALLENGES[args._id]
+		G.FUNCS.csau_run_challenge_functions(challenge)
+	end
+	return ref_cdt(args)
+end

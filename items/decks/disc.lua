@@ -28,7 +28,6 @@ end
 
 function deckInfo.apply(self, back)
     G.GAME.csau_unlimited_stands = true
-    G.GAME.csau_max_stands = G.GAME.modifiers.max_stands or 1
 end
 
 return deckInfo

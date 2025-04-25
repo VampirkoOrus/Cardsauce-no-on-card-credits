@@ -86,6 +86,7 @@ G.csau_team = {
 	['mary'] = 'Drawer_Mary',
 	['lwb'] = 'LolWutBurger',
 	['yumz'] = 'yumz',
+	['creachure'] = 'creachurearts',
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",

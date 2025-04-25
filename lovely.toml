@@ -576,7 +576,7 @@ position = "at"
 payload = '''
 local last_tarot_planet = localize('k_none')
 if fool_c == 'c_csau_arrow' then
-    last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set, vars = { G.GAME.csau_max_stands or 1, (card.area.config.collection and localize('k_stand')) or (G.GAME.csau_max_stands > 1 and localize('b_stand_cards') or localize('k_stand')) }} or localize('k_none')
+    last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set, vars = { G.GAME.modifiers.max_stands or 1, (card.area.config.collection and localize('k_stand')) or (G.GAME.modifiers.max_stands > 1 and localize('b_stand_cards') or localize('k_stand')) }} or localize('k_none')
 else
     last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set} or localize('k_none')
 end
@@ -1357,5 +1357,29 @@ target = "card.lua"
 pattern = "play_sound('tarot2', 0.76, 0.4);return true end}))"
 position = "at"
 payload = "play_sound(G.FUNCS.nutbuster_active() and 'csau_doot' or 'tarot2', G.FUNCS.nutbuster_active() and 1 or 0.76, 0.4);return true end}))"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "if specific_vars and specific_vars.sticker then info_queue[#info_queue+1] = {key = string.lower(specific_vars.sticker)..'_sticker', set = 'Other'} end"
+position = "at"
+payload = '''if specific_vars and specific_vars.sticker then
+    info_queue[#info_queue+1] = {key = string.lower(specific_vars.sticker)..'_sticker', set = 'Other', vars = { localize('k_'..string.lower(card.ability.set)) }}
+end'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''elseif v.id == 'no_shop_jokers' then
+                            self.GAME.joker_rate = 0
+'''
+position = "after"
+payload = '''if specific_vars and specific_vars.sticker then
+    info_queue[#info_queue+1] = {key = string.lower(specific_vars.sticker)..'_sticker', set = 'Other', vars = { localize('k_'..string.lower(card.ability.set)) }}
+end'''
 match_indent = true
 times = 1

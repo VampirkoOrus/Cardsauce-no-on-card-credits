@@ -836,6 +836,22 @@ end
 G.FUNCS.discovery_check = function(args)
 	local csau_only = args.csau_only or false
 	if not args.mode then return end
+	if args.mode == 'set_count' and args.set then
+		local count = 0
+		local total = 0
+		for k, v in pairs(SMODS.Centers) do
+			if (csau_only and starts_with(k, 'j_csau_')) or not csau_only then
+				if v.set == args.set then
+					total = total + 1
+					if v.discovered == true then
+						count = count + 1
+						if args.count and count >= args.count then return true end
+					end
+				end
+			end
+		end
+		return count >= total
+	end
 	if args.mode == 'key' and args.key then
 		for k, v in pairs(SMODS.Centers) do
 			if (csau_only and starts_with(k, 'j_csau_')) or not csau_only then
@@ -848,6 +864,7 @@ G.FUNCS.discovery_check = function(args)
 		end
 		return false
 	end
+	return false
 end
 
 local function check_secret(name, visible)
