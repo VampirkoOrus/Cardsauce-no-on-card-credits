@@ -331,7 +331,6 @@ return {
 		labels = {
 			vhs = "VHS Tape",
 			csau_stand = "Stands",
-
 			csau_corrupted = "Corrupted",
 		},
 		dictionary = {
@@ -477,6 +476,7 @@ return {
 			k_csau_chips = "Chips",
 			k_fort_doubled = "Blind requirement doubled!",
 			k_morshu_ui = "COME BACK RICHER",
+			k_sorrylink = "Sorry, Link!",
 			b_save = "SAVE",
 			k_ts_doubled = "Double Winnings!",
 			k_ts_tripled = "Triple Winnings!",
@@ -485,6 +485,7 @@ return {
 			k_theroom = "Love is Blind...",
 			k_enhanced = "Enhanced!",
 			k_troll2 = "Oh My God!!!",
+
 
 			-- badge titles
 			ba_vinny = "Vinesauce",
@@ -546,9 +547,11 @@ return {
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
+			c_csau_tgyh = "Thank Goodness You're Here",
 		},
 		v_text = {
-			ch_c_csau_tucker = {"All Non-{C:clubs}Cardsauce{} Jokers are banned"}
+			ch_c_csau_tucker = {"All Non-{C:clubs}Cardsauce{} Jokers are banned"},
+			ch_c_csau_tgyh_tenbob = {"All shop items cost {C:money}$10{}"}
 		},
 		achievement_names = {
 			--- [[NEW ACHIEVEMENTS]]

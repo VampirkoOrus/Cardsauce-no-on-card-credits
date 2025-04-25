@@ -429,6 +429,7 @@ if SMODS.current_mod.DT.twoPoint0 then
 
         Challenge = {
             'tucker',
+            'tgyh',
         },
 
         Blind = {

@@ -13,9 +13,9 @@ local jokerInfo = {
     streamer = "joel",
     animated = {
         tiles = {
-            x = 8,
+            x = 39,
         },
-        speed = 0.15
+        speed = 0.075
     }
 }
 
@@ -41,20 +41,13 @@ end
 function jokerInfo.calculate(self, card, context)
     if context.csau_duane_change then
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_duane', vars = {string.upper(localize(context.suit, 'suits_plural'))}}})
-        G.E_MANAGER:add_event(Event({
-             trigger = 'immediate',
-             func = function()
-                 G.GAME.csau_delay_duane = false
-                 return true
-             end
-        }))
     end
     if context.cardarea == G.play and context.repetition and not context.repetition_only and not card.debuff then
         if context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.duane_suit) then
             return {
                 message = 'Again!',
                 repetitions = card.ability.extra.repetitions,
-                card = context.other_card
+                card = card
             }
         end
     end
@@ -67,13 +60,19 @@ function Game:init_game_object()
     return ret
 end
 
+local delay_duane = false
 function jokerInfo.update(self, card)
-    if G.GAME and not G.GAME.csau_delay_duane then
-        local obj = G.P_CENTERS.j_csau_duane
-        local duane_suit = G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.duane_suit or nil
-        if get_suit_y(duane_suit) ~= obj.pos.y then
-            obj.pos.y = get_suit_y(duane_suit)
-        end
+    local obj = G.P_CENTERS.j_csau_duane
+    local duane_suit = G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.duane_suit or nil
+    if get_suit_y(duane_suit) ~= obj.pos.y and not delay_duane then
+        delay_duane = true
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                obj.pos.y = get_suit_y(duane_suit)
+                delay_duane = false
+                return true
+            end,
+        }))
     end
 end
 

@@ -10,6 +10,11 @@ local jokerInfo = {
     streamer = "joel",
 }
 
+SMODS.Sound({
+    key = "doot",
+    path = "doot.ogg",
+})
+
 G.FUNCS.nutbuster_active = function()
     local nutbusters = SMODS.find_card("j_csau_nutbuster")
     for i, v in ipairs(nutbusters) do

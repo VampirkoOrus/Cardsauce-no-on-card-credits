@@ -621,7 +621,7 @@ match_indent = true
 target = "card.lua"
 pattern = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or pseudorandom('wheel_of_fortune') < G.GAME.probabilities.normal/self.ability.extra then'''
 position = "at"
-payload = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or pseudorandom('wheel_of_fortune') < (G.FUNCS.nutbuster_active() and 3 or G.GAME.probabilities.normal/self.ability.extra) then'''
+payload = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or pseudorandom('wheel_of_fortune') < (G.FUNCS.nutbuster_active() and 3 or G.GAME.probabilities.normal)/self.ability.extra then'''
 match_indent = true
 
 [[patches]]
@@ -1094,55 +1094,10 @@ pattern = '''if G.shop and G.shop.alignment.offset.py then
     G.shop.alignment.offset.py = nil
 end'''
 position = "after"
-payload = '''if G.morshu_save and G.morshu_save.alignment.offset.py then 
+payload = '''if G.morshu_save and G.morshu_save.alignment.offset.py then
     G.morshu_save.alignment.offset.y = G.morshu_save.alignment.offset.py
     G.morshu_save.alignment.offset.py = nil
 end'''
-match_indent = true
-times = 1
-
-[[patches]]
-[patches.pattern]
-target = "functions/UI_definitions.lua"
-pattern = '''local t2 = card.ability.set == 'Voucher' and {
-            n=G.UIT.ROOT, config = {ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.GREEN, shadow = true, r = 0.08, minh = 0.94, func = 'can_redeem', one_press = true, button = 'redeem_from_shop', hover = true}, nodes={
-                {n=G.UIT.T, config={text = localize('b_redeem'),colour = G.C.WHITE, scale = 0.4}}
-            }} or card.ability.set == 'Booster' and {
-            n=G.UIT.ROOT, config = {ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.GREEN, shadow = true, r = 0.08, minh = 0.94, func = 'can_open', one_press = true, button = 'open_booster', hover = true}, nodes={
-                {n=G.UIT.T, config={text = localize('b_open'),colour = G.C.WHITE, scale = 0.5}}
-            }} or {
-            n=G.UIT.ROOT, config = {ref_table = card, minw = 1.1, maxw = 1.3, padding = 0.1, align = 'bm', colour = G.C.GOLD, shadow = true, r = 0.08, minh = 0.94, func = 'can_buy', one_press = true, button = 'buy_from_shop', hover = true}, nodes={
-                {n=G.UIT.T, config={text = localize('b_buy'),colour = G.C.WHITE, scale = 0.5}}
-            }}'''
-position = "at"
-payload = '''local t2 = {n=G.UIT.R, config={align = 'cm'}, nodes={
-				{n=G.UIT.C, config={align = "cm"}, nodes={
-						  card.ability.set == 'Voucher' and {n=G.UIT.C, config={ref_table = card,  minw = 1.1, maxw = 1.3, padding = 0.1, align = "bm", colour = G.C.GREEN, shadow = true,  r=0.08, minh = 0.94, func = 'can_redeem', one_press = true, button = 'redeem_from_shop', hover = true}, nodes={
-						{n=G.UIT.T, config={text = localize('b_redeem'),colour = G.C.WHITE, scale = 0.4}}
-					}} or card.ability.set == 'Booster' and {n=G.UIT.C, config={ref_table = card,  minw = 1.1, maxw = 1.3, padding = 0.1, align = "bm", colour = G.C.GREEN, shadow = true,  r=0.08, minh = 0.94, func = 'can_open', one_press = true, button = 'open_booster', hover = true}, nodes={
-						{n=G.UIT.T, config={text = localize('b_open'),colour = G.C.WHITE, scale = 0.5}}
-					}} or {n=G.UIT.C, config={ref_table = card,  minw = 1.1, maxw = 1.3, padding = 0.1, align = "bm", colour = G.C.GREEN, shadow = true,  r=0.08, minh = 0.94, func = 'can_buy', one_press = true, button = 'buy_from_shop', hover = true}, nodes={
-						{n=G.UIT.T, config={text = localize('b_buy'),colour = G.C.WHITE, scale = 0.5}}
-					}}
-				}}
-			}}
-			local spacer = {n=G.UIT.R, config={minh = 0.60}}
-			local morshu_save = (G.morshu_area and card.area ~= G.morshu_area) and {n=G.UIT.R, config={align = 'cl', minw = 1.7*G.CARD_W}, nodes={
-                {n=G.UIT.R, config={minh = 0.65}},
-				{n=G.UIT.R, config = {id = 'morshu_save', ref_table = card, minh = 1.1, padding = 0.1, align = 'cl', colour = G.C.PURPLE, shadow = true, r = 0.08, minw = 1.4, one_press = true, button = 'save_to_morshu', hover = true, focus_args = {type = 'none'}}, nodes={
-					  {n=G.UIT.R, config = {align = 'cm', maxw = 1}, nodes={
-						  {n=G.UIT.T, config={text = localize('b_save'),colour = G.C.WHITE, scale = 0.4}}
-					  }}
-				  }}
-				}} or {n=G.UIT.R, config={minh = 0.55}}
-
-			local t2 = {n=G.UIT.ROOT, config = {align = 'cm', padding = 0, colour = G.C.CLEAR}, nodes={
-				{n=G.UIT.C, config={align = 'cm'}, nodes={
-					morshu_save,
-					spacer,
-					t2
-				}},
-			}}'''
 match_indent = true
 times = 1
 
@@ -1168,33 +1123,6 @@ position = "after"
 payload = '''self.load_morshu_area = nil
 if G.morshu_save then G.morshu_save:remove() end
 G.morshu_save = nil'''
-match_indent = true
-times = 1
-
-[[patches]]
-[patches.pattern]
-target = "functions/UI_definitions.lua"
-pattern = '''card.children.buy_button = UIBox{
-            definition = t2,
-            config = {
-              align="bm",
-              offset = {x=0,y=-0.3},
-              major = card,
-              bond = 'Weak',
-              parent = card
-            }
-          }'''
-position = "at"
-payload = '''card.children.buy_button = UIBox{
-            definition = t2,
-            config = {
-              align="bm",
-              offset = {x=0,y=(G.morshu_area and card.area ~= G.morshu_area) and -2.58 or -1.45},
-              major = card,
-              bond = 'Weak',
-              parent = card
-            }
-          }'''
 match_indent = true
 times = 1
 
@@ -1420,5 +1348,14 @@ if SMODS.spectral_lower_handsize() then
     G.hand:change_size(-1)
 end
 '''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "play_sound('tarot2', 0.76, 0.4);return true end}))"
+position = "at"
+payload = "play_sound(G.FUNCS.nutbuster_active() and 'csau_doot' or 'tarot2', G.FUNCS.nutbuster_active() and 1 or 0.76, 0.4);return true end}))"
 match_indent = true
 times = 1

@@ -15,12 +15,13 @@ local jokerInfo = {
     eternal_compat = false,
     perishable_compat = false,
     pixel_size = { w = 71, h = 73 },
+    hasSoul = true,
     streamer = "joel",
 }
 
 local forms = {
-    ["Mug"] = {'mug', {x=0,y=0}, {w=71,h=73} },
-    ["Moment"] = {'moment', {x=1,y=0}, {w=71,h=95} },
+    ["Mug"] = {'mug', {x=1,y=0}, {w=71,h=73}, {x=2,y=0}, },
+    ["Moment"] = {'moment', {x=1,y=1}, {w=71,h=95}, {x=2,y=1} },
 }
 
 local change_form = function(card, form)
@@ -34,6 +35,9 @@ local change_form = function(card, form)
                 card.ability.form = v[1]
                 card.config.center.pos = v[2]
                 card.config.center.pixel_size = v[3]
+                if card.config.center.soul_pos then
+                    card.config.center.soul_pos = v[4]
+                end
             end
         end
     end
@@ -43,11 +47,13 @@ local change_form = function(card, form)
     card:set_sprites(card.config.center)
     card.config.center.pos = forms.Mug[2]
     card.config.center.pixel_size = forms.Mug[3]
+    card.config.center.soul_pos = forms.Mug[4]
     
     return card.ability.form
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.cejai } }
     return { 
         vars = { card.ability.extra.mult, card.ability.extra.rounds, card.ability.extra.x_mult },
         key = "j_csau_mug_"..card.ability.form

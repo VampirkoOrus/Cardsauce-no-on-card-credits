@@ -115,6 +115,7 @@ G.FUNCS.save_to_morshu = function(e)
 
             create_shop_card_ui(c2)
             G.morshu_area:emplace(c2)
+            create_shop_card_ui(c2, c2.ability.set, G.morshu_area)
             c2:start_materialize()
 
             -- could add a context for this if you want           
