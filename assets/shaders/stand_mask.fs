@@ -90,7 +90,7 @@ vec4 draw_shadow(Image tex, vec2 uv,  vec2 uv_min, vec2 uv_max, vec2 shadow_uv_o
 vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 {
     vec2 centre = vec2(0.5, 0.5);
-    vec2 scaled_texture_coords = (texture_coords - centre) / vec2(output_scale, 1.) + centre; // scale the entire uv to counter edge clipping
+    vec2 scaled_texture_coords = (texture_coords - centre) / output_scale + centre; // scale the entire uv to counter edge clipping
 
     vec2 dissolve_uv = (((scaled_texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
