@@ -331,7 +331,6 @@ return {
 		labels = {
 			vhs = "VHS Tape",
 			csau_stand = "Stands",
-
 			csau_corrupted = "Corrupted",
 		},
 		dictionary = {
@@ -449,6 +448,7 @@ return {
 			k_glass = "Glass",
 			k_dontmind = "\"Ah, yes...\"",
 			k_werewolves = "Not allowed [That's Werewolves]",
+			k_not_bj = "Hand must contain a Blackjack [Not My Bag, Baby]",
 			k_val_down = "Value Down...",
 			k_worthless_ex = "Worthless!",
 			k_noluck_ex = "No Luck!",
@@ -477,6 +477,7 @@ return {
 			k_csau_chips = "Chips",
 			k_fort_doubled = "Blind requirement doubled!",
 			k_morshu_ui = "COME BACK RICHER",
+			k_sorrylink = "Sorry, Link!",
 			b_save = "SAVE",
 			k_ts_doubled = "Double Winnings!",
 			k_ts_tripled = "Triple Winnings!",
@@ -485,6 +486,7 @@ return {
 			k_theroom = "Love is Blind...",
 			k_enhanced = "Enhanced!",
 			k_troll2 = "Oh My God!!!",
+
 
 			-- badge titles
 			ba_vinny = "Vinesauce",
@@ -546,9 +548,15 @@ return {
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
+			c_csau_tgyh = "Thank Goodness You're Here",
+			c_csau_nmbb = "Not My Bag, Baby",
+			c_csau_kriskross = "Kris Kross",
 		},
 		v_text = {
-			ch_c_csau_tucker = {"All Non-{C:clubs}Cardsauce{} Jokers are banned"}
+			ch_c_csau_tucker = {"All Non-{C:clubs}Cardsauce{} Jokers are {C:attention}banned"},
+			ch_c_csau_tgyh_tenbob = {"All shop items cost {C:money}$10{}"},
+			ch_c_csau_nmbb = {"Only hands that contain a {C:attention}Blackjack{} are allowed"},
+			ch_c_max_stands = {"You may have up to {C:attention}#1# {C:stand}Stands"},
 		},
 		achievement_names = {
 			--- [[NEW ACHIEVEMENTS]]
@@ -871,6 +879,70 @@ return {
 			},
 		},
 		Other = {
+			white_sticker={
+				name="White Sticker",
+				text={
+					"Used this #1#",
+					"to win on {C:attention}White",
+					"{C:attention}Stake{} difficulty",
+				},
+			},
+			red_sticker={
+				name="Red Sticker",
+				text={
+					"Used this #1#",
+					"to win on {C:attention}Red",
+					"{C:attention}Stake{} difficulty",
+				},
+			},
+			green_sticker={
+				name="Green Sticker",
+				text={
+					"Used this #1#",
+					"to win on {C:attention}Green",
+					"{C:attention}Stake{} difficulty",
+				},
+			},
+			black_sticker={
+				name="Black Sticker",
+				text={
+					"Used this #1#",
+					"to win on {C:attention}Black",
+					"{C:attention}Stake{} difficulty",
+				},
+			},
+			blue_sticker={
+				name="Blue Sticker",
+				text={
+					"Used this #1#",
+					"to win on {C:attention}Blue",
+					"{C:attention}Stake{} difficulty",
+				},
+			},
+			purple_sticker={
+				name="Purple Sticker",
+				text={
+					"Used this #1#",
+					"to win on {C:attention}Purple",
+					"{C:attention}Stake{} difficulty",
+				},
+			},
+			orange_sticker={
+				name="Orange Sticker",
+				text={
+					"Used this #1#",
+					"to win on {C:attention}Orange",
+					"{C:attention}Stake{} difficulty",
+				},
+			},
+			gold_sticker={
+				name="Gold Sticker",
+				text={
+					"Used this #1#",
+					"to win on {C:attention}Gold",
+					"{C:attention}Stake{} difficulty",
+				},
+			},
 			undiscovered_vhs={
 				name="Not Discovered",
 				text={
@@ -2288,7 +2360,7 @@ return {
 			j_csau_blackjack = {
 				name = "Blackjack",
 				text = {
-					"Allows {C:attention}Blackjack{} hands to be made",
+					"{C:dark_edition}Unlocks Blackjack poker hands{}",
 					"{C:inactive}(ex: {C:attention}A 8 7 5{C:inactive})",
 				},
 				unlock={
@@ -3043,7 +3115,8 @@ return {
 			c_csau_steel_tusk_4 = {
 				name = "Tusk ACT4",
 				text = {
-					"{C:dark_edition}Unlocks Fibonacci poker hands{}", 
+					"{C:dark_edition}Unlocks Fibonacci poker hands{}",
+					"{C:inactive}(ex: {C:attention}8 5 3 2 A{C:inactive})",
 					"{s:0.1} {}",
 					"Played Fibonacci {C:attention}ranks{} give",
 					"{C:chips}+#1#{} Chips when scored",

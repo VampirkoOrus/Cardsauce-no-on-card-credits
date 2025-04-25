@@ -701,26 +701,24 @@ local assemble_character_skins = function(key, suit, name, type)
         }
         palettes[1].pos_style.Ace = { atlas = 'csau_jazz_aces', pos = {x = 0, y = suit_y} }
     end
-    if type == "vine" or type == "varg" then
-        palettes[#palettes+1] = {
-            key = key..'_ace', ranks = full_ranks,
-            display_ranks = face_ace, atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Jack = { atlas = key, pos = {x = 0, y = 0} },
-                Queen = { atlas = key, pos = {x = 1, y = 0} },
-                King = { atlas = key, pos = {x = 2, y = 0} },
-                Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = suit_y} }
-            },
-            loc_txt = {
-                ['en-us'] = "Vanilla Ace"
-            },
-            colour = color[suit],
-            suit_icon = {
-                atlas = 'csau_suits'
-            }
+    palettes[#palettes+1] = {
+        key = key..'_ace', ranks = full_ranks,
+        display_ranks = face_ace, atlas = 'csau_default',
+        pos_style = {
+            fallback_style = 'deck',
+            Jack = { atlas = key, pos = {x = 0, y = 0} },
+            Queen = { atlas = key, pos = {x = 1, y = 0} },
+            King = { atlas = key, pos = {x = 2, y = 0} },
+            Ace = { atlas = 'csau_color_aces', pos = {x = 0, y = suit_y} }
+        },
+        loc_txt = {
+            ['en-us'] = "Vanilla Ace"
+        },
+        colour = color[suit],
+        suit_icon = {
+            atlas = 'csau_suits'
         }
-    end
+    }
 
     SMODS.DeckSkin{
         key = key,

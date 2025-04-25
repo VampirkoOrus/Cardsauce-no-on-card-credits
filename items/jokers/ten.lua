@@ -20,7 +20,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.using_consumeable and not G.shop then
+    if (context.using_consumeable or context.vhs_death) and not G.shop then
         card.ability.extra.mult = to_big(card.ability.extra.mult) + to_big(card.ability.extra.mult_mod)
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.MULT})
     end

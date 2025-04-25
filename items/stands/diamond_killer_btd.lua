@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Killer Queen: Bites the Dust',
     set = 'csau_Stand',
     config = {
+        stand_mask = true,
         evolved = true,
         aura_colors = { '151590DC', '5f277dDC' },
     },
@@ -14,6 +15,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.guff } }
     info_queue[#info_queue+1] = {key = "codercredit", set = "Other", vars = { G.csau_team.eremel } }
 end
 

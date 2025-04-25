@@ -16,7 +16,7 @@ local chalInfo = {
                     end
                 end
             end
-            return  banned 
+            return banned
         end,
     },
     unlocked = function(self)

@@ -193,6 +193,16 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 			atd_ref(self, card)
 			set_consumeable_usage(card)
 		end
+		if item_type == 'Stand' and info.rarity == 'csau_EvolvedRarity' then
+			local sctb_ref = function(self, card, badges) end
+			if info.set_card_type_badge then
+				sctb_ref = info.set_card_type_badge
+			end
+			function info.set_card_type_badge(self, card, badges)
+				badges[1] = create_badge(localize('k_csau_evolved'), get_type_colour(self or card.config, card), nil, 1.2)
+				sctb_ref(self, card)
+			end
+		end
 	end
 
 	if item_type == 'Deck' then smods_item = 'Back' end
@@ -826,6 +836,22 @@ end
 G.FUNCS.discovery_check = function(args)
 	local csau_only = args.csau_only or false
 	if not args.mode then return end
+	if args.mode == 'set_count' and args.set then
+		local count = 0
+		local total = 0
+		for k, v in pairs(SMODS.Centers) do
+			if (csau_only and starts_with(k, 'j_csau_')) or not csau_only then
+				if v.set == args.set then
+					total = total + 1
+					if v.discovered == true then
+						count = count + 1
+						if args.count and count >= args.count then return true end
+					end
+				end
+			end
+		end
+		return count >= total
+	end
 	if args.mode == 'key' and args.key then
 		for k, v in pairs(SMODS.Centers) do
 			if (csau_only and starts_with(k, 'j_csau_')) or not csau_only then
@@ -838,6 +864,7 @@ G.FUNCS.discovery_check = function(args)
 		end
 		return false
 	end
+	return false
 end
 
 local function check_secret(name, visible)

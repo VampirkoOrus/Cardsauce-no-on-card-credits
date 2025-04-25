@@ -15,6 +15,7 @@ local jokerInfo = {
     eternal_compat = false,
     perishable_compat = false,
     pixel_size = { w = 71, h = 73 },
+    hasSoul = true,
     streamer = "joel",
 }
 
@@ -44,7 +45,9 @@ local change_form = function(card, form)
                 card.ability.form = v.name
                 card.config.center.pos = v.pos
                 card.config.center.pixel_size = v.pixel_size
-                card.config.center.soul_pos = v.soul_pos
+                if card.config.center.soul_pos then
+                    card.config.center.soul_pos = v.soul_pos
+                end
             end
         end
     end
@@ -60,6 +63,7 @@ local change_form = function(card, form)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.cejai } }
     return { 
         vars = { card.ability.extra.mult, card.ability.extra.rounds, card.ability.extra.x_mult },
         key = "j_csau_mug_"..card.ability.form

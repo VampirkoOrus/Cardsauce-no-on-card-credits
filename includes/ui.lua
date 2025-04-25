@@ -485,6 +485,9 @@ SMODS.current_mod.credits_tab = function()
 								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
 									{ n = G.UIT.T, config = { text = G.csau_team.yumz, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
 								} },
+								{ n = G.UIT.R, config = { align = "tm", padding = artist_padding }, nodes = {
+									{ n = G.UIT.T, config = { text = G.csau_team.creachure, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
+								} },
 							}}
 						}},
 					} },

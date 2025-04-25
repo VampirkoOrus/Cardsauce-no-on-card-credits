@@ -66,6 +66,14 @@ local function activate(bool)
     end
 end
 
+function jokerInfo.in_pool(self, args)
+    for _, v in ipairs(G.playing_cards) do
+        if v.ability.effect == "Glass Card" then
+            return true
+        end
+    end
+end
+
 function jokerInfo.load(self, card)
     activate(true)
 end

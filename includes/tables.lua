@@ -27,6 +27,7 @@ G.csau_team = {
 	['numbuh'] = "Numbuh214",
 	['aure'] = "Aurelius7309",
 	['amtrax'] = "Austin L. Matthews",
+	['amtraxva'] = "AmtraxVA",
 	['tort'] = "tortoise",
 	['proto'] = "Protokyuuu",
 	['shrine'] = "ShrineFox",
@@ -85,6 +86,7 @@ G.csau_team = {
 	['mary'] = 'Drawer_Mary',
 	['lwb'] = 'LolWutBurger',
 	['yumz'] = 'yumz',
+	['creachure'] = 'creachurearts',
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",
@@ -155,7 +157,7 @@ G.csau_collab_credits = {
 	},
 	csau_pets = {
 		Ace = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } },
-		King = nil,
+		King = {key = "vacredit", set = "Other", vars = { G.csau_team.eld } },
 		Queen = nil,
 		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.winterg } },
 	},
