@@ -33,11 +33,16 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
     end
 end
 
+local blacklisted_seeds = {
+    'soul_Tarot1',
+}
+
 local ref_psr = pseudorandom
 function pseudorandom(seed, min, max)
     local shakma = G.FUNCS.find_activated_tape('c_csau_shakma')
     if shakma and not shakma.ability.destroyed then
-        if not min and not max then
+        if not min and not max and not table.contains(blacklisted_seeds, seed) then
+            send(seed)
             shakma.ability.extra.uses = shakma.ability.extra.uses+1
             if shakma.ability.extra.uses >= shakma.ability.extra.runtime then
                 G.FUNCS.destroy_tape(shakma)
