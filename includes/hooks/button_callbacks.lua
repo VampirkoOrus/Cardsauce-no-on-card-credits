@@ -150,10 +150,12 @@ function G.FUNCS.reroll_shop(e)
             G.E_MANAGER:add_event(Event({
                 trigger = 'immediate',
                 func = function()
-                    for i = #G.shop_booster.cards, 1, -1 do
-                        local c = G.shop_booster:remove_card(G.shop_booster.cards[i])
-                        c:remove()
-                        c = nil
+                    if #G.shop_booster.cards > 0 then
+                        for i = #G.shop_booster.cards, 1, -1 do
+                            local c = G.shop_booster:remove_card(G.shop_booster.cards[i])
+                            c:remove()
+                            c = nil
+                        end
                     end
 
                     G.GAME.current_round.used_packs = G.GAME.current_round.used_packs or {}
