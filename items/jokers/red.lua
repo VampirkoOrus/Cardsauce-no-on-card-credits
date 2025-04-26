@@ -18,8 +18,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.before and not card.debuff then
-        local last_hand = G.GAME.last_hand_played
+    if context.cardarea == G.jokers and context.after and not card.debuff then
         if pseudorandom('red') < G.GAME.probabilities.normal / card.ability.prob then
             check_for_unlock({ type = "activate_red" })
             card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_red', vars = {string.upper(localize(G.GAME and G.GAME.wigsaw_suit or "Hearts", 'suits_plural'))}}})
@@ -34,18 +33,7 @@ function jokerInfo.calculate(self, card, context)
                 local percent = 0.85 + (i-0.999)/(#context.scoring_hand-0.998)*0.3
                 G.E_MANAGER:add_event(Event({trigger = 'before',delay = 0.15,func = function() context.scoring_hand[i]:flip();play_sound('tarot2', percent, 0.6);context.scoring_hand[i]:juice_up(0.3, 0.3);return true end }))
             end
-            local scoring = {}
-            for i=1, #context.scoring_hand do
-                local _card = context.scoring_hand[i]
-                _card.base.suit = G.GAME and G.GAME.wigsaw_suit or card.ability.suit_conv
-                table.insert(scoring, _card)
-            end
-            local text = G.FUNCS.recheck_hand(last_hand, scoring)
-            return {
-                update_hand = text,
-                delay = 4.5,
-                silent = true
-            }
+            delay(0.8)
         end
     end
 end
