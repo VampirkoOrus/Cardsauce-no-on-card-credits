@@ -163,7 +163,7 @@ G.csau_collab_credits = {
 	},
 	csau_fingies = {
 		Ace = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } },
-		King = nil,
+		King = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.winterg } },
 		Queen = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.lwb } },
 		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } },
 	},
