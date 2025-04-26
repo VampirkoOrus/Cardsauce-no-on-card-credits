@@ -86,13 +86,4 @@ function jokerInfo.calculate(self, card, context)
 	end
 end
 
-function jokerInfo.update(self, card, dt)
-    sendDebugMessage(tostring(card.num_draws))
-    card.num_draws = 0
-end
-
-function jokerInfo.draw(self, card, layer)
-    card.num_draws = card.num_draws and (card.num_draws + 1) or 1
-end
-
 return jokerInfo
