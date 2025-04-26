@@ -285,6 +285,10 @@ if SMODS.current_mod.DT.twoPoint0 then
             'photodad',
             'no2joker',
             'sotw', -- Page 8 End
+
+            -- challenge dummy items
+            'banned_cards',
+            'banned_jokers',       
         },
 
         VHS = {
@@ -386,6 +390,7 @@ if SMODS.current_mod.DT.twoPoint0 then
             'corrupted',
             'plinkett',
             'spirit',
+            'banned_tags'
         },
 
         Voucher = {
@@ -394,7 +399,8 @@ if SMODS.current_mod.DT.twoPoint0 then
             'foo',
             'plant',
             'lampoil',
-            'ropebombs'
+            'ropebombs',
+            'banned_vouchers',
         },
 
         Consumable = {
@@ -410,6 +416,7 @@ if SMODS.current_mod.DT.twoPoint0 then
             'protojoker',
             -- Tarot
             'tarot_arrow',
+            'banned_consumables',
         },
 
         Deck = {
@@ -425,6 +432,7 @@ if SMODS.current_mod.DT.twoPoint0 then
             'analog2',
             'analog3',
             'analog4',
+            'banned_boosters'
         },
 
         Challenge = {
@@ -432,6 +440,7 @@ if SMODS.current_mod.DT.twoPoint0 then
             'tgyh',
             'nmbb',
             'kriskross',
+            'marathon'
         },
 
         Blind = {
@@ -456,7 +465,7 @@ for k, v in pairs(itemsToLoad) do
     if next(itemsToLoad[k]) then
         if csau_filter_loading('set', {key = k}) then
             for i = 1, #v do
-                load_cardsauce_item(v[i], k, false)
+                load_cardsauce_item(v[i], k)
             end
         end
     end

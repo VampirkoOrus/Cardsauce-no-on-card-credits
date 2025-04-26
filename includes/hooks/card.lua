@@ -166,15 +166,6 @@ function Card:jokerTalk(messages, index, delay, end_flag, fallback_card)
     }))
 end
 
-local card_drawRef = Card.draw
-function Card:draw(layer)
-	local obj = self.config.center
-	if obj.draw and type(obj.draw) == 'function' then
-		obj:draw(self, layer)
-	end
-	card_drawRef(self, layer)
-end
-
 function Card:gunshot_func()
     if G.OVERLAY_MENU and G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot') then
         play_sound("csau_gunshot", 1, 1)

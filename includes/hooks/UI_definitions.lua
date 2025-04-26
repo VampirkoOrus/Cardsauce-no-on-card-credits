@@ -458,8 +458,13 @@ function G.UIDEF.card_focus_ui(card)
 end
 
 function G.FUNCS.csau_run_challenge_functions(challenge)
-	if challenge.restrictions and challenge.restrictions.banned_cards and type(challenge.restrictions.banned_cards) == 'function' then
-		challenge.restrictions.banned_cards = challenge.restrictions.banned_cards()
+	if challenge.restrictions then
+	 	if challenge.restrictions.banned_cards and type(challenge.restrictions.banned_cards) == 'function' then
+			challenge.restrictions.banned_cards = challenge.restrictions.banned_cards()
+		end
+		if challenge.restrictions.banned_tags and type(challenge.restrictions.banned_tags) == 'function' then
+			challenge.restrictions.banned_tags = challenge.restrictions.banned_tags()
+		end
 	end
 end
 

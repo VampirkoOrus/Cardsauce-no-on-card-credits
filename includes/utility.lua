@@ -131,7 +131,7 @@ end
 --- @param file_key string file name to load within the "Items" directory, excluding file extension
 --- @param item_type string SMODS item type (such as Joker, Consumable, Deck, etc)
 --- @param no_badges boolean | nil Whether or not to display mod badges on this item
-function load_cardsauce_item(file_key, item_type, no_badges)
+function load_cardsauce_item(file_key, item_type)
 	local key = string.lower(item_type)..(item_type == 'VHS' and '' or 's')
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
 
@@ -155,7 +155,7 @@ function load_cardsauce_item(file_key, item_type, no_badges)
 		end
 	end
 
-	if no_badges then
+	if info.no_mod_badges then
 		info.no_mod_badges = true
 	elseif info.origin or info.part or (info.streamer and (info.streamer== 'vinny' or info.streamer== 'joel' or info.streamer== 'mike')) then
 		info.no_mod_badges = true

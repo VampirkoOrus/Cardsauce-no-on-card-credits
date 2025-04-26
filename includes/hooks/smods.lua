@@ -2,10 +2,19 @@ function SMODS.current_mod.reset_game_globals(run_start)
     if run_start then
         G.GAME.modifiers.max_stands = 1
 		G.GAME.morshu_cards = 0
+
+		if G.GAME.modifiers.csau_marathon then
+			-- set all consumable types besides VHS to 0 shop rate
+			for _, v in pairs(SMODS.ConsumableTypes) do
+				if v.key ~= 'VHS' then
+					local key = v.key:lower() .. '_rate'
+					G.GAME[key] = 0
+				end
+			end
+		end
     end
 
 	G.GAME.csau_shop_dollars_spent = 0
-
     csau_reset_paper_rank()
 
 	G.GAME.current_round.choicevoice = { suit = 'Clubs' }
