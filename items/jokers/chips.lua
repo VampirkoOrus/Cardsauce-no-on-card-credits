@@ -9,7 +9,7 @@ local jokerInfo = {
     rarity = 1,
     cost = 5,
     blueprint_compat = true,
-    eternal_compat = true,
+    eternal_compat = false,
     perishable_compat = true,
     streamer = "joel",
 }
@@ -21,7 +21,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.after and not (context.blueprint or card.debuff) and G.GAME.current_round.hands_left == 0 then
-        if card.ability.extra.chips - card.ability.extra.chip_mod <= 0 then
+        if card.ability.extra.chips - card.ability.extra.chips_mod <= 0 then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     play_sound('tarot1')
@@ -43,9 +43,9 @@ function jokerInfo.calculate(self, card, context)
                 colour = G.C.CHIPS
             }
         else
-            card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.chip_mod
+            card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.chips_mod
             return {
-                message = localize{type='variable',key='a_chips_minus',vars={card.ability.extra.chip_mod}},
+                message = localize{type='variable',key='a_chips_minus',vars={card.ability.extra.chips_mod}},
                 colour = G.C.CHIPS
             }
         end
