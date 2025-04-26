@@ -1037,9 +1037,6 @@ function SMODS.skip_cards_until(requirements, offset_pos)
 		if requirements.rank_min then
 			results.rank_min = card.base.nominal >= requirements.rank_min
 		end
-
-		sendDebugMessage(card.base.nominal..' >= '..requirements.rank_min..'('..tostring(results.rank_min)..')')
-
 		local requirements_met = true
 		for _, met in pairs(results) do
 			if not met then
@@ -1060,7 +1057,6 @@ end
 
 function SMODS.draw_card_filtered(i, hand_space, mod_table)
 	if mod_table.roar then
-		sendDebugMessage('roar draw')
 		local card = SMODS.skip_cards_until({ rank_min = 6 }, mod_table.roar)
 		if not card then 
 			return
@@ -1091,7 +1087,7 @@ end
 
 function G.FUNCS.stand_preview_deck(amount)
 	local preview_cards = {}
-	local roar = G.FUNCS.find_activated_tape('c_csau_roar')
+	local roar ad = G.FUNCS.find_activated_tape('c_csau_roar')
 	local count = 0
 	local i = #G.deck.cards
 
