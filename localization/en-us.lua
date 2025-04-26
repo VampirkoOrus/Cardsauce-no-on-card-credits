@@ -551,12 +551,14 @@ return {
 			c_csau_tgyh = "Thank Goodness You're Here",
 			c_csau_nmbb = "Not My Bag, Baby",
 			c_csau_kriskross = "Kris Kross",
+			c_csau_marathon = "Movie Marathon",
 		},
 		v_text = {
 			ch_c_csau_tucker = {"All Non-{C:clubs}Cardsauce{} Jokers are {C:attention}banned"},
 			ch_c_csau_tgyh_tenbob = {"All shop items cost {C:money}$10{}"},
 			ch_c_csau_nmbb = {"Only hands that contain a {C:attention}Blackjack{} are allowed"},
 			ch_c_max_stands = {"You may have up to {C:attention}#1# {C:stand}Stands"},
+			ch_c_csau_marathon = {"All non-{C:vhs}Analog{} consumables are {C:attention}banned{}"},
 		},
 		achievement_names = {
 			--- [[NEW ACHIEVEMENTS]]
@@ -986,6 +988,13 @@ return {
 					"Choose {C:attention}#1#{} of up to",
 					"{C:attention}#2#{C:vhs} VHS Tapes{}",
 				},
+			},
+			p_csau_banned_boosters = {
+				name = "Non-Cardsauce Boosters",
+				text = {
+					"This challenge bans all non-{C:clubs}Cardsauce{}",
+					"{C:attention}modded Booster Packs{}",
+				}
 			},
 			wheel2 = {
 				name = "The Wheel of Fortune",
@@ -2543,6 +2552,20 @@ return {
 					"{C:inactive}(Currently {C:chips}+#2#{}{C:inactive} Chips)",
 				},
 			},
+			j_csau_banned_cards = {
+				name = "Non-Cardsauce Cards",
+				text = {
+					"This challenge bans all",
+					"non-{C:clubs}Cardsauce{} {C:attention}modded cards{}",
+				}
+			},
+			j_csau_banned_jokers = {
+				name = "Non-Cardsauce Jokers",
+				text = {
+					"This challenge bans all",
+					"non-{C:clubs}Cardsauce{} {C:attention}jokers{}",
+				}
+			}
 		},
 		VHS = {
 			c_csau_blackspine = {
@@ -3274,6 +3297,13 @@ return {
 					"Create a random {C:stand}Stand{}",
 					"{C:inactive}(Must have room){}",
 				}
+			},
+			c_csau_banned_consumables = {
+				name = "Non-Cardsauce Consumables",
+				text = {
+					"This challenge bans all non-{C:clubs}Cardsauce{}",
+					"{C:attention}modded Consumables{}",
+				}
 			}
 		},
 		Spectral = {
@@ -3365,6 +3395,13 @@ return {
 					"Spent {C:money}$#1#{}",
 					"in one shop"
 				}
+			},
+			v_csau_banned_vouchers = {
+				name = "Non-Cardsauce Vouchers",
+				text = {
+					"This challenge bans all",
+					"non-{C:clubs}Cardsauce{} {C:attention}modded Vouchers{}",
+				}
 			}
 		},
 		Tag = {
@@ -3390,6 +3427,13 @@ return {
 					"{C:inactive}(Must have room)",
 				},
 			},
+			tag_csau_banned_tags = {
+				name = "Non-Cardsauce Tags",
+				text = {
+					"This challenge bans all",
+					"non-{C:clubs}Cardsauce{} {C:attention}modded Tags{}",
+				}
+			}
 		},
 		Edition = {
 			e_csau_corrupted = {

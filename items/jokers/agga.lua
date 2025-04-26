@@ -22,9 +22,9 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.individual and context.cardarea == G.play and not context.blueprint then
-        context.other_card.agga_retrigger_count = (context.other_card.agga_retrigger_count and context.other_card.agga_retrigger_count + 1) or 0
+        context.other_card['agga_retrigger_count'..card.ID] = (context.other_card['agga_retrigger_count'..card.ID] and context.other_card['agga_retrigger_count'..card.ID] + 1) or 0
 
-        if context.other_card.agga_retrigger_count > 0 then
+        if context.other_card['agga_retrigger_count'..card.ID] > 0 then
             if card.ability.extra.x_mult > 1 and pseudorandom('agga') < G.GAME.probabilities.normal / card.ability.extra.prob then
                 if card.ability.extra.x_mult >= 3 then
                     check_for_unlock({ type = "high_agga" })
@@ -40,7 +40,7 @@ function jokerInfo.calculate(self, card, context)
 
     if context.after then
         for _, v in ipairs(G.playing_cards) do
-            v.agga_retrigger_count = nil
+            v['agga_retrigger_count'..card.ID] = nil
         end
     end
 

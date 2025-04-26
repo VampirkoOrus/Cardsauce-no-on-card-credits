@@ -22,13 +22,14 @@ local jokerInfo = {
 local forms = {
     ["Mug"] = {
         name = 'mug',
-        pos = { x = 0, y = 0 },
-        pixel_size = { w = 71, h = 73 }
+        pos = { x = 1, y = 0 },
+        pixel_size = { w = 71, h = 73 },
+        soul_pos = { x = 2, y = 0},
     },
     ["Moment"] = {
         name = 'moment',
         pos = { x = 1, y = 1},
-        pixel_size = { w = 71, h = 73},
+        pixel_size = { w = 71, h = 95},
         soul_pos = { x = 2, y = 1},
     },
 }

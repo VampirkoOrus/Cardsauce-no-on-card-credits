@@ -8,15 +8,13 @@ local chalInfo = {
         banned_cards = function()
             local banned = {}
             for k, v in pairs(G.P_CENTERS) do
-                if not banned[k] then
-                    if starts_with(k, "j_") then
-                        if not starts_with(k, "j_csau_") then
-                            banned[#banned+1] = { id = k }
-                        end
+                if starts_with(k, "j_") then
+                    if not starts_with(k, "j_csau_") then
+                        banned[#banned+1] = k
                     end
                 end
             end
-            return banned
+            return {{id = 'j_csau_banned_jokers', ids = banned}}
         end,
     },
     unlocked = function(self)
