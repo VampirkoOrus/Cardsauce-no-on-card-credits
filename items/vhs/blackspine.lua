@@ -21,7 +21,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.activate(self, card, on)
-    local key = pseudorandom_element(get_current_pool('csau_VHS', nil, nil, 'blackspine'), pseudoseed('blackspine'))
+    local key = pseudorandom_element(get_current_pool('VHS', nil, nil, 'blackspine'), pseudoseed('blackspine'))
     G.FUNCS.csau_transform_card(card, key)
 end
 
