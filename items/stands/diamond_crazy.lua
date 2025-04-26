@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Crazy Diamond',
     set = 'csau_Stand',
     config = {
+        stand_mask = true,
         aura_colors = { 'e099e8DC' , 'f5ccf4DC' },
     },
     cost = 4,
@@ -11,6 +12,10 @@ local consumInfo = {
     part = 'diamond',
     in_progress = true,
 }
+
+function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.cejai } }
+end
 
 function consumInfo.calculate(self, card, context)
     if context.before and not card.debuff then

@@ -20,24 +20,34 @@ local jokerInfo = {
 }
 
 local forms = {
-    ["Mug"] = {'mug', {x=1,y=0}, {w=71,h=73}, {x=2,y=0}, },
-    ["Moment"] = {'moment', {x=1,y=1}, {w=71,h=95}, {x=2,y=1} },
+    ["Mug"] = {
+        name = 'mug',
+        pos = { x = 1, y = 0 },
+        pixel_size = { w = 71, h = 73 }
+    },
+
+
+    ["Moment"] = {
+        name = 'moment',
+        pos = { x = 1, y = 1},
+        pixel_size = { w = 71, h = 73},
+        soul_pos = { x = 2, y = 1},
+    },
 }
 
 local change_form = function(card, form)
     if forms[form] then
-        card.ability.form = forms[form][1]
-        card.config.center.pos = forms[form][2]
-        card.config.center.pixel_size = forms[form][3]
+        card.ability.form = forms[form].name
+        card.config.center.pos = forms[form].pos
+        card.config.center.pixel_size = forms[form].pixel_size
+        card.config.center.soul_pos = forms[form].soul_pos
     else
         for k, v in pairs(forms) do
-            if v[1] == form then
-                card.ability.form = v[1]
-                card.config.center.pos = v[2]
-                card.config.center.pixel_size = v[3]
-                if card.config.center.soul_pos then
-                    card.config.center.soul_pos = v[4]
-                end
+            if v.name == form then
+                card.ability.form = v.name
+                card.config.center.pos = v.pos
+                card.config.center.pixel_size = v.pixel_size
+                card.config.center.soul_pos = v.soul_pos
             end
         end
     end
@@ -45,9 +55,9 @@ local change_form = function(card, form)
     card.T.w = G.CARD_W
     card.T.h = G.CARD_H
     card:set_sprites(card.config.center)
-    card.config.center.pos = forms.Mug[2]
-    card.config.center.pixel_size = forms.Mug[3]
-    card.config.center.soul_pos = forms.Mug[4]
+    card.config.center.pos = forms.Mug.pos
+    card.config.center.pixel_size = forms.Mug.pixel_size
+    card.config.center.soul_pos = forms.Mug.soul_pos
     
     return card.ability.form
 end
