@@ -22,6 +22,11 @@ end
 
 function consumInfo.activate(self, card, on)
     local key = pseudorandom_element(get_current_pool('VHS', nil, nil, 'blackspine'), pseudoseed('blackspine'))
+    local it = 1
+    while key == 'UNAVAILABLE' do
+        it = it + 1
+        _tag = pseudorandom_element(get_current_pool('VHS', nil, nil, 'blackspine'), pseudoseed('blackspine_resample'..it))
+    end
     G.FUNCS.csau_transform_card(card, key)
 end
 
