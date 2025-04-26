@@ -467,7 +467,6 @@ return {
 			b_deactivate = "PAUSE",
 			b_pull = "PULL",
 			k_negative_mult = "Negative Mult!",
-			a_discards = "+#1# Discards",
 			k_allgone = "All Gone!",
 			k_mug_moment = "Mug Moment!",
 			k_mug_gone = "I Love My Mug!",

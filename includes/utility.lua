@@ -1035,7 +1035,6 @@ function SMODS.skip_cards_until(requirements)
 		local results = {}
 
 		if requirements.rank_min then
-			send(card.base.nominal)
 			results.rank_min = card.base.nominal >= requirements.rank_min
 		end
 

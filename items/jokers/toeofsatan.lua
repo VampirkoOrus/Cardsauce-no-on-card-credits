@@ -23,17 +23,21 @@ function jokerInfo.calculate(self, card, context)
     if context.setting_blind and not card.getting_sliced and not card.debuff and not context.blueprint then
         if not (context.blueprint_card or card).getting_sliced then
             G.E_MANAGER:add_event(Event({func = function()
-                ease_discard(card.ability.extra.discards_mod)
-                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_discards', vars = {card.ability.extra.discards}, colour = G.C.RED}})
+                ease_discard(card.ability.extra.discards)
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_plus_discard', vars = {card.ability.extra.discards}, colour = G.C.RED}})
                 return true
             end }))
         end
     end
-    if context.end_of_round and not context.blueprint then
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.end_of_round and not bad_context then
         if SMODS.food_expires(context) then
-            card.ability.extra.discards = card.ability.extra.discards - 1
+            card.ability.extra.discards = card.ability.extra.discards - card.ability.extra.discards_mod
             if card.ability.extra.discards > 0 then
-                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_remaining',vars={card.ability.extra.discards}}, colour = G.C.FILTER})
+                return {
+                    message = "-"..card.ability.extra.discards_mod,
+                    colour = G.C.RED
+                }
             else
                 G.E_MANAGER:add_event(Event({
                     func = function()
