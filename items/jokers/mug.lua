@@ -46,9 +46,7 @@ local change_form = function(card, form)
                 card.ability.form = v.name
                 card.config.center.pos = v.pos
                 card.config.center.pixel_size = v.pixel_size
-                if card.config.center.soul_pos then
-                    card.config.center.soul_pos = v.soul_pos
-                end
+                card.config.center.soul_pos = v.soul_pos
             end
         end
     end
