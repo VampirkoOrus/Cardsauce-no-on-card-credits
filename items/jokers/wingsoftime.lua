@@ -79,8 +79,7 @@ function jokerInfo.calculate(self, card, context)
 			end
 		}))
 	return {
-		message = localize('k_saved_ex'),
-		saved = true,
+		saved = 'ph_saved_vague',
 		colour = G.C.RED
 	}
 	end

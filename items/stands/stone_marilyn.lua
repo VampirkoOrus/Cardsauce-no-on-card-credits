@@ -134,8 +134,7 @@ function consumInfo.calculate(self, card, context)
             end
             ease_dollars(collect.ease)
             return {
-                saved = true,
-                message = localize('k_saved_ex'),
+                saved = 'ph_saved_vague',
                 colour = G.C.RED
             }
         end

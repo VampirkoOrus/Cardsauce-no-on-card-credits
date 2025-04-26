@@ -1027,17 +1027,18 @@ G.FUNCS.hand_contains_rank = function(hand, ranks, require_all)
 	end
 end
 
-function SMODS.skip_cards_until(requirements)
+function SMODS.skip_cards_until(requirements, offset_pos)
 	if not requirements then return end
 	local len = #G.deck.cards
 	for i = 1, len do
-		local card = G.deck.cards[#G.deck.cards]
+		local card = G.deck.cards[#G.deck.cards-offset_pos]
 		local results = {}
 
 		if requirements.rank_min then
-			send(card.base.nominal)
 			results.rank_min = card.base.nominal >= requirements.rank_min
 		end
+
+		sendDebugMessage(card.base.nominal..' >= '..requirements.rank_min..'('..tostring(results.rank_min)..')')
 
 		local requirements_met = true
 		for _, met in pairs(results) do
@@ -1050,7 +1051,7 @@ function SMODS.skip_cards_until(requirements)
 		if requirements_met then
 			return card
 		else
-			table.remove(G.deck.cards, #G.deck.cards)
+			table.remove(G.deck.cards, #G.deck.cards-offset_pos)
 			table.insert(G.deck.cards, 1, card)
 		end
 	end
@@ -1059,8 +1060,13 @@ end
 
 function SMODS.draw_card_filtered(i, hand_space, mod_table)
 	if mod_table.roar then
-		local card = SMODS.skip_cards_until({ rank_min = 6 })
-		if not card then return end
+		sendDebugMessage('roar draw')
+		local card = SMODS.skip_cards_until({ rank_min = 6 }, mod_table.roar)
+		if not card then 
+			return
+		else
+			mod_table.roar = mod_table.roar + 1
+		end
 	end
 	draw_card(G.deck,G.hand, i*100/hand_space,'up', true)
 end
@@ -1068,9 +1074,8 @@ end
 function SMODS.draw_cards_from_deck(hand_space, mod_table)
 	mod_table = mod_table or {}
 	local roar = G.FUNCS.find_activated_tape('c_csau_roar')
-	local draw = true
 	if roar and not roar.ability.destroyed then
-		mod_table.roar = true
+		mod_table.roar = 0
 		roar.ability.extra.uses = roar.ability.extra.uses+1
 		if roar.ability.extra.uses >= roar.ability.extra.runtime then
 			G.FUNCS.destroy_tape(roar)
@@ -1080,6 +1085,8 @@ function SMODS.draw_cards_from_deck(hand_space, mod_table)
 	for i=1, hand_space do --draw cards from deckL
 		SMODS.draw_card_filtered(i, hand_space, mod_table)
 	end
+
+	mod_table.roar = nil
 end
 
 function G.FUNCS.stand_preview_deck(amount)
