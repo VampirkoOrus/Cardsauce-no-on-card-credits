@@ -59,7 +59,7 @@ local includes = {
 G.FUNCS.initPostSplash = function() end
 
 for _, include in ipairs(includes) do
-	local init, error = NFS.load(SMODS.current_mod.path .. "includes/" .. include ..".lua")
+	local init, error = SMODS.load_file("includes/" .. include ..".lua")
 	if error then sendErrorMessage("[Cardsauce] Failed to load "..include.." with error "..error) else
 		local data = init()
 		sendDebugMessage("[Cardsauce] Loaded hook: " .. include)

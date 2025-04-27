@@ -27,8 +27,6 @@ G.FUNCS.update_collab_cards = function(key, suit, silent)
     if type(key) == "number" then
 		key = G.COLLABS.options[suit][key]
 	end
-    send(palette)
-    send(key)
 	if G.csau_collab_credits[key] then
 		for i, card in ipairs(G.cdds_cards.cards) do
 			if G.csau_collab_credits[key][card.config.card.value] then

@@ -47,75 +47,76 @@ SMODS.DrawStep:take_ownership('floating_sprite', {
 ---------------------------
 --------------------------- Sticker Scaling draw step
 ---------------------------
-
-SMODS.DrawStep:take_ownership('stickers', {
-	func = function(self, layer)
-        if not G.csau_shared_stand_stickers then
-            G.csau_shared_stand_stickers = {
-                white = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 0,y = 0}),
-                red = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 1,y = 0}),
-                green = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 2,y = 0}),
-                black = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 3,y = 0}),
-                blue = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 4,y = 0}),
-                purple = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 5,y = 0}),
-                orange = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 6,y = 0}),
-                gold = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 7,y = 0})
-            }
-        end
-        if self.sticker and G.shared_stickers[self.sticker] then
-            if self.ability.set == "csau_Stand" then
-                local t, vt = scale_joker_sticker(G.csau_shared_stand_stickers[self.sticker], self)
-                G.csau_shared_stand_stickers[self.sticker].role.draw_major = self
-                G.csau_shared_stand_stickers[self.sticker]:draw_shader('dissolve', nil, nil, nil, self.children.center)
-                G.csau_shared_stand_stickers[self.sticker]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
-                reset_sticker_scale(self, t, vt)
-            else
-                local t, vt = scale_joker_sticker(G.shared_stickers[self.sticker], self)
-                G.shared_stickers[self.sticker].role.draw_major = self
-                G.shared_stickers[self.sticker]:draw_shader('dissolve', nil, nil, nil, self.children.center)
-                G.shared_stickers[self.sticker]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
-                reset_sticker_scale(self, t, vt)
+if csau_enabled['enableStands'] then
+    SMODS.DrawStep:take_ownership('stickers', {
+        func = function(self, layer)
+            if not G.csau_shared_stand_stickers then
+                G.csau_shared_stand_stickers = {
+                    white = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 0,y = 0}),
+                    red = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 1,y = 0}),
+                    green = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 2,y = 0}),
+                    black = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 3,y = 0}),
+                    blue = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 4,y = 0}),
+                    purple = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 5,y = 0}),
+                    orange = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 6,y = 0}),
+                    gold = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["csau_stickers"], {x = 7,y = 0})
+                }
             end
-
-		elseif (self.sticker_run and G.shared_stickers[self.sticker_run]) and G.SETTINGS.run_stake_stickers then
-            if self.ability.set == "csau_Stand" then
-                local t, vt = scale_joker_sticker(G.csau_shared_stand_stickers[self.sticker_run], self)
-                G.csau_shared_stand_stickers[self.sticker_run].role.draw_major = self
-                G.csau_shared_stand_stickers[self.sticker_run]:draw_shader('dissolve', nil, nil, nil, self.children.center)
-                G.csau_shared_stand_stickers[self.sticker_run]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
-                reset_sticker_scale(self, t, vt)
-            else
-                local t, vt = scale_joker_sticker(G.shared_stickers[self.sticker_run], self)
-                G.shared_stickers[self.sticker_run].role.draw_major = self
-                G.shared_stickers[self.sticker_run]:draw_shader('dissolve', nil, nil, nil, self.children.center)
-                G.shared_stickers[self.sticker_run]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
-                reset_sticker_scale(self, t, vt)
-            end
-		end
-
-        for k, v in pairs(SMODS.Stickers) do
-            if self.ability[v.key] then
-                if v and v.draw and type(v.draw) == 'function' then
-                    v:draw(self, layer)
+            if self.sticker and G.shared_stickers[self.sticker] then
+                if self.ability.set == "csau_Stand" then
+                    local t, vt = scale_joker_sticker(G.csau_shared_stand_stickers[self.sticker], self)
+                    G.csau_shared_stand_stickers[self.sticker].role.draw_major = self
+                    G.csau_shared_stand_stickers[self.sticker]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+                    G.csau_shared_stand_stickers[self.sticker]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+                    reset_sticker_scale(self, t, vt)
                 else
-                    if self.ability.set == "csau_Stand" then
-                        local t, vt = scale_joker_sticker(G.csau_shared_stand_stickers[v.key], self)
-                        G.csau_shared_stand_stickers[v.key].role.draw_major = self
-                        G.csau_shared_stand_stickers[v.key]:draw_shader('dissolve', nil, nil, nil, self.children.center)
-                        G.csau_shared_stand_stickers[v.key]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
-                        reset_sticker_scale(self, t, vt)
-                    else
-                        local t, vt = scale_joker_sticker(G.shared_stickers[v.key], self)
-                        G.shared_stickers[v.key].role.draw_major = self
-                        G.shared_stickers[v.key]:draw_shader('dissolve', nil, nil, nil, self.children.center)
-                        G.shared_stickers[v.key]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
-                        reset_sticker_scale(self, t, vt)
-                    end
-				end
+                    local t, vt = scale_joker_sticker(G.shared_stickers[self.sticker], self)
+                    G.shared_stickers[self.sticker].role.draw_major = self
+                    G.shared_stickers[self.sticker]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+                    G.shared_stickers[self.sticker]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+                    reset_sticker_scale(self, t, vt)
+                end
+
+            elseif (self.sticker_run and G.shared_stickers[self.sticker_run]) and G.SETTINGS.run_stake_stickers then
+                if self.ability.set == "csau_Stand" then
+                    local t, vt = scale_joker_sticker(G.csau_shared_stand_stickers[self.sticker_run], self)
+                    G.csau_shared_stand_stickers[self.sticker_run].role.draw_major = self
+                    G.csau_shared_stand_stickers[self.sticker_run]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+                    G.csau_shared_stand_stickers[self.sticker_run]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+                    reset_sticker_scale(self, t, vt)
+                else
+                    local t, vt = scale_joker_sticker(G.shared_stickers[self.sticker_run], self)
+                    G.shared_stickers[self.sticker_run].role.draw_major = self
+                    G.shared_stickers[self.sticker_run]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+                    G.shared_stickers[self.sticker_run]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+                    reset_sticker_scale(self, t, vt)
+                end
             end
-        end
-    end,
-})
+
+            for k, v in pairs(SMODS.Stickers) do
+                if self.ability[v.key] then
+                    if v and v.draw and type(v.draw) == 'function' then
+                        v:draw(self, layer)
+                    else
+                        if self.ability.set == "csau_Stand" then
+                            local t, vt = scale_joker_sticker(G.csau_shared_stand_stickers[v.key], self)
+                            G.csau_shared_stand_stickers[v.key].role.draw_major = self
+                            G.csau_shared_stand_stickers[v.key]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+                            G.csau_shared_stand_stickers[v.key]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+                            reset_sticker_scale(self, t, vt)
+                        else
+                            local t, vt = scale_joker_sticker(G.shared_stickers[v.key], self)
+                            G.shared_stickers[v.key].role.draw_major = self
+                            G.shared_stickers[v.key]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+                            G.shared_stickers[v.key]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+                            reset_sticker_scale(self, t, vt)
+                        end
+                    end
+                end
+            end
+        end,
+    })
+end
 
 
 local old_seal_fs = SMODS.DrawSteps.seal.func
