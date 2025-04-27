@@ -557,7 +557,7 @@ return {
 			ch_c_csau_tgyh_tenbob = {"All shop items cost {C:money}$10{}"},
 			ch_c_csau_nmbb = {"Only hands that contain a {C:attention}Blackjack{} are allowed"},
 			ch_c_max_stands = {"You may have up to {C:attention}#1# {C:stand}Stands"},
-			ch_c_csau_marathon = {"All non-{C:vhs}Analog{} consumables are {C:attention}banned{}"},
+			ch_c_csau_marathon = {"All Non-{C:vhs}Analog{} consumables are {C:attention}banned{}"},
 		},
 		achievement_names = {
 			--- [[NEW ACHIEVEMENTS]]
@@ -3083,6 +3083,8 @@ return {
 			c_csau_stone_white = {
 				name = "Whitesnake",
 				text = {
+					"{C:attention}Retrigger{} each played {C:attention}6{}",
+					"{s:0.1} {}",
 					"{C:stand}Evolves{} after playing",
 					"{C:attention}#1#{} scoring {C:attention}#2#s{}"
 				},

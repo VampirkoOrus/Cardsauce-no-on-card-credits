@@ -38,6 +38,15 @@ function consumInfo.in_pool(self, args)
 end
 
 function consumInfo.calculate(self, card, context)
+    if context.cardarea == G.play and context.repetition and not context.repetition_only then
+        if context.other_card:get_id() == 6  then
+            return {
+                message = 'Again!',
+                repetitions = card.ability.extra.retrigger,
+                card = card
+            }
+        end
+    end
     local bad_context = context.repetition or context.individual or context.blueprint
     if context.before and not card.debuff and not bad_context then
         local six = {}
