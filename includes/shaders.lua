@@ -13,7 +13,7 @@ SMODS.DrawStep:take_ownership('floating_sprite', {
                 self.hover_tilt = self.hover_tilt/1.5
             else
                 if self.ability.stand_mask then
-                    local stand_scale_mod = -0.075
+                    local stand_scale_mod = 0
 
 
                     G.SHADERS['csau_stand_mask']:send("scale_mod",scale_mod)
