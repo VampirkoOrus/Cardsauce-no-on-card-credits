@@ -51,8 +51,7 @@ function jokerInfo.calculate(self, card, context)
         if pseudorandom('allgoneforever') < G.GAME.probabilities.normal / card.ability.extra.save_prob then
             check_for_unlock({ type = "activate_proto" })
             return {
-                message = localize('k_saved_ex'),
-                saved = true,
+                saved = 'ph_saved_vague',
                 colour = G.C.RED
             }
         end

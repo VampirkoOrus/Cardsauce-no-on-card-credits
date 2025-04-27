@@ -31,9 +31,9 @@ function jokerInfo.calculate(self, card, context)
     if context.using_consumeable and not card.debuff and not context.blueprint then
         local cons = context.consumeable
         if cons.ability.name == "Strength" then
-            for i=1, #G.hand.highlighted do
-                upgrade(card)
-            end
+            upgrade(card, #G.hand.highlighted)
+        elseif cons.ability.consumeable.mod_conv then
+            G.GAME.bulkin = true
         end
     end
 end
@@ -42,11 +42,12 @@ local card_set_ability_ref = Card.set_ability
 function Card:set_ability(center, initial, delay_sprites)
     local old_center = self.config.center
     card_set_ability_ref(self, center, initial, delay_sprites)
-    if old_center ~= center and self.ability.set == "Default" then
+    if G.GAME and G.GAME.bulkin and center ~= G.P_CENTERS.c_base then
         local bulks = SMODS.find_card("j_csau_bulk")
         for i, v in ipairs(bulks) do
-            upgrade(v)
+            upgrade(v, #G.hand.highlighted)
         end
+        G.GAME.bulkin = false
     end
 end
 

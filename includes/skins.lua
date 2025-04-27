@@ -1,14 +1,45 @@
+local function is_credited(key, card, palette)
+    if G.csau_collab_credits[key][card.config.card.value].specific then
+        if palette.pos_style[card.config.card.value] and palette.pos_style[card.config.card.value].atlas then
+            if G.csau_collab_credits[key][card.config.card.value].specific[palette.pos_style[card.config.card.value].atlas] then
+                return G.csau_collab_credits[key][card.config.card.value].specific[palette.pos_style[card.config.card.value].atlas]
+            end
+        else
+            if G.csau_collab_credits[key][card.config.card.value].specific[palette.atlas] then
+                return G.csau_collab_credits[key][card.config.card.value].specific[palette.atlas]
+            end
+        end
+        return false
+    else
+        return true
+    end
+end
+
+
 local upc_ref = G.FUNCS.update_collab_cards
 G.FUNCS.update_collab_cards = function(key, suit, silent)
 	upc_ref(key, suit, silent)
-	if type(key) == "number" then
+    if type(key) == "number" then
+        key = G.COLLABS.options[suit][key]
+    end
+    local deckskin = SMODS.DeckSkins[key]
+    local palette = deckskin.palette_map and deckskin.palette_map[G.SETTINGS.colour_palettes[suit] or ''] or (deckskin.palettes or {})[1]
+    if type(key) == "number" then
 		key = G.COLLABS.options[suit][key]
 	end
 	if G.csau_collab_credits[key] then
 		for i, card in ipairs(G.cdds_cards.cards) do
 			if G.csau_collab_credits[key][card.config.card.value] then
-				card.no_ui = false
-				card.csau_collab_credit = G.csau_collab_credits[key][card.config.card.value]
+                local is = is_credited(key, card, palette)
+                if is then
+                    card.no_ui = false
+                    card.csau_collab_credit = G.csau_collab_credits[key][card.config.card.value]
+                    if type(is) == 'table' then
+                        card.csau_collab_credit.vars = is
+                    else
+                        card.csau_collab_credit.vars = G.csau_collab_credits[key][card.config.card.value].vars
+                    end
+                end
 			else
 				card.no_ui = true
 				card.csau_collab_credit = nil
@@ -278,6 +309,26 @@ local function assemble_vanilla_palettes(key, suit)
         },
         loc_txt = {
             ['en-us'] = "CSAU Colors & Vargshroom"
+        },
+        colour = color[suit],
+        suit_icon = {
+            atlas = 'csau_suits'
+        }
+    })
+    SMODS.DeckSkin.add_palette(SMODS.DeckSkins[key], {
+        key = 'csau_'..key..'_jazz',
+        ranks = full_ranks,
+        display_ranks = face_ace,
+        atlas = 'csau_default',
+        pos_style = {
+            fallback_style = 'deck',
+            Jack = { atlas = 'csau_'..key, pos = {x = 0, y = 0} },
+            Queen = { atlas = 'csau_'..key, pos = {x = 1, y = 0} },
+            King = { atlas = 'csau_'..key, pos = {x = 2, y = 0} },
+            Ace = { atlas = 'csau_jazz_aces', pos = {x = 0, y = suit_y} }
+        },
+        loc_txt = {
+            ['en-us'] = "CSAU Colors & Jazz Mister"
         },
         colour = color[suit],
         suit_icon = {

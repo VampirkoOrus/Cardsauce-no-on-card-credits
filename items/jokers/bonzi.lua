@@ -42,7 +42,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.setting_blind and not card.getting_sliced and not card.debuff and not context.blueprint then
-        if (G.GAME.dollars - card.ability.extra.dollars) > (0 or next(SMODS.find_card('j_credit_card')) and -20) then
+        if (G.GAME.dollars - card.ability.extra.dollars) >= (0 or next(SMODS.find_card('j_credit_card')) and -20) then
             if card.ability.extra.mult < 0 then
                 card.ability.extra.mult = invertNum(card.ability.extra.mult)
             end

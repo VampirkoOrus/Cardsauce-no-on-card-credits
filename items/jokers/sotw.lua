@@ -39,13 +39,15 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if card.ability.extra.x_mult > 1 and context.joker_main and context.cardarea == G.jokers then
+    if context.joker_main and context.cardarea == G.jokers then
         local stands_obtained = 0
         for k, v in pairs(G.GAME.consumeable_usage) do if v.set == 'csau_Stand' then stands_obtained = stands_obtained + 1 end end
-        return {
-            message = localize{type='variable',key='a_xmult',vars={to_big(1 + (card.ability.extra.x_mult_mod*stands_obtained))}},
-            Xmult_mod = card.ability.extra.x_mult,
-        }
+        if card.ability.extra.x_mult_mod*stands_obtained > 1 then
+            return {
+                message = localize{type='variable',key='a_xmult',vars={to_big(1 + (card.ability.extra.x_mult_mod*stands_obtained))}},
+                Xmult_mod = card.ability.extra.x_mult,
+            }
+        end
     end
 end
 

@@ -17,42 +17,53 @@ overwrite = false
 [[patches]]
 [patches.pattern]
 target = "game.lua"
-pattern = '''
-G.SPLASH_BACK:define_draw_steps({{
+pattern = '''G.SPLASH_BACK:define_draw_steps({{
     shader = 'splash',
     send = {
-        {name = 'time', ref_table = G.TIMERS, ref_value = 'REAL'},
-        {name = 'vort_speed', val = 1},
-        {name = 'colour_1', ref_table = G.C, ref_value = 'COLOUR1'},
-        {name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},
-        {name = 'mid_flash', val = 0},
-        {name = 'vort_offset', val = (2*90.15315131*os.time())%100000},
-    }}})
-'''
+        {name = 'time', ref_table = G.SANDBOX, ref_value = 'vort_time'},
+        {name = 'vort_speed', val = 0.4},
+        {name = 'colour_1', ref_table = G.SANDBOX, ref_value = 'col1'},
+        {name = 'colour_2', ref_table = G.SANDBOX, ref_value = 'col2'},
+        {name = 'mid_flash', ref_table = G.SANDBOX, ref_value = 'mid_flash'},
+        {name = 'vort_offset', val = 0},
+}}})'''
 position = "at"
 payload = '''
 if csau_enabled['enableColors'] then
     G.SPLASH_BACK:define_draw_steps({{
         shader = 'splash',
         send = {
-            {name = 'time', ref_table = G.TIMERS, ref_value = 'REAL'},
+            {name = 'time', ref_table = G.SANDBOX, ref_value = 'vort_time'},
+            {name = 'vort_speed', val = 1},
+            {name = 'colour_1', ref_table = G.SANDBOX, ref_value = 'col1'},
+            {name = 'colour_2', ref_table = G.SANDBOX, ref_value = 'col2'},
+            {name = 'mid_flash', ref_table = G.SANDBOX, ref_value = 'mid_flash'},
+            {name = 'vort_offset', val = (2*90.15315131*os.time())%100000},
+        }
+    }})
+    G.SPLASH_BACK:define_draw_steps({{
+        shader = 'splash',
+        send = {
+            {name = 'time', ref_table = G.SANDBOX, ref_value = 'vort_time'},
             {name = 'vort_speed', val = 1},
             {name = 'colour_1', ref_table = G.C, ref_value = 'COLOUR1'},
             {name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},
             {name = 'mid_flash', val = 0},
             {name = 'vort_offset', val = (2*90.15315131*os.time())%100000},
-        }}})
+        }
+    }})
 else
     G.SPLASH_BACK:define_draw_steps({{
         shader = 'splash',
         send = {
-            {name = 'time', ref_table = G.TIMERS, ref_value = 'REAL'},
-            {name = 'vort_speed', val = 1},
-            {name = 'colour_1', ref_table = G.C, ref_value = 'COLOUR1'},
-            {name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},
-            {name = 'mid_flash', val = 0},
-            {name = 'vort_offset', val = (2*90.15315131*os.time())%100000},
-        }}})
+            {name = 'time', ref_table = G.SANDBOX, ref_value = 'vort_time'},
+            {name = 'vort_speed', val = 0.4},
+            {name = 'colour_1', ref_table = G.SANDBOX, ref_value = 'col1'},
+            {name = 'colour_2', ref_table = G.SANDBOX, ref_value = 'col2'},
+            {name = 'mid_flash', ref_table = G.SANDBOX, ref_value = 'mid_flash'},
+            {name = 'vort_offset', val = 0},
+        }
+    }})
 end
 '''
 match_indent = true
@@ -140,34 +151,6 @@ payload = '''
 		G.GAME.forcedeath = false
 		G.GAME.spawnDeathcards = G.GAME.spawnDeathcards - 1
 		return card
-'''
-match_indent = true
-overwrite = false
-
-[[patches]]
-[patches.pattern]
-target = "functions/state_events.lua"
-pattern = '''
-                if effects.jokers.level_up then
-                    level_up_hand(card, text)
-                end
-'''
-position = "after"
-payload = '''
-if effects.jokers.update_hand then
-    text = effects.jokers.update_hand
-end
-'''
-match_indent = true
-overwrite = false
-
-[[patches]]
-[patches.pattern]
-target = "functions/state_events.lua"
-pattern = "card_eval_status_text(card, 'jokers', nil, percent, nil, effects.jokers)"
-position = "at"
-payload = '''
-if not effects.jokers.silent then card_eval_status_text(card, 'jokers', nil, percent, nil, effects.jokers) end
 '''
 match_indent = true
 overwrite = false
@@ -328,14 +311,6 @@ if csau_enabled['enableSkins'] then
     G.FUNCS.ach_vineshroom_check()
 end
 '''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = "{n=G.UIT.O, config={object = DynaText({string = {' '..localize('ph_mr_bones')..' '}, colours = {G.C.FILTER}, shadow = true, pop_in = 0, scale = 0.5*scale, silent = true})}}"
-position = "at"
-payload = "{n=G.UIT.O, config={object = DynaText({string = {' '..localize('ph_saved_vague')..' '}, colours = {G.C.FILTER}, shadow = true, pop_in = 0, scale = 0.5*scale, silent = true})}}"
 match_indent = true
 
 [[patches]]
@@ -606,14 +581,6 @@ target = "card.lua"
 pattern = '''local card = copy_card(pseudorandom_element(G.consumeables.cards, pseudoseed('perkeo')), nil)'''
 position = "at"
 payload = '''local card = copy_card(pseudorandom_element(eligibleJokers, pseudoseed('perkeo')), nil)'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''if G.consumeables.cards[i].ability.consumeable then'''
-position = "at"
-payload = '''if G.consumeables.cards[i].ability.consumeable and not G.consumeables.cards[i].ability.set == "csau_Stand" then'''
 match_indent = true
 
 [[patches]]
@@ -1249,15 +1216,6 @@ times = 1
 [[patches]]
 [patches.pattern]
 target = "functions/UI_definitions.lua"
-pattern = "local rows, protos = {}, {'collection', 'challenges', 'joker_stickers', 'deck_stake_wins'}"
-position = "at"
-payload = '''local rows, protos = {}, {'collection', 'challenges', 'joker_stickers', 'stand_stickers', 'deck_stake_wins'}'''
-match_indent = true
-times = 1
-
-[[patches]]
-[patches.pattern]
-target = "functions/UI_definitions.lua"
 pattern = "_profile_progress.joker_stickers.tally/_profile_progress.joker_stickers.of +"
 position = "after"
 payload = '''_profile_progress.stand_stickers.tally/_profile_progress.stand_stickers.of +'''
@@ -1369,7 +1327,7 @@ payload = '''if specific_vars and specific_vars.sticker then
     info_queue[#info_queue+1] = {key = string.lower(specific_vars.sticker)..'_sticker', set = 'Other', vars = { localize('k_'..string.lower(_c.set)) or localize('k_joker') }}
 end'''
 match_indent = true
-times = 1
+times = 2
 
 [[patches]]
 [patches.pattern]
@@ -1391,8 +1349,6 @@ payload = '''function Tag:generate_UI(_size)
 
     local tag_sprite_tab = nil
 
-    sendDebugMessage(self.pos.x..', '..self.pos.y)
-
     local tag_sprite = Sprite(0,0,_sizeX*1,_sizeY*1,G.ASSET_ATLAS[(not self.hide_ability) and G.P_TAGS[self.key].atlas or "tags"], (self.hide_ability) and G.tag_undiscovered.pos or self.pos)
     tag_sprite.T.scale = 1
     tag_sprite_tab = {n= G.UIT.C, config={align = "cm", ref_table = self, group = self.tally}, nodes={
@@ -1400,14 +1356,3 @@ payload = '''function Tag:generate_UI(_size)
     }}'''
 match_indent = true
 times = 1
-
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = "if specific_vars and specific_vars.sticker then info_queue[#info_queue+1] = {key = string.lower(specific_vars.sticker)..'_sticker', set = 'Other'} end"
-position = "at"
-payload = '''if specific_vars and specific_vars.sticker then
-    info_queue[#info_queue+1] = {key = string.lower(specific_vars.sticker)..'_sticker', set = 'Other', vars = { localize('k_'..string.lower(_c.set)) or localize('k_joker') }}
-end'''
-match_indent = true
-times = 2

@@ -43,7 +43,7 @@ local function get_pi_digit(i)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.individual and not context.end_of_round then
+    if card.ability.activated and context.individual and not context.end_of_round then
         if context.cardarea == G.play then
             card.ability.extra.pi_index = card.ability.extra.pi_index+1
             return {
@@ -54,6 +54,14 @@ function consumInfo.calculate(self, card, context)
             return {
                 chips = get_pi_digit(card.ability.extra.pi_index-1)
             }
+        end
+    end
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.after and not card.ability.destroyed and card.ability.activated and not bad_context then
+        card.ability.extra.uses = card.ability.extra.uses+1
+        if card.ability.extra.uses >= card.ability.extra.runtime then
+            G.FUNCS.destroy_tape(card)
+            card.ability.destroyed = true
         end
     end
 end

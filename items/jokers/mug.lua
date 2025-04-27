@@ -1,8 +1,8 @@
 local jokerInfo = {
     name = 'Mug',
     config = {
-        form = 'mug',
         extra = {
+            form = 'mug',
             mult = 1,
             mult_xmod = 2,
             x_mult = 6,
@@ -36,14 +36,14 @@ local forms = {
 
 local change_form = function(card, form)
     if forms[form] then
-        card.ability.form = forms[form].name
+        card.ability.extra.form = forms[form].name
         card.config.center.pos = forms[form].pos
         card.config.center.pixel_size = forms[form].pixel_size
         card.config.center.soul_pos = forms[form].soul_pos
     else
         for k, v in pairs(forms) do
             if v.name == form then
-                card.ability.form = v.name
+                card.ability.extra.form = v.name
                 card.config.center.pos = v.pos
                 card.config.center.pixel_size = v.pixel_size
                 card.config.center.soul_pos = v.soul_pos
@@ -58,14 +58,14 @@ local change_form = function(card, form)
     card.config.center.pixel_size = forms.Mug.pixel_size
     card.config.center.soul_pos = forms.Mug.soul_pos
 
-    return card.ability.form
+    return card.ability.extra.form
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.cejai } }
     return { 
         vars = { card.ability.extra.mult, card.ability.extra.rounds, card.ability.extra.x_mult },
-        key = "j_csau_mug_"..card.ability.form
+        key = "j_csau_mug_"..card.ability.extra.form
     }
 end
 
@@ -77,18 +77,18 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.joker_main and context.cardarea == G.jokers then
-        if card.ability.form == "mug" then
+        if card.ability.extra.form == "mug" then
             return {
                 mult = card.ability.extra.mult,
             }
-        elseif card.ability.form == "moment" then
+        elseif card.ability.extra.form == "moment" then
             return {
                 xmult = card.ability.extra.x_mult,
             }
         end
     end
     if context.end_of_round and not context.other_card then
-        if card.ability.form == "moment" and SMODS.food_expires(context) then
+        if card.ability.extra.form == "moment" and SMODS.food_expires(context) then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     play_sound('tarot1')
@@ -111,7 +111,7 @@ function jokerInfo.calculate(self, card, context)
                 message = localize('k_mug_gone'),
                 colour = G.C.FILTER
             }
-        elseif card.ability.form == "mug" then
+        elseif card.ability.extra.form == "mug" then
             card.ability.extra.mult = card.ability.extra.mult * 2
             card.ability.extra.rounds = card.ability.extra.rounds - 1
             if card.ability.extra.rounds <= 0 then
@@ -129,12 +129,6 @@ function jokerInfo.calculate(self, card, context)
                 }
             end
         end
-    end
-end
-
-function jokerInfo.update(self, card)
-    if G.screenwipe then
-        change_form(card, card.ability.form)
     end
 end
 
