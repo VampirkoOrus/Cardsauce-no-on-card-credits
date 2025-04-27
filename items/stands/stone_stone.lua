@@ -26,7 +26,7 @@ function consumInfo.calculate(self, card, context)
     if context.before and not card.debuff and not bad_context then
         local stone = {}
         for k, v in ipairs(context.scoring_hand) do
-            if v.ability.effect ~= "Stone Card" then
+            if v.ability.effect == "Stone Card" then
                 stone[#stone+1] = v
                 v.ability.perma_bonus = v.ability.perma_bonus or 0
                 v.ability.perma_bonus = v.ability.perma_bonus + card.ability.extra.chips
