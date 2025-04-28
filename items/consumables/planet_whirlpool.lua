@@ -14,7 +14,7 @@ consumInfo.loc_vars = function(self, info_queue, card)
 end
 
 consumInfo.in_pool = function(self, args)
-    if next(SMODS.find_card("c_csau_steel_tusk_4")) then
+    if next(SMODS.find_card("c_csau_steel_tusk_4")) or next(SMODS.find_card('j_fnwk_plancks_jokestar')) then
         return true
     end
 end

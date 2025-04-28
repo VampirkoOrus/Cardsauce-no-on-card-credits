@@ -1,4 +1,4 @@
-local mod = SMODS.current_mod
+local current_mod = SMODS.current_mod
 local mod_path = SMODS.current_mod.path:match("Mods/[^/]+")..'/'
 
 ---------------------------
@@ -178,8 +178,8 @@ function load_cardsauce_item(file_key, item_type)
 
 	-- tape image loading
 	if item_type == 'VHS' then
-		mod['c_csau_'..info.key..'_tape'] = love.graphics.newImage(mod_path..'assets/1x/vhs/'..(info.tapeKey or 'blackspine')..'.png')
-		mod['c_csau_'..info.key..'_sleeve'] = love.graphics.newImage(mod_path..'assets/1x/vhs/'..info.key..'.png')
+		current_mod['c_csau_'..info.key..'_tape'] = love.graphics.newImage(mod_path..'assets/1x/vhs/'..(info.tapeKey or 'blackspine')..'.png')
+		current_mod['c_csau_'..info.key..'_sleeve'] = love.graphics.newImage(mod_path..'assets/1x/vhs/'..info.key..'.png')
 	end
 
 	local smods_item = item_type
@@ -388,7 +388,7 @@ G.FUNCS.csau_generate_detail_desc = function(self, info_queue, card, desc_nodes,
 		full_UI_table.name = localize{type = 'name', key = key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
 	end
 
-	if mod.config['detailedDescs'] and G.localization.descriptions.Joker[key.."_detailed"] then
+	if current_mod.config['detailedDescs'] and G.localization.descriptions.Joker[key.."_detailed"] then
 		localize{type = 'descriptions', key = key.."_detailed", set = self.set, nodes = desc_nodes, vars = self.loc_vars and self.loc_vars(self, info_queue, card).vars or {}}
 	else
 		localize{type = 'descriptions', key = key, set = self.set, nodes = desc_nodes, vars = self.loc_vars and self.loc_vars(self, info_queue, card).vars or {}}

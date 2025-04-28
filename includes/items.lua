@@ -407,7 +407,7 @@ if SMODS.current_mod.DT.twoPoint0 then
             -- Planet
             'lutetia',
             'varuna',
-            'whirlpool',
+            'planet_whirlpool',
             'planet_lost',
             -- Spectral
             'quixotic',
