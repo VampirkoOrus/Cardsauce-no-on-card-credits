@@ -2,7 +2,7 @@ local consumInfo = {
     name = 'I Am a Rock',
     set = 'csau_Stand',
     config = {
-        aura_colors = { '4c6eb9DC', 'd01d3dDC' },
+        aura_colors = { '7ec7ffDC', 'ffbb49DC' },
         stand_mask = true,
     },
     cost = 4,
@@ -15,6 +15,7 @@ local consumInfo = {
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_stone
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
 end
 
 local function has_stone(hand)

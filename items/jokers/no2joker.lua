@@ -31,12 +31,4 @@ function jokerInfo.calculate(self, card, context)
     end
 end
 
-local te_ref = SMODS.trigger_effects
-SMODS.trigger_effects = function(effects, card)
-    for i, v in ipairs(effects) do
-        send(v)
-    end
-    return te_ref(effects, card)
-end
-
 return jokerInfo

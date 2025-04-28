@@ -5,6 +5,7 @@ local consumInfo = {
         aura_colors = { '280101DC', '711b1aDC' },
         stand_mask = true,
         extra = {
+            form = 'lion_wonder',
             mult = 0,
             mult_mod = 5,
         }
@@ -19,24 +20,79 @@ local consumInfo = {
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.coop } }
     return {vars = {card.ability.extra.mult_mod, card.ability.extra.mult}}
 end
 
+local forms = {
+    [1] = "lion_wonder",
+    [2] = "lion_wonder_2",
+    [3] = "lion_wonder_3",
+}
+
+for i = 1, #forms do
+    if forms[i] then
+        SMODS.Atlas({ key = forms[i], path ="stands/"..forms[i]..".png", px = 71, py = 95 })
+    end
+end
+
+local function updateSprite(card)
+    if card.ability.extra.form then
+        if card.config.center.atlas ~= card.ability.extra.form then
+            local old_atlas = card.config.center.atlas
+            card.config.center.atlas = "csau_"..card.ability.extra.form
+            card:set_sprites(card.config.center)
+            card.config.center.atlas = old_atlas
+            if G.SETTINGS.highest_wonderofu ~= forms[3] then
+                G.SETTINGS.highest_wonderofu = card.ability.extra.form
+                G:save_settings()
+            end
+        end
+    end
+end
+
+function consumInfo.set_sprites(self, card, _front)
+    if card.config.center.discovered or card.bypass_discovery_center then
+        card.children.center:reset()
+    end
+end
+
 function consumInfo.calculate(self, card, context)
-    if context.individual and context.cardarea == G.play and not card.debuff and not context.blueprint then
-        if context.other_card.ability.effect == 'Lucky Card' and not context.other_card.debuff then
-            card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
+    if context.joker_main then
+        return {
+            mult = card.ability.extra.mult,
+        }
+    end
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.final_scoring_step and not bad_context then
+        local trigger = false
+        for i, v in ipairs(context.scoring_hand) do
+            if v.ability.effect == 'Lucky Card' and not v.debuff then
+                trigger = true
+                card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
+            end
+        end
+        local update_sprite = false
+        if card.ability.extra.mult >= 20 and card.ability.extra.form == 'lion_wonder' then
+            card.ability.extra.form = 'lion_wonder_2'
+            update_sprite = true
+        elseif card.ability.extra.mult >= 40 and card.ability.extra.form == 'lion_wonder_2' then
+            card.ability.extra.form = 'lion_wonder_3'
+            update_sprite = true
+        end
+        if update_sprite then
+            G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
+                updateSprite(card)
+                card:juice_up(1, 1)
+                return true end }))
+        end
+        if trigger then
             return {
                 message = localize('k_upgrade_ex'),
                 colour = G.C.RED,
                 card = card
             }
         end
-    end
-    if context.joker_main then
-        return {
-            mult = card.ability.extra.mult,
-        }
     end
     if context.destroy_card and not context.blueprint then
         if context.destroy_card.ability.effect == 'Lucky Card' then
@@ -49,6 +105,15 @@ end
 
 function consumInfo.can_use(self, card)
     return false
+end
+
+function consumInfo.update(self, card)
+    if card.area.config.collection and G.SETTINGS.highest_wonderofu and card.ability.extra.form ~= G.SETTINGS.highest_wonderofu then
+        card.ability.extra.form = G.SETTINGS.highest_wonderofu
+        updateSprite(card)
+    elseif G.screenwipe then
+        updateSprite(card)
+    end
 end
 
 return consumInfo

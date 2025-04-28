@@ -336,8 +336,8 @@ if SMODS.current_mod.DT.twoPoint0 then
         Stand = {
             -- stardust crusaders
             'stardust_star',
-            'stardust_thoth',
             'stardust_world',
+            'stardust_thoth',
 
             -- diamond is unbreakable
             'diamond_crazy',
