@@ -12,9 +12,10 @@ extern MY_HIGHP_OR_MEDIUMP vec4 base_color;
 extern MY_HIGHP_OR_MEDIUMP float spread;
 extern MY_HIGHP_OR_MEDIUMP vec2 step_size;
 extern MY_HIGHP_OR_MEDIUMP number seed;
+extern MY_HIGHP_OR_MEDIUMP number aura_rate = 1;
 
 vec4 effect(vec4 color, Image tex, vec2 tex_coords, vec2 screen_coords) {
-	float t = time + seed / 65536.;
+	float t = (time * aura_rate) + seed / 65536.;
 
 	vec4 ret = Texel(tex, tex_coords);
 	vec2 upper_coords = vec2(tex_coords.x, tex_coords.y + 0.12);

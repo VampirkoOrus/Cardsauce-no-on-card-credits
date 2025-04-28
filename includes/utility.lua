@@ -260,8 +260,22 @@ end
 --- x^4 easing function both in and out
 --- @param x number Value to ease (between 0 and 1)
 --- @return number # Eased value between 0 and 1
-function ease_in_out_quart(x) 
+function csau_ease_in_out_quart(x) 
 	return x < 0.5 and 8 * x * x * x * x or 1 - (-2 * x + 2)^4 / 2;
+end
+
+--- x^4 easing function in
+--- @param x number Value to ease (between 0 and 1)
+--- @return number # Eased value between 0 and 1
+function csau_ease_in_quint(x)
+	return x * x * x * x * x
+end
+
+--- exponential ease out function
+--- @param x number Value to ease (between 0 and 1)
+--- @return number # Eased value between 0 and 1
+function csau_ease_out_expo(x)
+	return x == 1 and 1 or 1 - (2 ^ (-10 * x))	
 end
 
 --- Parses a multi-entry string table as a single-line, human readable string
@@ -445,8 +459,7 @@ G.FUNCS.csau_transform_card = function(card, to_key, evolve)
 	card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})
 	card:set_ability(new_card)
 	card:set_cost()
-	if old_card.on_evolve and type(old_card.on_evolve) == 'function' then
-		send('uh')
+	if evolve and old_card.on_evolve and type(old_card.on_evolve) == 'function' then
 		old_card:on_evolve(old_card, card)
 	end
 	if new_card.soul_pos then
@@ -455,6 +468,7 @@ G.FUNCS.csau_transform_card = function(card, to_key, evolve)
 		card.children.floating_sprite.states.hover.can = false
 		card.children.floating_sprite.states.click.can = false
 	end
+
 	if not card.edition then
 		card:juice_up()
 		play_sound('generic1')
@@ -713,8 +727,14 @@ end
 --- Evolves a Stand. A Stand must have an 'evolve_key' field to evolve
 --- @param stand Card Balatro card table representing a Stand consumable
 G.FUNCS.csau_evolve_stand = function(stand)
+	if stand.children.stand_aura then
+		stand.children.stand_aura.atlas = G.ASSET_ATLAS[stand.ability.evolved and 'csau_blank_evolved' or 'csau_blank']
+	end
+	G.FUNCS.csau_flare_stand_aura(stand, 0.50)
+
 	G.E_MANAGER:add_event(Event({
         func = function()
+			
 			G.FUNCS.csau_transform_card(stand, stand.ability.evolve_key, true)
 			check_for_unlock({ type = "evolve_stand" })
 
@@ -731,7 +751,6 @@ G.FUNCS.csau_evolve_stand = function(stand)
 			if not stand.edition then
 				play_sound('polychrome1')
 			end
-			stand:juice_up(0.3, 0.5)
 
 			return true
 		end
@@ -752,15 +771,16 @@ end
 
 --- Queues a stand aura to flare for delay_time if a Stand has an aura attached
 --- @param stand Card Balatro card table representing a stand
---- @param delay_time delay_time length of flare in seconds
-G.FUNCS.csau_flare_stand_aura = function(stand, delay_time)
+--- @param delay_time number length of flare in seconds
+G.FUNCS.csau_flare_stand_aura = function(stand, delay_time, blockable)
 	if not stand.children.stand_aura then
 		return
 	end
 	
 	G.E_MANAGER:add_event(Event({
-		trigger = 'after',
-		delay = 0.05,
+		trigger = 'immediate',
+		blocking = false,
+		blockable = blockable or true,
 		func = function()
 			stand.ability.aura_flare_queued = true
 			stand.ability.aura_flare_target = (delay_time or 1) / 2
@@ -777,7 +797,7 @@ G.FUNCS.csau_set_stand_sprites = function(stand)
 		stand.no_shadow = true
 		G.ASSET_ATLAS['csau_noise'].image:setWrap('repeat', 'repeat', 'clamp')
 
-		local blank_atlas = G.ASSET_ATLAS['csau_blank']
+		local blank_atlas = G.ASSET_ATLAS[stand.ability.evolved and 'csau_blank_evolved' or 'csau_blank']
 		local aura_scale_x = blank_atlas.px / stand.children.center.atlas.px
 		local aura_scale_y = blank_atlas.py / stand.children.center.atlas.py
 		local aura_width = stand.T.w * aura_scale_x
@@ -785,9 +805,10 @@ G.FUNCS.csau_set_stand_sprites = function(stand)
 		local aura_x_offset = (aura_width - stand.T.w) / 2
 		local aura_y_offset = (aura_height - stand.T.h) / 1.1
 		
-		stand.ability.aura_spread = 0.45
+		stand.ability.aura_spread = 0.47
+		stand.ability.aura_startup = 0
+		stand.ability.aura_fadein_rate = 1
 		stand.ability.aura_rate = 0.7
-		stand.ability.aura_offset = math.random(0, 10)
 		stand.children.stand_aura = Sprite(
 			stand.T.x - aura_x_offset,
 			stand.T.y - aura_y_offset,
@@ -808,28 +829,6 @@ G.FUNCS.csau_set_stand_sprites = function(stand)
 		})
 		stand.children.stand_aura:align_to_major()
 		stand.children.stand_aura.custom_draw = true
-	end
-
-	if stand.ability.stand_overlay then
-		stand.children.stand_overlay = Sprite(
-			stand.T.x,
-			stand.T.y,
-			stand.T.w,
-			stand.T.h,
-			G.ASSET_ATLAS[stand.config.center.atlas],
-			{x = 3, y = 0}
-		)
-		stand.children.stand_overlay:set_role({
-			role_type = 'Glued',
-			major = stand,
-			offset = { x = 0, y = 0 },
-			xy_bond = 'Strong',
-			wh_bond = 'Strong',
-			r_bond = 'Strong',
-			scale_bond = 'Strong',
-			draw_major = stand
-		})
-		stand.children.stand_overlay.custom_draw = true
 	end
 end
 
