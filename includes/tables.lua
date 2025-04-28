@@ -88,7 +88,6 @@ G.csau_team = {
 	['yumz'] = 'yumz',
 	['creachure'] = 'creachurearts',
 	['stup'] = 'Stupisms',
-	['coop'] = 'Coop',
 	extra = {
 		['amtrax'] = "(AmtraxVA)",
 		['bass'] = "(bassclefff.bandcamp.com)",
