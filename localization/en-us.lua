@@ -3272,7 +3272,7 @@ return {
 					"{C:chips}+#4#{} chips",
 				}
 			},
-			c_csau_whirlpool = {
+			c_csau_planet_whirlpool = {
 				name = "Whirlpool",
 				text = {
 					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
