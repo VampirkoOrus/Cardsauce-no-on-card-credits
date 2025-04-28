@@ -1,3 +1,5 @@
+--- We can't do this because synergies with some VHS tapes require that we be able to move Stands around -keku
+--[[
 local ref_align_cards = CardArea.align_cards
 function CardArea:align_cards()
     local ret = ref_align_cards(self)
@@ -19,3 +21,4 @@ function CardArea:align_cards()
 
     return ret
 end
+]]--
