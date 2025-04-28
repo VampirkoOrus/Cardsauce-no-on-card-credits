@@ -9,7 +9,7 @@ local consumInfo = {
             num_cards = 1,
             mult = 3,
             evolve_rounds = 0,
-            evolve_num = 1,
+            evolve_num = 3,
         }
     },
     cost = 4,
@@ -65,12 +65,14 @@ function consumInfo.calculate(self, card, context)
                 local ref_card = context.full_hand[1]
                 if SMODS.has_any_suit(ref_card) then
                     card.ability.extra.ref_suit = "wild"
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
                     return {
                         message = localize('k_echoes_recorded'),
                         card = card
                     }
                 elseif not SMODS.has_no_suit(ref_card) then
                     card.ability.extra.ref_suit = ref_card.base.suit
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
                     return {
                         message = localize('k_echoes_recorded'),
                         card = card,
@@ -86,8 +88,13 @@ function consumInfo.calculate(self, card, context)
         if to_big(G.GAME.current_round.hands_played) > to_big(0) and card.ability.extra.ref_suit then
             if card.ability.extra.ref_suit == "wild" or context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or card.ability.extra.ref_suit) then
                 return {
-                    mult = card.ability.extra.mult,
-                    card = card
+                    func = function()
+                        G.FUNCS.csau_flare_stand_aura(card, 0.38)  
+                    end,
+                    extra = {
+                        mult = card.ability.extra.mult,
+                        card = card,
+                    }
                 }
             end
         end

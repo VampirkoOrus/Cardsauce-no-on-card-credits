@@ -167,6 +167,7 @@ SMODS.DrawStep:take_ownership('seal', {
 
 SMODS.Shader({ key = 'aura', path = 'stand_aura.fs' })
 SMODS.Atlas({ key = 'blank', path = 'blank.png', px = 93, py = 179})
+SMODS.Atlas({ key = 'blank_evolved', path = 'blank_evolved.png', px = 93, py = 179})
 SMODS.Atlas({ key = 'noise', path = 'noise.png',  px = 128, py = 128})
 SMODS.Atlas({ key = 'gradient', path = 'gradient.png', px = 64, py = 64})
 
@@ -197,14 +198,14 @@ SMODS.DrawStep {
     order = -110,
     func = function(self)
         if self.children.stand_aura and (self.config.center.discovered or self.bypass_discovery_center) then
-            if self.ability.aura_flare_queued or self.ability.stand_activated then
-                if self.ability.aura_flare_queued then
-                    self.ability.stand_activated = true
-                    self.ability.aura_flare_queued = false
-                    self.ability.aura_flare_lerp = 0.0
-                    self.ability.aura_flare_direction = 1
-                end
-                
+            if self.ability.aura_flare_queued then
+                self.ability.stand_activated = true
+                self.ability.aura_flare_queued = false
+                self.ability.aura_flare_lerp = 0.0
+                self.ability.aura_flare_direction = 1
+            end
+
+            if self.ability.stand_activated then              
                 -- lerping the values
                 if self.ability.aura_flare_direction > 0 and self.ability.aura_flare_lerp < self.ability.aura_flare_target then
                     self.ability.aura_flare_lerp = self.ability.aura_flare_lerp + G.real_dt
@@ -228,24 +229,59 @@ SMODS.DrawStep {
                 end
             end
 
-            local ease = self.ability.aura_flare_lerp and self.ability.aura_flare_lerp/self.ability.aura_flare_target or 0
-            local aura_rate = (ease * 0.5 * self.ability.aura_rate) + self.ability.aura_rate
-            local aura_spread = (ease * 0.08) + self.ability.aura_spread         
-            
+            local in_collection = self.area and self.area.config.collection
+            if not (self.ability.stand_activated or in_collection) then
+                self.no_shadow = false
+                return
+            end
+            self.no_shadow = true
+
+            -- startup in the collection
+
+            if in_collection then
+                self.ability.aura_rate = 0.7
+                self.ability.aura_startup = self.ability.aura_startup + G.real_dt * self.ability.aura_fadein_rate
+                if self.ability.aura_startup > 1 then
+                    self.ability.aura_startup = 1
+                end
+            else
+                self.ability.aura_startup = 1
+                self.ability.aura_rate = 1.2
+            end
+
+            -- aura flare in gameplay
+            local flare_ease = 0
+            if self.ability.aura_flare_lerp then
+                if self.ability.aura_flare_direction > 0 then
+                    flare_ease = csau_ease_in_quint(self.ability.aura_flare_lerp/self.ability.aura_flare_target)
+                else
+                    flare_ease = csau_ease_out_expo(self.ability.aura_flare_lerp/self.ability.aura_flare_target)
+                end
+            end
+            local aura_spread = (flare_ease * 0.06) + self.ability.aura_spread
+
+            -- colors
+            local startup_lerp = in_collection and csau_ease_in_quint(self.ability.aura_startup) or flare_ease
+            local outline_color = HEX(self.ability.aura_colors[1])
+            outline_color[4] = outline_color[4] * startup_lerp
+            local base_color = HEX(self.ability.aura_colors[2])
+            base_color[4] = base_color[4] * startup_lerp
+
+            -- default tilt behavior
             local cursor_pos = {}
             cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
             cursor_pos[2] = self.tilt_var and self.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
             local screen_scale = G.TILESCALE*G.TILESIZE*(self.children.center.mouse_damping or 1)*G.CANV_SCALE
             local hovering = (self.hover_tilt or 0)
-
             local seed = hashString(self.config.center.key..'_'..self.ID)
 
             G.SHADERS['csau_aura']:send('step_size', {0.021, 0.021})
-            G.SHADERS['csau_aura']:send('time', G.TIMERS.REAL + self.ability.aura_offset)
+            G.SHADERS['csau_aura']:send('time', G.TIMERS.REAL)
+            G.SHADERS['csau_aura']:send('aura_rate', 1)
             G.SHADERS['csau_aura']:send('noise_tex', G.ASSET_ATLAS['csau_noise'].image)
             G.SHADERS['csau_aura']:send('gradient_tex', G.ASSET_ATLAS['csau_gradient'].image)
-            G.SHADERS['csau_aura']:send('outline_color', HEX(self.ability.aura_colors[1]))
-            G.SHADERS['csau_aura']:send('base_color', HEX(self.ability.aura_colors[2]))
+            G.SHADERS['csau_aura']:send('outline_color', outline_color)
+            G.SHADERS['csau_aura']:send('base_color', base_color)
             G.SHADERS['csau_aura']:send('mouse_screen_pos', cursor_pos)
             G.SHADERS['csau_aura']:send('screen_scale', screen_scale)
             G.SHADERS['csau_aura']:send('hovering', hovering)
@@ -254,17 +290,6 @@ SMODS.DrawStep {
             love.graphics.setShader(G.SHADERS['csau_aura'], G.SHADERS['csau_aura'])
             self.children.stand_aura:draw_self()
             love.graphics.setShader()
-        end
-    end,
-    conditions = { vortex = false, facing = 'front' },
-}
-
-SMODS.DrawStep {
-    key = 'stand_overlay',
-    order = 62,
-    func = function(self)
-        if self.children.stand_overlay and (self.config.center.discovered or self.bypass_discovery_center) then
-            self.children.stand_overlay:draw_shader('dissolve')
         end
     end,
     conditions = { vortex = false, facing = 'front' },
