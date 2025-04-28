@@ -23,7 +23,8 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if not context.before then return end
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+    if not context.before or bad_context then return end
 
     local scoring_ranks = {}
     for _, scored in ipairs(context.scoring_hand) do

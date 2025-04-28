@@ -38,7 +38,7 @@ function consumInfo.in_pool(self, args)
 end
 
 function consumInfo.calculate(self, card, context)
-    local bad_context = context.repetition or context.blueprint
+    local bad_context = context.repetition or context.blueprint or context.retrigger_joker
     if context.individual and context.cardarea == G.play and not card.debuff then
         if context.other_card:get_id() == 14 or context.other_card:get_id() == 2 then
             if not bad_context then

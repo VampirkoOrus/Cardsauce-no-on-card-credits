@@ -46,7 +46,7 @@ function consumInfo.calculate(self, card, context)
             }
         end
     end
-    local bad_context = context.repetition or context.blueprint or context.individual
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.remove_playing_cards and not bad_context then
         local cards = 0
         for i, card in ipairs(context.removed) do

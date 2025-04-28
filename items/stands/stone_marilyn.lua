@@ -124,7 +124,8 @@ local debt_collection = function(card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if not context.blueprint_card and context.game_over then
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+    if not context.blueprint_card and context.game_over and not bad_context then
         local collect = debt_collection(card)
         if collect.saved then
             if collect.sell then

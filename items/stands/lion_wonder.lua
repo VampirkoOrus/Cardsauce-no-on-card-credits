@@ -63,7 +63,7 @@ function consumInfo.calculate(self, card, context)
             mult = card.ability.extra.mult,
         }
     end
-    local bad_context = context.repetition or context.individual or context.blueprint
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.final_scoring_step and not bad_context then
         local trigger = false
         for i, v in ipairs(context.scoring_hand) do

@@ -23,7 +23,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    local bad_context = context.repetition or context.individual or context.blueprint
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.before and not card.debuff and not bad_context then
         local stone = {}
         for k, v in ipairs(context.scoring_hand) do

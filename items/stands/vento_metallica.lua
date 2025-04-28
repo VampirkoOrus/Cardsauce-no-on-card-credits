@@ -32,7 +32,8 @@ local function detect_jacks(scoring_hand)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.before and not card.debuff and not context.blueprint then
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+    if context.before and not card.debuff and not bad_context then
         if detect_jacks(context.full_hand) then
             for i, v in ipairs(context.full_hand) do
                 if v:get_id() == 11 and v.ability.effect == "Base" then
@@ -51,7 +52,6 @@ function consumInfo.calculate(self, card, context)
             }
         end
     end
-    local bad_context = context.repetition or context.blueprint
     if context.individual and context.cardarea == G.play and not card.debuff and not bad_context then
         if context.other_card:get_id() == 11 and context.other_card.ability.effect == "Steel Card" then
             return {

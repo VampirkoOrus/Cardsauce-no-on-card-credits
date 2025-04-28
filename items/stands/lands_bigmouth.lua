@@ -29,7 +29,8 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-	if not context.before or #context.full_hand ~= card.ability.extra.hand_size then return end
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+	if not context.before or #context.full_hand ~= card.ability.extra.hand_size or bad_context then return end
 
     -- record flip cards and do initial flip
     local suit_list = {}

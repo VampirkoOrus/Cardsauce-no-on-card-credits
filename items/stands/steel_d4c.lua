@@ -6,6 +6,7 @@ local consumInfo = {
         stand_mask = true,
         evolve_key = 'c_csau_steel_d4c_love',
         extra = {
+            hands_played = {},
             evolve_num = 9,
         }
     },
@@ -49,15 +50,24 @@ function consumInfo.add_to_deck(self, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.destroy_card and context.cardarea == G.play then
-        if context.scoring_name == "Pair" and not card.ability.activated then
-            context.destroying_card = context.scoring_hand
-            card.ability.activated = true
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+    if context.before and not bad_context then
+        card.ability.extra.hands_played[context.scoring_name] = card.ability.extra.hands_played[context.scoring_name] or 0
+        card.ability.extra.hands_played[context.scoring_name] = card.ability.extra.hands_played[context.scoring_name] + 1
+    end
+    if context.destroying_card and not bad_context then
+        if context.scoring_name == "Pair" and card.ability.extra.hands_played[context.scoring_name] == 1 then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    card:juice_up()
+                    return true
+                end
+            }))
             return true
         end
     end
-    if context.end_of_round then
-        card.ability.activated = false
+    if context.end_of_round and not bad_context then
+        card.ability.extra.hands_played = {}
     end
 end
 

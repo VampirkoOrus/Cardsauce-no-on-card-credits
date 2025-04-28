@@ -46,7 +46,7 @@ function consumInfo.calculate(self, card, context)
             }
         end
     end
-    local bad_context = context.repetition or context.blueprint or context.individual
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.end_of_round and not card.debuff and not bad_context then
         if G.GAME.chips <= (G.GAME.blind.chips * (1+card.ability.extra.evolve_percent)) then
             check_for_unlock({ type = "evolve_tusk" })

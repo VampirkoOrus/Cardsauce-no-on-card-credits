@@ -112,7 +112,7 @@ function consumInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.individual and context.cardarea == G.play and not card.debuff and not context.repetition then
+    if context.individual and context.cardarea == G.play and not card.debuff then
         if context.other_card:get_id() == 2 or
         context.other_card:get_id() == 3 or
         context.other_card:get_id() == 5 or
