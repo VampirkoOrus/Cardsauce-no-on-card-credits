@@ -3,6 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         aura_colors = { 'c09f5fDC', '6c161fDC' },
+        stand_mask = true,
         extra = {
             tarot = 'c_hanged_man'
         }

@@ -3,6 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         aura_colors = { 'f3b7f5DC', '8ae5ffDC' },
+        stand_mask = true,
         evolved = true,
     },
     cost = 10,
