@@ -1,7 +1,7 @@
 local old_draw_step_fs = SMODS.DrawSteps.floating_sprite.func
 SMODS.DrawStep:take_ownership('floating_sprite', { 
 	func = function(self, layer)
-        if self.config.center.soul_pos and not self.ability.stand_mask and (self.config.center.discovered or self.bypass_discovery_center) then
+        if self.config.center.soul_pos and not self.ability.set == 'csau_Stand' and (self.config.center.discovered or self.bypass_discovery_center) then
             local scale_mod = 0.07 + 0.02*math.sin(1.8*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
             local rotate_mod = 0.05*math.sin(1.219*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2
 
@@ -39,18 +39,24 @@ if csau_enabled['enableStands'] then
         key = 'stand_mask',
         order = 39,
         func = function(self, layer)
-            if self.ability.stand_mask and self.config.center.soul_pos and (self.config.center.discovered or self.bypass_discovery_center) then
+            if self.config.center.soul_pos and self.ability.set == 'csau_Stand' and (self.config.center.discovered or self.bypass_discovery_center) then
                 local scale_mod = 0.07 + 0.02*math.sin(1.8*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
                 local rotate_mod = 0.05*math.sin(1.219*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2
-                local stand_scale_mod = 0
+                
 
-                G.SHADERS['csau_stand_mask']:send("scale_mod",scale_mod)
-                G.SHADERS['csau_stand_mask']:send("rotate_mod",rotate_mod)
-                G.SHADERS['csau_stand_mask']:send("output_scale",1+stand_scale_mod)
-                --G.SHADERS['csau_stand_mask']:send("my",0.1 + 0.03*math.sin(1.8*G.TIMERS.REAL)) -- my (vertical y offset i think)
-                --G.SHADERS['csau_stand_mask']:send("shadow_height",self.shadow_height)
+                if self.ability.stand_mask then
+                    local stand_scale_mod = 0
+                    G.SHADERS['csau_stand_mask']:send("scale_mod",scale_mod)
+                    G.SHADERS['csau_stand_mask']:send("rotate_mod",rotate_mod)
+                    G.SHADERS['csau_stand_mask']:send("output_scale",1+stand_scale_mod)
+                    --G.SHADERS['csau_stand_mask']:send("my",0.1 + 0.03*math.sin(1.8*G.TIMERS.REAL)) -- my (vertical y offset i think)
+                    --G.SHADERS['csau_stand_mask']:send("shadow_height",self.shadow_height)
 
-                self.children.floating_sprite:draw_shader('csau_stand_mask', nil, nil, nil, self.children.center, -stand_scale_mod)
+                    self.children.floating_sprite:draw_shader('csau_stand_mask', nil, nil, nil, self.children.center, -stand_scale_mod)
+                else
+                    self.children.floating_sprite:draw_shader('dissolve',0, nil, nil, self.children.center,scale_mod, rotate_mod,nil, 0.1 + 0.03*math.sin(1.8*G.TIMERS.REAL),nil, 0.6)
+                    self.children.floating_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
+                end  
 
                 if self.edition then
                     for k, v in pairs(G.P_CENTER_POOLS.Edition) do
