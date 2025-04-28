@@ -3,6 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         aura_colors = { 'ebfafeDC', 'b48df1DC' },
+        stand_mask = true,
         evolve_key = 'c_csau_lion_soft_beyond',
         extra = {
             perma_reduction = 0.5,
