@@ -3215,8 +3215,8 @@ return {
 				name = "Wonder of U",
 				text = {
 					"When a {C:attention}Lucky Card{} is scored,",
-					"{C:attention}destroy{} it and gain {C:mult}+#1#{} Mult",
-					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
+					"{C:attention}destroy{} it and gain {X:mult,C:white}X#1#{} Mult",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
 					
 				},
 			},
