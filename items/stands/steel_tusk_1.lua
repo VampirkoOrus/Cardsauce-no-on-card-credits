@@ -5,7 +5,7 @@ local consumInfo = {
         aura_colors = { 'ff7dbcDC', 'e675c2DC' },
         evolve_key = 'c_csau_steel_tusk_2',
         extra = {
-            chips = 20,
+            chips = 13,
             evolve_scores = 0,
             evolve_num = 20,
         }

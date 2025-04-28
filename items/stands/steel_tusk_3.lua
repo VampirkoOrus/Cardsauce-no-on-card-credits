@@ -7,7 +7,7 @@ local consumInfo = {
         evolved = true,
         evolve_key = 'c_csau_steel_tusk_4',
         extra = {
-            chips = 40,
+            chips = 34,
             evolve_percent = 0.1
         }
     },

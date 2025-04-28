@@ -6,7 +6,7 @@ local consumInfo = {
         evolved = true,
         evolve_key = 'c_csau_steel_tusk_3',
         extra = {
-            chips = 30,
+            chips = 21,
             evolve_destroys = 0,
             evolve_num = 3,
         }

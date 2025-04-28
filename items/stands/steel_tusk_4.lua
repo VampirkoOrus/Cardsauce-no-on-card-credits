@@ -64,7 +64,7 @@ local consumInfo = {
         stand_mask = true,
         evolved = true,
         extra = {
-            chips = 50,
+            chips = 55,
             hand_mod = 1
         }
     },
