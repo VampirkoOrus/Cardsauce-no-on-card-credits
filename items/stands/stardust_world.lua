@@ -2,6 +2,7 @@ local consumInfo = {
     name = "DIO's World",
     set = 'csau_Stand',
     config = {
+        stand_mask = true,
         aura_colors = { 'ce9c36DC' , 'ffd575DC' },
         extra = {
             hand_mod = 1,
@@ -33,7 +34,7 @@ function consumInfo.calculate(self, card, context)
             ease_hands_played(card.ability.extra.hand_mod)
             return {
                 card = card,
-                message = localize{type = 'variable', key = 'a_hands', vars = {self.ability.extra}},
+                message = localize{type = 'variable', key = 'a_hands', vars = {card.ability.extra.hand_mod}},
                 colour = G.C.BLUE
             }
         end

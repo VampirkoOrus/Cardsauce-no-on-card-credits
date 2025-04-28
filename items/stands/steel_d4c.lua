@@ -27,6 +27,7 @@ local function get_lucky()
 end
 
 function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
     return {vars = {card.ability.extra.evolve_num, get_lucky()}}
 end
 

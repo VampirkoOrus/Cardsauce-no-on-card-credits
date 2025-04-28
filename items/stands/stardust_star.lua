@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Star Platinum',
     set = 'csau_Stand',
     config = {
+        stand_mask = true,
         aura_colors = { 'c640ffDC' , 'f96bffDC' },
         extra = {
             hand_mod = 1,
@@ -16,6 +17,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
     return { vars = { card.ability.extra.hand_mod } }
 end
 
@@ -32,7 +34,7 @@ function consumInfo.calculate(self, card, context)
             ease_hands_played(card.ability.extra.hand_mod)
             return {
                 card = card,
-                message = localize('k_plus_hand'),
+                message = localize{type = 'variable', key = 'a_hands', vars = {card.ability.extra.hand_mod}},
                 colour = G.C.BLUE
             }
         end

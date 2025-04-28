@@ -39,14 +39,15 @@ function consumInfo.in_pool(self, args)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.individual and context.cardarea == G.play and not card.debuff and not context.repetition then
+    if context.individual and context.cardarea == G.play and not card.debuff then
         if context.other_card:get_id() == 14 or context.other_card:get_id() == 2 or context.other_card:get_id() == 3 then
             return {
                 chips = card.ability.extra.chips
             }
         end
     end
-    if context.remove_playing_cards then
+    local bad_context = context.repetition or context.blueprint or context.individual
+    if context.remove_playing_cards and not bad_context then
         local cards = 0
         for i, card in ipairs(context.removed) do
             cards = cards + 1

@@ -38,12 +38,14 @@ function consumInfo.in_pool(self, args)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.individual and context.cardarea == G.play and not card.debuff and not context.repetition then
+    local bad_context = context.repetition or context.blueprint
+    if context.individual and context.cardarea == G.play and not card.debuff then
         if context.other_card:get_id() == 14 or context.other_card:get_id() == 2 then
-            card.ability.extra.evolve_scores = card.ability.extra.evolve_scores + 1
-            send(card.ability.extra.evolve_scores)
+            if not bad_context then
+                card.ability.extra.evolve_scores = card.ability.extra.evolve_scores + 1
+            end
             if card.ability.extra.evolve_scores >= card.ability.extra.evolve_num then
-                if not context.blueprint then
+                if not bad_context then
                     G.FUNCS.csau_evolve_stand(card)
                 end
             else

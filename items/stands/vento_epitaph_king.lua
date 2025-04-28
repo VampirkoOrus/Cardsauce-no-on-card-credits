@@ -3,6 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         evolved = true,
+        stand_mask = true,
         aura_colors = { 'e53663DC', 'a71d40DC' },
     },
     cost = 10,
@@ -12,6 +13,10 @@ local consumInfo = {
     part = 'vento',
     in_progress = true,
 }
+
+function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
+end
 
 function consumInfo.in_pool(self, args)
     if next(SMODS.find_card('j_showman')) then

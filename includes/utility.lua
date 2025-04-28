@@ -968,15 +968,6 @@ function csau_format_display_number(n, number_type, caps_style)
 	return ret
 end
 
-G.FUNCS.csau_center_discovered = function(key)
-	for k, v in pairs(SMODS.Centers) do
-		if k == key and v.discovered == true then
-			return true
-		end
-	end
-	return false
-end
-
 G.FUNCS.find_activated_tape = function(key)
 	local tapes = SMODS.find_card(key)
 	if tapes and #tapes > 0 then

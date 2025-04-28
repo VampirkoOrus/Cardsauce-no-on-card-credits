@@ -17,7 +17,8 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    return {vars = { }}
+    info_queue[#info_queue+1] = G.P_CENTERS.m_bonus
+    info_queue[#info_queue+1] = G.P_CENTERS.m_mult
 end
 
 function consumInfo.in_pool(self, args)
@@ -46,7 +47,8 @@ local get_enhancement_center = function(center)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.before and not card.debuff and not context.blueprint then
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.before and not card.debuff and not bad_context then
         if not SMODS.PokerHands[context.scoring_name].visible then
             check_for_unlock({ type = "evolve_soft" })
             G.FUNCS.csau_evolve_stand(card)

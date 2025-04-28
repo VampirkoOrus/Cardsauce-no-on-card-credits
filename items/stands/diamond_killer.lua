@@ -36,7 +36,8 @@ function consumInfo.in_pool(self, args)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.remove_playing_cards then
+    local bad_context = context.repetition or context.individual or context.blueprint
+    if context.remove_playing_cards and not bad_context then
         local hands = 0
         for i, _card in ipairs(context.removed) do
             check_for_unlock({ type = "destroy_killer" })

@@ -38,14 +38,15 @@ function consumInfo.in_pool(self, args)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.individual and context.cardarea == G.play and not card.debuff and not context.repetition then
+    if context.individual and context.cardarea == G.play and not card.debuff then
         if context.other_card:get_id() == 14 or context.other_card:get_id() == 2 or context.other_card:get_id() == 3 or context.other_card:get_id() == 5 then
             return {
                 chips = card.ability.extra.chips
             }
         end
     end
-    if context.end_of_round and not card.debuff and not context.individual and not context.repetition and not context.blueprint then
+    local bad_context = context.repetition or context.blueprint or context.individual
+    if context.end_of_round and not card.debuff and not bad_context then
         if G.GAME.chips <= (G.GAME.blind.chips * (1+card.ability.extra.evolve_percent)) then
             check_for_unlock({ type = "evolve_tusk" })
             G.FUNCS.csau_evolve_stand(card)

@@ -4,6 +4,9 @@ local consumInfo = {
     config = {
         stand_mask = true,
         aura_colors = { 'F97C87DA', 'CE3749DA' },
+        extra = {
+            x_mult = 2,
+        }
     },
     cost = 4,
     rarity = 'csau_StandRarity',
@@ -14,6 +17,8 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_steel
+    info_queue[#info_queue+1] = G.P_CENTERS.m_glass
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
 end
 
@@ -46,8 +51,22 @@ function consumInfo.calculate(self, card, context)
             }
         end
     end
-    if context.check_enhancement and context.other_card.config.center.key == 'm_steel' then
-        return { m_glass = true }
+    local bad_context = context.repetition or context.blueprint
+    if context.individual and context.cardarea == G.play and not card.debuff and not bad_context then
+        if context.other_card:get_id() == 11 and context.other_card.ability.effect == "Steel Card" then
+            return {
+                x_mult = (next(SMODS.find_card("j_csau_plaguewalker")) and 3 or card.ability.extra.x_mult),
+                card = context.other_card
+            }
+        end
+    end
+    bad_context = context.repetition or context.blueprint or context.individual
+    if context.destroying_card and not bad_context then
+        if context.destroying_card:get_id() == 11 and context.other_card.ability.effect == "Steel Card" then
+            if pseudorandom('metallica') < G.GAME.probabilities.normal / (next(SMODS.find_card("j_csau_plaguewalker")) and 2 or 4) then
+                return true
+            end
+        end
     end
 end
 

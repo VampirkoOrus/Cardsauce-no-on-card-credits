@@ -16,6 +16,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_glass
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.trance } }
 end
 
@@ -26,29 +27,23 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.check_enhancement and context.cardarea == G.jokers then
-		if context.other_card.ability.effect ~= "Glass Card" and context.other_card.ability.effect ~= "Stone Card" and
-		context.other_card.base.id == 7 then
-            context.other_card.sephiroth = true
+    local bad_context = context.repetition or context.blueprint
+    if context.individual and context.cardarea == G.play and not card.debuff and not bad_context then
+        if context.other_card:get_id() == 7 and context.other_card.ability.effect ~= "Glass Card" then
             return {
-                ['m_glass'] = true,
+                x_mult = (next(SMODS.find_card("j_csau_plaguewalker")) and 3 or card.ability.extra.x_mult),
+                card = context.other_card
             }
         end
-	end
-    if context.remove_playing_cards then
-        for i, v in ipairs(context.removed) do
-            if v.base.id == 7 and not v.ability.effect ~= "Glass Card" and v.sephiroth then
-                check_for_unlock({ type = "destroy_meteor" })
-            end
-        end
     end
-    --[[if context.destroying_card then
-        if context.destroying_card:get_id() == 7 and context.destroying_card.ability.effect ~= "Glass Card" and not context.blueprint then
-            if pseudorandom('meteor') < G.GAME.probabilities.normal / 4 then
+    bad_context = context.repetition or context.blueprint or context.individual
+    if context.destroying_card and not bad_context then
+        if context.destroying_card:get_id() == 7 and context.destroying_card.ability.effect ~= "Glass Card" then
+            if pseudorandom('meteor') < G.GAME.probabilities.normal / (next(SMODS.find_card("j_csau_plaguewalker")) and 2 or 4) then
                 return true
             end
         end
-    end]]--
+    end
 end
 
 return jokerInfo

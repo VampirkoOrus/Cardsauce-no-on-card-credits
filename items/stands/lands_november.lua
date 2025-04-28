@@ -23,7 +23,8 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.modify_scoring_hand then
+    local bad_context = context.repetition or context.blueprint or context.individual
+    if context.modify_scoring_hand and not bad_context then
         local chip_val = context.other_card.base.nominal
         if chip_val <= 9 then
             return {

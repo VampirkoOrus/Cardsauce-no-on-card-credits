@@ -12,7 +12,7 @@ local jokerInfo = {
     origin = 'monkeywrench'
 }
 
-G.FUNCS.plaguewalker_active = function(card)
+local plaguewalker_active = function(card)
     card = card or nil
     local plaguewalkers = SMODS.find_card("j_csau_plaguewalker")
     for i, v in ipairs(plaguewalkers) do
@@ -28,7 +28,7 @@ end
 local gcxm_ref = Card.get_chip_x_mult
 function Card:get_chip_x_mult(context)
     local ref = gcxm_ref(self, context)
-    if self.ability.name == "Glass Card" and G.FUNCS.plaguewalker_active() then
+    if self.ability.name == "Glass Card" and next(SMODS.find_card("j_csau_plaguewalker")) then
         return 3
     else
         return ref
@@ -36,6 +36,7 @@ function Card:get_chip_x_mult(context)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_glass
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.zeurel } }
     return { vars = { G.GAME.probabilities.normal } }
 end
@@ -83,7 +84,14 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.remove_from_deck(self, card)
-    if not G.FUNCS.plaguewalker_active(card) then
+    local deactivate = true
+    local pw = SMODS.find_card("j_csau_plaguewalker")
+    for i, v in ipairs(pw) do
+        if v ~= card then
+            deactivate = false
+        end
+    end
+    if deactivate then
         activate(false)
     end
 end
@@ -91,7 +99,7 @@ end
 function jokerInfo.update(self, card)
     if card.debuff and not card.ability.debuff then
         card.ability.debuff = true
-        if not G.FUNCS.plaguewalker_active(card) then
+        if not plaguewalker_active(card) then
             activate(false)
         end
     elseif not card.debuff and card.ability.debuff then

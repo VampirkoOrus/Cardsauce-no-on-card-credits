@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Marilyn Manson',
     set = 'csau_Stand',
     config = {
+        stand_mask = true,
         aura_colors = { 'efac55DC', 'df7f32DC' },
         extra = {
             conv_money = 1,
@@ -17,6 +18,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
     return {vars = {card.ability.extra.conv_money, card.ability.extra.conv_score * 100}}
 end
 

@@ -20,15 +20,23 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.retrigger_joker_check and context.other_card ~= card then
+    if context.retrigger_joker_check and not context.retrigger_joker then
         if context.other_card.ability.set == "csau_Stand" then
             return {
+                message = localize('k_again_ex'),
                 repetitions = card.ability.extra,
-                card = context.other_card,
-                juice_card = card,
+                card = card,
             }
         end
     end
+end
+
+local te_ref = SMODS.trigger_effects
+SMODS.trigger_effects = function(effects, card)
+    for i, v in ipairs(effects) do
+        send(v)
+    end
+    return te_ref(effects, card)
 end
 
 return jokerInfo
