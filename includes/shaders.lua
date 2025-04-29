@@ -309,7 +309,7 @@ SMODS.DrawStep {
 
 SMODS.Shader({ key = 'vhs', path = 'vhs.fs' })
 
-local slide_mod = 0.825
+local slide_mod = 10
 local slide_out_delay = 0.1
 
 SMODS.DrawStep {
