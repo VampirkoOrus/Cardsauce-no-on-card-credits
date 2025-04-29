@@ -193,79 +193,75 @@ local function hashString(input)
     return hash
 end
 
+local default_aura_target = 0.3
+
 SMODS.DrawStep {
     key = 'stand_aura',
     order = -110,
     func = function(self)
         if self.children.stand_aura and (self.config.center.discovered or self.bypass_discovery_center) then
             if self.ability.aura_flare_queued then
-                self.ability.stand_activated = true
                 self.ability.aura_flare_queued = false
-                self.ability.aura_flare_lerp = 0.0
+
+                if not self.ability.stand_activated then 
+                    self.ability.aura_flare_lerp = 0.0
+                end
+                
+                self.ability.stand_activated = true
                 self.ability.aura_flare_direction = 1
             end
 
             if self.ability.stand_activated then              
                 -- lerping the values
-                if self.ability.aura_flare_direction > 0 and self.ability.aura_flare_lerp < self.ability.aura_flare_target then
+                if self.ability.aura_flare_direction > 0 and self.ability.aura_flare_lerp < (self.ability.aura_flare_target or default_aura_target) then
                     self.ability.aura_flare_lerp = self.ability.aura_flare_lerp + G.real_dt
-                    if self.ability.aura_flare_lerp >= self.ability.aura_flare_target then
-                        -- self.ability.aura_flare_lerp = self.ability.aura_flare_target
-                        self.ability.aura_flare_direction = -1
-                    end
-                end
-            
-                
-                if self.ability.aura_flare_direction < 0 and self.ability.aura_flare_lerp > 0 then
-                    self.ability.aura_flare_lerp = self.ability.aura_flare_lerp - G.real_dt
-                    if self.ability.aura_flare_lerp <= 0 then
-                        self.ability.aura_flare_lerp = nil
-                        self.ability.aura_flare_direction = nil
+                    if self.ability.aura_flare_lerp >= (self.ability.aura_flare_target or default_aura_target) then
+                        if self.ability.aura_flare_target then
+                            self.ability.aura_flare_direction = -1
+                        else
+                            self.ability.aura_flare_lerp = default_aura_target
+                        end
                     end
                 end
 
-                if self.ability.aura_flare_lerp == nil then
-                    self.ability.stand_activated = nil
+                if self.ability.aura_flare_target then
+                    if self.ability.aura_flare_direction < 0 and self.ability.aura_flare_lerp > 0 then
+                        self.ability.aura_flare_lerp = self.ability.aura_flare_lerp - G.real_dt
+                        if self.ability.aura_flare_lerp <= 0 then
+                            self.ability.aura_flare_lerp = nil
+                            self.ability.aura_flare_direction = nil
+                        end
+                    end
+    
+                    if self.ability.aura_flare_lerp == nil then
+                        self.ability.stand_activated = nil
+                    end
                 end
             end
 
-            local in_collection = self.area and self.area.config.collection
-            if not (self.ability.stand_activated or in_collection) then
+            if not self.ability.stand_activated then
                 self.no_shadow = false
                 return
             end
+
             self.no_shadow = true
-
-            -- startup in the collection
-
-            if in_collection then
-                self.ability.aura_rate = 0.7
-                self.ability.aura_startup = self.ability.aura_startup + G.real_dt * self.ability.aura_fadein_rate
-                if self.ability.aura_startup > 1 then
-                    self.ability.aura_startup = 1
-                end
-            else
-                self.ability.aura_startup = 1
-                self.ability.aura_rate = 1.2
-            end
 
             -- aura flare in gameplay
             local flare_ease = 0
             if self.ability.aura_flare_lerp then
                 if self.ability.aura_flare_direction > 0 then
-                    flare_ease = csau_ease_in_quint(self.ability.aura_flare_lerp/self.ability.aura_flare_target)
+                    flare_ease = csau_ease_in_cubic(self.ability.aura_flare_lerp/(self.ability.aura_flare_target or default_aura_target))
                 else
-                    flare_ease = csau_ease_out_expo(self.ability.aura_flare_lerp/self.ability.aura_flare_target)
+                    flare_ease = csau_ease_out_sin(self.ability.aura_flare_lerp/(self.ability.aura_flare_target or default_aura_target))
                 end
             end
-            local aura_spread = (flare_ease * 0.06) + self.ability.aura_spread
+            local aura_spread = (flare_ease * 0.04) + self.ability.aura_spread
 
             -- colors
-            local startup_lerp = in_collection and csau_ease_in_quint(self.ability.aura_startup) or flare_ease
             local outline_color = HEX(self.ability.aura_colors[1])
-            outline_color[4] = outline_color[4] * startup_lerp
+            outline_color[4] = outline_color[4] * flare_ease
             local base_color = HEX(self.ability.aura_colors[2])
-            base_color[4] = base_color[4] * startup_lerp
+            base_color[4] = base_color[4] * flare_ease
 
             -- default tilt behavior
             local cursor_pos = {}
