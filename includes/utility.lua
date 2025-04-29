@@ -802,23 +802,6 @@ G.FUNCS.csau_flare_stand_aura = function(stand, delay_time, on_hover)
 	}))
 end
 
-G.FUNCS.cancel_stand_aura = function(stand)
-	if not stand.children.stand_aura then
-		return
-	end
-	
-	G.E_MANAGER:add_event(Event({
-		trigger = 'immediate',
-		blocking = false,
-		func = function()
-			stand.ability.aura_flare_queued = nil
-			stand.ability.aura_flare_target = nil
-			stand.ability.stand_activated = nil
-        	return true
-		end 
-	}))
-end
-
 --- Sets relevant sprites for stand auras and overlays (if applicable)
 --- @param stand Card Balatro card table representing a stand
 G.FUNCS.csau_set_stand_sprites = function(stand)
