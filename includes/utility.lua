@@ -781,7 +781,6 @@ G.FUNCS.csau_flare_stand_aura = function(stand, delay_time, on_hover)
 		trigger = 'immediate',
 		blocking = false,
 		func = function()
-			sendDebugMessage('flare')
 			stand.ability.aura_flare_queued = true
 			stand.ability.aura_flare_target = delay_time and (delay_time / 2) or nil
         	return true
