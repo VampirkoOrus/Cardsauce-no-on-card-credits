@@ -1383,21 +1383,3 @@ position = "at"
 payload = "button_contents = {n=G.UIT.T, config={text = args.card.ability.set == 'VHS' and localize('b_'..(args.card.ability.activated and 'de' or '')..'activate') or localize('b_use'),colour = G.C.WHITE, scale = 0.5}}"
 match_indent = true
 times = 1
-
-[[patches]]
-[patches.pattern]
-target = "functions/UI_definitions.lua"
-pattern = "offset = {x=(args.type == 'sell' and -1 or 1)*((args.card_width or 0) - 0.17 - args.card.T.w/2),y=args.type == 'buy_and_use' and 0.6 or (args.buy_and_use) and -0.6 or 0}, "
-position = "at"
-payload = "offset = {x=(args.type == 'sell' and -1 or 1)*((args.card_width or 0) - 0.17 - args.card.T.w/2) - (args.card.ability.set == 'VHS' and (args.type == 'use' and 0.1 or args.type == 'sell' and -0.1 or 0) or 0),y=args.type == 'buy_and_use' and 0.6 or (args.buy_and_use) and -0.6 or 0}, "
-match_indent = true
-times = 1
-
-[[patches]]
-[patches.pattern]
-target = "functions/UI_definitions.lua"
-pattern = "{n=G.UIT.R, config={align = args.type == 'sell' and 'cl' or 'cr', minw = 1 + (args.type == 'select' and 0.1 or 0), minh = args.type == 'sell' and 1.5 or 1, padding = 0.08,"
-position = "at"
-payload = "{n=G.UIT.R, config={align = args.type == 'sell' and 'cl' or 'cr', minw = 1 + (args.type == 'select' and 0.1 or 0) + (args.card.ability.set == 'VHS' and 0.35 or 0), minh = args.type == 'sell' and 1.5 or 1, padding = 0.08,"
-match_indent = true
-times = 1

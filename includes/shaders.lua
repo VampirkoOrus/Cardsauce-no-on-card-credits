@@ -309,8 +309,9 @@ SMODS.DrawStep {
 
 SMODS.Shader({ key = 'vhs', path = 'vhs.fs' })
 
-local slide_mod = 10
-local slide_out_delay = 0.1
+local slide_mod = 12
+local slide_out_delay = 0.05
+local width_factor = 0.1
 
 SMODS.DrawStep {
     key = 'vhs_slide',
@@ -333,18 +334,42 @@ SMODS.DrawStep {
                 if self.ability.slide_move > 1 then
                     self.ability.slide_move = 1
                 end
+                self.children.center:set_role({
+                    role_type = 'Minor',
+                    offset = {x = -0.25 * self.ability.slide_move, y = 0},
+                    major = self,
+                    draw_major = self,
+                    xy_bond = 'Strong',
+                    wh_bond = 'Strong',
+                    r_bond = 'Strong',
+                    scale_bond = 'Strong'
+                })
             end
         elseif not self.ability.activated and self.ability.slide_move > 0 then
             self.ability.slide_out_delay = 0
-            self.ability.slide_move = self.ability.slide_move - slide_mod
+            self.ability.slide_move = self.ability.slide_move - (slide_mod * G.real_dt)
             if self.ability.slide_move < 0 then
                 self.ability.slide_move = 0
             end
+            self.children.center:set_role({
+                role_type = 'Minor',
+                offset = {x = -0.25 * self.ability.slide_move, y = 0},
+                major = self,
+                draw_major = self,
+                xy_bond = 'Strong',
+                wh_bond = 'Strong',
+                r_bond = 'Strong',
+                scale_bond = 'Strong'
+            })
         end
 
-        if self.ability.slide_move < 0 then
+        if self.ability.slide_move <= 0 then
+            self.children.center.VT.w = self.T.w
             return
         end
+
+        -- adjusting the width to match the shader change
+        self.children.center.VT.w = (self.T.w * width_factor * self.ability.slide_move) + self.T.w
 
         -- default tilt behavior
         local cursor_pos = {}

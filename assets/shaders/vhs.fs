@@ -157,20 +157,15 @@ extern MY_HIGHP_OR_MEDIUMP float screen_scale;
 #ifdef VERTEX
 vec4 position( mat4 transform_projection, vec4 vertex_position )
 {
-    float scaleX = 1.0 + (DISTANCE_FACTOR * lerp); // scale the vertices in the x direction according to the lerp value
-    vec4 scaled_vertex_position = vertex_position;
-
-    scaled_vertex_position.x *= scaleX; // I think it needs to be translated to and from the origin before/after scaling
-
     if (hovering <= 0.){
-        return transform_projection * scaled_vertex_position;
+        return transform_projection * vertex_position;
     }
     float mid_dist = length(vertex_position.xy - 0.5*love_ScreenSize.xy)/length(love_ScreenSize.xy);
     vec2 mouse_offset = (vertex_position.xy - mouse_screen_pos.xy)/screen_scale;
     float scale = 0.2*(-0.03 - 0.3*max(0., 0.3-mid_dist))
                 *hovering*(length(mouse_offset)*length(mouse_offset))/(2. -mid_dist);
 
-    vec4 result = transform_projection * scaled_vertex_position + vec4(0,0,0,scale);
+    vec4 result = transform_projection * vertex_position + vec4(0,0,0,scale);
 
     return result;
 }
