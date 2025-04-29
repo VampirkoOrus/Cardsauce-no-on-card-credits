@@ -39,6 +39,9 @@ function consumInfo.calculate(self, card, context)
                 end}))
             playing_card_joker_effects({_card})
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 message = localize('k_plus_stone'),
                 G.C.SECONDARY_SET.Enhanced
             }

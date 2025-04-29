@@ -36,6 +36,9 @@ function consumInfo.calculate(self, card, context)
         local chip_val = context.other_card.base.nominal
         if chip_val <= 9 then
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 chips = card.ability.extra.chips
             }
         end

@@ -75,6 +75,7 @@ function consumInfo.calculate(self, card, context)
 
     if #change_cards < 1 then return end
 
+    G.FUNCS.csau_flare_stand_aura(card, 0.38)
     card_eval_status_text(card, 'extra', nil, nil, nil, {
         message = localize(target_key, 'suits_plural'),
         colour = G.C.SUITS[target_key]

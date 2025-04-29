@@ -96,6 +96,9 @@ function consumInfo.calculate(self, card, context)
     end
 
     return {
+        func = function()
+            G.FUNCS.csau_flare_stand_aura(card, 0.38)
+        end,
         message = localize('k_smooth_operators'),
         message_card = card
     }

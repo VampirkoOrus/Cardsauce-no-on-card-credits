@@ -64,6 +64,25 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
     end
 end
 
+function consumInfo.calculate(self, card, context)
+    if context.before then
+        card.ability.index = 0
+    end
+    if context.individual and context.cardarea == G.play and not card.debuff then
+        card.ability.index = card.ability.index + 1
+        if card.ability.index > #context.scoring_hand then
+            return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
+            }
+        end
+    end
+    if context.end_of_round then
+        card.ability.index = 0
+    end
+end
+
 function consumInfo.can_use(self, card)
     return false
 end

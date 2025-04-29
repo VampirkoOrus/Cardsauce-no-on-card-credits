@@ -199,9 +199,13 @@ SMODS.DrawStep {
     func = function(self)
         if self.children.stand_aura and (self.config.center.discovered or self.bypass_discovery_center) then
             if self.ability.aura_flare_queued then
-                self.ability.stand_activated = true
                 self.ability.aura_flare_queued = false
-                self.ability.aura_flare_lerp = 0.0
+
+                if not self.ability.stand_activated then
+                    self.ability.aura_flare_lerp = 0.0
+                end
+
+                self.ability.stand_activated = true
                 self.ability.aura_flare_direction = 1
             end
 
@@ -253,15 +257,15 @@ SMODS.DrawStep {
             local flare_ease = 0
             if self.ability.aura_flare_lerp then
                 if self.ability.aura_flare_direction > 0 then
-                    flare_ease = csau_ease_in_quint(self.ability.aura_flare_lerp/self.ability.aura_flare_target)
+                    flare_ease = csau_ease_in_cubic(self.ability.aura_flare_lerp/self.ability.aura_flare_target)
                 else
-                    flare_ease = csau_ease_out_expo(self.ability.aura_flare_lerp/self.ability.aura_flare_target)
+                    flare_ease = csau_ease_out_sin(self.ability.aura_flare_lerp/self.ability.aura_flare_target)
                 end
             end
             local aura_spread = (flare_ease * 0.06) + self.ability.aura_spread
 
             -- colors
-            local startup_lerp = in_collection and csau_ease_in_quint(self.ability.aura_startup) or flare_ease
+            local startup_lerp = in_collection and csau_ease_in_cubic(self.ability.aura_startup) or flare_ease
             local outline_color = HEX(self.ability.aura_colors[1])
             outline_color[4] = outline_color[4] * startup_lerp
             local base_color = HEX(self.ability.aura_colors[2])

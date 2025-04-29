@@ -56,6 +56,7 @@ function consumInfo.calculate(self, card, context)
         if not (context.blueprint_card or card).getting_sliced then
             G.E_MANAGER:add_event(Event({func = function()
                 ease_hands_played(card.ability.extra.hands)
+                G.FUNCS.csau_flare_stand_aura(card, 0.38)
                 card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..card.ability.extra.hands.." "..localize('k_hud_hands')})
                 card.ability.extra.hands = 0
                 return true

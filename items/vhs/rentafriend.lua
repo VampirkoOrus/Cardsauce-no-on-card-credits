@@ -49,33 +49,35 @@ end
 local upd = Game.update
 function Game:update(dt)
     upd(self,dt)
-    if G.shop_jokers and G.shop_jokers.cards then
-        for i, v in ipairs(G.shop_jokers.cards) do
-            if v.ability.set == "Joker" then
-                local rent = G.FUNCS.find_activated_tape('c_csau_rentafriend')
-                if rent then
-                    if not v.ability.rent_ref then
-                        v.ability.rent_ref = {}
-                        if v.edition and v.edition.type then
-                            v.ability.rent_ref.edition = v.edition.type
+    if next(SMODS.find_card('c_csau_rentafriend')) then
+        if G.shop_jokers and G.shop_jokers.cards then
+            for i, v in ipairs(G.shop_jokers.cards) do
+                if v.ability.set == "Joker" then
+                    local rent = G.FUNCS.find_activated_tape('c_csau_rentafriend')
+                    if rent then
+                        if not v.ability.rent_ref then
+                            v.ability.rent_ref = {}
+                            if v.edition and v.edition.type then
+                                v.ability.rent_ref.edition = v.edition.type
+                            end
+                            if v.ability.rental then
+                                v.ability.rent_ref.rental = true
+                            end
+                            v:set_edition({ negative = true }, true)
+                            v:set_rental(true)
                         end
-                        if v.ability.rental then
-                            v.ability.rent_ref.rental = true
+                    else
+                        if v.ability.rent_ref then
+                            if v.ability.rent_ref.edition then
+                                v:set_edition({ [v.ability.rent_ref.edition] = true }, true)
+                            else
+                                v:set_edition(nil, true)
+                            end
+                            if not v.ability.rent_ref.rental then
+                                v:set_rental(false)
+                            end
+                            v.ability.rent_ref = nil
                         end
-                        v:set_edition({ negative = true }, true)
-                        v:set_rental(true)
-                    end
-                else
-                    if v.ability.rent_ref then
-                        if v.ability.rent_ref.edition then
-                            v:set_edition({ [v.ability.rent_ref.edition] = true }, true)
-                        else
-                            v:set_edition(nil, true)
-                        end
-                        if not v.ability.rent_ref.rental then
-                            v:set_rental(false)
-                        end
-                        v.ability.rent_ref = nil
                     end
                 end
             end

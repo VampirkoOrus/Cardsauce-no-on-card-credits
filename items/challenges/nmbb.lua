@@ -11,7 +11,7 @@ local chalInfo = {
         { id = 'j_csau_blackjack', eternal = true}
     },
     unlocked = function(self)
-        return G.FUNCS.csau_center_discovered('j_csau_blackjack')
+        return G.FUNCS.discovery_check({ mode = 'key', key = 'j_csau_blackjack' })
     end
 }
 
