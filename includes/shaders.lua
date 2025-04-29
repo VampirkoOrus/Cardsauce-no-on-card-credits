@@ -304,8 +304,10 @@ SMODS.DrawStep {
 
 
 ---------------------------
---------------------------- Temp VHS Draw Steps
+--------------------------- VHS slide shader
 ---------------------------
+
+SMODS.Shader({ key = 'vhs', path = 'vhs.fs' })
 
 local slide_mod = 0.825
 local slide_out_delay = 0.1
