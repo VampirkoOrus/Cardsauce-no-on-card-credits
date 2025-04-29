@@ -39,13 +39,13 @@ end
 
 function consumInfo.calculate(self, card, context)
     if context.cardarea == G.play and context.repetition and not context.repetition_only then
-        if context.other_card:get_id() == 6  then
+        if context.other_card:get_id() == 6 then
             return {
                 func = function()
                     G.FUNCS.csau_flare_stand_aura(card, 0.38)
                 end,
                 message = 'Again!',
-                repetitions = card.ability.extra.retrigger,
+                repetitions = 1,
                 card = card
             }
         end

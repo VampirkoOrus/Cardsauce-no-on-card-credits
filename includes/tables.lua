@@ -96,7 +96,7 @@ G.csau_team = {
 		['akai'] = "(Balatrostuck)",
 		['myst'] = "(LobotomyCorp)",
 		['victin'] = "(Victin's Collection)",
-		['alizarin'] = "(vinemon.link)",
+		['alizarin'] = "(alizarin.red)",
 	}
 }
 
