@@ -2935,7 +2935,7 @@ return {
 				},
 			},
 			c_csau_stardust_thoth = {
-				name = "Thoth",
+				name = "Tohth",
 				text = {
 					"{C:attention}Preview{} the top {C:attention}#1#{} cards in your deck{}",
 				},

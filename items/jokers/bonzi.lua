@@ -12,11 +12,8 @@ local jokerInfo = {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
-    display_size = { w = 71*1.47887323944, h = 95 },
-    width = 105,
-    sticker_offset = {
-        x = 0,
-    },
+    display_size = { w = 87, h = 95 },
+    width = 87,
     streamer = "joel",
     animated = {
         tiles = {
@@ -34,6 +31,21 @@ local function getSignum(num)
     if num >= 0 then return "+" else return "" end
 end
 
+function jokerInfo.set_sprites(self, card, _front)
+    if card.config.center.discovered or card.bypass_discovery_center then
+        if card.children.center then
+            local x_off = G.CARD_W - G.CARD_W*(87/71)
+            card.children.center.alignment.offset.x = x_off
+            card:set_alignment({
+                major = args.config.major,
+                type = args.config.align or args.config.type or '',
+                bond = args.config.bond or 'Strong',
+                offset = args.config.offset or {x=0,y=0},
+                lr_clamp = args.config.lr_clamp
+            })
+        end
+    end
+end
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.crispy } }
