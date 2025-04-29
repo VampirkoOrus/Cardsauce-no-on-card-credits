@@ -304,23 +304,14 @@ SMODS.DrawStep {
 
 
 ---------------------------
---------------------------- Temp VHS Draw Steps
+--------------------------- VHS slide shader
 ---------------------------
----
-local current_mod = SMODS.current_mod
-local slide_out = 8.25
-local slide_mod = 0.825
-local slide_out_delay = 1
 
-local setupTapeCanvas = function(card, center, tape, sleeve)
-    card.children.center.video = love.graphics.newCanvas(center.width or 71, center.height or 95)
-    card.children.center.video:renderTo(function()
-        love.graphics.clear(1,1,1,0)
-        love.graphics.setColor(1,1,1,1)
-        love.graphics.draw(current_mod[card.config.center.key..'_tape'], ((center.width or 71)/2)+card.ability.slide_move, (center.height or 95)/2,0,1,1,71/2,95/2)
-        love.graphics.draw(current_mod[card.config.center.key..'_sleeve'],((center.width or 71)/2)-card.ability.slide_move,(center.height or 95)/2,0,1,1,71/2,95/2)
-    end)
-end
+SMODS.Shader({ key = 'vhs', path = 'vhs.fs' })
+
+local slide_mod = 12
+local slide_out_delay = 0.05
+local width_factor = 0.1
 
 SMODS.DrawStep {
     key = 'vhs_slide',
@@ -335,30 +326,67 @@ SMODS.DrawStep {
             self.ability.slide_out_delay = 0
         end
 
-        local center = self.config.center
-        love.graphics.push('all')
-        love.graphics.reset()
-        if not self.children.center.video then
-            setupTapeCanvas(self, center, current_mod[center.key..'_tape'], current_mod[center.key..'_sleeve'])
-        end
-
-        if self.ability.activated and self.ability.slide_move < slide_out then
+        if self.ability.activated and self.ability.slide_move < 1 then
             if self.ability.slide_out_delay < slide_out_delay then
-                self.ability.slide_out_delay = self.ability.slide_out_delay + slide_mod
+                self.ability.slide_out_delay = self.ability.slide_out_delay + (slide_mod * G.real_dt)
             else
-                self.ability.slide_move = self.ability.slide_move + slide_mod
+                self.ability.slide_move = self.ability.slide_move + (slide_mod * G.real_dt)
+                if self.ability.slide_move > 1 then
+                    self.ability.slide_move = 1
+                end
+                self.children.center:set_role({
+                    role_type = 'Minor',
+                    offset = {x = -0.25 * self.ability.slide_move, y = 0},
+                    major = self,
+                    draw_major = self,
+                    xy_bond = 'Strong',
+                    wh_bond = 'Strong',
+                    r_bond = 'Strong',
+                    scale_bond = 'Strong'
+                })
             end
         elseif not self.ability.activated and self.ability.slide_move > 0 then
             self.ability.slide_out_delay = 0
-            self.ability.slide_move = self.ability.slide_move - slide_mod
+            self.ability.slide_move = self.ability.slide_move - (slide_mod * G.real_dt)
+            if self.ability.slide_move < 0 then
+                self.ability.slide_move = 0
+            end
+            self.children.center:set_role({
+                role_type = 'Minor',
+                offset = {x = -0.25 * self.ability.slide_move, y = 0},
+                major = self,
+                draw_major = self,
+                xy_bond = 'Strong',
+                wh_bond = 'Strong',
+                r_bond = 'Strong',
+                scale_bond = 'Strong'
+            })
         end
 
-        self.children.center.video:renderTo(function()
-            love.graphics.clear(1,1,1,0)
-            love.graphics.draw(current_mod[self.config.center.key..'_tape'], ((self.config.center.width or 71)/2)+self.ability.slide_move, (self.config.center.height or 95)/2,0,1,1,71/2,95/2)
-            love.graphics.draw(current_mod[self.config.center.key..'_sleeve'],((self.config.center.width or 71)/2)-self.ability.slide_move,(self.config.center.height or 95)/2,0,1,1,71/2,95/2)
-        end)
-        love.graphics.pop()
+        if self.ability.slide_move <= 0 then
+            self.children.center.VT.w = self.T.w
+            return
+        end
+
+        -- adjusting the width to match the shader change
+        self.children.center.VT.w = (self.T.w * width_factor * self.ability.slide_move) + self.T.w
+
+        -- default tilt behavior
+        local cursor_pos = {}
+        cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
+        cursor_pos[2] = self.tilt_var and self.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
+        local screen_scale = G.TILESCALE*G.TILESIZE*(self.children.center.mouse_damping or 1)*G.CANV_SCALE
+        local hovering = (self.hover_tilt or 0)
+
+        G.SHADERS['csau_vhs']:send('spine', G.ASSET_ATLAS['csau_blackspine'].image)
+        G.SHADERS['csau_vhs']:send('lerp', self.ability.slide_move)
+        G.SHADERS['csau_vhs']:send('mouse_screen_pos', cursor_pos)
+        G.SHADERS['csau_vhs']:send('screen_scale', screen_scale)
+        G.SHADERS['csau_vhs']:send('hovering', hovering)
+        love.graphics.setShader(G.SHADERS['csau_vhs'], G.SHADERS['csau_vhs'])
+        self.children.center:draw_self()
+        love.graphics.setShader()
+
     end,
     conditions = { vortex = false, facing = 'front' },
 }
