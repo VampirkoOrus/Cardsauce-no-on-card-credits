@@ -1332,7 +1332,7 @@ times = 1
 target = "functions/common_events.lua"
 pattern = "if specific_vars and specific_vars.sticker then info_queue[#info_queue+1] = {key = string.lower(specific_vars.sticker)..'_sticker', set = 'Other'} end"
 position = "at"
-payload = '''if specific_vars and specific_vars.sticker then
+payload = '''if specific_vars and specific_vars.sticker and type(specific_vars.sticker) ~= 'number' then
     info_queue[#info_queue+1] = {key = string.lower(specific_vars.sticker)..'_sticker', set = 'Other', vars = { localize('k_'..string.lower(_c.set)) or localize('k_joker') }}
 end'''
 match_indent = true

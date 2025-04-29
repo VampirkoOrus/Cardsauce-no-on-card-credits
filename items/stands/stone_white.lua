@@ -61,7 +61,7 @@ function consumInfo.calculate(self, card, context)
         card.ability.extra.evolve_cards = card.ability.extra.evolve_cards + #six
         if card.ability.extra.evolve_cards >= card.ability.extra.evolve_num then
             G.FUNCS.csau_evolve_stand(card)
-        else
+        elseif #six > 0 then
             return {
                 message = card.ability.extra.evolve_cards..'/'..card.ability.extra.evolve_num,
                 colour = G.C.STAND
