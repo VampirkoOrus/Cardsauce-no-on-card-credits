@@ -337,7 +337,7 @@ if SMODS.current_mod.DT.twoPoint0 then
             -- stardust crusaders
             'stardust_star',
             'stardust_world',
-            'stardust_thoth',
+            'stardust_tohth',
 
             -- diamond is unbreakable
             'diamond_crazy',
