@@ -54,7 +54,7 @@ function jokerInfo.calculate(self, card, context)
         if roll == 1 then
             local free_joker_tags = {}
             for k, v in pairs(G.P_TAGS) do
-                if starts_with(v.config.type, 'store_joker') and (not v.min_ante or (G.GAME.round_resets.ante >= v.min_ante)) then
+                if v:in_pool() and starts_with(v.config.type, 'store_joker') and (not v.min_ante or (G.GAME.round_resets.ante >= v.min_ante)) then
                     free_joker_tags[#free_joker_tags + 1] = k
                 end
             end
@@ -74,7 +74,7 @@ function jokerInfo.calculate(self, card, context)
         elseif roll == 2 then
             local booster_pack_tags = {}
             for k, v in pairs(G.P_TAGS) do
-                if v.config.type == 'new_blind_choice' and (not v.min_ante or (G.GAME.round_resets.ante >= v.min_ante)) and k ~= 'tag_boss' then
+                if v:in_pool() and v.config.type == 'new_blind_choice' and (not v.min_ante or (G.GAME.round_resets.ante >= v.min_ante)) and k ~= 'tag_boss' then
                     booster_pack_tags[#booster_pack_tags + 1] = k
                 end
             end
@@ -94,7 +94,7 @@ function jokerInfo.calculate(self, card, context)
         elseif roll == 3 then
             local rand_tags = {}
             for k, v in pairs(G.P_TAGS) do
-                if (not v.min_ante or (G.GAME.round_resets.ante >= v.min_ante)) then
+                if v:in_pool() and (not v.min_ante or (G.GAME.round_resets.ante >= v.min_ante)) then
                     rand_tags[#rand_tags + 1] = k
                 end
             end
