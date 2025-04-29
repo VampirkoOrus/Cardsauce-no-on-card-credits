@@ -2934,7 +2934,7 @@ return {
 					"is all {C:diamonds}Diamonds{}, gain {C:blue}+1{} Hand",
 				},
 			},
-			c_csau_stardust_thoth = {
+			c_csau_stardust_tohth = {
 				name = "Tohth",
 				text = {
 					"{C:attention}Preview{} the top {C:attention}#1#{} cards in your deck{}",

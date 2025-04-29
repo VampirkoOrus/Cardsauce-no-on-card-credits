@@ -256,3 +256,53 @@ function Card:juice_up(scale, rot_amount)
     if self.seal_delay then self.seal_delay = false end
     ref_card_ju(self, scale, rot_amount)
 end
+
+
+
+
+
+---------------------------
+--------------------------- For stand auras in the collection
+---------------------------
+
+local hoverable_stands = {
+    ['c_csau_stardust_tohth'] = true,
+    ['c_csau_vento_epitaph'] = true,
+}
+
+local ref_card_hover = Card.hover
+function Card:hover()
+
+    if G.col_stand_hover and G.col_stand_hover ~= self then
+        G.col_stand_hover.ability.aura_flare_queued = nil
+        G.col_stand_hover.ability.stand_activated = nil
+        G.col_stand_hover = nil
+    end
+
+    if hoverable_stands[self.config.center.key] or (self.area and self.area.config.collection and self.ability.set == 'csau_Stand') then       
+        G.col_stand_hover = self
+        self.ability.aura_flare_queued = true
+    end
+
+    return ref_card_hover(self)
+end
+
+local ref_card_stop_hover = Card.stop_hover
+function Card:stop_hover()
+    if hoverable_stands[self.config.center.key] or (self.area and self.area.config.collection and self.ability.set == 'csau_Stand') then
+        self.ability.aura_flare_queued = nil
+        self.ability.stand_activated = nil
+    end
+
+    return ref_card_stop_hover(self)
+end
+
+function love.focus(f)
+    if not f then return end
+
+    if G.col_stand_hover then
+        G.col_stand_hover.ability.aura_flare_queued = nil
+        G.col_stand_hover.ability.stand_activated = nil
+        G.col_stand_hover = nil
+    end
+end

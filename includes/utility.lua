@@ -267,15 +267,15 @@ end
 --- x^4 easing function in
 --- @param x number Value to ease (between 0 and 1)
 --- @return number # Eased value between 0 and 1
-function csau_ease_in_quint(x)
-	return x * x * x * x * x
+function csau_ease_in_cubic(x)
+	return x * x * x
 end
 
---- exponential ease out function
+--- sin ease out function
 --- @param x number Value to ease (between 0 and 1)
 --- @return number # Eased value between 0 and 1
-function csau_ease_out_expo(x)
-	return x == 1 and 1 or 1 - (2 ^ (-10 * x))	
+function csau_ease_out_sin(x) 
+	return math.sin((x * math.pi) / 2);
 end
 
 --- x^4 easing function in
@@ -786,7 +786,7 @@ end
 --- Queues a stand aura to flare for delay_time if a Stand has an aura attached
 --- @param stand Card Balatro card table representing a stand
 --- @param delay_time number length of flare in seconds
-G.FUNCS.csau_flare_stand_aura = function(stand, delay_time, blockable)
+G.FUNCS.csau_flare_stand_aura = function(stand, delay_time, on_hover)
 	if not stand.children.stand_aura then
 		return
 	end
@@ -794,10 +794,9 @@ G.FUNCS.csau_flare_stand_aura = function(stand, delay_time, blockable)
 	G.E_MANAGER:add_event(Event({
 		trigger = 'immediate',
 		blocking = false,
-		blockable = blockable or true,
 		func = function()
 			stand.ability.aura_flare_queued = true
-			stand.ability.aura_flare_target = (delay_time or 1) / 2
+			stand.ability.aura_flare_target = delay_time and (delay_time / 2) or nil
         	return true
 		end 
 	}))
@@ -820,8 +819,6 @@ G.FUNCS.csau_set_stand_sprites = function(stand)
 		local aura_y_offset = (aura_height - stand.T.h) / 1.1
 		
 		stand.ability.aura_spread = 0.47
-		stand.ability.aura_startup = 0
-		stand.ability.aura_fadein_rate = 1
 		stand.ability.aura_rate = 0.7
 		stand.children.stand_aura = Sprite(
 			stand.T.x - aura_x_offset,
