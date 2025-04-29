@@ -256,7 +256,6 @@ SMODS.DrawStep {
 
             -- aura flare in gameplay
             local flare_ease = 0
-            sendDebugMessage(self.ability.aura_flare_lerp)
             if self.ability.aura_flare_direction > 0 then
                 flare_ease = csau_ease_in_cubic(self.ability.aura_flare_lerp/(self.ability.aura_flare_target or default_aura_target))
             else
