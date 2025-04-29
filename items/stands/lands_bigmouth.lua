@@ -29,7 +29,8 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-	if not context.before or #context.full_hand ~= card.ability.extra.hand_size then return end
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+	if not context.before or #context.full_hand ~= card.ability.extra.hand_size or bad_context then return end
 
     -- record flip cards and do initial flip
     local suit_list = {}
@@ -74,6 +75,7 @@ function consumInfo.calculate(self, card, context)
 
     if #change_cards < 1 then return end
 
+    G.FUNCS.csau_flare_stand_aura(card, 0.38)
     card_eval_status_text(card, 'extra', nil, nil, nil, {
         message = localize(target_key, 'suits_plural'),
         colour = G.C.SUITS[target_key]

@@ -27,10 +27,11 @@ function consumInfo.in_pool(self, args)
 end
 
 function consumInfo.calculate(self, card, context)
-    local bad_context = context.repetition or context.individual or context.blueprint
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.end_of_round and not G.GAME.blind.boss and not bad_context then
         add_tag(Tag(G.GAME.round_resets.blind_tags[G.GAME.blind_on_deck]))
         card:juice_up()
+        G.FUNCS.csau_flare_stand_aura(card, 0.38)
     end
 end
 

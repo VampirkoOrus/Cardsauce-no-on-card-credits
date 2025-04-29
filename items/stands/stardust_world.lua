@@ -33,6 +33,9 @@ function consumInfo.calculate(self, card, context)
         if all then
             ease_hands_played(card.ability.extra.hand_mod)
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 card = card,
                 message = localize{type = 'variable', key = 'a_hands', vars = {card.ability.extra.hand_mod}},
                 colour = G.C.BLUE

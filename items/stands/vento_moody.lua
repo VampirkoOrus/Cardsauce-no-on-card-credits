@@ -24,6 +24,7 @@ function consumInfo.add_to_deck(self, card)
     for i, v in ipairs(G.consumeables.cards) do
         if v.ability.set == "VHS" and (v.ability.extra and v.ability.extra.runtime) then
             v.ability.extra.runtime = v.ability.extra.runtime * 2
+            G.FUNCS.csau_flare_stand_aura(card, 0.38)
         end
     end
 end

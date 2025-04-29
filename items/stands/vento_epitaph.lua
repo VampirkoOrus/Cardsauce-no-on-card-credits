@@ -89,7 +89,7 @@ function consumInfo.generate_ui(self, info_queue, card, desc_nodes, specific_var
 end
 
 function consumInfo.calculate(self, card, context)
-    local bad_context = context.repetition or context.individual or context.blueprint
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.skip_blind and not bad_context then
         card.ability.extra.evolve_skips = card.ability.extra.evolve_skips + 1
         if card.ability.extra.evolve_skips >= card.ability.extra.evolve_num then

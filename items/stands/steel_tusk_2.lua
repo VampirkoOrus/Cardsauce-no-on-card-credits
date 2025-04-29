@@ -6,7 +6,7 @@ local consumInfo = {
         evolved = true,
         evolve_key = 'c_csau_steel_tusk_3',
         extra = {
-            chips = 30,
+            chips = 21,
             evolve_destroys = 0,
             evolve_num = 3,
         }
@@ -42,11 +42,14 @@ function consumInfo.calculate(self, card, context)
     if context.individual and context.cardarea == G.play and not card.debuff then
         if context.other_card:get_id() == 14 or context.other_card:get_id() == 2 or context.other_card:get_id() == 3 then
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 chips = card.ability.extra.chips
             }
         end
     end
-    local bad_context = context.repetition or context.blueprint or context.individual
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.remove_playing_cards and not bad_context then
         local cards = 0
         for i, card in ipairs(context.removed) do

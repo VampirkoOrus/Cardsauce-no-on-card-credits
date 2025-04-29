@@ -625,6 +625,7 @@ return {
 			--- Silver
 			ach_csau_flip_sosad = "I'm Unhappy When You're Happy",
 			ach_csau_activate_roche = "You Earned It, Big Boy!",
+			ach_csau_activate_quixotic = "From Some Place Even Higher",
 			ach_csau_fuckingkill_jimbo = "NOOOOOO HOW COULD YOU",
 			ach_csau_high_one = "All You Need Is One",
 			ach_csau_miracle_inherit = "Recessive Genes",
@@ -739,7 +740,6 @@ return {
 			ach_csau_monkey_butt = "Have Wayne's World VCR Board Game expire",
 			ach_csau_wheres_po = "Obtain a Tarot Card from The Purple Joker while rAw TiMe is activated",
 			--- Silver
-			ach_csau_activate_quixotic = "From Some Place Even Higher",
 			ach_csau_flip_sosad = "Win a round with I'm So Happy, causing it to flip to I'm So Sad",
 			ach_csau_activate_quixotic = "Use a Quixotic Card",
 			ach_csau_activate_roche = "Receive a gift from Motorcyclist Joker",
@@ -2508,9 +2508,9 @@ return {
 			j_csau_gravity = {
 				name = "Gravity",
 				text = {
-					"This Joker gains {C:mult}+#1#{} Mult every round",
-					"you have a {C:stand}Stand{}, resets when your",
-					"{C:stand}Stand{} is sold or replaced",
+					"This Joker gains {C:mult}+#1#{} Mult every",
+					"round you have a {C:stand}Stand{},",
+					"resets when a {C:stand}Stand{} is sold",
 					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
@@ -3215,8 +3215,8 @@ return {
 				name = "Wonder of U",
 				text = {
 					"When a {C:attention}Lucky Card{} is scored,",
-					"{C:attention}destroy{} it and gain {C:mult}+#1#{} Mult",
-					"{C:inactive}(Currently{} {C:mult}+#2#{} {C:inactive}Mult){}",
+					"{C:attention}destroy{} it and gain {X:mult,C:white}X#1#{} Mult",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
 					
 				},
 			},

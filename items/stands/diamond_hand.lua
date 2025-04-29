@@ -26,7 +26,8 @@ local function is_removed(card, removed)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.remove_playing_cards then
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+    if context.remove_playing_cards and not bad_context then
         local juice = false
         for i, card in ipairs(context.removed) do
             local pos = card.rank

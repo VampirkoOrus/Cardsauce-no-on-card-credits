@@ -23,7 +23,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    local bad_context = context.repetition or context.blueprint or context.individual
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.modify_scoring_hand and not bad_context then
         local chip_val = context.other_card.base.nominal
         if chip_val <= 9 then
@@ -36,6 +36,9 @@ function consumInfo.calculate(self, card, context)
         local chip_val = context.other_card.base.nominal
         if chip_val <= 9 then
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 chips = card.ability.extra.chips
             }
         end

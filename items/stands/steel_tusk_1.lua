@@ -5,7 +5,7 @@ local consumInfo = {
         aura_colors = { 'ff7dbcDC', 'e675c2DC' },
         evolve_key = 'c_csau_steel_tusk_2',
         extra = {
-            chips = 20,
+            chips = 13,
             evolve_scores = 0,
             evolve_num = 20,
         }
@@ -38,7 +38,7 @@ function consumInfo.in_pool(self, args)
 end
 
 function consumInfo.calculate(self, card, context)
-    local bad_context = context.repetition or context.blueprint
+    local bad_context = context.repetition or context.blueprint or context.retrigger_joker
     if context.individual and context.cardarea == G.play and not card.debuff then
         if context.other_card:get_id() == 14 or context.other_card:get_id() == 2 then
             if not bad_context then
@@ -50,6 +50,9 @@ function consumInfo.calculate(self, card, context)
                 end
             else
                 return {
+                    func = function()
+                        G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                    end,
                     chips = card.ability.extra.chips
                 }
             end

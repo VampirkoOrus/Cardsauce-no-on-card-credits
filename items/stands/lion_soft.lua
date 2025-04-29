@@ -49,7 +49,7 @@ local get_enhancement_center = function(center)
 end
 
 function consumInfo.calculate(self, card, context)
-    local bad_context = context.repetition or context.individual or context.blueprint
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.before and not card.debuff and not bad_context then
         if not SMODS.PokerHands[context.scoring_name].visible then
             check_for_unlock({ type = "evolve_soft" })
@@ -81,6 +81,7 @@ function consumInfo.calculate(self, card, context)
             if #enhanced > 0 then
                 G.E_MANAGER:add_event(Event({
                     func = function()
+                        G.FUNCS.csau_flare_stand_aura(card, 0.38)
                         card:juice_up()
                         return true
                     end

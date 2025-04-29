@@ -195,7 +195,12 @@ G.FUNCS.use_card = function(e, mute, nosave)
         end
         if card.ability.activation then
             G.FUNCS.tape_activate(card)
-            card:highlight(true)
+            if G.CONTROLLER.HID.controller then
+                G.UIDEF.card_focus_ui(card)
+                G.CONTROLLER.locks.use = false
+            else
+                card:highlight(true)
+            end
         end
         discover_card(card.config.center)
         if card.area and card.area ~= G.consumeables then
@@ -206,7 +211,7 @@ G.FUNCS.use_card = function(e, mute, nosave)
                 end
                 G.GAME.pack_choices = G.GAME.pack_choices - 1
                 if G.GAME.pack_choices <= 0 then
-                    G.FUNCS.end_consumeable(nil, delay_fac)
+                    G.FUNCS.end_consumeable(nil, 0.2)
                 end
                 card.area:remove_card(card)
             end
@@ -214,12 +219,9 @@ G.FUNCS.use_card = function(e, mute, nosave)
             G.consumeables:emplace(card)
             play_sound('card1', 0.8, 0.6)
             play_sound('generic1')
-            dont_dissolve = true
-            delay_fac = 0.2
         end
         return
     end
-
     return ref_uc(e, mute, nosave)
 end
 

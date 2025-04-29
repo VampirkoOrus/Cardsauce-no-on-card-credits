@@ -98,6 +98,9 @@ end
 function consumInfo.calculate(self, card, context)
     if context.joker_main and deck_is_52_2Ace(G.playing_cards) then
         return {
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(card, 0.38)
+            end,
             xmult = card.ability.extra.x_mult,
         }
     end

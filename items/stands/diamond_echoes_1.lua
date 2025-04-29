@@ -59,7 +59,8 @@ function consumInfo.in_pool(self, args)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.before and not card.debuff then
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+    if context.before and not card.debuff and not bad_context then
         if to_big(G.GAME.current_round.hands_played) == to_big(0) then
             if #context.full_hand == card.ability.extra.num_cards then
                 local ref_card = context.full_hand[1]
@@ -99,7 +100,6 @@ function consumInfo.calculate(self, card, context)
             end
         end
     end
-    local bad_context = context.repetition or context.individual or context.blueprint
     if context.end_of_round and not bad_context then
         card.ability.extra.ref_suit = nil
         card.ability.extra.nm = false

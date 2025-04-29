@@ -33,7 +33,7 @@ function consumInfo.in_pool(self, args)
 end
 
 function consumInfo.calculate(self, card, context)
-    local bad_context = context.repetition or context.individual or context.blueprint
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.before and not card.debuff and not bad_context then
         local gold = {}
         for k, v in ipairs(context.scoring_hand) do
@@ -50,10 +50,21 @@ function consumInfo.calculate(self, card, context)
         end
         if pseudorandom('thisisrequiem') < G.FUNCS.csau_add_chance(card.ability.extra.chance+#gold, true) / card.ability.extra.divide then
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 card = card,
                 level_up = true,
                 message = localize('k_level_up_ex')
             }
+        elseif #gold > 0 then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                    card:juice_up()
+                    return true
+                end
+            }))
         end
     end
 end

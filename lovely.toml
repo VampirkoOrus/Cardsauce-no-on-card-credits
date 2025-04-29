@@ -963,6 +963,15 @@ if next(SMODS.find_card('c_csau_steel_d4c_love')) then
         [1] = 'mult',
         [2] = 'dollars',
     }
+    local d4cl = SMODS.find_card('c_csau_steel_d4c_love')
+    for i, v in ipairs(d4cl) do
+         G.E_MANAGER:add_event(Event({
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(v, 0.38)
+                return true
+            end
+        }))
+    end
     proc = triggers[pseudorandom('d4c_lovetrain', 1, 2)]
 end
 '''
@@ -1354,5 +1363,41 @@ payload = '''function Tag:generate_UI(_size)
     tag_sprite_tab = {n= G.UIT.C, config={align = "cm", ref_table = self, group = self.tally}, nodes={
         {n=G.UIT.O, config={w=_sizeX*1,h=_sizeY*1, colour = G.C.BLUE, object = tag_sprite, focus_with_object = true}},
     }}'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "card.ability.consumeable then --Add a use button"
+position = "at"
+payload = "card.ability.consumeable and card.ability.set ~= 'csau_Stand' then --Add a use button"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "button_contents = {n=G.UIT.T, config={text = localize('b_use'),colour = G.C.WHITE, scale = 0.5}}"
+position = "at"
+payload = "button_contents = {n=G.UIT.T, config={text = args.card.ability.set == 'VHS' and localize('b_'..(args.card.ability.activated and 'de' or '')..'activate') or localize('b_use'),colour = G.C.WHITE, scale = 0.5}}"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "offset = {x=(args.type == 'sell' and -1 or 1)*((args.card_width or 0) - 0.17 - args.card.T.w/2),y=args.type == 'buy_and_use' and 0.6 or (args.buy_and_use) and -0.6 or 0}, "
+position = "at"
+payload = "offset = {x=(args.type == 'sell' and -1 or 1)*((args.card_width or 0) - 0.17 - args.card.T.w/2) - (args.card.ability.set == 'VHS' and (args.type == 'use' and 0.1 or args.type == 'sell' and -0.1 or 0) or 0),y=args.type == 'buy_and_use' and 0.6 or (args.buy_and_use) and -0.6 or 0}, "
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "{n=G.UIT.R, config={align = args.type == 'sell' and 'cl' or 'cr', minw = 1 + (args.type == 'select' and 0.1 or 0), minh = args.type == 'sell' and 1.5 or 1, padding = 0.08,"
+position = "at"
+payload = "{n=G.UIT.R, config={align = args.type == 'sell' and 'cl' or 'cr', minw = 1 + (args.type == 'select' and 0.1 or 0) + (args.card.ability.set == 'VHS' and 0.35 or 0), minh = args.type == 'sell' and 1.5 or 1, padding = 0.08,"
 match_indent = true
 times = 1

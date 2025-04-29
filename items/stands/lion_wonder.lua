@@ -6,8 +6,8 @@ local consumInfo = {
         stand_mask = true,
         extra = {
             form = 'lion_wonder',
-            mult = 0,
-            mult_mod = 5,
+            xmult = 1,
+            xmult_mod = 0.2,
         }
     },
     cost = 4,
@@ -20,8 +20,8 @@ local consumInfo = {
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.coop } }
-    return {vars = {card.ability.extra.mult_mod, card.ability.extra.mult}}
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.cauthen } }
+    return {vars = {card.ability.extra.xmult_mod, card.ability.extra.xmult}}
 end
 
 local forms = {
@@ -60,41 +60,44 @@ end
 function consumInfo.calculate(self, card, context)
     if context.joker_main then
         return {
-            mult = card.ability.extra.mult,
+            xmult = card.ability.extra.xmult,
         }
     end
-    local bad_context = context.repetition or context.individual or context.blueprint
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.final_scoring_step and not bad_context then
         local trigger = false
         for i, v in ipairs(context.scoring_hand) do
             if v.ability.effect == 'Lucky Card' and not v.debuff then
                 trigger = true
-                card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
+                card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_mod
             end
         end
         local update_sprite = false
-        if card.ability.extra.mult >= 20 and card.ability.extra.form == 'lion_wonder' then
+        if card.ability.extra.xmult >= 2 and card.ability.extra.form == 'lion_wonder' then
             card.ability.extra.form = 'lion_wonder_2'
             update_sprite = true
-        elseif card.ability.extra.mult >= 40 and card.ability.extra.form == 'lion_wonder_2' then
+        elseif card.ability.extra.xmult >= 3 and card.ability.extra.form == 'lion_wonder_2' then
             card.ability.extra.form = 'lion_wonder_3'
             update_sprite = true
         end
         if update_sprite then
             G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
                 updateSprite(card)
-                card:juice_up(1, 1)
+                card:juice_up()
                 return true end }))
         end
         if trigger then
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 message = localize('k_upgrade_ex'),
                 colour = G.C.RED,
                 card = card
             }
         end
     end
-    if context.destroy_card and not context.blueprint then
+    if context.destroy_card and not bad_context then
         if context.destroy_card.ability.effect == 'Lucky Card' then
             return {
                 remove = true,

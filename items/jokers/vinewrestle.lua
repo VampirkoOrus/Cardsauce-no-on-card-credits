@@ -31,7 +31,7 @@ function jokerInfo.calculate(self, card, context)
     if context.end_of_round and G.GAME.blind.boss and not card.debuff and not bad_context then
         local free_joker_tags = {}
         for k, v in pairs(G.P_TAGS) do
-            if starts_with(v.config.type, 'store_joker') and (not v.min_ante or (G.GAME.round_resets.ante >= v.min_ante)) then
+            if v:in_pool() and v.config.type and starts_with(v.config.type, 'store_joker') and (not v.min_ante or (G.GAME.round_resets.ante >= v.min_ante)) then
                 free_joker_tags[#free_joker_tags + 1] = k
             end
         end

@@ -23,7 +23,8 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if not context.before then return end
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+    if not context.before or bad_context then return end
 
     local scoring_ranks = {}
     for _, scored in ipairs(context.scoring_hand) do
@@ -95,6 +96,9 @@ function consumInfo.calculate(self, card, context)
     end
 
     return {
+        func = function()
+            G.FUNCS.csau_flare_stand_aura(card, 0.38)
+        end,
         message = localize('k_smooth_operators'),
         message_card = card
     }

@@ -18,7 +18,8 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.before and not card.debuff then
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+    if context.before and not card.debuff and not bad_context then
          local activated = false
          for i, v in ipairs(context.full_hand) do
              if v.debuff then
@@ -34,6 +35,9 @@ function consumInfo.calculate(self, card, context)
          end
          if activated then
              return {
+                 func = function()
+                     G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                 end,
                  card = card,
                  message = localize('k_cd_healed'),
                  colour = G.C.IMPORTANT

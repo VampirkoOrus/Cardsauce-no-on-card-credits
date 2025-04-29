@@ -35,6 +35,9 @@ function consumInfo.calculate(self, card, context)
     if context.before and not card.debuff then
         ease_hands_played(1)
         return {
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(card, 0.38)
+            end,
             card = card,
             message = localize{type = 'variable', key = 'a_plus_hand', vars = {1}},
             colour = G.C.BLUE
@@ -43,6 +46,9 @@ function consumInfo.calculate(self, card, context)
     if context.pre_discard then
         ease_discard(1)
         return {
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(card, 0.38)
+            end,
             card = card,
             message = localize{type = 'variable', key = 'a_plus_discard', vars = {1}},
             colour = G.C.RED

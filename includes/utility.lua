@@ -278,6 +278,20 @@ function csau_ease_out_sin(x)
 	return math.sin((x * math.pi) / 2);
 end
 
+--- x^4 easing function in
+--- @param x number Value to ease (between 0 and 1)
+--- @return number # Eased value between 0 and 1
+function csau_ease_in_cubic(x)
+	return x * x * x
+end
+
+--- sin ease out function
+--- @param x number Value to ease (between 0 and 1)
+--- @return number # Eased value between 0 and 1
+function csau_ease_out_sin(x)
+	return math.sin((x * math.pi) / 2);
+end
+
 --- Parses a multi-entry string table as a single-line, human readable string
 --- @param tbl table Array table of strings
 --- @param sep string | nil String separator between entries. Default is a single space

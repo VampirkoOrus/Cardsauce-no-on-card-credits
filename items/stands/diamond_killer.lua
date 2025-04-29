@@ -36,7 +36,7 @@ function consumInfo.in_pool(self, args)
 end
 
 function consumInfo.calculate(self, card, context)
-    local bad_context = context.repetition or context.individual or context.blueprint
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.remove_playing_cards and not bad_context then
         local hands = 0
         for i, _card in ipairs(context.removed) do
@@ -56,6 +56,7 @@ function consumInfo.calculate(self, card, context)
         if not (context.blueprint_card or card).getting_sliced then
             G.E_MANAGER:add_event(Event({func = function()
                 ease_hands_played(card.ability.extra.hands)
+                G.FUNCS.csau_flare_stand_aura(card, 0.38)
                 card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..card.ability.extra.hands.." "..localize('k_hud_hands')})
                 card.ability.extra.hands = 0
                 return true

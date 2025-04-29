@@ -27,4 +27,16 @@ function consumInfo.can_use(self, card)
     return false
 end
 
+function consumInfo.calculate(self, card, context)
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+    if context.using_consumeable and not card.debuff and not bad_context then
+        local cons = context.consumeable
+        if cons.ability.name == "Hanged Man" then
+            G.FUNCS.csau_flare_stand_aura(card, 0.38)
+        end
+    end
+end
+
+
+
 return consumInfo

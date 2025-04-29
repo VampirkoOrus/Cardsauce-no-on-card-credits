@@ -124,7 +124,8 @@ local debt_collection = function(card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if not context.blueprint_card and context.game_over then
+    local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+    if not context.blueprint_card and context.game_over and not bad_context then
         local collect = debt_collection(card)
         if collect.saved then
             if collect.sell then
@@ -136,6 +137,9 @@ function consumInfo.calculate(self, card, context)
             end
             ease_dollars(collect.ease)
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 saved = 'ph_saved_vague',
                 colour = G.C.RED
             }

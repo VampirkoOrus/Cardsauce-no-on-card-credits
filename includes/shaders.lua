@@ -203,10 +203,10 @@ SMODS.DrawStep {
             if self.ability.aura_flare_queued then
                 self.ability.aura_flare_queued = false
 
-                if not self.ability.stand_activated then 
+                if not self.ability.stand_activated then
                     self.ability.aura_flare_lerp = 0.0
                 end
-                
+
                 self.ability.stand_activated = true
                 self.ability.aura_flare_direction = 1
             end

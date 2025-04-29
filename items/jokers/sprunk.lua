@@ -396,7 +396,7 @@ end
 local ed_ref = ease_dollars
 function ease_dollars(mod, instant)
     ed_ref(mod, instant)
-    if mod < 0 then
+    if to_big(mod) < to_big(0) then
         local sprunk = SMODS.find_card("j_csau_sprunk")
         if #sprunk > 0 then
             for i, v in ipairs(sprunk) do
