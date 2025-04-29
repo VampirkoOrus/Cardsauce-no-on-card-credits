@@ -40,6 +40,15 @@ function consumInfo.calculate(self, card, context)
                 }))
             end
         end
+        if #stone > 0 then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                    card:juice_up()
+                    return true
+                end
+            }))
+        end
     end
 end
 

@@ -50,10 +50,21 @@ function consumInfo.calculate(self, card, context)
         end
         if pseudorandom('thisisrequiem') < G.FUNCS.csau_add_chance(card.ability.extra.chance+#gold, true) / card.ability.extra.divide then
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 card = card,
                 level_up = true,
                 message = localize('k_level_up_ex')
             }
+        elseif #gold > 0 then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                    card:juice_up()
+                    return true
+                end
+            }))
         end
     end
 end

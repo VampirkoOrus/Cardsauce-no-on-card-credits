@@ -50,6 +50,9 @@ function consumInfo.calculate(self, card, context)
                 end
             else
                 return {
+                    func = function()
+                        G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                    end,
                     chips = card.ability.extra.chips
                 }
             end

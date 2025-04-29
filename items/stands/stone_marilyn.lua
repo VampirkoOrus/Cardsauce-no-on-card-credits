@@ -137,6 +137,9 @@ function consumInfo.calculate(self, card, context)
             end
             ease_dollars(collect.ease)
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 saved = 'ph_saved_vague',
                 colour = G.C.RED
             }

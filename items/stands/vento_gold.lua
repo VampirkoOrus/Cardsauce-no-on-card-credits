@@ -46,6 +46,9 @@ function consumInfo.calculate(self, card, context)
         end
         if #gold > 0 then
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 message = localize('k_gold_exp'),
                 colour = G.C.MONEY,
                 card = card

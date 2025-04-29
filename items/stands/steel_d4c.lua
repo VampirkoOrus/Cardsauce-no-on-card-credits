@@ -59,6 +59,7 @@ function consumInfo.calculate(self, card, context)
         if context.scoring_name == "Pair" and card.ability.extra.hands_played[context.scoring_name] == 1 then
             G.E_MANAGER:add_event(Event({
                 func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
                     card:juice_up()
                     return true
                 end

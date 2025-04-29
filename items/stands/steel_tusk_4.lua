@@ -119,6 +119,9 @@ function consumInfo.calculate(self, card, context)
         context.other_card:get_id() == 8 or
         context.other_card:get_id() == 14 then
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 chips = card.ability.extra.chips
             }
         end
@@ -127,6 +130,9 @@ function consumInfo.calculate(self, card, context)
         if next(context.poker_hands['csau_Fibonacci']) then
             ease_hands_played(card.ability.extra.hand_mod)
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 card = card,
                 message = localize('k_plus_hand'),
                 colour = G.C.BLUE

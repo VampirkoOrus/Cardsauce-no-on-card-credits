@@ -963,6 +963,15 @@ if next(SMODS.find_card('c_csau_steel_d4c_love')) then
         [1] = 'mult',
         [2] = 'dollars',
     }
+    local d4cl = SMODS.find_card('c_csau_steel_d4c_love')
+    for i, v in ipairs(d4cl) do
+         G.E_MANAGER:add_event(Event({
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(v, 0.38)
+                return true
+            end
+        }))
+    end
     proc = triggers[pseudorandom('d4c_lovetrain', 1, 2)]
 end
 '''

@@ -88,6 +88,9 @@ function consumInfo.calculate(self, card, context)
         end
         if trigger then
             return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
                 message = localize('k_upgrade_ex'),
                 colour = G.C.RED,
                 card = card

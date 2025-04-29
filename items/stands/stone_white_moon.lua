@@ -69,6 +69,9 @@ function consumInfo.calculate(self, card, context)
             for k, v in ipairs(context.full_hand) do
                 if not v.debuff then
                     return {
+                        func = function()
+                            G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                        end,
                         message = 'Again!',
                         repetitions = card.ability.extra.repetitions,
                         card = context.other_card
