@@ -209,12 +209,14 @@ SMODS.DrawStep {
 
                 self.ability.stand_activated = true
                 self.ability.aura_flare_direction = 1
+                self.ability.flare_rise = self.ability.aura_flare_target or default_aura_target
             end
 
             if self.ability.stand_activated then              
                 -- lerping the values
                 if self.ability.aura_flare_direction > 0 and self.ability.aura_flare_lerp < (self.ability.aura_flare_target or default_aura_target) then
                     self.ability.aura_flare_lerp = self.ability.aura_flare_lerp + G.real_dt
+                    self.ability.flare_rise = self.ability.flare_rise - G.real_dt
                     if self.ability.aura_flare_lerp >= (self.ability.aura_flare_target or default_aura_target) then
                         if self.ability.aura_flare_target then
                             self.ability.aura_flare_direction = -1
@@ -224,8 +226,14 @@ SMODS.DrawStep {
                     end
                 end
 
-                if self.ability.aura_flare_target then
-                    if self.ability.aura_flare_direction < 0 and self.ability.aura_flare_lerp > 0 then
+                if self.ability.aura_flare_target and self.ability.aura_flare_direction < 0 then
+                    -- hang longer on max if it took less time to reach max
+                    if self.ability.flare_rise > 0 then
+                        self.ability.flare_rise = self.ability.flare_rise - G.real_dt
+                        if self.ability.flare_rise < 0 then
+                            self.ability.flare_rise = 0
+                        end
+                    elseif self.ability.aura_flare_lerp > 0 then
                         self.ability.aura_flare_lerp = self.ability.aura_flare_lerp - G.real_dt
                         if self.ability.aura_flare_lerp <= 0 then
                             self.ability.aura_flare_lerp = nil
@@ -248,13 +256,14 @@ SMODS.DrawStep {
 
             -- aura flare in gameplay
             local flare_ease = 0
-            if self.ability.aura_flare_lerp then
-                if self.ability.aura_flare_direction > 0 then
-                    flare_ease = csau_ease_in_cubic(self.ability.aura_flare_lerp/(self.ability.aura_flare_target or default_aura_target))
-                else
-                    flare_ease = csau_ease_out_sin(self.ability.aura_flare_lerp/(self.ability.aura_flare_target or default_aura_target))
-                end
+            sendDebugMessage(self.ability.aura_flare_lerp)
+            if self.ability.aura_flare_direction > 0 then
+                flare_ease = csau_ease_in_cubic(self.ability.aura_flare_lerp/(self.ability.aura_flare_target or default_aura_target))
+            else
+                flare_ease = csau_ease_out_quint(self.ability.aura_flare_lerp/(self.ability.aura_flare_target or default_aura_target))
             end
+
+            
             local aura_spread = (flare_ease * 0.04) + self.ability.aura_spread
 
             -- colors

@@ -71,11 +71,15 @@ function consumInfo.calculate(self, card, context)
     if context.individual and context.cardarea == G.play and not card.debuff then
         card.ability.index = card.ability.index + 1
         if card.ability.index > #context.scoring_hand then
-            return {
+            G.FUNCS.csau_flare_stand_aura(card, 0.6)
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                blocking = false,
                 func = function()
-                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
-                end,
-            }
+                    card:juice_up()
+                    return true
+                end 
+            }))
         end
     end
     if context.end_of_round then

@@ -264,18 +264,11 @@ function csau_ease_in_out_quart(x)
 	return x < 0.5 and 8 * x * x * x * x or 1 - (-2 * x + 2)^4 / 2;
 end
 
---- x^4 easing function in
---- @param x number Value to ease (between 0 and 1)
---- @return number # Eased value between 0 and 1
-function csau_ease_in_cubic(x)
-	return x * x * x
-end
-
 --- sin ease out function
 --- @param x number Value to ease (between 0 and 1)
 --- @return number # Eased value between 0 and 1
-function csau_ease_out_sin(x) 
-	return math.sin((x * math.pi) / 2);
+function csau_ease_out_quint(x) 
+	return 1 - (1-x)^5;
 end
 
 --- x^4 easing function in
@@ -283,13 +276,6 @@ end
 --- @return number # Eased value between 0 and 1
 function csau_ease_in_cubic(x)
 	return x * x * x
-end
-
---- sin ease out function
---- @param x number Value to ease (between 0 and 1)
---- @return number # Eased value between 0 and 1
-function csau_ease_out_sin(x)
-	return math.sin((x * math.pi) / 2);
 end
 
 --- Parses a multi-entry string table as a single-line, human readable string
@@ -795,6 +781,7 @@ G.FUNCS.csau_flare_stand_aura = function(stand, delay_time, on_hover)
 		trigger = 'immediate',
 		blocking = false,
 		func = function()
+			sendDebugMessage('flare')
 			stand.ability.aura_flare_queued = true
 			stand.ability.aura_flare_target = delay_time and (delay_time / 2) or nil
         	return true
