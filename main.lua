@@ -17,6 +17,7 @@ csau_enabled = copy_table(csau_config)
 
 SMODS.current_mod.DT = {
 	twoPoint0 = true,
+	def_deckskin = 'joel' -- 'vinny' or nil for Vine Characters, 'joel' for Joel characters
 }
 
 -- I put the colors here I guess

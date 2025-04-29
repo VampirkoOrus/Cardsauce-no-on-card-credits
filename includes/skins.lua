@@ -371,40 +371,43 @@ SMODS.Atlas{ key = 'suits', px = 18, py = 18, path = 'cards/suits.png' }
 SMODS.Atlas{ key = 'hearts_willo', px = 18, py = 18, path = 'cards/hearts_willo.png' }
 local suits = {'hearts', 'diamonds', 'clubs', 'spades'}
 
--- default color palettes if all suit colors are disabled
-if not G.SETTINGS.initCSAUColors then
-    G.SETTINGS.CUSTOM_DECK.Collabs.Spades = "csau_default_spades"
-    G.SETTINGS.CUSTOM_DECK.Collabs.Hearts = "csau_default_hearts"
-    G.SETTINGS.CUSTOM_DECK.Collabs.Diamonds = "csau_default_diamonds"
-    G.SETTINGS.CUSTOM_DECK.Collabs.Clubs = "csau_default_clubs"
-    if not G.SETTINGS.colourpalettes then
-        G.SETTINGS.colourpalettes = {}
+local function set_first_deckskin(ds)
+    if ds == 'vinny' then
+        G.SETTINGS.CUSTOM_DECK.Collabs.Spades = "csau_confidants"
+        G.SETTINGS.CUSTOM_DECK.Collabs.Hearts = "csau_wildcards"
+        G.SETTINGS.CUSTOM_DECK.Collabs.Diamonds = "csau_classics"
+        G.SETTINGS.CUSTOM_DECK.Collabs.Clubs = "csau_mascots"
+
+        G.SETTINGS.colourpalettes.Spades = "csau_confidants"
+        G.SETTINGS.colourpalettes.Hearts = "csau_wildcards"
+        G.SETTINGS.colourpalettes.Diamonds = "csau_classics"
+        G.SETTINGS.colourpalettes.Clubs = "csau_mascots"
+    elseif ds == 'joel' then
+        G.SETTINGS.CUSTOM_DECK.Collabs.Spades = "csau_powerful"
+        G.SETTINGS.CUSTOM_DECK.Collabs.Hearts = "csau_americans"
+        G.SETTINGS.CUSTOM_DECK.Collabs.Diamonds = "csau_duendes"
+        G.SETTINGS.CUSTOM_DECK.Collabs.Clubs = "csau_voices"
+
+        G.SETTINGS.colourpalettes.Spades = "csau_powerful"
+        G.SETTINGS.colourpalettes.Hearts = "csau_americans"
+        G.SETTINGS.colourpalettes.Diamonds = "csau_duendes"
+        G.SETTINGS.colourpalettes.Clubs = "csau_voices"
     end
-    G.SETTINGS.colourpalettes.Spades = "csau_def_spades"
-    G.SETTINGS.colourpalettes.Hearts = "csau_def_hearts"
-    G.SETTINGS.colourpalettes.Diamonds = "csau_def_diamonds"
-    G.SETTINGS.colourpalettes.Clubs = "csau_def_clubs"
-    G.SETTINGS.initCSAUColors = true
-    G.save_settings()
 end
 
--- setting base suit
-for suit, color in pairs(G.C.SUITS) do
-    local c
-    if suit == "Hearts" then c = HEX("e14e62")
-    elseif suit == "Diamonds" then c = HEX("3c56a4")
-    elseif suit == "Clubs" then c = HEX("4dac84")
-    elseif suit == "Spades" then c = HEX("8d619a")
+-- default color palettes if all suit colors are disabled
+if not G.SETTINGS.initCSAUSkins then
+    if SMODS.current_mod.DT.def_deckskin then
+        if SMODS.current_mod.DT.def_deckskin == 'joel' then
+            set_first_deckskin('joel')
+        elseif SMODS.current_mod.DT.def_deckskin == 'vinny' then
+            set_first_deckskin('vinny')
+        end
+    else
+        set_first_deckskin('vinny')
     end
-    SMODS.Suits[suit].keep_base_colours = false
-    SMODS.Suits[suit].lc_colour = c
-    SMODS.Suits[suit].hc_colour = c
-    if G.VANILLA_COLLABS then
-        G.VANILLA_COLLABS.lc_colours[suit] = c
-        G.VANILLA_COLLABS.hc_colours[suit] = c
-    end
-    G.C.SO_1[suit] = c
-    G.C.SO_2[suit] = c
+    G.SETTINGS.initCSAUSkins = true
+    G.save_settings()
 end
 
 for _, suit in ipairs(suits) do
