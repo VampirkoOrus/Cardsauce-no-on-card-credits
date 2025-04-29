@@ -393,7 +393,7 @@ function G.UIDEF.card_focus_button(args)
 			{n=G.UIT.ROOT, config = {align = 'bm', colour = G.C.CLEAR}, nodes={
 				{n=G.UIT.R, config={id = args.type == 'morshu_save', ref_table = args.card, ref_parent = args.parent, align = 'bm', padding = 0.05, colour = G.C.PURPLE, shadow = true, r = 0.08, func = args.func, one_press = true, button = args.button, focus_args = {type = 'none'}, hover = true}, nodes={
 					{n=G.UIT.R, config={align = 'bm', minw = 1, minh = 0.75, padding = 0.08,
-										focus_args = {button = 'a', scale = 0.35, orientation = 'bli', offset = {x = 0, y = 0}, type = 'none'},
+										focus_args = {button = 'a', scale = 0.45, orientation = 'bli', offset = {x = 0.05, y = -0.05}, type = 'none'},
 										func = 'set_button_pip'}, nodes={
 						{n=G.UIT.R, config={align = "bm", minw = 1}, nodes={
 							{n=G.UIT.R, config={align = "cl", minw = 1.25}, nodes={}},
