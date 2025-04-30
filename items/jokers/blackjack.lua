@@ -108,4 +108,18 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { } }
 end
 
+function jokerInfo.add_to_deck(self, card)
+    G.GAME.hands['csau_Blackjack'].visible = true
+    if G.GAME.hands.csau_FlushBlackjack.played > 0 then
+        G.GAME.hands['csau_FlushBlackjack'].visible = true
+    end
+end
+
+function jokerInfo.remove_from_deck(self, card, from_debuff)
+    G.GAME.hands['csau_Blackjack'].visible = false
+    G.GAME.hands['csau_FlushBlackjack'].visible = false
+end
+
+
+
 return jokerInfo

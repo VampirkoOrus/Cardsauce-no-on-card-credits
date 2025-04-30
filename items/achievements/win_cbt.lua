@@ -2,7 +2,7 @@ local trophyInfo = {
     rarity = 3,
     unlock_condition = function(self, args)
         if args.type == 'win_deck' then
-            if get_deck_win_stake('b_csau_cbt') then
+            if G.GAME.selected_back.effect.center.key == "b_csau_cbt" then
                 return true
             end
         end
