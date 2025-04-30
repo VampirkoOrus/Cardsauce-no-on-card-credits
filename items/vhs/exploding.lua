@@ -46,7 +46,7 @@ function consumInfo.calculate(self, card, context)
         end
         return {
             card = card,
-            message = localize{type = 'variable', key = 'a_plus_discard', vars = {card.ability.extra.discard_mod}},
+            message = localize{type = 'variable', key = 'a_plus_discard', vars = {mod}},
             colour = G.C.RED
         }
     end

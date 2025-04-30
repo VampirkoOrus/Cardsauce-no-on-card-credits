@@ -23,8 +23,6 @@ function jokerInfo.calculate(self, card, context)
             local bj1 = false
             local ps1 = pseudorandom('bjbros1')
             local ps2 = G.GAME.probabilities.normal / card.ability.prob_1
-            send(ps1)
-            send(ps2)
             if ps1 < ps2 then
                 bj1 = true
                 return {
