@@ -816,7 +816,7 @@ return {
 			bl_csau_hog = {
 				name="The Hog",
 				text={
-					"#1# in 4 face cards",
+					"#1# in 2 face cards",
 					"become The Hog's prey"
 				},
 			},
@@ -2496,10 +2496,10 @@ return {
 			j_csau_junka = {
 				name = "Black Spine Junka",
 				text = {
-					"Gains {C:mult}+#1#{} Mult, {C:green}+#2#{} chance, and has a",
+					"Gains {X:mult,C:white} X#1# {} Mult, {C:green}+#2#{} chance, and has a",
 					"{C:green}#3# in #4#{} chance to {C:red}self destruct{}",
 					"each time a {C:vhs}VHS Tape{} finishes",
-					"{C:inactive}(Currently {}{C:mult}+#5#{}{C:inactive} Mult{}{C:inactive}){}",
+					"{C:inactive}(Currently {}{X:mult,C:white} X#5# {}{C:inactive} Mult{}{C:inactive}){}",
 				},
 				unlock = {
 					"Discover {E:1,C:attention}#1#{} {E:1,C:vhs}VHS Tapes",

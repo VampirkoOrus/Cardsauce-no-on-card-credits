@@ -1,9 +1,9 @@
 local jokerInfo = {
-    name = 'Barbeque Shoes',
+    name = 'Gravity',
     config = {
         extra = {
             mult = 0,
-            mult_mod = 2,
+            mult_mod = 4,
         }
     },
     rarity = 1,

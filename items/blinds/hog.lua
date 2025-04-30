@@ -15,7 +15,7 @@ local blindInfo = {
 function blindInfo.recalc_debuff(self, card, from_blind)
     if not self.disabled and card.area ~= G.jokers then
         if card:is_face() then
-            if pseudorandom(pseudoseed('hog')) < G.GAME.probabilities.normal/4 then
+            if pseudorandom(pseudoseed('hog')) < G.GAME.probabilities.normal/2 then
                 return true
             end
         end
