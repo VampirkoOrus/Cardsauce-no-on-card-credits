@@ -17,9 +17,6 @@ extern bool shadow;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_1;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_2;
 
-extern MY_HIGHP_OR_MEDIUMP float screen_scale;
-
-extern MY_HIGHP_OR_MEDIUMP number shadow_height;
 extern MY_HIGHP_OR_MEDIUMP float scale_mod;
 extern MY_HIGHP_OR_MEDIUMP float rotate_mod;
 // should be the inverse of the scale factor used for the canvas size
@@ -31,8 +28,6 @@ number hue(number s, number t, number h);
 vec4 HSL(vec4 c);
 vec4 RGB(vec4 c);
 
-#define PI 3.141592653
-#define SOUL_OFFSET vec2(0.0) // default uv starts at the soul frame, so no offset required
 #define MASK_OFFSET vec2(0.4, 0.0) // mask frame is 0.4 units away from the soul frame (normalised)
 #define BASE_OFFSET vec2(-0.2, 0.0) // base frame is -0.2 units away from the soul frame (normalised)
 
@@ -223,7 +218,7 @@ vec4 HSL(vec4 c)
 
 extern MY_HIGHP_OR_MEDIUMP vec2 mouse_screen_pos;
 extern MY_HIGHP_OR_MEDIUMP float hovering;
-// extern MY_HIGHP_OR_MEDIUMP float screen_scale; // moved to top
+extern MY_HIGHP_OR_MEDIUMP float screen_scale;
 
 #ifdef VERTEX
 vec4 position( mat4 transform_projection, vec4 vertex_position )

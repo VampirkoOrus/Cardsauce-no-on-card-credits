@@ -6,8 +6,6 @@
 	#define MY_HIGHP_OR_MEDIUMP mediump
 #endif
 
-//todo: external seed for the random grid
-
 extern MY_HIGHP_OR_MEDIUMP vec2 glitched;
 extern MY_HIGHP_OR_MEDIUMP number dissolve;
 extern MY_HIGHP_OR_MEDIUMP number time;
@@ -111,13 +109,13 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 
     float sprite_width = texture_details.z / image_details.x;
     float sprite_height = texture_details.a / image_details.y;
-    vec2 sprite_size = vec2(sprite_width, sprite_height); // Normalised size
+    vec2 sprite_size = vec2(sprite_width, sprite_height); // normalised size
 
     float sprite_pos_x = texture_details.x * sprite_width;
     float sprite_pos_y = texture_details.y * sprite_height;
-    vec2 sprite_pos = vec2(sprite_pos_x, sprite_pos_y); // Normalised pos
+    vec2 sprite_pos = vec2(sprite_pos_x, sprite_pos_y); // normalised pos
 
-    vec2 pixel_size = vec2(1.) / image_details.xy; // Normalised pixel size
+    vec2 pixel_size = vec2(1.) / image_details.xy; // normalised pixel size
 
     vec4 glitch_layer = vec4(0.);
 
@@ -166,8 +164,7 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
             glitch_layer.rgb += 0.2 * vec3(red_offset, green_offset, blue_offset);
         }
     }
-
-    //vec4 tex = shine_effect(tex_orig, uv);
+    
     vec4 tex = tex_orig;
     tex = mix(tex, glitch_layer, glitch_layer.a);
     tex = shine_effect(tex, uv);
