@@ -60,7 +60,7 @@ G.FUNCS.toggle_shop = function(e)
 end
 
 G.FUNCS.check_for_morshu_space = function(card)
-    if #G.morshu_area.cards >= G.morshu_area.config.card_limit + ((card.edition and card.edition.negative) and 1 or 0) then
+    if #G.morshu_area.cards >= G.morshu_area.config.card_limit then
         --alert_no_space(card, G.morshu_area)
         for i, v in ipairs(G.morshu_area.cards) do
             G.E_MANAGER:add_event(Event({
