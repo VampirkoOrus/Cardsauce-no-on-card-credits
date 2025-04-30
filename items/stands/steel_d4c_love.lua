@@ -31,6 +31,19 @@ function consumInfo.in_pool(self, args)
     return true
 end
 
+local ref_cie = SMODS.calculate_individual_effect
+SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, from_edition)
+    if next(SMODS.find_card('c_csau_steel_d4c_love')) and scored_card.ability.effect and scored_card.ability.effect == 'Lucky Card' and not from_edition then
+        if key == 'mult' and effect.mult == G.P_CENTERS.m_lucky.config.mult or key == 'p_dollars' and effect.p_dollars == G.P_CENTERS.m_lucky.config.p_dollars then
+            local d4cl = SMODS.find_card('c_csau_steel_d4c_love')
+            for i, v in ipairs(d4cl) do
+                G.FUNCS.csau_flare_stand_aura(v, 0.38)
+            end
+        end
+    end
+    return ref_cie(effect, scored_card, key, amount, from_edition)
+end
+
 function consumInfo.can_use(self, card)
     return false
 end

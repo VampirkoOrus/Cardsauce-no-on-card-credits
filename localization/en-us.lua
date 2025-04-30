@@ -775,7 +775,7 @@ return {
 			ach_csau_evolve_soft = "Evolve your Stand into Soft & Wet: Go Beyond",
 			--- Gold
 			ach_csau_high_tetris = "Get to maximum speed in YOU GOT THE TETRIS!",
-			ach_csau_fucking_idiot = "Have both Live Dangerously and Nutbuster in your Joker slots",
+			ach_csau_fucking_idiot = "Have both Live Dangerously and Oops! All 6's or Beginner's Luck in your Joker slots",
 			ach_csau_discover_vincenzo = "Discover Vincenzo",
 			ach_csau_discover_quarterdumb = "Discover Quarterdumb",
 			ach_csau_discover_wigsaw = "Discover Wigsaw",

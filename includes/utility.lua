@@ -387,8 +387,7 @@ G.FUNCS.csau_generate_detail_desc = function(self, info_queue, card, desc_nodes,
 		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
 		full_UI_table.name = localize{type = 'name', key = key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
 	end
-
-	if current_mod.config['detailedDescs'] and G.localization.descriptions.Joker[key.."_detailed"] then
+	if current_mod.config['detailedDescs'] and G.localization.descriptions[self.set][key.."_detailed"] then
 		localize{type = 'descriptions', key = key.."_detailed", set = self.set, nodes = desc_nodes, vars = self.loc_vars and self.loc_vars(self, info_queue, card).vars or {}}
 	else
 		localize{type = 'descriptions', key = key, set = self.set, nodes = desc_nodes, vars = self.loc_vars and self.loc_vars(self, info_queue, card).vars or {}}
