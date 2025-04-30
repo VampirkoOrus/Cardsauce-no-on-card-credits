@@ -597,7 +597,7 @@ G.FUNCS.destroy_tape = function(card, delay_time, ach, silent, text)
         delay = delay_time,
         func = function()
 			attention_text({
-				text = localize(text or 'k_vhs_destroyed'),
+				text = text or localize('k_vhs_destroyed'),
 				scale = 1,
 				hold = 0.5,
 				backdrop_colour = G.C.VHS,
