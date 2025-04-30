@@ -49,9 +49,18 @@ function jokerInfo.calculate(self, card, context)
     end
     if not context.blueprint_card and context.game_over then
         if pseudorandom('allgoneforever') < G.GAME.probabilities.normal / card.ability.extra.save_prob then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.hand_text_area.blind_chips:juice_up()
+                    G.hand_text_area.game_chips:juice_up()
+                    play_sound('tarot1')
+                    card:start_dissolve()
+                    return true
+                end
+            }))
             check_for_unlock({ type = "activate_proto" })
             return {
-                saved = 'ph_saved_vague',
+                saved = 'ph_saved_proto',
                 colour = G.C.RED
             }
         end

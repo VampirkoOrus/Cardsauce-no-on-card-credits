@@ -24,7 +24,7 @@ end
 
 local debt_collection = function(card)
     local percentage_left = (G.GAME.blind.chips-G.GAME.chips) / G.GAME.blind.chips
-    local debt = math.ceil(percentage_left / card.ability.extra.conv_score)*card.ability.conv_money
+    local debt = math.ceil(percentage_left / card.ability.extra.conv_score)*card.ability.extra.conv_money
     local recoverable = 0
     if G.GAME.dollars - debt >= G.GAME.bankrupt_at then
         send("Debt satisfied with only money")
@@ -139,8 +139,10 @@ function consumInfo.calculate(self, card, context)
             return {
                 func = function()
                     G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                    card:juice_up()
+                    play_sound('tarot1')
                 end,
-                saved = 'ph_saved_vague',
+                saved = 'ph_saved_marilyn',
                 colour = G.C.RED
             }
         end

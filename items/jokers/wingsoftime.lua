@@ -79,7 +79,7 @@ function jokerInfo.calculate(self, card, context)
 			end
 		}))
 	return {
-		saved = 'ph_saved_vague',
+		saved = 'ph_saved_wings',
 		colour = G.C.RED
 	}
 	end

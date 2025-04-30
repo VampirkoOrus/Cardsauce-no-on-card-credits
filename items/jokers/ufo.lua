@@ -13,6 +13,7 @@ local jokerInfo = {
     eternal_compat = false,
     perishable_compat = false,
     hasSoul = true,
+    no_soul_shadow = true,
     streamer = "joel",
 }
 
