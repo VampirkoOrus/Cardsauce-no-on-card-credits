@@ -16,19 +16,19 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.setting_blind and not card.getting_sliced and not card.debuff then
-        local least_played_num = (G.GAME.hands["High Card"].played or 10000)
-        for k, v in pairs(G.GAME.hands) do
-            if v.played <= least_played_num and v.visible then
-                least_played_num = v.played
+        local lowest = math.huge
+        local lowest_pool = {}
+        for k, hand in pairs(G.GAME.hands) do
+            if hand.visible and hand.played and hand.played < lowest then
+                lowest = hand.played
             end
         end
-        local least_pool = {}
-        for k, v in pairs(G.GAME.hands) do
-            if v.played == least_played_num and v.visible then
-                least_pool[#least_pool + 1] = k
+        for k, hand in pairs(G.GAME.hands) do
+            if hand.visible and hand.played == lowest then
+                table.insert(lowest_pool, k)
             end
         end
-        local level_hand = least_pool[pseudorandom('rottenwomb', 1, #least_pool)]
+        local level_hand = pseudorandom_element(lowest_pool, pseudoseed('rottenwomb'))
         if level_hand then
             card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex')})
             update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=localize(level_hand, 'poker_hands'),chips = G.GAME.hands[level_hand].chips, mult = G.GAME.hands[level_hand].mult, level=G.GAME.hands[level_hand].level})
