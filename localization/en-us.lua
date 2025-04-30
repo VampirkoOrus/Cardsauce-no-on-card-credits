@@ -666,7 +666,7 @@ return {
 			ach_csau_purchase_dink = "VERY Expensive.",
 			ach_csau_final_odio = "MEGALOMANIA",
 			ach_csau_win_vine = "Growing Free",
-			ach_csau_win_varg = "Biggest Gamer",
+			ach_csau_win_varg = "Don't Quit for Nothin'",
 			ach_csau_win_cbt = "Now Gold Stake, Pussy",
 			ach_csau_win_wheel = "Fuck Movies",
 			ach_csau_win_disc = "ORAORAORAORA",
