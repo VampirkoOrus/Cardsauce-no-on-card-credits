@@ -313,11 +313,37 @@ local slide_mod = 12
 local slide_out_delay = 0.05
 local width_factor = 0.1
 
+local old_center_ds = SMODS.DrawSteps.center.func
+SMODS.DrawStep:take_ownership('center', {
+    func = function(self, layer)
+        if self.ability.set ~= 'VHS' then
+            old_center_ds(self, layer)
+        end
+    end
+})
+
 SMODS.DrawStep {
     key = 'vhs_slide',
     order = -1,
-    func = function(self)
+    func = function(self, layer)
         if self.ability.set ~= 'VHS' or (self.area and self.area.config.collection and not self.config.center.discovered) then
+            --If the card is not yet discovered
+            if not self.config.center.discovered then
+                local shared_sprite = G.shared_undiscovered_tarot
+                local scale_mod = -0.05 + 0.05*math.sin(1.8*G.TIMERS.REAL)
+                local rotate_mod = 0.03*math.sin(1.219*G.TIMERS.REAL)
+
+                self.children.center:draw_shader('dissolve')
+                shared_sprite.role.draw_major = self
+                if (self.config.center.undiscovered and not self.config.center.undiscovered.no_overlay) or not( SMODS.UndiscoveredSprites[self.ability.set] and SMODS.UndiscoveredSprites[self.ability.set].no_overlay) then 
+                    shared_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
+                else
+                    if SMODS.UndiscoveredSprites[self.ability.set] and SMODS.UndiscoveredSprites[self.ability.set].overlay_sprite then
+                        SMODS.UndiscoveredSprites[self.ability.set].overlay_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
+                    end
+                end
+            end
+            
             return
         end
 
@@ -334,73 +360,41 @@ SMODS.DrawStep {
                 if self.ability.slide_move > 1 then
                     self.ability.slide_move = 1
                 end
-                self.children.center:set_role({
-                    role_type = 'Minor',
-                    offset = {x = -0.25 * self.ability.slide_move, y = 0},
-                    major = self,
-                    draw_major = self,
-                    xy_bond = 'Strong',
-                    wh_bond = 'Strong',
-                    r_bond = 'Strong',
-                    scale_bond = 'Strong'
-                })
             end
         elseif not self.ability.activated and self.ability.slide_move > 0 then
             self.ability.slide_out_delay = 0
             self.ability.slide_move = self.ability.slide_move - (slide_mod * G.real_dt)
+            
             if self.ability.slide_move < 0 then
                 self.ability.slide_move = 0
+                self.children.center.VT.w = self.T.w
             end
-            self.children.center:set_role({
-                role_type = 'Minor',
-                offset = {x = -0.25 * self.ability.slide_move, y = 0},
-                major = self,
-                draw_major = self,
-                xy_bond = 'Strong',
-                wh_bond = 'Strong',
-                r_bond = 'Strong',
-                scale_bond = 'Strong'
-            })
+            
         end
 
         if self.ability.slide_move <= 0 then
-            self.children.center.VT.w = self.T.w
+            self.children.center:draw_shader('dissolve', self.shadow_height)
+	        self.children.center:draw_shader('dissolve')
             return
         end
 
         -- adjusting the width to match the shader change
-        self.children.center.VT.w = (self.T.w * width_factor * self.ability.slide_move) + self.T.w
-
-        -- default tilt behavior
-        local cursor_pos = {}
-        cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
-        cursor_pos[2] = self.tilt_var and self.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
-        local _draw_major = self.role.draw_major or self
-        local screen_scale = G.TILESCALE*G.TILESIZE*(self.children.center.mouse_damping or 1)*G.CANV_SCALE
-        local hovering = (self.hover_tilt or 0)
-
-        for i=1, 2 do
-            local shadow_height = self.shadow_height
-            if i==2 then
-                shadow_height = nil
-            end
-
-            G.SHADERS['csau_vhs']:send('spine', G.ASSET_ATLAS['csau_blackspine'].image)
-            G.SHADERS['csau_vhs']:send('lerp', self.ability.slide_move)
-            G.SHADERS['csau_vhs']:send('mouse_screen_pos', cursor_pos)
-            G.SHADERS['csau_vhs']:send('screen_scale', screen_scale)
-            G.SHADERS['csau_vhs']:send('hovering', hovering)
-            G.SHADERS['csau_vhs']:send("texture_details",self.children.center:get_pos_pixel())
-            G.SHADERS['csau_vhs']:send("image_details",self.children.center:get_image_dims())
-            G.SHADERS['csau_vhs']:send("dissolve",math.abs(_draw_major.dissolve or 0))
-            G.SHADERS['csau_vhs']:send("burn_colour_1",_draw_major.dissolve_colours and _draw_major.dissolve_colours[1] or G.C.CLEAR)
-            G.SHADERS['csau_vhs']:send("burn_colour_2",_draw_major.dissolve_colours and _draw_major.dissolve_colours[2] or G.C.CLEAR)
-            G.SHADERS['csau_vhs']:send("shadow",(not not shadow_height))
-            love.graphics.setShader(G.SHADERS['csau_vhs'], G.SHADERS['csau_vhs'])
-            self.children.center:draw_self()
-            love.graphics.setShader()
+        if not self.children.center.pinch.x then
+            self.children.center.VT.x = self.T.x - width_factor * self.ability.slide_move * 2
+            self.children.center.VT.w = (self.T.w * width_factor * self.ability.slide_move) + self.T.w
         end
 
+        -- default tilt behavior
+        G.SHADERS['csau_vhs']:send('spine', G.ASSET_ATLAS['csau_blackspine'].image)
+        G.SHADERS['csau_vhs']:send('lerp', self.ability.slide_move)
+
+        self.children.center:draw_shader('csau_vhs', self.shadow_height)
+	    self.children.center:draw_shader('csau_vhs', nil)
+
+        local center = self.config.center
+        if center.draw and type(center.draw) == 'function' then
+            center:draw(self, layer)
+        end
     end,
     conditions = { vortex = false, facing = 'front' },
 }
