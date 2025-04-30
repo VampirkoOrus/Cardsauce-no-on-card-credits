@@ -40,7 +40,7 @@ local card_set_ability_ref = Card.set_ability
 function Card:set_ability(center, initial, delay_sprites)
     local old_center = self.config.center
     card_set_ability_ref(self, center, initial, delay_sprites)
-    if center ~= G.P_CENTERS.c_base and not initial then
+    if self.area and (self.area == G.hand or self.area == G.play) and center ~= G.P_CENTERS.c_base and not initial then
         local bulks = SMODS.find_card("j_csau_bulk")
         if #G.hand.highlighted > 0 then
             for i, v in ipairs(bulks) do
