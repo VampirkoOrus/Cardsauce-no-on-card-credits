@@ -723,16 +723,6 @@ payload = '''elseif self.ability.name == 'Ancient Joker' then loc_vars = {self.a
 
 [[patches]]
 [patches.pattern]
-target = 'functions/common_events.lua'
-pattern = '''if not SMODS.has_no_suit(v) and not SMODS.has_no_rank(v) then'''
-position = 'at'
-match_indent = true
-payload = '''if G.GAME and G.GAME.wigsaw_suit and not SMODS.has_no_suit(v) and not SMODS.has_no_rank(v) and v:is_suit(G.GAME.wigsaw_suit) then
-    valid_idol_cards[#valid_idol_cards+1] = v
-elseif not SMODS.has_no_suit(v) and not SMODS.has_no_rank(v) and not G.GAME and G.GAME.wigsaw_suit then'''
-
-[[patches]]
-[patches.pattern]
 target = 'card.lua'
 pattern = '''if v:is_suit('Clubs', nil, true) or v:is_suit('Spades', nil, true) then'''
 position = 'at'
