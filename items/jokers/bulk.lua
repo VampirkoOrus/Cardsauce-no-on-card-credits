@@ -34,6 +34,11 @@ function jokerInfo.calculate(self, card, context)
             upgrade(card, #G.hand.highlighted)
         end
     end
+    if context.joker_main and to_big(card.ability.extra.x_mult) > to_big(1) then
+        return {
+            xmult = card.ability.extra.x_mult
+        }
+    end
 end
 
 local card_set_ability_ref = Card.set_ability
