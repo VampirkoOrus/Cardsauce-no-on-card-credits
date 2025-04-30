@@ -306,3 +306,19 @@ function love.focus(f)
         G.col_stand_hover = nil
     end
 end
+
+local ref_cgid = Card.get_id
+function Card:get_id(skip_pmk)
+    skip_pmk = skip_pmk or false
+    if not skip_pmk and (self.area == G.hand or self.area == G.play) and self:is_face() and next(SMODS.find_card("c_csau_lion_paper")) then
+        local pmk = SMODS.find_card("c_csau_lion_paper")
+        for i, v in ipairs(pmk) do
+            G.FUNCS.csau_flare_stand_aura(v, 0.38)
+        end
+        if G.GAME.current_round.paper_rank then
+            send(G.GAME.current_round.paper_rank)
+        end
+        return SMODS.Ranks[G.GAME.current_round.paper_rank or 'Jack'].id
+    end
+    return ref_cgid(self)
+end

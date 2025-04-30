@@ -13,12 +13,12 @@ end
 
 --- Resets the rank used by the Paper Moon King stand card
 function csau_reset_paper_rank()
-    G.GAME.csau_current_paper_rank = {'Jack'}
+    G.GAME.current_round.paper_rank = 'Jack'
 	local valid_ranks = {}
     for _, rank in pairs(SMODS.Ranks) do
         if rank.face then valid_ranks[#valid_ranks+1] = rank.key end
     end
-    G.GAME.csau_current_paper_rank = pseudorandom_element(valid_ranks, pseudoseed('papermoon'..G.GAME.round_resets.ante))
+	G.GAME.current_round.paper_rank = pseudorandom_element(valid_ranks, pseudoseed('papermoon'..G.GAME.round_resets.ante))
 end
 
 function is_perfect_square(x)

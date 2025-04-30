@@ -58,16 +58,6 @@ function SMODS.current_mod.reset_game_globals(run_start)
 	G.GAME.csau_delay_duane = true
 	SMODS.calculate_context({csau_duane_change = true, suit = randCard_3.base.suit})
 	G.GAME.current_round.duane_suit = randCard_3.base.suit
-
-
-	local valid_paper_ranks = {}
-	for _, rank in pairs(SMODS.Ranks) do
-		if rank.face then
-			valid_paper_ranks[#valid_paper_ranks+1] = v
-		end
-	end
-	local randCard_4 = pseudorandom_element(valid_paper_ranks, pseudoseed('papermoon'..G.GAME.round_resets.ante))
-	G.GAME.current_round.paper_rank = randCard_4 and randCard_4.base.value
 end
 
 SMODS.PokerHandPart:take_ownership('_straight', {
