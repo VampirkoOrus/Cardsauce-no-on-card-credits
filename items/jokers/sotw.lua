@@ -23,7 +23,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
     local stands_obtained = 0
     for k, v in pairs(G.GAME.consumeable_usage) do if v.set == 'csau_Stand' then stands_obtained = stands_obtained + 1 end end
-    return { vars = {card.ability.extra.x_mult_mod, to_big(1 + (card.ability.extra.x_mult_mod*stands_obtained))} }
+    return { vars = {card.ability.extra.x_mult_mod, 1 + (card.ability.extra.x_mult_mod*stands_obtained)} }
 end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
@@ -42,10 +42,9 @@ function jokerInfo.calculate(self, card, context)
     if context.joker_main and context.cardarea == G.jokers then
         local stands_obtained = 0
         for k, v in pairs(G.GAME.consumeable_usage) do if v.set == 'csau_Stand' then stands_obtained = stands_obtained + 1 end end
-        if card.ability.extra.x_mult_mod*stands_obtained > 1 then
+        if to_big(1 + (card.ability.extra.x_mult_mod*stands_obtained)) > to_big(1) then
             return {
-                message = localize{type='variable',key='a_xmult',vars={to_big(1 + (card.ability.extra.x_mult_mod*stands_obtained))}},
-                Xmult_mod = card.ability.extra.x_mult,
+                xmult = 1 + (card.ability.extra.x_mult_mod*stands_obtained),
             }
         end
     end
