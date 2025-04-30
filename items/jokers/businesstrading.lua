@@ -7,7 +7,7 @@ local jokerInfo = {
         },
         destroyed_card = nil
     },
-    rarity = 2,
+    rarity = 1,
     cost = 6,
     blueprint_compat = false,
     eternal_compat = true,

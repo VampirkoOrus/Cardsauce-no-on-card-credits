@@ -142,6 +142,7 @@ if SMODS.current_mod.DT.twoPoint0 then
 
             'purple', -- Page 2 Start
             'garbagehand',
+            'businesstrading',
             'fantabulous',
             -- Update 1.2
             'ten',
@@ -157,15 +158,13 @@ if SMODS.current_mod.DT.twoPoint0 then
             'cousinsclub',
             'anotherlight',
             'sohappy',
-            'code',
-            'deathcard', -- Page 2 End
+            'code', -- Page 2 End
 
 
-
-            'maskedjoker', -- Page 3 Start
+            'deathcard', -- Page 3 Start
+            'maskedjoker',
             'dontmind',
             'kerosene',
-            'businesstrading',
             'red',
             'fate',
             'miracle',
@@ -256,11 +255,11 @@ if SMODS.current_mod.DT.twoPoint0 then
             'ufo',
             'tetris',
             -- [[Common]] (LOCKED)
-            'powers',
-            'nutbuster',
             'itsmeaustin',
             'vomitblast',
+            'nutbuster',
             -- [[Uncommon]] (LOCKED)
+            'powers',
             'triptoamerica',
             'monkey',
             'blackjack', -- Page 7 End

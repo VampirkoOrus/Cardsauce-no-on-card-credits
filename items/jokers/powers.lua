@@ -1,9 +1,9 @@
 local jokerInfo = {
     name = 'Live Dangerously',
     config = {
-        extra = 2
+        extra = 1.5
     },
-    rarity = 1,
+    rarity = 2,
     cost = 6,
     unlocked = false,
     blueprint_compat = false,
