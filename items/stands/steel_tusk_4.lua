@@ -97,18 +97,6 @@ end
 
 function consumInfo.add_to_deck(self, card)
     set_consumeable_usage(card)
-    G.GAME.hands['csau_Fibonacci'].visible = true
-    G.GAME.hands['csau_FlushFibonacci'].visible = true
-end
-
-function consumInfo.remove_from_deck(self, card, from_debuff)
-    -- compatability with fanworks mod, this other card also enables fibonacci hands
-    if next(SMODS.find_card('j_fnwk_plancks_jokestar')) or next(SMODS.find_card("c_csau_steel_tusk_4")) then
-        return
-    end
-
-    G.GAME.hands['csau_Fibonacci'].visible = false
-    G.GAME.hands['csau_FlushFibonacci'].visible = false
 end
 
 function consumInfo.calculate(self, card, context)
