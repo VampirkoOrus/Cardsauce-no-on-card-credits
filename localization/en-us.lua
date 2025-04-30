@@ -837,7 +837,8 @@ return {
 			bl_csau_vod = {
 				name="The Vod",
 				text={
-					"Played cards are redrawn"
+					"Played cards",
+					"are redrawn"
 				},
 			},
 			bl_csau_outlaw = {
@@ -2162,7 +2163,7 @@ return {
 				text = {
 					"When {C:attention}Blind{} is selected, this Joker",
 					"gains {C:mult}+#1#{} Mult if it can take {C:money}$#2#{}",
-					"If not, Mult becomes {C:attention}negative{} this round",
+					"If not, Mult becomes {C:dark_edition}Negative{} this round",
 					"{C:inactive}(Currently {}{C:mult}#3#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
@@ -2692,8 +2693,8 @@ return {
 				name = "Top Slots",
 				text = {
 					"When {C:attention}playing{}, at end of round",
-					"gain {C:money}$#1#{} per {C:attention}#2#%{} over the required",
-					"chips to beat the blind",
+					"gain {C:money}$#1#{} per {C:attention}#2#%{} over required chips",
+					"{C:inactive}(Max of {}{C:money}$#3#{}{C:inactive}){}",
 					"{C:green}#4# in #5#{} chance to {C:attention}double{} winnings",
 					"{C:green}#4# in #6#{} chance to {C:attention}triple{} winnings",
 					"{C:vhs}Running Time{}: {C:attention}#7#{} Rounds"
@@ -3401,7 +3402,7 @@ return {
 					"be saved {C:attention}indefinitely{}"
 				},
 				unlock = {
-					"Spent {C:money}$#1#{}",
+					"Spend {C:money}$#1#{}",
 					"in one shop"
 				}
 			},
