@@ -237,6 +237,10 @@ function Card:set_ability(center, initial, delay_sprites)
         G.FUNCS.csau_set_stand_sprites(self)
     end
 
+    if self.ability.set == 'VHS' then
+        self.no_shadow = true
+    end
+
     return ret
 end
 
@@ -246,6 +250,10 @@ function Card:load(cardTable, other_card)
 
     if self.ability.set == 'csau_Stand' then
         G.FUNCS.csau_set_stand_sprites(self)
+    end
+    
+    if self.ability.set == 'VHS' then
+        self.no_shadow = true
     end
 
     return ret

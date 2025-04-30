@@ -338,6 +338,7 @@ return {
 			k_galaxy = "Galaxy",
 			k_galaxy_q = "Galaxy?",
 			k_vhs = "VHS Tape",
+			k_vhs_destroyed = "Fin!",
 			k_csau_stand = "Stand",
 			b_csau_stand_cards = "Stands",
 			k_csau_evolved = "Evolved Stand",
