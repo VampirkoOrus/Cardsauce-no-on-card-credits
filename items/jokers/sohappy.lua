@@ -49,9 +49,9 @@ function jokerInfo.calculate(self, card, context)
 					 G.localization.descriptions["Joker"]["j_sohappy"] = card.ability.extra.deschappy
 					 card:juice_up(1, 1)
 					 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-												  func = function()
-													  card.ability.extra.side = 'happy'
-													  return true; end}))
+						  func = function()
+							  card.ability.extra.side = 'happy'
+							  return true; end}))
 					 return true; end}))
 			changeHandsAndDiscards(card.ability.extra.flip, -card.ability.extra.flip)
 		elseif card.ability.extra.side == 'happy' then
@@ -62,9 +62,9 @@ function jokerInfo.calculate(self, card, context)
 					 G.localization.descriptions["Joker"]["j_csau_sohappy"] = G.localization.descriptions["Joker"]["j_csau_sosad"]
 					 card:juice_up(1, 1)
 					 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-												  func = function()
-													  card.ability.extra.side = 'sad'
-													  return true; end}))
+						  func = function()
+							  card.ability.extra.side = 'sad'
+							  return true; end}))
 					 return true; end}))
 			changeHandsAndDiscards(-card.ability.extra.flip, card.ability.extra.flip)
 		end

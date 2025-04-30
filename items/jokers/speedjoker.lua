@@ -12,9 +12,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.check_for_unlock(self, args)
-	if args.type == "discover_sohappy" then
-		return true
-	end
+	return G.FUNCS.discovery_check({ mode = 'key', key = 'j_csau_sohappy' })
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
