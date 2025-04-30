@@ -317,7 +317,7 @@ local old_center_ds = SMODS.DrawSteps.center.func
 SMODS.DrawStep:take_ownership('center', {
     func = function(self, layer)
         if self.ability.set ~= 'VHS' then
-            old_center_ds(self, layer)
+            return old_center_ds(self, layer)
         end
     end
 })
@@ -328,12 +328,14 @@ SMODS.DrawStep {
     func = function(self, layer)
         if self.ability.set ~= 'VHS' or (self.area and self.area.config.collection and not self.config.center.discovered) then
             --If the card is not yet discovered
-            if not self.config.center.discovered then
+            if not self.config.center.discovered and self.ability.set == 'VHS' then
+
                 local shared_sprite = G.shared_undiscovered_tarot
                 local scale_mod = -0.05 + 0.05*math.sin(1.8*G.TIMERS.REAL)
                 local rotate_mod = 0.03*math.sin(1.219*G.TIMERS.REAL)
 
-                self.children.center:draw_shader('dissolve')
+                self.children.center:draw_shader('dissolve', self.shadow_height)
+	            self.children.center:draw_shader('dissolve')
                 shared_sprite.role.draw_major = self
                 if (self.config.center.undiscovered and not self.config.center.undiscovered.no_overlay) or not( SMODS.UndiscoveredSprites[self.ability.set] and SMODS.UndiscoveredSprites[self.ability.set].no_overlay) then 
                     shared_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
