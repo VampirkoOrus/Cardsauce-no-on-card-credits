@@ -316,13 +316,24 @@ local width_factor = 0.1
 local old_center_ds = SMODS.DrawSteps.center.func
 SMODS.DrawStep:take_ownership('center', {
     func = function(self, layer)
-        if self.ability.set == 'VHS' then
+        if self.ability.set ~= 'VHS' then
+            old_center_ds(self, layer)
+        end
+    end
+})
+
+SMODS.DrawStep {
+    key = 'vhs_slide',
+    order = -1,
+    func = function(self, layer)
+        if self.ability.set ~= 'VHS' or (self.area and self.area.config.collection and not self.config.center.discovered) then
             --If the card is not yet discovered
-            if not self.config.center.discovered and (self.ability.consumeable or self.config.center.unlocked) and not self.config.center.demo and not self.bypass_discovery_center then
-                local shared_sprite = (self.ability.set == 'Edition' or self.ability.set == 'Joker') and G.shared_undiscovered_joker or G.shared_undiscovered_tarot
+            if not self.config.center.discovered then
+                local shared_sprite = G.shared_undiscovered_tarot
                 local scale_mod = -0.05 + 0.05*math.sin(1.8*G.TIMERS.REAL)
                 local rotate_mod = 0.03*math.sin(1.219*G.TIMERS.REAL)
 
+                self.children.center:draw_shader('dissolve')
                 shared_sprite.role.draw_major = self
                 if (self.config.center.undiscovered and not self.config.center.undiscovered.no_overlay) or not( SMODS.UndiscoveredSprites[self.ability.set] and SMODS.UndiscoveredSprites[self.ability.set].no_overlay) then 
                     shared_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
@@ -332,23 +343,7 @@ SMODS.DrawStep:take_ownership('center', {
                     end
                 end
             end
-
-            local center = self.config.center
-            if center.draw and type(center.draw) == 'function' then
-                center:draw(self, layer)
-            end
-            return
-        end
-
-        return old_center_ds(self, layer)
-    end
-})
-
-SMODS.DrawStep {
-    key = 'vhs_slide',
-    order = -1,
-    func = function(self)
-        if self.ability.set ~= 'VHS' or (self.area and self.area.config.collection and not self.config.center.discovered) then
+            
             return
         end
 
@@ -395,6 +390,11 @@ SMODS.DrawStep {
 
         self.children.center:draw_shader('csau_vhs', self.shadow_height)
 	    self.children.center:draw_shader('csau_vhs', nil)
+
+        local center = self.config.center
+        if center.draw and type(center.draw) == 'function' then
+            center:draw(self, layer)
+        end
     end,
     conditions = { vortex = false, facing = 'front' },
 }
