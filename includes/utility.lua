@@ -176,12 +176,6 @@ function load_cardsauce_item(file_key, item_type)
 		info.color = nil
 	end
 
-	-- tape image loading
-	if item_type == 'VHS' then
-		current_mod['c_csau_'..info.key..'_tape'] = love.graphics.newImage(mod_path..'assets/1x/vhs/'..(info.tapeKey or 'blackspine')..'.png')
-		current_mod['c_csau_'..info.key..'_sleeve'] = love.graphics.newImage(mod_path..'assets/1x/vhs/'..info.key..'.png')
-	end
-
 	local smods_item = item_type
 	if item_type == 'Stand' or item_type == 'VHS' then
 		smods_item = 'Consumable'
@@ -586,8 +580,6 @@ G.FUNCS.tape_activate = function(card)
         card.ability.activated = false
         play_sound('csau_vhsclose', 0.9 + math.random()*0.1, 0.4)
     else
-        card.ability.tape_move = 9
-        card.ability.sleeve_move = -9
         card.ability.activated = true
         play_sound('csau_vhsopen', 0.9 + math.random()*0.1, 0.4)
     end
@@ -1134,4 +1126,34 @@ G.FUNCS.have_multiple_jokers = function(tbl, amount)
 	else
 		return found == #tbl
 	end
+end
+
+local tag_colors = {
+	tag_uncommon = G.C.GREEN,
+	tag_rare = G.C.RED,
+	tag_negative = G.C.DARK_EDITION,
+	tag_foil = G.C.DARK_EDITION,
+	tag_holo = G.C.DARK_EDITION,
+	tag_polychrome = G.C.DARK_EDITION,
+}
+
+G.FUNCS.csau_get_free_tag = function(type, seed)
+	type = type or 'joker'
+	seed = seed or 'freejokertag'
+	local _pool, _pool_key = get_current_pool('Tag', nil, nil, seed)
+	local real_pool = {}
+	for i, v in ipairs(_pool) do
+		if v ~= "UNAVAILABLE" then
+			if G.P_TAGS[v] then
+				local tag = G.P_TAGS[v]
+				if type == 'joker' and (tag.config.type and starts_with(tag.config.type, 'store_joker') and (not tag.min_ante or (G.GAME.round_resets.ante >= tag.min_ante)))
+				or type == 'booster' and (tag.config.type == 'new_blind_choice' and (not tag.min_ante or (G.GAME.round_resets.ante >= tag.min_ante)) and v ~= 'tag_boss')
+				or type == 'any' then
+					real_pool[#real_pool+1] = v
+				end
+			end
+		end
+	end
+	local key = pseudorandom_element(real_pool, pseudoseed(seed))
+	return key, G.P_TAGS[key], tag_colors[key] or G.C.IMPORTANT
 end
