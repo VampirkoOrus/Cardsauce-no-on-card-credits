@@ -37,21 +37,17 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
         dissolve_uv = vhs;
     }
 
-    vec2 front_coords = texture_coords; // cover
-    //front_coords.x -= 0.1 - factor;
+    vec2 front_coords = texture_coords; // COVER
     front_coords.x *= 1 + (DISTANCE_FACTOR * lerp);
-
     vec4 tex_front = Texel(texture, front_coords);
     if(front_coords.x < 0.0 || front_coords.x > 1.0) {
         tex_front = vec4(0.0);
     }
 
-    vec2 back_coords = texture_coords; // spine
-    //back_coords.x -= 0.1 + factor;
-    back_coords.x -= 1.0;
+    vec2 back_coords = texture_coords; // SPINE
+    back_coords.x -= 1.0; // move to the left so that it scales in the opposite direction
     back_coords.x *= 1 + (DISTANCE_FACTOR * lerp);
-    back_coords.x += 1.0;
-
+    back_coords.x += 1.0; // move back
     vec4 tex_back = Texel(spine, back_coords);
     if(back_coords.x < 0.0 || back_coords.x > 1.0) {
         tex_back = vec4(0.0);
@@ -165,8 +161,6 @@ vec4 position( mat4 transform_projection, vec4 vertex_position )
     float scale = 0.2*(-0.03 - 0.3*max(0., 0.3-mid_dist))
                 *hovering*(length(mouse_offset)*length(mouse_offset))/(2. -mid_dist);
 
-    vec4 result = transform_projection * vertex_position + vec4(0,0,0,scale);
-
-    return result;
+    return transform_projection * vertex_position + vec4(0,0,0,scale);
 }
 #endif

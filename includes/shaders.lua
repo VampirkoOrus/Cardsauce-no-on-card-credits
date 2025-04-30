@@ -53,8 +53,6 @@ if csau_enabled['enableStands'] then
                     G.SHADERS['csau_stand_mask']:send("scale_mod",scale_mod)
                     G.SHADERS['csau_stand_mask']:send("rotate_mod",rotate_mod)
                     G.SHADERS['csau_stand_mask']:send("output_scale",1+stand_scale_mod)
-                    --G.SHADERS['csau_stand_mask']:send("my",0.1 + 0.03*math.sin(1.8*G.TIMERS.REAL)) -- my (vertical y offset i think)
-                    --G.SHADERS['csau_stand_mask']:send("shadow_height",self.shadow_height)
 
                     self.children.floating_sprite:draw_shader('csau_stand_mask', nil, nil, nil, self.children.center, -stand_scale_mod)
                 else
