@@ -377,17 +377,31 @@ SMODS.DrawStep {
         local cursor_pos = {}
         cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
         cursor_pos[2] = self.tilt_var and self.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
+        local _draw_major = self.role.draw_major or self
         local screen_scale = G.TILESCALE*G.TILESIZE*(self.children.center.mouse_damping or 1)*G.CANV_SCALE
         local hovering = (self.hover_tilt or 0)
 
-        G.SHADERS['csau_vhs']:send('spine', G.ASSET_ATLAS['csau_blackspine'].image)
-        G.SHADERS['csau_vhs']:send('lerp', self.ability.slide_move)
-        G.SHADERS['csau_vhs']:send('mouse_screen_pos', cursor_pos)
-        G.SHADERS['csau_vhs']:send('screen_scale', screen_scale)
-        G.SHADERS['csau_vhs']:send('hovering', hovering)
-        love.graphics.setShader(G.SHADERS['csau_vhs'], G.SHADERS['csau_vhs'])
-        self.children.center:draw_self()
-        love.graphics.setShader()
+        for i=1, 2 do
+            local shadow_height = self.shadow_height
+            if i==2 then
+                shadow_height = nil
+            end
+
+            G.SHADERS['csau_vhs']:send('spine', G.ASSET_ATLAS['csau_blackspine'].image)
+            G.SHADERS['csau_vhs']:send('lerp', self.ability.slide_move)
+            G.SHADERS['csau_vhs']:send('mouse_screen_pos', cursor_pos)
+            G.SHADERS['csau_vhs']:send('screen_scale', screen_scale)
+            G.SHADERS['csau_vhs']:send('hovering', hovering)
+            G.SHADERS['csau_vhs']:send("texture_details",self.children.center:get_pos_pixel())
+            G.SHADERS['csau_vhs']:send("image_details",self.children.center:get_image_dims())
+            G.SHADERS['csau_vhs']:send("dissolve",math.abs(_draw_major.dissolve or 0))
+            G.SHADERS['csau_vhs']:send("burn_colour_1",_draw_major.dissolve_colours and _draw_major.dissolve_colours[1] or G.C.CLEAR)
+            G.SHADERS['csau_vhs']:send("burn_colour_2",_draw_major.dissolve_colours and _draw_major.dissolve_colours[2] or G.C.CLEAR)
+            G.SHADERS['csau_vhs']:send("shadow",(not not shadow_height))
+            love.graphics.setShader(G.SHADERS['csau_vhs'], G.SHADERS['csau_vhs'])
+            self.children.center:draw_self()
+            love.graphics.setShader()
+        end
 
     end,
     conditions = { vortex = false, facing = 'front' },

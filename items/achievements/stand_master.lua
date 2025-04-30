@@ -5,7 +5,7 @@ local trophyInfo = {
             local csauStands = 0
             local csauDiscovered = 0
             for k, v in pairs(SMODS.Centers) do
-                if starts_with(k, 'c_csau_') then
+                if starts_with(k, 'c_csau_') and v.set == 'csau_Stand' then
                     csauStands = csauStands + 1
                     if v.discovered == true then
                         csauDiscovered = csauDiscovered + 1

@@ -488,6 +488,7 @@ return {
 			k_theroom = "Love is Blind...",
 			k_enhanced = "Enhanced!",
 			k_troll2 = "Oh My God!!!",
+			k_vhs_fin = "Fin!",
 
 
 			-- badge titles
