@@ -61,7 +61,17 @@ end
 
 G.FUNCS.check_for_morshu_space = function(card)
     if #G.morshu_area.cards >= G.morshu_area.config.card_limit + ((card.edition and card.edition.negative) and 1 or 0) then
-        alert_no_space(card, G.morshu_area)
+        --alert_no_space(card, G.morshu_area)
+        for i, v in ipairs(G.morshu_area.cards) do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.3,
+                func = function()
+                    v:start_dissolve()
+                    return true
+                end
+            }))
+        end
         return false
     end
     return true
@@ -70,10 +80,7 @@ end
 G.FUNCS.save_to_morshu = function(e)
     local c1 = e.config.ref_table
     if c1 and c1:is(Card) then
-        if not G.FUNCS.check_for_morshu_space(c1) then
-            e.disable_button = nil
-            return false
-        end
+        G.FUNCS.check_for_morshu_space(c1)
         local c2 = copy_card(c1)
         c2.states.visible = false
         if not c2.bypass_discovery_ui or not c2.bypass_discovery_center then
