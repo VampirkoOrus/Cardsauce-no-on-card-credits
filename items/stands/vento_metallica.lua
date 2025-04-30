@@ -68,7 +68,7 @@ function consumInfo.calculate(self, card, context)
     end
     bad_context = context.repetition or context.blueprint or context.individual
     if context.destroying_card and not bad_context then
-        if context.destroying_card:get_id() == 11 and context.other_card.ability.effect == "Steel Card" then
+        if context.destroying_card:get_id() == 11 and context.destroying_card.ability.effect == "Steel Card" then
             if pseudorandom('metallica') < G.GAME.probabilities.normal / (next(SMODS.find_card("j_csau_plaguewalker")) and 2 or 4) then
                 return true
             end

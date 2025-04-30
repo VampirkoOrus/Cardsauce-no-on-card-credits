@@ -53,6 +53,14 @@ function jokerInfo.calculate(self, card, context)
     end
 end
 
+function jokerInfo.set_sprites(self, card, _front)
+    if card.config.center.discovered or card.bypass_discovery_center then
+        local obj = G.P_CENTERS.j_csau_duane
+        local duane_suit = G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.duane_suit or nil
+        obj.pos.y = get_suit_y(duane_suit)
+    end
+end
+
 local igo = Game.init_game_object
 function Game:init_game_object()
     local ret = igo(self)

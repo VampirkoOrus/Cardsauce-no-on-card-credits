@@ -72,7 +72,7 @@ end
 
 function jokerInfo.update(self, card, dt)
     if card.children.buy_button and not card.children.buy_button.bonzi_draw then
-        card.children.buy_button:set_alignment({offset = {x=-0.7,y=0}})
+        card.children.buy_button:set_alignment({offset = {x=-0,y=-0.3}})
         card.children.buy_button.bonzi_draw = true
     end
 
