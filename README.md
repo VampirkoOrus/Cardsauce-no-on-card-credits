@@ -1,7 +1,7 @@
 # Cardsauce
 A Balatro mod made for Vinesauce!
 
-![Cardsauce Logo](https://i.imgur.com/aKvF0sg.png)
+![Cardsauce Logo](https://i.imgur.com/db2zy4W.png)
 
 **Cardsauce** is a Vinesauce-themed expansion for Balatro, made in collaboration with the Balatro Discord and Vinesauce communities! Featuring art from several talented artists, Cardsauce adds 70 new Jokers, as well as a handful of other new additions to the game.
 
