@@ -179,15 +179,25 @@ function load_cardsauce_item(file_key, item_type)
 	local smods_item = item_type
 	if item_type == 'Stand' or item_type == 'VHS' then
 		smods_item = 'Consumable'
-		local atd_ref = function(self, card) end
+		
+		-- add universal set_consumable_usage() for stands
+		local ref_add_to_deck = function(self, card, from_debuff) end
 		if info.add_to_deck then
-			atd_ref = info.add_to_deck
+			ref_add_to_deck = info.add_to_deck
 		end
 		function info.add_to_deck(self, card, from_debuff)
-			atd_ref(self, card, from_debuff)
+			ref_add_to_deck(self, card, from_debuff)
+
+			-- only set initially
 			if not from_debuff then
 				set_consumeable_usage(card)
 			end
+			
+		end
+
+		-- force no use for stands
+		function info.can_use(self, card)
+			return false
 		end
 
 		if item_type == 'Stand' and info.rarity == 'csau_EvolvedRarity' then

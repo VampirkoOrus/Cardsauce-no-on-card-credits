@@ -106,9 +106,6 @@ function consumInfo.calculate(self, card, context)
     end
 end
 
-function consumInfo.can_use(self, card)
-    return false
-end
 
 function consumInfo.update(self, card)
     if card.area.config.collection and G.SETTINGS.highest_wonderofu and card.ability.extra.form ~= G.SETTINGS.highest_wonderofu then
