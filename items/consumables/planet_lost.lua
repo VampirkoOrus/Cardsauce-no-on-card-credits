@@ -15,7 +15,9 @@ consumInfo.loc_vars = function(self, info_queue, card)
 end
 
 consumInfo.in_pool = function(self, args)
-    return next(SMODS.find_card("c_csau_steel_tusk_4")) or next(SMODS.find_card('j_fnwk_plancks_jokestar'))
+    if next(SMODS.find_card("c_csau_steel_tusk_4")) or next(SMODS.find_card('j_fnwk_plancks_jokestar')) then
+        return (G.GAME and G.GAME.hands and G.GAME.csau_FlushFibonacci.played > 0)
+    end
 end
 
 consumInfo.set_card_type_badge = function(self, card, badges)

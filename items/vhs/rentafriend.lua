@@ -46,6 +46,28 @@ function consumInfo.calculate(self, card, context)
     end
 end
 
+function consumInfo.activate(self, card, on)
+    if not on then
+        if G.shop_jokers and G.shop_jokers.cards then
+            for i, v in ipairs(G.shop_jokers.cards) do
+                if v.ability.set == "Joker" then
+                    if v.ability.rent_ref then
+                        if v.ability.rent_ref.edition then
+                            v:set_edition({ [v.ability.rent_ref.edition] = true }, true)
+                        else
+                            v:set_edition(nil, true)
+                        end
+                        if not v.ability.rent_ref.rental then
+                            v:set_rental(false)
+                        end
+                        v.ability.rent_ref = nil
+                    end
+                end
+            end
+        end
+    end
+end
+
 local upd = Game.update
 function Game:update(dt)
     upd(self,dt)

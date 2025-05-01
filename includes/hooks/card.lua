@@ -321,10 +321,9 @@ function Card:get_id(skip_pmk)
     if not skip_pmk and (self.area == G.hand or self.area == G.play) and self:is_face() and next(SMODS.find_card("c_csau_lion_paper")) then
         local pmk = SMODS.find_card("c_csau_lion_paper")
         for i, v in ipairs(pmk) do
-            G.FUNCS.csau_flare_stand_aura(v, 0.38)
-        end
-        if G.GAME.current_round.paper_rank then
-            send(G.GAME.current_round.paper_rank)
+            if not v.ability.aura_flare_queued then
+                G.FUNCS.csau_flare_stand_aura(v, 0.38)
+            end
         end
         return SMODS.Ranks[G.GAME.current_round.paper_rank or 'Jack'].id
     end

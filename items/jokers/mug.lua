@@ -20,13 +20,13 @@ local jokerInfo = {
 }
 
 local forms = {
-    ["Mug"] = {
+    ["mug"] = {
         name = 'mug',
         pos = { x = 1, y = 0 },
         pixel_size = { w = 71, h = 73 },
         soul_pos = { x = 2, y = 0},
     },
-    ["Moment"] = {
+    ["moment"] = {
         name = 'moment',
         pos = { x = 1, y = 1},
         pixel_size = { w = 71, h = 95},
@@ -54,9 +54,9 @@ local change_form = function(card, form)
     card.T.w = G.CARD_W
     card.T.h = G.CARD_H
     card:set_sprites(card.config.center)
-    card.config.center.pos = forms.Mug.pos
-    card.config.center.pixel_size = forms.Mug.pixel_size
-    card.config.center.soul_pos = forms.Mug.soul_pos
+    card.config.center.pos = forms.mug.pos
+    card.config.center.pixel_size = forms.mug.pixel_size
+    card.config.center.soul_pos = forms.mug.soul_pos
 
     return card.ability.extra.form
 end
@@ -116,7 +116,7 @@ function jokerInfo.calculate(self, card, context)
             card.ability.extra.rounds = card.ability.extra.rounds - 1
             if card.ability.extra.rounds <= 0 then
                 check_for_unlock({ type = "activate_mug" })
-                change_form(card, "Moment")
+                change_form(card, "moment")
                 card:juice_up(1, 1)
                 return {
                     message = localize('k_mug_moment'),
@@ -129,6 +129,12 @@ function jokerInfo.calculate(self, card, context)
                 }
             end
         end
+    end
+end
+
+function jokerInfo.update(self, card)
+    if G.screenwipe and card.ability.extra.form == 'moment' then
+        change_form(card, 'moment')
     end
 end
 
