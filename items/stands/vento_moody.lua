@@ -37,8 +37,5 @@ function consumInfo.remove_from_deck(self, card)
     end
 end
 
-function consumInfo.can_use(self, card)
-    return false
-end
 
 return consumInfo

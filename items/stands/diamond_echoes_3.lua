@@ -56,8 +56,5 @@ function Card:is_suit(suit, bypass_debuff, flush_calc)
     return ref_is(self, suit, bypass_debuff, flush_calc)
 end
 
-function consumInfo.can_use(self, card)
-    return false
-end
 
 return consumInfo
