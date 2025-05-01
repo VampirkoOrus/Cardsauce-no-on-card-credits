@@ -97,7 +97,7 @@ function consumInfo.calculate(self, card, context)
         elseif card.ability.extra.ref_suit and card.ability.extra.ref_suit ~= "wild" and not card.ability.extra.nm then
             local nm = get_first_non_matching(G.GAME and G.GAME.wigsaw_suit or card.ability.extra.ref_suit, context.scoring_hand)
             if nm then
-                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_boing')})
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_boing'), colour = G.C.STAND})
                 local percent = 1.15 - (1-0.999)/(#context.scoring_hand-0.998)*0.3
                 G.E_MANAGER:add_event(Event({trigger = 'before',delay = 0.15,func = function() nm:flip();play_sound('card1', percent);nm:juice_up(0.3, 0.3);return true end }))
                 G.E_MANAGER:add_event(Event({trigger = 'before',delay = 1,func = function() nm:change_suit(G.GAME and G.GAME.wigsaw_suit or card.ability.extra.ref_suit);card:juice_up();return true end }))

@@ -183,9 +183,11 @@ function load_cardsauce_item(file_key, item_type)
 		if info.add_to_deck then
 			atd_ref = info.add_to_deck
 		end
-		function info.add_to_deck(self, card)
-			atd_ref(self, card)
-			set_consumeable_usage(card)
+		function info.add_to_deck(self, card, from_debuff)
+			atd_ref(self, card, from_debuff)
+			if not from_debuff then
+				set_consumeable_usage(card)
+			end
 		end
 
 		if item_type == 'Stand' and info.rarity == 'csau_EvolvedRarity' then

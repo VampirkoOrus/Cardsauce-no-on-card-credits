@@ -1,7 +1,7 @@
 local jokerInfo = {
     name = "That Fucking Koffing Again",
     config = {extra = {rerolled = false}},
-    rarity = 2,
+    rarity = 1,
     cost = 5,
     blueprint_compat = false,
     eternal_compat = true,

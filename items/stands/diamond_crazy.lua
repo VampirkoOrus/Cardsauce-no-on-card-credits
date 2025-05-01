@@ -36,11 +36,12 @@ function consumInfo.calculate(self, card, context)
          if activated then
              return {
                  func = function()
+                     card:juice_up()
                      G.FUNCS.csau_flare_stand_aura(card, 0.38)
                  end,
                  card = card,
                  message = localize('k_cd_healed'),
-                 colour = G.C.IMPORTANT
+                 colour = G.C.STAND
              }
          end
     end

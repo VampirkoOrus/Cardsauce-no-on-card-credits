@@ -68,18 +68,24 @@ function consumInfo.calculate(self, card, context)
     if context.before then
         card.ability.index = 0
     end
+    local bad_context = context.repetition or context.blueprint or context.retrigger_joker
     if context.individual and context.cardarea == G.play and not card.debuff then
         card.ability.index = card.ability.index + 1
-        if card.ability.index > #context.scoring_hand then
-            G.FUNCS.csau_flare_stand_aura(card, 0.6)
-            G.E_MANAGER:add_event(Event({
-                trigger = 'immediate',
-                blocking = false,
+        if card.ability.index == #context.scoring_hand then
+            return {
                 func = function()
-                    card:juice_up()
-                    return true
-                end 
-            }))
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
+                message = localize('k_bites_the_dust'),
+                colour = G.C.STAND,
+                card = card
+            }
+        elseif card.ability.index > #context.scoring_hand and not bad_context then
+            return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
+            }
         end
     end
     if context.end_of_round then

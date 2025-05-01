@@ -47,12 +47,11 @@ function consumInfo.calculate(self, card, context)
                 }))
             end
         end
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                card:juice_up()
-                return true
-            end
-        }))
+        return {
+            message = localize('k_bighunks'),
+            colour = G.C.MULT,
+            card = card
+        }
     end
     local bad_context = context.repetition or context.individual or context.blueprint
     if context.after and not card.ability.destroyed and card.ability.activated and not bad_context then

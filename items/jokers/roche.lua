@@ -38,7 +38,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and not self.debuff and not context.individual and not context.repetition then
-		if to_big(G.GAME.dollars) == to_big(card.ability.gil) then
+		if to_big(G.GAME.dollars) <= to_big(card.ability.gil) and G.GAME.last_hand_played then
 			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
 				local card_type = 'Planet'
 				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
@@ -67,21 +67,13 @@ function jokerInfo.calculate(self, card, context)
 					trigger = 'after',
 					delay = 0.0,
 					func = (function()
-						local _handname, _played, _order = 'High Card', -1, 100
-                    	for k, v in pairs(G.GAME.hands) do
-                        	if v.played > _played or (v.played == _played and _order > v.order) then 
-                            	_played = v.played
-								_order = v.order
-                            	_handname = k
-                        	end
-                    	end
 						local _planet = 0
 						for k, v in pairs(G.P_CENTER_POOLS.Planet) do
-							if v.config.hand_type == _handname then
+							if v.config.hand_type == G.GAME.last_hand_played then
 								_planet = v.key
 							end
 						end
-						local _card = create_card(card_type,G.consumeables, nil, nil, nil, nil, _planet, 'blusl')
+						local _card = create_card(card_type,G.consumeables, nil, nil, nil, nil, _planet, 'youearnedit')
 						_card:add_to_deck()
 						G.consumeables:emplace(_card)
 						G.GAME.consumeable_buffer = 0

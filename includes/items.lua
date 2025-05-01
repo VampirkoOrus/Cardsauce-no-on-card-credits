@@ -37,7 +37,7 @@ local itemsToLoad = {
         'dontmind',
         'kerosene',
         'businesstrading',
-    
+
         'red',
         'fate',
         'miracle',
@@ -50,7 +50,7 @@ local itemsToLoad = {
         -- Common (Locked)
         'speedjoker',
         'disturbedjoker',
-    
+
         -- Uncommon (Locked)
         'shrimp',
         'muppet',
@@ -65,7 +65,7 @@ local itemsToLoad = {
         -- Legendary
         'vincenzo',
         'quarterdumb',
-    
+
         -- Update 1.2
         'fantabulous',
         'grand',
@@ -77,7 +77,7 @@ local itemsToLoad = {
         'rapture',
         'villains',
         'killjester',
-    
+
         -- Update 1.3
         'crudeoil',
         'grannycream',
@@ -125,7 +125,6 @@ if SMODS.current_mod.DT.twoPoint0 then
             -- 1.0
             'newjoker', -- Page 1 Start
             'twoface',
-            'depressedbrother',
             'pivot',
             'disguy',
             'gnorts',
@@ -137,31 +136,33 @@ if SMODS.current_mod.DT.twoPoint0 then
             'reyn',
             'emmanuel',
             'fisheye',
-            'chad', -- Page 1 End
+            'chad',
+            'garbagehand', -- Page 1 End
 
 
-            'purple', -- Page 2 Start
-            'garbagehand',
+            'purple',-- Page 2 Start
             'businesstrading',
             'fantabulous',
             -- Update 1.2
             'ten',
             -- Update 1.3
+            'koffing',
             'crudeoil',
             'grannycream',
             -- [[Uncommon]]
             -- 1.0
+            'depressedbrother',
             'meat',
             'greyjoker',
             'veryexpensivejoker',
             'roger',
             'cousinsclub',
             'anotherlight',
-            'sohappy',
-            'code', -- Page 2 End
+            'sohappy', -- Page 2 End
 
 
-            'deathcard', -- Page 3 Start
+            'code', -- Page 3 Start
+            'deathcard',
             'maskedjoker',
             'dontmind',
             'kerosene',
@@ -175,7 +176,6 @@ if SMODS.current_mod.DT.twoPoint0 then
             'rotten',
             -- Update 1.3
             'bjbros',
-            'koffing',
             'drippy',
             -- [[Rare]]
             'thisiscrack', -- Page 3 End

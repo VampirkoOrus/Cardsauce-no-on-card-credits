@@ -26,26 +26,29 @@ local function has_stone(hand)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.before and not card.debuff then
-        if has_stone(context.full_hand) then
-            local front = pseudorandom_element(G.P_CARDS, pseudoseed('marb_fr'))
-            G.playing_card = (G.playing_card and G.playing_card + 1) or 1
-            local _card = Card(G.discard.T.x + G.discard.T.w/2, G.discard.T.y, G.CARD_W, G.CARD_H, front, G.P_CENTERS.m_stone, {playing_card = G.playing_card})
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    _card:start_materialize({G.C.SECONDARY_SET.Enhanced})
-                    G.hand:emplace(_card)
-                    return true
-                end}))
-            playing_card_joker_effects({_card})
-            return {
-                func = function()
+    if context.playing_card_added and not card.debuff then
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                local cards = {}
+                for i, v in ipairs(context.cards) do
+                    if not (v.iamarock or (v[1] and v[1].iamarock)) then
+                        local front = pseudorandom_element(G.P_CARDS, pseudoseed('rock_fr'))
+                        G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+                        local _card = Card(G.discard.T.x + G.discard.T.w/2, G.discard.T.y, G.CARD_W, G.CARD_H, front, G.P_CENTERS.m_stone, {playing_card = G.playing_card})
+                        _card.iamarock = true
+                        G.hand:emplace(_card)
+                        cards[#cards+1] = _card
+                    end
+                end
+                if #cards > 0 then
+                    playing_card_joker_effects({cards})
+                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_iamarock'), colour = G.C.STAND})
                     G.FUNCS.csau_flare_stand_aura(card, 0.38)
-                end,
-                message = localize('k_plus_stone'),
-                G.C.SECONDARY_SET.Enhanced
-            }
-        end
+                end
+                return true
+            end}
+        ))
+
     end
 end
 

@@ -482,13 +482,16 @@ return {
 			k_morshu_ui = "COME BACK RICHER",
 			k_sorrylink = "Sorry, Link!",
 			b_save = "SAVE",
-			k_ts_doubled = "Double Winnings!",
-			k_ts_tripled = "Triple Winnings!",
+			k_ts_doubled = "Jackpot!",
+			k_ts_tripled = "Triple Jackpot!",
 			k_ts_wild = "WIILLDDD!",
 			k_spacecop = "Space Cop!",
 			k_theroom = "Love is Blind...",
 			k_enhanced = "Enhanced!",
 			k_troll2 = "Oh My God!!!",
+			k_sealed = "Sealed!",
+			k_ryansbabe = "Bonus!",
+			k_bighunks = "Mult!",
 			k_vhs_fin = "Fin!",
 
 
@@ -534,13 +537,16 @@ return {
 			-- stand related loc strings
 			k_stand_evolved = 'Evolved!',
 			k_echoes_recorded = 'Recorded!',
+			k_iamarock = "Rock!",
 			k_boing = "Boing!",
 			k_metal = "Metal!",
 			k_gold_exp = "Gold Experience!",
 			k_stone_free = "Stone Free!",
 			k_bsa = "Bigmouth Strikes Again!",
 			k_smooth_operators = "Modified!",
-
+			k_soft_and_wet = "Stolen!",
+			k_bites_the_dust = "Bites the Dust!",
+			k_thehand = "Swipe!",
 			k_stand_stickers="Stand Stickers",
 		},
 		v_dictionary = {
@@ -1501,10 +1507,9 @@ return {
 			j_csau_roche = {
 				name = "Motorcyclist Joker",
 				text = {
-					"If round ends with exactly {C:money}$#1#{},",
-					"create a {C:planet}Planet{} card for",
-					"your most-used hand",
-					"{C:inactive}(Must have room){}",
+					"If round ends with {C:money}$#1#{} or less,",
+					"create a {C:planet}Planet{} card for final played",
+					"{C:attention}poker hand {C:inactive}(Must have room){}",
 				},
 			},
 			j_csau_speen = {
@@ -1645,9 +1650,8 @@ return {
 			j_csau_depressedbrother = {
 				name = "Depressed Brother",
 				text = {
-					"This Joker gains {C:chips}+#2#{} Chips",
-					"per {C:attention}non-scoring{} card played",
-					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}",
+					"All {C:attention}unscored{} cards have {C:green}#1# in #2#{} chance",
+					"to permanently gain {C:mult}+#3#{} Mult"
 				},
 			},
 			j_csau_code = {
@@ -3215,10 +3219,9 @@ return {
 			c_csau_lion_rock = {
 				name = "I Am a Rock",
 				text = {
-					"If played hand contains",
-					"a {C:attention}Stone Card{}, add a",
-					"{C:attention}Stone Card{} to your hand",
-					
+					"Add one {C:attention}Stone Card{} to deck",
+					"every time a {C:attention}playing card",
+					"is added to your deck",
 				},
 			},
 			c_csau_lion_wonder= {

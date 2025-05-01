@@ -118,17 +118,38 @@ local function ach_reno_check()
 	end
 end
 
+local function isShowdown()
+	if G.GAME then
+		local blindname = ((G.GAME.blind and G.GAME.blind.name ~= '' and G.GAME.blind.name)) or 'Small Blind'
+		local blindname = (blindname == '' and 'Small Blind' or blindname)
+		for k, v in pairs(G.P_BLINDS) do
+			if v.name == blindname then
+				if v.boss.showdown then
+					return true
+				end
+			end
+		end
+	end
+	return false
+end
+
 for color, _ in pairs(colors) do
 	G.FUNCS["change_color_1_" .. color] = function()
 		G.C.COLOUR1 = G.C[color]
 		csau_save_color(1, color)
 		ach_reno_check()
+		if isShowdown() then
+			ease_background_colour{new_colour = G.C.COLOUR2, special_colour = G.C.COLOUR1, tertiary_colour = darken(G.C.BLACK, 0.4), contrast = 3}
+		end
 	end
 
 	G.FUNCS["change_color_2_" .. color] = function()
 		G.C.COLOUR2 = G.C[color]
 		csau_save_color(2, color)
 		ach_reno_check()
+		if isShowdown() then
+			ease_background_colour{new_colour = G.C.COLOUR2, special_colour = G.C.COLOUR1, tertiary_colour = darken(G.C.BLACK, 0.4), contrast = 3}
+		end
 	end
 
 	G.FUNCS["change_color_3_" .. color] = function()
@@ -194,8 +215,10 @@ G.FUNCS.apply_colors = function()
 				if i==3 then
 					G.C.BLIND.Small = HEX(hex)
 					G.C.BLIND.Big = HEX(hex)
-					if G.GAME and G.GAME.round_resets.ante < 9 then
-						ease_background_colour{new_colour = HEX(hex), contrast = 1}
+					if G.GAME then
+						if G.GAME.round_resets.ante < 9 then
+							ease_background_colour{new_colour = HEX(hex), contrast = 1}
+						end
 					end
 					G.SETTINGS["CS_COLOR"..i] = HEX(hex)
 					G:save_settings()
@@ -203,6 +226,9 @@ G.FUNCS.apply_colors = function()
 					G.C["COLOUR"..i] = HEX(hex)
 					G.SETTINGS["CS_COLOR"..i] = HEX(hex)
 					G:save_settings()
+					if isShowdown() then
+						ease_background_colour{new_colour = G.C.COLOUR2, special_colour = G.C.COLOUR1, tertiary_colour = darken(G.C.BLACK, 0.4), contrast = 3}
+					end
 				end
 			end
 		end
@@ -216,7 +242,7 @@ function ease_background_colour_blind(state, blind_override)
 	local blindname = (blindname == '' and 'Small Blind' or blindname)
 	for k, v in pairs(G.P_BLINDS) do
 		if v.name == blindname then
-			if v.boss.showdown then
+			if v.boss and v.boss.showdown then
 				if G.GAME.blind then
 					G.GAME.blind:change_colour()
 				end
