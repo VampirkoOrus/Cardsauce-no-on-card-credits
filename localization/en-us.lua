@@ -3255,13 +3255,6 @@ return {
 					"into that suit",
 				},
 			},
-			c_csau_epitaph = {
-				name = "Epitaph",
-				text = {
-					"The top card of your deck is shown here",
-					"{C:stand}Evolves{} after {C:attention}#1#{} Blinds are skipped {C:inactive}({}{C:attention}#2#{}{C:inactive}/#1#)",
-				},
-			},
 		},
 		Planet = {
 			c_csau_lutetia = {
