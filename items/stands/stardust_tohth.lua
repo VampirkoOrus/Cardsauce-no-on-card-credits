@@ -83,8 +83,5 @@ function consumInfo.generate_ui(self, info_queue, card, desc_nodes, specific_var
 end
 
 
-function consumInfo.can_use(self, card)
-    return false
-end
 
 return consumInfo

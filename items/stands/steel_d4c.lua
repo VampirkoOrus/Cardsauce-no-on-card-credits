@@ -72,9 +72,6 @@ function consumInfo.calculate(self, card, context)
     end
 end
 
-function consumInfo.can_use(self, card)
-    return false
-end
 
 function consumInfo.update(self, card)
     if not card.area.config.collection and card.area == G.consumeables and get_lucky() >= card.ability.extra.evolve_num and not card.ability.evolved then

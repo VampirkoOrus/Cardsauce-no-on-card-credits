@@ -44,8 +44,5 @@ SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, f
     return ref_cie(effect, scored_card, key, amount, from_edition)
 end
 
-function consumInfo.can_use(self, card)
-    return false
-end
 
 return consumInfo

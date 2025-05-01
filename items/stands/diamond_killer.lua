@@ -65,8 +65,5 @@ function consumInfo.calculate(self, card, context)
     end
 end
 
-function consumInfo.can_use(self, card)
-    return false
-end
 
 return consumInfo

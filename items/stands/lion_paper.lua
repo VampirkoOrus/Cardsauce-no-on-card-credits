@@ -18,8 +18,5 @@ function consumInfo.loc_vars(self, info_queue, card)
     return {vars = {(G.GAME and G.GAME.current_round and G.GAME.current_round.paper_rank) or 'Jack'}}
 end
 
-function consumInfo.can_use(self, card)
-    return false
-end
 
 return consumInfo
