@@ -210,7 +210,23 @@ G.FUNCS.apply_colors = function()
 	ach_reno_check()
 end
 
-
+local ebcb_ref = ease_background_colour_blind
+function ease_background_colour_blind(state, blind_override)
+	local blindname = ((blind_override or (G.GAME.blind and G.GAME.blind.name ~= '' and G.GAME.blind.name)) or 'Small Blind')
+	local blindname = (blindname == '' and 'Small Blind' or blindname)
+	for k, v in pairs(G.P_BLINDS) do
+		if v.name == blindname then
+			if v.boss.showdown then
+				if G.GAME.blind then
+					G.GAME.blind:change_colour()
+				end
+				ease_background_colour{new_colour = G.C.COLOUR2, special_colour = G.C.COLOUR1, tertiary_colour = darken(G.C.BLACK, 0.4), contrast = 3}
+				return
+			end
+		end
+	end
+	ebcb_ref(state, blind_override)
+end
 
 
 G.FUNCS.change_color_buttons = function()

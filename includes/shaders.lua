@@ -252,7 +252,7 @@ SMODS.DrawStep {
                 return
             end
 
-            self.no_shadow = true
+            --self.no_shadow = true
 
             -- aura flare in gameplay
             local flare_ease = 0
@@ -375,6 +375,7 @@ SMODS.DrawStep {
         end
 
         if self.ability.slide_move <= 0 then
+            self.shadow_height = self.states.drag.is and 0.35 or 0.1
             self.children.center:draw_shader('dissolve', self.shadow_height)
 	        self.children.center:draw_shader('dissolve')
             return
@@ -390,6 +391,7 @@ SMODS.DrawStep {
         G.SHADERS['csau_vhs']:send('spine', G.ASSET_ATLAS['csau_blackspine'].image)
         G.SHADERS['csau_vhs']:send('lerp', self.ability.slide_move)
 
+        self.shadow_height = self.states.drag.is and 0.35 or 0.1
         self.children.center:draw_shader('csau_vhs', self.shadow_height)
 	    self.children.center:draw_shader('csau_vhs', nil)
 

@@ -21,7 +21,7 @@ function jokerInfo.calculate(self, card, context)
     if context.pre_discard then
         card.ability.ach_disc = 0
     end
-    if context.discard and not context.other_card.debuff and context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.joeycastle.suit) and not context.blueprint then
+    if context.discard and not context.other_card.debuff and context.other_card:is_suit(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.joeycastle.suit) then
         card.ability.ach_disc = card.ability.ach_disc + 1
         if card.ability.ach_disc >= 5 then
             check_for_unlock({ type = "high_joeyscastle" })

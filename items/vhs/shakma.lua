@@ -57,6 +57,7 @@ function pseudorandom(seed, min, max)
         if not min and not max and not blacklisted_seed(seed) then
             send("SHAKMA SEED:")
             send(seed)
+            shakma:juice_up()
             shakma.ability.extra.uses = shakma.ability.extra.uses+1
             if shakma.ability.extra.uses >= shakma.ability.extra.runtime then
                 G.FUNCS.destroy_tape(shakma)

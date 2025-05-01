@@ -764,7 +764,7 @@ G.FUNCS.csau_new_stand = function(evolved)
     G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 	local stand = create_card(pool_key, G.consumeables, nil, nil, nil, nil, nil, 'arrow')
 	stand:add_to_deck()
-	G.consumeables:emplace(stand, nil, nil, nil, nil, G.FUNCS.csau_get_num_stands() + 1)
+	G.consumeables:emplace(stand, #G.consumeables.cards <= 2 and 'front' or nil)
 	stand:juice_up(0.3, 0.5)
 	G.GAME.consumeable_buffer = 0
 end
@@ -1059,6 +1059,7 @@ function SMODS.draw_cards_from_deck(hand_space, mod_table)
 	local roar = G.FUNCS.find_activated_tape('c_csau_roar')
 	if roar and not roar.ability.destroyed then
 		mod_table.roar = 0
+		roar:juice_up()
 		roar.ability.extra.uses = roar.ability.extra.uses+1
 		if roar.ability.extra.uses >= roar.ability.extra.runtime then
 			G.FUNCS.destroy_tape(roar)
@@ -1100,6 +1101,7 @@ end
 SMODS.spectral_lower_handsize = function(context)
 	local rem = G.FUNCS.find_activated_tape('c_csau_remlezar')
 	if rem and not rem.ability.destroyed  then
+		rem:juice_up()
 		rem.ability.extra.uses = rem.ability.extra.uses+1
 		if rem.ability.extra.uses >= rem.ability.extra.runtime then
 			G.FUNCS.destroy_tape(rem)
@@ -1113,6 +1115,7 @@ end
 SMODS.will_destroy_card = function(context)
 	local sew = G.FUNCS.find_activated_tape('c_csau_sew')
 	if sew and not sew.ability.destroyed then
+		sew:juice_up()
 		sew.ability.extra.uses = sew.ability.extra.uses+1
 		if sew.ability.extra.uses >= sew.ability.extra.runtime then
 			G.FUNCS.destroy_tape(sew)

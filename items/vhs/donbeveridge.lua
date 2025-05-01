@@ -36,7 +36,8 @@ end
 local ref_fe = SMODS.food_expires
 SMODS.food_expires = function(context)
     local bagels = G.FUNCS.find_activated_tape('c_csau_donbeveridge')
-    if bagels then
+    if bagels and not bagels.ability.destroyed then
+        bagels:juice_up()
         bagels.ability.extra.uses = bagels.ability.extra.uses+1
         if bagels.ability.extra.uses >= bagels.ability.extra.runtime then
             G.FUNCS.destroy_tape(bagels)

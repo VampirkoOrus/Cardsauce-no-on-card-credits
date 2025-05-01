@@ -49,7 +49,7 @@ function Card:set_ability(center, initial, delay_sprites)
         local bulks = SMODS.find_card("j_csau_bulk")
         if #G.hand.highlighted > 0 then
             for i, v in ipairs(bulks) do
-                upgrade(v, #G.hand.highlighted)
+                upgrade(v)
             end
         else
             for i, v in ipairs(bulks) do
