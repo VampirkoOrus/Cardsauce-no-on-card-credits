@@ -187,6 +187,7 @@ function load_cardsauce_item(file_key, item_type)
 			atd_ref(self, card)
 			set_consumeable_usage(card)
 		end
+
 		if item_type == 'Stand' and info.rarity == 'csau_EvolvedRarity' then
 			local sctb_ref = function(self, card, badges) end
 			if info.set_card_type_badge then
@@ -587,37 +588,45 @@ end
 
 --- Destroys a VHS tape and calls all relevant contexts
 --- @param card Card Balatro Card object of VHS tape to destroy
---- @param delay number Event delay in seconds
+--- @param delay_time number Event delay in seconds
 --- @param ach string | nil Achievement type key, will check for achievement unlock if not nil
 --- @param silent boolean | nil Plays tarot sound effect on destruction if true
-G.FUNCS.destroy_tape = function(card, delay, ach, silent)
-    G.E_MANAGER:add_event(Event({
+G.FUNCS.destroy_tape = function(card, delay_time, ach, silent, text)
+	G.E_MANAGER:add_event(Event({
         trigger = 'after',
-        delay = delay,
+        delay = delay_time,
         func = function()
-            if not silent then
+			attention_text({
+				text = text or localize('k_vhs_destroyed'),
+				scale = 1,
+				hold = 0.5,
+				backdrop_colour = G.C.VHS,
+				align = 'bm',
+				major = card,
+				offset = {x = 0, y = 0.05*card.T.h}
+			})
+			play_sound('generic1')
+
+			delay(0.15)
+
+			if not silent then
                 play_sound('tarot1')
             end
-            card.T.r = -0.2
-            card:juice_up(0.3, 0.4)
+            card.T.r = -0.1
+			card:juice_up(0.3, 0.4)
             card.states.drag.is = true
             card.children.center.pinch.x = true
+			
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
                  func = function()
-					 if card.config.center.activate and type(card.config.center.activate) == 'function' then
-						 card.config.center.activate(card.config.center, card, false)
-					 end
-                     card:start_dissolve({ G.C.VHS, G.C.RED })
-                     --G.consumeables:remove_card(card)
-                     --card:remove()
-                     --card = nil
-                     return true
-                 end
-            }))
-            G.E_MANAGER:add_event(Event({trigger = 'after',
-                 func = function()
-                     SMODS.calculate_context({vhs_death = true, card = card})
-                     return true
+					if card.config.center.activate and type(card.config.center.activate) == 'function' then
+						card.config.center.activate(card.config.center, card, false)
+					end
+
+					SMODS.calculate_context({vhs_death = true, card = card})
+
+                    card:remove()
+                    return true
                  end
             }))
             if ach then
