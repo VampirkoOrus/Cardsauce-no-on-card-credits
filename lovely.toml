@@ -828,22 +828,6 @@ position = 'at'
 match_indent = true
 payload = '''if next(card) and not delay_sprites then'''
 
-
-#
-# Adds the ability to emplace cards at a specified index
-#
-
-# CardArea:emplace()
-[[patches]]
-[patches.pattern]
-target = "cardarea.lua"
-pattern = '''
-function CardArea:emplace(card, location, stay_flipped)'''
-position = "at"
-payload = '''function CardArea:emplace(card, location, stay_flipped, created, copied, index)'''
-match_indent = true
-times = 1
-
 # CardArea:emplace()
 [[patches]]
 [patches.pattern]

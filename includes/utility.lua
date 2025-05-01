@@ -764,7 +764,7 @@ G.FUNCS.csau_new_stand = function(evolved)
     G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 	local stand = create_card(pool_key, G.consumeables, nil, nil, nil, nil, nil, 'arrow')
 	stand:add_to_deck()
-	G.consumeables:emplace(stand, nil, nil, nil, nil, G.FUNCS.csau_get_num_stands() + 1)
+	G.consumeables:emplace(stand)
 	stand:juice_up(0.3, 0.5)
 	G.GAME.consumeable_buffer = 0
 end
