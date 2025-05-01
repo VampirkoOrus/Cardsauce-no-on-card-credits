@@ -13,7 +13,7 @@ local jokerInfo = {
 	unlocked = false,
 	blueprint_compat = true,
 	eternal_compat = true,
-	perishable_compat = false,
+	perishable_compat = true,
 	streamer = "other",
 }
 

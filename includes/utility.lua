@@ -192,12 +192,13 @@ function load_cardsauce_item(file_key, item_type)
 			if not from_debuff then
 				set_consumeable_usage(card)
 			end
-			
 		end
 
 		-- force no use for stands
-		function info.can_use(self, card)
-			return false
+		if item_type == 'Stand' then
+			function info.can_use(self, card)
+				return false
+			end
 		end
 
 		if item_type == 'Stand' and info.rarity == 'csau_EvolvedRarity' then

@@ -10,9 +10,9 @@ local jokerInfo = {
     },
     rarity = 2,
     cost = 7,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = true,
+    blueprint_compat = false,
+    eternal_compat = false,
+    perishable_compat = false,
     streamer = "joel",
 }
 

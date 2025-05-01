@@ -39,33 +39,35 @@ end
 
 function consumInfo.calculate(self, card, context)
     if card.ability.activated and context.open_booster then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            func = function()
-                local _card = find_first_card(G.pack_cards.cards)
-                if _card then
-                    _card.area:remove_card(_card)
-                    _card:add_to_deck()
-                    if _card.children.price then
-                        _card.children.price:remove()
+        if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                func = function()
+                    local _card = find_first_card(G.pack_cards.cards)
+                    if _card then
+                        _card.area:remove_card(_card)
+                        _card:add_to_deck()
+                        if _card.children.price then
+                            _card.children.price:remove()
+                        end
+                        _card.children.price = nil
+                        if _card.children.buy_button then
+                            _card.children.buy_button:remove()
+                        end
+                        _card.children.buy_button = nil
+                        remove_nils(_card.children)
+                        G.consumeables:emplace(_card)
+                        card:juice_up()
+                        card.ability.extra.uses = card.ability.extra.uses+1
+                        if card.ability.extra.uses >= card.ability.extra.runtime then
+                            G.FUNCS.destroy_tape(card)
+                            card.ability.destroyed = true
+                        end
                     end
-                    _card.children.price = nil
-                    if _card.children.buy_button then
-                        _card.children.buy_button:remove()
-                    end
-                    _card.children.buy_button = nil
-                    remove_nils(_card.children)
-                    G.consumeables:emplace(_card)
-                    card:juice_up()
-                    card.ability.extra.uses = card.ability.extra.uses+1
-                    if card.ability.extra.uses >= card.ability.extra.runtime then
-                        G.FUNCS.destroy_tape(card)
-                        card.ability.destroyed = true
-                    end
+                    return true
                 end
-                return true
-            end
-        }))
+            }))
+        end
     end
 end
 
