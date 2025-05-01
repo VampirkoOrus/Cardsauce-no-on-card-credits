@@ -2,7 +2,7 @@ local jokerInfo = {
     name = "Hack Fraud",
     config = {
         extra = {
-            chip_mod = 10,
+            chip_mod = 15,
             chips = 0,
         },
     },
