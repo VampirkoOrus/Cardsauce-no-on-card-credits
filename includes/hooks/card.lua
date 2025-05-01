@@ -272,12 +272,6 @@ end
 ---------------------------
 --------------------------- For stand auras in the collection
 ---------------------------
-
-local hoverable_stands = {
-    ['c_csau_stardust_tohth'] = true,
-    ['c_csau_vento_epitaph'] = true,
-}
-
 local ref_card_hover = Card.hover
 function Card:hover()
 
@@ -287,7 +281,7 @@ function Card:hover()
         G.col_stand_hover = nil
     end
 
-    if hoverable_stands[self.config.center.key] or (self.area and self.area.config.collection and self.ability.set == 'csau_Stand') then       
+    if self.ability.aura_hover or (self.area and self.area.config.collection and self.ability.set == 'csau_Stand') then
         G.col_stand_hover = self
         self.ability.aura_flare_queued = true
     end
@@ -297,7 +291,7 @@ end
 
 local ref_card_stop_hover = Card.stop_hover
 function Card:stop_hover()
-    if hoverable_stands[self.config.center.key] or (self.area and self.area.config.collection and self.ability.set == 'csau_Stand') then
+    if self.ability.aura_hover or (self.area and self.area.config.collection and self.ability.set == 'csau_Stand') then
         self.ability.aura_flare_queued = nil
         self.ability.stand_activated = nil
     end
@@ -319,12 +313,6 @@ local ref_cgid = Card.get_id
 function Card:get_id(skip_pmk)
     skip_pmk = skip_pmk or false
     if not skip_pmk and (self.area == G.hand or self.area == G.play) and self:is_face() and next(SMODS.find_card("c_csau_lion_paper")) then
-        local pmk = SMODS.find_card("c_csau_lion_paper")
-        for i, v in ipairs(pmk) do
-            if not v.ability.aura_flare_queued then
-                G.FUNCS.csau_flare_stand_aura(v, 0.38)
-            end
-        end
         return SMODS.Ranks[G.GAME.current_round.paper_rank or 'Jack'].id
     end
     return ref_cgid(self)

@@ -3,6 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         aura_colors = { '9d8f64DC' , 'b2a784DC' },
+        aura_hover = true,
         extra = {
             preview = 3
         }

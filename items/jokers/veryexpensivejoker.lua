@@ -62,7 +62,7 @@ end
 
 function jokerInfo.update(self, card)
 	if card.area and card.area.config.type ~= "joker" then
-		if card.area == G.shop_jokers and card.ability.wasShop == false then
+		if (card.area == G.shop_jokers or card.area == G.morshu_area) and card.ability.wasShop == false then
 			card.ability.wasShop = true
 		end
 		if to_big(card.cost) ~= to_big(G.GAME.dollars) and to_big(G.GAME.dollars) ~= to_big(0) then

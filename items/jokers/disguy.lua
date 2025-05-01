@@ -11,7 +11,7 @@ local jokerInfo = {
 
 local function detect2or5(scoring_hand)
 	for k, v in ipairs(scoring_hand) do
-		if (v:get_id() == 2 or v:get_id() == 5) and v.ability.effect == "Base" then
+		if (v:get_id() == 2 or v:get_id() == 5) and v.ability.effect == "Base" and not v.debuff then
 			return true
 		end
 	end
@@ -41,7 +41,7 @@ function jokerInfo.calculate(self, card, context)
 				[8] = G.P_CENTERS.m_lucky,
 			}
 			for i, v in ipairs(context.scoring_hand) do
-				if (v:get_id() == 2 or v:get_id() == 5) and v.ability.effect == "Base" then
+				if (v:get_id() == 2 or v:get_id() == 5) and v.ability.effect == "Base" and not v.debuff then
 					v:set_ability(enhancements[pseudorandom('OONDORTOOL', 1, 8)], nil, true)
 					G.E_MANAGER:add_event(Event({
 						func = function()

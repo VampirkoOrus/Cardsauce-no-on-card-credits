@@ -3,6 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         aura_colors = { 'fd5481DC', 'ee3c69DC' },
+        aura_hover = true,
         evolve_key = 'c_csau_vento_epitaph_king',
         extra = {
             evolve_skips = 0,

@@ -252,7 +252,7 @@ SMODS.DrawStep {
                 return
             end
 
-            self.no_shadow = true
+            --self.no_shadow = true
 
             -- aura flare in gameplay
             local flare_ease = 0

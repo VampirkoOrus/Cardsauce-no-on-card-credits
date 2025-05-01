@@ -2164,7 +2164,7 @@ return {
 				text = {
 					"When {C:attention}Blind{} is selected, this Joker",
 					"gains {C:mult}+#1#{} Mult if it can take {C:money}$#2#{}",
-					"If not, Mult becomes {C:dark_edition}Negative{} this round",
+					"If not, Mult becomes negative this round",
 					"{C:inactive}(Currently {}{C:mult}#3#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
