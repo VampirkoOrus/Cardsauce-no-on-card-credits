@@ -124,7 +124,7 @@ local function isShowdown()
 		local blindname = (blindname == '' and 'Small Blind' or blindname)
 		for k, v in pairs(G.P_BLINDS) do
 			if v.name == blindname then
-				if v.boss.showdown then
+				if v.boss and v.boss.showdown then
 					return true
 				end
 			end

@@ -62,7 +62,7 @@ return {
 			wq_8 = {
 				"YES! IT IS DONE!",
 			},
-			wq_8 = {
+			wq_9 = {
 				"Mental.",
 			},
 			wq_10 = {
