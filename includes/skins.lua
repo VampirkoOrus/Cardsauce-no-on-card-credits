@@ -372,6 +372,7 @@ SMODS.Atlas{ key = 'hearts_willo', px = 18, py = 18, path = 'cards/hearts_willo.
 local suits = {'hearts', 'diamonds', 'clubs', 'spades'}
 
 local function set_first_deckskin(ds)
+    G.SETTINGS.colourpalettes = {}
     if ds == 'vinny' then
         G.SETTINGS.CUSTOM_DECK.Collabs.Spades = "csau_confidants"
         G.SETTINGS.CUSTOM_DECK.Collabs.Hearts = "csau_wildcards"
