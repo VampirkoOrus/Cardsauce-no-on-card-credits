@@ -191,7 +191,7 @@ G.csau_collab_credits = {
 	},
 	csau_pets = {
 		Ace = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario }, specific = { ['csau_jazz_aces'] = true } },
-		King = {key = "vacredit", set = "Other", vars = { G.csau_team.eld } },
+		King = {key = "vacredit", set = "Other", vars = { G.csau_team.fenix } },
 		Queen = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.winterg } },
 		Jack = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.winterg } },
 	},
