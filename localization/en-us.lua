@@ -737,7 +737,7 @@ return {
 			ach_csau_high_triptoamerica = "Get Trip to America to +90 Mult",
 			ach_csau_high_april = "Få Aprilskämt-jokern till +40 Mult",
 			ach_csau_high_hack = "Get Hack Fraud to +200 Chips",
-			ach_csau_high_junka = "Get Black Spine Junka to +50 Mult",
+			ach_csau_high_junka = "Get Black Spine Junka to X5 Mult",
 			ach_csau_high_feature = "Have IT'S A FEATURE pay out $50 or more",
 			ach_csau_high_muppet = "Get Movin' Right Along to X4 Mult",
 			ach_csau_high_supper = "Proc WAAUGGHGHHHHGHH 10 times in one hand",
@@ -2500,6 +2500,17 @@ return {
 				text = {
 					"All {C:attention}suit{} effects target the suit with",
 					"the {C:attention}most cards{} in your full deck instead",
+					"{C:inactive}(Current suit: {V:1}#1#{C:inactive})"
+				},
+				unlock = {
+					"{E:1,s:1.3}?????"
+				}
+			},
+			j_csau_wigsaw_inactive = {
+				name = "Wigsaw",
+				text = {
+					"All {C:attention}suit{} effects target the suit with",
+					"the {C:attention}most cards{} in your full deck instead",
 					"{C:inactive}(Not active if {C:attention}2 or more suits{C:inactive} are tied)"
 				},
 				unlock = {
@@ -2945,7 +2956,7 @@ return {
 				name = "Star Platinum",
 				text = {
 					"If {C:attention}first hand{} of round",
-					"is all {C:diamonds}Diamonds{}, gain {C:blue}+1{} Hand",
+					"is all {V:1}#2#{}, gain {C:blue}+1{} Hand",
 				},
 			},
 			c_csau_stardust_tohth = {
@@ -2958,7 +2969,7 @@ return {
 				name = "DIO's World",
 				text = {
 					"If {C:attention}first hand{} of round",
-					"is all {C:spades}Spades{}, gain {C:blue}+1{} Hand",
+					"is all {V:1}#2#{}, gain {C:blue}+1{} Hand",
 				},
 			},
 			c_csau_diamond_crazy = {

@@ -36,6 +36,9 @@ end
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
+    if G.GAME and G.GAME.wigsaw_suit then
+        return { vars = { localize(G.GAME.wigsaw_suit, 'suits_plural'), colours = {G.C.SUITS[G.GAME.wigsaw_suit]}} }
+    end
 end
 
 function jokerInfo.add_to_deck(self, card)
@@ -73,10 +76,14 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
         -- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
         full_UI_table.name = localize{type = 'name', key = self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
     end
-    if (specific_vars and not specific_vars.not_hidden) or card.bypass_discovery_center then
+    if (specific_vars and not specific_vars.not_hidden) and not card.bypass_discovery_center then
         localize{type = 'unlocks', key = 'joker_locked_legendary', set = 'Other', nodes = desc_nodes, vars = {}}
     else
-        localize{type = 'descriptions', key = self.key, set = self.set, nodes = desc_nodes, vars = self.loc_vars(self, info_queue, card)}
+        if G.GAME and G.GAME.wigsaw_suit then
+            localize{type = 'descriptions', key = self.key, set = self.set, nodes = desc_nodes, vars = self.loc_vars(self, info_queue, card).vars}
+        else
+            localize{type = 'descriptions', key = self.key..'_inactive', set = self.set, nodes = desc_nodes, vars = self.loc_vars(self, info_queue, card).vars}
+        end
     end
 end
 
@@ -97,6 +104,8 @@ return jokerInfo
 JOKERS AFFECTED BY WIGSAW MANUALLY (FUCK):
 
 Vanilla:
+
+--JOKERS:
 - Greedy Joker ✔️
 - Lusty Joker ✔️
 - Wrathful Joker ✔️
@@ -111,7 +120,17 @@ Vanilla:
 - Flowerpot ✔️
 - The Idol ✔️
 - Seeing Double ✔️
+
+--CONSUMABLES:
+- The Star ✔️
+- The Moon ✔️
+- The Sun ✔️
+- The World ✔️
+- Sigil ✔️
+
 Cardsauce:
+
+--JOKERS:
 - The Purple Joker ✔️
 - Cousin's Club ✔️
 - Why Are You Red? ✔️
@@ -119,6 +138,11 @@ Cardsauce:
 - Choicest Voice ✔️
 - Barbeque Shoes ✔️
 - Dancing Joker ✔️
+
+--STANDS:
+- Star Platinum ✔️
+- DIO's World ✔️
+- Gold Experience ✔️
 
 
 ]]--

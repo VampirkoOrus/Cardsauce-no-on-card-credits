@@ -15,7 +15,7 @@ end
 
 consumInfo.in_pool = function(self, args)
     if next(SMODS.find_card("j_csau_blackjack")) then
-        return (G.GAME and G.GAME.hands and G.GAME.csau_Blackjack.played > 0)
+        return (G.GAME and G.GAME.hands and  G.GAME.hands.csau_Blackjack.played > 0)
     end
 end
 

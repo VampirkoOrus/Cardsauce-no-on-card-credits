@@ -1384,3 +1384,35 @@ end
 '''
 match_indent = true
 times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''elseif _c.name == "The Star" then loc_vars = {cfg.max_highlighted,  localize(cfg.suit_conv, 'suits_plural'), colours = {G.C.SUITS[cfg.suit_conv]}}
+       elseif _c.name == "The Moon" then loc_vars = {cfg.max_highlighted, localize(cfg.suit_conv, 'suits_plural'), colours = {G.C.SUITS[cfg.suit_conv]}}
+       elseif _c.name == "The Sun" then loc_vars = {cfg.max_highlighted, localize(cfg.suit_conv, 'suits_plural'), colours = {G.C.SUITS[cfg.suit_conv]}}'''
+position = "at"
+payload = '''elseif _c.name == "The Star" then loc_vars = {cfg.max_highlighted,  localize(G.GAME and G.GAME.wigsaw_suit or cfg.suit_conv, 'suits_plural'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or cfg.suit_conv]}}
+       elseif _c.name == "The Moon" then loc_vars = {cfg.max_highlighted, localize(G.GAME and G.GAME.wigsaw_suit or cfg.suit_conv, 'suits_plural'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or cfg.suit_conv]}}
+       elseif _c.name == "The Sun" then loc_vars = {cfg.max_highlighted, localize(G.GAME and G.GAME.wigsaw_suit or cfg.suit_conv, 'suits_plural'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or cfg.suit_conv]}}
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''elseif _c.name == "The World" then loc_vars = {cfg.max_highlighted, localize(cfg.suit_conv, 'suits_plural'), colours = {G.C.SUITS[cfg.suit_conv]}}'''
+position = "at"
+payload = '''elseif _c.name == "The World" then loc_vars = {cfg.max_highlighted, localize(G.GAME and G.GAME.wigsaw_suit or cfg.suit_conv, 'suits_plural'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or cfg.suit_conv]}}'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function() G.hand.highlighted[i]:change_suit(self.ability.consumeable.suit_conv);return true end }))'''
+position = "at"
+payload = '''G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function() G.hand.highlighted[i]:change_suit(G.GAME and G.GAME.wigsaw_suit or self.ability.consumeable.suit_conv);return true end }))'''
+match_indent = true
+times = 1
