@@ -651,18 +651,21 @@ G.FUNCS.destroy_tape = function(card, delay_time, ach, silent, text)
     }))
 end
 
-
---Modified Code from Betmma's Vouchers
-G.FUNCS.can_select_tape = function(e)
-	if #G.consumeables.cards < G.consumeables.config.card_limit then
-		if not e.config.colour == G.C.IMPORTANT then
-			e.config.colour = G.C.RED
+local ref_select_card = G.FUNCS.can_select_card
+G.FUNCS.can_select_card = function(e)
+	local card = e.config.ref_table
+	if card.ability.set == 'VHS' then
+		if #G.consumeables.cards < G.consumeables.config.card_limit then
+			e.config.colour = G.C.GREEN
+			e.config.button = "use_card"
+		else
+			e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+			e.config.button = nil
 		end
-		e.config.button = "use_card"
-	else
-		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
-		e.config.button = nil
+		return
 	end
+	
+	return ref_select_card(e)
 end
 
 
