@@ -38,7 +38,7 @@ function jokerInfo.calculate(self, card, context)
         end
         card.ability.dollars_before = nil
     end
-    if context.joker_main and context.cardarea == G.jokers then
+    if context.joker_main and context.cardarea == G.jokers and card.ability.extra.x_mult > 1 then
         return {
             message = localize{type='variable',key='a_xmult',vars={to_big(card.ability.extra.x_mult)}},
             Xmult_mod = card.ability.extra.x_mult,
