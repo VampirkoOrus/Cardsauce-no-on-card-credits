@@ -542,7 +542,7 @@ return {
 			k_gold_exp = "Gold Experience!",
 			k_stone_free = "Stone Free!",
 			k_bsa = "Bigmouth Strikes Again!",
-			k_smooth_operators = "Modified!",
+			k_smooth_operators = "Dragged!",
 			k_soft_and_wet = "Stolen!",
 			k_bites_the_dust = "Bites the Dust!",
 			k_thehand = "Swipe!",
@@ -736,7 +736,7 @@ return {
 			ach_csau_high_triptoamerica = "Get Trip to America to +90 Mult",
 			ach_csau_high_april = "Få Aprilskämt-jokern till +40 Mult",
 			ach_csau_high_hack = "Get Hack Fraud to +200 Chips",
-			ach_csau_high_junka = "Get Black Spine Junka to +50 Mult",
+			ach_csau_high_junka = "Get Black Spine Junka to X5 Mult",
 			ach_csau_high_feature = "Have IT'S A FEATURE pay out $50 or more",
 			ach_csau_high_muppet = "Get Movin' Right Along to X4 Mult",
 			ach_csau_high_supper = "Proc WAAUGGHGHHHHGHH 10 times in one hand",
@@ -2045,7 +2045,7 @@ return {
 				text = {
 					"{C:attention}Transforms{} into a different Joker",
 					"depending on the {C:attention}suit{} of the",
-					"first card scored!",
+					"first card scored each round!",
 				},
 			},
 			j_csau_sts_hearts = {
@@ -2499,6 +2499,17 @@ return {
 				text = {
 					"All {C:attention}suit{} effects target the suit with",
 					"the {C:attention}most cards{} in your full deck instead",
+					"{C:inactive}(Current suit: {V:1}#1#{C:inactive})"
+				},
+				unlock = {
+					"{E:1,s:1.3}?????"
+				}
+			},
+			j_csau_wigsaw_inactive = {
+				name = "Wigsaw",
+				text = {
+					"All {C:attention}suit{} effects target the suit with",
+					"the {C:attention}most cards{} in your full deck instead",
 					"{C:inactive}(Not active if {C:attention}2 or more suits{C:inactive} are tied)"
 				},
 				unlock = {
@@ -2727,7 +2738,7 @@ return {
 				name = "Twisted Pair",
 				text = {
 					"While {C:attention}playing{}, add a {C:attention}copy of the",
-					"first card scored to your deck",
+					"first card scored to your hand",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
 			},
@@ -2743,8 +2754,8 @@ return {
 			c_csau_streetsmarts = {
 				name = "Street Smarts",
 				text = {
-					"While {C:attention}playing{}, final hands",
-					"have {C:mult}+#1#{} Mult",
+					"While {C:attention}playing{}, {C:mult}+#1#{} Mult",
+					"on {C:attention}final hand{} of round",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Rounds"
 				},
 			},
@@ -2944,7 +2955,7 @@ return {
 				name = "Star Platinum",
 				text = {
 					"If {C:attention}first hand{} of round",
-					"is all {C:diamonds}Diamonds{}, gain {C:blue}+1{} Hand",
+					"is all {V:1}#2#{}, gain {C:blue}+1{} Hand",
 				},
 			},
 			c_csau_stardust_tohth = {
@@ -2957,7 +2968,7 @@ return {
 				name = "DIO's World",
 				text = {
 					"If {C:attention}first hand{} of round",
-					"is all {C:spades}Spades{}, gain {C:blue}+1{} Hand",
+					"is all {V:1}#2#{}, gain {C:blue}+1{} Hand",
 				},
 			},
 			c_csau_diamond_crazy = {
@@ -3244,7 +3255,7 @@ return {
 				name = "Smooth Operators",
 				text = {
 					"Before scoring, if an unscored card",
-					"is an {C:attention}adjacent rank{} to a scored card",
+					"is an {C:attention}adjacent rank{} to a scored card,",
 					"{C:attention}upgrade or downgrade{} it one rank",
 				},
 			},

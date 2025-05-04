@@ -93,17 +93,7 @@ function jokerInfo.calculate(self, card, context)
         end }))
     end
     if context.end_of_round and not card.debuff and not context.individual and not context.repetition and not context.blueprint then
-        if G.GAME.FLAME_ON and G.GAME.FLAME_ON > 0 then
-            G.GAME.FLAME_ON = G.GAME.FLAME_ON - 1
-            if G.GAME.FLAME_ON == 0 then
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    func = function()
-                        G.GAME.FLAME_ON = nil
-                        return true
-                    end
-                }))
-            end
+        if G.ARGS.score_intensity.earned_score >= G.ARGS.score_intensity.required_score and G.ARGS.score_intensity.required_score > 0 then
             local lines = {
                 [1] = "jerma_perfect",
                 [2] = "jerma_godgamer",

@@ -317,3 +317,55 @@ function Card:get_id(skip_pmk)
     end
     return ref_cgid(self)
 end
+
+-- why is this function not a global, i had to steal it from smods code
+local function juice_flip(used_tarot)
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.4,
+        func = function()
+            play_sound('tarot1')
+            used_tarot:juice_up(0.3, 0.5)
+            return true
+        end
+    }))
+    for i = 1, #G.hand.cards do
+        local percent = 1.15 - (i - 0.999) / (#G.hand.cards - 0.998) * 0.3
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.15,
+            func = function()
+                G.hand.cards[i]:flip(); play_sound('card1', percent); G.hand.cards[i]:juice_up(0.3, 0.3); return true
+            end
+        }))
+    end
+end
+
+SMODS.Consumable:take_ownership('sigil', {
+    use = function(self, card, area, copier)
+        local used_tarot = copier or card
+        juice_flip(used_tarot)
+        local _suit = pseudorandom_element(SMODS.Suits, pseudoseed('sigil'))
+        _suit = (G.GAME and G.GAME.wigsaw_suit and SMODS.Suits[G.GAME.wigsaw_suit]) or _suit
+        for i = 1, #G.hand.cards do
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    local _card = G.hand.cards[i]
+                    assert(SMODS.change_base(_card, _suit.key))
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.cards do
+            local percent = 0.85 + (i - 0.999) / (#G.hand.cards - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.cards[i]:flip(); play_sound('tarot2', percent, 0.6); G.hand.cards[i]:juice_up(0.3, 0.3); return true
+                end
+            }))
+        end
+        delay(0.5)
+    end,
+})

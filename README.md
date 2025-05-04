@@ -3,13 +3,13 @@ A Balatro mod made for Vinesauce!
 
 ![Cardsauce Logo](https://i.imgur.com/db2zy4W.png)
 
-**Cardsauce** is a Vinesauce-themed expansion for Balatro, made in collaboration with the Balatro Discord and Vinesauce communities! Featuring art from several talented artists, Cardsauce adds 70 new Jokers, as well as a handful of other new additions to the game.
+**Cardsauce** is a Vinesauce-themed expansion for Balatro, made in collaboration with the Balatro Discord and Vinesauce communities! Featuring art from several talented artists, Cardsauce adds 120 new Jokers, as well as a lot of other new additions to the game.
 
 Join the discord [here](https://discord.gg/evwdM4Tvc5)! 
 
 ## Installation
 
-This mod requires [Lovely](https://github.com/ethangreen-dev/lovely-injector) and the latest version of [Steammodded](https://github.com/Steamopollys/Steamodded) **(Version 1.0.0~ALPHA-1317a or later)**. Without these dependencies, this mod will not function.
+This mod requires [Lovely](https://github.com/ethangreen-dev/lovely-injector) and the latest version of [Steammodded](https://github.com/Steamopollys/Steamodded) **(Version 1.0.0~BETA-0427a or later)**. Without these dependencies, this mod will not function.
 
 Once you've installed both lovely and Steammodded, download the latest release zip file from the **Releases** tab and put the folder inside it in your Balatro Mods folder (`%APPDATA%/Balatro/Mods`). That's it! 
 

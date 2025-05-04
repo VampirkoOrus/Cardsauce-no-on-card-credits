@@ -116,11 +116,9 @@ end
 
 function jokerInfo.update(self, card, dt)
     if G.STAGE == G.STAGES.RUN then
-        --do the Mario
-        --swing your arms from side to side
         if mod.tetris.isActive then
             card.ability.extra.mult = mod.tetris.linesCleared
-            if mod.tetris.speedLevel >= 17 then
+            if mod.tetris.speedLevel >= 16 then
                 check_for_unlock({ type = "high_tetris" })
             end
             if mod.tetris.queue and #mod.tetris.queue > 0 then
