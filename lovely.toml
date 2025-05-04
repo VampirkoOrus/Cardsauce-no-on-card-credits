@@ -1340,20 +1340,9 @@ if args.card.ability.set == 'VHS' then
         button_text = localize('b_activate')
     end
 end
-sendDebugMessage(button_text)
 button_contents = {n=G.UIT.T, config={text = button_text, colour = G.C.WHITE, scale = 0.5}}'''
 match_indent = true
 times = 1
-
-[[patches]]
-[patches.pattern]
-target = "functions/button_callbacks.lua"
-pattern = '''base_attach.children.use = G.UIDEF.card_focus_button{'''
-position = "before"
-payload = '''sendDebugMessage('trying to update use button')'''
-match_indent = true
-times = 1
-
 
 
 [[patches]]
