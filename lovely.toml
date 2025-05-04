@@ -1321,7 +1321,16 @@ times = 1
 target = "functions/UI_definitions.lua"
 pattern = "card.ability.consumeable then --Add a use button"
 position = "at"
-payload = "card.ability.consumeable and card.ability.set ~= 'csau_Stand' then --Add a use button"
+payload = "card.ability.consumeable and card.ability.set ~= 'csau_Stand' then"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "if (card.area == G.pack_cards and G.pack_cards) and not card.ability.consumeable then --Add a use button"
+position = "at"
+payload = "if (card.area == G.pack_cards and G.pack_cards) and (card.ability.set == 'VHS' or not card.ability.consumeable) then"
 match_indent = true
 times = 1
 
@@ -1332,9 +1341,7 @@ pattern = "button_contents = {n=G.UIT.T, config={text = localize('b_use'),colour
 position = "at"
 payload = '''local button_text = localize('b_use')
 if args.card.ability.set == 'VHS' then
-    if G.pack_cards and args.card.area == G.pack_cards then
-        button_text = localize('b_select')
-    elseif args.card.ability.activated then
+    if args.card.ability.activated then
         button_text = localize('b_deactivate')
     else
         button_text = localize('b_activate')
@@ -1343,7 +1350,6 @@ end
 button_contents = {n=G.UIT.T, config={text = button_text, colour = G.C.WHITE, scale = 0.5}}'''
 match_indent = true
 times = 1
-
 
 [[patches]]
 [patches.pattern]
