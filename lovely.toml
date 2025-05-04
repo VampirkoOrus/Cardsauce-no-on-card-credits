@@ -168,21 +168,6 @@ overwrite = false
 
 [[patches]]
 [patches.pattern]
-target = "functions/button_callbacks.lua"
-pattern = "if G.ARGS.score_intensity.earned_score >= G.ARGS.score_intensity.required_score and G.ARGS.score_intensity.required_score > 0 then"
-position = "after"
-payload = '''
-if G.STATE == G.STATES.HAND_PLAYED and (next(SMODS.find_card('j_csau_kerosene')) or next(SMODS.find_card('j_csau_jerma'))) then
-    if not G.GAME.FLAME_ON then
-        G.GAME.FLAME_ON = #SMODS.find_card('j_csau_kerosene') + #SMODS.find_card('j_csau_jerma')
-    end
-end
-'''
-match_indent = true
-overwrite = false
-
-[[patches]]
-[patches.pattern]
 target = "functions/common_events.lua"
 pattern = "_pool[#_pool + 1] = v.key"
 position = "before"
