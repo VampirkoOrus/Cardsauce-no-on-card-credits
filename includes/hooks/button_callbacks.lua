@@ -196,36 +196,18 @@ end
 local ref_uc = G.FUNCS.use_card
 G.FUNCS.use_card = function(e, mute, nosave)
     local card = e.config.ref_table
-    if card.ability.activation or (card.config.center.activate and type(card.config.center.activate) == 'function') then
+    if card.area == G.consumeables and (card.ability.activation or (card.config.center.activate and type(card.config.center.activate) == 'function')) then
         if card.config.center.activate and type(card.config.center.activate) == 'function' then
             card.config.center.activate(card.config.center, card, not card.ability.activated)
         end
         if card.ability.activation then
             G.FUNCS.tape_activate(card)
             if G.CONTROLLER.HID.controller then
-                G.UIDEF.card_focus_ui(card)
+                card.children.focused_ui = G.UIDEF.card_focus_ui(card)
                 G.CONTROLLER.locks.use = false
             else
                 card:highlight(true)
             end
-        end
-        discover_card(card.config.center)
-        if card.area and card.area ~= G.consumeables then
-            if card.area and card.area == G.pack_cards then
-                if G.booster_pack.alignment.offset.py then
-                    G.booster_pack.alignment.offset.y = G.booster_pack.alignment.offset.py
-                    G.booster_pack.alignment.offset.py = nil
-                end
-                G.GAME.pack_choices = G.GAME.pack_choices - 1
-                if G.GAME.pack_choices <= 0 then
-                    G.FUNCS.end_consumeable(nil, 0.2)
-                end
-                card.area:remove_card(card)
-            end
-            card:add_to_deck()
-            G.consumeables:emplace(card)
-            play_sound('card1', 0.8, 0.6)
-            play_sound('generic1')
         end
         return
     end

@@ -1330,9 +1330,20 @@ times = 1
 target = "functions/UI_definitions.lua"
 pattern = "button_contents = {n=G.UIT.T, config={text = localize('b_use'),colour = G.C.WHITE, scale = 0.5}}"
 position = "at"
-payload = "button_contents = {n=G.UIT.T, config={text = args.card.ability.set == 'VHS' and localize('b_'..(args.card.ability.activated and 'de' or '')..'activate') or localize('b_use'),colour = G.C.WHITE, scale = 0.5}}"
+payload = '''local button_text = localize('b_use')
+if args.card.ability.set == 'VHS' then
+    if G.pack_cards and args.card.area == G.pack_cards then
+        button_text = localize('b_select')
+    elseif args.card.ability.activated then
+        button_text = localize('b_deactivate')
+    else
+        button_text = localize('b_activate')
+    end
+end
+button_contents = {n=G.UIT.T, config={text = button_text, colour = G.C.WHITE, scale = 0.5}}'''
 match_indent = true
 times = 1
+
 
 [[patches]]
 [patches.pattern]

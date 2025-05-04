@@ -9,7 +9,7 @@ local packInfo = {
     cost = 8,
     kind = 'VHS',
     group_key = "k_mega_analog_pack",
-    origin = 'rlm',
+    select_card = 'consumeables',
     csau_dependencies = {
         'enableVHSs',
     },

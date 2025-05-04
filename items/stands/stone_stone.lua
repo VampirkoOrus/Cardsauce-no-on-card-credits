@@ -26,9 +26,9 @@ function consumInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.blueprint or context.retrigger_joker
     if context.individual and context.cardarea == G.play and not card.debuff then
         if context.other_card.ability.effect == "Stone Card" then
+            local oc = context.other_card
             return {
                 func = function()
-                    local oc = context.other_card
                     G.E_MANAGER:add_event(Event({
                         func = (function()
                             G.FUNCS.csau_flare_stand_aura(card, 0.38)

@@ -29,34 +29,18 @@ end
 -- Modified Code from Malverk
 local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
 function G.UIDEF.use_and_sell_buttons(card)
-	local use = nil
 	if card.ability.set == "VHS" then
 		if (card.area == G.pack_cards and G.pack_cards) and card.ability.consumeable then --Add a use button
-			local spacer = {n=G.UIT.R, config={minh = 0.8}}
-			local pull = {n=G.UIT.R, config={minh = 0.55}}
 			use = {n=G.UIT.R, config={align = 'cm'}, nodes={
 				{n=G.UIT.C, config={align = "cm"}, nodes={
-					{n=G.UIT.C, config={align = "bm", maxw = G.CARD_W * 0.65, shadow = true, padding = 0.1, r=0.08, minw = 0.5 * G.CARD_W, minh = 0.8, hover = true, colour = G.C.RED, button = "use_card", func = "can_reserve_card", ref_table = card, activate = true}, nodes={
-						{n=G.UIT.T, config={text = localize('b_activate'), colour = G.C.UI.TEXT_LIGHT, scale = 0.45, shadow = true}}
+					{n=G.UIT.C, config={align = "bm", maxw = G.CARD_W * 0.65, shadow = true, padding = 0.1, r=0.08, minw = 0.5 * G.CARD_W, minh = 0.8, hover = true, colour = G.C.RED, button = "use_card", func = "can_select_tape", ref_table = card}, nodes={
+						{n=G.UIT.T, config={text = localize('b_select'), colour = G.C.UI.TEXT_LIGHT, scale = 0.45, shadow = true}}
 					}}
 				}}
 			}}
-			if not card.config.center.unpauseable then
-				pull = {n=G.UIT.R, config={align = 'cr', minw = 1.7*G.CARD_W}, nodes={
-					{n=G.UIT.R, config={minh = 0.65}},
-					{n=G.UIT.R, nodes = {
-						{n=G.UIT.C, config={minw = G.CARD_W, minh = 0.8, colour = G.C.IMPORTANT, r = 0.1, align = 'cr', shadow = true, padding = 0.1, hover = true, button = "use_card", func = "can_reserve_card", ref_table = card, pull = true}, nodes = {
-							{n=G.UIT.T, config={text = localize('b_pull'), colour = G.C.UI.TEXT_LIGHT, scale = 0.45, shadow = true}}
-						}}
-					}}
-				}}
-			end
-			spacer = {n=G.UIT.R, config={minh = 0.7}}
 			local t = {n=G.UIT.ROOT, config = {align = 'cm', padding = 0, colour = G.C.CLEAR}, nodes={
 				{n=G.UIT.C, config={align = 'cm'}, nodes={
-					pull,
-					spacer,
-					use
+					use,
 				}},
 			}}
 			return t
