@@ -199,18 +199,19 @@ function load_cardsauce_item(file_key, item_type)
 			function info.can_use(self, card)
 				return false
 			end
-		end
 
-		if item_type == 'Stand' and info.rarity == 'csau_EvolvedRarity' then
-			local sctb_ref = function(self, card, badges) end
-			if info.set_card_type_badge then
-				sctb_ref = info.set_card_type_badge
-			end
-			function info.set_card_type_badge(self, card, badges)
-				badges[1] = create_badge(localize('k_csau_evolved'), get_type_colour(self or card.config, card), nil, 1.2)
-				sctb_ref(self, card)
+			if info.rarity == 'csau_EvolvedRarity' then
+				local sctb_ref = function(self, card, badges) end
+				if info.set_card_type_badge then
+					sctb_ref = info.set_card_type_badge
+				end
+				function info.set_card_type_badge(self, card, badges)
+					badges[1] = create_badge(localize('k_csau_evolved'), get_type_colour(self or card.config, card), nil, 1.2)
+					sctb_ref(self, card)
+				end
 			end
 		end
+		
 	end
 
 	if item_type == 'Deck' then smods_item = 'Back' end
@@ -652,50 +653,16 @@ end
 
 
 --Modified Code from Betmma's Vouchers
-G.FUNCS.can_reserve_card = function(e)
+G.FUNCS.can_select_tape = function(e)
 	if #G.consumeables.cards < G.consumeables.config.card_limit then
 		if not e.config.colour == G.C.IMPORTANT then
 			e.config.colour = G.C.RED
 		end
-		if (e.config.ref_table.config.center.activation and e.config.activate) or e.config.pull then
-			e.config.button = "reserve_card"
-		else
-			e.config.button = "use_card"
-		end
+		e.config.button = "use_card"
 	else
 		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
 		e.config.button = nil
 	end
-end
-
-G.FUNCS.reserve_card = function(e)
-	local c1 = e.config.ref_table
-	if e.config.activate then
-		G.FUNCS.tape_activate(c1)
-	end
-	G.E_MANAGER:add_event(Event({
-		trigger = "after",
-		delay = 0.1,
-		func = function()
-			c1.area:remove_card(c1)
-			c1:add_to_deck()
-			if c1.children.price then
-				c1.children.price:remove()
-			end
-			c1.children.price = nil
-			if c1.children.buy_button then
-				c1.children.buy_button:remove()
-			end
-			c1.children.buy_button = nil
-			remove_nils(c1.children)
-			G.consumeables:emplace(c1)
-			G.GAME.pack_choices = G.GAME.pack_choices - 1
-			if G.GAME.pack_choices <= 0 then
-				G.FUNCS.end_consumeable(nil, delay_fac)
-			end
-			return true
-		end,
-	}))
 end
 
 

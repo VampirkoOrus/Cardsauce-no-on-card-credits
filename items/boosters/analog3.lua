@@ -9,6 +9,7 @@ local packInfo = {
     cost = 6,
     kind = 'VHS',
     group_key = "k_jumbo_analog_pack",
+    select_card = 'consumeables',
     csau_dependencies = {
         'enableVHSs',
     },
