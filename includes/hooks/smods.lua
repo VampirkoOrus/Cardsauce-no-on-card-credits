@@ -1,6 +1,6 @@
 function SMODS.current_mod.reset_game_globals(run_start)
     if run_start then
-        G.GAME.modifiers.max_stands = 1
+        G.GAME.modifiers.max_stands = G.GAME.modifiers.max_stands or 1
 		G.GAME.morshu_cards = 0
 
 		if G.GAME.modifiers.csau_marathon then
