@@ -543,7 +543,7 @@ return {
 			k_gold_exp = "Gold Experience!",
 			k_stone_free = "Stone Free!",
 			k_bsa = "Bigmouth Strikes Again!",
-			k_smooth_operators = "Modified!",
+			k_smooth_operators = "Dragged!",
 			k_soft_and_wet = "Stolen!",
 			k_bites_the_dust = "Bites the Dust!",
 			k_thehand = "Swipe!",
@@ -2046,7 +2046,7 @@ return {
 				text = {
 					"{C:attention}Transforms{} into a different Joker",
 					"depending on the {C:attention}suit{} of the",
-					"first card scored!",
+					"first card scored each round!",
 				},
 			},
 			j_csau_sts_hearts = {
@@ -2739,7 +2739,7 @@ return {
 				name = "Twisted Pair",
 				text = {
 					"When {C:attention}playing{}, add a {C:attention}copy of the",
-					"first card scored to your deck",
+					"first card scored to your hand",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
 			},
@@ -2755,8 +2755,8 @@ return {
 			c_csau_streetsmarts = {
 				name = "Street Smarts",
 				text = {
-					"When {C:attention}playing{}, final hands",
-					"have {C:mult}+#1#{} Mult",
+					"When {C:attention}playing{}, {C:mult}+#1#{} Mult",
+					"on {C:attention}final hand{} of round",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Rounds"
 				},
 			},
@@ -3256,7 +3256,7 @@ return {
 				name = "Smooth Operators",
 				text = {
 					"Before scoring, if an unscored card",
-					"is an {C:attention}adjacent rank{} to a scored card",
+					"is an {C:attention}adjacent rank{} to a scored card,",
 					"{C:attention}upgrade or downgrade{} it one rank",
 				},
 			},
