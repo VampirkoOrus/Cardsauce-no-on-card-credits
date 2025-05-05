@@ -407,7 +407,9 @@ function ease_dollars(mod, instant)
                         blocking = true,
                         func = function()
                             v.ability.extra.mult = v.ability.extra.mult + (-mod * v.ability.extra.mult_mod)
-                            v.ability.extra.prob_extra = v.ability.extra.prob_extra + (-mod * v.ability.extra.prob_mod)
+                            if SMODS.food_expires() then
+                                v.ability.extra.prob_extra = v.ability.extra.prob_extra + (-mod * v.ability.extra.prob_mod)
+                            end
                             card_eval_status_text(v, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_mult',vars={v.ability.extra.mult}}, colour = G.C.IMPORTANT})
                             return true
                         end
