@@ -20,7 +20,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.after and not (context.blueprint or card.debuff) and G.GAME.current_round.hands_left == 0 then
+    if context.cardarea == G.jokers and context.after and not (context.blueprint or card.debuff) and G.GAME.current_round.hands_left == 0 and SMODS.food_expires(context) then
         if card.ability.extra.chips - card.ability.extra.chips_mod <= 0 then
             G.E_MANAGER:add_event(Event({
                 func = function()
