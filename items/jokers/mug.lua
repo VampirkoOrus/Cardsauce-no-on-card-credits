@@ -15,6 +15,7 @@ local jokerInfo = {
     eternal_compat = false,
     perishable_compat = false,
     pixel_size = { w = 71, h = 73 },
+    pools = { ["Food"] = true },
     hasSoul = true,
     streamer = "joel",
 }

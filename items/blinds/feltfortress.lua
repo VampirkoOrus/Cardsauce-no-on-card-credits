@@ -28,7 +28,8 @@ end
 
 --Modified code from Math Blinds
 blindInfo.drawn_to_hand = function(self)
-    if G.GAME.blind.activated then
+    if not G.GAME.blind.disabled and G.GAME.blind.activated then
+        G.GAME.blind.activated = false
         local new_chips = math.floor(G.GAME.blind.chips * 2)
         G.GAME.blind:wiggle()
         play_area_status_text(localize('k_fort_doubled'))

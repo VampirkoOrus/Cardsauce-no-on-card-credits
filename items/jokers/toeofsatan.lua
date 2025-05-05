@@ -11,6 +11,7 @@ local jokerInfo = {
     blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
+    pools = { ["Food"] = true },
     streamer = "joel",
 }
 

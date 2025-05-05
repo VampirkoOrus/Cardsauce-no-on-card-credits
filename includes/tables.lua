@@ -1,6 +1,7 @@
 -- I replaced the old is_food() function by just making this a map instead ~Winter
 
---- Table representing "food" jokers, including vanilla Balatro jokers like Ice Cream and Ramen
+--- ObjectType representing "food" jokers, including vanilla Balatro jokers like Ice Cream and Ramen. Compatible with Cryptid
+---LIST OF FOOD JOKERS:
 G.foodjokers = {
 	['j_gros_michel'] = true,
 	['j_ice_cream'] = true,
@@ -15,10 +16,100 @@ G.foodjokers = {
 	['j_csau_crudeoil'] = true,
 	['j_csau_grannycream'] = true,
 	['j_csau_toeofsatan'] = true,
-	['j_csau_sprunk'] = true,
 	['j_csau_chips'] = true,
 	['j_csau_mug'] = true,
+	['j_cry_pickle'] = true,
+	['j_cry_chili_pepper'] = true,
+	['j_cry_tropical_smoothie'] = true,
+	['j_cry_cotton_candy'] = true,
+	['j_cry_wrapped'] = true,
+	['j_cry_candy_cane'] = true,
+	['j_cry_candy_buttons'] = true,
+	['j_cry_jawbreaker'] = true,
+	['j_cry_mellowcreme'] = true,
+	['j_cry_brittle'] = true,
+	['j_cry_caramel'] = true,
+	['j_cry_oldcandy'] = true,
+	['j_neat_icecreamsandwich'] = true,
+	['j_neat_frostedprimerib'] = true,
+	['j_neat_bananastand'] = true,
+	['j_ExtraCredit_badapple'] = true,
+	['j_ExtraCredit_espresso'] = true,
+	['j_ExtraCredit_ambrosia'] = true,
+	['j_ExtraCredit_candynecklace'] = true,
+	['j_ExtraCredit_compost'] = true,
+	['j_ExtraCredit_starfruit'] = true,
+	['j_bunc_starfruit'] = true,
+	['j_ortalab_taliaferro'] = true,
+	['j_ortalab_sunnyside'] = true,
+	['j_ortalab_hot_chocolate'] = true,
+	['j_ortalab_royal_gala'] = true,
+	['j_ortalab_fine_wine'] = true,
+	['j_ortalab_mystery_soda'] = true,
+	['j_ortalab_popcorn_bag'] = true,
+	['j_ortalab_salad'] = true,
+	['j_paperback_apple'] = true,
+	['j_paperback_joker_cookie'] = true,
+	['j_paperback_nachos'] = true,
+	['j_paperback_crispy_taco'] = true,
+	['j_paperback_soft_taco'] = true,
+	['j_paperback_complete_breakfast'] = true,
+	['j_paperback_ghost_cola'] = true,
+	['j_paperback_b_soda'] = true,
+	['j_paperback_ice_cube'] = true,
+	['j_paperback_cream_liqueur'] = true,
+	['j_paperback_champagne'] = true,
+	['j_paperback_coffee'] = true,
+	['j_paperback_matcha'] = true,
+	['j_paperback_epic_sauce'] = true,
+	['j_paperback_dreamsicle'] = true,
+	['j_paperback_cakepop'] = true,
+	['j_paperback_caramel_apple'] = true,
+	['j_paperback_charred_marshmallow'] = true,
+	['j_paperback_rock_candy'] = true,
+	['j_paperback_tanghulu'] = true,
+	['j_buf_gfondue'] = true,
+	['j_buf_camarosa'] = true,
+	['j_buf_'] = true,
 }
+
+if not SMODS.ObjectTypes.Food then
+	SMODS.ObjectType({
+		key = "Food",
+		default = "j_reserved_parking",
+		cards = {},
+		inject = function(self)
+			SMODS.ObjectType.inject(self)
+			-- insert base game food jokers
+			self:inject_card(G.P_CENTERS.j_gros_michel)
+			self:inject_card(G.P_CENTERS.j_egg)
+			self:inject_card(G.P_CENTERS.j_ice_cream)
+			self:inject_card(G.P_CENTERS.j_cavendish)
+			self:inject_card(G.P_CENTERS.j_turtle_bean)
+			self:inject_card(G.P_CENTERS.j_diet_cola)
+			self:inject_card(G.P_CENTERS.j_popcorn)
+			self:inject_card(G.P_CENTERS.j_ramen)
+			self:inject_card(G.P_CENTERS.j_selzer)
+		end,
+	})
+else
+	local inj_ref = SMODS.ObjectTypes.Food.inject
+	SMODS.ObjectType:take_ownership("Food", {
+		inject = function(self)
+			inj_ref(self)
+			for k, v in pairs(G.foodjokers) do
+				if G.P_CENTERS[k] or SMODS.Centers[k] then
+					local center = G.P_CENTERS[k] or SMODS.Centers[k]
+					if not v.pools and v.pools.Food then
+						self:inject_card(center)
+					end
+				end
+			end
+		end
+	})
+end
+
+
 
 --- Table containing all names of people who contributed to the mod, used in crediting
 G.csau_team = {

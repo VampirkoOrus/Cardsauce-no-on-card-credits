@@ -34,7 +34,7 @@ function jokerInfo.update(self, card, dt)
     if not G.jokers then return end
     local food = 0
     for k, v in pairs(G.jokers.cards) do
-        if G.foodjokers[v.config.center.key] and not v.debuff then
+        if v.config.center.pools and v.config.center.pools.Food and not v.debuff then
             food = food + 1
         end
     end

@@ -117,7 +117,7 @@ if G.GAME.selected_back and G.GAME.selected_back.effect.center.key == "b_csau_vi
     end
 end
 if next(SMODS.find_card('j_csau_frich')) then
-    if G.foodjokers[v.key] then
+    if v.pools and v.pools.Food then
         _pool[#_pool + 1] = v.key
         _pool_size = _pool_size + 1
     end
