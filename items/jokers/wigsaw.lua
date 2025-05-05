@@ -36,9 +36,6 @@ end
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
-    if G.GAME and G.GAME.wigsaw_suit then
-        return { vars = { localize(G.GAME.wigsaw_suit, 'suits_plural'), colours = {G.C.SUITS[G.GAME.wigsaw_suit]}} }
-    end
 end
 
 function jokerInfo.add_to_deck(self, card)
@@ -79,16 +76,12 @@ function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars
     if (specific_vars and not specific_vars.not_hidden) and not card.bypass_discovery_center then
         localize{type = 'unlocks', key = 'joker_locked_legendary', set = 'Other', nodes = desc_nodes, vars = {}}
     else
-        if G.GAME and G.GAME.wigsaw_suit then
-            localize{type = 'descriptions', key = self.key, set = self.set, nodes = desc_nodes, vars = self.loc_vars(self, info_queue, card).vars}
-        else
-            localize{type = 'descriptions', key = self.key..'_inactive', set = self.set, nodes = desc_nodes, vars = self.loc_vars(self, info_queue, card).vars}
-        end
+        localize{type = 'descriptions', key = self.key, set = self.set, nodes = desc_nodes, vars = self.loc_vars(self, info_queue, card)}
     end
 end
 
 function jokerInfo.update(self, card)
-    if card.area == G.jokers and G.playing_cards then
+    if card.area and card.area == G.jokers and G.playing_cards then
         local suit_tallies = {}
         for i, v in ipairs(G.playing_cards) do
             if v.base.suit then suit_tallies[v.base.suit] = (suit_tallies[v.base.suit] or 0) + 1 end
@@ -143,6 +136,5 @@ Cardsauce:
 - Star Platinum ✔️
 - DIO's World ✔️
 - Gold Experience ✔️
-
 
 ]]--

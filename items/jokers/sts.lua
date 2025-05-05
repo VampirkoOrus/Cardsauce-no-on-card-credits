@@ -140,8 +140,12 @@ function jokerInfo.calculate(self, card, context)
                     }))
                 end
                 if card.ability.form == "spades" then
-                    ease_discard(-G.GAME.current_round.discards_left, nil, true)
-                    ease_hands_played(-G.GAME.current_round.hands_left + 1, nil, true)
+                    if G.GAME.current_round.hands_left > 0 then
+                        ease_discard(-G.GAME.current_round.discards_left, nil, true)
+                    end
+                    if G.GAME.current_round.hands_left > 1 then
+                        ease_hands_played(-G.GAME.current_round.hands_left + 1, nil, true)
+                    end
                 end
                 card.ability.changed_forms[card.ability.form] = true
                 sts_allforms(card)

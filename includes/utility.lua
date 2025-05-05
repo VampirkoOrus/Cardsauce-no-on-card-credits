@@ -1152,3 +1152,13 @@ G.FUNCS.csau_get_free_tag = function(type, seed)
 	local key = pseudorandom_element(real_pool, pseudoseed(seed))
 	return key, G.P_TAGS[key], tag_colors[key] or G.C.IMPORTANT
 end
+
+G.FUNCS.nutbuster_active = function()
+	local nutbusters = SMODS.find_card("j_csau_nutbuster")
+	for i, v in ipairs(nutbusters) do
+		if not v.debuff then
+			return true
+		end
+	end
+	return false
+end

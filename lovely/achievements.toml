@@ -1,0 +1,158 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 9999999
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "G.STATE = G.STATES.GAME_OVER; G.STATE_COMPLETE = false"
+position = "before"
+payload = '''
+if next(find_joker('2 Kings 2:23-24')) then
+    check_for_unlock({ type = "shebear_mauling" })
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "local temp_hand = {}"
+position = "before"
+payload = "check_for_unlock({type = 'unlock_kings'})"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+return {
+    message = localize('k_saved_ex'),
+    saved = true,
+    colour = G.C.RED
+}
+'''
+position = "before"
+payload = "check_for_unlock({ type = 'unlock_epoch' })"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = 'local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(G.play.cards)'
+position = "after"
+payload = "G.FUNCS.ach_pepsecretunlock(text)"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function() G.hand.highlighted[i]:set_ability(G.P_CENTERS[self.ability.consumeable.mod_conv]);return true end }))"
+position = "before"
+payload = '''
+    if self.ability.name == "The Tower" and G.hand.highlighted[i]:get_id() == 12 then
+        check_for_unlock({ type = "unlock_villains" })
+    end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if v ~= chosen_joker then"
+position = "at"
+payload = '''
+if v ~= chosen_joker and SMODS.will_destroy_card() then
+check_for_unlock({ type = "unlock_killjester" })
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if v ~= eligible_card and (not v.ability.eternal) then v:start_dissolve(nil, _first_dissolve);_first_dissolve = true end"
+position = "at"
+payload = '''
+if v ~= eligible_card and (not v.ability.eternal) and SMODS.will_destroy_card() then
+ v:start_dissolve(nil, _first_dissolve)
+ _first_dissolve = true
+ check_for_unlock({ type = "unlock_killjester" })
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+local sliced_card = G.jokers.cards[my_pos+1]
+'''
+position = "before"
+payload = '''
+check_for_unlock({ type = "unlock_killjester" })
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if joker_to_destroy and not (context.blueprint_card or self).getting_sliced then"
+position = "at"
+payload = '''
+if joker_to_destroy and not (context.blueprint_card or self).getting_sliced and SMODS.will_destroy_card() then
+check_for_unlock({ type = "unlock_killjester" })
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if pseudorandom(self.ability.name == 'Cavendish' and 'cavendish' or 'gros_michel') < G.GAME.probabilities.normal/self.ability.extra.odds then"
+position = "after"
+payload = "if self.ability.name == 'Gros Michel' then check_for_unlock({ type = 'gros_extinct' }) end"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+                attention_text({
+                    text = localize('k_nope_ex'),
+'''
+position = "before"
+payload = "check_for_unlock({ type = 'wheel_nope' })"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "elseif self.ability.name == 'The Wheel of Fortune' then"
+position = "after"
+payload = "check_for_unlock({ type = 'wheel_trigger' })"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = "elseif self.name == 'The Manacle' and not self.disabled then"
+position = "before"
+payload = "elseif self.name == 'The Wall' and not self.disabled then check_for_unlock({ type = 'defeat_wall' })"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''end
+if self.ability.name == 'Mr. Bones' and context.game_over and'''
+position = "before"
+payload = '''else
+if self.ability.name == 'Gros Michel' and not SMODS.food_expires(context) and next(SMODS.find_card("j_csau_bunji")) then
+    check_for_unlock({ type = "preserve_gros" })
+end
+'''
+match_indent = true

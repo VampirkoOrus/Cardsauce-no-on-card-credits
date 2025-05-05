@@ -696,7 +696,7 @@ return {
 			ach_csau_activate_voice = "Activate Choicest Voice",
 			ach_csau_activate_watto = "Activate Let Fate Decide",
 			ach_csau_activate_dud = "Remove a sticker with The Dud",
-			ach_csau_activate_proto = "Survive Death with Protogent Antivirus",
+			ach_csau_activate_proto = "Survive Death with Protegent Antivirus",
 			ach_csau_activate_wot = "Activate Wings Of Time",
 			ach_csau_activate_eman = "Activate Emmanual Blast",
 			ach_csau_activate_drippy = "Activate an Enhancement with Dripping Joker",
@@ -2091,8 +2091,8 @@ return {
 					"Use {C:attention}Arrow Keys{}/{C:attention}D-Pad{},",
 					"{C:attention}Z{}/{C:attention}L3{}, and {C:attention}X{}/{C:attention}R3{} to play",
 					"{C:inactive}(Pausing not allowed)",
-					"Gain {C:mult}Mult{} equal to",
-					"amount of lines cleared",
+					"Gain {C:mult}Mult{} equal to lines",
+					"cleared, resets on {C:attention}Game Over{}",
 					"{C:inactive}(Currently {}{C:mult}+#1#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
@@ -2338,7 +2338,7 @@ return {
 				},
 			},
 			j_csau_protogent = {
-				name = "Protogent Antivirus",
+				name = "Protegent Antivirus",
 				text = {
 					"{C:green}#1# in #2#{} chance to disable {C:attention}Boss Blinds{}",
 					"{C:green}#1# in #3#{} chance to prevent death",
@@ -2495,17 +2495,6 @@ return {
 				},
 			},
 			j_csau_wigsaw = {
-				name = "Wigsaw",
-				text = {
-					"All {C:attention}suit{} effects target the suit with",
-					"the {C:attention}most cards{} in your full deck instead",
-					"{C:inactive}(Current suit: {V:1}#1#{C:inactive})"
-				},
-				unlock = {
-					"{E:1,s:1.3}?????"
-				}
-			},
-			j_csau_wigsaw_inactive = {
 				name = "Wigsaw",
 				text = {
 					"All {C:attention}suit{} effects target the suit with",

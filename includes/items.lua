@@ -475,12 +475,14 @@ if not SMODS.current_mod.DT.twoPoint0 then
     return
 end
 
+SMODS.Atlas({ key = 'undiscovered', path = "undiscovered.png", px = 71, py = 95 })
 --------------------------- VHS Consumable Type
----
 if csau_enabled['enableVHSs'] then
     SMODS.Sound({ key = "vhsopen", path = "vhsopen.ogg"})
     SMODS.Sound({ key = "vhsclose", path = "vhsclose.ogg"})
+
     SMODS.UndiscoveredSprite{ key = "VHS", atlas = "csau_undiscovered", pos = { x = 0, y = 0 }}
+
     SMODS.ConsumableType{
         key = "VHS",
         primary_colour = G.C.VHS,
@@ -495,7 +497,6 @@ if csau_enabled['enableVHSs'] then
 end
 
 --------------------------- Stands consumable type
-
 if csau_enabled['enableStands'] then
     SMODS.ObjectType { default = 'c_csau_stardust_star', key = 'csau_StandPool', prefix_config = false }
     SMODS.ObjectType { default = 'c_csau_stardust_star', key = 'csau_EvolvedPool', prefix_config = false}
@@ -519,7 +520,6 @@ if csau_enabled['enableStands'] then
 
     -- Stand Consumable
     SMODS.Atlas({ key = 'stickers', path = "stickers.png", px = 71, py = 95 })
-    SMODS.Atlas({ key = 'undiscovered', path = "undiscovered.png", px = 71, py = 95 })
     SMODS.UndiscoveredSprite { key = "csau_Stand", atlas = "csau_undiscovered", pos = { x = 1, y = 0 }, overlay_pos = { x = 2, y = 0 }, prefix_config = false }
     SMODS.ConsumableType {
         key = 'csau_Stand',
@@ -550,6 +550,7 @@ if csau_enabled['enableStands'] then
             end
         end,
     }
+
     SMODS.Shader {
         key = 'stand_mask',
         path = 'stand_mask.fs',

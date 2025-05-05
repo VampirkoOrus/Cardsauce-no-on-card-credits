@@ -1,5 +1,5 @@
 local jokerInfo = {
-    name = 'Protogent Antivirus',
+    name = 'Protegent Antivirus',
     config = {
         extra = {
             boss_prob = 4,

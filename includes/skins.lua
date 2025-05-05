@@ -358,9 +358,11 @@ end
 SMODS.Atlas{ key = 'balcolor_shrooms_lc', px = 71, py = 95, path = 'cards/balcolor_shrooms_lc.png' }
 SMODS.Atlas{ key = 'balcolor_shrooms_hc', px = 71, py = 95, path = 'cards/balcolor_shrooms_hc.png' }
 SMODS.Atlas{ key = 'varg_aces', px = 71, py = 95, path = 'cards/csau_varg_aces.png' }
-SMODS.Atlas{ key = 'jazz_aces', px = 71, py = 95, path = 'cards/jazz_aces.png' }
 SMODS.Atlas{ key = 'balcolor_varg_lc', px = 71, py = 95, path = 'cards/balcolor_varg_lc.png' }
 SMODS.Atlas{ key = 'balcolor_varg_hc', px = 71, py = 95, path = 'cards/balcolor_varg_hc.png' }
+SMODS.Atlas{ key = 'jazz_aces', px = 71, py = 95, path = 'cards/jazz_aces.png' }
+SMODS.Atlas{ key = 'balcolor_jazz_lc', px = 71, py = 95, path = 'cards/balcolor_jazz_lc.png' }
+SMODS.Atlas{ key = 'balcolor_jazz_hc', px = 71, py = 95, path = 'cards/balcolor_jazz_hc.png' }
 SMODS.Atlas{ key = 'varg_willo', px = 71, py = 95, path = 'cards/csau_varg_willo.png' }
 SMODS.Atlas{ key = 'color_aces', px = 71, py = 95, path = 'cards/csau_color_aces.png' }
 SMODS.Atlas{ key = 'c_vineshroom', px = 71, py = 95, path = 'cards/c_vineshroom.png' } -- REMOVE THIS
@@ -645,6 +647,30 @@ if SMODS.current_mod.DT.twoPoint0 then
     SMODS.Atlas{ key = 'fingies', px = 71, py = 95, path = 'cards/csau/fingies.png',}
 end
 
+SMODS.Atlas{ key = 'mascots_1', px = 71, py = 95, path = 'cards/csau_recolored/mascots_1.png',}
+SMODS.Atlas{ key = 'mascots_2', px = 71, py = 95, path = 'cards/csau_recolored/mascots_2.png',}
+SMODS.Atlas{ key = 'wildcards_1', px = 71, py = 95, path = 'cards/csau_recolored/wildcards_1.png',}
+SMODS.Atlas{ key = 'wildcards_2', px = 71, py = 95, path = 'cards/csau_recolored/wildcards_2.png',}
+SMODS.Atlas{ key = 'confidants_1', px = 71, py = 95, path = 'cards/csau_recolored/confidants_1.png',}
+SMODS.Atlas{ key = 'confidants_2', px = 71, py = 95, path = 'cards/csau_recolored/confidants_2.png',}
+SMODS.Atlas{ key = 'classics_1', px = 71, py = 95, path = 'cards/csau_recolored/classics_1.png',}
+SMODS.Atlas{ key = 'classics_2', px = 71, py = 95, path = 'cards/csau_recolored/classics_2.png',}
+SMODS.Atlas{ key = 'voices_1', px = 71, py = 95, path = 'cards/csau_recolored/voices_1.png',}
+SMODS.Atlas{ key = 'voices_2', px = 71, py = 95, path = 'cards/csau_recolored/voices_2.png',}
+SMODS.Atlas{ key = 'duendes_1', px = 71, py = 95, path = 'cards/csau_recolored/duendes_1.png',}
+SMODS.Atlas{ key = 'duendes_2', px = 71, py = 95, path = 'cards/csau_recolored/duendes_2.png',}
+SMODS.Atlas{ key = 'americans_1', px = 71, py = 95, path = 'cards/csau_recolored/americans_1.png',}
+SMODS.Atlas{ key = 'americans_2', px = 71, py = 95, path = 'cards/csau_recolored/americans_2.png',}
+SMODS.Atlas{ key = 'powerful_1', px = 71, py = 95, path = 'cards/csau_recolored/powerful_1.png',}
+SMODS.Atlas{ key = 'powerful_2', px = 71, py = 95, path = 'cards/csau_recolored/powerful_2.png',}
+SMODS.Atlas{ key = 'poops_1', px = 71, py = 95, path = 'cards/csau_recolored/poops_1.png',}
+SMODS.Atlas{ key = 'poops_2', px = 71, py = 95, path = 'cards/csau_recolored/poops_2.png',}
+SMODS.Atlas{ key = 'ocs_1', px = 71, py = 95, path = 'cards/csau_recolored/ocs_1.png',}
+SMODS.Atlas{ key = 'ocs_2', px = 71, py = 95, path = 'cards/csau_recolored/ocs_2.png',}
+SMODS.Atlas{ key = 'pets_1', px = 71, py = 95, path = 'cards/csau_recolored/pets_1.png',}
+SMODS.Atlas{ key = 'pets_2', px = 71, py = 95, path = 'cards/csau_recolored/pets_2.png',}
+SMODS.Atlas{ key = 'fingies_1', px = 71, py = 95, path = 'cards/csau_recolored/fingies_1.png',}
+SMODS.Atlas{ key = 'fingies_2', px = 71, py = 95, path = 'cards/csau_recolored/fingies_2.png',}
 
 local skins = {
     Spades = {
@@ -704,6 +730,78 @@ local skins = {
          }},
     },
 }
+
+local function assemble_csau_vanilla_palettes(palettes, key, suit, type)
+    local suit_y = 0; if suit == "Clubs" then suit_y = 1 elseif suit == "Diamonds" then suit_y = 2 elseif suit == "Spades" then suit_y = 3 end
+    palettes[#palettes+1] = {
+        key = 'csau_'..key.."_lc",
+        ranks = full_ranks,
+        display_ranks = face_ace,
+        atlas = 'cards_1',
+        pos_style = {
+            fallback_style = 'deck',
+            Jack = { atlas = key.."_1", pos = {x = 0, y = 0} },
+            Queen = { atlas = key.."_1", pos = {x = 1, y = 0} },
+            King = { atlas = key.."_1", pos = {x = 2, y = 0} },
+            Ace = { atlas = (type == 'vine' and 'csau_balcolor_shrooms_lc') or (type == 'varg' and 'csau_balcolor_varg_lc') or (type == 'mike' and 'csau_balcolor_jazz_lc'), pos = {x = 0, y = suit_y} }
+        },
+        loc_txt = {
+            ['en-us'] = "Low Contrast "..(type == 'mike' and "Jazz" or "Shrooms")
+        },
+        colour = G.C.SO_1[suit:gsub("^%l", string.upper)],
+    }
+    palettes[#palettes+1] = {
+        key = 'csau_'..key.."_lc_ace",
+        ranks = full_ranks,
+        display_ranks = face_ace,
+        atlas = 'cards_1',
+        pos_style = {
+            fallback_style = 'deck',
+            Jack = { atlas = key.."_1", pos = {x = 0, y = 0} },
+            Queen = { atlas = key.."_1", pos = {x = 1, y = 0} },
+            King = { atlas = key.."_1", pos = {x = 2, y = 0} },
+        },
+        loc_txt = {
+            ['en-us'] = "Low Contrast"
+        },
+        colour = G.C.SO_1[suit:gsub("^%l", string.upper)],
+    }
+    palettes[#palettes+1] = {
+        key = 'csau_'..key.."_hc",
+        ranks = full_ranks,
+        display_ranks = face_ace,
+        atlas = 'cards_2',
+        pos_style = {
+            fallback_style = 'deck',
+            Jack = { atlas = key.."_2", pos = {x = 0, y = 0} },
+            Queen = { atlas = key.."_2", pos = {x = 1, y = 0} },
+            King = { atlas = key.."_2", pos = {x = 2, y = 0} },
+            Ace = { atlas = (type == 'vine' and 'csau_balcolor_shrooms_hc') or (type == 'varg' and 'csau_balcolor_varg_hc') or (type == 'mike' and 'csau_balcolor_jazz_hc'), pos = {x = 0, y = suit_y} }
+        },
+        loc_txt = {
+            ['en-us'] = "High Contrast "..(type == 'mike' and "Jazz" or "Shrooms")
+        },
+        colour = G.C.SO_2[suit:gsub("^%l", string.upper)],
+    }
+    palettes[#palettes+1] = {
+        key = 'csau_'..key.."_hc_ace",
+        ranks = full_ranks,
+        display_ranks = face_ace,
+        atlas = 'cards_2',
+        pos_style = {
+            fallback_style = 'deck',
+            Jack = { atlas = key.."_2", pos = {x = 0, y = 0} },
+            Queen = { atlas = key.."_2", pos = {x = 1, y = 0} },
+            King = { atlas = key.."_2", pos = {x = 2, y = 0} },
+        },
+        loc_txt = {
+            ['en-us'] = "High Contrast"
+        },
+        colour = G.C.SO_2[suit:gsub("^%l", string.upper)],
+    }
+
+    return palettes
+end
 
 local assemble_character_skins = function(key, suit, name, type)
     local suit_y = 0; if suit == "Clubs" then suit_y = 1 elseif suit == "Diamonds" then suit_y = 2 elseif suit == "Spades" then suit_y = 3 end
@@ -774,6 +872,10 @@ local assemble_character_skins = function(key, suit, name, type)
             atlas = 'csau_suits'
         }
     }
+
+    if SMODS.Atlases[key.."_1"] and SMODS.Atlases[key.."_2"] then
+        palettes = assemble_csau_vanilla_palettes(palettes, key, suit, type)
+    end
 
     SMODS.DeckSkin{
         key = key,

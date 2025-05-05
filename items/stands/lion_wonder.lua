@@ -98,7 +98,7 @@ function consumInfo.calculate(self, card, context)
         end
     end
     if context.destroy_card and not bad_context then
-        if context.destroy_card.ability.effect == 'Lucky Card' then
+        if context.destroy_card.ability.effect == 'Lucky Card' and context.destroy_card.area == G.play then
             return {
                 remove = true,
             }

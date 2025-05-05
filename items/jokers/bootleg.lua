@@ -238,7 +238,7 @@ local function fuck_you_generate_ui_box_ability_table(self)
     elseif self.ability.name == 'Ride the Bus' then loc_vars = {self.ability.extra, self.ability.mult}
     elseif self.ability.name == 'Egg' then loc_vars = {self.ability.extra}
     elseif self.ability.name == 'Burglar' then loc_vars = {self.ability.extra}
-    elseif self.ability.name == 'Blackboard' then loc_vars = {self.ability.extra, localize('Spades', 'suits_plural'), localize('Clubs', 'suits_plural')}
+    elseif self.ability.name == 'Blackboard' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or 'Spades', 'suits_plural'), localize(G.GAME and G.GAME.wigsaw_suit or 'Clubs', 'suits_plural'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Spades'], G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Clubs']}}
     elseif self.ability.name == 'Runner' then loc_vars = {self.ability.extra.chips, self.ability.extra.chip_mod}
     elseif self.ability.name == 'Ice Cream' then loc_vars = {self.ability.extra.chips, self.ability.extra.chip_mod}
     elseif self.ability.name == 'DNA' then loc_vars = {self.ability.extra}
@@ -268,16 +268,16 @@ local function fuck_you_generate_ui_box_ability_table(self)
     elseif self.ability.name == 'Certificate' then loc_vars = {self.ability.extra}
     elseif self.ability.name == 'Throwback' then loc_vars = {self.ability.extra, self.ability.x_mult}
     elseif self.ability.name == 'Hanging Chad' then loc_vars = {self.ability.extra}
-    elseif self.ability.name == 'Rough Gem' then loc_vars = {self.ability.extra}
-    elseif self.ability.name == 'Bloodstone' then loc_vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), self.ability.extra.odds, self.ability.extra.Xmult}
-    elseif self.ability.name == 'Arrowhead' then loc_vars = {self.ability.extra}
-    elseif self.ability.name == 'Onyx Agate' then loc_vars = {self.ability.extra}
+    elseif self.ability.name == 'Rough Gem' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or 'Diamonds', 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Diamonds']}}
+    elseif self.ability.name == 'Bloodstone' then loc_vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), self.ability.extra.odds, self.ability.extra.Xmult, localize(G.GAME and G.GAME.wigsaw_suit or 'Hearts', 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Hearts']}}
+    elseif self.ability.name == 'Arrowhead' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or 'Spades', 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Spades']}}
+    elseif self.ability.name == 'Onyx Agate' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or 'Clubs', 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Clubs']}}
     elseif self.ability.name == 'Glass Joker' then loc_vars = {self.ability.extra, self.ability.x_mult}
     elseif self.ability.name == 'Showman' then
-    elseif self.ability.name == 'Flower Pot' then loc_vars = {self.ability.extra}
+    elseif self.ability.name == 'Flower Pot' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or 'Diamonds', 'suits_singular'), localize(G.GAME and G.GAME.wigsaw_suit or 'Clubs', 'suits_singular'), localize(G.GAME and G.GAME.wigsaw_suit or 'Hearts', 'suits_singular'), localize(G.GAME and G.GAME.wigsaw_suit or 'Spades', 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Diamonds'], G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Clubs'], G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Hearts'], G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or 'Spades']}}
     elseif self.ability.name == 'Wee Joker' then loc_vars = {self.ability.extra.chips, self.ability.extra.chip_mod}
     elseif self.ability.name == 'Merry Andy' then loc_vars = {self.ability.d_size, self.ability.h_size}
-    elseif self.ability.name == 'The Idol' then loc_vars = {self.ability.extra, localize(G.GAME.current_round.idol_card.rank, 'ranks'), localize(G.GAME.current_round.idol_card.suit, 'suits_plural'), colours = {G.C.SUITS[G.GAME.current_round.idol_card.suit]}}
+    elseif self.ability.name == 'The Idol' then loc_vars = {self.ability.extra, localize(G.GAME.current_round.idol_card.rank, 'ranks'), localize(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.idol_card.suit, 'suits_plural'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.idol_card.suit]}}
     elseif self.ability.name == 'Seeing Double' then loc_vars = {self.ability.extra}
     elseif self.ability.name == 'Matador' then loc_vars = {self.ability.extra}
     elseif self.ability.name == 'Hit the Road' then loc_vars = {self.ability.extra, self.ability.x_mult}
@@ -328,10 +328,10 @@ local function fuck_you_generate_ui_box_ability_table(self)
     elseif self.ability.name == 'Flash Card' then loc_vars = {self.ability.extra, self.ability.mult}
     elseif self.ability.name == 'Popcorn' then loc_vars = {self.ability.mult, self.ability.extra}
     elseif self.ability.name == 'Ramen' then loc_vars = {self.ability.x_mult, self.ability.extra}
-    elseif self.ability.name == 'Ancient Joker' then loc_vars = {self.ability.extra, localize(G.GAME.current_round.ancient_card.suit, 'suits_singular'), colours = {G.C.SUITS[G.GAME.current_round.ancient_card.suit]}}
+    elseif self.ability.name == 'Ancient Joker' then loc_vars = {self.ability.extra, localize(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.ancient_card.suit, 'suits_singular'), colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.ancient_card.suit]}}
     elseif self.ability.name == 'Walkie Talkie' then loc_vars = {self.ability.extra.chips, self.ability.extra.mult}
     elseif self.ability.name == 'Seltzer' then loc_vars = {self.ability.extra}
-    elseif self.ability.name == 'Castle' then loc_vars = {self.ability.extra.chip_mod, localize(G.GAME.current_round.castle_card.suit, 'suits_singular'), self.ability.extra.chips, colours = {G.C.SUITS[G.GAME.current_round.castle_card.suit]}}
+    elseif self.ability.name == 'Castle' then loc_vars = {self.ability.extra.chip_mod, localize(G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.castle_card.suit, 'suits_singular'), self.ability.extra.chips, colours = {G.C.SUITS[G.GAME and G.GAME.wigsaw_suit or G.GAME.current_round.castle_card.suit]}}
     elseif self.ability.name == 'Smiley Face' then loc_vars = {self.ability.extra}
     elseif self.ability.name == 'Campfire' then loc_vars = {self.ability.extra, self.ability.x_mult}
     elseif self.ability.name == 'Stuntman' then loc_vars = {self.ability.extra.chip_mod, self.ability.extra.h_size}
