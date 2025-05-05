@@ -15,6 +15,9 @@ G.foodjokers = {
 	['j_csau_crudeoil'] = true,
 	['j_csau_grannycream'] = true,
 	['j_csau_toeofsatan'] = true,
+	['j_csau_sprunk'] = true,
+	['j_csau_chips'] = true,
+	['j_csau_mug'] = true,
 }
 
 --- Table containing all names of people who contributed to the mod, used in crediting
