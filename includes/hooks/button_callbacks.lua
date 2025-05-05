@@ -214,3 +214,25 @@ G.FUNCS.use_card = function(e, mute, nosave)
     return ref_uc(e, mute, nosave)
 end
 
+local ref_bfs = G.FUNCS.buy_from_shop
+G.FUNCS.buy_from_shop = function(e)
+    ref_bfs(e)
+    local c1 = e.config.ref_table
+    if c1 and c1:is(Card) then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.1,
+            func = function()
+                if c1.ability.consumeable then
+                    if c1.config.center.set == 'csau_Stand' then
+                        inc_career_stat('c_stands_bought', 1)
+                    elseif c1.config.center.set == 'VHS' then
+                        inc_career_stat('c_vhss_bought', 1)
+                    end
+                end
+                return true
+            end
+        }))
+    end
+end
+
