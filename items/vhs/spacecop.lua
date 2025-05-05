@@ -32,7 +32,7 @@ end
 
 function consumInfo.calculate(self, card, context)
     if card.ability.activated and context.modify_level_increment and context.card then
-        if context.card.ability.set == 'Planet' then
+        if context.card.ability.set == 'Planet' and card.ability then
             card.ability.extra.uses = card.ability.extra.uses+1
             if card.ability.extra.uses >= card.ability.extra.runtime then
                 G.FUNCS.destroy_tape(card)

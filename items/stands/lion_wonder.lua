@@ -98,7 +98,7 @@ function consumInfo.calculate(self, card, context)
         end
     end
     if context.destroy_card and not bad_context then
-        if context.destroy_card.ability.effect == 'Lucky Card' and context.destroy_card.area == G.play then
+        if context.destroy_card.ability.effect == 'Lucky Card' and table.contains(context.scoring_hand, context.destroy_card) then
             return {
                 remove = true,
             }

@@ -1162,3 +1162,17 @@ G.FUNCS.nutbuster_active = function()
 	end
 	return false
 end
+
+--- Allows for Modded Legendaries to show ????? on their normal unlock descriptions, but show the joker_locked_legendary msg on the unlock notifications
+G.FUNCS.generate_legendary_desc = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table, key)
+	key = key or card.config.center.key
+	if card.area and card.area == G.jokers or (card.config.center.discovered or card.bypass_discovery_center) then
+		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
+		full_UI_table.name = localize{type = 'name', key = key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
+	end
+	if (specific_vars and not specific_vars.not_hidden) and not (card.config.center.discovered or card.bypass_discovery_center) then
+		localize{type = 'unlocks', key = 'joker_locked_legendary', set = 'Other', nodes = desc_nodes, vars = {}}
+	else
+		localize{type = 'descriptions', key = key, set = self.set, nodes = desc_nodes, vars = (self.loc_vars(self, info_queue, card) and self.loc_vars(self, info_queue, card).vars) or {}}
+	end
+end
