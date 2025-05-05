@@ -9,6 +9,7 @@ local consumInfo = {
             chips = 21,
             evolve_destroys = 0,
             evolve_num = 3,
+            evolved = false,
         }
     },
     cost = 10,
@@ -56,7 +57,8 @@ function consumInfo.calculate(self, card, context)
             cards = cards + 1
         end
         card.ability.extra.evolve_destroys = card.ability.extra.evolve_destroys + cards
-        if card.ability.extra.evolve_destroys >= card.ability.extra.evolve_num then
+        if card.ability.extra.evolve_destroys >= card.ability.extra.evolve_num and not card.ability.extra.evolved then
+            card.ability.extra.evolved = true
             G.FUNCS.csau_evolve_stand(card)
             return
         else

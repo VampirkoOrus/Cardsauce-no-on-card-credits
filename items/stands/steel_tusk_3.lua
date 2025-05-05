@@ -8,7 +8,8 @@ local consumInfo = {
         evolve_key = 'c_csau_steel_tusk_4',
         extra = {
             chips = 34,
-            evolve_percent = 0.1
+            evolve_percent = 0.1,
+            evolved = false,
         }
     },
     cost = 10,
@@ -51,7 +52,8 @@ function consumInfo.calculate(self, card, context)
     end
     local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.end_of_round and not card.debuff and not bad_context then
-        if G.GAME.chips <= (G.GAME.blind.chips * (1+card.ability.extra.evolve_percent)) then
+        if G.GAME.chips <= (G.GAME.blind.chips * (1+card.ability.extra.evolve_percent)) and not card.ability.extra.evolved then
+            card.ability.extra.evolved = true
             check_for_unlock({ type = "evolve_tusk" })
             G.FUNCS.csau_evolve_stand(card)
         end
