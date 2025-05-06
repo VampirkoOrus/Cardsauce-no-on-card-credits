@@ -1,6 +1,5 @@
 -- I replaced the old is_food() function by just making this a map instead ~Winter
 
---- ObjectType representing "food" jokers, including vanilla Balatro jokers like Ice Cream and Ramen. Compatible with Cryptid
 ---LIST OF FOOD JOKERS:
 G.foodjokers = {
 	-- Balatro (Vanilla)
@@ -94,6 +93,7 @@ G.foodjokers = {
 	['j_joey_vegemite'] = true,
 }
 
+--- ObjectType representing "food" jokers, including vanilla Balatro jokers like Ice Cream and Ramen. Compatible with Cryptid
 if not SMODS.ObjectTypes.Food then
 	SMODS.ObjectType({
 		key = "Food",
@@ -111,6 +111,14 @@ if not SMODS.ObjectTypes.Food then
 			self:inject_card(G.P_CENTERS.j_popcorn)
 			self:inject_card(G.P_CENTERS.j_ramen)
 			self:inject_card(G.P_CENTERS.j_selzer)
+			for k, v in pairs(G.foodjokers) do
+				if G.P_CENTERS[k] or SMODS.Centers[k] then
+					local center = G.P_CENTERS[k] or SMODS.Centers[k]
+					if not (center.pools and center.pools.Food) then
+						self:inject_card(center)
+					end
+				end
+			end
 		end,
 	})
 else
