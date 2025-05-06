@@ -56,7 +56,7 @@ function jokerInfo.calculate(self, card, context)
                 allfaces = false
             end
         end
-        if allfaces and card.ability.extra.destroyed < card.ability.extra.destroy then
+        if allfaces and to_big(card.ability.extra.destroyed) <  to_big(card.ability.extra.destroy) then
             if pseudorandom('businesstrading') < G.GAME.probabilities.normal / 3 then
                 card.ability.extra.destroyed = card.ability.extra.destroyed + 1
                 return true
