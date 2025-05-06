@@ -70,7 +70,15 @@ G.foodjokers = {
 	['j_paperback_tanghulu'] = true,
 	['j_buf_gfondue'] = true,
 	['j_buf_camarosa'] = true,
-	['j_buf_'] = true,
+	['j_akyrs_eat_pant'] = true,
+	['j_prism_pizza_cap'] = true,
+	['j_prism_pizza_mar'] = true,
+	['j_prism_pizza_for'] = true,
+	['j_prism_pizza_ruc'] = true,
+	['j_prism_pizza_haw'] = true,
+	['j_prism_pizza_det'] = true,
+	['j_prism_cookie'] = true,
+	['j_prism_whiskey'] = true,
 }
 
 if not SMODS.ObjectTypes.Food then
