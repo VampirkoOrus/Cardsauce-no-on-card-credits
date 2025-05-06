@@ -24,9 +24,8 @@ function jokerInfo.calculate(self, card, context)
         end
         if non_face_count >= 5 then
             local mod = math.floor(non_face_count / 5)
-            local dollars = card.ability.extra*mod
             return {
-                dollars = to_big(dollars),
+                dollars = card.ability.extra*mod,
                 colour = G.C.MONEY,
                 card = card
             }
