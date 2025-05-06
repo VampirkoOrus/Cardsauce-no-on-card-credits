@@ -121,7 +121,7 @@ else
 			for k, v in pairs(G.foodjokers) do
 				if G.P_CENTERS[k] or SMODS.Centers[k] then
 					local center = G.P_CENTERS[k] or SMODS.Centers[k]
-					if not v.pools and v.pools.Food then
+					if not (center.pools and center.pools.Food) then
 						self:inject_card(center)
 					end
 				end
