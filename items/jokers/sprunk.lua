@@ -36,6 +36,15 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.mult_mod, card.ability.extra.prob_mod, G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true), card.ability.extra.prob, card.ability.extra.mult }}
 end
 
+function jokerInfo.in_pool(self, args)
+    if MP then
+        if MP.LOBBY and MP.LOBBY.connected then
+            return false
+        end
+    end
+    return true
+end
+
 -- Modified code from Cryptid
 local function fake_crash()
     messages = {
