@@ -59,7 +59,7 @@ function pseudorandom(seed, min, max)
             send(seed)
             shakma:juice_up()
             shakma.ability.extra.uses = shakma.ability.extra.uses+1
-            if shakma.ability.extra.uses >= shakma.ability.extra.runtime then
+            if to_big(shakma.ability.extra.uses) >= to_big(shakma.ability.extra.runtime) then
                 G.FUNCS.destroy_tape(shakma)
                 shakma.ability.destroyed = true
             end
@@ -114,7 +114,7 @@ function G.FUNCS.reroll_shop(e)
 end
 
 function consumInfo.can_use(self, card)
-    if #G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables then return true end
+    if to_big(#G.consumeables.cards) < to_big(G.consumeables.config.card_limit) or card.area == G.consumeables then return true end
 end
 
 return consumInfo

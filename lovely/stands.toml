@@ -82,6 +82,16 @@ payload = "if proc and proc == 'mult' or (pseudorandom('lucky_mult') < G.GAME.pr
 match_indent = true
 times = 1
 
+# Cryptid compatibility version of the above patch:
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if pseudorandom('lucky_mult') < cry_prob(self.ability.cry_prob, 5, self.ability.cry_rigged)/5 then"
+position = "at"
+payload = "if proc and proc == 'mult' or pseudorandom('lucky_mult') < cry_prob(self.ability.cry_prob, 5, self.ability.cry_rigged)/5 then"
+match_indent = true
+times = 1
+
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -97,6 +107,16 @@ target = "card.lua"
 pattern = "if pseudorandom('lucky_money') < G.GAME.probabilities.normal/15 then"
 position = "at"
 payload = "if proc and proc == 'dollars' or (pseudorandom('lucky_money') < G.GAME.probabilities.normal/15) then"
+match_indent = true
+times = 1
+
+# Cryptid compatibility version of the above patch:
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if pseudorandom('lucky_money') < cry_prob(self.ability.cry_prob, 15, self.ability.cry_rigged)/15 then"
+position = "at"
+payload = "if proc and proc == 'dollars' or (pseudorandom('lucky_money') < cry_prob(self.ability.cry_prob, 15, self.ability.cry_rigged)/15) then"
 match_indent = true
 times = 1
 

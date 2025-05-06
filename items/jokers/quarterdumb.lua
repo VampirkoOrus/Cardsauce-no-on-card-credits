@@ -29,11 +29,9 @@ local function textIsFlush(text)
 	end
 end
 
-
 function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.before and not card.debuff then
-		local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(context.scoring_hand)
-		if next(poker_hands["Flush"]) then
+		if next(context.poker_hands["Flush"]) then
 			ease_hands_played(1)
 			return {
 				card = card,
@@ -44,7 +42,4 @@ function jokerInfo.calculate(self, card, context)
 	end
 end
 
-
-
 return jokerInfo
-	

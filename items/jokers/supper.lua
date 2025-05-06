@@ -18,7 +18,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.check_for_unlock(self, args)
-	if args.type == "ante_up" and args.ante == 7 then
+	if args.type == "ante_up" and to_big(args.ante) == to_big(7) then
 		return true
 	end
 end

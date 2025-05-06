@@ -8,6 +8,9 @@ local jokerInfo = {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
+    pools = {
+        ["Meme"] = true
+    },
     streamer = "joel",
 }
 
@@ -22,7 +25,7 @@ function jokerInfo.calculate(self, card, context)
         for i = 1, #context.scoring_hand do
             if context.scoring_hand[i]:is_face() then faces = faces + 1 end
         end
-        if faces >= 3 and next(context.poker_hands['Full House']) and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+        if faces >= 3 and next(context.poker_hands['Full House']) and to_big(#G.consumeables.cards + G.GAME.consumeable_buffer) < to_big(G.consumeables.config.card_limit) then
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
             G.E_MANAGER:add_event(Event({
                 func = (function()

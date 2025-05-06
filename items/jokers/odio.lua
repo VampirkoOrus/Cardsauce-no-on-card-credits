@@ -15,7 +15,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.in_pool(self, args)
-	if G.GAME.round_resets.ante < 9 then
+	if to_big(G.GAME.round_resets.ante) < to_big(9) then
 		return true
 	end
 end

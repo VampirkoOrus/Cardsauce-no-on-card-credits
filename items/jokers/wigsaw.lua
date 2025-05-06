@@ -57,7 +57,8 @@ function jokerInfo.add_to_deck(self, card)
                 G.GAME.current_round.choicevoice.id = randCard.base.id
             end
             return true
-        end }))
+        end
+    }))
 end
 
 function jokerInfo.remove_from_deck(self, card)
@@ -65,7 +66,8 @@ function jokerInfo.remove_from_deck(self, card)
         func = function()
             G.GAME.wigsaw_suit = nil
             return true
-        end }))
+        end
+    }))
 end
 
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)

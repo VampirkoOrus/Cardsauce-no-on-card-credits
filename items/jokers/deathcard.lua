@@ -25,7 +25,7 @@ end
 function jokerInfo.add_to_deck(self, card)
 	card.sell_cost = math.max(1, math.floor(card.cost/2))
 	check_for_unlock({ type = "discover_deathcard" })
-	if card.ability.timesSold and card.ability.timesSold >= 5 then
+	if card.ability.timesSold and to_big(card.ability.timesSold) >= to_big(5) then
 		check_for_unlock({ type = "five_deathcard" })
 	end
 	if not card.ability.id then

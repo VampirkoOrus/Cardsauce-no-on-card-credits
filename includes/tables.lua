@@ -93,6 +93,17 @@ G.foodjokers = {
 	['j_joey_vegemite'] = true,
 }
 
+local function inject(self)
+	for k, v in pairs(G.foodjokers) do
+		if G.P_CENTERS[k] or SMODS.Centers[k] then
+			local center = G.P_CENTERS[k] or SMODS.Centers[k]
+			if not (center.pools and center.pools.Food) then
+				self:inject_card(center)
+			end
+		end
+	end
+end
+
 --- ObjectType representing "food" jokers, including vanilla Balatro jokers like Ice Cream and Ramen. Compatible with Cryptid
 if not SMODS.ObjectTypes.Food then
 	SMODS.ObjectType({
@@ -111,14 +122,7 @@ if not SMODS.ObjectTypes.Food then
 			self:inject_card(G.P_CENTERS.j_popcorn)
 			self:inject_card(G.P_CENTERS.j_ramen)
 			self:inject_card(G.P_CENTERS.j_selzer)
-			for k, v in pairs(G.foodjokers) do
-				if G.P_CENTERS[k] or SMODS.Centers[k] then
-					local center = G.P_CENTERS[k] or SMODS.Centers[k]
-					if not (center.pools and center.pools.Food) then
-						self:inject_card(center)
-					end
-				end
-			end
+			inject(self)
 		end,
 	})
 else
@@ -126,14 +130,7 @@ else
 	SMODS.ObjectType:take_ownership("Food", {
 		inject = function(self)
 			inj_ref(self)
-			for k, v in pairs(G.foodjokers) do
-				if G.P_CENTERS[k] or SMODS.Centers[k] then
-					local center = G.P_CENTERS[k] or SMODS.Centers[k]
-					if not (center.pools and center.pools.Food) then
-						self:inject_card(center)
-					end
-				end
-			end
+			inject(self)
 		end
 	})
 end

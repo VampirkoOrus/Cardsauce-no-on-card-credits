@@ -31,6 +31,9 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
+	pools = {
+		["Meme"] = true
+	},
 	streamer = "vinny",
 }
 
@@ -55,7 +58,8 @@ function jokerInfo.calculate(self, card, context)
 					end}))   
 					card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_speen'), colour = G.C.PURPLE})
 				return true
-			end)}))
+			end)}
+		))
 	end
 end
 

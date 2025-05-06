@@ -25,7 +25,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-
     if context.joker_main and context.cardarea == G.jokers then
         if not G.playing_cards then return end
         local faces = 0
@@ -33,7 +32,7 @@ function jokerInfo.calculate(self, card, context)
             if v:is_face() then faces = faces+1 end
         end
         local chips = card.ability.extra.chips_mod * faces
-        if chips > 0 then
+        if to_big(chips) > to_big(0) then
             return {
                 message = localize{type='variable',key='a_chips',vars={to_big(chips)}},
                 chip_mod = chips,

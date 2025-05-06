@@ -86,7 +86,7 @@ function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and G.GAME.blind.boss and not context.blueprint then
 		local reset = false
 		for k, v in pairs(G.GAME.hands) do
-			if v.level > 1 then reset = true end
+			if to_big(v.level) > to_big(1) then reset = true end
 		end
 		if reset then
 			hand_level_reset(card)

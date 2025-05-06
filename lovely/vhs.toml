@@ -46,7 +46,7 @@ if G.GAME.blind.name ~= 'The Serpent' then
         miami:juice_up()
         hand_space = hand_space + miami.ability.extra.draw_mod
         miami.ability.extra.uses = miami.ability.extra.uses+1
-        if miami.ability.extra.uses >= miami.ability.extra.runtime then
+        if to_big(miami.ability.extra.uses) >= to_big(miami.ability.extra.runtime) then
             G.FUNCS.destroy_tape(miami)
             miami.ability.destroyed = true
         end

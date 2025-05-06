@@ -28,7 +28,7 @@ function jokerInfo.calculate(self, card, context)
 			if flush_type == 'Hearts' then flush_tarot = 'c_sun' end
 			if flush_type == 'Clubs' then flush_tarot = 'c_moon' end
 			if flush_type == 'Diamonds' then flush_tarot = 'c_star' end
-			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+			if to_big(#G.consumeables.cards) + to_big(G.GAME.consumeable_buffer) < to_big(G.consumeables.config.card_limit) then
 				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 				G.E_MANAGER:add_event(Event({
 					func = (function()
@@ -42,7 +42,8 @@ function jokerInfo.calculate(self, card, context)
 							end}))   
 							card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+1 "..localize{type = 'name_text', key = flush_tarot, set = 'Tarot'}, colour = G.C.PURPLE})
 						return true
-					end)}))
+					end)}
+				))
 			end
 		end
 	end

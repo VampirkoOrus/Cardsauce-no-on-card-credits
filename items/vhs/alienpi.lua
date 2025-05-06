@@ -41,7 +41,7 @@ function consumInfo.calculate(self, card, context)
     if card.ability.activated and context.individual and context.cardarea == G.play and not card.debuff then
         if context.other_card then
             card.ability.extra.uses = card.ability.extra.uses+1
-            if card.ability.extra.uses >= card.ability.extra.runtime then
+            if to_big(card.ability.extra.uses) >= to_big(card.ability.extra.runtime) then
                 G.STATE = G.STATES.GAME_OVER
             else
                 card.ability.extra.chance = card.ability.extra.chance+1
@@ -60,7 +60,7 @@ function consumInfo.calculate(self, card, context)
 end
 
 function consumInfo.can_use(self, card)
-    if #G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables then return true end
+    if to_big(#G.consumeables.cards) < to_big(G.consumeables.config.card_limit) or card.area == G.consumeables then return true end
 end
 
 return consumInfo

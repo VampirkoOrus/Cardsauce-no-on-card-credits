@@ -17,7 +17,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if G.GAME.hands.Pair.played > 0 and context.joker_main and context.cardarea == G.jokers then
+    if to_big(G.GAME.hands.Pair.played) > to_big(0) and context.joker_main and context.cardarea == G.jokers then
         return {
             mult = G.GAME.hands.Pair.played*card.ability.extra,
         }

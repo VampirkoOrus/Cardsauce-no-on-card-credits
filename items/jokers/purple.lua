@@ -20,7 +20,7 @@ function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before and not card.debuff and next(context.poker_hands['Flush']) then
         local purp = G.FUNCS.csau_all_suit(context.full_hand, G.GAME and G.GAME.wigsaw_suit or "Spades")
         if purp then
-            if G.consumeables.config.card_limit > #G.consumeables.cards then
+            if to_big(G.consumeables.config.card_limit) > to_big(#G.consumeables.cards) then
                 if G.FUNCS.find_activated_tape('c_csau_rawtime') then check_for_unlock({ type = "wheres_po" }) end
                 G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                 G.E_MANAGER:add_event(Event({func = function()

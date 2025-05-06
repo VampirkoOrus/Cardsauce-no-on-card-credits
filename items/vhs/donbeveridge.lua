@@ -39,7 +39,7 @@ SMODS.food_expires = function(context)
     if bagels and not bagels.ability.destroyed then
         bagels:juice_up()
         bagels.ability.extra.uses = bagels.ability.extra.uses+1
-        if bagels.ability.extra.uses >= bagels.ability.extra.runtime then
+        if to_big(bagels.ability.extra.uses) >= to_big(bagels.ability.extra.runtime) then
             G.FUNCS.destroy_tape(bagels)
             bagels.ability.destroyed = true
         end
@@ -49,7 +49,7 @@ SMODS.food_expires = function(context)
 end
 
 function consumInfo.can_use(self, card)
-    if #G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables then return true end
+    if to_big(#G.consumeables.cards) < to_big(G.consumeables.config.card_limit) or card.area == G.consumeables then return true end
 end
 
 return consumInfo

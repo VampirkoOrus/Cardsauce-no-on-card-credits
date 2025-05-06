@@ -31,7 +31,7 @@ function consumInfo.activate(self, card, on)
 end
 
 function consumInfo.can_use(self, card)
-    if #G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables then return true end
+    if to_big(#G.consumeables.cards) < to_big(G.consumeables.config.card_limit) or card.area == G.consumeables then return true end
 end
 
 return consumInfo

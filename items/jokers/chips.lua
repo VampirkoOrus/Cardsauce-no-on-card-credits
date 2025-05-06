@@ -21,8 +21,8 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.after and not (context.blueprint or card.debuff) and G.GAME.current_round.hands_left == 0 and SMODS.food_expires(context) then
-        if card.ability.extra.chips - card.ability.extra.chips_mod <= 0 then
+    if context.cardarea == G.jokers and context.after and not (context.blueprint or card.debuff) and to_big(G.GAME.current_round.hands_left) == to_big(0) and SMODS.food_expires(context) then
+        if to_big(card.ability.extra.chips - card.ability.extra.chips_mod) <= to_big(0) then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     play_sound('tarot1')
@@ -51,7 +51,7 @@ function jokerInfo.calculate(self, card, context)
             }
         end
     end
-    if card.ability.extra.chips > 0 and context.joker_main and context.cardarea == G.jokers and not card.debuff then
+    if to_big(card.ability.extra.chips) > to_big(0) and context.joker_main and context.cardarea == G.jokers and not card.debuff then
         return {
             chips = card.ability.extra.chips,
         }

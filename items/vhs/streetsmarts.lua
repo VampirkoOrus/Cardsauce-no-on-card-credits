@@ -43,7 +43,7 @@ function consumInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.individual or context.blueprint
     if card.ability.activated and context.end_of_round and not card.debuff and not bad_context then
         card.ability.extra.uses = card.ability.extra.uses+1
-        if card.ability.extra.uses >= card.ability.extra.runtime then
+        if to_big(card.ability.extra.uses) >= to_big(card.ability.extra.runtime) then
             G.FUNCS.destroy_tape(card)
             card.ability.destroyed = true
         end
@@ -51,7 +51,7 @@ function consumInfo.calculate(self, card, context)
 end
 
 function consumInfo.can_use(self, card)
-    if #G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables then return true end
+    if to_big(#G.consumeables.cards) < to_big(G.consumeables.config.card_limit) or card.area == G.consumeables then return true end
 end
 
 return consumInfo

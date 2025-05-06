@@ -46,7 +46,7 @@ function jokerInfo.calculate(self, card, context)
 			end
 		end
 
-		if card.ability.extra.cardsRemaining <= 0 then 
+		if to_big(card.ability.extra.cardsRemaining) <= to_big(0) then
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					play_sound('tarot1')

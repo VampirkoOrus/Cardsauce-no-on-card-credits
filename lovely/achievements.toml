@@ -108,9 +108,12 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = "if pseudorandom(self.ability.name == 'Cavendish' and 'cavendish' or 'gros_michel') < G.GAME.probabilities.normal/self.ability.extra.odds then"
-position = "after"
-payload = "if self.ability.name == 'Gros Michel' then check_for_unlock({ type = 'gros_extinct' }) end"
+pattern = "if self.ability.name == 'Gros Michel' then G.GAME.pool_flags.gros_michel_extinct = true end"
+position = "at"
+payload = '''if self.ability.name == 'Gros Michel' then
+    G.GAME.pool_flags.gros_michel_extinct = true
+    check_for_unlock({ type = 'gros_extinct' })
+end'''
 match_indent = true
 times = 1
 

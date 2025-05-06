@@ -25,7 +25,7 @@ function jokerInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.individual or context.blueprint
     if context.before and not card.debuff and not bad_context then
         card.ability.extra.money = card.ability.extra.money + card.ability.extra.money_mod
-        if card.ability.extra.money >= 50 then
+        if to_big(card.ability.extra.money) >= to_big(50) then
             check_for_unlock({ type = "high_feature" })
         end
         return {
@@ -34,7 +34,7 @@ function jokerInfo.calculate(self, card, context)
         }
     end
     if context.joker_main and not card.debuff and not bad_context then
-        if context.scoring_name == "Straight" and card.ability.extra.money > 0 and pseudorandom('funfudgeyspray') < G.GAME.probabilities.normal / card.ability.extra.prob then
+        if context.scoring_name == "Straight" and to_big(card.ability.extra.money) > to_big(0) and pseudorandom('funfudgeyspray') < G.GAME.probabilities.normal / card.ability.extra.prob then
             card.ability.extra.reset = true
             return {
                 dollars = card.ability.extra.money

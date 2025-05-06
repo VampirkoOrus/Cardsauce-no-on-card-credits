@@ -17,7 +17,7 @@ local function get_most_played(lock)
         local most_played = "High Card"
         local play_more_than = (G.GAME.hands["High Card"].played or 0)
         for k, v in pairs(G.GAME.hands) do
-            if v.played >= play_more_than and v.visible then
+            if to_big(v.played) >= to_big(play_more_than) and v.visible then
                 play_more_than = v.played
                 most_played = k
             end

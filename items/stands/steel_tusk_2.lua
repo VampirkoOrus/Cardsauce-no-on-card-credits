@@ -57,7 +57,7 @@ function consumInfo.calculate(self, card, context)
             cards = cards + 1
         end
         card.ability.extra.evolve_destroys = card.ability.extra.evolve_destroys + cards
-        if card.ability.extra.evolve_destroys >= card.ability.extra.evolve_num and not card.ability.extra.evolved then
+        if to_big(card.ability.extra.evolve_destroys) >= to_big(card.ability.extra.evolve_num) and not card.ability.extra.evolved then
             card.ability.extra.evolved = true
             G.FUNCS.csau_evolve_stand(card)
             return

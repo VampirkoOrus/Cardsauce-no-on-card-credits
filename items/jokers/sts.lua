@@ -140,10 +140,10 @@ function jokerInfo.calculate(self, card, context)
                     }))
                 end
                 if card.ability.form == "spades" then
-                    if G.GAME.current_round.hands_left > 0 then
+                    if to_big(G.GAME.current_round.hands_left) > to_big(0) then
                         ease_discard(-G.GAME.current_round.discards_left, nil, true)
                     end
-                    if G.GAME.current_round.hands_left > 1 then
+                    if to_big(G.GAME.current_round.hands_left) > to_big(1) then
                         ease_hands_played(-G.GAME.current_round.hands_left + 1, nil, true)
                     end
                 end
@@ -173,7 +173,7 @@ function jokerInfo.calculate(self, card, context)
                 G.GAME.csau_stss_drawthreeextra = G.GAME.csau_stss_drawthreeextra + 1
             end
         end
-        if G.GAME.current_round.hands_played > 0 then
+        if to_big(G.GAME.current_round.hands_played) > to_big(0) then
             if card.ability.form == "diamonds" and not context.blueprint then
                 card.ability.diamonds.mult = to_big(card.ability.diamonds.mult) + (to_big(card.ability.diamonds.mult_mod) * to_big(#context.scoring_hand))
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_mult', vars = {to_big(card.ability.diamonds.mult)}}, colour = G.C.MULT})
@@ -202,7 +202,7 @@ function jokerInfo.calculate(self, card, context)
             end
         end
     end
-    if context.cardarea == G.play and context.repetition and not context.repetition_only and not card.debuff and G.GAME.current_round.hands_played > 0 then
+    if context.cardarea == G.play and context.repetition and not context.repetition_only and not card.debuff and to_big(G.GAME.current_round.hands_played) > to_big(0) then
         if card.ability.form == "hearts" then
             return {
                 message = 'Again!',
@@ -217,7 +217,7 @@ function jokerInfo.calculate(self, card, context)
             }
         end
     end
-    if context.final_scoring_step and G.GAME.current_round.hands_played > 0 then
+    if context.final_scoring_step and to_big(G.GAME.current_round.hands_played) > to_big(0) then
         if card.ability.form == "diamonds" and to_big(card.ability.diamonds.mult) > to_big(0) then
             return {
                 message = localize{type='variable',key='a_mult',vars={to_big(card.ability.diamonds.mult)}},

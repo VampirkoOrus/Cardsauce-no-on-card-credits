@@ -41,7 +41,7 @@ function consumInfo.can_use(self, card)
         return false
     end
 
-    return G.GAME.csau_unlimited_stands or (G.FUNCS.csau_get_num_stands() < G.GAME.modifiers.max_stands) or next(SMODS.find_card("c_csau_vento_gold"))
+    return G.GAME.csau_unlimited_stands or (to_big(G.FUNCS.csau_get_num_stands()) < to_big(G.GAME.modifiers.max_stands)) or next(SMODS.find_card("c_csau_vento_gold"))
 end
 
 return consumInfo

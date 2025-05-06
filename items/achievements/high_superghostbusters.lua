@@ -4,7 +4,7 @@ local trophyInfo = {
         local cards = SMODS.find_card('j_csau_superghostbusters')
         if cards and #cards > 0 then
             for i, v in ipairs(cards) do
-                if v.ability.mult >= 30 then
+                if to_big(v.ability.mult) >= to_big(30) then
                     return true
                 end
             end

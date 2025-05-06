@@ -47,12 +47,12 @@ local editionInfo = {
 -- Modified code from Cryptid
 editionInfo.calculate = function(self, card, context)
     if (
-            context.edition -- for when on jonklers
-                    and context.cardarea == G.jokers -- checks if should trigger
-                    and card.config.trigger -- fixes double trigger
+        context.edition -- for when on jonklers
+                and context.cardarea == G.jokers -- checks if should trigger
+                and card.config.trigger -- fixes double trigger
     ) or (
-            context.main_scoring -- for when on playing cards
-                    and context.cardarea == G.play
+        context.main_scoring -- for when on playing cards
+                and context.cardarea == G.play
     )
     then
         local pull = pseudorandom("CORRUPTED", self.config.prob_min, self.config.prob)

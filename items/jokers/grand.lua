@@ -12,6 +12,9 @@ local jokerInfo = {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
+    pools = {
+        ["Meme"] = true
+    },
     streamer = "joel",
 }
 

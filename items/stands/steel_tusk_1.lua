@@ -45,7 +45,7 @@ function consumInfo.calculate(self, card, context)
             if not bad_context then
                 card.ability.extra.evolve_scores = card.ability.extra.evolve_scores + 1
             end
-            if card.ability.extra.evolve_scores >= card.ability.extra.evolve_num then
+            if to_big(card.ability.extra.evolve_scores) >= to_big(card.ability.extra.evolve_num) then
                 if not card.ability.extra.evolved and not bad_context then
                     card.ability.extra.evolved = true
                     G.FUNCS.csau_evolve_stand(card)

@@ -21,7 +21,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and not card.debuff and not context.individual and not context.repetition and not context.blueprint then
-		if G.GAME.chips <= (G.GAME.blind.chips * 1.1) then
+		if to_big(G.GAME.chips) <= to_big(G.GAME.blind.chips * 1.1) then
 			card.ability.extra.mult = to_big(card.ability.extra.mult) + to_big(card.ability.extra.mult_mod)
 			card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.MULT})
 		end

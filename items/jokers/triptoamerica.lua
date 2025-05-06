@@ -41,7 +41,7 @@ function jokerInfo.check_for_unlock(self, args)
         else
             G.GAME.trip_to_america_hands = 0
         end
-        return G.GAME.trip_to_america_hands >= goal
+        return to_big(G.GAME.trip_to_america_hands) >= to_big(goal)
     end
     if args.type == 'round_win' then
         G.GAME.trip_to_america_hands = 0
@@ -59,7 +59,7 @@ function jokerInfo.calculate(self, card, context)
         else
             local last_mult = card.ability.extra.mult
             card.ability.extra.mult = 0
-            if last_mult > 0 then
+            if to_big(last_mult) > to_big(0) then
                 return {
                     card = card,
                     message = localize('k_reset')
@@ -67,7 +67,7 @@ function jokerInfo.calculate(self, card, context)
             end
         end
     end
-    if card.ability.extra.mult > 0 and context.joker_main and context.cardarea == G.jokers then
+    if to_big(card.ability.extra.mult) > to_big(0) and context.joker_main and context.cardarea == G.jokers then
         return {
             mult = card.ability.extra.mult,
         }

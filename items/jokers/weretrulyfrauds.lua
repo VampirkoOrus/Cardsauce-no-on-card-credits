@@ -36,7 +36,8 @@ local function refresh_costs()
         for k, v in pairs(G.I.CARD) do
             if v.set_cost then v:set_cost() end
         end
-        return true end }))
+        return true
+    end }))
 end
 
 function jokerInfo.add_to_deck(self, card)

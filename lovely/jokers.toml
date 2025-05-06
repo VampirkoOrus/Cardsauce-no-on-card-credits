@@ -89,28 +89,12 @@ payload = "if my_pos and G.jokers.cards[my_pos+1] and not self.getting_sliced an
 match_indent = true
 
 # Make Perkeo only copy consumables (and not Stands)
-# (Slightly modified code from Cryptid, this should conflict with Cryptid's lovely patch of this,
-# but it should maintain Cryptid compatibility, cause it does the same thing)
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = '''if G.consumeables.cards[1] then'''
+pattern = 'if G.consumeables.cards[i].ability.consumeable then'
 position = "at"
-payload = '''local eligibleJokers = {}
-for i = 1, #G.consumeables.cards do
-    if G.consumeables.cards[i].ability.consumeable and G.consumeables.cards[i].ability.set ~= "csau_Stand" then
-        eligibleJokers[#eligibleJokers + 1] = G.consumeables.cards[i]
-    end
-end
-if #eligibleJokers > 0 then'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''local card = copy_card(pseudorandom_element(G.consumeables.cards, pseudoseed('perkeo')), nil)'''
-position = "at"
-payload = '''local card = copy_card(pseudorandom_element(eligibleJokers, pseudoseed('perkeo')), nil)'''
+payload = 'if G.consumeables.cards[i].ability.consumeable and G.consumeables.cards[i].ability.set ~= "csau_Stand" then'
 match_indent = true
 
 [[patches]]
@@ -121,12 +105,30 @@ position = "at"
 payload = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or pseudorandom('wheel_of_fortune') < (G.FUNCS.nutbuster_active() and 3 or G.GAME.probabilities.normal)/self.ability.extra then'''
 match_indent = true
 
+# Cryptid compatibility version of the above patch:
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or pseudorandom('wheel_of_fortune') < cry_prob(self.ability.cry_prob, self.ability.extra, self.ability.cry_rigged)/self.ability.extra then'''
+position = "at"
+payload = '''if self.ability.name == 'Ectoplasm' or self.ability.name == 'Hex' or pseudorandom('wheel_of_fortune') < (G.FUNCS.nutbuster_active() and 3 or cry_prob(self.ability.cry_prob, self.ability.extra, self.ability.cry_rigged))/self.ability.extra then'''
+match_indent = true
+
 [[patches]]
 [patches.pattern]
 target = 'functions/common_events.lua'
 pattern = "elseif _c.name == \"The Wheel of Fortune\" then loc_vars = {G.GAME.probabilities.normal, cfg.extra};  info_queue[#info_queue+1] = G.P_CENTERS.e_foil; info_queue[#info_queue+1] = G.P_CENTERS.e_holo; info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome; "
 position = 'at'
 payload = "elseif _c.name == \"The Wheel of Fortune\" then loc_vars = {G.FUNCS.nutbuster_active() and 3 or G.GAME.probabilities.normal, _c.config.extra};  info_queue[#info_queue+1] = G.P_CENTERS.e_foil; info_queue[#info_queue+1] = G.P_CENTERS.e_holo; info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome;"
+match_indent = true
+
+# Cryptid compatibility version of the above patch:
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = "elseif _c.name == \"The Wheel of Fortune\" then loc_vars = {cfg.cry_prob and cry_prob(cfg.cry_prob, cfg.extra, cfg.cry_rigged) or G.GAME.probabilities.normal, cfg.extra};  info_queue[#info_queue+1] = G.P_CENTERS.e_foil; info_queue[#info_queue+1] = G.P_CENTERS.e_holo; info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome;"
+position = 'at'
+payload = "elseif _c.name == \"The Wheel of Fortune\" then loc_vars = {G.FUNCS.nutbuster_active() and 3 or cfg.cry_prob and cry_prob(cfg.cry_prob, cfg.extra, cfg.cry_rigged) or G.GAME.probabilities.normal, _c.config.extra};  info_queue[#info_queue+1] = G.P_CENTERS.e_foil; info_queue[#info_queue+1] = G.P_CENTERS.e_holo; info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome;"
 match_indent = true
 
 [[patches]]
@@ -148,5 +150,14 @@ target = "card.lua"
 pattern = "play_sound('tarot2', 0.76, 0.4);return true end}))"
 position = "at"
 payload = "play_sound(G.FUNCS.nutbuster_active() and 'csau_doot' or 'tarot2', G.FUNCS.nutbuster_active() and 1 or 0.76, 0.4);return true end}))"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "if v.set == 'Joker' then"
+position = "at"
+payload = "if v.set == 'Joker' and not v.omit then "
 match_indent = true
 times = 1

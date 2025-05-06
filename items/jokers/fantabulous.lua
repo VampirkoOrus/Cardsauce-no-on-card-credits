@@ -27,7 +27,7 @@ function jokerInfo.calculate(self, card, context)
 		card.ability.sell_val = card.ability.sell_val - card.ability.money_mod
 		card.sell_cost = card.ability.sell_val
 		if SMODS.food_expires(context) then
-			if card.ability.sell_val > 0 then
+			if to_big(card.ability.sell_val) > to_big(0) then
 				return {
 					message = localize('k_val_down'),
 					colour = G.C.MONEY,

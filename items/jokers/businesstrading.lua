@@ -37,7 +37,7 @@ local function all_faces(hand)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.before and context.cardarea == G.jokers and not context.blueprint and G.GAME.current_round.hands_played == 0 then
+    if context.before and context.cardarea == G.jokers and not context.blueprint and to_big(G.GAME.current_round.hands_played) == to_big(0) then
         if all_faces(context.full_hand) then
             ease_dollars(to_big(card.ability.extra.dollars))
             card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('$') .. to_big(card.ability.extra.dollars), colour = G.C.MONEY})

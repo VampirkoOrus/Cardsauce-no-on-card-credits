@@ -52,13 +52,11 @@ times = 1
 [patches.pattern]
 target = "functions/button_callbacks.lua"
 pattern = '''G.shop.alignment.offset.y = G.ROOM.T.y + 29
-G.SHOP_SIGN.alignment.offset.y = -15
-return true'''
+G.SHOP_SIGN.alignment.offset.y = -15'''
 position = "at"
 payload = '''G.shop.alignment.offset.y = G.ROOM.T.y + 29
 if G.morshu_save then G.morshu_save.alignment.offset.y = G.ROOM.T.y + 29 end
-G.SHOP_SIGN.alignment.offset.y = -15
-return true'''
+G.SHOP_SIGN.alignment.offset.y = -15'''
 match_indent = true
 times = 1
 

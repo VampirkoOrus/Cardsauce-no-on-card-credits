@@ -18,7 +18,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.before and G.GAME.current_round.hands_left == 0 and not context.blueprint and not card.debuff then
+    if context.before and to_big(G.GAME.current_round.hands_left) == to_big(0) and not context.blueprint and not card.debuff then
         local cards = {}
         for i=1, card.ability.extra do
             local _card = create_playing_card({

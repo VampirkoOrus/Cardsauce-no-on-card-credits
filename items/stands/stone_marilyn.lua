@@ -26,7 +26,7 @@ local debt_collection = function(card)
     local percentage_left = (G.GAME.blind.chips-G.GAME.chips) / G.GAME.blind.chips
     local debt = math.ceil(percentage_left / card.ability.extra.conv_score)*card.ability.extra.conv_money
     local recoverable = 0
-    if G.GAME.dollars - debt >= G.GAME.bankrupt_at then
+    if to_big(G.GAME.dollars - debt) >= to_big(G.GAME.bankrupt_at) then
         send("Debt satisfied with only money")
         return {
             saved = true,
@@ -54,10 +54,10 @@ local debt_collection = function(card)
                 send("debt: "..debt)
                 send("difference: "..(G.GAME.dollars + recoverable) - debt)
                 send("bankrupt at: "..G.GAME.bankrupt_at)
-                if (G.GAME.dollars + recoverable) - debt >= G.GAME.bankrupt_at then
+                if to_big((G.GAME.dollars + recoverable) - debt) >= to_big(G.GAME.bankrupt_at) then
                     table.insert(sell, joker)
                     local ease = debt
-                    if (G.GAME.dollars + recoverable) - debt > 0 then
+                    if to_big((G.GAME.dollars + recoverable) - debt) > to_big(0) then
                         ease = ease + (G.GAME.dollars + recoverable) - debt
                     end
                     send("Debt satisfied. (Debt: "..debt..", Recovered: "..recoverable..")")
@@ -75,7 +75,7 @@ local debt_collection = function(card)
         send("debt: "..debt)
         send("difference: "..(G.GAME.dollars + recoverable) - debt)
         send("bankrupt at: "..G.GAME.bankrupt_at)
-        if (G.GAME.dollars + recoverable) - debt < G.GAME.bankrupt_at then
+        if to_big((G.GAME.dollars + recoverable) - debt) < to_big(G.GAME.bankrupt_at) then
             send("Not enough money.")
             if #G.playing_cards > 0 then
                 send("Playing cards found.")
@@ -98,10 +98,10 @@ local debt_collection = function(card)
                     send("difference: "..(G.GAME.dollars + recoverable) - debt)
                     send("bankrupt at: "..G.GAME.bankrupt_at)
                     recoverable = recoverable + card.sell_cost
-                    if (G.GAME.dollars + recoverable) - debt >= G.GAME.bankrupt_at then
+                    if to_big((G.GAME.dollars + recoverable) - debt) >= to_big(G.GAME.bankrupt_at) then
                         table.insert(sell, card)
                         local ease = -debt
-                        if (G.GAME.dollars + recoverable) - debt > 0 then
+                        if to_big((G.GAME.dollars + recoverable) - debt) > to_big(0) then
                             ease = (G.GAME.dollars + recoverable) - debt
                         end
                         send("Debt satisfied. (Debt: "..debt..", Recovered: "..recoverable..")")

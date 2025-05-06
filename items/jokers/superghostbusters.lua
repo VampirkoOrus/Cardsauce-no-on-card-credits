@@ -14,7 +14,7 @@ local jokerInfo = {
 
 local function get_mult(card)
     if G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.spectral then
-        if G.GAME.consumeable_usage_total.spectral > 0 then
+        if to_big(G.GAME.consumeable_usage_total.spectral) > to_big(0) then
             return G.GAME.consumeable_usage_total.spectral * card.ability.extra
         end
     end
@@ -40,7 +40,7 @@ function jokerInfo.calculate(self, card, context)
             end}))
         end
     end
-    if get_mult(card) > 0 and context.joker_main and context.cardarea == G.jokers then
+    if to_big(get_mult(card)) > to_big(0) and context.joker_main and context.cardarea == G.jokers then
         return {
             mult = get_mult(card),
         }

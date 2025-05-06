@@ -18,7 +18,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.in_pool(self, args)
-    if G.GAME.round_resets.ante <= 4 then
+    if to_big(G.GAME.round_resets.ante) <= to_big(4) then
         return true
     end
 end
@@ -39,7 +39,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.end_of_round and not context.blueprint and not context.repetition and not context.individual then
-        if G.GAME.round_resets.ante >= 4 and G.GAME.blind.boss then
+        if to_big(G.GAME.round_resets.ante) >= to_big(4) and G.GAME.blind.boss then
             for k, v in pairs(G.GAME.probabilities) do
                 G.GAME.probabilities[k] = v / card.ability.prob_mult
             end

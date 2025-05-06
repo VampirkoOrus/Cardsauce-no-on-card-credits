@@ -387,7 +387,7 @@ function jokerInfo.calculate(self, card, context)
             fake_crash()
         end
     end
-    if context.joker_main and context.cardarea == G.jokers and not card.debuff and not bad_context then
+    if context.joker_main and context.cardarea == G.jokers and not card.debuff and to_big(card.ability.extra.mult) > to_big(0) and not bad_context then
         return {
             mult = card.ability.extra.mult,
         }

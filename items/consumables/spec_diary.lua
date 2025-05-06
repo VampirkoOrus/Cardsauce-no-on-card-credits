@@ -29,11 +29,11 @@ function consumInfo.use(self, card, area, copier)
 end
 
 function consumInfo.can_use(self, card)
-    if G.consumeables.config.card_limit <= #G.consumeables.cards - (card.area == G.consumeables and 1 or 0) then
+    if to_big(G.consumeables.config.card_limit) <= to_big(#G.consumeables.cards - (card.area == G.consumeables and 1 or 0)) then
         return false
     end
 
-    return G.GAME.csau_unlimited_stands or G.FUNCS.csau_get_num_stands() < G.GAME.modifiers.max_stands
+    return G.GAME.csau_unlimited_stands or to_big(G.FUNCS.csau_get_num_stands()) < to_big(G.GAME.modifiers.max_stands)
 end
 
 return consumInfo

@@ -30,7 +30,8 @@ function jokerInfo.calculate(self, card, context)
 					end}))   
 					card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_judge'), colour = G.C.PURPLE})
 				return true
-			end)}))
+			end)}
+		))
 	end
 end
 
@@ -40,7 +41,4 @@ function jokerInfo.add_to_deck(self, card)
 	end
 end
 
-
-
 return jokerInfo
-	
