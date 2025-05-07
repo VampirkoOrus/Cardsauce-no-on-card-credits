@@ -35,7 +35,7 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.final_scoring_step then
+    if card.ability.activated and context.final_scoring_step then
         G.E_MANAGER:add_event(Event({
             func = function()
                 for i, v in ipairs(context.scoring_hand) do
