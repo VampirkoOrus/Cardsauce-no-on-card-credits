@@ -32,6 +32,7 @@ function jokerInfo.calculate(self, card, context)
                     G.GAME.consumeable_buffer = 0
                     return true
                 end }))
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})
             end
         end
     end

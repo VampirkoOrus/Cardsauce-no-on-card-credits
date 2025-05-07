@@ -33,7 +33,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.donk } }
-    return { vars = {card.ability.extra.mult_mod, card.ability.extra.prob_mod, G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true), card.ability.extra.prob, card.ability.extra.mult }}
+    return { vars = {card.ability.extra.mult_mod, card.ability.extra.prob_mod, G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, {multiply = true}), card.ability.extra.prob, card.ability.extra.mult }}
 end
 
 function jokerInfo.in_pool(self, args)
@@ -380,7 +380,7 @@ end
 function jokerInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.individual or context.blueprint
     if context.cardarea == G.jokers and context.before and not card.debuff and not bad_context and SMODS.food_expires(context) then
-        if pseudorandom('essenceofcrash') < G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true) / card.ability.extra.prob then
+        if pseudorandom('essenceofcrash') < G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, {multiply = true}) / card.ability.extra.prob then
             if pseudorandom('sprunkdit') < (card.ability.hidden_prob.manip and G.GAME.probabilities.normal or card.ability.hidden_prob.non_manip_rate) / card.ability.hidden_prob.prob then
                 send("RUN DELETED! LOL")
                 check_for_unlock({ type = "get_sprunked" })

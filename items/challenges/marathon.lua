@@ -64,6 +64,9 @@ local chalInfo = {
             {id = "csau_marathon" },
         },
     },
+    vouchers = {
+        { id = 'v_csau_scavenger'}
+    },
     restrictions = {
         banned_cards = function()
             default_card_bans[18].ids = smods_pool_search({'Tarot', 'Planet', 'Spectral'}, 'csau_')

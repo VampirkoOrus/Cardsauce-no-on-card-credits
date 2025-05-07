@@ -68,7 +68,7 @@ function consumInfo.calculate(self, card, context)
             end
         end
     end
-    if card.ability.activated and context.starting_shop and not context.blueprint then
+    if context.starting_shop and not context.blueprint then
         if to_big(card.ability.extra.uses) >= to_big(card.ability.extra.runtime) then
             G.FUNCS.destroy_tape(card)
             card.ability.destroyed = true

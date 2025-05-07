@@ -46,25 +46,16 @@ function jokerInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.final_scoring_step and not bad_context then
         if all_faces(context.full_hand) and pseudorandom('businesstrading') < G.GAME.probabilities.normal / 3 then
-            card.ability.extra.destroyed[#card.ability.extra.destroyed+1] = context.full_hand[pseudorandom('businesstrading_1', 1, #context.full_hand)]
+            card.ability.extra.destroyed = context.full_hand[pseudorandom('businesstrading_1', 1, #context.full_hand)]
         end
     end
     if context.destroying_card and table.contains(context.full_hand, context.destroy_card) and not bad_context then
-        local allfaces = true
-        for k, v in ipairs(context.full_hand) do
-            if not v:is_face() then
-                allfaces = false
-            end
-        end
-        if allfaces and to_big(card.ability.extra.destroyed) <  to_big(card.ability.extra.destroy) then
-            if pseudorandom('businesstrading') < G.GAME.probabilities.normal / 3 then
-                card.ability.extra.destroyed = card.ability.extra.destroyed + 1
-                return true
-            end
+        if context.destroy_card == card.ability.extra.destroyed then
+            return true
         end
     end
     if context.end_of_round then
-        card.ability.extra.destroyed = 0
+        card.ability.extra.destroyed = nil
     end
 end
 

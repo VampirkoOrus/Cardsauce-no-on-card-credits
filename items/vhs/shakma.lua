@@ -51,19 +51,22 @@ local function blacklisted_seed(seed)
 end
 
 local ref_psr = pseudorandom
-function pseudorandom(seed, min, max)
-    local shakma = G.FUNCS.find_activated_tape('c_csau_shakma')
-    if shakma and not shakma.ability.destroyed and not G.GAME.disable_shakma then
-        if not min and not max and not blacklisted_seed(seed) then
-            send("SHAKMA SEED:")
-            send(seed)
-            shakma:juice_up()
-            shakma.ability.extra.uses = shakma.ability.extra.uses+1
-            if to_big(shakma.ability.extra.uses) >= to_big(shakma.ability.extra.runtime) then
-                G.FUNCS.destroy_tape(shakma)
-                shakma.ability.destroyed = true
+function pseudorandom(seed, min, max, no_shakma)
+    no_shakma = no_shakma or false
+    if not no_shakma then
+        local shakma = G.FUNCS.find_activated_tape('c_csau_shakma')
+        if shakma and not shakma.ability.destroyed and not G.GAME.disable_shakma then
+            if not min and not max and not blacklisted_seed(seed) then
+                send("SHAKMA SEED:")
+                send(seed)
+                shakma:juice_up()
+                shakma.ability.extra.uses = shakma.ability.extra.uses+1
+                if to_big(shakma.ability.extra.uses) >= to_big(shakma.ability.extra.runtime) then
+                    G.FUNCS.destroy_tape(shakma)
+                    shakma.ability.destroyed = true
+                end
+                return 0
             end
-            return 0
         end
     end
     return ref_psr(seed, min, max)

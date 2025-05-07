@@ -21,6 +21,8 @@ function voucherInfo.redeem(self, card, area, copier)
     if not G.morshu_save or not G.morshu_area then
     -- set the morshu area to appear
         if G.morshu_area then G.morshu_area.config.card_limit = G.GAME.morshu_cards end
+
+        -- set the morshu area to appear
         G.morshu_save = G.morshu_save or UIBox{
             definition = G.UIDEF.morshu_save(G.morshu_area),
             config = {align='tmi', instance_type = 'NODE', offset = {x=7.6,y=G.ROOM.T.y+29}, major = G.hand, bond = 'Weak'}

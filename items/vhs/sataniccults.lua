@@ -36,7 +36,7 @@ function consumInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function consumInfo.calculate(self, card, context)
-    if card.ability.activated and context.individual and context.cardarea == G.hand then
+    if card.ability.activated and context.individual and context.cardarea == G.hand and not context.final_scoring_step then
         if SMODS.has_enhancement(context.other_card, 'm_gold') then
             return {
                 xmult = card.ability.extra.xmult

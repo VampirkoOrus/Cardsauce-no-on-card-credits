@@ -45,15 +45,17 @@ function jokerInfo.calculate(self, card, context)
     if not context.blueprint and not card.debuff then
         if context.vhs_death then
             G.hand:change_size(-card.ability.extra.h_mod)
+            card:juice_up()
         end
         if context.buying_card then
             if context.card.ability.set == "VHS" then
                 G.hand:change_size(card.ability.extra.h_mod)
+                card:juice_up()
             end
         end
         if context.selling_card then
             if context.card.ability.set == "VHS" then
-                G.hand:change_size(-card.ability.extra.h_mod)
+                card:juice_up()
             end
         end
     end

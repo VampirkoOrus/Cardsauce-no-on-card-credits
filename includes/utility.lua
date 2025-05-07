@@ -416,33 +416,18 @@ G.FUNCS.csau_all_suit = function(hand, suit)
 	return true
 end
 
-G.FUNCS.csau_add_chance = function(num, multiply, startAtOne)
-	multiply = multiply or false
-	startAtOne = startAtOne or false
+G.FUNCS.csau_add_chance = function(num, extra)
+	local multiply = extra and extra.multiply or false
+	local startAtOne = extra and extra.start_at_one or false
 	if G.FUNCS.powers_active and G.FUNCS.powers_active() then
 		return 0
 	else
 		if multiply then
 			if G.GAME.probabilities and G.GAME.probabilities.normal then
-				if startAtOne then
-					return (1 + num) * G.GAME.probabilities.normal
-				else
-					return (num <= 0 and 0 or (1 + num)) * G.GAME.probabilities.normal
-				end
-			else
-				if startAtOne then
-					return 1 + num
-				else
-					return num
-				end
-			end
-		else
-			if startAtOne then
-				return 1 + num
-			else
-				return num
+				return ((startAtOne and 1 or 0) + num) * G.GAME.probabilities.normal
 			end
 		end
+		return (startAtOne and 1 or 0) + num
 	end
 end
 
@@ -1083,7 +1068,8 @@ end
 
 SMODS.spectral_lower_handsize = function(context)
 	local rem = G.FUNCS.find_activated_tape('c_csau_remlezar')
-	if rem and not rem.ability.destroyed  then
+	if rem and not rem.ability.destroyed then
+		send('what')
 		rem:juice_up()
 		rem.ability.extra.uses = rem.ability.extra.uses+1
 		if rem.ability.extra.uses >= rem.ability.extra.runtime then
@@ -1092,6 +1078,7 @@ SMODS.spectral_lower_handsize = function(context)
 		end
 		return false
 	end
+	send('how')
 	return true
 end
 

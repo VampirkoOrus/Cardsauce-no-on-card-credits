@@ -42,6 +42,7 @@ local includes = {
 	'hooks/state_events',
 	'hooks/misc_functions',
 	'hooks/UI_definitions',
+	'hooks/overrides',
 	'hooks/smods',
 
 	-- option files

@@ -48,7 +48,7 @@ function consumInfo.calculate(self, card, context)
                 }))
             end
         end
-        if pseudorandom('thisisrequiem') < G.FUNCS.csau_add_chance(card.ability.extra.chance+#gold, true) / card.ability.extra.divide then
+        if pseudorandom('thisisrequiem') < G.FUNCS.csau_add_chance(card.ability.extra.chance+#gold, {multiply = true}) / card.ability.extra.divide then
             return {
                 func = function()
                     G.FUNCS.csau_flare_stand_aura(card, 0.38)

@@ -121,3 +121,20 @@ end
 '''
 match_indent = true
 times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "local edition_poll = pseudorandom(pseudoseed(_key or 'edition_generic'))"
+position = "at"
+payload = "local edition_poll = pseudorandom(pseudoseed(_key or 'edition_generic'), nil, nil, true)"
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/overrides.lua"]'''
+pattern = "local edition_poll = pseudorandom(pseudoseed(_key or 'edition_generic')) -- Generate the poll value"
+position = "at"
+payload = "local edition_poll = pseudorandom(pseudoseed(_key or 'edition_generic'), nil, nil, true) -- Generate the poll value"
+match_indent = true

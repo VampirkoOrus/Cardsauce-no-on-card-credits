@@ -8,6 +8,9 @@ local chalInfo = {
             {id = 'consumable_slots', value = 6}
         }
     },
+    vouchers = {
+        { id = 'v_csau_foo'}
+    },
     unlocked = function(self)
         return G.FUNCS.discovery_check({ mode = 'set_count', set = 'Stand', count = 1, })
     end

@@ -30,7 +30,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.yunkie } }
-    return { vars = { card.ability.extra.x_mult_mod, card.ability.extra.prob_mod, G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true), card.ability.extra.prob, card.ability.extra.x_mult } }
+    return { vars = { card.ability.extra.x_mult_mod, card.ability.extra.prob_mod, G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, {multiply = true}), card.ability.extra.prob, card.ability.extra.x_mult } }
 end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
@@ -47,7 +47,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.vhs_death and not context.blueprint then
-        if not card.ability.extra.destroyed and pseudorandom('junka') < G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, true) / card.ability.extra.prob then
+        if not card.ability.extra.destroyed and pseudorandom('junka') < G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, {multiply = true}) / card.ability.extra.prob then
             card.ability.extra.destroyed = true
             G.E_MANAGER:add_event(Event({
                 func = function()

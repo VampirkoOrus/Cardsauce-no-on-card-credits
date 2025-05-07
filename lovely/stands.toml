@@ -166,6 +166,19 @@ times = 1
 [[patches]]
 [patches.pattern]
 target = "functions/UI_definitions.lua"
+pattern = '''  4
+
+  local text_scale = smaller and 0.7 or 1'''
+position = "at"
+payload = '''  5
+
+  local text_scale = smaller and 0.7 or 1'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
 pattern = "elseif v == 'joker_stickers' then"
 position = "before"
 payload = '''elseif v == 'stand_stickers' then
