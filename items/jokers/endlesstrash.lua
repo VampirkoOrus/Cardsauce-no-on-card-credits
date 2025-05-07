@@ -31,7 +31,7 @@ function jokerInfo.calculate(self, card, context)
             if count > 0 then
                 G.E_MANAGER:add_event(Event({func = function()
                     ease_discard(card.ability.extra*count)
-                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..localize('k_hud_discards').." Discards"})
+                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..count.." "..localize('k_hud_discards')})
                     return true
                 end }))
             end
