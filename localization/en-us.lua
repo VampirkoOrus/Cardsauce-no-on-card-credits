@@ -3447,30 +3447,9 @@ return {
 			e_csau_corrupted = {
 				name = "Corrupted",
 				text = {
-					"{C:green}3 in 20{} chance for {X:mult,C:white}X1.5{} Mult,",
-					"{C:green}7 in 20{} chance for {C:mult}+10{} Mult,",
-					"or {C:green}10 in 20{} chance for {C:chips}+50{} Chips",
-					"{s:0.8,C:inactive}(Odds not affected by probability manipulation){}",
+					"",
 				},
 			},
-			e_csau_corrupted_x_mult = {
-				name = "Corrupted",
-				text = {
-					"{E:2,X:mult,C:white}X1.5{} Mult",
-				},
-			},
-			e_csau_corrupted_mult = {
-				name = "Corrupted",
-				text = {
-					"{E:2,C:mult}+10{} Mult",
-				},
-			},
-			e_csau_corrupted_chips = {
-				name = "Corrupted",
-				text = {
-					"{E:2,C:chips}+50{} Chips",
-				},
-			}
 		},
 		Back = {
 			b_csau_vine = {

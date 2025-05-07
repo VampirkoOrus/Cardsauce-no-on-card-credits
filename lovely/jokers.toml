@@ -152,12 +152,3 @@ position = "at"
 payload = "play_sound(G.FUNCS.nutbuster_active() and 'csau_doot' or 'tarot2', G.FUNCS.nutbuster_active() and 1 or 0.76, 0.4);return true end}))"
 match_indent = true
 times = 1
-
-[[patches]]
-[patches.pattern]
-target = "functions/misc_functions.lua"
-pattern = "if v.set == 'Joker' then"
-position = "at"
-payload = "if v.set == 'Joker' and not v.omit then "
-match_indent = true
-times = 1

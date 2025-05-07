@@ -29,12 +29,11 @@ local editionInfo = {
             x_mult = 1.5,
             mult = 10,
             chips = 50,
-            
         },
         weights = {
-            x_mult = 3,
-            mult = 7,
-            chips = 10,
+            x_mult = {weight = 3, display = 'X1.5', color = G.C.UI.TEXT_LIGHT},
+            mult = {weight = 7, display = '+10', color = G.C.MULT },
+            chips = {weight = 10, display = '+50', color = G.C.CHIPS},
         },
     },
     unlocked = true,
@@ -47,6 +46,13 @@ local editionInfo = {
     }
 }
 
+G.FUNCS.csau_corrupted_func = function(e)
+    local card = e.config.ref_table
+    local dynatext_main = e.children[1].children[1].config.object
+    card.csau_corrupted_text = dynatext_main.string == "+50" and "Chips" or "Mult"
+    e.children[1].config.colour = dynatext_main.string == "X1.5" and G.C.MULT or G.C.CLEAR
+end
+
 local function weighted_random(weights, key)
     local total = 0
 	
@@ -57,7 +63,7 @@ local function weighted_random(weights, key)
 	local roll = pseudorandom(pseudoseed(key), 1, total)
 	local iter = 0
 	for k, v in pairs(weights) do
-		iter = iter + v
+		iter = iter + v.weight
 		if roll <= iter then
 			return k
 		end
@@ -65,26 +71,59 @@ local function weighted_random(weights, key)
 end
 
 function editionInfo.loc_vars(self, info_queue, card)
-    local last_display = card.edition.corrupted_display_key or 'chips'
-    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.21, blockable = false, blocking = false, func = function()
-        if G.CONTROLLER.hovering.target == card then
-            card:stop_hover()
-
-            card.children.focused_ui = G.UIDEF.card_focus_ui(card)
-            card.ability_UIBox_table = card:generate_UIBox_ability_table()
-            card.config.h_popup = G.UIDEF.card_h_popup(card)
-            card.config.h_popup_config = card:align_h_popup()
-    
-            Node.hover(card)
-        else
-            card.edition.corrupted_display_key = nil
-            card.edition.no_recycle = nil
+    card.csau_corrupted_text = "Chips"
+    local corru_strings = {}
+    for k, v in pairs(self.config.weights) do
+        for i=1, v.weight do
+            corru_strings[#corru_strings+1] = { string = v.display, colour = v.color }
         end
-    return true end}))
+    end
 
-    card.edition.no_recycle = (card.edition.corrupted_display_key ~= nil)
-    card.edition.corrupted_display_key = weighted_random(self.config.weights, 'csau_corrupted_display')
-    return { vars = { self.config.values[last_display] }, key = self.key..'_'..last_display}
+    local main_start = {
+        {
+            n = G.UIT.R,
+            config = { ref_table = card, func = "csau_corrupted_func" },
+            nodes = {{
+                n = G.UIT.C,
+                config = { colour = G.C.CLEAR, r = 0.05, padding = 0.03, res = 0.15 },
+                nodes = {{
+                    n = G.UIT.O,
+                    config = {
+                        object = DynaText({
+                            string = corru_strings,
+                            colours = { G.C.RED },
+                            pop_in_rate = 9999999,
+                            silent = true,
+                            random_element = true,
+                            pop_delay = 0.2,
+                            scale = 0.32,
+                            min_cycle_time = 0,
+                        }),
+                    },
+                }}
+            },
+            {
+                n = G.UIT.C,
+                config = { colour = G.C.CLEAR, r = 0.05, padding = 0.03, res = 0.15 },
+                nodes = {{
+                    n = G.UIT.O,
+                    config = {
+                        object = DynaText({
+                            string = {
+                                { ref_table = card, ref_value = "csau_corrupted_text" } },
+                            colours = { G.C.UI.TEXT_DARK },
+                            pop_in_rate = 9999999,
+                            silent = true,
+                            pop_delay = 0.2,
+                            scale = 0.32,
+                            min_cycle_time = 0
+                        })
+                    }
+                }}
+            }},
+        },
+    }
+    return { main_start = main_start }
 end
 
 -- Modified code from Cryptid
