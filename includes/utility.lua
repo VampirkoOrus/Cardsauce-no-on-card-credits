@@ -577,7 +577,7 @@ end
 --- Retrieves the number of VHS tapes in your consumable slots
 --- @return number # Count of current VHS tapes
 G.FUNCS.get_vhs_count = function()
-	if not G.consumables then return 0 end
+	if not G.consumeables then return 0 end
 	local count = 0
 	for i, v in ipairs(G.consumeables.cards) do
 		if v.ability.set == "VHS" then
