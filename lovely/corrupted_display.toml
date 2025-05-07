@@ -1,0 +1,38 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 9999999
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = '''pop_in_rate = 4,'''
+position = "at"
+payload = '''pop_in_rate = args.no_recycle and 99999999 or 4,'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_object.lua"]'''
+pattern = '''full_UI_table.name = self.set == 'Enhanced' and 'temp_value' or localize { type = 'name', set = target.set, key = res.name_key or target.key, nodes = full_UI_table.name, vars = res.name_vars or target.vars or {} }'''
+position = "at"
+payload = '''full_UI_table.name = self.set == 'Enhanced' and 'temp_value' or localize { type = 'name', set = target.set, key = res.name_key or target.key, nodes = full_UI_table.name, vars = res.name_vars or target.vars or {}, no_recycle = (card and card.edition and card.edition.no_recycle or nil) }'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_object.lua"]'''
+pattern = '''desc_nodes.name = localize{type = 'name_text', key = res.name_key or target.key, set = target.set }'''
+position = "at"
+payload = '''desc_nodes.name = localize{type = 'name_text', key = res.name_key or target.key, set = target.set, no_recycle = (card and card.edition and card.edition.no_recycle or nil) }'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''functions/common_events.lua'''
+pattern = '''full_UI_table.name = localize{type = 'name', set = _c.set, key = _c.key, nodes = full_UI_table.name}'''
+position = "at"
+payload = '''full_UI_table.name = localize{type = 'name', set = _c.set, key = _c.key, nodes = full_UI_table.name, no_recycle = (card and card.edition and card.edition.no_recycle or nil) }'''
+match_indent = true
+
+

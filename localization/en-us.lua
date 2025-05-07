@@ -3452,6 +3452,24 @@ return {
 					"or {C:green}10 in 20{} chance for {C:chips}+50{} Chips",
 					"{s:0.8,C:inactive}(Odds not affected by probability manipulation){}",
 				},
+			},
+			e_csau_corrupted_x_mult = {
+				name = "Corrupted",
+				text = {
+					"{E:2,X:mult,C:white}X1.5{} Mult",
+				},
+			},
+			e_csau_corrupted_mult = {
+				name = "Corrupted",
+				text = {
+					"{E:2,C:mult}+10{} Mult",
+				},
+			},
+			e_csau_corrupted_chips = {
+				name = "Corrupted",
+				text = {
+					"{E:2,C:chips}+50{} Chips",
+				},
 			}
 		},
 		Back = {
