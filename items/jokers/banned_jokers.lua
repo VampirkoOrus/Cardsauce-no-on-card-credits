@@ -6,7 +6,6 @@ local jokerInfo = {
     no_mod_badges = true,
     no_collection = true,
     no_doe = true,
-    omit = true,
     discovered = true,
     unlocked = true,
     blueprint_compat = false,

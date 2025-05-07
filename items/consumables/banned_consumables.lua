@@ -1,7 +1,8 @@
 local consumInfo = {
     name = "Banned Consumables",
+    set = "Tarot",
+    config = {},
     no_doe = true,
-    omit = true,
     no_mod_badges = true,
     no_collection = true,
     width = 169,

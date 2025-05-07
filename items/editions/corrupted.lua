@@ -25,14 +25,16 @@ SMODS.Shader {
 local editionInfo = {
     shader = "csau_glitched",
     config = {
-        chips = 50,
-        mult = 10,
-        xmult = 1.5,
-        poly_chance = 3,
-        holo_chance = 7,
-        foil_chance = 10,
-        prob_min = 1,
-        prob = 20,
+        values = {
+            x_mult = 1.5,
+            mult = 10,
+            chips = 50,
+        },
+        weights = {
+            x_mult = {weight = 3, display = 'X1.5', color = G.C.UI.TEXT_LIGHT},
+            mult = {weight = 7, display = '+10', color = G.C.MULT },
+            chips = {weight = 10, display = '+50', color = G.C.CHIPS},
+        },
     },
     unlocked = true,
     in_shop = true,
@@ -44,32 +46,96 @@ local editionInfo = {
     }
 }
 
--- Modified code from Cryptid
-editionInfo.calculate = function(self, card, context)
-    if (
-        context.edition -- for when on jonklers
-                and context.cardarea == G.jokers -- checks if should trigger
-                and card.config.trigger -- fixes double trigger
-    ) or (
-        context.main_scoring -- for when on playing cards
-                and context.cardarea == G.play
-    )
-    then
-        local pull = pseudorandom("CORRUPTED", self.config.prob_min, self.config.prob)
-        if pull > 10 then
-            return {
-                chips = self.config.chips,
-            }
-        elseif pull <= 10 and pull > 3 then
-            return {
-                mult = self.config.mult,
-            }
-        else
-            return {
-                x_mult = self.config.xmult,
-            }
+G.FUNCS.csau_corrupted_func = function(e)
+    local card = e.config.ref_table
+    local dynatext_main = e.children[1].children[1].config.object
+    card.csau_corrupted_text = dynatext_main.string == "+50" and "Chips" or "Mult"
+    e.children[1].config.colour = dynatext_main.string == "X1.5" and G.C.MULT or G.C.CLEAR
+end
+
+local function weighted_random(weights, key)
+    local total = 0
+	
+	for _, v in pairs(weights) do
+		total = total + v
+	end
+	
+	local roll = pseudorandom(pseudoseed(key), 1, total)
+	local iter = 0
+	for k, v in pairs(weights) do
+		iter = iter + v.weight
+		if roll <= iter then
+			return k
+		end
+	end
+end
+
+function editionInfo.loc_vars(self, info_queue, card)
+    card.csau_corrupted_text = "Chips"
+    local corru_strings = {}
+    for k, v in pairs(self.config.weights) do
+        for i=1, v.weight do
+            corru_strings[#corru_strings+1] = { string = v.display, colour = v.color }
         end
     end
+
+    local main_start = {
+        {
+            n = G.UIT.R,
+            config = { ref_table = card, func = "csau_corrupted_func" },
+            nodes = {{
+                n = G.UIT.C,
+                config = { colour = G.C.CLEAR, r = 0.05, padding = 0.03, res = 0.15 },
+                nodes = {{
+                    n = G.UIT.O,
+                    config = {
+                        object = DynaText({
+                            string = corru_strings,
+                            colours = { G.C.RED },
+                            pop_in_rate = 9999999,
+                            silent = true,
+                            random_element = true,
+                            pop_delay = 0.2,
+                            scale = 0.32,
+                            min_cycle_time = 0,
+                        }),
+                    },
+                }}
+            },
+            {
+                n = G.UIT.C,
+                config = { colour = G.C.CLEAR, r = 0.05, padding = 0.03, res = 0.15 },
+                nodes = {{
+                    n = G.UIT.O,
+                    config = {
+                        object = DynaText({
+                            string = {
+                                { ref_table = card, ref_value = "csau_corrupted_text" } },
+                            colours = { G.C.UI.TEXT_DARK },
+                            pop_in_rate = 9999999,
+                            silent = true,
+                            pop_delay = 0.2,
+                            scale = 0.32,
+                            min_cycle_time = 0
+                        })
+                    }
+                }}
+            }},
+        },
+    }
+    return { main_start = main_start }
+end
+
+-- Modified code from Cryptid
+function editionInfo.calculate(self, card, context)
+    if (context.edition and context.cardarea == G.jokers and card.config.trigger) 
+    or (context.main_scoring and context.cardarea == G.play) then
+        local roll = weighted_random(self.config.weights, 'csau_corrupted')
+        return {
+            [roll] = self.config.values[roll]
+        }
+    end
+
     if context.joker_main then
         card.config.trigger = true -- context.edition triggers twice, this makes it only trigger once (only for jonklers)
     end
@@ -79,23 +145,5 @@ editionInfo.calculate = function(self, card, context)
     end
 end
 
-editionInfo.generate_ui = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
-    if not full_UI_table.name then
-        full_UI_table.name = localize({ type = "name", set = self.set, key = self.key, nodes = full_UI_table.name })
-    end
-    local rand_ui = {
-        {
-            n=G.UIT.O, config={object = DynaText({
-            string = {
-                {string = 'X1.5', colour = G.C.RED, outer_colour = G.C.UI.TEXT_DARK, suffix = ' '..localize('k_mult')},
-                {string = "+10", colour = G.C.MULT, outer_colour = G.C.UI.TEXT_DARK, suffix = ' '..(localize('k_mult'))},
-                {string = "+50", colour = G.C.CHIPS, outer_colour = G.C.UI.TEXT_DARK, suffix = ' '..(localize('k_csau_chips'))},
-            },
-            colours = {G.C.UI.TEXT_DARK}, pop_in_rate = 9999999, silent = true, random_element = true, pop_delay = 0.2011, scale = 0.32, min_cycle_time = 0
-        })}
-        }
-    }
-    desc_nodes[#desc_nodes + 1] = rand_ui
-end
 
 return editionInfo

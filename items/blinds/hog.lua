@@ -31,19 +31,15 @@ function blindInfo.recalc_debuff(self, card, from_blind)
 
     if card.csau_hogstruck then
         if card:is_face(true) then
-            sendDebugMessage('still face card, stay hogged')
             return true
         end
 
-        sendDebugMessage('unhoggd')
         card.csau_hogstruck = nil
         card.csau_hog_checked = nil
         return false
     elseif card:is_face(true) and not card.csau_hog_checked then
         card.csau_hog_checked = true
-        sendDebugMessage('retested for hog')
         if pseudorandom(pseudoseed('csau_hog')) < G.GAME.probabilities.normal/2 then
-            sendDebugMessage('newly hoggd')
             card.csau_hogstruck = true
             return true
         end
