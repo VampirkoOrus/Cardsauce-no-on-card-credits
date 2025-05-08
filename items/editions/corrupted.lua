@@ -57,7 +57,7 @@ local function weighted_random(weights, key)
     local total = 0
 	
 	for _, v in pairs(weights) do
-		total = total + v
+		total = total + v.weight
 	end
 	
 	local roll = pseudorandom(pseudoseed(key), 1, total)
