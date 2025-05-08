@@ -25,7 +25,7 @@ function consumInfo.in_pool(self, args)
         return true
     end
     
-    return G.GAME.used_jokers['c_csau_vento_gold_requiem'] ~= nil
+    return (not G.GAME.used_jokers['c_csau_vento_gold_requiem'])
 end
 
 function consumInfo.calculate(self, card, context)
