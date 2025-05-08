@@ -76,7 +76,7 @@ function consumInfo.calculate(self, card, context)
         if to_big(card.ability.extra.xmult) >= to_big(2) and card.ability.extra.form == 'lion_wonder' then
             card.ability.extra.form = 'lion_wonder_2'
             update_sprite = true
-        elseif card.ability.extra.xmult >= 3 and card.ability.extra.form == 'lion_wonder_2' then
+        elseif to_big(card.ability.extra.xmult) >= to_big(3) and card.ability.extra.form == 'lion_wonder_2' then
             card.ability.extra.form = 'lion_wonder_3'
             update_sprite = true
         end
@@ -98,7 +98,7 @@ function consumInfo.calculate(self, card, context)
         end
     end
     if context.destroy_card and not bad_context then
-        if context.destroy_card.ability.effect == 'Lucky Card' and table.contains(context.scoring_hand, context.destroy_card) then
+        if context.destroy_card.ability.effect == 'Lucky Card' and table.contains(context.scoring_hand, context.destroy_card) and not context.destroy_card.debuff then
             return {
                 remove = true,
             }

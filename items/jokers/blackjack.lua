@@ -2,11 +2,13 @@ local function isBlackjack(hand)
     local total = 0
     local ace_count = 0
     for _, v in ipairs(hand) do
-        local rank = SMODS.Ranks[v.base.value]
-        if rank.key == "Ace" then
-            ace_count = ace_count + 1
+        if not SMODS.has_no_rank(v) then
+            local rank = SMODS.Ranks[v.base.value]
+            if rank.key == "Ace" then
+                ace_count = ace_count + 1
+            end
+            total = total + rank.nominal
         end
-        total = total + rank.nominal
     end
     while total > 21 and ace_count > 0 do
         total = total - 10
