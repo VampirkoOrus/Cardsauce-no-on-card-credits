@@ -2785,7 +2785,7 @@ return {
 			c_csau_wwvcr_detailed = {
 				name = "Wayne's World VCR Board Game",
 				text = {
-					"{C:chips}+#1#{} Chips While {C:attention}playing{}",
+					"{C:chips}+#1#{} Chips while {C:attention}playing{}",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
