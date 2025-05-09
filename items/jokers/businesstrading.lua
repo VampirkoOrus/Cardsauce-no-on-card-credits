@@ -20,10 +20,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.dollars, G.GAME.probabilities.normal, card.ability.extra.destroy} }
 end
 
-function jokerInfo.set_sprites(self, card, _front)
-    G.FUNCS.csau_set_big_sprites(self, card)
-end
-
 local function all_faces(hand)
     local allfaces = true
     for k, v in ipairs(hand) do
