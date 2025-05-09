@@ -237,10 +237,10 @@ function jokerInfo.calculate(self, card, context)
             card:set_sprites(card.config.center)
             card.config.center.pos = forms.Base[2]
         end
-        if card.ability.diamonds.mult > 0 then
+        if to_big(card.ability.diamonds.mult) > to_big(0) then
             card.ability.diamonds.mult = 0
         end
-        if G.GAME.csau_stss_drawthreeextra and G.GAME.csau_stss_drawthreeextra > 0 then
+        if G.GAME.csau_stss_drawthreeextra and to_big(G.GAME.csau_stss_drawthreeextra) > to_big(0) then
             G.GAME.csau_stss_drawthreeextra = 0
         end
     end
