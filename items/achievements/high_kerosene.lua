@@ -4,7 +4,7 @@ local trophyInfo = {
         local cards = SMODS.find_card('j_csau_kerosene')
         if cards and #cards > 0 then
             for i, v in ipairs(cards) do
-                if v.ability.extra.chips >= 200 then
+                if to_big(v.ability.extra.chips) >= to_big(200) then
                     return true
                 end
             end

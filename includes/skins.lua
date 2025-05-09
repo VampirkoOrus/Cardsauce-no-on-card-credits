@@ -526,97 +526,95 @@ for _, suit in ipairs(suits) do
     })
 end
 
-if SMODS.current_mod.DT.twoPoint0 then
-    for _, suit in ipairs(suits) do
-        local palettes = {}
+for _, suit in ipairs(suits) do
+    local palettes = {}
+    palettes[#palettes+1] = {
+        key = 'csau_def_varg_'..suit,
+        ranks = full_ranks,
+        display_ranks = face_ace,
+        atlas = 'csau_default',
+        pos_style = {
+            fallback_style = 'deck',
+            Ace = {
+                atlas = 'csau_varg_aces',
+                pos = {x = 0, y = (suit == 'hearts' and 0) or (suit == 'clubs' and 1) or (suit == 'diamonds' and 2) or (suit == 'spades' and 3)}
+            }
+        },
+        loc_txt = {
+            ['en-us'] = "Vargshroom"
+        },
+        colour = color[suit:gsub("^%l", string.upper)],
+        suit_icon = {
+            atlas = 'csau_suits'
+        }
+    }
+    if suit == 'hearts' then
         palettes[#palettes+1] = {
-            key = 'csau_def_varg_'..suit,
+            key = 'csau_varg_willo',
             ranks = full_ranks,
             display_ranks = face_ace,
-            atlas = 'csau_default',
-            pos_style = {
-                fallback_style = 'deck',
-                Ace = {
-                    atlas = 'csau_varg_aces',
-                    pos = {x = 0, y = (suit == 'hearts' and 0) or (suit == 'clubs' and 1) or (suit == 'diamonds' and 2) or (suit == 'spades' and 3)}
-                }
-            },
+            atlas = 'csau_varg_willo',
+            pos_style = 'suit',
             loc_txt = {
-                ['en-us'] = "Vargshroom"
+                ['en-us'] = "Mini Highlights"
             },
-            colour = color[suit:gsub("^%l", string.upper)],
+            colour = HEX('b4665c'),
             suit_icon = {
-                atlas = 'csau_suits'
+                atlas = 'csau_hearts_willo'
             }
-        }
-        if suit == 'hearts' then
-            palettes[#palettes+1] = {
-                key = 'csau_varg_willo',
-                ranks = full_ranks,
-                display_ranks = face_ace,
-                atlas = 'csau_varg_willo',
-                pos_style = 'suit',
-                loc_txt = {
-                    ['en-us'] = "Mini Highlights"
-                },
-                colour = HEX('b4665c'),
-                suit_icon = {
-                    atlas = 'csau_hearts_willo'
-                }
-            }
-        end
-        palettes[#palettes+1] = {
-            key = 'csau_baldef_varg_'..suit.."_lc",
-            ranks = full_ranks,
-            display_ranks = face_ace,
-            atlas = 'cards_1',
-            pos_style = {
-                fallback_style = 'deck',
-                Ace = {
-                    atlas = 'csau_balcolor_varg_lc',
-                    pos = {x = 0, y = (suit == 'hearts' and 0) or (suit == 'clubs' and 1) or (suit == 'diamonds' and 2) or (suit == 'spades' and 3)}
-                }
-            },
-            loc_txt = {
-                ['en-us'] = "Low Contrast Shrooms"
-            },
-            colour = G.C.SO_1[suit:gsub("^%l", string.upper)],
-            suit_icon = {
-                atlas = 'ui_1',
-                pos = 1
-            }
-        }
-        palettes[#palettes+1] = {
-            key = 'csau_baldef_varg_'..suit.."_hc",
-            ranks = full_ranks,
-            display_ranks = face_ace,
-            atlas = 'cards_2',
-            pos_style = {
-                fallback_style = 'deck',
-                Ace = {
-                    atlas = 'csau_balcolor_varg_hc',
-                    pos = {x = 0, y = (suit == 'hearts' and 0) or (suit == 'clubs' and 1) or (suit == 'diamonds' and 2) or (suit == 'spades' and 3)}
-                }
-            },
-            loc_txt = {
-                ['en-us'] = "High Contrast Shrooms"
-            },
-            colour = G.C.SO_2[suit:gsub("^%l", string.upper)],
-            suit_icon = {
-                atlas = 'ui_2',
-                pos = 1
-            }
-        }
-        SMODS.DeckSkin{
-            key = "default_varg_"..suit,
-            suit = suit:gsub("^%l", string.upper),
-            palettes = palettes,
-            loc_txt = {
-                ['en-us'] = (suit == 'clubs' and "Main Channel") or (suit == 'hearts' and "Extravarg?") or (suit == 'diamonds' and "Uncut") or (suit == 'spades' and "Twitch Clips")
-            },
-            prefix_config = { key = false },
         }
     end
+    palettes[#palettes+1] = {
+        key = 'csau_baldef_varg_'..suit.."_lc",
+        ranks = full_ranks,
+        display_ranks = face_ace,
+        atlas = 'cards_1',
+        pos_style = {
+            fallback_style = 'deck',
+            Ace = {
+                atlas = 'csau_balcolor_varg_lc',
+                pos = {x = 0, y = (suit == 'hearts' and 0) or (suit == 'clubs' and 1) or (suit == 'diamonds' and 2) or (suit == 'spades' and 3)}
+            }
+        },
+        loc_txt = {
+            ['en-us'] = "Low Contrast Shrooms"
+        },
+        colour = G.C.SO_1[suit:gsub("^%l", string.upper)],
+        suit_icon = {
+            atlas = 'ui_1',
+            pos = 1
+        }
+    }
+    palettes[#palettes+1] = {
+        key = 'csau_baldef_varg_'..suit.."_hc",
+        ranks = full_ranks,
+        display_ranks = face_ace,
+        atlas = 'cards_2',
+        pos_style = {
+            fallback_style = 'deck',
+            Ace = {
+                atlas = 'csau_balcolor_varg_hc',
+                pos = {x = 0, y = (suit == 'hearts' and 0) or (suit == 'clubs' and 1) or (suit == 'diamonds' and 2) or (suit == 'spades' and 3)}
+            }
+        },
+        loc_txt = {
+            ['en-us'] = "High Contrast Shrooms"
+        },
+        colour = G.C.SO_2[suit:gsub("^%l", string.upper)],
+        suit_icon = {
+            atlas = 'ui_2',
+            pos = 1
+        }
+    }
+    SMODS.DeckSkin{
+        key = "default_varg_"..suit,
+        suit = suit:gsub("^%l", string.upper),
+        palettes = palettes,
+        loc_txt = {
+            ['en-us'] = (suit == 'clubs' and "Main Channel") or (suit == 'hearts' and "Extravarg?") or (suit == 'diamonds' and "Uncut") or (suit == 'spades' and "Twitch Clips")
+        },
+        prefix_config = { key = false },
+    }
 end
 
 
@@ -629,46 +627,43 @@ end
 
 -- Vine Skins
 SMODS.Atlas{ key = 'mascots', px = 71, py = 95, path = 'cards/csau/mascots.png',}
-SMODS.Atlas{ key = 'classics', px = 71, py = 95, path = 'cards/csau/classics.png',}
-SMODS.Atlas{ key = 'wildcards', px = 71, py = 95, path = 'cards/csau/wildcards.png',}
-SMODS.Atlas{ key = 'confidants', px = 71, py = 95, path = 'cards/csau/confidants.png',}
-
-if SMODS.current_mod.DT.twoPoint0 then
-    -- Varg Skins
-    SMODS.Atlas{ key = 'voices', px = 71, py = 95, path = 'cards/csau/voices.png',}
-    SMODS.Atlas{ key = 'duendes', px = 71, py = 95, path = 'cards/csau/duendes.png',}
-    SMODS.Atlas{ key = 'americans', px = 71, py = 95, path = 'cards/csau/americans.png',}
-    SMODS.Atlas{ key = 'powerful', px = 71, py = 95, path = 'cards/csau/powerful.png',}
-
-    -- Mike Skins
-    SMODS.Atlas{ key = 'poops', px = 71, py = 95, path = 'cards/csau/poops.png',}
-    SMODS.Atlas{ key = 'ocs', px = 71, py = 95, path = 'cards/csau/ocs.png',}
-    SMODS.Atlas{ key = 'pets', px = 71, py = 95, path = 'cards/csau/pets.png',}
-    SMODS.Atlas{ key = 'fingies', px = 71, py = 95, path = 'cards/csau/fingies.png',}
-end
-
 SMODS.Atlas{ key = 'mascots_1', px = 71, py = 95, path = 'cards/csau_recolored/mascots_1.png',}
 SMODS.Atlas{ key = 'mascots_2', px = 71, py = 95, path = 'cards/csau_recolored/mascots_2.png',}
-SMODS.Atlas{ key = 'wildcards_1', px = 71, py = 95, path = 'cards/csau_recolored/wildcards_1.png',}
-SMODS.Atlas{ key = 'wildcards_2', px = 71, py = 95, path = 'cards/csau_recolored/wildcards_2.png',}
-SMODS.Atlas{ key = 'confidants_1', px = 71, py = 95, path = 'cards/csau_recolored/confidants_1.png',}
-SMODS.Atlas{ key = 'confidants_2', px = 71, py = 95, path = 'cards/csau_recolored/confidants_2.png',}
+SMODS.Atlas{ key = 'classics', px = 71, py = 95, path = 'cards/csau/classics.png',}
 SMODS.Atlas{ key = 'classics_1', px = 71, py = 95, path = 'cards/csau_recolored/classics_1.png',}
 SMODS.Atlas{ key = 'classics_2', px = 71, py = 95, path = 'cards/csau_recolored/classics_2.png',}
+SMODS.Atlas{ key = 'wildcards', px = 71, py = 95, path = 'cards/csau/wildcards.png',}
+SMODS.Atlas{ key = 'wildcards_1', px = 71, py = 95, path = 'cards/csau_recolored/wildcards_1.png',}
+SMODS.Atlas{ key = 'wildcards_2', px = 71, py = 95, path = 'cards/csau_recolored/wildcards_2.png',}
+SMODS.Atlas{ key = 'confidants', px = 71, py = 95, path = 'cards/csau/confidants.png',}
+SMODS.Atlas{ key = 'confidants_1', px = 71, py = 95, path = 'cards/csau_recolored/confidants_1.png',}
+SMODS.Atlas{ key = 'confidants_2', px = 71, py = 95, path = 'cards/csau_recolored/confidants_2.png',}
+
+-- Varg Skins
+SMODS.Atlas{ key = 'voices', px = 71, py = 95, path = 'cards/csau/voices.png',}
 SMODS.Atlas{ key = 'voices_1', px = 71, py = 95, path = 'cards/csau_recolored/voices_1.png',}
 SMODS.Atlas{ key = 'voices_2', px = 71, py = 95, path = 'cards/csau_recolored/voices_2.png',}
+SMODS.Atlas{ key = 'duendes', px = 71, py = 95, path = 'cards/csau/duendes.png',}
 SMODS.Atlas{ key = 'duendes_1', px = 71, py = 95, path = 'cards/csau_recolored/duendes_1.png',}
 SMODS.Atlas{ key = 'duendes_2', px = 71, py = 95, path = 'cards/csau_recolored/duendes_2.png',}
+SMODS.Atlas{ key = 'americans', px = 71, py = 95, path = 'cards/csau/americans.png',}
 SMODS.Atlas{ key = 'americans_1', px = 71, py = 95, path = 'cards/csau_recolored/americans_1.png',}
 SMODS.Atlas{ key = 'americans_2', px = 71, py = 95, path = 'cards/csau_recolored/americans_2.png',}
+SMODS.Atlas{ key = 'powerful', px = 71, py = 95, path = 'cards/csau/powerful.png',}
 SMODS.Atlas{ key = 'powerful_1', px = 71, py = 95, path = 'cards/csau_recolored/powerful_1.png',}
 SMODS.Atlas{ key = 'powerful_2', px = 71, py = 95, path = 'cards/csau_recolored/powerful_2.png',}
+
+-- Mike Skins
+SMODS.Atlas{ key = 'poops', px = 71, py = 95, path = 'cards/csau/poops.png',}
 SMODS.Atlas{ key = 'poops_1', px = 71, py = 95, path = 'cards/csau_recolored/poops_1.png',}
 SMODS.Atlas{ key = 'poops_2', px = 71, py = 95, path = 'cards/csau_recolored/poops_2.png',}
+SMODS.Atlas{ key = 'ocs', px = 71, py = 95, path = 'cards/csau/ocs.png',}
 SMODS.Atlas{ key = 'ocs_1', px = 71, py = 95, path = 'cards/csau_recolored/ocs_1.png',}
 SMODS.Atlas{ key = 'ocs_2', px = 71, py = 95, path = 'cards/csau_recolored/ocs_2.png',}
+SMODS.Atlas{ key = 'pets', px = 71, py = 95, path = 'cards/csau/pets.png',}
 SMODS.Atlas{ key = 'pets_1', px = 71, py = 95, path = 'cards/csau_recolored/pets_1.png',}
 SMODS.Atlas{ key = 'pets_2', px = 71, py = 95, path = 'cards/csau_recolored/pets_2.png',}
+SMODS.Atlas{ key = 'fingies', px = 71, py = 95, path = 'cards/csau/fingies.png',}
 SMODS.Atlas{ key = 'fingies_1', px = 71, py = 95, path = 'cards/csau_recolored/fingies_1.png',}
 SMODS.Atlas{ key = 'fingies_2', px = 71, py = 95, path = 'cards/csau_recolored/fingies_2.png',}
 

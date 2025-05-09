@@ -494,6 +494,8 @@ return {
 			k_vhs_fin = "Fin!",
 
 
+
+
 			-- badge titles
 			ba_vinny = "Vinesauce",
 			ba_vinny_wotw = "Wheel of the Weird",
@@ -2785,7 +2787,7 @@ return {
 			c_csau_wwvcr_detailed = {
 				name = "Wayne's World VCR Board Game",
 				text = {
-					"{C:chips}+#1#{} Chips while {C:attention}playing{}",
+					"{C:chips}+#1#{} Chips While {C:attention}playing{}",
 					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
@@ -3455,9 +3457,9 @@ return {
 			b_csau_vine = {
 				name = "Vine Deck",
 				text = {
-					"Start run with {C:attention}#1#{}",
+					"Start run with {C:attention,T:v_overstock_norm}#1#{}",
 					"{C:clubs}Cardsauce{} Jokers appear",
-					"{C:attention}2x{} more often",
+					"{C:attention}3x{} more often",
 				},
 			},
 			b_csau_varg = {
@@ -3472,9 +3474,9 @@ return {
 			b_csau_wheel = {
 				name = "Wheel Deck",
 				text = {
-					"Start run with {C:purple}#1#{}",
+					"Start run with {C:tarot,T:v_crystal_ball}#1#{}",
 					"After each {C:attention}Boss Blind,{} ",
-					"gain a {C:vhs}Black Spine{}",
+					"gain a {C:vhs,T:c_csau_blackspine}Black Spine{}",
 				},
 				unlock = {
 					"Discover {C:attention}#1#{} {C:vhs}VHS Tapes",
@@ -3484,8 +3486,7 @@ return {
 			b_csau_disc = {
 				name = "DISC Deck",
 				text = {
-					"Start with the",
-					"{C:tarot}Crystal Ball{} voucher",
+					"Start run with {C:tarot,T:v_crystal_ball}#1#{}",
 					"There is no {C:stand}Stand{} limit",
 				},
 				unlock = {
