@@ -123,7 +123,16 @@ function csau_filter_loading(item_type, args)
 			end
 		end
 	elseif item_type == 'set' then
-		return csau_enabled['enable'..args.key..'s']
+		if args.key == 'Sleeve' then
+			if CardSleeves then
+				return true
+			end
+		else
+			if csau_enabled['enable'..args.key..'s'] then
+				return true
+			end
+		end
+		return false
 	end
 end
 
@@ -131,8 +140,8 @@ end
 --- @param file_key string file name to load within the "Items" directory, excluding file extension
 --- @param item_type string SMODS item type (such as Joker, Consumable, Deck, etc)
 --- @param no_badges boolean | nil Whether or not to display mod badges on this item
-function load_cardsauce_item(file_key, item_type)
-	local key = string.lower(item_type)..(item_type == 'VHS' and '' or 's')
+function load_cardsauce_item(file_key, item_type, key)
+	key = key or string.lower(item_type)..(item_type == 'VHS' and '' or 's')
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
 
 	if info.csau_dependencies then
@@ -214,33 +223,48 @@ function load_cardsauce_item(file_key, item_type)
 		
 	end
 
-	if item_type == 'Deck' then smods_item = 'Back' end
-	local new_item = SMODS[smods_item](info)
-	for k_, v_ in pairs(new_item) do
-		if type(v_) == 'function' then
-			new_item[k_] = info[k_]
+	if item_type == 'Deck' then
+		smods_item = 'Back'
+	end
+	local new_item
+	if SMODS[smods_item] then
+		new_item = SMODS[smods_item](info)
+		for k_, v_ in pairs(new_item) do
+			if type(v_) == 'function' then
+				new_item[k_] = info[k_]
+			end
+		end
+	else
+		if CardSleeves and item_type == 'Sleeve' then
+			new_item = CardSleeves.Sleeve(info)
+			for k_, v_ in pairs(new_item) do
+				if type(v_) == 'function' then
+					new_item[k_] = info[k_]
+				end
+			end
 		end
 	end
 
-    if item_type == 'Challenge' or item_type == 'Edition' then
-        -- these dont need visuals
-        return
-    end
+	if item_type == 'Challenge' or item_type == 'Edition' then
+		-- these dont need visuals
+		return
+	end
 
 	if info.animated then
 		G.csau_animated_centers[info.key] = info.animated
 		G.csau_animated_centers[info.key].dt = 0
 	end
 
-    if item_type == 'Blind' then
-        -- separation for animated spritess
-        SMODS.Atlas({ key = file_key, atlas_table = "ANIMATION_ATLAS", path = "blinds/" .. file_key .. ".png", px = 34, py = 34, frames = 21, })
+	if item_type == 'Blind' then
+		-- separation for animated spritess
+		SMODS.Atlas({ key = file_key, atlas_table = "ANIMATION_ATLAS", path = "blinds/" .. file_key .. ".png", px = 34, py = 34, frames = 21, })
 	else
 		local width = 71
 		local height = 95
 		if item_type == 'Tag' then width = 34; height = 34 end
-        SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or width, py = new_item.height or height })
-    end
+		if item_type == 'Sleeve' then width = 73 end
+		SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or width, py = new_item.height or height })
+	end
 end
 
 math.randomseed(os.time())
@@ -1162,4 +1186,14 @@ G.FUNCS.generate_legendary_desc = function(self, info_queue, card, desc_nodes, s
 	else
 		localize{type = 'descriptions', key = key, set = self.set, nodes = desc_nodes, vars = (self.loc_vars(self, info_queue, card) and self.loc_vars(self, info_queue, card).vars) or {}}
 	end
+end
+
+--- Checks for if any hands are above level 1
+function G.FUNCS.cbt_can_delevel()
+	for k, v in pairs(G.GAME.hands) do
+		if v.level > 1 then
+			return true
+		end
+	end
+	return false
 end

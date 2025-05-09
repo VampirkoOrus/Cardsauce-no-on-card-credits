@@ -1,16 +1,13 @@
----------------------------
---------------------------- 1.0 Items and Loading
----------------------------
-
 local itemsToLoad = {
     Joker = {
-        -- Common
-		'newjoker',
+        --- [[[VINNY]]]
+        -- [[Common]]
+        -- 1.0
+        'newjoker', -- Page 1 Start
         'twoface',
-        'depressedbrother',
         'pivot',
-		'disguy',
-		'gnorts',
+        'disguy',
+        'gnorts',
         'diaper',
         'speen',
         'pacman',
@@ -20,445 +17,335 @@ local itemsToLoad = {
         'emmanuel',
         'fisheye',
         'chad',
-    
-        'purple',
-        'garbagehand',
-        -- Uncommon
+        'garbagehand', -- Page 1 End
+
+
+        'purple',-- Page 2 Start
+        'businesstrading',
+        'fantabulous',
+        -- Update 1.2
+        'ten',
+        -- Update 1.3
+        'koffing',
+        'crudeoil',
+        'grannycream',
+        -- [[Uncommon]]
+        -- 1.0
+        'depressedbrother',
         'meat',
         'greyjoker',
         'veryexpensivejoker',
         'roger',
         'cousinsclub',
         'anotherlight',
-        'sohappy',
-        'code',
+        'sohappy', -- Page 2 End
+
+
+        'code', -- Page 3 Start
         'deathcard',
         'maskedjoker',
         'dontmind',
         'kerosene',
-        'businesstrading',
-
         'red',
         'fate',
         'miracle',
         'chromedup',
-        -- Rare
-        'thisiscrack',
-        'werewolves',
-        'hell',
-        'odio',
-        -- Common (Locked)
-        'speedjoker',
-        'disturbedjoker',
-
-        -- Uncommon (Locked)
-        'shrimp',
-        'muppet',
-        -- Rare (Locked)
-        'charity',
-        'supper',
-        'pepsecret',
-    
-        'greenneedle',
-        'wingsoftime',
-        'kings',
-        -- Legendary
-        'vincenzo',
-        'quarterdumb',
-
         -- Update 1.2
-        'fantabulous',
-        'grand',
-        'ten',
         'beginners',
-        'joeycastle',
         'voice',
         'rotten',
-        'rapture',
-        'villains',
-        'killjester',
-
         -- Update 1.3
-        'crudeoil',
-        'grannycream',
         'bjbros',
-        'koffing',
         'drippy',
+        -- [[Rare]]
+        'thisiscrack', -- Page 3 End
+
+
+        'werewolves', -- Page 4 Start
+        'hell',
+        'odio',
+        -- Update 1.3
         'sts',
+        -- [[Common]] (LOCKED)
+        -- Update 1.3
         'meteor',
         'dud',
+        -- Update 1.2
+        'rapture',
+        'villains',
+        -- 1.0
+        'speedjoker',
+        'disturbedjoker',
+        -- [[Uncommon]] (LOCKED)
+        -- 1.0
+        'charity',
+        'shrimp',
+        'muppet',
+        -- Update 1.3
         'frich',
         'bunji',
+        -- [[Rare]] (LOCKED)
+         -- Page 4 End
+
+
+        'supper', -- Page 5 Start
+        'pepsecret',
+        'greenneedle',
+        'wingsoftime',
+        'killjester',
+        --- [[[JOEL]]]
+        -- [[Common]]
+        'grand',
+        'frens',
+        'memehouse',
+        'bonzi',
+        'bbq',
+        'protogent',
+        'lidl',
+        'superghostbusters',
+        'chips',
+        'toeofsatan', -- Page 5 End
+
+
+        'bald', -- Page 6 Start
+        'bootleg',
+        'facade',
+        -- [[Uncommon]]
+        'joeycastle',
+        'flusher',
+        'bulk',
+        'mrkill',
+        'plaguewalker',
+        'skeletor',
+        'agga',
+        'duane',
+        'bsi',
+        'mug',
+        'fireworks',
+        'scam', -- Page 6 End
+
+
+        'april', -- Page 7 Start
+        'sprunk',
+        'itsafeature',
+        'passport',
+        'vinewrestle',
+        -- [[Rare]]
+        'skeletonmetal',
+        'ufo',
+        'tetris',
+        -- [[Common]] (LOCKED)
+        'itsmeaustin',
+        'vomitblast',
+        'nutbuster',
+        -- [[Uncommon]] (LOCKED)
+        'powers',
+        'triptoamerica',
+        'monkey',
+        'blackjack', -- Page 7 End
+
+
+        -- [[Rare]] (LOCKED)
+        'kings', -- Page 8 Start
+        'byebye',
+        --- [[LEGENDARY]]
+        'vincenzo',
+        'quarterdumb',
+        'wigsaw',
+        --- [[REDLETTERMEDIA]]
+        'hack',
+        'endlesstrash',
+        'genres',
+        'weretrulyfrauds',
+        'junka',
+        --- [[JOJO'S BIZARRE ADVENTURE]]
+        'gravity',
+        'jokerdrive',
+        'photodad',
+        'no2joker',
+        'sotw', -- Page 8 End
+
+        -- challenge dummy items
+        'banned_cards',
+        'banned_jokers',
+    },
+
+    VHS = {
+        'blackspine',
+        'remlezar',
+        'sew',
+        'shakma',
+        'troll2',
+        'swhs',
+        'exploding',
+        'choppingmall',
+        'roar',
+        'calibighunks',
+        'ishtar',
+        'nukie',
+        'sataniccults',
+        'blooddebts',
+        'topslots',
+        'doubledown',
+        'twistedpair',
+        'fatefulfindings',
+        'streetsmarts',
+        'devilstory',
+        'rentafriend',
+        'tbone',
+        'wwvcr',
+        'sos',
+        'macandme',
+        'osteo',
+        'miami',
+        'lowblow',
+        'kidsand',
+        'spacecop',
+        'theroom',
+        'ryansbabe',
+        'ritf',
+        'suburbansasquatch',
+        'rawtime',
+        'donbeveridge',
+        'alienpi',
+        'supershow',
+        'yoyoman',
+    },
+
+    Stand = {
+        -- stardust crusaders
+        'stardust_star',
+        'stardust_world',
+        'stardust_tohth',
+
+        -- diamond is unbreakable
+        'diamond_crazy',
+        'diamond_hand',
+        'diamond_echoes_1',
+        'diamond_echoes_2',
+        'diamond_echoes_3',
+        'diamond_killer',
+        'diamond_killer_btd',
+
+        -- vento aureo
+        'vento_gold',
+        'vento_gold_requiem',
+        'vento_moody',
+        'vento_metallica',
+        'vento_epitaph',
+        'vento_epitaph_king',
+        'vento_watchtower',
+
+        -- stone ocean
+        'stone_stone',
+        'stone_marilyn',
+        'stone_white',
+        'stone_white_moon',
+        'stone_white_heaven',
+
+        -- steel ball run
+        'steel_d4c',
+        'steel_d4c_love',
+        'steel_tusk_1',
+        'steel_tusk_2',
+        'steel_tusk_3',
+        'steel_tusk_4',
+        'steel_civil',
+
+        -- jojolion
+        'lion_soft',
+        'lion_soft_beyond',
+        'lion_paper',
+        'lion_rock',
+        'lion_wonder',
+
+        -- jojolands
+        'lands_november',
+        'lands_smooth',
+        'lands_bigmouth',
+    },
+
+    Tag = {
+        'corrupted',
+        'plinkett',
+        'spirit',
+        'banned_tags'
+    },
+
+    Voucher = {
+        'scavenger',
+        'raffle',
+        'foo',
+        'plant',
+        'lampoil',
+        'ropebombs',
+        'banned_vouchers',
     },
 
     Consumable = {
-        --Spectral
+        -- Planet
+        'lutetia',
+        'varuna',
+        'planet_whirlpool',
+        'planet_lost',
+        -- Spectral
         'quixotic',
+        'spec_stone',
+        'spec_diary',
         'protojoker',
+        -- Tarot
+        'tarot_arrow',
+        'banned_consumables',
     },
 
     Deck = {
         'vine',
+        'varg',
+        'cbt',
+        'wheel',
+        'disc'
+    },
+
+    Sleeve = {
+        'sleeve_vine',
+        'sleeve_varg',
+        'sleeve_cbt',
+        'sleeve_wheel',
+        'sleeve_disc'
+    },
+
+    Booster = {
+        'analog1',
+        'analog2',
+        'analog3',
+        'analog4',
+        'banned_boosters'
     },
 
     Challenge = {
         'tucker',
+        'tgyh',
+        'nmbb',
+        'kriskross',
+        'marathon'
     },
 
     Blind = {
         'hog',
         'tray',
-        'vod',
+        'darkest',
         'finger',
         'mochamike',
+        'vod',
+        'outlaw',
+        'paint',
+        'wasp',
+        'feltfortress',
     },
-}
-
----------------------------
---------------------------- 2.0 Items and Loading
----------------------------
-if SMODS.current_mod.DT.twoPoint0 then
-    itemsToLoad = {
-        Joker = {
-            --- [[[VINNY]]]
-            -- [[Common]]
-            -- 1.0
-            'newjoker', -- Page 1 Start
-            'twoface',
-            'pivot',
-            'disguy',
-            'gnorts',
-            'diaper',
-            'speen',
-            'pacman',
-            'besomeone',
-            'roche',
-            'reyn',
-            'emmanuel',
-            'fisheye',
-            'chad',
-            'garbagehand', -- Page 1 End
-
-
-            'purple',-- Page 2 Start
-            'businesstrading',
-            'fantabulous',
-            -- Update 1.2
-            'ten',
-            -- Update 1.3
-            'koffing',
-            'crudeoil',
-            'grannycream',
-            -- [[Uncommon]]
-            -- 1.0
-            'depressedbrother',
-            'meat',
-            'greyjoker',
-            'veryexpensivejoker',
-            'roger',
-            'cousinsclub',
-            'anotherlight',
-            'sohappy', -- Page 2 End
-
-
-            'code', -- Page 3 Start
-            'deathcard',
-            'maskedjoker',
-            'dontmind',
-            'kerosene',
-            'red',
-            'fate',
-            'miracle',
-            'chromedup',
-            -- Update 1.2
-            'beginners',
-            'voice',
-            'rotten',
-            -- Update 1.3
-            'bjbros',
-            'drippy',
-            -- [[Rare]]
-            'thisiscrack', -- Page 3 End
-
-
-            'werewolves', -- Page 4 Start
-            'hell',
-            'odio',
-            -- Update 1.3
-            'sts',
-            -- [[Common]] (LOCKED)
-            -- Update 1.3
-            'meteor',
-            'dud',
-            -- Update 1.2
-            'rapture',
-            'villains',
-            -- 1.0
-            'speedjoker',
-            'disturbedjoker',
-            -- [[Uncommon]] (LOCKED)
-            -- 1.0
-            'charity',
-            'shrimp',
-            'muppet',
-            -- Update 1.3
-            'frich',
-            'bunji',
-            -- [[Rare]] (LOCKED)
-             -- Page 4 End
-
-
-            'supper', -- Page 5 Start
-            'pepsecret',
-            'greenneedle',
-            'wingsoftime',
-            'killjester',
-            --- [[[JOEL]]]
-            -- [[Common]]
-            'grand',
-            'frens',
-            'memehouse',
-            'bonzi',
-            'bbq',
-            'protogent',
-            'lidl',
-            'superghostbusters',
-            'chips',
-            'toeofsatan', -- Page 5 End
-
-
-            'bald', -- Page 6 Start
-            'bootleg',
-            'facade',
-            -- [[Uncommon]]
-            'joeycastle',
-            'flusher',
-            'bulk',
-            'mrkill',
-            'plaguewalker',
-            'skeletor',
-            'agga',
-            'duane',
-            'bsi',
-            'mug',
-            'fireworks',
-            'scam', -- Page 6 End
-
-
-            'april', -- Page 7 Start
-            'sprunk',
-            'itsafeature',
-            'passport',
-            'vinewrestle',
-            -- [[Rare]]
-            'skeletonmetal',
-            'ufo',
-            'tetris',
-            -- [[Common]] (LOCKED)
-            'itsmeaustin',
-            'vomitblast',
-            'nutbuster',
-            -- [[Uncommon]] (LOCKED)
-            'powers',
-            'triptoamerica',
-            'monkey',
-            'blackjack', -- Page 7 End
-
-
-            -- [[Rare]] (LOCKED)
-            'kings', -- Page 8 Start
-            'byebye',
-            --- [[LEGENDARY]]
-            'vincenzo',
-            'quarterdumb',
-            'wigsaw',
-            --- [[REDLETTERMEDIA]]
-            'hack',
-            'endlesstrash',
-            'genres',
-            'weretrulyfrauds',
-            'junka',
-            --- [[JOJO'S BIZARRE ADVENTURE]]
-            'gravity',
-            'jokerdrive',
-            'photodad',
-            'no2joker',
-            'sotw', -- Page 8 End
-
-            -- challenge dummy items
-            'banned_cards',
-            'banned_jokers',       
-        },
-
-        VHS = {
-            'blackspine',
-            'remlezar',
-            'sew',
-            'shakma',
-            'troll2',
-            'swhs',
-            'exploding',
-            'choppingmall',
-            'roar',
-            'calibighunks',
-            'ishtar',
-            'nukie',
-            'sataniccults',
-            'blooddebts',
-            'topslots',
-            'doubledown',
-            'twistedpair',
-            'fatefulfindings',
-            'streetsmarts',
-            'devilstory',
-            'rentafriend',
-            'tbone',
-            'wwvcr',
-            'sos',
-            'macandme',
-            'osteo',
-            'miami',
-            'lowblow',
-            'kidsand',
-            'spacecop',
-            'theroom',
-            'ryansbabe',
-            'ritf',
-            'suburbansasquatch',
-            'rawtime',
-            'donbeveridge',
-            'alienpi',
-            'supershow',
-            'yoyoman',
-        },
-
-        Stand = {
-            -- stardust crusaders
-            'stardust_star',
-            'stardust_world',
-            'stardust_tohth',
-
-            -- diamond is unbreakable
-            'diamond_crazy',
-            'diamond_hand',
-            'diamond_echoes_1',
-            'diamond_echoes_2',
-            'diamond_echoes_3',
-            'diamond_killer',
-            'diamond_killer_btd',
-
-            -- vento aureo
-            'vento_gold',
-            'vento_gold_requiem',
-            'vento_moody',
-            'vento_metallica',
-            'vento_epitaph',
-            'vento_epitaph_king',
-            'vento_watchtower',
-
-            -- stone ocean
-            'stone_stone',
-            'stone_marilyn',
-            'stone_white',
-            'stone_white_moon',
-            'stone_white_heaven',
-
-            -- steel ball run
-            'steel_d4c',
-            'steel_d4c_love',
-            'steel_tusk_1',
-            'steel_tusk_2',
-            'steel_tusk_3',
-            'steel_tusk_4',
-            'steel_civil',
-
-            -- jojolion
-            'lion_soft',
-            'lion_soft_beyond',
-            'lion_paper',
-            'lion_rock',
-            'lion_wonder',
-
-            -- jojolands
-            'lands_november',
-            'lands_smooth',
-            'lands_bigmouth',
-        },
-
-        Tag = {
-            'corrupted',
-            'plinkett',
-            'spirit',
-            'banned_tags'
-        },
-
-        Voucher = {
-            'scavenger',
-            'raffle',
-            'foo',
-            'plant',
-            'lampoil',
-            'ropebombs',
-            'banned_vouchers',
-        },
-
-        Consumable = {
-            -- Planet
-            'lutetia',
-            'varuna',
-            'planet_whirlpool',
-            'planet_lost',
-            -- Spectral
-            'quixotic',
-            'spec_stone',
-            'spec_diary',
-            'protojoker',
-            -- Tarot
-            'tarot_arrow',
-            'banned_consumables',
-        },
-
-        Deck = {
-            'vine',
-            'varg',
-            'cbt',
-            'wheel',
-            'disc'
-        },
-
-        Booster = {
-            'analog1',
-            'analog2',
-            'analog3',
-            'analog4',
-            'banned_boosters'
-        },
-
-        Challenge = {
-            'tucker',
-            'tgyh',
-            'nmbb',
-            'kriskross',
-            'marathon'
-        },
-
-        Blind = {
-            'hog',
-            'tray',
-            'darkest',
-            'finger',
-            'mochamike',
-            'vod',
-            'outlaw',
-			'paint',
-            'wasp',
-            'feltfortress',
-        },
-        Edition = {
-            'corrupted'
-        }
+    Edition = {
+        'corrupted'
     }
-end
+}
 
 for k, v in pairs(itemsToLoad) do
     if next(itemsToLoad[k]) then
@@ -468,11 +355,6 @@ for k, v in pairs(itemsToLoad) do
             end
         end
     end
-end
-
-
-if not SMODS.current_mod.DT.twoPoint0 then
-    return
 end
 
 SMODS.Atlas({ key = 'undiscovered', path = "undiscovered.png", px = 71, py = 95 })

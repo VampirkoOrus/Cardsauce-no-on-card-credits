@@ -12,18 +12,12 @@ local jokerInfo = {
     blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = true,
-    width = 178,
-    height = 238,
     streamer = "vinny",
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.bard } }
+    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.keku } }
     return { vars = {card.ability.extra.dollars, G.GAME.probabilities.normal, card.ability.extra.destroy} }
-end
-
-function jokerInfo.set_sprites(self, card, _front)
-    G.FUNCS.csau_set_big_sprites(self, card)
 end
 
 local function all_faces(hand)
