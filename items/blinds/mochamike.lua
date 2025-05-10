@@ -2,7 +2,7 @@ local blindInfo = {
     name = "Mocha Mike",
     color = HEX('a07c64'),
     pos = {x = 0, y = 0},
-    dollars = 5,
+    dollars = 8,
     mult = 2,
     vars = {},
     debuff = {},
