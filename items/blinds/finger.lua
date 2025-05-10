@@ -14,9 +14,7 @@ function blindInfo.defeat(self)
 end
 
 function blindInfo.debuff_hand(self, cards, hand, handname, check)
-    if handname == "High Card" then
-        return true
-    end
+    return (not G.GAME.blind.disabled and handname == "High Card")
 end
 
 return blindInfo

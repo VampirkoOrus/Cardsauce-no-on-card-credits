@@ -833,67 +833,67 @@ return {
 			bl_csau_hog = {
 				name="The Hog",
 				text={
-					"#1# in 2 face cards",
+					"{C:green}#1# in 2{} {C:attention}face{} cards",
 					"become The Hog's prey"
 				},
 			},
 			bl_csau_tray = {
 				name="The Tray",
 				text={
-					"#1# in #2# chance to divide",
-					"base Chips and Mult by 3"
+					"{C:green}#1# in #2#{} chance to divide",
+					"base Chips and Mult by {C:attention}3{}"
 				},
 			},
 			bl_csau_vod = {
 				name="The Vod",
 				text={
 					"Played cards",
-					"are redrawn"
+					"are {C:attention}redrawn{}"
 				},
 			},
 			bl_csau_outlaw = {
 				name = "The Outlaw",
 				text = {
-					"Debuffs all ranks",
-					"scored last hand"
+					"Debuffs all {C:attention}ranks{}",
+					"scored {C:attention}last hand{}"
 				},
 			},
 			bl_csau_darkest = {
 				name = "The Darkest",
 				text = {
-					"Scoring face cards become",
-					"a random numbered rank"
+					"Scoring {C:attention}face{} cards become",
+					"a random {C:attention}numbered rank{}"
 				},
 			},
 			bl_csau_finger = {
 				name="The Finger",
 				text={
-					"High Card will not score"
+					"{C:attention}High Card{} will not score"
 				},
 			},
 			bl_csau_mochamike = {
 				name="Mocha Mike",
 				text={
-					"#1# will not score"
+					"{C:attention}#1#{} will not score"
 				},
 			},
 			bl_csau_paint = {
 				name="The Paint",
 				text={
 					"Scoring cards change",
-					"suits randomly"
+					"{C:attention}suits{} randomly"
 				},
 			},
 			bl_csau_wasp = {
 				name = "The Wasp",
 				text = {
-					"Cards cannot retrigger"
+					"Cards cannot {C:attention}retrigger{}"
 				},
 			},
 			bl_csau_feltfortress = {
 				name = "Felt Fortress",
 				text = {
-					"Blind requirement doubles",
+					"{C:attention}Blind{} requirement {C:attention}doubles{}",
 					"after each hand scored"
 				},
 			},
