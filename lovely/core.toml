@@ -128,7 +128,7 @@ if G.GAME.starting_params.csau_jokers_rate or G.GAME.starting_params.csau_all_ra
     end
 end
 if next(SMODS.find_card('j_csau_frich')) then
-    if v.pools and v.pools.Food then
+    if table.contains(G.P_CENTER_POOLS.Food, v) then
         _pool[#_pool + 1] = v.key
         _pool_size = _pool_size + 1
     end
