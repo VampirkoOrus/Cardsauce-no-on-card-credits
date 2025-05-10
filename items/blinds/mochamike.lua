@@ -9,38 +9,12 @@ local blindInfo = {
     boss = {min = 1, max = 10, showdown = true}
 }
 
-local function get_most_played(lock)
-    lock = lock or false
-    if G.GAME.blind.most_played then
-        return G.GAME.blind.most_played
-    else
-        local most_played = "High Card"
-        local play_more_than = (G.GAME.hands["High Card"].played or 0)
-        for k, v in pairs(G.GAME.hands) do
-            if to_big(v.played) >= to_big(play_more_than) and v.visible then
-                play_more_than = v.played
-                most_played = k
-            end
-        end
-        if lock then
-            G.GAME.blind.most_played = most_played
-        end
-        return most_played
-    end
-
-end
-
 function blindInfo.defeat(self)
     check_for_unlock({ type = "defeat_mochamike" })
 end
 
-function blindInfo.set_blind(self)
-    G.GAME.blind.most_played = get_most_played(true)
-end
-
 function blindInfo.loc_vars(self)
-    local most_played = get_most_played()
-    return {vars = { localize(most_played, 'poker_hands') or localize('ph_most_played') } }
+    return {vars = { localize(G.GAME.current_round.most_played_poker_hand, 'poker_hands') or localize('ph_most_played') } }
 end
 
 function blindInfo.collection_loc_vars(self)
@@ -48,10 +22,7 @@ function blindInfo.collection_loc_vars(self)
 end
 
 function blindInfo.debuff_hand(self, cards, hand, handname, check)
-    local most_played = get_most_played()
-    if handname == most_played then
-        return true
-    end
+    return (not G.GAME.blind.disabled and handname == G.GAME.current_round.most_played_poker_hand)
 end
 
 return blindInfo

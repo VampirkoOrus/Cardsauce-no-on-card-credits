@@ -950,7 +950,16 @@ SMODS.food_expires = function(context)
 end
 
 SMODS.return_to_hand = function(card, context)
-	if G.GAME.blind.boss and G.GAME.blind.name == "The Vod" then return true end
+	if not G.GAME.blind.disabled and G.GAME.blind.name == 'The Vod' then 
+        return true
+    else
+        for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
+            if not v.disabled and v.name == 'The Vod' then
+                return true
+            end
+        end
+    end
+	
 	if G.FUNCS.find_activated_tape('c_csau_yoyoman') and table.contains(context.scoring_hand, card) then return true end
 	if context.scoring_name == "High Card" and next(SMODS.find_card("j_csau_besomeone")) and table.contains(context.scoring_hand, card) then return true end
 	return false
