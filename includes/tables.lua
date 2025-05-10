@@ -1,8 +1,9 @@
 -- I replaced the old is_food() function by just making this a map instead ~Winter
 
 ---LIST OF FOOD JOKERS:
+-- ✔️ = Bunji/Don Beveridge compatibility
 G.foodjokers = {
-	-- Balatro (Vanilla)
+	-- Balatro (Vanilla) ✔️
 	['j_gros_michel'] = true,
 	['j_ice_cream'] = true,
 	['j_cavendish'] = true,
@@ -11,7 +12,8 @@ G.foodjokers = {
 	['j_ramen'] = true,
 	['j_selzer'] = true,
 	['j_diet_cola'] = true,
-	-- Cardsauce
+	['j_egg'] = true,
+	-- Cardsauce ✔️
 	['j_csau_meat'] = true,
 	['j_csau_fantabulous'] = true,
 	['j_csau_crudeoil'] = true,
@@ -32,7 +34,7 @@ G.foodjokers = {
 	['j_cry_brittle'] = true,
 	['j_cry_caramel'] = true,
 	['j_cry_oldcandy'] = true,
-	-- Neato's Jokers
+	-- Neato's Jokers ✔️
 	['j_neat_icecreamsandwich'] = true,
 	['j_neat_frostedprimerib'] = true,
 	['j_neat_bananastand'] = true,
@@ -91,13 +93,18 @@ G.foodjokers = {
 	['j_prism_whiskey'] = true,
 	-- JoeyJokers
 	['j_joey_vegemite'] = true,
+	-- Plantain
+	['j_pl_plantain'] = true,
+	['j_pl_apple_pie'] = true,
+	['j_pl_grape_soda'] = true,
+	['j_pl_raw_meat'] = true,
 }
 
 local function inject(self)
 	for k, v in pairs(G.foodjokers) do
 		if G.P_CENTERS[k] or SMODS.Centers[k] then
 			local center = G.P_CENTERS[k] or SMODS.Centers[k]
-			if not (center.pools and center.pools.Food) then
+			if not table.contains(self, center) then
 				self:inject_card(center)
 			end
 		end
@@ -112,16 +119,6 @@ if not SMODS.ObjectTypes.Food then
 		cards = {},
 		inject = function(self)
 			SMODS.ObjectType.inject(self)
-			-- insert base game food jokers
-			self:inject_card(G.P_CENTERS.j_gros_michel)
-			self:inject_card(G.P_CENTERS.j_egg)
-			self:inject_card(G.P_CENTERS.j_ice_cream)
-			self:inject_card(G.P_CENTERS.j_cavendish)
-			self:inject_card(G.P_CENTERS.j_turtle_bean)
-			self:inject_card(G.P_CENTERS.j_diet_cola)
-			self:inject_card(G.P_CENTERS.j_popcorn)
-			self:inject_card(G.P_CENTERS.j_ramen)
-			self:inject_card(G.P_CENTERS.j_selzer)
 			inject(self)
 		end,
 	})

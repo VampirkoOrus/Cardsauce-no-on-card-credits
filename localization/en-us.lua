@@ -3503,5 +3503,85 @@ return {
 				},
 			},
 		},
+		Sleeve = {
+			sleeve_csau_sleeve_vine = {
+				name = "Vine Sleeve",
+				text = {
+					"Start run with {C:attention,T:v_overstock_norm}#2#{}",
+					"{C:clubs}Cardsauce{} Jokers appear",
+					"{C:attention}#1#x{} more often",
+				},
+			},
+			sleeve_csau_sleeve_vine_alt = {
+				name = "Vine Sleeve",
+				text = {
+					"Start run with {C:attention,T:v_overstock_plus}#2#{}",
+					"All {C:clubs}Cardsauce{} additions",
+					"appear {C:attention}#1#x{} more often",
+				},
+			},
+			sleeve_csau_sleeve_varg = {
+				name = "Varg Sleeve",
+				text = {
+					"{C:attention}#1#{} Hand Size",
+					"{C:green}Probabilities{} are {C:attention}doubled{}",
+					"{C:clubs}Cardsauce{} Jokers appear",
+					"{C:attention}#2#x{} more often",
+				},
+			},
+			sleeve_csau_sleeve_varg_alt = {
+				name = "Varg Sleeve",
+				text = {
+					"{C:green}Probabilities{} are multiplied {C:attention}#1#x{}",
+					"All {C:clubs}Cardsauce{} additions",
+					"appear {C:attention}#2#x{} more often",
+				},
+			},
+			sleeve_csau_sleeve_wheel = {
+				name = "Wheel Sleeve",
+				text = {
+					"Start run with {C:tarot,T:v_crystal_ball}#1#{}",
+					"After each {C:attention}Boss Blind,{} ",
+					"gain a {C:vhs,T:c_csau_blackspine}Black Spine{}",
+				},
+			},
+			sleeve_csau_sleeve_wheel_alt = {
+				name = "Wheel Sleeve",
+				text = {
+					"Start run with {C:vhs,T:v_csau_scavenger}#1#{}",
+				},
+			},
+			sleeve_csau_sleeve_disc = {
+				name = "DISC Sleeve",
+				text = {
+					"Start run with {C:tarot,T:v_crystal_ball}#1#{}",
+					"There is no {C:stand}Stand{} limit",
+				},
+			},
+			sleeve_csau_sleeve_disc_alt = {
+				name = "DISC Sleeve",
+				text = {
+					"Start run with {C:stand,T:v_csau_foo}#1#{}",
+				},
+			},
+			sleeve_csau_sleeve_cbt = {
+				name = "CBT Sleeve",
+				text = {
+					"{C:chips}#1#{} hand every round",
+					"{C:mult}#2#{} discard every round",
+					"After defeating each {C:attention}Boss Blind{},",
+					"{C:planet}level down{} every hand",
+				},
+			},
+			sleeve_csau_sleeve_cbt_alt = {
+				name = "CBT Sleeve",
+				text = {
+					"{C:red}#1#{} Joker slot",
+					"{C:chips}#2#{} hand every round",
+					"Cannot have more than {C:money}$#3#",
+					"Earn no {C:attention}Interest{}",
+				},
+			},
+		}
 	},
 }
