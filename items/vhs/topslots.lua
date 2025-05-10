@@ -34,12 +34,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.conv_money, card.ability.extra.conv_score, card.ability.extra.max_initial_money, G.GAME.probabilities.normal, card.ability.extra.prob_double, card.ability.extra.prob_triple, card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
-function consumInfo.set_ability(self, card, initial, delay_sprites)
-    if next(SMODS.find_card("c_csau_moodyblues")) then
-        card.ability.extra.runtime = card.ability.extra.runtime*2
-    end
-end
-
 function consumInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.individual or context.blueprint
     if card.ability.activated and context.end_of_round and not card.debuff and not bad_context then

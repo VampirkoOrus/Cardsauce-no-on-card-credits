@@ -288,11 +288,13 @@ local itemsToLoad = {
         'varuna',
         'planet_whirlpool',
         'planet_lost',
+        
         -- Spectral
         'quixotic',
+        'protojoker',
         'spec_stone',
         'spec_diary',
-        'protojoker',
+
         -- Tarot
         'tarot_arrow',
         'banned_consumables',

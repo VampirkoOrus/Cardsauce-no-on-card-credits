@@ -6,6 +6,9 @@ local consumInfo = {
     nosleeve = true,
     config = {
         use_activate = true,
+        extra = {
+            runtime = 1
+        }
     },
     origin = 'rlm',
     origin = {
