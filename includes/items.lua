@@ -306,6 +306,14 @@ local itemsToLoad = {
         'disc'
     },
 
+    Sleeve = {
+        'sleeve_vine',
+        'sleeve_varg',
+        'sleeve_cbt',
+        'sleeve_wheel',
+        'sleeve_disc'
+    },
+
     Booster = {
         'analog1',
         'analog2',

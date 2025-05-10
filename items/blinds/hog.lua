@@ -14,6 +14,8 @@ local blindInfo = {
 
 function blindInfo.set_blind(self)
     for _, v in ipairs(G.playing_cards) do
+        v.csau_hogstruck = nil
+        v.csau_hog_checked = nil
         if v:is_face(true) then
             if pseudorandom(pseudoseed('csau_hog')) < G.GAME.probabilities.normal/2 then
                 v.csau_hogstruck = true

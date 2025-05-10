@@ -833,67 +833,67 @@ return {
 			bl_csau_hog = {
 				name="The Hog",
 				text={
-					"#1# in 2 face cards",
+					"{C:green}#1# in 2{} {C:attention}face{} cards",
 					"become The Hog's prey"
 				},
 			},
 			bl_csau_tray = {
 				name="The Tray",
 				text={
-					"#1# in #2# chance to divide",
-					"base Chips and Mult by 3"
+					"{C:green}#1# in #2#{} chance to divide",
+					"base Chips and Mult by {C:attention}3{}"
 				},
 			},
 			bl_csau_vod = {
 				name="The Vod",
 				text={
 					"Played cards",
-					"are redrawn"
+					"are {C:attention}redrawn{}"
 				},
 			},
 			bl_csau_outlaw = {
 				name = "The Outlaw",
 				text = {
-					"Debuffs all ranks",
-					"scored last hand"
+					"Debuffs all {C:attention}ranks{}",
+					"scored {C:attention}last hand{}"
 				},
 			},
 			bl_csau_darkest = {
 				name = "The Darkest",
 				text = {
-					"Scoring face cards become",
-					"a random numbered rank"
+					"Scoring {C:attention}face{} cards become",
+					"a random {C:attention}numbered rank{}"
 				},
 			},
 			bl_csau_finger = {
 				name="The Finger",
 				text={
-					"High Card will not score"
+					"{C:attention}High Card{} will not score"
 				},
 			},
 			bl_csau_mochamike = {
 				name="Mocha Mike",
 				text={
-					"#1# will not score"
+					"{C:attention}#1#{} will not score"
 				},
 			},
 			bl_csau_paint = {
 				name="The Paint",
 				text={
 					"Scoring cards change",
-					"suits randomly"
+					"{C:attention}suits{} randomly"
 				},
 			},
 			bl_csau_wasp = {
 				name = "The Wasp",
 				text = {
-					"Cards cannot retrigger"
+					"Cards cannot {C:attention}retrigger{}"
 				},
 			},
 			bl_csau_feltfortress = {
 				name = "Felt Fortress",
 				text = {
-					"Blind requirement doubles",
+					"{C:attention}Blind{} requirement {C:attention}doubles{}",
 					"after each hand scored"
 				},
 			},
@@ -3503,5 +3503,85 @@ return {
 				},
 			},
 		},
+		Sleeve = {
+			sleeve_csau_sleeve_vine = {
+				name = "Vine Sleeve",
+				text = {
+					"Start run with {C:attention,T:v_overstock_norm}#2#{}",
+					"{C:clubs}Cardsauce{} Jokers appear",
+					"{C:attention}#1#x{} more often",
+				},
+			},
+			sleeve_csau_sleeve_vine_alt = {
+				name = "Vine Sleeve",
+				text = {
+					"Start run with {C:attention,T:v_overstock_plus}#2#{}",
+					"All {C:clubs}Cardsauce{} additions",
+					"appear {C:attention}#1#x{} more often",
+				},
+			},
+			sleeve_csau_sleeve_varg = {
+				name = "Varg Sleeve",
+				text = {
+					"{C:attention}#1#{} Hand Size",
+					"{C:green}Probabilities{} are {C:attention}doubled{}",
+					"{C:clubs}Cardsauce{} Jokers appear",
+					"{C:attention}#2#x{} more often",
+				},
+			},
+			sleeve_csau_sleeve_varg_alt = {
+				name = "Varg Sleeve",
+				text = {
+					"{C:green}Probabilities{} are multiplied {C:attention}#1#x{}",
+					"All {C:clubs}Cardsauce{} additions",
+					"appear {C:attention}#2#x{} more often",
+				},
+			},
+			sleeve_csau_sleeve_wheel = {
+				name = "Wheel Sleeve",
+				text = {
+					"Start run with {C:tarot,T:v_crystal_ball}#1#{}",
+					"After each {C:attention}Boss Blind,{} ",
+					"gain a {C:vhs,T:c_csau_blackspine}Black Spine{}",
+				},
+			},
+			sleeve_csau_sleeve_wheel_alt = {
+				name = "Wheel Sleeve",
+				text = {
+					"Start run with {C:vhs,T:v_csau_scavenger}#1#{}",
+				},
+			},
+			sleeve_csau_sleeve_disc = {
+				name = "DISC Sleeve",
+				text = {
+					"Start run with {C:tarot,T:v_crystal_ball}#1#{}",
+					"There is no {C:stand}Stand{} limit",
+				},
+			},
+			sleeve_csau_sleeve_disc_alt = {
+				name = "DISC Sleeve",
+				text = {
+					"Start run with {C:stand,T:v_csau_foo}#1#{}",
+				},
+			},
+			sleeve_csau_sleeve_cbt = {
+				name = "CBT Sleeve",
+				text = {
+					"{C:chips}#1#{} hand every round",
+					"{C:mult}#2#{} discard every round",
+					"After defeating each {C:attention}Boss Blind{},",
+					"{C:planet}level down{} every hand",
+				},
+			},
+			sleeve_csau_sleeve_cbt_alt = {
+				name = "CBT Sleeve",
+				text = {
+					"{C:red}#1#{} Joker slot",
+					"{C:chips}#2#{} hand every round",
+					"Cannot have more than {C:money}$#3#",
+					"Earn no {C:attention}Interest{}",
+				},
+			},
+		}
 	},
 }

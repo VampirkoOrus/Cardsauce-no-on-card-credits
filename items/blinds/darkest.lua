@@ -15,10 +15,6 @@ function blindInfo.defeat(self)
     check_for_unlock({ type = "defeat_darkest" })
 end
 
-function blindInfo.set_blind(self)
-    G.GAME.blind.played_ranks = {}
-end
-
 function blindInfo.modify_hand(self, cards, poker_hands, text, mult, hand_chips)
     -- only use non face ranks
     -- this would support modded numbered ranks, thank you 161 of clubs

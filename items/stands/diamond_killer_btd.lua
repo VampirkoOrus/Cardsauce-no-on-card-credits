@@ -32,6 +32,7 @@ function consumInfo.in_pool(self, args)
 end
 
 local get_btd = function()
+    if not G.consumeables then return false end
     for i, v in ipairs(G.consumeables.cards) do
         if v.config.center.key == 'c_csau_diamond_killer_btd' then
             return true

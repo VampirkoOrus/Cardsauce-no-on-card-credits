@@ -20,6 +20,8 @@ end
 deckInfo.apply = function(self, back)
     G.E_MANAGER:add_event(Event({
         func = function()
+            G.GAME.starting_params.csau_jokers_rate = G.GAME.starting_params.csau_jokers_rate or 1
+            G.GAME.starting_params.csau_jokers_rate = G.GAME.starting_params.csau_jokers_rate * 2
             for k, v in pairs(G.GAME.probabilities) do
                 G.GAME.probabilities[k] = v * 2
             end
