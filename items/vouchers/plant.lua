@@ -26,7 +26,7 @@ end
 function voucherInfo.redeem(self, card, area, copier)
     G.E_MANAGER:add_event(Event({
         func = (function()
-            G.GAME.evolvedrarity_mod = G.GAME.evolvedrarity_mod + card.ability.extra.rate
+            G.GAME.csau_evolvedrarity_mod = G.GAME.csau_evolvedrarity_mod + card.ability.extra.rate
             return true
         end)
     }))
