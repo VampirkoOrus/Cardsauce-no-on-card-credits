@@ -68,9 +68,7 @@ function blindInfo.recalc_debuff(self, card, from_blind)
     if card.area == G.jokers or G.GAME.blind.disabled or SMODS.has_no_rank(card) or not card.base.value then
         return false
     end
-
-    sendDebugMessage(SMODS.Ranks[card.base.value].key..': '..tostring(G.GAME.blind.played_ranks[SMODS.Ranks[card.base.value].key]))
-
+    
     return (G.GAME.blind.played_ranks[SMODS.Ranks[card.base.value].key] ~= nil)
 end
 
