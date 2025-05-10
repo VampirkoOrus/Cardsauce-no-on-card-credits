@@ -492,7 +492,7 @@ return {
 			k_ryansbabe = "Bonus!",
 			k_bighunks = "Mult!",
 			k_vhs_fin = "Fin!",
-
+			k_outlaw_default = "Debuffs all ranks scored last hand",
 
 
 
@@ -555,7 +555,8 @@ return {
 			a_plus_hand = "+#1# Hand",
 			a_red = "#1#!!!",
 			a_duane = "#1#!",
-			a_chance = "#1# in #2#"
+			a_chance = "#1# in #2#",
+			a_outlaw_debuffs = "All #1# debuffed!"
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
