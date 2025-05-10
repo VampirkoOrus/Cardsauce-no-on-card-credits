@@ -4,7 +4,8 @@ to_big = to_big or function(num)
 end
 
 --- Why the fuck does lovely not work with patching plantain now i gotta do this stupid shit
-if SMODS.find_mod('plantain') then
+local has_pl = SMODS.find_mod('plantain')
+if next(has_pl) and has_pl[1].can_load then
 	local pl_ref = SMODS.Centers.j_pl_plantain.calculate
 	SMODS.Joker:take_ownership('pl_plantain', {
 		calculate = function(self, card, context)
