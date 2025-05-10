@@ -73,7 +73,7 @@ function consumInfo.calculate(self, card, context)
             end
         end
         local update_sprite = false
-        if to_big(card.ability.extra.xmult) >= to_big(2) and card.ability.extra.form == 'lion_wonder' then
+        if to_big(card.ability.extra.xmult) >= to_big(1.9) and card.ability.extra.form == 'lion_wonder' then
             card.ability.extra.form = 'lion_wonder_2'
             update_sprite = true
         elseif to_big(card.ability.extra.xmult) >= to_big(3) and card.ability.extra.form == 'lion_wonder_2' then

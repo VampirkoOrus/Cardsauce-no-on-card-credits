@@ -319,7 +319,7 @@ function Card:get_id(skip_pmk)
 end
 
 -- why is this function not a global, i had to steal it from smods code
-local function juice_flip(used_tarot)
+function juice_flip(used_tarot)
     G.E_MANAGER:add_event(Event({
         trigger = 'after',
         delay = 0.4,

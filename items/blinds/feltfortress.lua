@@ -2,7 +2,7 @@ local blindInfo = {
     name = "Felt Fortress",
     color = HEX('88e054'),
     pos = {x = 0, y = 0},
-    dollars = 5,
+    dollars = 8,
     mult = 2,
     vars = {},
     debuff = {},
@@ -16,47 +16,44 @@ function blindInfo.defeat(self)
     check_for_unlock({ type = "defeat_feltfortress" })
 end
 
-blindInfo.set_blind = function(self, reset, silent)
-    if not G.GAME.blind.disabled then
-        G.GAME.blind.backup_chips = G.GAME.blind.chips
-    end
-end
-
 blindInfo.press_play = function(self)
-    G.GAME.blind.activated = true
+    if not G.GAME.blind.disabled then
+        G.GAME.blind.activated = true
+        G.GAME.blind.fortress_num_hands = (G.GAME.blind.fortress_num_hands or 0) + 1
+    end
 end
 
 --Modified code from Math Blinds
 blindInfo.drawn_to_hand = function(self)
     if not G.GAME.blind.disabled and G.GAME.blind.activated then
         G.GAME.blind.activated = false
-        local new_chips = math.floor(G.GAME.blind.chips * 2)
+        G.GAME.blind.chips = math.floor(G.GAME.blind.chips * 2)
+        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         G.GAME.blind:wiggle()
         play_area_status_text(localize('k_fort_doubled'))
-        G.E_MANAGER:add_event(Event({
-            trigger = 'ease',
-            blocking = false,
-            ref_table = G.GAME.blind,
-            ref_value = 'chips',
-            ease_to = new_chips,
-            delay =  0.5,
-            func = (function(t) G.GAME.blind.chip_text = number_format(G.GAME.blind.chips); return math.floor(t) end)
-        }))
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.5,
-            func = function()
-                G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
-                return true
-            end
-        }))
+        G.hand_text_area.blind_chips:juice_up()
     end
 end
 
 blindInfo.disable = function(self, silent)
-    G.GAME.blind.chips = G.GAME.blind.backup_chips
+    G.GAME.blind.chips = math.floor(G.GAME.blind.chips * (2 ^ (-1 * (G.GAME.blind.fortress_num_hands or 0))))
     G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
-    G.GAME.blind.backup_chips = nil
+    G.GAME.blind.fortress_num_hands = nil
+end
+
+--- this feels like it's going to get me killed
+local ref_blind_save = Blind.save
+function Blind:save()
+	local ret = ref_blind_save(self)
+    ret.fortress_num_hands = self.fortress_num_hands
+	return ret
+end
+
+local ref_blind_load = Blind.load
+function Blind:load(blindTable)
+	local ret = ref_blind_load(self, blindTable)
+    self.fortress_num_hands = blindTable.fortress_num_hands
+    return ret
 end
 
 return blindInfo

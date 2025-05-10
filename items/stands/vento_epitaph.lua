@@ -29,7 +29,7 @@ function consumInfo.in_pool(self, args)
         return true
     end
     
-    return G.GAME.used_jokers['c_csau_vento_epitaph_king'] ~= nil
+    return (not G.GAME.used_jokers['c_csau_vento_epitaph_king'])
 end
 
 -- Modified Code from Jimbo's Pack

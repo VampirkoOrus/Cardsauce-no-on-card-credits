@@ -31,7 +31,7 @@ function blindInfo.drawn_to_hand(self)
 end
 
 function blindInfo.get_loc_debuff_text(self)
-    if not (next(G.GAME.blind.played_ranks)) then
+    if not G.GAME.blind.played_ranks or not (next(G.GAME.blind.played_ranks)) then
         return "Debuffs all ranks played last hand"
     end
 
