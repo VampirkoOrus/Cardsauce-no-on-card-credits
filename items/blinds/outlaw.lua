@@ -21,18 +21,19 @@ function blindInfo.drawn_to_hand(self)
         return
     end
 
-    G.GAME.blind.debuff_queued = nil
-
     for _, v in ipairs(G.playing_cards) do
-        G.GAME.blind:debuff_card(v)
+        if not G.GAME.blind.fnwk_extra_blind or not v.debuffed_by_blind then
+            G.GAME.blind:debuff_card(v, true)
+        end
     end
 
+    G.GAME.blind.debuff_queued = nil
     G.GAME.blind:alert_debuff(false)
 end
 
 function blindInfo.get_loc_debuff_text(self)
     if not G.GAME.blind.played_ranks or not (next(G.GAME.blind.played_ranks)) then
-        return "Debuffs all ranks played last hand"
+        return localize('k_outlaw_default')
     end
 
  
@@ -40,7 +41,7 @@ function blindInfo.get_loc_debuff_text(self)
     for k, v in pairs(G.GAME.blind.played_ranks) do table.insert(ordered_array, {rank = k, nominal = v}) end
     table.sort(ordered_array, function(a, b) return a.nominal < b.nominal end)  
 
-    local debuff_str = 'All '
+    local debuff_str = ''
     for i, v in ipairs(ordered_array) do
         if #ordered_array > 1 and i == #ordered_array then
             debuff_str = debuff_str..'and '
@@ -51,10 +52,12 @@ function blindInfo.get_loc_debuff_text(self)
             debuff_str = debuff_str..','
         end
 
-        debuff_str = debuff_str..' '
+        if i < #ordered_array then
+            debuff_str = debuff_str..' '
+        end
     end
-    debuff_str = debuff_str..'debuffed!'
-    return debuff_str
+
+    return localize{type='variable',key='a_outlaw_debuffs',vars={debuff_str}}
 end
 
 function blindInfo.recalc_debuff(self, card, from_blind)
@@ -65,8 +68,8 @@ function blindInfo.recalc_debuff(self, card, from_blind)
     if card.area == G.jokers or G.GAME.blind.disabled or SMODS.has_no_rank(card) or not card.base.value then
         return false
     end
-
-    return G.GAME.blind.played_ranks[SMODS.Ranks[card.base.value].key]
+    
+    return (G.GAME.blind.played_ranks[SMODS.Ranks[card.base.value].key] ~= nil)
 end
 
 function blindInfo.modify_hand(self, cards, poker_hands, text, mult, hand_chips)
