@@ -27,12 +27,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
-function consumInfo.set_ability(self, card, initial, delay_sprites)
-    if next(SMODS.find_card("c_csau_moodyblues")) then
-        card.ability.extra.runtime = card.ability.extra.runtime*2
-    end
-end
-
 function consumInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.individual or context.blueprint
     if context.after and not card.ability.destroyed and card.ability.activated and not bad_context then

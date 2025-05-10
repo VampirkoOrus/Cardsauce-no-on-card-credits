@@ -22,12 +22,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
-function consumInfo.set_ability(self, card, initial, delay_sprites)
-    if next(SMODS.find_card("c_csau_moodyblues")) then
-        card.ability.extra.runtime = card.ability.extra.runtime*2
-    end
-end
-
 local function find_first_card(cards)
     for i, v in ipairs(cards) do
         if v.ability.set == 'Tarot' or v.ability.set == 'Planet' or v.ability.set == 'Spectral' then

@@ -67,6 +67,7 @@ function consumInfo.calculate(self, card, context)
             return true
         end
     end
+
     if context.end_of_round and not bad_context then
         card.ability.extra.hands_played = {}
     end
@@ -74,10 +75,16 @@ end
 
 
 function consumInfo.update(self, card)
-    if not card.area.config.collection and card.area == G.consumeables and to_big(get_lucky()) >= to_big(card.ability.extra.evolve_num) and not card.ability.evolved then
-        check_for_unlock({ type = "evolve_d4c" })
-        card.ability.evolved = true
-        G.FUNCS.csau_evolve_stand(card)
+    if card.area == nil or card.area.config.collection or card.area ~= G.consumeables then return end
+
+    if card.ability.d4c_evolve_queued then return end
+
+    if to_big(get_lucky()) >= to_big(card.ability.extra.evolve_num) then
+        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
+			check_for_unlock({ type = "evolve_d4c" })
+            card.ability.d4c_evolve_queued = true
+            G.FUNCS.csau_evolve_stand(card)
+        return true end}))
     end
 end
 

@@ -2597,7 +2597,7 @@ return {
 				text = {
 					"While {C:attention}playing{}, {C:spectral}Spectral{} Cards",
 					"cannot lower your hand size",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Card"
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Card#2#"
 				},
 			},
 			c_csau_sew = {
@@ -2605,7 +2605,7 @@ return {
 				text = {
 					"While {C:attention}playing{}, will {C:attention}take the hit{} for",
 					"the next Joker to be destroyed",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Joker"
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Joker#2#"
 				},
 			},
 			c_csau_shakma = {
@@ -2638,7 +2638,7 @@ return {
 				text = {
 					"While {C:attention}playing{}, turn all but one {C:blue}Hands",
 					"into {C:red}Discards{} when {C:attention}Blind{} is selected",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Round"
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Round#2#"
 				},
 			},
 			c_csau_choppingmall = {
@@ -2647,7 +2647,7 @@ return {
 					"While {C:attention}playing{}, if {C:attention}scoring hand{} has",
 					"{C:attention}Steel Cards{} at the start and end",
 					"of the hand, add {C:red}Red Seals{} to both",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand"
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand#2#"
 				},
 			},
 			c_csau_roar = {
@@ -2758,7 +2758,7 @@ return {
 				text = {
 					"While {C:attention}playing{}, add {C:money}Gold Seals{} to",
 					"all {C:attention}Enhanced{} cards in scoring hand",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand"
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand#2#"
 				},
 			},
 			c_csau_rentafriend = {
@@ -2766,7 +2766,7 @@ return {
 				text = {
 					"While {C:attention}playing{}, all Jokers in ",
 					"shop are {C:money}Rental{} and {C:dark_edition}Negative{}",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Joker"
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Joker#2#"
 				},
 			},
 			c_csau_tbone = {

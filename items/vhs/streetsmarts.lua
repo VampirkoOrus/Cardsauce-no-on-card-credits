@@ -27,13 +27,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.yumz } }
     return { vars = { card.ability.extra.mult, card.ability.extra.runtime-card.ability.extra.uses } }
 end
-
-function consumInfo.set_ability(self, card, initial, delay_sprites)
-    if next(SMODS.find_card("c_csau_moodyblues")) then
-        card.ability.extra.runtime = card.ability.extra.runtime*2
-    end
-end
-
 function consumInfo.calculate(self, card, context)
     if card.ability.activated and context.joker_main and G.GAME.current_round.hands_left == 0 then
         return {
