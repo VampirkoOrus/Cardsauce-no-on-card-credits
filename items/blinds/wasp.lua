@@ -19,7 +19,7 @@ end
 local function american_hornet()
     if not G.GAME.blind.disabled and G.GAME.blind.name == 'The Wasp' then 
         return true
-    else
+    elseif G.GAME.fnwk_extra_blinds then
         for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
             if not v.disabled and v.name == 'The Wasp' then
                 return true
