@@ -12,8 +12,8 @@ sleeveInfo.loc_vars = function(self, info_queue)
     local key, vars
     if self.get_current_deck_key() == "b_csau_cbt" then
         key = self.key .. "_alt"
-        self.config = { jokers = -1, hands = -1, max_money = 30, no_interest = true, }
-        vars = { self.config.jokers, self.config.hands, self.config.max_money }
+        self.config = { joker_slot = -1, hands = -1, max_money = 30, no_interest = true, }
+        vars = { self.config.joker_slot, self.config.hands, self.config.max_money }
     else
         key = self.key
 
@@ -65,14 +65,10 @@ function ease_dollars(mod, instant)
     if CardSleeves and G.GAME.selected_sleeve then
         local sleeve_center = CardSleeves.Sleeve:get_obj(G.GAME.selected_sleeve)
         if sleeve_center.key == 'sleeve_csau_sleeve_cbt' and CardSleeves.Sleeve.get_current_deck_key() == "b_csau_cbt" then
-            send('max money is enabled')
             if sleeve_center.config.max_money then
-                send('max money is '..sleeve_center.config.max_money)
-                send('old mod: '..mod)
                 if G.GAME.dollars + mod > sleeve_center.config.max_money then
                     mod = sleeve_center.config.max_money - G.GAME.dollars
                     if mod < 0 then mod = 0 end
-                    send('new mod: '..mod)
                 end
             end
         end

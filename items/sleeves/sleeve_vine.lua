@@ -13,9 +13,11 @@ sleeveInfo.loc_vars = function(self, info_queue)
     if self.get_current_deck_key() == "b_csau_vine" then
         key = self.key .. "_alt"
         vars = {self.config.csau_all_rate, localize{type = 'name_text', key = 'v_overstock_plus', set = 'Voucher'}}
+        self.config.voucher = "v_overstock_plus"
     else
         key = self.key
         vars = {self.config.csau_jokers_rate, localize{type = 'name_text', key = 'v_overstock_norm', set = 'Voucher'}}
+        self.config.voucher = "v_overstock_norm"
     end
     return { key = key, vars = vars }
 end
