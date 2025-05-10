@@ -952,7 +952,7 @@ end
 SMODS.return_to_hand = function(card, context)
 	if not G.GAME.blind.disabled and G.GAME.blind.name == 'The Vod' then 
         return true
-    else
+    elseif G.GAME.fnwk_extra_blinds then
         for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
             if not v.disabled and v.name == 'The Vod' then
                 return true
