@@ -63,7 +63,6 @@ function blindInfo.defeat(self)
     for _, v in ipairs(G.playing_cards) do
         v.csau_hogstruck = nil
         v.csau_hog_checked = nil
-        v:set_debuff(false)
     end
 end
 
