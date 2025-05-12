@@ -1,3 +1,4 @@
+
 local jokerInfo = {
     name = "UFO COMODIN",
     config = {
