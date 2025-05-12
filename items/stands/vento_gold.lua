@@ -4,7 +4,10 @@ local consumInfo = {
     config = {
         stand_mask = true,
         aura_colors = { 'fff679DC' , 'f9d652DC' },
-        evolve_key = 'c_csau_vento_gold_requiem'
+        evolve_key = 'c_csau_vento_gold_requiem',
+        extra = {
+            prob = 2,
+        }
     },
     cost = 4,
     rarity = 'csau_StandRarity',
@@ -33,7 +36,7 @@ function consumInfo.calculate(self, card, context)
     if context.before and not card.debuff and not bad_context then
         local gold = {}
         for k, v in ipairs(context.scoring_hand) do
-            if v:is_suit(G.GAME and G.GAME.wigsaw_suit or "Hearts") then
+            if v:is_suit(G.GAME and G.GAME.wigsaw_suit or "Hearts") and pseudorandom('thisisrequiem') < G.GAME.probabilities.normal / card.ability.extra.prob then
                 gold[#gold+1] = v
                 v:set_ability(G.P_CENTERS.m_gold, nil, true)
                 G.E_MANAGER:add_event(Event({

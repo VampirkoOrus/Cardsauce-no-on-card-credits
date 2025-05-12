@@ -9,7 +9,7 @@ local consumInfo = {
         activated = false,
         destroyed = false,
         extra = {
-            runtime = 2,
+            runtime = 3,
             uses = 0,
             xmult = 2,
         }

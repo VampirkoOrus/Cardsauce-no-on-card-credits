@@ -14,7 +14,7 @@ local consumInfo = {
             chance_mod = 1,
             chance = 0,
             rate = 100,
-            x_mult = 1.1,
+            x_mult = 1.25,
         },
     },
     origin = {

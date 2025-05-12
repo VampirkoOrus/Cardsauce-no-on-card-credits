@@ -11,7 +11,6 @@ local consumInfo = {
         extra = {
             runtime = 3,
             uses = 0,
-            prob = 2,
         },
     },
     origin = 'rlm'
@@ -21,7 +20,7 @@ local consumInfo = {
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
-    return { vars = { G.GAME.probabilities.normal, card.ability.extra.prob, card.ability.extra.runtime-card.ability.extra.uses } }
+    return { vars = { card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
 function consumInfo.set_ability(self, card, initial, delay_sprites)
@@ -38,13 +37,13 @@ function consumInfo.calculate(self, card, context)
                 G.FUNCS.destroy_tape(card)
                 card.ability.destroyed = true
             end
-            if pseudorandom('theclownhasarrived') < G.GAME.probabilities.normal / card.ability.extra.prob then
-                return {
-                    mult_inc = 2,
-                    message = localize('k_spacecop'),
-                    colour = G.C.SECONDARY_SET.Planet
-                }
-            end
+            
+            return {
+                mult_inc = 2,
+                message = localize('k_spacecop'),
+                colour = G.C.SECONDARY_SET.Planet
+            }
+            
         end
     end
 end

@@ -1886,9 +1886,9 @@ return {
 				name = "Choicest Voice",
 				text = {
 					"If played hand contains a",
-					"{C:attention}#1#{} and a {C:attention}#2#{} of {V:1}#3#{},",
+					"{C:attention}#1#{} of {V:1}#2#{},",
 					"retrigger the whole hand",
-					"{C:inactive}hand and card changes every round"
+					"{s:0.8}Card changes every round"
 				},
 			},
 			j_csau_beginners = {
@@ -2444,7 +2444,7 @@ return {
 				text = {
 					"Retrigger each played",
                     "card with {V:1}#1#{} suit",
-					"{s:0.8}suit changes at end of round",
+					"{s:0.8}Suit changes at end of round",
 				},
 			},
 			j_csau_vinewrestle = {
@@ -2595,7 +2595,7 @@ return {
 				name = "Creating Rem Lezar",
 				text = {
 					"While {C:attention}playing{}, {C:spectral}Spectral{} Cards",
-					"cannot lower your hand size",
+					"have no adverse effects",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Card"
 				},
 			},
@@ -2643,10 +2643,9 @@ return {
 			c_csau_choppingmall = {
 				name = "Chopping Mall",
 				text = {
-					"While {C:attention}playing{}, if {C:attention}scoring hand{} has",
-					"{C:attention}Steel Cards{} at the start and end",
-					"of the hand, add {C:red}Red Seals{} to both",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand"
+					"While {C:attention}playing{}, retrigger all",
+					"card {C:attention}held in hand{} abilities",
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
 			},
 			c_csau_roar = {
@@ -2843,10 +2842,9 @@ return {
 			c_csau_spacecop = {
 				name = "Space Cop",
 				text = {
-					"While {C:attention}playing{}, {C:green}#1# in #2#{} chance to",
-					"level up by {C:attention}double{} the standard",
-					"increment when using a {C:planet}Planet Card",
-					"{C:vhs}Running Time{}: {C:attention}#3# {C:planet}Planet Cards"
+					"While {C:attention}playing{}, {C:planet}Planet Cards{}",
+					"level up by {C:attention}double{} the standard increment",
+					"{C:vhs}Running Time{}: {C:attention}#1# {C:planet}Planet Cards"
 				},
 			},
 			c_csau_theroom = {
@@ -3007,15 +3005,17 @@ return {
 			c_csau_diamond_echoes_3 = {
 				name = "Echoes ACT3",
 				text = {
-					"{C:attention}#1#s{} count as {C:attention}all suits{}",
-					"and give {C:mult}+#2#{} Mult when scored",
+					"If played hand contains a {C:attention}Flush{}",
+					"each card scored gives {C:mult}+#1#{} Mult",
+					"{C:attention}Stone Cards{} count as {C:attention}all suits{}",
+					"and give {X:mult,C:white}X#2#{} Mult when scored",
 				},
 			},
 			c_csau_diamond_killer = {
 				name = "Killer Queen",
 				text = {
 					"Whenever you {C:attention}destroy{} a card,",
-					"gain {C:chips}+#1#{} hand next round {C:inactive}({C:chips}+#2#{C:inactive})",
+					"gain {C:chips}+#1#{} hand this Ante {C:inactive}({C:chips}+#2#{C:inactive})",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} after destroying {C:attention}#3#{} cards {C:inactive}({C:attention}#4#{C:inactive}/#3#)"
 				},
@@ -3030,7 +3030,8 @@ return {
 			c_csau_vento_gold = {
 				name = "Gold Experience",
 				text = {
-					"All played {V:1}#1#{} become {C:attention}Gold Cards{}",
+					"{C:green}#2# in #3#{} chance for played {V:1}#1#{}",
+					"to become {C:attention}Gold Cards{}",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} after using {C:tarot}The Arrow{}",
 				},
@@ -3109,11 +3110,19 @@ return {
 			c_csau_stone_white_moon = {
 				name = "C-MOON",
 				text = {
-					"All cards in played",
-					"{C:attention}straights{} are retriggered",
+					"{C:attention}Retrigger{} each played {C:attention}6{}",
+					"{C:attention}Retrigger{} each played {C:attention}Straight{}",
 					"{s:0.1} {}",
-					"{C:stand}Evolves{} after playing straights",
-					"containing {C:attention}#1#{} unique ranks",
+					"{C:dark_edition}The time for Heaven has almost come...",
+				},
+			},
+			c_csau_stone_white_moon_detailed = {
+				name = "C-MOON",
+				text = {
+					"{C:attention}Retrigger{} each played {C:attention}6{}",
+					"{C:attention}Retrigger{} each played {C:attention}Straight{}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after using {C:attention}#1#{} {C:tarot}The Moon{} cards",
 				},
 			},
 			c_csau_stone_white_heaven = {
@@ -3169,8 +3178,8 @@ return {
 			c_csau_steel_civil = {
 				name = "Civil War",
 				text = {
-					"{C:tarot}The Fool{} always creates",
-					"{C:tarot,T:c_hanged_man}#1#{}",
+					"{C:tarot}The Fool{} and {C:tarot}The Emperor{}",
+					"always create {C:tarot,T:c_hanged_man}#1#{}",
 				},
 			},
 			c_csau_steel_d4c = {
@@ -3255,10 +3264,9 @@ return {
 			c_csau_lands_bigmouth = {
 				name = "Bigmouth Strikes Again",
 				text = {
-					"If played hand is {C:attention}#1#{} cards",
-					"and {C:attention}#2#{} are the {C:attention}same suit{},",
-					"transform the {C:attention}fifth card{}",
-					"into that suit",
+					"{C:attention}Flushes{} may be made with {C:attention}4{} cards",
+					"If a fifth is played with a different suit,",
+					"{C:attention}transform{} it into the {C:attention}Flush's suit{}",
 				},
 			},
 		},

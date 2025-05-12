@@ -6,8 +6,8 @@ local consumInfo = {
         stand_mask = true,
         aura_colors = { 'f9ec4bDC', '6edb75DC' },
         extra = {
-            enhancement = 'm_stone',
             mult = 5,
+            xmult = 1.5,
         }
     },
     cost = 10,
@@ -21,7 +21,7 @@ local consumInfo = {
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_stone
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.chvsau } }
-    return {vars = {G.P_CENTERS[card.ability.extra.enhancement].name, card.ability.extra.mult}}
+    return {vars = {card.ability.extra.mult, card.ability.extra.xmult}}
 end
 
 function consumInfo.in_pool(self, args)
@@ -44,9 +44,15 @@ function consumInfo.calculate(self, card, context)
                 func = function()
                     G.FUNCS.csau_flare_stand_aura(card, 0.38)
                 end,
-                mult = card.ability.extra.mult
+                xmult = card.ability.extra.xmult
             }
         end
+        if next(context.poker_hands['Flush']) and not context.other_card.debuff then
+			return {
+				mult = card.ability.extra.mult,
+				card = card
+			}
+		end
     end
 end
 

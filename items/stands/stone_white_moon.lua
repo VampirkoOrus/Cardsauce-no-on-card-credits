@@ -65,6 +65,16 @@ function consumInfo.calculate(self, card, context)
         end
     end
     if context.cardarea == G.play and context.repetition and not context.repetition_only and not card.debuff then
+        if context.other_card:get_id() == 6 then
+            return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                end,
+                message = 'Again!',
+                repetitions = 1,
+                card = card
+            }
+        end
         if next(context.poker_hands["Straight"]) then
             for k, v in ipairs(context.full_hand) do
                 if not v.debuff then

@@ -2,7 +2,7 @@ local jokerInfo = {
     name = "Chips for Dinner",
     config = {
         extra = {
-            chips = 100,
+            chips = 80,
             chips_mod = 20,
         },
     },
