@@ -130,3 +130,24 @@ function set_profile_progress()
 	end
 	G.PROFILES[G.SETTINGS.profile].progress.stand_stickers = copy_table(G.PROGRESS.stand_stickers)
 end
+
+
+function get_flush(hand, sub_count)
+  local ret = {}
+  local suits = SMODS.Suit.obj_buffer
+  if #hand < (5 - (math.min(sub_count, 4) or 0)) then return ret else
+    for j = 1, #suits do
+      local t = {}
+      local suit = suits[j]
+      local flush_count = 0
+      for i=1, #hand do
+        if hand[i]:is_suit(suit, nil, true) then flush_count = flush_count + 1;  t[#t+1] = hand[i] end 
+      end
+      if flush_count >= (5 - (math.min(sub_count, 4) or 0)) then
+        table.insert(ret, t)
+        return ret
+      end
+    end
+    return {}
+  end
+end

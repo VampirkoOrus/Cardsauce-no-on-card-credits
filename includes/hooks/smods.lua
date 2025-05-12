@@ -64,6 +64,13 @@ SMODS.PokerHandPart:take_ownership('_straight', {
 	func = function(hand) return get_straight(hand, next(SMODS.find_card('j_four_fingers')) and 4 or 5, not not next(SMODS.find_card('j_shortcut')), next(SMODS.find_card('j_csau_gnorts'))) end
 })
 
+SMODS.PokerHandPart:take_ownership('_flush', {
+	func = function(hand)
+		local sub_count = (next(SMODS.find_card('j_four_fingers')) or next(SMODS.find_card('c_csau_lands_bigmouth'))) and 1 or 0
+		return get_flush(hand, sub_count)
+	end,
+})
+
 local ref_ccuib = SMODS.card_collection_UIBox
 SMODS.card_collection_UIBox = function(_pool, rows, args)
 	if _pool == G.P_CENTER_POOLS.csau_Stand then

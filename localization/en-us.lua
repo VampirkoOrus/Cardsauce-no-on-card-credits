@@ -2494,9 +2494,8 @@ return {
 				name="UFO COMODIN",
 				text={
 					"Upon purchase, {C:attention}removes{} a random Joker",
-					"After {C:attention}#2#{} rounds, sell this card",
+					"After {C:attention}#1#{} rounds, sell this card",
 					"to return it {C:dark_edition}Negative{}",
-					"{C:inactive}(Currently {C:attention}#1#{C:inactive}/#2#)",
 				},
 			},
 			j_csau_wigsaw = {

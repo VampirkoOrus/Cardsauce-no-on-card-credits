@@ -33,49 +33,35 @@ function consumInfo.calculate(self, card, context)
 	if not context.before or #context.full_hand ~= card.ability.extra.hand_size or bad_context then return end
 
     -- record flip cards and do initial flip
-    local suit_list = {}
-    local target_key = nil
-    for _, hand_card in ipairs(context.full_hand) do
-        local suit_key = SMODS.Suits[hand_card.base.suit].key
+    if not next(context.poker_hands['Flush']) then return end
 
-        -- populate the suit keys
-        if not suit_list[suit_key] then suit_list[suit_key] = {} end
-        suit_list[suit_key][#suit_list[suit_key]+1] = hand_card
-
-        if #suit_list[suit_key] == card.ability.extra.suit_count then
-            target_key = suit_key
-        end
-    end
-
-    if not target_key then return end
-
+    local target_key = context.poker_hands['Flush'][1][1].base.suit
     local change_cards = {}
-    for k, v in pairs(suit_list) do
+    for k, v in pairs(context.full_hand) do
         -- find any cards not of the target transform key to transform
-        if k ~= target_key then
-            for _, change in ipairs(v) do
-                change_cards[#change_cards+1] = change
-                local suit = SMODS.Suits[target_key].card_key
-                local rank = SMODS.Ranks[change.base.value].card_key
-                change:set_base(G.P_CARDS[suit..'_'..rank], nil, true)
+        if v.base.suit ~= target_key then
+            local change = v
+            change_cards[#change_cards+1] = change
+            local suit = SMODS.Suits[target_key].card_key
+            local rank = SMODS.Ranks[change.base.value].card_key
+            change:set_base(G.P_CARDS[suit..'_'..rank], nil, true)
 
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.15,
-                    func = function()
-                        change:flip()
-                        play_sound('card1')
-                        change:juice_up(0.3, 0.3)
-                        return true 
-                    end 
-                }))
-            end
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    change:flip()
+                    play_sound('card1')
+                    change:juice_up(0.3, 0.3)
+                    return true 
+                end 
+            }))
         end
     end
 
     if #change_cards < 1 then return end
 
-    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+    G.FUNCS.csau_flare_stand_aura(card, 0.5)
     card_eval_status_text(card, 'extra', nil, nil, nil, {
         message = localize(target_key, 'suits_plural'),
         colour = G.C.SUITS[target_key]
@@ -105,7 +91,6 @@ function consumInfo.calculate(self, card, context)
             end 
         }))
     end
-
 end
 
 
