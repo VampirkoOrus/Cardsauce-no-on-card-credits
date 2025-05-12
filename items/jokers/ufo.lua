@@ -1,3 +1,4 @@
+
 local jokerInfo = {
     name = "UFO COMODIN",
     config = {
@@ -20,7 +21,34 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = G.P_TAGS.tag_negative
     info_queue[#info_queue+1] = {key = "csau_artistcredit_2", set = "Other", vars = { G.csau_team.gote, G.csau_team.ele } }
-    return { vars = { card.ability.ufo_rounds, card.ability.extra } }
+    
+    local main_end = nil
+    if card.ability.card_key then
+        local name_text = localize{type = 'name_text', key = card.ability.card_key, set = 'Joker'}
+        main_end = {
+            {n=G.UIT.C, config={align = "bm", padding = 0.05}, nodes={
+                {n=G.UIT.C, config={align = "m", colour = G.C.BLACK, r = 0.05, padding = 0.05}, nodes={{
+                        n=G.UIT.T,
+                        config={text = ' '..name_text..' ', colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true}
+                    }, {
+                        n=G.UIT.T,
+                        config={text = '[', colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true}
+                    }, {
+                        n=G.UIT.T,
+                        config={text = card.ability.ufo_rounds, colour = G.C.FILTER, scale = 0.3, shadow = true}
+                    }, {
+                        n=G.UIT.T,
+                        config={text = '/'..card.ability.extra..'] ', colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true}
+                    }
+                }}
+            }}
+        }
+    end
+    
+    return { 
+        vars = { card.ability.extra },
+        main_end = main_end
+    }
 end
 
 function jokerInfo.add_to_deck(self, card)

@@ -2494,9 +2494,8 @@ return {
 				name="UFO COMODIN",
 				text={
 					"Upon purchase, {C:attention}removes{} a random Joker",
-					"After {C:attention}#2#{} rounds, sell this card",
+					"After {C:attention}#1#{} rounds, sell this card",
 					"to return it {C:dark_edition}Negative{}",
-					"{C:inactive}(Currently {C:attention}#1#{C:inactive}/#2#)",
 				},
 			},
 			j_csau_wigsaw = {
@@ -3114,7 +3113,7 @@ return {
 					"{C:attention}Retrigger{} each played {C:attention}6{}",
 					"{C:attention}Retrigger{} each played {C:attention}Straight{}",
 					"{s:0.1} {}",
-					"{C:dark_edition}The time for Heaven has almost come...",
+					"{C:dark_edition,s:0.8}The time for Heaven has almost come...",
 				},
 			},
 			c_csau_stone_white_moon_detailed = {
@@ -3323,7 +3322,15 @@ return {
 					"This challenge bans all non-{C:clubs}Cardsauce{}",
 					"{C:attention}modded Consumables{}",
 				}
-			}
+			},
+			c_emperor_civil = {
+				name = "The Emperor",
+				text = {
+					"Creates {C:tarot}The Hanged Man{} and",
+                    "{C:attention}#1#{} random {C:tarot}Tarot{} card",
+                    "{C:inactive}(Must have room)"
+				}
+			},
 		},
 		Spectral = {
 			c_csau_quixotic = {

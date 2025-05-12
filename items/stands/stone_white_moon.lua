@@ -1,4 +1,5 @@
 local consumInfo = {
+    key = 'c_csau_stone_white_moon',
     name = 'C-MOON',
     set = 'csau_Stand',
     config = {
@@ -8,8 +9,8 @@ local consumInfo = {
         evolve_key = 'c_csau_stone_white_heaven',
         extra = {
             repetitions = 1,
-            evolve_ranks = 0,
-            evolve_num = 13,
+            evolve_moons = 0,
+            evolve_num = 4,
             ranks = {}
         }
     },
@@ -23,7 +24,11 @@ local consumInfo = {
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit_2", set = "Other", vars = { G.csau_team.wario, G.csau_team.gote } }
-    return { vars = {card.ability.extra.evolve_num}}
+    return { vars = {card.ability.extra.evolve_num - card.ability.extra.evolve_moons}}
+end
+
+function consumInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+    G.FUNCS.csau_generate_detail_desc(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 end
 
 function consumInfo.in_pool(self, args)
@@ -39,55 +44,51 @@ function consumInfo.in_pool(self, args)
     return true
 end
 
-local function unique_ranks_check(card, new_rank, num)
-    card.ability.extra.ranks[new_rank] = true
-    local count = 0
-    for k, v in pairs(card.ability.extra.ranks) do
-        if v == true then count = count + 1 end
-    end
-    return count >= num
-end
-
 function consumInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
-    if context.before and not card.debuff and not bad_context then
-        if next(context.poker_hands["Straight"]) then
-            local evolved = false
-            for k, v in ipairs(context.full_hand) do
-                if not v.debuff then
-                    evolved = unique_ranks_check(card, v.base.value, card.ability.extra.evolve_num)
-                end
-            end
-            if evolved then
-                check_for_unlock({ type = "evolve_heaven" })
-                G.FUNCS.csau_evolve_stand(card)
-            end
+    if context.using_consumeable and not card.debuff and not bad_context and context.consumeable.config.center.key == 'c_moon' then
+        
+        card.ability.extra.evolve_moons = card.ability.extra.evolve_moons + 1
+        if card.ability.extra.evolve_moons >= card.ability.extra.evolve_num then
+            G.FUNCS.csau_evolve_stand(card)
+            return
         end
+
+        return {
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            end,
+            extra = {
+                message = localize{type='variable',key='a_remaining',vars={card.ability.extra.evolve_num - card.ability.extra.evolve_moons}},
+                colour = G.C.STAND,
+                delay = 1
+            }
+        }
     end
-    if context.cardarea == G.play and context.repetition and not context.repetition_only and not card.debuff then
-        if context.other_card:get_id() == 6 then
+
+    if context.cardarea == G.play and context.repetition and not card.debuff then
+        local reps = next(context.poker_hands["Straight"]) and 1 or 0
+        if context.other_card:get_id() == 6 then reps = reps + 1 end
+        
+        if reps > 0 then
+            G.FUNCS.csau_flare_stand_aura(card, 0.38)
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                blocking = false,
+                func = function()
+                    card:juice_up()
+                    return true
+                end 
+            }))
+            
             return {
                 func = function()
-                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                    -- 
                 end,
-                message = 'Again!',
-                repetitions = 1,
-                card = card
+                message = localize('k_again_ex'),
+                repetitions = card.ability.extra.repetitions * reps,
+                card = context.other_card
             }
-        end
-        if next(context.poker_hands["Straight"]) then
-            for k, v in ipairs(context.full_hand) do
-                if not v.debuff then
-                    return {
-                        func = function()
-                            G.FUNCS.csau_flare_stand_aura(card, 0.38)
-                        end,
-                        message = 'Again!',
-                        repetitions = card.ability.extra.repetitions,
-                        card = context.other_card
-                    }
-                end
-            end
         end
     end
 end

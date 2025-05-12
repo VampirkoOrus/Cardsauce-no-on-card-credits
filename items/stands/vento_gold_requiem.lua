@@ -45,7 +45,7 @@ function consumInfo.calculate(self, card, context)
                 level_up = true,
                 message = localize('k_level_up_ex')
             }
-        
+        end
     end
 end
 

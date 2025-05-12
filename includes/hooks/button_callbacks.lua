@@ -10,6 +10,10 @@ SMODS.Sound({
 
 local ref_check_buy_space = G.FUNCS.check_for_buy_space
 G.FUNCS.check_for_buy_space = function(card)
+    if card.config.center.key == 'j_csau_ufo' then
+        return true
+    end
+    
     local ret = ref_check_buy_space(card)
     if not ret then
         return ret

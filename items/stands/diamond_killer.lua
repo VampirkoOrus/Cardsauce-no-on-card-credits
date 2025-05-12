@@ -37,31 +37,46 @@ end
 
 function consumInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
+    
     if context.remove_playing_cards and not bad_context then
         local hands = 0
-        for i, _card in ipairs(context.removed) do
+        for i, _ in ipairs(context.removed) do
             check_for_unlock({ type = "destroy_killer" })
             hands = hands + card.ability.extra.hand_mod
         end
-        card.ability.extra.hands = hands
+        card.ability.extra.hands = card.ability.extra.hands + hands
         card.ability.extra.evolve_cards = card.ability.extra.evolve_cards + hands
         if to_big(card.ability.extra.evolve_cards) >= to_big(card.ability.extra.evolve_num) then
             check_for_unlock({ type = "evolve_btd" })
             G.FUNCS.csau_evolve_stand(card)
             return
         end
-        card:juice_up()
+        
+        G.FUNCS.csau_flare_stand_aura(card, 0.38)
+        G.E_MANAGER:add_event(Event({func = function()
+            play_sound('generic1')
+            card:juice_up()
+            return true
+        end }))
     end
-    if context.setting_blind and not card.debuff and card.ability.extra.hands > 0 then
-        if not (context.blueprint_card or card).getting_sliced then
-            G.E_MANAGER:add_event(Event({func = function()
-                ease_hands_played(card.ability.extra.hands)
+
+    if context.setting_blind and not bad_context and card.ability.extra.hands > 0 then
+        return {
+            func = function()
                 G.FUNCS.csau_flare_stand_aura(card, 0.38)
-                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..card.ability.extra.hands.." "..localize('k_hud_hands')})
-                card.ability.extra.hands = 0
-                return true
-            end }))
-        end
+                ease_hands_played(card.ability.extra.hands)
+            end,
+            extra = {
+                message = localize{type = 'variable', key = 'a_hands', vars = {card.ability.extra.hands}}
+            }
+        }
+    end
+
+    if context.end_of_round and not bad_context and G.GAME.blind:get_type() == 'Boss' and card.ability.extra.hands > 0 then
+        card.ability.extra.hands = 0
+        return {
+            message = localize('k_reset'),
+        }
     end
 end
 
