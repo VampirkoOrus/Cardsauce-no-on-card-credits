@@ -28,12 +28,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.discard_mod, card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
-function consumInfo.set_ability(self, card, initial, delay_sprites)
-    if next(SMODS.find_card("c_csau_moodyblues")) then
-        card.ability.extra.runtime = card.ability.extra.runtime*2
-    end
-end
-
 function consumInfo.calculate(self, card, context)
     if card.ability.activated and context.setting_blind and not card.getting_sliced and not card.debuff then
         ease_discard(card.ability.extra.discard_mod)

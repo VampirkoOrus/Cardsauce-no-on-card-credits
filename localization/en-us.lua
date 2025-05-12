@@ -492,7 +492,7 @@ return {
 			k_ryansbabe = "Bonus!",
 			k_bighunks = "Mult!",
 			k_vhs_fin = "Fin!",
-
+			k_outlaw_default = "Debuffs all ranks scored last hand",
 
 
 
@@ -555,7 +555,8 @@ return {
 			a_plus_hand = "+#1# Hand",
 			a_red = "#1#!!!",
 			a_duane = "#1#!",
-			a_chance = "#1# in #2#"
+			a_chance = "#1# in #2#",
+			a_outlaw_debuffs = "All #1# debuffed!"
 		},
 		challenge_names = {
 			c_csau_tucker = "Tucker's Challenge",
@@ -2596,7 +2597,7 @@ return {
 				text = {
 					"While {C:attention}playing{}, {C:spectral}Spectral{} Cards",
 					"have no adverse effects",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Card"
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Card#2#"
 				},
 			},
 			c_csau_sew = {
@@ -2604,7 +2605,7 @@ return {
 				text = {
 					"While {C:attention}playing{}, will {C:attention}take the hit{} for",
 					"the next Joker to be destroyed",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Joker"
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Joker#2#"
 				},
 			},
 			c_csau_shakma = {
@@ -2637,7 +2638,7 @@ return {
 				text = {
 					"While {C:attention}playing{}, turn all but one {C:blue}Hands",
 					"into {C:red}Discards{} when {C:attention}Blind{} is selected",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Round"
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Round#2#"
 				},
 			},
 			c_csau_choppingmall = {
@@ -2756,7 +2757,7 @@ return {
 				text = {
 					"While {C:attention}playing{}, add {C:money}Gold Seals{} to",
 					"all {C:attention}Enhanced{} cards in scoring hand",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand"
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand#2#"
 				},
 			},
 			c_csau_rentafriend = {
@@ -2764,7 +2765,7 @@ return {
 				text = {
 					"While {C:attention}playing{}, all Jokers in ",
 					"shop are {C:money}Rental{} and {C:dark_edition}Negative{}",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Joker"
+					"{C:vhs}Running Time{}: {C:attention}#1#{} Joker#2#"
 				},
 			},
 			c_csau_tbone = {

@@ -4,23 +4,23 @@
 -- ✔️ = Bunji/Don Beveridge compatibility
 G.foodjokers = {
 	-- Balatro (Vanilla) ✔️
-	['j_gros_michel'] = true,
-	['j_ice_cream'] = true,
-	['j_cavendish'] = true,
-	['j_turtle_bean'] = true,
-	['j_popcorn'] = true,
-	['j_ramen'] = true,
-	['j_selzer'] = true,
-	['j_diet_cola'] = true,
-	['j_egg'] = true,
+	['j_gros_michel'] = true, -- ✔️
+	['j_ice_cream'] = true, -- ✔️
+	['j_cavendish'] = true, -- ✔️
+	['j_turtle_bean'] = true, -- ✔️
+	['j_popcorn'] = true, -- ✔️
+	['j_ramen'] = true, -- ✔️
+	['j_selzer'] = true, -- ✔️
+	['j_diet_cola'] = true, -- ❌
+	['j_egg'] = true, -- ❌
 	-- Cardsauce ✔️
-	['j_csau_meat'] = true,
-	['j_csau_fantabulous'] = true,
-	['j_csau_crudeoil'] = true,
-	['j_csau_grannycream'] = true,
-	['j_csau_toeofsatan'] = true,
-	['j_csau_chips'] = true,
-	['j_csau_mug'] = true,
+	['j_csau_meat'] = true, -- ✔️
+	['j_csau_fantabulous'] = true, -- ✔️
+	['j_csau_crudeoil'] = true, -- ✔️
+	['j_csau_grannycream'] = true, -- ✔️
+	['j_csau_toeofsatan'] = true, -- ✔️
+	['j_csau_chips'] = true, -- ✔️
+	['j_csau_mug'] = true, -- ✔️
 	-- Cryptid
 	['j_cry_pickle'] = true,
 	['j_cry_chili_pepper'] = true,
@@ -35,16 +35,16 @@ G.foodjokers = {
 	['j_cry_caramel'] = true,
 	['j_cry_oldcandy'] = true,
 	-- Neato's Jokers ✔️
-	['j_neat_icecreamsandwich'] = true,
-	['j_neat_frostedprimerib'] = true,
-	['j_neat_bananastand'] = true,
+	['j_neat_icecreamsandwich'] = true, -- ✔️
+	['j_neat_frostedprimerib'] = true, -- ✔️
+	['j_neat_bananastand'] = true, -- ✔️
 	-- Extra Credit
-	['j_ExtraCredit_badapple'] = true,
-	['j_ExtraCredit_espresso'] = true,
-	['j_ExtraCredit_ambrosia'] = true,
-	['j_ExtraCredit_candynecklace'] = true,
-	['j_ExtraCredit_compost'] = true,
-	['j_ExtraCredit_starfruit'] = true,
+	['j_ExtraCredit_badapple'] = true, -- ✔️
+	['j_ExtraCredit_espresso'] = true, -- ✔️
+	['j_ExtraCredit_ambrosia'] = true, -- ✔️
+	['j_ExtraCredit_candynecklace'] = true, -- ✔️
+	['j_ExtraCredit_compost'] = true, -- ✔️
+	['j_ExtraCredit_starfruit'] = true, -- ✔️
 	-- Bunco
 	['j_bunc_starfruit'] = true,
 	-- Ortalab
@@ -80,8 +80,8 @@ G.foodjokers = {
 	-- Buffoonery
 	['j_buf_gfondue'] = true,
 	['j_buf_camarosa'] = true,
-	-- Aikoyori's Shenanigans
-	['j_akyrs_eat_pant'] = true,
+	-- Aikoyori's Shenanigans ❌
+	['j_akyrs_eat_pant'] = true, -- ❌
 	-- Prism
 	['j_prism_pizza_cap'] = true,
 	['j_prism_pizza_mar'] = true,
@@ -93,11 +93,11 @@ G.foodjokers = {
 	['j_prism_whiskey'] = true,
 	-- JoeyJokers
 	['j_joey_vegemite'] = true,
-	-- Plantain
-	['j_pl_plantain'] = true,
-	['j_pl_apple_pie'] = true,
-	['j_pl_grape_soda'] = true,
-	['j_pl_raw_meat'] = true,
+	-- Plantain ✔️
+	['j_pl_plantain'] = true, -- ✔️
+	['j_pl_apple_pie'] = true, -- ✔️
+	['j_pl_grape_soda'] = true, -- ✔️
+	['j_pl_raw_meat'] = true, -- ❌
 }
 
 local function inject(self)

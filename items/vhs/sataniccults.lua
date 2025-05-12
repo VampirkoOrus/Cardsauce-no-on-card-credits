@@ -29,12 +29,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.xmult, card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
-function consumInfo.set_ability(self, card, initial, delay_sprites)
-    if next(SMODS.find_card("c_csau_moodyblues")) then
-        card.ability.extra.runtime = card.ability.extra.runtime*2
-    end
-end
-
 function consumInfo.calculate(self, card, context)
     if card.ability.activated and context.individual and context.cardarea == G.hand and not context.final_scoring_step then
         if SMODS.has_enhancement(context.other_card, 'm_gold') then

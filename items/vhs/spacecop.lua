@@ -23,12 +23,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
-function consumInfo.set_ability(self, card, initial, delay_sprites)
-    if next(SMODS.find_card("c_csau_moodyblues")) then
-        card.ability.extra.runtime = card.ability.extra.runtime*2
-    end
-end
-
 function consumInfo.calculate(self, card, context)
     if card.ability.activated and context.modify_level_increment and context.card then
         if context.card.ability.set == 'Planet' and card.ability then

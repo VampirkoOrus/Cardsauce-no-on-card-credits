@@ -8,8 +8,6 @@ local jokerInfo = {
 	eternal_compat = false,
 	perishable_compat = true,
 	hasSoul = true,
-	width = 284,
-	height = 380,
 	streamer = "vinny",
 }
 
@@ -28,10 +26,6 @@ end
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.guff } }
 	return { vars = { } }
-end
-
-function jokerInfo.set_sprites(self, card, _front)
-	G.FUNCS.csau_set_big_sprites(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)

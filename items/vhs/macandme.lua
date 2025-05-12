@@ -24,12 +24,6 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.runtime-card.ability.extra.uses } }
 end
 
-function consumInfo.set_ability(self, card, initial, delay_sprites)
-    if next(SMODS.find_card("c_csau_moodyblues")) then
-        card.ability.extra.runtime = card.ability.extra.runtime*2
-    end
-end
-
 function consumInfo.calculate(self, card, context)
     if card.ability.activated and context.cardarea == G.play and context.repetition and not context.repetition_only then
         if (context.scoring_hand[1] and context.other_card == context.scoring_hand[1]) or (context.scoring_hand[2] and context.other_card == context.scoring_hand[2]) then
