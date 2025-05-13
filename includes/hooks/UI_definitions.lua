@@ -197,15 +197,15 @@ function G.UIDEF.morshu_save(existing_morshu_area)
     return t
 end
 
-local function illegal_morshu_area(area)
-	return (area == G.morshu_area or area == G.pack_cards)
+local function illegal_morshu_area(area, card)
+	return not (area == G.shop_vouchers or area == G.shop_jokers or area == G.shop_booster)
 end
 
 --I wish i didnt have to overwrite this whole thing but it gives me no fuckin choice i hate working with UI -keku
 local cscui_ref = create_shop_card_ui
 function create_shop_card_ui(card, type, area)
 	local morshu_exists = not not G.morshu_save
-	if (G.morshu_area or morshu_exists) and not illegal_morshu_area(card.area) then
+	if (G.morshu_area or morshu_exists) and not illegal_morshu_area(card.area, card) then
 		G.E_MANAGER:add_event(Event({
 			trigger = 'after',
 			delay = 0.43,
@@ -431,7 +431,7 @@ function G.UIDEF.card_focus_ui(card)
 					func = 'can_buy', button = 'buy_from_shop', card_width = card_width, buy_and_use = buy_and_use
 				}
 			end
-		elseif not illegal_morshu_area(card.area) then
+		elseif not illegal_morshu_area(card.area, card) then
 			base_attach.children.use = G.UIDEF.card_focus_button{
 				card = card, parent = base_attach, type = 'save',
 				func = nil, button = 'save_to_morshu', card_width = card_width, card_height = card_height
