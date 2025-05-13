@@ -2411,9 +2411,7 @@ return {
 			j_csau_jokerdrive = {
 				name = "Jokerdrive",
 				text = {
-					"{C:mult}+#1#{} Mult per {C:attention}Ante{}",
-					"if you do not have a {C:stand}Stand{}",
-					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
+					"{C:mult}+#1#{} Mult if you do not have a {C:stand}Stand{}",
 				},
 			},
 			j_csau_memehouse = {

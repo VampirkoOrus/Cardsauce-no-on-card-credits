@@ -2,7 +2,7 @@ local jokerInfo = {
     name = "Jokerdrive",
     config = {
         extra = {
-            mult_mod = 5,
+            mult_mod = 15,
         },
     },
     rarity = 1,
@@ -20,7 +20,7 @@ local jokerInfo = {
 
 local function get_mult(card)
     if not G.FUNCS.csau_get_leftmost_stand() then
-        return G.GAME.round_resets.ante * card.ability.extra.mult_mod
+        return 15
     else
         return 0
     end
@@ -28,11 +28,11 @@ end
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
-    return { vars = { card.ability.extra.mult_mod, get_mult(card) } }
+    return { vars = { card.ability.extra.mult_mod } }
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.joker_main and context.cardarea == G.jokers then
+    if context.joker_main and context.cardarea == G.jokers and get_mult(card) > 0 then
         return {
             mult = get_mult(card)
         }
