@@ -2752,9 +2752,9 @@ return {
 			c_csau_devilstory = {
 				name = "Devil Story",
 				text = {
-					"While {C:attention}playing{}, add {C:money}Gold Seals{} to",
-					"all {C:attention}Enhanced{} cards in scoring hand",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand#2#"
+					"While {C:attention}playing{}, each played {C:attention}Enhanced{} card",
+					"gives {C:money}$#1#{} when scored",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
 			c_csau_rentafriend = {

@@ -9,7 +9,8 @@ local consumInfo = {
         activated = false,
         destroyed = false,
         extra = {
-            runtime = 1,
+            dollars = 3,
+            runtime = 3,
             uses = 0,
         },
     },
@@ -26,22 +27,21 @@ function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gong } }
     return { 
         vars = {
-            card.ability.extra.runtime-card.ability.extra.uses,
-            (card.ability.extra.runtime-card.ability.extra.uses) > 1 and 's' or ''
+            card.ability.extra.dollars,
+            card.ability.extra.runtime-card.ability.extra.uses
         }
     }
 end
 
 function consumInfo.calculate(self, card, context)
-    if card.ability.activated and context.before and not card.debuff and not context.blueprint then
+    if card.ability.activated and context.individual and context.cardarea == G.play and not card.debuff and not context.blueprint and not context.repetition then
         local count = 0
         for i, v in ipairs(context.scoring_hand) do
-            if not v.seal and v.ability.effect ~= "Base" then
+            if v.ability.effect ~= "Base" then
                 count = count + 1
-                v.seal_delay = true
-                v:set_seal("Gold", nil, nil, {set_func = function()
-                    card:juice_up()
-                end} )
+                return {
+                    dollars = card.ability.extra.dollars
+                }
             end
         end
         if count > 0 then
