@@ -76,30 +76,6 @@ times = 1
 
 [[patches]]
 [patches.pattern]
-target = "card.lua"
-pattern = '''end
-if self.ability.name == 'Ectoplasm' then'''
-position = "at"
-payload = '''end
-if self.ability.name == 'Ectoplasm' and SMODS.spectral_lower_handsize() then'''
-match_indent = true
-times = 1
-
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = "G.hand:change_size(-1)"
-position = "at"
-payload = '''
-if SMODS.spectral_lower_handsize() then
-    G.hand:change_size(-1)
-end
-'''
-match_indent = true
-times = 1
-
-[[patches]]
-[patches.pattern]
 target = "functions/UI_definitions.lua"
 pattern = "button_contents = {n=G.UIT.T, config={text = localize('b_use'),colour = G.C.WHITE, scale = 0.5}}"
 position = "at"

@@ -18,7 +18,7 @@ SMODS.Consumable:take_ownership('ouija', {
                 end
             }))
         end
-        if SMODS.spectral_lower_handsize() then
+        if SMODS.spectral_downside() then
             G.hand:change_size(-1)
         end
         for i = 1, #G.hand.cards do

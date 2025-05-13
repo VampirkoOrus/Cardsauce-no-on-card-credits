@@ -1099,10 +1099,9 @@ function G.FUNCS.stand_preview_deck(amount)
 	return preview_cards
 end
 
-SMODS.spectral_lower_handsize = function(context)
+SMODS.spectral_downside = function()
 	local rem = G.FUNCS.find_activated_tape('c_csau_remlezar')
 	if rem and not rem.ability.destroyed then
-		send('what')
 		rem:juice_up()
 		rem.ability.extra.uses = rem.ability.extra.uses+1
 		if rem.ability.extra.uses >= rem.ability.extra.runtime then
@@ -1111,11 +1110,10 @@ SMODS.spectral_lower_handsize = function(context)
 		end
 		return false
 	end
-	send('how')
 	return true
 end
 
-SMODS.will_destroy_card = function(context)
+SMODS.will_destroy_card = function()
 	local sew = G.FUNCS.find_activated_tape('c_csau_sew')
 	if sew and not sew.ability.destroyed then
 		sew:juice_up()
