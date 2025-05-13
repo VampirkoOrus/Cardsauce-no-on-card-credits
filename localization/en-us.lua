@@ -493,6 +493,7 @@ return {
 			k_bighunks = "Mult!",
 			k_vhs_fin = "Fin!",
 			k_outlaw_default = "Debuffs all ranks scored last hand",
+			b_planet_card="Planet Card",
 
 
 
@@ -2580,6 +2581,20 @@ return {
 					"non-{C:clubs}Cardsauce{} {C:attention}jokers{}",
 				}
 			}
+		},
+		Partner={
+			pnr_csau_partner_roche={
+				name = "Roche",
+				text = {
+					"Upgrade first played",
+					"{C:attention}poker hand{} each {C:attention}#1#",
+				},
+				unlock={
+					"Used {C:attention}Motorcyclist Joker",
+					"to win on {C:attention}Gold",
+					"{C:attention}Stake{} difficulty",
+				},
+			},
 		},
 		VHS = {
 			c_csau_blackspine = {

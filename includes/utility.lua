@@ -127,6 +127,10 @@ function csau_filter_loading(item_type, args)
 			if CardSleeves then
 				return true
 			end
+		elseif args.key == 'Partner' then
+			if Partner_API then
+				return true
+			end
 		else
 			if csau_enabled['enable'..args.key..'s'] then
 				return true
@@ -220,7 +224,10 @@ function load_cardsauce_item(file_key, item_type, key)
 				end
 			end
 		end
-		
+	end
+
+	if info.has_shiny then
+		info.poke_custom_prefix = 'csau_'..file_key
 	end
 
 	if item_type == 'Deck' then
@@ -237,6 +244,13 @@ function load_cardsauce_item(file_key, item_type, key)
 	else
 		if CardSleeves and item_type == 'Sleeve' then
 			new_item = CardSleeves.Sleeve(info)
+			for k_, v_ in pairs(new_item) do
+				if type(v_) == 'function' then
+					new_item[k_] = info[k_]
+				end
+			end
+		elseif Partner_API and item_type == 'Partner' then
+			new_item = Partner_API.Partner(info)
 			for k_, v_ in pairs(new_item) do
 				if type(v_) == 'function' then
 					new_item[k_] = info[k_]
@@ -263,8 +277,14 @@ function load_cardsauce_item(file_key, item_type, key)
 		local height = 95
 		if item_type == 'Tag' then width = 34; height = 34 end
 		if item_type == 'Sleeve' then width = 73 end
+		if item_type == 'Partner' then width = 46; height = 58 end
 		SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or width, py = new_item.height or height })
+		if info.has_shiny then
+			SMODS.Atlas({ key = file_key..'_shiny', path = "pokermon-shiny/" .. key .. "/" .. file_key .. ".png", px = new_item.width or width, py = new_item.height or height })
+		end
 	end
+
+
 end
 
 math.randomseed(os.time())
