@@ -26,7 +26,7 @@ SMODS.Consumable:take_ownership('c_ouija', {
 
         delay(0.2)
 
-        local _rank = pseudorandom_element({'2','3','4','5','6','7','8','9','T','J','Q','K','A'}, pseudoseed('ouija'))
+        local _rank = pseudorandom_element(SMODS.Ranks, pseudoseed('ouija'))
         for _, v in ipairs(G.hand.cards) do
             G.E_MANAGER:add_event(Event({
                 func = function()
