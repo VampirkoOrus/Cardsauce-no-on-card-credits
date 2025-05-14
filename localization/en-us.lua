@@ -3088,7 +3088,7 @@ return {
 				},
 			},
 			c_csau_vento_watchtower = {
-				name = "All Along The Watchtower",
+				name = "All Along Watchtower",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult if deck is {C:attention}52{} cards,",
 					"{C:attention}2-A{} for each suit"
