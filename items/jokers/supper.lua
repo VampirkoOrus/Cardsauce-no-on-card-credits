@@ -9,7 +9,7 @@ local jokerInfo = {
 		proc = 0
 	},
 	rarity = 3,
-	cost = 6,
+	cost = 7,
 	unlocked = false,
 	blueprint_compat = true,
 	eternal_compat = true,
