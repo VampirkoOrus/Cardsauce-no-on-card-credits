@@ -133,7 +133,7 @@ SMODS.Consumable:take_ownership('c_familiar', {
         delay(0.3)
 
         if downside then
-            SMODS.calculate_context({ remove_playing_cards = true, removed = destroyed_cards })
+            SMODS.calculate_context({ remove_playing_cards = true, removed = {destroyed_card} })
         end
     end
 }, true)
@@ -206,7 +206,7 @@ SMODS.Consumable:take_ownership('c_incantation', {
         delay(0.3)
 
         if downside then
-            SMODS.calculate_context({ remove_playing_cards = true, removed = destroyed_cards })
+            SMODS.calculate_context({ remove_playing_cards = true, removed = {destroyed_card} })
         end
     end
 }, true)
@@ -273,7 +273,7 @@ SMODS.Consumable:take_ownership('c_grim', {
         delay(0.3)
 
         if downside then
-            SMODS.calculate_context({ remove_playing_cards = true, removed = destroyed_cards })
+            SMODS.calculate_context({ remove_playing_cards = true, removed = {destroyed_card} })
         end
     end
 }, true)
