@@ -198,14 +198,14 @@ function G.UIDEF.morshu_save(existing_morshu_area)
 end
 
 local function illegal_morshu_area(area, card)
-	return not (area == G.shop_vouchers or area == G.shop_jokers or area == G.shop_booster)
+	return not (area == G.shop_vouchers or area == G.shop_jokers or area == G.shop_booster or (area and area.config.type == 'shop' and not area == G.morshu_area))
 end
 
 --I wish i didnt have to overwrite this whole thing but it gives me no fuckin choice i hate working with UI -keku
 local cscui_ref = create_shop_card_ui
 function create_shop_card_ui(card, type, area)
 	local morshu_exists = not not G.morshu_save
-	if (G.morshu_area or morshu_exists) and not illegal_morshu_area(card.area, card) then
+	if (G.morshu_area or morshu_exists) and not illegal_morshu_area(area, card) then
 		G.E_MANAGER:add_event(Event({
 			trigger = 'after',
 			delay = 0.43,

@@ -171,7 +171,7 @@ local itemsToLoad = {
     },
 
     Partner = {
-        --'partner_roche',
+        'partner_roche',
     },
 
     VHS = {

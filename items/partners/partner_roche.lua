@@ -27,6 +27,10 @@ partnerInfo.check_for_unlock = function(self, args)
 end
 
 partnerInfo.calculate = function(self, card, context)
+    if context.partner_setting_blind and not card.ability.locked then
+        local eval = function(card) return not card.ability.locked end
+        juice_card_until(card, eval, true)
+    end
     if context.partner_before and G.GAME.current_round.hands_played == 0 and not card.ability.locked then
         card.ability.locked = true
         return {
