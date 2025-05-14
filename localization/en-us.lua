@@ -3488,7 +3488,7 @@ return {
 				text = {
 					"Start run with {C:attention,T:v_overstock_norm}#1#{}",
 					"{C:clubs}Cardsauce{} Jokers appear",
-					"{C:attention}3x{} more often",
+					"{C:attention}2x{} more often",
 				},
 			},
 			b_csau_varg = {
