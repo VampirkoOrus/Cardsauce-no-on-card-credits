@@ -28,14 +28,18 @@ function consumInfo.in_pool(self, args)
     if next(SMODS.find_card('j_showman')) then
         return true
     end
-    
     return (not G.GAME.used_jokers['c_csau_vento_gold'])
 end
 
 function consumInfo.calculate(self, card, context)
     local bad_context = context.repetition or context.blueprint or context.individual or context.retrigger_joker
     if context.before and not card.debuff and not bad_context then
-        
+        local gold = {}
+        for k, v in ipairs(context.scoring_hand) do
+            if v.ability.effect == "Gold Card" then
+                gold[#gold+1] = v
+            end
+        end
         if pseudorandom('thisisrequiem') < G.FUNCS.csau_add_chance(card.ability.extra.chance+#gold, {multiply = true}) / card.ability.extra.divide then
             return {
                 func = function()
