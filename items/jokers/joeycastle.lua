@@ -27,7 +27,7 @@ function jokerInfo.calculate(self, card, context)
             check_for_unlock({ type = "high_joeyscastle" })
         end
         return {
-            dollars = to_big(card.ability.money),
+            dollars = card.ability.money,
             colour = G.C.MONEY,
             card = card
         }
