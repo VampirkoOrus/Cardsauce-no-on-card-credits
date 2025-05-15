@@ -17,9 +17,9 @@ extern bool shadow;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_1;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_2;
 
-extern MY_HIGHP_OR_MEDIUMP vec3 primaryColor; // default red
-extern MY_HIGHP_OR_MEDIUMP vec3 secondaryColor; // default yellow
-extern MY_HIGHP_OR_MEDIUMP vec3 tertiaryColor; // default blue
+extern MY_HIGHP_OR_MEDIUMP vec3 primary_color; // default red
+extern MY_HIGHP_OR_MEDIUMP vec3 secondary_color; // default yellow
+extern MY_HIGHP_OR_MEDIUMP vec3 tertiary_color; // default blue
 extern MY_HIGHP_OR_MEDIUMP number gamma; // gamma correction (tweak this to change contrast, I think 1.5 is pretty good though)
 
 // function defs for required functions later in the code
@@ -35,7 +35,7 @@ float colorDistance(vec3 color1, vec3 color2) {
 
 vec4 posterise(vec4 inputColor) {
 	vec3 c = inputColor.rgb;
-	c = pow(c, vec3(1.5));
+	c = pow(c, vec3(gamma)); // apply gamma correction
 
 	// target colors (pure red, yellow, and blue)
 	vec3 blackColor = vec3(0.0, 0.0, 0.0);
@@ -44,9 +44,9 @@ vec4 posterise(vec4 inputColor) {
 	// distances to each target color
 	float distanceToBlack = colorDistance(c, blackColor - 0.0); // tweak this to add extra distance to black to make colours come through more
 	float distanceToWhite = colorDistance(c, whiteColor + 0.0); // tweak this to add extra distance to white to make colours come through more
-	float distanceToPrimary = colorDistance(c, primaryColor);
-	float distanceToSecondary = colorDistance(c, secondaryColor);
-	float distanceToTertiary = colorDistance(c, tertiaryColor);
+	float distanceToPrimary = colorDistance(c, primary_color);
+	float distanceToSecondary = colorDistance(c, secondary_color);
+	float distanceToTertiary = colorDistance(c, tertiary_color);
 
 	// closest color
 	vec3 closestColor = blackColor; // initialize to black
@@ -58,17 +58,17 @@ vec4 posterise(vec4 inputColor) {
 	}
 
 	if (distanceToPrimary < shortestDistance) {
-		closestColor = primaryColor;
+		closestColor = primary_color;
 		shortestDistance = distanceToPrimary;
 	}
 
 	if (distanceToSecondary < shortestDistance) {
-		closestColor = secondaryColor;
+		closestColor = secondary_color;
 		shortestDistance = distanceToSecondary;
 	}
 
 	if (distanceToTertiary < shortestDistance) {
-		closestColor = tertiaryColor;
+		closestColor = tertiary_color;
 		shortestDistance = distanceToTertiary;
 	}
 
