@@ -37,7 +37,7 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.pre_discard and #context.full_hand >= 5 then
+    if context.pre_discard and not context.blueprint and #context.full_hand >= 5 then
         local mod = math.floor(#context.full_hand / 5)
         card.ability.extra.mult = card.ability.extra.mult + ( card.ability.extra.mult_mod * mod )
         G.E_MANAGER:add_event(Event({ func = function()
