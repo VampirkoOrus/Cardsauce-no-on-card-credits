@@ -7,6 +7,7 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
+	has_shiny = true,
 	unlock_condition = {type = 'win_deck', deck = 'b_green'},
 	streamer = "other",
 }

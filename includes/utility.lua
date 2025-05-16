@@ -226,7 +226,7 @@ function load_cardsauce_item(file_key, item_type, key)
 		end
 	end
 
-	if info.has_shiny then
+	if (SMODS.Mods["Pokermon"] or {}).can_load and info.has_shiny then
 		info.poke_custom_prefix = 'csau_'..file_key
 	end
 
@@ -279,7 +279,7 @@ function load_cardsauce_item(file_key, item_type, key)
 		if item_type == 'Sleeve' then width = 73 end
 		if item_type == 'Partner' then width = 46; height = 58 end
 		SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or width, py = new_item.height or height })
-		if info.has_shiny then
+		if (SMODS.Mods["Pokermon"] or {}).can_load and info.has_shiny then
 			SMODS.Atlas({ key = file_key..'_shiny', path = "pokermon-shiny/" .. key .. "/" .. file_key .. ".png", px = new_item.width or width, py = new_item.height or height })
 		end
 	end

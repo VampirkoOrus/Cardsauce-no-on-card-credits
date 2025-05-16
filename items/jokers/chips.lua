@@ -12,6 +12,7 @@ local jokerInfo = {
     eternal_compat = false,
     perishable_compat = false,
     pools = { ["Food"] = true },
+    has_shiny = true,
     streamer = "joel",
 }
 

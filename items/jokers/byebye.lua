@@ -18,6 +18,7 @@ local jokerInfo = {
     blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
+    has_shiny = true,
     unlock_condition = {type = 'win_deck', deck = 'b_abandoned'},
     streamer = "joel",
 }
