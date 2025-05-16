@@ -151,3 +151,40 @@ function get_flush(hand, sub_count)
     return {}
   end
 end
+
+local ref_alert_space = alert_no_space
+alert_no_space = function(card, area)
+	if card.config.center.key == 'j_csau_ufo' then
+		G.CONTROLLER.locks.no_space = true
+		attention_text({
+			scale = 0.9, text = localize('k_ufo_alert'), hold = 0.9, align = 'cm',
+			cover = area, cover_padding = 0.1, cover_colour = adjust_alpha(G.C.BLACK, 0.7)
+		})
+		card:juice_up(0.3, 0.2)
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 0.06*G.SETTINGS.GAMESPEED,
+			blockable = false,
+			blocking = false,
+			func = function()
+				play_sound('tarot2', 0.76, 0.4);
+				return true
+			end
+		}))
+		play_sound('tarot2', 1, 0.4)
+
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 0.5*G.SETTINGS.GAMESPEED,
+			blockable = false,
+			blocking = false,
+			func = function()
+				G.CONTROLLER.locks.no_space = nil
+				return true 
+			end
+		}))
+		return
+	end
+	
+	return ref_alert_space(card, area)
+end

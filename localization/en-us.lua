@@ -493,8 +493,8 @@ return {
 			k_bighunks = "Mult!",
 			k_vhs_fin = "Fin!",
 			k_outlaw_default = "Debuffs all ranks scored last hand",
+			k_ufo_alert = "Nothing to abduct!",
 			b_planet_card="Planet Card",
-
 
 
 			-- badge titles

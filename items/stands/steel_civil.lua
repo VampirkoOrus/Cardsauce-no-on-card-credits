@@ -84,8 +84,6 @@ SMODS.Consumable:take_ownership('c_emperor', {
         local tarot_count = self.config.tarots
         local found_card = force_fool_card()
 
-        sendDebugMessage('tarot count: '..tarot_count)
-        sendDebugMessage('space: '..tostring(G.consumeables.config.card_limit - #G.consumeables.cards))
         for i = 1, math.min(tarot_count, G.consumeables.config.card_limit - #G.consumeables.cards) do
             local force_key = i==1 and found_card
             G.E_MANAGER:add_event(Event({
@@ -98,7 +96,6 @@ SMODS.Consumable:take_ownership('c_emperor', {
                         new_tarot:add_to_deck()
                         G.consumeables:emplace(new_tarot)
                         card:juice_up(0.3, 0.5)
-                        sendDebugMessage('checking space: '..tostring(G.consumeables.config.card_limit - #G.consumeables.cards))
                     end
                     return true    
                 end
