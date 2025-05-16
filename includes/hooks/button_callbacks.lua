@@ -11,6 +11,11 @@ SMODS.Sound({
 local ref_check_buy_space = G.FUNCS.check_for_buy_space
 G.FUNCS.check_for_buy_space = function(card)
     if card.config.center.key == 'j_csau_ufo' then
+        if #G.jokers.cards < 1 then
+            alert_no_space(card, G.jokers)
+            return false
+        end
+        
         return true
     end
     
