@@ -38,7 +38,7 @@ local function hand_level_reset(card, delayMod)
 	update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level='1'})
 	delay(1.3/delayMod)
 	for k, v in pairs(G.GAME.hands) do
-		if v.level > 1 then
+		if to_big(v.level) > to_big(1) then
 			level_up_hand(self, k, true, -G.GAME.hands[k].level + 1)
 		end
 	end

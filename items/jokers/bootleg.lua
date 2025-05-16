@@ -438,6 +438,10 @@ end
 
 function jokerInfo.draw(self, card, layer)
     if card.config.center.atlas ~= "csau_bootleg" then
+        G.SHADERS['csau_bootleg']:send('primary_color',   {1.0, 0.0, 0.0}) -- default red
+        G.SHADERS['csau_bootleg']:send('secondary_color', {1.0, 1.0, 0.0}) -- default yellow
+        G.SHADERS['csau_bootleg']:send('tertiary_color',  {0.0, 0.0, 1.0}) -- default blue
+        G.SHADERS['csau_bootleg']:send('gamma', 1.5) -- default 1.5 (changes constrast)
         card.children.center:draw_shader('csau_bootleg', nil, card.ARGS.send_to_shader)
     end
 end

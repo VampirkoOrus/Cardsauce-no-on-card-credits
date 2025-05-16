@@ -17,6 +17,11 @@ extern bool shadow;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_1;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_2;
 
+extern MY_HIGHP_OR_MEDIUMP vec3 primary_color; // default red
+extern MY_HIGHP_OR_MEDIUMP vec3 secondary_color; // default yellow
+extern MY_HIGHP_OR_MEDIUMP vec3 tertiary_color; // default blue
+extern MY_HIGHP_OR_MEDIUMP number gamma; // gamma correction (tweak this to change contrast, I think 1.5 is pretty good though)
+
 // function defs for required functions later in the code
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv);
 number hue(number s, number t, number h);
@@ -30,21 +35,18 @@ float colorDistance(vec3 color1, vec3 color2) {
 
 vec4 posterise(vec4 inputColor) {
 	vec3 c = inputColor.rgb;
-	c = pow(c, vec3(1.5)); // gamma correction (tweak this to change contrast, I think 1.5 is pretty good though)
+	c = pow(c, vec3(gamma)); // apply gamma correction
 
 	// target colors (pure red, yellow, and blue)
 	vec3 blackColor = vec3(0.0, 0.0, 0.0);
 	vec3 whiteColor = vec3(1.0, 1.0, 1.0);
-	vec3 redColor = vec3(1.0, 0.0, 0.0);
-	vec3 yellowColor = vec3(1.0, 1.0, 0.0);
-	vec3 blueColor = vec3(0.0, 0.0, 1.0);
 
 	// distances to each target color
 	float distanceToBlack = colorDistance(c, blackColor - 0.0); // tweak this to add extra distance to black to make colours come through more
 	float distanceToWhite = colorDistance(c, whiteColor + 0.0); // tweak this to add extra distance to white to make colours come through more
-	float distanceToRed = colorDistance(c, redColor);
-	float distanceToYellow = colorDistance(c, yellowColor);
-	float distanceToBlue = colorDistance(c, blueColor);
+	float distanceToPrimary = colorDistance(c, primary_color);
+	float distanceToSecondary = colorDistance(c, secondary_color);
+	float distanceToTertiary = colorDistance(c, tertiary_color);
 
 	// closest color
 	vec3 closestColor = blackColor; // initialize to black
@@ -55,19 +57,19 @@ vec4 posterise(vec4 inputColor) {
 		shortestDistance = distanceToWhite;
 	}
 
-	if (distanceToRed < shortestDistance) {
-		closestColor = redColor;
-		shortestDistance = distanceToRed;
+	if (distanceToPrimary < shortestDistance) {
+		closestColor = primary_color;
+		shortestDistance = distanceToPrimary;
 	}
 
-	if (distanceToYellow < shortestDistance) {
-		closestColor = yellowColor;
-		shortestDistance = distanceToYellow;
+	if (distanceToSecondary < shortestDistance) {
+		closestColor = secondary_color;
+		shortestDistance = distanceToSecondary;
 	}
 
-	if (distanceToBlue < shortestDistance) {
-		closestColor = blueColor;
-		shortestDistance = distanceToBlue;
+	if (distanceToTertiary < shortestDistance) {
+		closestColor = tertiary_color;
+		shortestDistance = distanceToTertiary;
 	}
 
 	c = closestColor;
@@ -78,18 +80,18 @@ vec4 posterise(vec4 inputColor) {
 vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 {
 	vec4 tex = Texel(texture, texture_coords);
-    vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
+	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
-  	// Dummy, doesn't do anything but at least it makes the shader useable  
-    if (uv.x > uv.x * 2){
-        uv = bootleg;
-    }
+	// Dummy, doesn't do anything but at least it makes the shader useable  
+	if (uv.x > uv.x * 2){
+		uv = bootleg;
+	}
 
-  	// output
-  	tex = posterise(tex);
+	// output
+    	tex = posterise(tex);
 
-  	// required for dissolve fx
-    return dissolve_mask(tex*colour, texture_coords, uv);
+	// required for dissolve fx
+	return dissolve_mask(tex*colour, texture_coords, uv);
 }
 
 // --- below are all required functions --- //

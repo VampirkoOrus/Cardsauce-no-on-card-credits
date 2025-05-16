@@ -170,6 +170,10 @@ local itemsToLoad = {
         'banned_jokers',
     },
 
+    Partner = {
+        'partner_roche',
+    },
+
     VHS = {
         'blackspine',
         'remlezar',

@@ -52,7 +52,7 @@ function jokerInfo.calculate(self, card, context)
             card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult}}})
         end
     end
-    if context.joker_main and context.cardarea == G.jokers then
+    if context.joker_main and context.cardarea == G.jokers and card.ability.extra.x_mult > 1 then
         return {
             message = localize{type='variable',key='a_xmult',vars={to_big(card.ability.extra.x_mult)}},
             Xmult_mod = card.ability.extra.x_mult,

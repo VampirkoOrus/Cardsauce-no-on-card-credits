@@ -494,6 +494,7 @@ return {
 			k_vhs_fin = "Fin!",
 			k_outlaw_default = "Debuffs all ranks scored last hand",
 			k_ufo_alert = "Nothing to abduct!",
+			b_planet_card="Planet Card",
 
 
 			-- badge titles
@@ -2411,9 +2412,7 @@ return {
 			j_csau_jokerdrive = {
 				name = "Jokerdrive",
 				text = {
-					"{C:mult}+#1#{} Mult per {C:attention}Ante{}",
-					"if you do not have a {C:stand}Stand{}",
-					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult{}{C:inactive}){}",
+					"{C:mult}+#1#{} Mult if you do not have a {C:stand}Stand{}",
 				},
 			},
 			j_csau_memehouse = {
@@ -2582,6 +2581,20 @@ return {
 					"non-{C:clubs}Cardsauce{} {C:attention}jokers{}",
 				}
 			}
+		},
+		Partner={
+			pnr_csau_partner_roche={
+				name = "Roche",
+				text = {
+					"Upgrade first played",
+					"{C:attention}poker hand{} each {C:attention}#1#",
+				},
+				unlock={
+					"Used {C:attention}Motorcyclist Joker",
+					"to win on {C:attention}Gold",
+					"{C:attention}Stake{} difficulty",
+				},
+			},
 		},
 		VHS = {
 			c_csau_blackspine = {
@@ -2754,9 +2767,9 @@ return {
 			c_csau_devilstory = {
 				name = "Devil Story",
 				text = {
-					"While {C:attention}playing{}, add {C:money}Gold Seals{} to",
-					"all {C:attention}Enhanced{} cards in scoring hand",
-					"{C:vhs}Running Time{}: {C:attention}#1#{} Hand#2#"
+					"While {C:attention}playing{}, each played {C:attention}Enhanced{} card",
+					"gives {C:money}$#1#{} when scored",
+					"{C:vhs}Running Time{}: {C:attention}#2#{} Hands"
 				},
 			},
 			c_csau_rentafriend = {
@@ -3075,7 +3088,7 @@ return {
 				},
 			},
 			c_csau_vento_watchtower = {
-				name = "All Along The Watchtower",
+				name = "All Along Watchtower",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult if deck is {C:attention}52{} cards,",
 					"{C:attention}2-A{} for each suit"
@@ -3475,7 +3488,7 @@ return {
 				text = {
 					"Start run with {C:attention,T:v_overstock_norm}#1#{}",
 					"{C:clubs}Cardsauce{} Jokers appear",
-					"{C:attention}3x{} more often",
+					"{C:attention}2x{} more often",
 				},
 			},
 			b_csau_varg = {
