@@ -3043,7 +3043,7 @@ return {
 			c_csau_vento_gold = {
 				name = "Gold Experience",
 				text = {
-					"{C:green}#2# in #3#{} chance for played {V:1}#1#{}",
+					"{C:green}#1# in #2#{} chance for scored {V:1}#3#{}",
 					"to become {C:attention}Gold Cards{}",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} after using {C:tarot}The Arrow{}",
