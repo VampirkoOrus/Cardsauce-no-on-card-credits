@@ -51,6 +51,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
     }
 end
 
+function jokerInfo.in_pool(self, args)
+    return (G.jokers and #G.jokers.cards > 0)
+end
+
 function jokerInfo.add_to_deck(self, card)
     local deletable_jokers = {}
     for k, v in pairs(G.jokers.cards) do
@@ -63,6 +67,7 @@ function jokerInfo.add_to_deck(self, card)
         trigger = 'before',
         delay = 0.75,
         func = function()
+            card:juice_up()
             _card:start_dissolve()
         return true end
     }))
