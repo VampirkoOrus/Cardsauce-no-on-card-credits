@@ -12,6 +12,13 @@ local jokerInfo = {
     csau_dependencies = {
         'enableVHSs',
     },
+    csau_filters = {
+        require = {
+            config = {
+                enableVHSs = true,
+            }
+        }
+    },
     origin = {
         'rlm',
         'rlm_hitb',

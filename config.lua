@@ -27,4 +27,6 @@ return {
 	['enableTags'] = true,
 	['enableVouchers'] = true,
 	['enableBoosters'] = true,
+	['forceDisableOrtalab'] = false,
+	['forceEnableOrtalab'] = false,
 }

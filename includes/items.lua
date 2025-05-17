@@ -444,3 +444,11 @@ if csau_enabled['enableStands'] then
         path = 'stand_mask.fs',
     }
 end
+
+if SMODS.current_mod.DT.ortalab_dlc then
+    local init, error = SMODS.load_file("includes/ortalab_dlc.lua")
+    if error then sendErrorMessage("[Cardsauce] Failed to load ortalab_dlc with error "..error) else
+        local data = init()
+        sendDebugMessage("[Cardsauce] Loaded hook: ortalab_dlc")
+    end
+end

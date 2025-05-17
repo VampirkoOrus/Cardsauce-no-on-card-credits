@@ -104,16 +104,68 @@ local function dynamic_badges(info)
 	end
 end
 
+SMODS.Gradient({
+	key = 'ortalab_1',
+	colours = {
+		HEX('990000'),
+		HEX('990000')
+	}
+})
+
+SMODS.Gradient({
+	key = 'ortalab_2',
+	colours = {
+		HEX('E28585'),
+		HEX('E28585')
+	}
+})
+
+function create_dummy_ortalab(file_key, item_type, info)
+	if item_type == 'Joker' then
+		SMODS.Joker({
+			key = file_key..'_locked',
+			pos = {x = 8, y = 9},
+			loc_txt = {
+				name = 'Locked',
+				text = {'{s:1.1}Install {E:1,s:1.3,C:csau_ortalab_1}Ortalab'}
+			},
+			discovered = true,
+			no_doe = true,
+			rarity = (info and info.rarity) or nil,
+			in_pool = function(self)
+				return false
+			end,
+			set_badges = function(self, card, badges)
+				if card.area and card.area == G.jokers or card.config.center.discovered then
+					badges[#badges+1] = create_badge('Ortalab', HEX('990000'), HEX('E28585'), 0.9 )
+				end
+			end
+		})
+	end
+end
+
 function csau_filter_loading(item_type, args)
 	item_type = item_type or 'item'
 	if item_type == 'item' then
 		if args.dependencies then
-			for i, key in ipairs(args.dependencies) do
-				if not csau_enabled[key] then
+			if args.dependencies.Ortalab then
+				if csau_enabled['forceDisableOrtalab'] then
 					return false
+				elseif Ortalab then
+					return true
+				elseif not Ortalab and args.dependencies.Ortalab == 'loose' and csau_enabled['forceEnableOrtalab'] then
+					return true
+				else
+					create_dummy_ortalab(args.file_key, args.item_type)
 				end
+			else
+				for i, key in ipairs(args.dependencies) do
+					if not csau_enabled[key] then
+						return false
+					end
+				end
+				return true
 			end
-			return true
 		elseif args.streamer then
 			if ((args.streamer == 'vinny' or args.streamer == 'othervinny') and not csau_enabled['enableVinnyContent'])
 			or ((args.streamer == 'joel' or args.streamer == 'otherjoel') and not csau_enabled['enableJoelContent']) then
@@ -140,23 +192,77 @@ function csau_filter_loading(item_type, args)
 	end
 end
 
+function csau_filter_item(info, args)
+	if not info then return false end
+	if not info.csau_filters then return true end
+	local streamerCheck = true
+	if info.csau_filters.streamer then
+		if not csau_enabled[info.csau_filters.streamer] then
+			streamerCheck = false
+		end
+	end
+	local configCheck = true
+	local modCheck = true
+	if info.csau_filters.require then
+		if info.csau_filters.require.config then
+			for k, v in pairs(info.csau_filters.require.config) do
+				if not csau_enabled[k] then
+					configCheck = false
+				end
+			end
+		end
+		if info.csau_filters.require.mods then
+			local mod = info.csau_filters.require.mods
+			if mod.Ortalab then
+				if mod.Ortalab == 'strict' then
+					if not Ortalab then
+						modCheck = false
+						if not csau_enabled['forceDisableOrtalab'] then
+							create_dummy_ortalab(args.file_key, args.item_type, info)
+						end
+					end
+				elseif mod.Ortalab == 'loose' then
+					if not (Ortalab or csau_enabled['forceEnableOrtalab']) then
+						modCheck = false
+						if not csau_enabled['forceDisableOrtalab'] then
+							create_dummy_ortalab(args.file_key, args.item_type, info)
+						end
+					end
+				end
+			end
+		end
+	end
+	return (streamerCheck and configCheck and modCheck)
+end
+
 --- Load an item definition using SMODS
 --- @param file_key string file name to load within the "Items" directory, excluding file extension
 --- @param item_type string SMODS item type (such as Joker, Consumable, Deck, etc)
 --- @param no_badges boolean | nil Whether or not to display mod badges on this item
-function load_cardsauce_item(file_key, item_type, key)
+function load_cardsauce_item(file_key, item_type, key, args)
 	key = key or string.lower(item_type)..(item_type == 'VHS' and '' or 's')
-	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
+	local parent_folder = 'items/'
+	if args and args.ortalab then
+		parent_folder = 'items/ortalab/'
+	end
+	local info = assert(SMODS.load_file(parent_folder .. key .. "/" .. file_key .. ".lua"))()
 
-	if info.csau_dependencies then
-		if not csau_filter_loading('item', { key = file_key, type = item_type, dependencies = info.csau_dependencies }) then
+	if info.csau_filters then
+		if not csau_filter_item(info, { file_key = file_key, item_type = item_type }) then
 			return
 		end
-	elseif info.streamer then
-		if not csau_filter_loading('item', { key = file_key, type = item_type, streamer = info.streamer }) then
-			return
+	else
+		if info.csau_dependencies then
+			if not csau_filter_loading('item', { key = file_key, type = item_type, dependencies = info.csau_dependencies}) then
+				return
+			end
+		elseif info.streamer then
+			if not csau_filter_loading('item', { key = file_key, type = item_type, streamer = info.streamer}) then
+				return
+			end
 		end
 	end
+
 
 	info.key = file_key
 	if item_type ~= 'Challenge' and item_type ~= 'Edition' then
@@ -180,6 +286,19 @@ function load_cardsauce_item(file_key, item_type, key)
 			sb_ref(self, card, badges)
 			if card.area and card.area == G.jokers or card.config.center.discovered then
 				badges[#badges+1] = dynamic_badges(info)
+			end
+		end
+	end
+
+	if args and args.ortalab then
+		local sb_ref = function(self, card, badges) end
+		if info.set_badges then
+			sb_ref = info.set_badges
+		end
+		info.set_badges = function(self, card, badges)
+			sb_ref(self, card, badges)
+			if card.area and card.area == G.jokers or card.config.center.discovered then
+				badges[#badges+1] = create_badge('Ortalab', HEX('990000'), HEX('E28585'), 0.9 )
 			end
 		end
 	end
@@ -269,18 +388,23 @@ function load_cardsauce_item(file_key, item_type, key)
 		G.csau_animated_centers[info.key].dt = 0
 	end
 
+	local asset_folder = ''
+	if args and args.ortalab then
+		asset_folder = 'ortalab/'
+	end
+
 	if item_type == 'Blind' then
 		-- separation for animated spritess
-		SMODS.Atlas({ key = file_key, atlas_table = "ANIMATION_ATLAS", path = "blinds/" .. file_key .. ".png", px = 34, py = 34, frames = 21, })
+		SMODS.Atlas({ key = file_key, atlas_table = "ANIMATION_ATLAS", path = asset_folder.."blinds/" .. file_key .. ".png", px = 34, py = 34, frames = 21, })
 	else
 		local width = 71
 		local height = 95
 		if item_type == 'Tag' then width = 34; height = 34 end
 		if item_type == 'Sleeve' then width = 73 end
 		if item_type == 'Partner' then width = 46; height = 58 end
-		SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or width, py = new_item.height or height })
+		SMODS.Atlas({ key = file_key, path = asset_folder..key .. "/" .. file_key .. ".png", px = new_item.width or width, py = new_item.height or height })
 		if (SMODS.Mods["Pokermon"] or {}).can_load and info.has_shiny then
-			SMODS.Atlas({ key = file_key..'_shiny', path = "pokermon-shiny/" .. key .. "/" .. file_key .. ".png", px = new_item.width or width, py = new_item.height or height })
+			SMODS.Atlas({ key = file_key..'_shiny', path = "pokermon-shiny/" .. asset_folder ..key .. "/" .. file_key .. ".png", px = new_item.width or width, py = new_item.height or height })
 		end
 	end
 

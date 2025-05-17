@@ -16,7 +16,8 @@ csau_config = SMODS.current_mod.config
 csau_enabled = copy_table(csau_config)
 
 SMODS.current_mod.DT = {
-	def_deckskin = 'joel' -- 'vinny' or nil for Vine Characters, 'joel' for Joel characters
+	def_deckskin = 'joel', -- 'vinny' or nil for Vine Characters, 'joel' for Joel characters
+	ortalab_dlc = false,
 }
 
 -- I put the colors here I guess

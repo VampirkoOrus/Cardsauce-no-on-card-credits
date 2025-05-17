@@ -2581,7 +2581,15 @@ return {
 					"This challenge bans all",
 					"non-{C:clubs}Cardsauce{} {C:attention}jokers{}",
 				}
-			}
+			},
+			j_csau_piss = {
+				name = "Pissing Joker",
+				text = {
+					"{C:mult}+#2#{} Mult for each {C:attention}Ace",
+					"in your {C:attention}full deck",
+					"{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}",
+				},
+			},
 		},
 		Partner={
 			pnr_csau_partner_roche={

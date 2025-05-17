@@ -191,7 +191,7 @@ for i=1, 4 do
 	end
 end
 
-local function validHEX(str)
+function validHEX(str)
 	local hex = str:match("^#?(%x%x%x%x%x%x)$") or str:match("^#?(%x%x%x)$")
 	return hex ~= nil
 end

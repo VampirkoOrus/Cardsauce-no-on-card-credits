@@ -192,6 +192,11 @@ SMODS.current_mod.extra_tabs = function()
 	}
 } end
 
+local ortalab = false
+if SMODS.current_mod.DT.ortalab_dlc then
+	ortalab = true
+end
+
 SMODS.current_mod.config_tab = function()
 	local ordered_config = {
 		'enableVinnyContent',
@@ -215,6 +220,10 @@ SMODS.current_mod.config_tab = function()
 		'enableTarotSkins',
 		'enableEasterEggs',
 	}
+	if ortalab then
+		ordered_config[#ordered_config+1] = 'forceDisableOrtalab'
+		ordered_config[#ordered_config+1] = 'forceEnableOrtalab'
+	end
 	local left_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
 	local right_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
 	local left_count = 0
@@ -223,7 +232,7 @@ SMODS.current_mod.config_tab = function()
 	for i, k in ipairs(ordered_config) do
 		if right_count < left_count then
 			local main_node = create_toggle({
-				label = localize("vs_options_"..ordered_config[i]),
+				label = localize("vs_options_"..ordered_config[i]) ~= 'ERROR' and localize("vs_options_"..ordered_config[i]) or ordered_config[i],
 				w = 1,
 				ref_table = csau_config,
 				ref_value = ordered_config[i],
@@ -235,7 +244,7 @@ SMODS.current_mod.config_tab = function()
 			right_count = right_count + 1
 		else
 			local main_node = create_toggle({
-				label = localize("vs_options_"..ordered_config[i]),
+				label = (localize("vs_options_"..ordered_config[i]) ~= 'ERROR' and localize("vs_options_"..ordered_config[i])) or ordered_config[i],
 				w = 1,
 				ref_table = csau_config,
 				ref_value = ordered_config[i],
