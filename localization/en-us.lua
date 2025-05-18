@@ -2590,6 +2590,17 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}",
 				},
 			},
+			j_csau_puyo = {
+				name = "Puyo Puyo Balatro",
+				text = {
+					"Use {C:attention}Arrow Keys{}/{C:attention}D-Pad{},",
+					"{C:attention}Z{}/{C:attention}L3{}, and {C:attention}X{}/{C:attention}R3{} to play",
+					"{C:inactive}(Pausing not allowed)",
+					"Gain {C:chips}Chips{} equal to score,",
+					"resets on {C:attention}Game Over{}",
+					"{C:inactive}(Currently {}{C:chips}+#1#{}{C:inactive} Chips{}{C:inactive}){}",
+				},
+			},
 		},
 		Partner={
 			pnr_csau_partner_roche={

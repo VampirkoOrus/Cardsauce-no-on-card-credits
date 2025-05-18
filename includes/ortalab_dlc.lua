@@ -1,6 +1,7 @@
 local itemsToLoad = {
     Joker = {
-        'piss'
+        'piss',
+        'puyo'
     },
 }
 
