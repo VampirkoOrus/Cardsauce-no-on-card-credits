@@ -2590,6 +2590,15 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}",
 				},
 			},
+			j_csau_expiredmeds = {
+				name = "Expired Medicine",
+				text = {
+					"When {C:attention}sold{} reappears in the",
+					"next shop with {C:chips}+#1#{} Chips",
+					"{C:green}#2# in #3#{} chance to {C:attention}reset{} instead",
+					"{C:inactive}(Currently {}{C:chips}+#4#{}{C:inactive} Chips{}{C:inactive}){}",
+				},
+			},
 			j_csau_puyo = {
 				name = "Puyo Puyo Balatro",
 				text = {

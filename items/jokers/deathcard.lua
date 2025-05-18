@@ -57,9 +57,9 @@ function jokerInfo.calculate(self, card, context)
 	end
 	if context.selling_self then
 		local stop = false
-		if G.GAME.deathsold then
-			for i, v in ipairs(G.GAME.deathsold) do
-				if v['id'] == card.ability.id then
+		if G.GAME.sellShopJokersSold then
+			for i, v in ipairs(G.GAME.sellShopJokersSold) do
+				if v['key'] == card.config.center.key and v['id'] == card.ability.id then
 					stop = true
 				end
 			end
@@ -70,23 +70,23 @@ function jokerInfo.calculate(self, card, context)
 			else
 				card.ability.timesSold = 1
 			end
-			if not G.GAME.deathsold then
-				G.GAME.deathsold = {}
+			if not G.GAME.sellShopJokersSold then
+				G.GAME.sellShopJokersSold = {}
 			end
-			G.GAME.deathsold[#G.GAME.deathsold+1] = {id=card.ability.id, timesSold=card.ability.timesSold, edition=card.edition and card.edition.type or nil}
-			if G.GAME.spawnDeathcards then
-				G.GAME.spawnDeathcards = G.GAME.spawnDeathcards + 1
+			G.GAME.sellShopJokersSold[#G.GAME.sellShopJokersSold+1] = {key =card.config.center.key, id=card.ability.id, timesSold=card.ability.timesSold, edition=card.edition and card.edition.type or nil}
+			if G.GAME.spawnSellShopJokers then
+				G.GAME.spawnSellShopJokers = G.GAME.spawnSellShopJokers + 1
 			else
-				G.GAME.spawnDeathcards = 1
+				G.GAME.spawnSellShopJokers = 1
 			end
 		end
 	end
 end
 
 function jokerInfo.update(self, card)
-	if card.area and card.area.config.type == "shop" and G.GAME.deathsold then
-		if #G.GAME.deathsold > 0 and not card.ability.id and not card.ability.timesSold then
-			local death = G.GAME.deathsold[1]
+	if card.area and card.area.config.type == "shop" and G.GAME.sellShopJokersSold then
+		if #G.GAME.sellShopJokersSold > 0 and not card.ability.id and not card.ability.timesSold then
+			local death = G.GAME.sellShopJokersSold[1]
 			local id = death['id']
 			if death['edition'] then
 				if death['edition'] == "foil" then
@@ -106,7 +106,7 @@ function jokerInfo.update(self, card)
 			card.cost = newcost
 			local newmult = card.ability.extra.mult + (card.ability.extra.mult_mod * card.ability.timesSold)
 			card.ability.extra.mult = newmult
-			table.remove(G.GAME.deathsold, 1)
+			table.remove(G.GAME.sellShopJokersSold, 1)
 		end
 	end
 end

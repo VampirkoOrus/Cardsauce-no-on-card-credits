@@ -58,11 +58,12 @@ pattern = '''
 '''
 position = "after"
 payload = '''
-    elseif G.GAME.spawnDeathcards and G.GAME.spawnDeathcards ~= 0 then
-		local card = Card(area.T.x + area.T.w/2, area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_csau_deathcard'])
+    elseif G.GAME.spawnSellShopJokers and G.GAME.spawnSellShopJokers ~= 0 then
+        local card_ref = G.GAME.sellShopJokersSold[1]
+		local card = Card(area.T.x + area.T.w/2, area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS.empty, G.P_CENTERS[card_ref.key])
 		create_shop_card_ui(card)
 		G.GAME.forcedeath = false
-		G.GAME.spawnDeathcards = G.GAME.spawnDeathcards - 1
+		G.GAME.spawnSellShopJokers = G.GAME.spawnSellShopJokers - 1
 		return card
 '''
 match_indent = true

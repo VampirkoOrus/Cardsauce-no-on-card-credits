@@ -106,6 +106,7 @@ end
 jokerInfo.add_to_deck = function(self, card)
     mod.puyo.load()
     mod.puyo.isActive = true
+    mod.puyo.score = 0
 end
 
 jokerInfo.remove_from_deck = function(self, card)
