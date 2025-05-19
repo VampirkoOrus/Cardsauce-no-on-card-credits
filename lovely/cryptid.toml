@@ -10,3 +10,11 @@ pattern = "local mod = SMODS.current_mod"
 position = "before"
 payload = "-- Test"
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if G.consumeables.cards[i].ability.consumeable then'''
+position = "at"
+payload = '''if G.consumeables.cards[i].ability.consumeable and G.consumeables.cards[i].ability.set ~= "csau_Stand" then'''
+match_indent = true

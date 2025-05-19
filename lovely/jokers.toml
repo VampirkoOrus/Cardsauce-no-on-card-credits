@@ -90,12 +90,28 @@ payload = "if my_pos and G.jokers.cards[my_pos+1] and not self.getting_sliced an
 match_indent = true
 
 # Make Perkeo only copy consumables (and not Stands)
+# (Slightly modified code from Cryptid, this should conflict with Cryptid's lovely patch of this,
+# but it should maintain Cryptid compatibility, cause it does the same thing)
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = 'if G.consumeables.cards[i].ability.consumeable then'
+pattern = '''if G.consumeables.cards[1] then'''
 position = "at"
-payload = 'if G.consumeables.cards[i].ability.consumeable and G.consumeables.cards[i].ability.set ~= "csau_Stand" then'
+payload = '''local eligibleJokers = {}
+for i = 1, #G.consumeables.cards do
+    if G.consumeables.cards[i].ability.consumeable and G.consumeables.cards[i].ability.set ~= "csau_Stand" then
+        eligibleJokers[#eligibleJokers + 1] = G.consumeables.cards[i]
+    end
+end
+if #eligibleJokers > 0 then'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''local card = copy_card(pseudorandom_element(G.consumeables.cards, pseudoseed('perkeo')), nil)'''
+position = "at"
+payload = '''local card = copy_card(pseudorandom_element(eligibleJokers, pseudoseed('perkeo')), nil)'''
 match_indent = true
 
 [[patches]]
