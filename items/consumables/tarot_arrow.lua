@@ -37,11 +37,15 @@ function consumInfo.use(self, card, area, copier)
 end
 
 function consumInfo.can_use(self, card)
+    if next(SMODS.find_card("c_csau_vento_gold")) then
+        return true
+    end
+    
     if G.consumeables.config.card_limit <= #G.consumeables.cards - (card.area == G.consumeables and 1 or 0) then
         return false
     end
 
-    return G.GAME.csau_unlimited_stands or (to_big(G.FUNCS.csau_get_num_stands()) < to_big(G.GAME.modifiers.max_stands)) or next(SMODS.find_card("c_csau_vento_gold"))
+    return G.GAME.csau_unlimited_stands or (to_big(G.FUNCS.csau_get_num_stands()) < to_big(G.GAME.modifiers.max_stands))
 end
 
 return consumInfo
