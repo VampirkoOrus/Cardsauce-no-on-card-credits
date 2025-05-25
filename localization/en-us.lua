@@ -2942,7 +2942,7 @@ return {
 			c_csau_rawtime = {
 				name = "rAw TiMe",
 				text = {
-					"{C:attention}Retrigger{} each played {C:attention}4{}, {C:attention}7{}, or {C:attention}3{}",
+					"{C:attention}Retrigger{} each played {C:attention}4{}, {C:attention}7{}, or {C:attention}2{}",
 					"while this tape is {C:attention}playing{}",
 					"{C:vhs}Running Time{}: {C:attention}#1#{} Hands"
 				},
