@@ -43,7 +43,7 @@ function jokerInfo.calculate(self, card, context)
             }
         end
     end
-    if context.joker_main and context.cardarea == G.jokers and not card.debuff and not bad_context then
+    if context.joker_main and context.cardarea == G.jokers and not card.debuff then
         if to_big(card.ability.extra.mult) > to_big(0) then
             return {
                 mult = card.ability.extra.mult,
