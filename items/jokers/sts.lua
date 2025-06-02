@@ -91,7 +91,7 @@ function G.FUNCS.find_sts_form(form)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
+
     return { vars = {card.ability.diamonds.mult_mod, card.ability.diamonds.mult, card.ability.spades.x_mult, card.ability.spades.extra_cards, card.ability.spades.hands, card.ability.spades.discards } }
 end
 

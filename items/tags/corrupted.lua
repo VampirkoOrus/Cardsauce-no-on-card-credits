@@ -9,7 +9,7 @@ local tagInfo = {
 }
 
 tagInfo.loc_vars = function(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
+
 end
 
 tagInfo.apply = function(self, tag, context)

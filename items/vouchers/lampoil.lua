@@ -10,7 +10,7 @@ local voucherInfo = {
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.wario } }
+
     return { vars = {card.ability.extra.num_cards, card.ability.extra.num_cards ~= 1 and 's' or ''}}
 end
 

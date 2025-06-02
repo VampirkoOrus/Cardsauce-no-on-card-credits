@@ -15,7 +15,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	if G.SETTINGS.roche then
 		info_queue[#info_queue+1] = {key = "vacredit", set = "Other", vars = { G.csau_team.amtraxva } }
 	end
-	info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
+
 	return { vars = {card.ability.gil} }
 end
 

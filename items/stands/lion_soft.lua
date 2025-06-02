@@ -20,7 +20,7 @@ local consumInfo = {
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_bonus
     info_queue[#info_queue+1] = G.P_CENTERS.m_mult
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.stup } }
+
 end
 
 function consumInfo.in_pool(self, args)

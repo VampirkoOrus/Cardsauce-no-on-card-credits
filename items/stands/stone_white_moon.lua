@@ -23,7 +23,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "csau_artistcredit_2", set = "Other", vars = { G.csau_team.wario, G.csau_team.gote } }
+
     return { vars = {card.ability.extra.evolve_num - card.ability.extra.evolve_moons}}
 end
 

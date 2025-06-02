@@ -17,7 +17,7 @@ local jokerInfo = {
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
+
     return { vars = {G.FUNCS.csau_add_chance(card.ability.extra.prob_extra, {multiply = true, start_at_one = true}), card.ability.extra.prob, card.ability.extra.prob_mod} }
 end
 

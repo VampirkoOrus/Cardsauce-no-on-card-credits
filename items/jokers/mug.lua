@@ -63,7 +63,7 @@ local change_form = function(card, form)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.cejai } }
+
     return { 
         vars = { card.ability.extra.mult, card.ability.extra.rounds, card.ability.extra.x_mult },
         key = "j_csau_mug_"..card.ability.extra.form

@@ -12,7 +12,7 @@ local deckInfo = {
 
 deckInfo.loc_vars = function(self, info_queue, card)
     if info_queue then
-        info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.gote } }
+
     end
     return {vars = { self.config.hands, self.config.discards } }
 end

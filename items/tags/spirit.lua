@@ -13,7 +13,7 @@ tagInfo.loc_vars = function(self, info_queue, card)
     else
         info_queue[#info_queue+1] = {key = "csau_stand_info", set = "Other", vars = { G.GAME.modifiers.max_stands or 1, ((G.GAME.modifiers.max_stands and G.GAME.modifiers.max_stands > 1) and localize('b_csau_stand_cards') or localize('k_csau_stand')) }}
     end
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.keku } }
+
 end
 
 tagInfo.apply = function(self, tag, context)

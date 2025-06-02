@@ -25,7 +25,7 @@ local consumInfo = {
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_gold
     info_queue[#info_queue+1] = {key = "vhs_activation", set = "Other"}
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.keku } }
+
     return { vars = { card.ability.extra.xmult, card.ability.extra.runtime-card.ability.extra.uses } }
 end
 

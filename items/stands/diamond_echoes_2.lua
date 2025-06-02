@@ -21,7 +21,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "csau_artistcredit_2", set = "Other", vars = { G.csau_team.chvsau, G.csau_team.dolos } }
+
     local color = G.C.IMPORTANT
     if G.GAME and G.GAME.wigsaw_suit then
         color = G.C.SUITS[G.GAME and G.GAME.wigsaw_suit]

@@ -37,7 +37,7 @@ end
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_glass
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.zeurel } }
+
     return { vars = { G.GAME.probabilities.normal } }
 end
 

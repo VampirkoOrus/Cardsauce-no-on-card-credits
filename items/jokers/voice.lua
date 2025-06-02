@@ -14,7 +14,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "csau_artistcredit", set = "Other", vars = { G.csau_team.akai } }
+
     return { vars = { localize(G.GAME.current_round.choicevoice.rank, 'ranks'), localize(G.GAME.current_round.choicevoice.suit, 'suits_plural'), colours = {G.C.SUITS[G.GAME.current_round.choicevoice.suit]} }}
 end
 
