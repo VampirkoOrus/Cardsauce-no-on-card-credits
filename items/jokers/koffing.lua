@@ -11,7 +11,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
 
-    info_queue[#info_queue+1] = {key = "codercredit", set = "Other", vars = { G.csau_team.myst } }
+
 end
 
 function jokerInfo.calculate(self, card, context)
