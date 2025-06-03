@@ -30,8 +30,8 @@ end
 function jokerInfo.calculate(self, card, context)
     if context.starting_shop and not context.blueprint then
         if SMODS.food_expires(context) then
-            card.ability.extra.dollars = to_big(card.ability.extra.dollars) - to_big(card.ability.extra.dollars_mod)
-            if card.ability.extra.dollars <= to_big(0) then
+            card.ability.extra.dollars = card.ability.extra.dollars - card.ability.extra.dollars_mod
+            if card.ability.extra.dollars <= 0 then
                 check_for_unlock({ type = "expire_crudeoil" })
                 G.E_MANAGER:add_event(Event({
                     func = function()
@@ -54,7 +54,7 @@ function jokerInfo.calculate(self, card, context)
                 }))
             else
                 return {
-                    message = "-"..localize('$') .. to_big(card.ability.extra.dollars_mod),
+                    message = "-"..localize('$') .. card.ability.extra.dollars_mod,
                     colour = G.C.MONEY
                 }
             end
